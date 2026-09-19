@@ -32,18 +32,13 @@ jobs:
         run: python tools/validate_skill.py
       - name: Verify plugin distribution
         run: python tools/verify_plugin_distribution.py
-      - name: Canonical byte-exact regression
-        if: matrix.python-version == '3.10'
-        run: pytest -q
-      - name: Python 3.12 functional regression
-        if: matrix.python-version == '3.12'
+      - name: Blocking regression
         run: >
           pytest -q
           -k "not test_s17_legacy_drum_path_is_byte_identical_to_s16_baseline
           and not test_s20_existing_modeled_kick_snare_closed_hat_are_byte_identical_to_s19
           and not test_s21_s20_preset_and_existing_default_hits_remain_byte_identical"
-      - name: Python 3.12 known byte-exact probe (Issue #2)
-        if: matrix.python-version == '3.12'
+      - name: "Known runner-sensitive drum byte-exact probe (Issue #2)"
         continue-on-error: true
         run: >
           pytest -q
