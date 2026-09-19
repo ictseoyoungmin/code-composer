@@ -1,0 +1,22 @@
+{
+  "name": "code-composer",
+  "version": "1.17.0",
+  "description": "Deterministic, model-free music composition and rendering for AI agents and programmable workflows.",
+  "author": {
+    "name": "ictseoyoungmin",
+    "url": "https://github.com/ictseoyoungmin"
+  },
+  "homepage": "https://github.com/ictseoyoungmin/code-composer",
+  "repository": "https://github.com/ictseoyoungmin/code-composer",
+  "license": "AGPL-3.0-only",
+  "keywords": [
+    "music",
+    "composition",
+    "midi",
+    "audio",
+    "agent-skill",
+    "deterministic",
+    "rendering"
+  ],
+  "skills": "./skills/"
+}

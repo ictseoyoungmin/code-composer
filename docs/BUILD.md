@@ -50,20 +50,21 @@ The resulting ZIP contains only `code-composer/` and must remain valid when extr
 python tools/build_plugins.py
 ```
 
-`.codex_plugins/` and `.claude_plugins/` store platform manifest source. The build copies the canonical skill into the plugin artifact's `skills/code-composer/` directory. There is no independently edited duplicate skill source.
+Repository-root `.codex-plugin/` and `.claude-plugin/` directories store thin platform manifests, while `.agents/plugins/` provides generic marketplace discovery. All three route to the canonical `./skills/` tree. The build copies the canonical `skills/code-composer/` tree into generated platform artifacts; there is no independently edited duplicate skill source.
 
 ## Release checks
 
 1. `pytest -q`
 2. `python skills/code-composer/kit/scripts/self_check.py`
 3. `python tools/validate_skill.py`
-4. `python -m compileall -q skills/code-composer/kit/src`
-5. build the runtime wheel with `--no-build-isolation` when offline;
-6. install the wheel outside the repository source path and verify `importlib.metadata.version("code-composer") == code_composer.__version__`;
-7. smoke all six public entry points;
-8. verify standalone skill and generated plugin ZIPs contain no root showcase/dogfood assets;
-9. verify skill examples contain no polished audio/MIDI and fixtures are declared synthetic/non-reference;
-10. run engine regression/compatibility hashes required by the active release.
+4. `python tools/verify_plugin_distribution.py`
+5. `python -m compileall -q skills/code-composer/kit/src`
+6. build the runtime wheel with `--no-build-isolation` when offline;
+7. install the wheel outside the repository source path and verify `importlib.metadata.version("code-composer") == code_composer.__version__`;
+8. smoke all public entry points;
+9. verify standalone skill and generated plugin ZIPs contain no root showcase/dogfood assets;
+10. verify skill examples contain no polished audio/MIDI and fixtures are declared synthetic/non-reference;
+11. run engine regression/compatibility hashes required by the active release.
 
 For historical compatibility checks, verify the **wheel-shipped reference assets** that still exist in S0 (schemas only), keep **explicitly removed legacy mutation surfaces** unimportable, and compare any promised compatibility render against its **established baseline**.
 
@@ -76,6 +77,9 @@ code-composer-midi
 code-composer-collab
 code-composer-exchange
 code-composer-delivery
+code-composer-presets
+code-composer-violin
+code-composer-admittance-fit
 ```
 
 The package deliberately does not ship the repository's completed musical examples. Wheel package data contains current schemas, not a musical reference corpus.

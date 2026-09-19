@@ -1,0 +1,42 @@
+{
+  "name": "code-composer",
+  "version": "1.17.0",
+  "description": "Deterministic, model-free music composition and rendering for AI agents and programmable workflows.",
+  "author": {
+    "name": "ictseoyoungmin",
+    "url": "https://github.com/ictseoyoungmin"
+  },
+  "homepage": "https://github.com/ictseoyoungmin/code-composer",
+  "repository": "https://github.com/ictseoyoungmin/code-composer",
+  "license": "AGPL-3.0-only",
+  "keywords": [
+    "music",
+    "composition",
+    "midi",
+    "audio",
+    "agent-skill",
+    "deterministic",
+    "rendering"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Code Composer",
+    "shortDescription": "Deterministic music composition and rendering",
+    "longDescription": "An agent-directed, model-free music composition and rendering system that keeps musical intent editable as canonical Music IR and deterministically produces audio, MIDI, exchange packages, and production handoff files.",
+    "developerName": "ictseoyoungmin",
+    "category": "Creative Tools",
+    "capabilities": [
+      "Instructions",
+      "Audio",
+      "Interactive"
+    ],
+    "websiteURL": "https://github.com/ictseoyoungmin/code-composer",
+    "defaultPrompt": [
+      "Use Code Composer to compose an original editable music piece from this brief and render a deterministic reference mix.",
+      "Use Code Composer to revise this composition while preserving explicit musical intent and prepare MIDI, stems, or a delivery package."
+    ],
+    "brandColor": "#0D1422",
+    "composerIcon": "./skills/code-composer/assets/icon.svg",
+    "logo": "./skills/code-composer/assets/icon.svg"
+  }
+}

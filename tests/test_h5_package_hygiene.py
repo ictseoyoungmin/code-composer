@@ -17,7 +17,9 @@ def test_package_version_has_one_declared_source():
     assert '"version": "1.16.0"' in v116 and '"v1.16_final_closed": true' in v116
 
 def test_current_headers_describe_s0_repository_and_preserve_v116_architecture_history():
-    assert (ROOT/"README.md").read_text(encoding="utf-8").splitlines()[0]=="# Code Composer"
+    readme=(ROOT/"README.md").read_text(encoding="utf-8")
+    assert '<h1>Code Composer</h1>' in readme[:1200]
+    assert 'skills/code-composer/assets/icon.svg' in readme[:1200]
     assert (ROOT/"docs/STRUCTURE.md").read_text(encoding="utf-8").splitlines()[0]=="# Code Composer repository structure"
     assert (ROOT/"docs/architecture/ARCHITECTURE.md").read_text(encoding="utf-8").splitlines()[0]=="# Code Composer Architecture v1.16"
 

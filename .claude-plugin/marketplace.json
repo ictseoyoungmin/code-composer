@@ -1,0 +1,14 @@
+{
+  "name": "code-composer",
+  "owner": {
+    "name": "ictseoyoungmin"
+  },
+  "description": "Claude Code marketplace for Code Composer.",
+  "plugins": [
+    {
+      "name": "code-composer",
+      "source": "./skills/",
+      "description": "Deterministic music composition, rendering, MIDI, project exchange, and production delivery through one canonical agent skill."
+    }
+  ]
+}

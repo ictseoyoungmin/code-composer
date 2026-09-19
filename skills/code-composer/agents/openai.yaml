@@ -1,0 +1,14 @@
+interface:
+  display_name: "Code Composer"
+  short_description: "Deterministic music composition and rendering"
+  icon_small: "./assets/icon.svg"
+  icon_large: "./assets/icon.svg"
+  brand_color: "#0D1422"
+  default_prompt: "Use $code-composer to compose or revise an editable deterministic music project and render validated audio, MIDI, or delivery outputs."
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
