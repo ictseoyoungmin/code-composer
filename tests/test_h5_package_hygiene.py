@@ -13,12 +13,12 @@ def test_package_version_has_one_declared_source():
     m=re.search(r'^__version__\s*=\s*"([^"]+)"',init,re.M)
     assert m and m.group(1)==code_composer.__version__
     assert re.fullmatch(r"\d+\.\d+\.\d+", code_composer.__version__)
-    v116=(ROOT/"V1.16_DESIGN_STATUS.json").read_text(encoding="utf-8")
+    v116=(ROOT/"docs/history/status/V1.16_DESIGN_STATUS.json").read_text(encoding="utf-8")
     assert '"version": "1.16.0"' in v116 and '"v1.16_final_closed": true' in v116
 
 def test_current_headers_describe_s0_repository_and_preserve_v116_architecture_history():
     assert (ROOT/"README.md").read_text(encoding="utf-8").splitlines()[0]=="# Code Composer"
-    assert (ROOT/"STRUCTURE.md").read_text(encoding="utf-8").splitlines()[0]=="# Code Composer Repository Structure — S0"
+    assert (ROOT/"docs/STRUCTURE.md").read_text(encoding="utf-8").splitlines()[0]=="# Code Composer repository structure"
     assert (ROOT/"docs/architecture/ARCHITECTURE.md").read_text(encoding="utf-8").splitlines()[0]=="# Code Composer Architecture v1.16"
 
 def test_repository_examples_are_explicitly_maintainer_only_and_not_skill_taste():

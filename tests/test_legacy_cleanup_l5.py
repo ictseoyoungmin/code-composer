@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_l5_closes_legacy_cleanup_without_reopening_v116():
-    status = json.loads((ROOT / "V1.16_DESIGN_STATUS.json").read_text(encoding="utf-8"))
+    status = json.loads((ROOT / "docs/history/status/V1.16_DESIGN_STATUS.json").read_text(encoding="utf-8"))
     assert status["status"] == "V1.16_FINAL_CLOSED"
     assert status["v1.16_final_closed"] is True
     maintenance = status["maintenance"]["legacy_cleanup"]
