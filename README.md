@@ -1,14 +1,20 @@
-# Code Composer
-
-[![CI](https://github.com/ictseoyoungmin/code-composer/actions/workflows/ci.yml/badge.svg)](https://github.com/ictseoyoungmin/code-composer/actions/workflows/ci.yml)
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
+<div align="center">
+  <img src="skills/code-composer/assets/icon.svg" width="180" alt="Code Composer icon">
+  <h1>Code Composer</h1>
+  <p>
+    <img src="https://img.shields.io/badge/version-v1.17.0-59636e" alt="Version v1.17.0">
+    <a href="https://github.com/ictseoyoungmin/code-composer/actions/workflows/ci.yml"><img src="https://github.com/ictseoyoungmin/code-composer/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+    <img src="https://img.shields.io/badge/Python-3.10%2B-blue" alt="Python 3.10+">
+    <img src="https://img.shields.io/badge/Agent%20Skill-Deterministic%20Music-8b6f47" alt="Agent Skill: Deterministic Music">
+    <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0--only-green" alt="AGPL-3.0-only"></a>
+  </p>
+</div>
 
 **Deterministic, model-free music composition and rendering for AI agents and programmable workflows.**
 
 Code Composer turns explicit musical intent into editable structured music, deterministic audio, MIDI, exchange packages, and production handoff files. The **agent or user decides the music**; the engine validates and realizes those decisions reproducibly.
 
-It is designed for workflows where you want the composition to remain inspectable and editable instead of disappearing inside a black-box generation step.
+It is designed for workflows where the composition should remain inspectable, revisable, and portable instead of disappearing inside a black-box generation step.
 
 ## What you can do
 
@@ -25,9 +31,29 @@ It is designed for workflows where you want the composition to remain inspectabl
 
 Code Composer does **not** use a bundled model to decide melody, harmony, rhythm, form, or style. Musical decisions come from the current user brief, current composition, and the agent/user workflow.
 
-## Quick start
+## Install
 
-### 1. Install the engine
+### Agent skill / plugin discovery
+
+With the Skills CLI:
+
+```bash
+npx skills add ictseoyoungmin/code-composer --skill code-composer --agent claude-code
+npx skills add ictseoyoungmin/code-composer --skill code-composer --agent codex
+```
+
+Use the matching `--agent` value for another supported agent.
+
+Code Composer follows the same thin-adapter layout as RefAs:
+
+- `.claude-plugin/` — Claude discovery / marketplace metadata
+- `.codex-plugin/` — Codex plugin metadata and product interface
+- `.agents/plugins/` — generic agent marketplace metadata
+- `skills/code-composer/` — the **only canonical skill source**
+
+Every adapter routes to the same `./skills/` tree. There is no platform-specific copy of the instructions or engine in source control.
+
+### Python engine
 
 Requirements: **Python 3.10+**.
 
@@ -44,7 +70,9 @@ code-composer --help
 code-composer-presets list
 ```
 
-### 2. Render a minimal deterministic fixture
+## Quick start
+
+### Render a minimal deterministic fixture
 
 The repository includes a tiny synthetic protocol fixture for smoke testing:
 
@@ -56,19 +84,16 @@ code-composer \
 
 This fixture is intentionally minimal and is **not** a musical style reference.
 
-### 3. Use Code Composer as an agent skill
+### Use the canonical agent skill
 
-The canonical skill is:
+The skill entry point is [`skills/code-composer/SKILL.md`](skills/code-composer/SKILL.md). It routes an agent into only the workflow and contracts required for the current task instead of requiring broad source-code inspection.
 
-```text
-skills/code-composer/
-```
-
-Its entry point is [`skills/code-composer/SKILL.md`](skills/code-composer/SKILL.md). The skill routes an agent into only the workflow/contracts it needs instead of requiring source-code inspection.
+OpenAI product metadata lives with the skill at [`skills/code-composer/agents/openai.yaml`](skills/code-composer/agents/openai.yaml), and the canonical icon is [`skills/code-composer/assets/icon.svg`](skills/code-composer/assets/icon.svg).
 
 To build standalone skill and platform plugin artifacts:
 
 ```bash
+python tools/verify_plugin_distribution.py
 python tools/build_skill.py
 python tools/build_plugins.py
 ```
@@ -145,9 +170,10 @@ Historical slice reports, release manifests, checksums, maintenance evidence, an
 PYTHONPATH=skills/code-composer/kit/src pytest -q
 python skills/code-composer/kit/scripts/self_check.py
 python tools/validate_skill.py
+python tools/verify_plugin_distribution.py
 ```
 
-CI validates Python 3.10 and 3.12, the canonical skill boundary, the full regression suite, and release-surface builds.
+CI validates Python 3.10 and 3.12, the canonical skill boundary, plugin-discovery layout, the full regression suite, and release-surface builds.
 
 ## License and generated music
 
