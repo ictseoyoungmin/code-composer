@@ -44,7 +44,7 @@ npx skills add ictseoyoungmin/code-composer --skill code-composer --agent codex
 
 Use the matching `--agent` value for another supported agent.
 
-Code Composer follows the same thin-adapter layout as RefAs:
+Code Composer uses thin discovery adapters:
 
 - `.claude-plugin/` — Claude discovery / marketplace metadata
 - `.codex-plugin/` — Codex plugin metadata and product interface
