@@ -173,7 +173,7 @@ python tools/validate_skill.py
 python tools/verify_plugin_distribution.py
 ```
 
-CI validates Python 3.10 and 3.12, the canonical skill boundary, plugin-discovery layout, the full regression suite, and release-surface builds.
+CI uses Python 3.10 as the canonical byte-exact regression lane and Python 3.12 as a functional-compatibility lane, while also validating the canonical skill boundary, plugin-discovery layout, and release-surface builds.
 
 ## License and generated music
 
