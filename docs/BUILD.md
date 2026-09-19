@@ -77,6 +77,9 @@ code-composer-midi
 code-composer-collab
 code-composer-exchange
 code-composer-delivery
+code-composer-presets
+code-composer-violin
+code-composer-admittance-fit
 ```
 
 The package deliberately does not ship the repository's completed musical examples. Wheel package data contains current schemas, not a musical reference corpus.
