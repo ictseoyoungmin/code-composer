@@ -8,11 +8,18 @@ code-composer/
 ├─ OUTPUT_POLICY.md
 ├─ CHANGELOG.md
 ├─ CREDITS.md
+├─ .agents/plugins/             # generic agent marketplace discovery
+├─ .claude-plugin/              # Claude plugin + marketplace metadata
+├─ .codex-plugin/               # Codex plugin metadata and product interface
 ├─ .github/workflows/           # CI
 ├─ skills/
 │  └─ code-composer/            # canonical self-contained agent skill
 │     ├─ SKILL.md
 │     ├─ VERSION
+│     ├─ agents/
+│     │  └─ openai.yaml         # OpenAI product discovery metadata
+│     ├─ assets/
+│     │  └─ icon.svg            # canonical Code Composer icon
 │     └─ kit/
 │        ├─ INDEX.md
 │        ├─ CAPABILITIES.md
@@ -24,8 +31,6 @@ code-composer/
 │        ├─ fixtures/
 │        ├─ scripts/
 │        └─ src/                # deterministic engine implementation
-├─ .codex_plugins/              # Codex adapter metadata only
-├─ .claude_plugins/             # Claude adapter metadata only
 ├─ docs/                        # user/developer docs + historical evidence
 │  ├─ architecture/
 │  ├─ validation/
@@ -39,7 +44,15 @@ code-composer/
 
 ## Source of truth
 
-`skills/code-composer/` is the single canonical agent-skill source. Platform plugin directories contain adapter metadata only; `tools/build_plugins.py` injects the canonical skill into generated plugin artifacts.
+`skills/code-composer/` is the single canonical agent-skill source. The repository-root discovery manifests route every supported platform to the same `./skills/` tree:
+
+- `.codex-plugin/`
+- `.claude-plugin/`
+- `.agents/plugins/`
+
+There is no platform-specific duplicate copy of the skill in source control. `skills/code-composer/agents/openai.yaml` and `skills/code-composer/assets/icon.svg` travel with the canonical skill itself.
+
+`tools/build_plugins.py` may assemble installable plugin ZIPs by combining one thin root platform manifest with that canonical skill tree, but generated plugin artifacts are never source authority.
 
 The Python package is rooted at `skills/code-composer/kit/`.
 
