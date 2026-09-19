@@ -1,0 +1,270 @@
+{
+  "source_prompt": "새벽에 비가 그친 뒤 텅 빈 도로를 혼자 달리는 느낌. 너무 우울하지는 않고, 후반에만 조금 벅차오른다.",
+  "concept": "restrained night-road motion with a modest late emotional lift",
+  "hard_constraints": {
+    "bpm": 90,
+    "root": "E",
+    "scale": "natural_minor",
+    "forbidden_roles": [
+      "topline"
+    ]
+  },
+  "transport": {
+    "bpm": 90,
+    "beats_per_bar": 4
+  },
+  "tonal": {
+    "root": "E",
+    "scale": "natural_minor"
+  },
+  "form": {
+    "sections": [
+      {
+        "id": "verse",
+        "bars": 4,
+        "energy": 0.34
+      },
+      {
+        "id": "final",
+        "bars": 4,
+        "energy": 1.0
+      }
+    ]
+  },
+  "materials": {
+    "progression": [
+      1,
+      4,
+      6,
+      5
+    ],
+    "motif": [
+      0,
+      4,
+      6,
+      5,
+      3,
+      2,
+      1,
+      0
+    ],
+    "motif_rhythm": [
+      1.0,
+      0.5,
+      0.5,
+      1.0,
+      0.5,
+      0.5,
+      1.0,
+      1.0
+    ]
+  },
+  "rhythm": {
+    "groove": {
+      "steps_per_bar": 16,
+      "roles": {
+        "kick": [
+          0.88,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0.66,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "snare": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0.54,
+          0,
+          0,
+          0
+        ],
+        "hat": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0.24,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0.3,
+          0
+        ]
+      },
+      "fills": {
+        "default": [
+          [
+            12,
+            "snare",
+            0.38
+          ],
+          [
+            14,
+            "hat",
+            0.46
+          ],
+          [
+            15,
+            "snare",
+            0.6
+          ]
+        ],
+        "final": [
+          [
+            12,
+            "snare",
+            0.5
+          ],
+          [
+            14,
+            "snare",
+            0.68
+          ],
+          [
+            15,
+            "snare",
+            0.82
+          ]
+        ]
+      }
+    },
+    "swing": 0.0,
+    "humanize_beats": 0.002,
+    "velocity_jitter": 0.012,
+    "fill_probability": 0.55,
+    "bass_coupling": 0.62,
+    "section_profiles": {
+      "verse": {
+        "density": 0.34,
+        "kick": 0.66,
+        "snare": 0.4,
+        "hat": 0.38,
+        "fill": 0.95
+      },
+      "final": {
+        "density": 0.92,
+        "kick": 1.0,
+        "snare": 0.82,
+        "hat": 0.7,
+        "fill": 1.0
+      }
+    }
+  },
+  "orchestration": {
+    "default": {
+      "foreground_mode": "none"
+    },
+    "sections": {
+      "verse": {
+        "foreground_mode": "none"
+      },
+      "final": {
+        "foreground_mode": "sparse",
+        "sparse_role": "lead",
+        "sparse_density_scale": 0.22
+      }
+    }
+  },
+  "harmony": {
+    "colors": [
+      "add9",
+      "sus2",
+      "seventh",
+      "add9"
+    ],
+    "cadence_color": "add9",
+    "normalize_density": true,
+    "motion_weight": 1.0,
+    "center_weight": 0.22,
+    "sections": {
+      "verse": {
+        "colors": [
+          "sus2",
+          "add9",
+          "seventh",
+          "sus2"
+        ],
+        "cadence_color": "sus2"
+      },
+      "final": {
+        "colors": [
+          "add9",
+          "seventh",
+          "sus4",
+          "add9"
+        ],
+        "cadence_color": "add9"
+      }
+    }
+  },
+  "development": {
+    "families": {
+      "primary": [
+        "final"
+      ]
+    },
+    "default": {
+      "stage": "develop"
+    },
+    "sections": {
+      "verse": {
+        "stage": "establish",
+        "energy_scale": 0.92,
+        "rhythm_density_scale": 0.82,
+        "pad_gain_scale": 0.94,
+        "lead_density_scale": 0.8,
+        "topline_density_scale": 0.0,
+        "fill_scale": 0.8
+      },
+      "final": {
+        "stage": "culminate",
+        "energy_scale": 1.08,
+        "rhythm_density_scale": 1.0,
+        "pad_gain_scale": 1.08,
+        "lead_density_scale": 1.0,
+        "topline_density_scale": 0.0,
+        "register_shift_add": 5,
+        "fill_scale": 1.0
+      }
+    }
+  },
+  "transitions": {
+    "final": {
+      "entry_gain": 0.05,
+      "entry_soften_beats": 2.5,
+      "pre_fill": 0.95
+    }
+  },
+  "rationale": [
+    "Foreground remains absent through the opening section.",
+    "A sparse final lead provides the emotional lift without turning the piece into a lead-driven track.",
+    "Harmony stays minor-colored but uses suspended/add9 colors to avoid overt tragedy."
+  ]
+}

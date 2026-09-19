@@ -1,0 +1,22 @@
+{
+  "kind": "piano",
+  "piano_design": {
+    "categories": {
+      "body": "concert_grand",
+      "hammer": "medium_felt",
+      "stringing": "concert",
+      "soundboard": "open_board",
+      "perspective": "player"
+    },
+    "controls": {
+      "stereo_width": 0.82,
+      "base_decay_s": 4.4,
+      "velocity_brightness": 0.8,
+      "hammer_noise_gain": 0.052,
+      "resonance_gain": 0.034,
+      "soundboard_gain": 0.032,
+      "output_gain": 0.6
+    },
+    "family": "acoustic"
+  }
+}

@@ -1,0 +1,554 @@
+{
+  "version": "1.16",
+  "phrases": [
+    {
+      "phrase_id": "p_pulse",
+      "section_id": "pulse",
+      "role": "lead",
+      "source_material": "m_pulse",
+      "start_beat": 0.25,
+      "duration_beats": 4.8,
+      "dynamic_curve": [
+        [
+          0,
+          0.46
+        ],
+        [
+          0.55,
+          0.74
+        ],
+        [
+          1,
+          0.48
+        ]
+      ],
+      "timing_curve_ms": [
+        [
+          0,
+          0
+        ],
+        [
+          0.5,
+          3
+        ],
+        [
+          1,
+          7
+        ]
+      ],
+      "gate_curve": [
+        [
+          0,
+          0.78
+        ],
+        [
+          0.5,
+          0.92
+        ],
+        [
+          1,
+          0.68
+        ]
+      ],
+      "articulation_curve": [
+        {
+          "position": 0.0,
+          "articulation": "neutral"
+        }
+      ],
+      "accent_points": [],
+      "apex_position": 0.58,
+      "breath_after_beats": 0.25
+    },
+    {
+      "phrase_id": "p_drive",
+      "section_id": "drive",
+      "role": "lead",
+      "source_material": "m_drive",
+      "start_beat": 8.25,
+      "duration_beats": 4.8,
+      "dynamic_curve": [
+        [
+          0,
+          0.46
+        ],
+        [
+          0.55,
+          0.74
+        ],
+        [
+          1,
+          0.48
+        ]
+      ],
+      "timing_curve_ms": [
+        [
+          0,
+          0
+        ],
+        [
+          0.5,
+          3
+        ],
+        [
+          1,
+          7
+        ]
+      ],
+      "gate_curve": [
+        [
+          0,
+          0.78
+        ],
+        [
+          0.5,
+          0.92
+        ],
+        [
+          1,
+          0.68
+        ]
+      ],
+      "articulation_curve": [
+        {
+          "position": 0.0,
+          "articulation": "accent"
+        }
+      ],
+      "accent_points": [],
+      "apex_position": 0.58,
+      "breath_after_beats": 0.25
+    },
+    {
+      "phrase_id": "p_break",
+      "section_id": "break",
+      "role": "lead",
+      "source_material": "m_break",
+      "start_beat": 16.25,
+      "duration_beats": 4.8,
+      "dynamic_curve": [
+        [
+          0,
+          0.46
+        ],
+        [
+          0.55,
+          0.74
+        ],
+        [
+          1,
+          0.48
+        ]
+      ],
+      "timing_curve_ms": [
+        [
+          0,
+          0
+        ],
+        [
+          0.5,
+          3
+        ],
+        [
+          1,
+          7
+        ]
+      ],
+      "gate_curve": [
+        [
+          0,
+          0.78
+        ],
+        [
+          0.5,
+          0.92
+        ],
+        [
+          1,
+          0.68
+        ]
+      ],
+      "articulation_curve": [
+        {
+          "position": 0.0,
+          "articulation": "neutral"
+        }
+      ],
+      "accent_points": [],
+      "apex_position": 0.58,
+      "breath_after_beats": 0.25
+    },
+    {
+      "phrase_id": "p_final",
+      "section_id": "final",
+      "role": "lead",
+      "source_material": "m_final",
+      "start_beat": 24.25,
+      "duration_beats": 4.8,
+      "dynamic_curve": [
+        [
+          0,
+          0.46
+        ],
+        [
+          0.55,
+          0.74
+        ],
+        [
+          1,
+          0.48
+        ]
+      ],
+      "timing_curve_ms": [
+        [
+          0,
+          0
+        ],
+        [
+          0.5,
+          3
+        ],
+        [
+          1,
+          7
+        ]
+      ],
+      "gate_curve": [
+        [
+          0,
+          0.78
+        ],
+        [
+          0.5,
+          0.92
+        ],
+        [
+          1,
+          0.68
+        ]
+      ],
+      "articulation_curve": [
+        {
+          "position": 0.0,
+          "articulation": "accent"
+        }
+      ],
+      "accent_points": [],
+      "apex_position": 0.58,
+      "breath_after_beats": 0.25
+    }
+  ],
+  "motif_statements": [
+    {
+      "statement_id": "m_pulse",
+      "source_motif_id": "motif_A",
+      "section_id": "pulse",
+      "transform_chain": [
+        {
+          "op": "exact"
+        }
+      ],
+      "identity_floor": 0.95,
+      "cadence_rule": "authored"
+    },
+    {
+      "statement_id": "m_drive",
+      "source_motif_id": "motif_A",
+      "section_id": "drive",
+      "transform_chain": [
+        {
+          "op": "sequence",
+          "scale_degrees": 1
+        },
+        {
+          "op": "rhythm_scale",
+          "factor": 0.92
+        }
+      ],
+      "identity_floor": 0.72,
+      "cadence_rule": "authored"
+    },
+    {
+      "statement_id": "m_break",
+      "source_motif_id": "motif_A",
+      "section_id": "break",
+      "transform_chain": [
+        {
+          "op": "fragment",
+          "start": 0,
+          "length": 5
+        },
+        {
+          "op": "rhythm_scale",
+          "factor": 1.25
+        }
+      ],
+      "identity_floor": 0.66,
+      "cadence_rule": "authored"
+    },
+    {
+      "statement_id": "m_final",
+      "source_motif_id": "motif_A",
+      "section_id": "final",
+      "transform_chain": [
+        {
+          "op": "cadence_rewrite",
+          "intervals": [
+            3,
+            1,
+            0
+          ],
+          "rhythm": [
+            0.4,
+            0.4,
+            0.8
+          ]
+        }
+      ],
+      "identity_floor": 0.78,
+      "cadence_rule": "authored"
+    }
+  ],
+  "register_plans": {
+    "lead": {
+      "hard_range": [
+        52,
+        88
+      ],
+      "preferred_range": [
+        62,
+        79
+      ],
+      "center": 70,
+      "max_span": 24,
+      "min_intervoice_distance": 0,
+      "overlap_policy": "primary_wins",
+      "motion_policy": "stepwise_preferred"
+    },
+    "pad": {
+      "hard_range": [
+        40,
+        68
+      ],
+      "preferred_range": [
+        47,
+        60
+      ],
+      "center": 54,
+      "max_span": 20,
+      "min_intervoice_distance": 3,
+      "overlap_policy": "avoid",
+      "motion_policy": "oblique"
+    },
+    "bass": {
+      "hard_range": [
+        28,
+        52
+      ],
+      "preferred_range": [
+        34,
+        45
+      ],
+      "center": 40,
+      "max_span": 24,
+      "min_intervoice_distance": 0,
+      "overlap_policy": "avoid",
+      "motion_policy": "smooth"
+    }
+  },
+  "orchestration_sections": {
+    "pulse": {
+      "primary_roles": [
+        "lead"
+      ],
+      "secondary_roles": [
+        "bass"
+      ],
+      "decorative_roles": [
+        "pad",
+        "drums"
+      ],
+      "max_simultaneous_roles": 3,
+      "allowed_overlaps": [],
+      "phrase_gap_only_roles": [],
+      "silence_roles": []
+    },
+    "drive": {
+      "primary_roles": [
+        "lead"
+      ],
+      "secondary_roles": [
+        "bass",
+        "pad"
+      ],
+      "decorative_roles": [
+        "drums"
+      ],
+      "max_simultaneous_roles": 4,
+      "allowed_overlaps": [
+        [
+          "lead",
+          "pad"
+        ]
+      ],
+      "phrase_gap_only_roles": [],
+      "silence_roles": []
+    },
+    "break": {
+      "primary_roles": [
+        "lead"
+      ],
+      "secondary_roles": [
+        "bass"
+      ],
+      "decorative_roles": [
+        "pad",
+        "drums"
+      ],
+      "max_simultaneous_roles": 2,
+      "allowed_overlaps": [],
+      "phrase_gap_only_roles": [
+        "pad"
+      ],
+      "silence_roles": []
+    },
+    "final": {
+      "primary_roles": [
+        "lead"
+      ],
+      "secondary_roles": [
+        "bass",
+        "pad"
+      ],
+      "decorative_roles": [
+        "drums"
+      ],
+      "max_simultaneous_roles": 4,
+      "allowed_overlaps": [
+        [
+          "lead",
+          "pad"
+        ]
+      ],
+      "phrase_gap_only_roles": [],
+      "silence_roles": []
+    }
+  },
+  "transitions": [
+    {
+      "from_section": "pulse",
+      "to_section": "drive",
+      "harmonic_anticipation": {
+        "enabled": false
+      },
+      "pickup": {
+        "enabled": false
+      },
+      "bass_approach": {
+        "type": "none"
+      },
+      "cadence_extension": {},
+      "texture_subtraction": {},
+      "silence_beats": 0.0,
+      "register_preparation": {},
+      "rhythm_fill": {}
+    },
+    {
+      "from_section": "drive",
+      "to_section": "break",
+      "harmonic_anticipation": {
+        "enabled": false
+      },
+      "pickup": {
+        "enabled": false
+      },
+      "bass_approach": {
+        "type": "none"
+      },
+      "cadence_extension": {},
+      "texture_subtraction": {
+        "roles": [
+          "pad",
+          "drums"
+        ],
+        "beats": 0.75
+      },
+      "silence_beats": 0.35,
+      "register_preparation": {},
+      "rhythm_fill": {}
+    },
+    {
+      "from_section": "break",
+      "to_section": "final",
+      "harmonic_anticipation": {
+        "enabled": true,
+        "role": "pad",
+        "beats": 0.75,
+        "target_degree": 6,
+        "chord_intervals": [
+          0,
+          2,
+          4
+        ],
+        "velocity": 0.42,
+        "gate": 0.9
+      },
+      "pickup": {
+        "enabled": true,
+        "role": "lead",
+        "beats": 0.5,
+        "degrees": [
+          5,
+          7
+        ],
+        "rhythm": [
+          0.25,
+          0.25
+        ],
+        "octave": 4,
+        "velocity": 0.5
+      },
+      "bass_approach": {
+        "type": "chromatic",
+        "beats": 0.5,
+        "direction": "below",
+        "steps": 2,
+        "velocity": 0.39999999999999997
+      },
+      "cadence_extension": {},
+      "texture_subtraction": {},
+      "silence_beats": 0.0,
+      "register_preparation": {},
+      "rhythm_fill": {
+        "role": "drums",
+        "events": [
+          {
+            "offset_beats": -0.25,
+            "drum": "hat",
+            "duration_beats": 0.07,
+            "velocity": 0.28
+          },
+          {
+            "offset_beats": -0.125,
+            "drum": "snare",
+            "duration_beats": 0.07,
+            "velocity": 0.34
+          }
+        ]
+      }
+    }
+  ],
+  "realization": {
+    "seed": 11602,
+    "microtiming": {
+      "enabled": true,
+      "max_abs_ms": 4.0
+    },
+    "velocity_variation": {
+      "enabled": true,
+      "max_abs": 0.015
+    },
+    "timing_quantization_guard_ms": 0.5,
+    "minimum_note_gap_ms": 1.0
+  }
+}

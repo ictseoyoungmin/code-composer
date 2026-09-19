@@ -1,0 +1,103 @@
+{
+  "slice": "v1.17 M3 External Delivery Hardening",
+  "status": "CLOSED",
+  "version": "1.17.0",
+  "format": "code-composer-external-delivery/v1",
+  "entrypoint": "code-composer-delivery",
+  "focused": {
+    "passed": 10,
+    "total": 10
+  },
+  "full_regression_source": {
+    "passed": 293,
+    "total": 293
+  },
+  "full_regression_clean_installed": {
+    "passed": 293,
+    "total": 293
+  },
+  "coverage": {
+    "source_percent": 90.64802285370621,
+    "export_delivery_percent": 94.48275862068965,
+    "delivery_cli_percent": 96.15384615384616
+  },
+  "compileall": "PASS",
+  "wheel": {
+    "file": "code_composer-1.17.0-py3-none-any.whl",
+    "sha256": "0189fc54b7841e45a9523af394ab06cc69f9ece1aa01976ca19f6cd543129b5e",
+    "clean_prefix_install": "PASS",
+    "console_entrypoints": 6
+  },
+  "external_parse": {
+    "mido": "PASS",
+    "scipy_float_wav": "PASS"
+  },
+  "graph": {
+    "m2": {
+      "modules": 106,
+      "edges": 138,
+      "cycles": 0,
+      "import_failures": 0
+    },
+    "m3": {
+      "modules": 108,
+      "edges": 145,
+      "cycles": 0,
+      "import_failures": 0
+    }
+  },
+  "runtime_delta": {
+    "existing_m2_src_files_changed": 0,
+    "new_modules": [
+      "src/code_composer/export/delivery.py",
+      "src/code_composer/app/delivery_cli.py"
+    ]
+  },
+  "dogfood": {
+    "A": {
+      "tracks": 2,
+      "files": 9,
+      "reference_wav_sha256": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+      "full_midi_sha256": "134a387503ef4c7e7d851bb1545e3357049e527f2f40f5eebfba8c3b625e3931"
+    },
+    "B": {
+      "tracks": 4,
+      "files": 13,
+      "reference_wav_sha256": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+      "full_midi_sha256": "027486521afa5e44d5143998a6f41c5332f3c84824c9cbf268f9f061ac839d47",
+      "per_track": {
+        "lead": {
+          "midi_sha256": "ca7d0cddb1011be11e4f41d2c5444d0bf616d5b765b34456d83a957ad449de6b",
+          "stem_sha256": "fc38c91d16cf7f052d0246c105b1417db045b5c3ffb580c6061cc091cc942c97"
+        },
+        "pad": {
+          "midi_sha256": "badf2b3f8c2565bf9097c9484d3371a396a9ca30dbcd1180fa0b4f43deb176a9",
+          "stem_sha256": "34d43a10110a2dcb34aa064afb05d39b18c2cf8b39bb97ca1f67255a4a6d5ed0"
+        },
+        "bass": {
+          "midi_sha256": "3f9fd2c054241ef88d52d890f6d44c5bab7d5f2e396bf87fc4ab3e820ffd3816",
+          "stem_sha256": "a2fa66280ac793b0091d03214393022e97b54956d02fdf646aa116d25c67c139"
+        },
+        "drums": {
+          "midi_sha256": "f34c3ea3ca7a470faed5aece56d30462a4544085c2db5ee945ff30f5e079ad20",
+          "stem_sha256": "b54d3492d89cde07347455b3cfdc3526c2d0170f7c7af85e2a431e874afd8af1"
+        }
+      }
+    },
+    "C": {
+      "tracks": 3,
+      "files": 11,
+      "reference_wav_sha256": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f",
+      "full_midi_sha256": "0a472f11458e3eb30214972cb766758dcda83782105947387f1caba86bd0e926"
+    }
+  },
+  "policies": {
+    "stem_format": "32-bit float stereo WAV",
+    "shared_processing": "not independently baked into per-track stems",
+    "reference_mix_authority": true,
+    "tempo_map_invented": false,
+    "continuous_cc_invented": false,
+    "pitch_bend_invented": false,
+    "gm_program_changes": false
+  }
+}

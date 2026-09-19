@@ -1,0 +1,21 @@
+{
+  "kind": "piano",
+  "piano_design": {
+    "family": "electric",
+    "categories": {
+      "mechanism": "reed",
+      "pickup": "neutral",
+      "amp": "warm_combo",
+      "modulation": "none",
+      "perspective": "close"
+    },
+    "controls": {
+      "decay_s": 2.0,
+      "bark_gain": 0.31,
+      "pickup_drive": 1.2,
+      "amp_drive": 1.45,
+      "stereo_width": 0.3,
+      "output_gain": 0.6
+    }
+  }
+}
