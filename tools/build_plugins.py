@@ -1,27 +1,47 @@
 from pathlib import Path
-import shutil, tempfile, zipfile
-ROOT=Path(__file__).resolve().parents[1]
-SKILL=ROOT/'skills'/'code-composer'
-DIST=ROOT/'dist'; DIST.mkdir(exist_ok=True)
+import shutil
+import tempfile
+import zipfile
 
-EXCLUDED_PARTS={"__pycache__",".pytest_cache",".mypy_cache",".ruff_cache","build","dist"}
-def include_file(p: Path) -> bool:
-    rel_parts=p.parts
-    if any(part in EXCLUDED_PARTS or part.endswith(".egg-info") for part in rel_parts):
+ROOT = Path(__file__).resolve().parents[1]
+SKILL = ROOT / "skills" / "code-composer"
+DIST = ROOT / "dist"
+DIST.mkdir(exist_ok=True)
+VERSION = (SKILL / "VERSION").read_text(encoding="utf-8").strip()
+
+ADAPTERS = {
+    "codex": ROOT / ".codex-plugin",
+    "claude": ROOT / ".claude-plugin",
+}
+
+EXCLUDED_PARTS = {"__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache", "build", "dist"}
+
+
+def include_file(path: Path) -> bool:
+    if any(part in EXCLUDED_PARTS or part.endswith(".egg-info") for part in path.parts):
         return False
-    if p.name==".coverage" or p.suffix==".pyc":
+    if path.name == ".coverage" or path.suffix == ".pyc":
         return False
-    return p.is_file()
-for platform, hidden in [('codex','.codex-plugin'),('claude','.claude-plugin')]:
-    source=ROOT/f'.{platform}_plugins'/'code-composer'
+    return path.is_file()
+
+
+for platform, source in ADAPTERS.items():
     with tempfile.TemporaryDirectory() as td:
-        stage=Path(td)/'code-composer'
-        shutil.copytree(source,stage)
-        shutil.copytree(SKILL,stage/'skills'/'code-composer')
-        out=DIST/f'code-composer-{platform}-plugin-v1.17.0.zip'
-        if out.exists(): out.unlink()
-        with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED) as z:
-            for p in sorted(stage.rglob('*')):
-                if include_file(p):
-                    z.write(p,Path('code-composer')/p.relative_to(stage))
+        stage = Path(td) / "code-composer"
+        stage.mkdir(parents=True)
+        shutil.copytree(source, stage / source.name)
+        shutil.copytree(
+            SKILL,
+            stage / "skills" / "code-composer",
+            ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "*.egg-info", ".pytest_cache", ".coverage"),
+        )
+
+        out = DIST / f"code-composer-{platform}-plugin-v{VERSION}.zip"
+        if out.exists():
+            out.unlink()
+
+        with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as archive:
+            for path in sorted(stage.rglob("*")):
+                if include_file(path):
+                    archive.write(path, Path("code-composer") / path.relative_to(stage))
         print(out)
