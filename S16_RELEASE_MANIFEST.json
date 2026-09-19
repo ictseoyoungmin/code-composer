@@ -1,0 +1,141 @@
+{
+  "release": "Code Composer v1.17.0 S16",
+  "slice": "S16 Bass Acoustic Fidelity Hardening",
+  "status": "CLOSED",
+  "date": "2026-09-19",
+  "baseline": "S15 ensemble-realism repository",
+  "scope": {
+    "engine": "plucked_bass",
+    "preset": "bass.electric_finger_modeled@1.0.0",
+    "automatic_composition": false,
+    "samples_or_external_measurements": false,
+    "pluck_position_harmonic_weighting": true,
+    "pickup_position_response": true,
+    "frequency_dependent_damping": true,
+    "bounded_inharmonicity": true,
+    "deterministic_finger_attack": true,
+    "existing_bass_expression_compatible": true
+  },
+  "validation": {
+    "focused_s16": "8/8 PASS",
+    "source_regression": "443/443 PASS (69 isolated test-file processes; 0 failed files; 0 timeouts)",
+    "clean_installed_regression": "443/443 PASS (69 isolated test-file processes; 0 failed files; 0 timeouts)",
+    "import_modules": 129,
+    "import_failures": 0,
+    "static_modules": 129,
+    "static_edges": 189,
+    "cycles": 0,
+    "public_entrypoints": 9,
+    "self_check": "PASS",
+    "skill_validation": "PASS",
+    "isolated_skill_self_check": "PASS",
+    "isolated_skill_compileall": "PASS",
+    "forbidden_package_files": 0,
+    "embedded_skill_byte_exact": true,
+    "final_repository_zip_self_check": "PASS",
+    "final_external_skill_self_check": "PASS",
+    "final_repository_forbidden_files": 0,
+    "final_external_packages_forbidden_files": 0,
+    "final_plugin_embedded_skill_byte_exact": true
+  },
+  "dogfood": {
+    "slice": "S16 Bass Acoustic Fidelity Hardening",
+    "dogfood": "Last Light on Platform Three",
+    "sample_rate_hz": 24000,
+    "events_identity_all_tracks": true,
+    "changed_surface": "bass instrument patch only",
+    "control_bass": {
+      "peak": 0.0380565813165685,
+      "rms": 0.010764881395038497,
+      "spectral_centroid_hz": 142.50435681367338
+    },
+    "treatment_bass": {
+      "peak": 0.0597857600634785,
+      "rms": 0.010330279746598435,
+      "spectral_centroid_hz": 298.8408340458343
+    },
+    "bass_stem_rms_ratio": 0.9596278275169507,
+    "bass_centroid_ratio": 2.097064544044595,
+    "full_song_ab": {
+      "sample_rate": 24000,
+      "duration_s": 68.19833333333334,
+      "control_peak": 0.3465681936094241,
+      "treatment_peak": 0.3465681936094241,
+      "control_rms": 0.05336671823669116,
+      "treatment_rms": 0.0535219000007541,
+      "difference_rms": 0.011280119770107818,
+      "mono_waveform_correlation": 0.9772058715575718
+    },
+    "treatment_full": {
+      "duration_s": 68.19833333333334,
+      "peak": 0.3465681936094241,
+      "rms": 0.05352203276437851,
+      "clipped_sample_ratio": 0.0,
+      "section_metrics": [
+        {
+          "id": "hush",
+          "rms": 0.039400184789169644,
+          "peak": 0.24622333445234534
+        },
+        {
+          "id": "theme",
+          "rms": 0.06481480974288242,
+          "peak": 0.2535172582171087
+        },
+        {
+          "id": "pulse",
+          "rms": 0.0459995463307368,
+          "peak": 0.3465681936094241
+        },
+        {
+          "id": "rise",
+          "rms": 0.0556496539008733,
+          "peak": 0.2241983009733263
+        },
+        {
+          "id": "apex",
+          "rms": 0.07211507261689651,
+          "peak": 0.3317361980040895
+        },
+        {
+          "id": "return",
+          "rms": 0.03475805928218465,
+          "peak": 0.17438276314584797
+        }
+      ]
+    },
+    "model_evidence": {
+      "pluck_position": "harmonic weighting from string excitation position",
+      "pickup_position": "harmonic pickup sampling response",
+      "frequency_dependent_damping": "upper partials decay faster than fundamental",
+      "inharmonicity": "bounded stiffness-like partial stretch",
+      "finger_attack": "deterministic band-limited transient"
+    },
+    "next_candidate": "drum/percussion acoustic fidelity if listening confirms support percussion remains synthetic"
+  },
+  "compatibility": {
+    "generic_engine_preserved": true,
+    "s15_ensemble_preserved": true,
+    "s14_piano_preserved": true,
+    "s13_violin_preserved": true,
+    "factory_preset_count": 14,
+    "violin_preset_count": 8,
+    "bass_preset_count": 1,
+    "registered_engine_count": 5
+  },
+  "next": "Percussion acoustic fidelity as a separate candidate slice after listening review.",
+  "packaging": {
+    "standalone_skill_files": 207,
+    "codex_plugin_files": 209,
+    "claude_plugin_files": 209,
+    "forbidden_files": 0,
+    "codex_skill_exact": true,
+    "claude_skill_exact": true,
+    "artifact_sha256": {
+      "standalone": "9641d2357004e283edbb0aa9484735023d72c1dec1299ae7bfabf05d38d3dedb",
+      "codex": "792e7c34a3df3b4e77b9211b8f2fa7535f23256af243d2d16803900444094103",
+      "claude": "ab9ca870a1869421725c0c9b066bd191892a6d9bb1971bc29cd1c5a135505084",
+      "wheel": "fa5aa6ab48119a475cd4de6e4eeba57e15d942d8968f158a2484019b6da580aa"
+    }
+  }
+}

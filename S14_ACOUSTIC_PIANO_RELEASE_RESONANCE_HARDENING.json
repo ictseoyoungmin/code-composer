@@ -1,0 +1,110 @@
+{
+  "release": "Code Composer v1.17.0 S14",
+  "slice": "S14 Acoustic Piano Release & Resonance Hardening",
+  "status": "CLOSED",
+  "date": "2026-09-19",
+  "baseline": "S13 articulation repository",
+  "scope": {
+    "engine_level_fix": true,
+    "preset_bypass": false,
+    "mechanisms": [
+      "damper-down modal soundboard shortening",
+      "no-pedal harmonic-only per-note resonance",
+      "release-only damping of secondary detuned unison strings"
+    ],
+    "presets_required": [
+      "concert_grand",
+      "studio_grand",
+      "upright"
+    ]
+  },
+  "validation": {
+    "focused_s14": "20/20 PASS",
+    "source_regression": "420/420 PASS (67 test files; grouped/isolated physical-render execution; 0 engine failures)",
+    "clean_installed_regression": "420/420 PASS (wheel target; source-path injection disabled; transient build hygiene fixed)",
+    "self_check": "PASS",
+    "skill_validation": "PASS",
+    "compileall": "PASS",
+    "import_modules": 126,
+    "import_failures": 0,
+    "static_modules": 126,
+    "static_edges": 182,
+    "cycles": 0,
+    "public_entrypoints": 9
+  },
+  "regression_metrics": {
+    "protocol": {
+      "sample_rate_hz": 12000,
+      "note_duration_s": 0.45,
+      "release_analysis_s": [
+        0.18,
+        0.8
+      ],
+      "pedal": false
+    },
+    "concert_grand_persistent_off_harmonic_peak_db": {
+      "single": {
+        "before": -41.68459489708178,
+        "after": -54.057233128681034
+      },
+      "dyad": {
+        "before": -41.70394804854855,
+        "after": -54.08677607546502
+      },
+      "triad": {
+        "before": -42.017483500220294,
+        "after": -54.24533865067965
+      }
+    },
+    "concert_grand_late_rms_db_relative_preoff": {
+      "single": {
+        "before": -39.886577948574654,
+        "after": -49.56690130835497
+      },
+      "dyad": {
+        "before": -42.54600127386087,
+        "after": -52.210545825158604
+      },
+      "triad": {
+        "before": -44.50624557175285,
+        "after": -54.08329402185728
+      }
+    },
+    "single_note_1_5x_ratio_db_relative_fundamental": {
+      "midi": 60,
+      "before": -41.48673411253608,
+      "after": -93.9978554265339
+    },
+    "pedal_body_preservation": {
+      "window_s": [
+        0.9,
+        1.3
+      ],
+      "dry_rms": 0.00016938602699587325,
+      "pedal_rms": 0.060628857919190635,
+      "ratio": 357.9354331437818
+    }
+  },
+  "compatibility": {
+    "pedal_on_shared_body_resonance_preserved": true,
+    "attack_sustain_unison_detune_preserved": true,
+    "electric_piano_path_unchanged": true,
+    "factory_preset_count": 13,
+    "violin_preset_count": 8
+  },
+  "packaging": {
+    "standalone_skill_files": 200,
+    "codex_plugin_files": 202,
+    "claude_plugin_files": 202,
+    "forbidden_skill_files": 0,
+    "codex_skill_exact": true,
+    "claude_skill_exact": true,
+    "clean_wheel_sha256": "7d7480abb98227e2e18e7b9af4c3ab6005e925d33ac74739aed78c8fa0d4bf76",
+    "artifact_sha256": {
+      "standalone": "283add050d75b169da439e232f2e85b8d49edb546525b4d0d32f258388536c29",
+      "codex": "4f6939c094a10d06ceac004b463f59d4299af224ca4a2b0f5466a217624d075c",
+      "claude": "370626e6c0129e3e103835d5a7a75c61a7eba454de3e0773332af3f74cee4c15"
+    }
+  },
+  "next": "S15 Ensemble / Orchestration Realism after S14 piano-tail closure."
+}

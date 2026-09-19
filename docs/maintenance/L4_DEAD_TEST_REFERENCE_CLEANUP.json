@@ -1,0 +1,194 @@
+{
+  "status": "CLOSED",
+  "release_baseline": "v1.16.0 CLOSED",
+  "release_reopened": false,
+  "slice": "L4 Dead Test / Reference Cleanup",
+  "authorization": "Only the 12 L3_CANDIDATE paths from the closed L3 snapshot were eligible for deletion.",
+  "removed_count": 12,
+  "removed_bytes": 37197041,
+  "removed": [
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/after_repeat.wav",
+      "bytes": 4734348,
+      "sha256": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/A_lyrical_piano/after.wav",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/analysis_after_repeat.json",
+      "bytes": 7916,
+      "sha256": "d19271f63533c1ca18628e0d47dfa95c00c207b756a8eba14f76d5f2a5094e69",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/A_lyrical_piano/analysis_after.json",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/before_vs_after.wav",
+      "bytes": 9592128,
+      "sha256": "f2bea0cb81105f79be721723edd2abf9989281061c034b720fc39870f74853ee",
+      "candidate_reason": "derived_listening_convenience_reconstructible_from_before_after"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/resolved_after_repeat.json",
+      "bytes": 128590,
+      "sha256": "e4414609096ab97adc130763a17d0ab1136ff2eabe0d629fb2a8e3a71ce4e804",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/A_lyrical_piano/resolved_after.json",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/after_repeat.wav",
+      "bytes": 3200128,
+      "sha256": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/B_rhythm_centered/after.wav",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/analysis_after_repeat.json",
+      "bytes": 14940,
+      "sha256": "b884ac1f71ec51eeefafc931eb4a05f2b68770be62085dfccd3134fd9fc44f9c",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/B_rhythm_centered/analysis_after.json",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/before_vs_after.wav",
+      "bytes": 6523688,
+      "sha256": "93fc6dcd0b93c7a1e63d2b3f60081c1e6e434dde9d75c3fba5870c2e4b2c84d7",
+      "candidate_reason": "derived_listening_convenience_reconstructible_from_before_after"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/resolved_after_repeat.json",
+      "bytes": 156679,
+      "sha256": "81dbf014f3d97e9ea751ca100801d5a1e4aa2c23b38ba69e408401cf54dd0702",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/B_rhythm_centered/resolved_after.json",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/after_repeat.wav",
+      "bytes": 4198772,
+      "sha256": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/C_sparse_chamber_electronic/after.wav",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/analysis_after_repeat.json",
+      "bytes": 8611,
+      "sha256": "1691490fe60b92d10c79c2885c6d888a22b6fe2cbfdaabdb7a2bb6fa94bc59ce",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/C_sparse_chamber_electronic/analysis_after.json",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/before_vs_after.wav",
+      "bytes": 8520976,
+      "sha256": "b514ce8d49c832222eb3c82513f2dcf89bc0b5ad372103d050c6a1f6ff31261e",
+      "candidate_reason": "derived_listening_convenience_reconstructible_from_before_after"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/resolved_after_repeat.json",
+      "bytes": 110265,
+      "sha256": "90ab30d13d0832c0785d01d5380586863ab97f386a55aec3a5d79f066594edbb",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/C_sparse_chamber_electronic/resolved_after.json",
+      "duplicate_sha256_match": true
+    }
+  ],
+  "comparison_derivation_proof": {
+    "A_lyrical_piano": {
+      "gap_frames": 30869,
+      "gap_seconds": 0.6999773242630386,
+      "sample_rate": 44100,
+      "before_frames": 1183576,
+      "after_frames": 1183576,
+      "derivation": "quantize_int16(before) + 30869 zero frames + quantize_int16(after)",
+      "exact_predelete_proof": true
+    },
+    "B_rhythm_centered": {
+      "gap_frames": 30869,
+      "gap_seconds": 0.6999773242630386,
+      "sample_rate": 44100,
+      "before_frames": 800021,
+      "after_frames": 800021,
+      "derivation": "quantize_int16(before) + 30869 zero frames + quantize_int16(after)",
+      "exact_predelete_proof": true
+    },
+    "C_sparse_chamber_electronic": {
+      "gap_frames": 30869,
+      "gap_seconds": 0.6999773242630386,
+      "sample_rate": 44100,
+      "before_frames": 1049682,
+      "after_frames": 1049682,
+      "derivation": "quantize_int16(before) + 30869 zero frames + quantize_int16(after)",
+      "exact_predelete_proof": true
+    }
+  },
+  "src_schema_aggregate_sha256": "bcee602c1f5d96246910acf1052496923fb4aafc52cf0a8becd84759f6318ea4",
+  "l3_snapshot_preserved": true,
+  "historical_reference_policy": {
+    "preserved_snapshots": [
+      "docs/maintenance/L3_HISTORICAL_FIXTURE_CLASSIFICATION.json",
+      "docs/maintenance/L3_HISTORICAL_FIXTURE_CLASSIFICATION.md",
+      "docs/maintenance/LEGACY_SURFACE_INVENTORY.json"
+    ],
+    "rule": "Historical inventories may name removed paths as historical facts; current navigation must not present them as available artifacts."
+  },
+  "test_cleanup": {
+    "test_legacy_cleanup_l3.py": "retained but decoupled from current candidate file existence/digests; now validates the immutable L3 authorization snapshot and retained peers",
+    "test_legacy_cleanup_l4.py": "post-cleanup guards for exact removals, retained evidence, runtime/schema identity, and L5 handoff"
+  },
+  "next": "L5 Clean Install / Compatibility",
+  "validation": {
+    "focused_l3_l4": {
+      "passed": 12,
+      "failed": 0
+    },
+    "full_regression": {
+      "passed": 247,
+      "failed": 0
+    },
+    "coverage_percent": 88,
+    "compileall": true,
+    "runtime_graph": {
+      "import_modules": 98,
+      "import_failures": [],
+      "static_modules": 99,
+      "static_edges": 121,
+      "cycles": 0
+    },
+    "legacy_representative_wav": {
+      "sha256": "589ac3efdc466a1a7c191caa0e614a63b1a28e4dea566b08164df3730f4490e0",
+      "expected": "589ac3efdc466a1a7c191caa0e614a63b1a28e4dea566b08164df3730f4490e0",
+      "byte_identical": true,
+      "clipped_frame_ratio": 0.0,
+      "sample_rate": 44100
+    },
+    "final_dogfood_rerender": {
+      "A_lyrical_piano": {
+        "sha256": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+        "expected": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+        "byte_identical": true,
+        "clipped_frame_ratio": 0.0,
+        "sample_rate": 44100
+      },
+      "B_rhythm_centered": {
+        "sha256": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+        "expected": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+        "byte_identical": true,
+        "clipped_frame_ratio": 0.0,
+        "sample_rate": 44100
+      },
+      "C_sparse_chamber_electronic": {
+        "sha256": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f",
+        "expected": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f",
+        "byte_identical": true,
+        "clipped_frame_ratio": 0.0,
+        "sample_rate": 44100
+      }
+    }
+  }
+}

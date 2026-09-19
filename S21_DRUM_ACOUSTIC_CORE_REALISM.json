@@ -1,0 +1,206 @@
+{
+  "slice": "S21 Drum Acoustic Core Realism Hardening",
+  "status": "CLOSED",
+  "date": "2026-09-19",
+  "engine_version": "1.17.0",
+  "baseline": "S20 Drum Articulation Foundation",
+  "preset": {
+    "legacy": "drums.acoustic_kit_modeled@1.0.0",
+    "realistic": "drums.acoustic_kit_modeled_realistic@1.0.0",
+    "opt_in": true
+  },
+  "scope": {
+    "dry_source_only": true,
+    "room_overhead_reverb_mic_model": false,
+    "stateful_choke_or_shared_residual_state": false,
+    "drummer_performance_grammar": false,
+    "auto_generated_hits_or_fills": false,
+    "kick": "reduced-order batter/resonant head pair + cavity + shell + beater contact",
+    "snare": "reduced-order batter/resonant head pair + cavity + shell + resonant-head-driven wire rattle",
+    "toms": "size-dependent paired heads + cavity + shell coupling",
+    "cymbals": "dense deterministic inharmonic paired modal field + broadband wash/contact"
+  },
+  "compatibility": {
+    "s20_preset_byte_identical": true,
+    "s20_articulation_surface_preserved": true,
+    "s18_track_gain_preserved": true,
+    "s19_track_pan_preserved": true
+  },
+  "validation": {
+    "focused_s21": "10/10 PASS",
+    "source_regression": "488/488 PASS (74 test files; 0 failures/timeouts)",
+    "clean_installed_regression": "488/488 PASS (74 test files; source-path injection disabled)",
+    "import_modules": 130,
+    "import_failures": 0,
+    "static_modules": 130,
+    "static_edges": 191,
+    "cycles": 0,
+    "public_entrypoints": 9
+  },
+  "dogfood": {
+    "sample_rate": 24000,
+    "bpm": 96,
+    "bars": 8,
+    "explicit_events": 114,
+    "s20_preset": "drums.acoustic_kit_modeled@1.0.0",
+    "s21_preset": "drums.acoustic_kit_modeled_realistic@1.0.0",
+    "metrics": {
+      "kick": {
+        "S20": {
+          "low_ratio_20_120": 0.9985894231172566,
+          "body_ratio_120_500": 0.0013597750980828653,
+          "presence_ratio_1k_5k": 9.603401156914514e-08,
+          "air_ratio_7k_16k": 3.6567520940598006e-08,
+          "centroid_hz": 51.37690012547411,
+          "crest_factor": 3.536360548699223,
+          "onset_click_score": 0.2538849471474381,
+          "decay_time_s": 0.31695833333333334
+        },
+        "S21": {
+          "low_ratio_20_120": 0.9961619693367755,
+          "body_ratio_120_500": 0.003834934387373314,
+          "presence_ratio_1k_5k": 1.93773462766686e-07,
+          "air_ratio_7k_16k": 6.15988328151597e-08,
+          "centroid_hz": 52.30662338550019,
+          "crest_factor": 3.5333474816781267,
+          "onset_click_score": 0.8625951199620371,
+          "decay_time_s": 0.3329166666666667
+        }
+      },
+      "snare_center": {
+        "S20": {
+          "low_ratio_20_120": 5.856872230820296e-05,
+          "body_ratio_120_500": 0.12060407584528209,
+          "presence_ratio_1k_5k": 0.34605769072800135,
+          "air_ratio_7k_16k": 0.3451826769313715,
+          "centroid_hz": 5408.082229300639,
+          "crest_factor": 4.8585170143091005,
+          "onset_click_score": 6.732136289579661,
+          "decay_time_s": 0.33779166666666666
+        },
+        "S21": {
+          "low_ratio_20_120": 0.018382818564662715,
+          "body_ratio_120_500": 0.45265225520555125,
+          "presence_ratio_1k_5k": 0.1903568408109503,
+          "air_ratio_7k_16k": 0.20991270184406194,
+          "centroid_hz": 3453.525204758844,
+          "crest_factor": 7.058558915030426,
+          "onset_click_score": 9.990649963146382,
+          "decay_time_s": 0.20766666666666667
+        }
+      },
+      "hat_closed": {
+        "S20": {
+          "low_ratio_20_120": 1.0702146542530072e-09,
+          "body_ratio_120_500": 1.522458721330969e-06,
+          "presence_ratio_1k_5k": 0.05028974986303186,
+          "air_ratio_7k_16k": 0.7314922034112972,
+          "centroid_hz": 8077.74642670055,
+          "crest_factor": 9.303850157879737,
+          "onset_click_score": 14.782491664705047,
+          "decay_time_s": 0.06645833333333333
+        },
+        "S21": {
+          "low_ratio_20_120": 6.117111538643082e-08,
+          "body_ratio_120_500": 1.116395339131405e-05,
+          "presence_ratio_1k_5k": 0.25976467348934,
+          "air_ratio_7k_16k": 0.4124153950069919,
+          "centroid_hz": 6895.498003471425,
+          "crest_factor": 6.092095843535684,
+          "onset_click_score": 10.596829451808594,
+          "decay_time_s": 0.10016666666666667
+        }
+      },
+      "hat_open": {
+        "S20": {
+          "low_ratio_20_120": 2.8823920912524386e-07,
+          "body_ratio_120_500": 1.530063578525622e-05,
+          "presence_ratio_1k_5k": 0.15789905448009117,
+          "air_ratio_7k_16k": 0.5505412728821315,
+          "centroid_hz": 7323.888882790394,
+          "crest_factor": 6.555505107552129,
+          "onset_click_score": 10.276550699356127,
+          "decay_time_s": 1.1210833333333334
+        },
+        "S21": {
+          "low_ratio_20_120": 1.7534049276203647e-07,
+          "body_ratio_120_500": 4.951259586710205e-05,
+          "presence_ratio_1k_5k": 0.39279966720409926,
+          "air_ratio_7k_16k": 0.3665084339055431,
+          "centroid_hz": 6307.126638569122,
+          "crest_factor": 7.022213963184598,
+          "onset_click_score": 11.174393104662629,
+          "decay_time_s": 1.1429166666666666
+        }
+      },
+      "ride_bow": {
+        "S20": {
+          "low_ratio_20_120": 6.161689082241796e-07,
+          "body_ratio_120_500": 0.00035843426851836117,
+          "presence_ratio_1k_5k": 0.6589315420596137,
+          "air_ratio_7k_16k": 0.1949585879112283,
+          "centroid_hz": 4195.06929879746,
+          "crest_factor": 6.2617887212942875,
+          "onset_click_score": 6.769245089767947,
+          "decay_time_s": 1.7878333333333334
+        },
+        "S21": {
+          "low_ratio_20_120": 1.9907758349094125e-06,
+          "body_ratio_120_500": 0.0015121105294675348,
+          "presence_ratio_1k_5k": 0.509065543610109,
+          "air_ratio_7k_16k": 0.29712786395369384,
+          "centroid_hz": 5265.115906274321,
+          "crest_factor": 7.018972212043689,
+          "onset_click_score": 9.00304321735275,
+          "decay_time_s": 1.8955833333333334
+        }
+      },
+      "ride_bell": {
+        "S20": {
+          "low_ratio_20_120": 1.0533929293377709e-07,
+          "body_ratio_120_500": 2.1159606922289286e-05,
+          "presence_ratio_1k_5k": 0.6930668868283141,
+          "air_ratio_7k_16k": 0.13041307717688466,
+          "centroid_hz": 5048.262239891979,
+          "crest_factor": 5.826568623910051,
+          "onset_click_score": 6.722395120676915,
+          "decay_time_s": 1.239875
+        },
+        "S21": {
+          "low_ratio_20_120": 3.196361304133723e-07,
+          "body_ratio_120_500": 0.00027196273598539453,
+          "presence_ratio_1k_5k": 0.4522042522032021,
+          "air_ratio_7k_16k": 0.31886249135186956,
+          "centroid_hz": 5834.469584085309,
+          "crest_factor": 8.15080606604737,
+          "onset_click_score": 10.521954526671744,
+          "decay_time_s": 1.1855
+        }
+      },
+      "crash": {
+        "S20": {
+          "low_ratio_20_120": 3.866965418685593e-06,
+          "body_ratio_120_500": 0.001873032703068069,
+          "presence_ratio_1k_5k": 0.43014890028106695,
+          "air_ratio_7k_16k": 0.3135644613147964,
+          "centroid_hz": 5201.550241654048,
+          "crest_factor": 7.354411435021037,
+          "onset_click_score": 9.771674708725293,
+          "decay_time_s": 1.9562916666666668
+        },
+        "S21": {
+          "low_ratio_20_120": 2.147060041775524e-05,
+          "body_ratio_120_500": 0.012889436568363437,
+          "presence_ratio_1k_5k": 0.45613078248147093,
+          "air_ratio_7k_16k": 0.29318274635081853,
+          "centroid_hz": 5104.109164290617,
+          "crest_factor": 7.243226153599334,
+          "onset_click_score": 11.332541651772722,
+          "decay_time_s": 2.247708333333333
+        }
+      }
+    },
+    "scope": "dry source only; no room/overhead/microphone model; identical authored events in groove A/B"
+  },
+  "next": "Post-S21 listening review; S22 Performance-to-Timbre Dynamics remains a candidate and is not opened automatically."
+}

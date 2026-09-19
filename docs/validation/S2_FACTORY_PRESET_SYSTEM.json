@@ -1,0 +1,104 @@
+{
+  "status": "CLOSED",
+  "slice": "S2 Factory Preset System",
+  "date": "2026-09-17",
+  "engine_version": "1.17.0",
+  "principles": {
+    "presets": "provide sonic capability, not composition content",
+    "examples": "teach operation, never taste",
+    "agent_catalog_raw_patch_values": false,
+    "song_state": "factory preset is fully materialized into canonical Music IR"
+  },
+  "factory_presets": {
+    "format": "code-composer-factory-preset/v1",
+    "count": 6,
+    "ids": [
+      "bowed.violin.synthetic_warm",
+      "generic.clean_lead",
+      "generic.soft_pad",
+      "piano.concert_grand",
+      "piano.electric_tine_warm",
+      "piano.upright_intimate"
+    ],
+    "catalog": "skills/code-composer/kit/presets/CATALOG.json",
+    "catalog_sha256": "e73f296ea1e3e3dbde166b28ae6fcaa6bc47403fc52ac45e0d905fad92dc5880",
+    "musical_content_forbidden": true,
+    "genre_mapping_removed_from_catalog": true,
+    "s1_violin_dogfood_patch_promoted_to_factory_preset": true
+  },
+  "materialization": {
+    "brief_fields": [
+      "preset_id",
+      "preset_version",
+      "patch_overrides"
+    ],
+    "identity_fields_override_forbidden": [
+      "kind",
+      "engine",
+      "family",
+      "preset_provenance"
+    ],
+    "provenance": [
+      "preset_id",
+      "preset_version",
+      "materialized"
+    ],
+    "future_factory_update_changes_existing_song": false
+  },
+  "source_delta_from_s1": {
+    "python_modules_before": 115,
+    "python_modules_after": 118,
+    "added": [
+      "app/presets_cli.py",
+      "presets.py",
+      "reference/presets/__init__.py"
+    ],
+    "changed": [
+      "agent/composer_planner.py",
+      "agent/composition_brief.py"
+    ],
+    "removed": []
+  },
+  "validation": {
+    "focused": "11/11 PASS",
+    "full_regression": "321/321 PASS",
+    "coverage_percent": 92.65225933202358,
+    "preset_module_coverage_percent": 84.21052631578948,
+    "preset_cli_coverage_percent": 90.47619047619048,
+    "self_check": "PASS",
+    "skill_validation": "PASS",
+    "compileall": "PASS",
+    "import_modules": 118,
+    "import_failures": 0,
+    "static_modules": 118,
+    "static_edges": 165,
+    "cycles": 0,
+    "clean_standalone_zip_self_check": "PASS",
+    "clean_wheel_preset_smoke": "PASS",
+    "console_entrypoints": 7,
+    "legacy_A_B_C_wav_byte_identity": {
+      "A": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+      "B": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+      "C": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f"
+    }
+  },
+  "audition": {
+    "path": "validation-only/violin_factory_preset_audition.wav",
+    "sha256": "b0f00cb26de10bfe27842e761b122410fac0a0b94eee6a66a845b3be324fcb31",
+    "shipped_inside_skill": false
+  },
+  "packaging": {
+    "standalone_skill_files": 174,
+    "codex_plugin_files": 176,
+    "claude_plugin_files": 176,
+    "forbidden_build_cache_audio_midi_files": 0,
+    "codex_skill_subtree_exact": true,
+    "claude_skill_subtree_exact": true,
+    "clean_wheel_sha256": "dd005277d4910a7a7372efd900449d36bfca477cbe90c99b869e40a7e319a8a1",
+    "artifact_sha256": {
+      "standalone_skill": "b88c599ceff7068d2b14a611d225a4265791acb9571bec1f5b1ee12f0325cfbd",
+      "codex_plugin": "dfb9f04b6127aa3f5ce40613c6626ab22f8e6603e98c896ec91ae9671e4af7a1",
+      "claude_plugin": "399a95b18909dd3487324853b9faa9156eff1b60bcf41f9c28df80b898f3f4ca"
+    }
+  }
+}

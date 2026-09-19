@@ -1,0 +1,65 @@
+{
+  "slice": "S9 Measured Bridge-Admittance ERA Fitting",
+  "status": "CLOSED",
+  "date": "2026-09-18",
+  "engine_version": "1.17.0",
+  "scope": {
+    "fit_format": "code-composer-bridge-admittance-era/v1",
+    "method": "ERA",
+    "input_quantity": "preprocessed force-to-bridge-velocity impulse response",
+    "runtime": "O(M) pole/residue state",
+    "radiation_response_separate": true,
+    "named_measured_factory_preset_shipped": false,
+    "reason_no_measured_preset": "public research/data availability verified, but exact raw measurement asset and redistribution provenance were not independently imported/verified in this slice"
+  },
+  "research": {
+    "dafx_2026": "Eigensystem Realization of Violin Bridge Admittances — reduced-order ERA models directly from measured impulse responses",
+    "acta_acustica_2026": "Violin playing-in study — bridge input admittance measured with laser Doppler vibrometer and instrumented impact hammer; dataset declared available on Zenodo",
+    "github_access_code": "hugo-paugesteros/CNSM-dataset exposes admittance dataset access code"
+  },
+  "validation": {
+    "focused_latest": "22/22 PASS (fitter/CLI/S8 integration/Skill surface)",
+    "source_regression": "374/374 PASS (57 bowed/violin/fitter + 317 remainder)",
+    "clean_installed_regression": "374/374 PASS (57 bowed/violin/fitter + 317 remainder)",
+    "fitter_cli_coverage_percent": 91,
+    "bridge_admittance_fit_coverage_percent": 92,
+    "admittance_fit_cli_coverage_percent": 86,
+    "self_check": "PASS",
+    "skill_validation": "PASS",
+    "compileall": "PASS",
+    "import_modules": 126,
+    "import_failures": 0,
+    "static_modules": 126,
+    "static_edges": 182,
+    "cycles": 0,
+    "clean_wheel_sha256": "0fdc903d34daff5eed0c87d772a8dabddfa190dc8dfb817e7892459fefb4655b",
+    "public_entrypoints": 9
+  },
+  "compatibility": {
+    "s8_modeled_admittance_raw_render_sha256_s8": "c871b3fea30327e73d901c40bba7286fa9486df1bcefe612671acf35002b8f37",
+    "s8_modeled_admittance_raw_render_sha256_s9": "c871b3fea30327e73d901c40bba7286fa9486df1bcefe612671acf35002b8f37",
+    "s8_modeled_admittance_byte_identical": true,
+    "legacy_A_B_C_guard": "PASS through regression suite"
+  },
+  "protocol_validation": {
+    "measured_data_used": false,
+    "synthetic_six_pole_fit_nmse": 5.558967221626991e-25,
+    "closed_loop_base_sha256": "7bee84452edf503609efc38d049905cbf8b85d83150d4f8a9b07759aafc1c433",
+    "closed_loop_fit_sha256": "3a50f7275f90b763cfbf4d1e5014ff280cf0779b02c4e8cfc9a46746b4f518b2",
+    "closed_loop_diff_rms": 0.013009961761815568
+  },
+  "packaging": {
+    "standalone_skill_files": 197,
+    "codex_plugin_files": 199,
+    "claude_plugin_files": 199,
+    "forbidden_files": 0,
+    "codex_skill_exact": true,
+    "claude_skill_exact": true,
+    "artifact_sha256": {
+      "standalone": "51eeb15a9468e9fb1fa321efb2f04dbb394f12c2cd1357450bb84c3b18122ed8",
+      "codex": "fc4d0f656c220e03144c253ef4838038c6a2652142de3d065b228074780ba446",
+      "claude": "54a8fb543b708c5e7df737375b1e6be2a299890072e64152f93cbac2d5e3d68a"
+    }
+  },
+  "next": "import and verify an exact redistributable measured bridge-admittance asset, then fit/audition it as a separately versioned measurement-derived resource; keep radiation transfer separate"
+}

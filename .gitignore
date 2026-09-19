@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Build and release outputs
+build/
+dist/
+*.whl
+*.zip
+
+# Generated audio / media dogfood
+*.wav
+*.mp3
+*.flac
+*.ogg
+*.m4a
+
+# Local editor / OS
+.DS_Store
+.idea/
+.vscode/

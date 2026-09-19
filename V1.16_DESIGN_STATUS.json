@@ -1,0 +1,49 @@
+{
+  "status": "V1.16_FINAL_CLOSED",
+  "version": "1.16.0",
+  "closed_slices": [
+    "E0",
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "E5",
+    "E6"
+  ],
+  "closed_hardening": [
+    "H1 E6 QA correctness",
+    "H2 Contract Parity",
+    "H3 E2 Semantic Closure",
+    "H4 Revision Surface Cleanup",
+    "H5 Reference / Package Hygiene"
+  ],
+  "final_integrated_closure": {
+    "status": "PASS",
+    "cases": [
+      "A_lyrical_piano",
+      "B_rhythm_centered",
+      "C_sparse_chamber_electronic"
+    ],
+    "manifest": "examples/v1.16/final_closure/final_closure_manifest.json"
+  },
+  "v1.16_final_closed": true,
+  "next": "Future version planning only; reopen v1.16 if perceptual or architectural evidence invalidates closure.",
+  "maintenance": {
+    "legacy_cleanup": {
+      "status": "L5_CLEAN_INSTALL_COMPATIBILITY_CLOSED",
+      "release_reopened": false,
+      "closed": [
+        "L0 Legacy surface inventory",
+        "L1 Public import / compatibility audit",
+        "L2 Superseded analyzer-driven mutation removal",
+        "L3 Historical documentation / fixture classification",
+        "L4 Dead test / reference cleanup",
+        "L5 Clean Install / Compatibility"
+      ],
+      "next": "Legacy cleanup maintenance complete; future work requires a new explicitly scoped maintenance or version-planning chain.",
+      "l4_removed_count": 12,
+      "l4_removed_bytes": 37197041,
+      "l5_clean_install_compatibility": true
+    }
+  }
+}

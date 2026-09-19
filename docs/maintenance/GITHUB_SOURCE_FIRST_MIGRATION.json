@@ -1,0 +1,88 @@
+{
+  "status": "GITHUB_SOURCE_FIRST_MIGRATION_CLOSED",
+  "baseline": "S24_CYMBAL_PRESENCE_EXCITATION_HARDENING_CLOSED",
+  "policy": "Large rendered audio is externalized from Git source history. Historical identity is retained by path/size/SHA-256 metadata; release archives may carry audio bytes separately.",
+  "canonical_skill": "skills/code-composer",
+  "plugin_source_policy": "adapter-only; tools/build_plugins.py injects the canonical Skill into generated artifacts",
+  "externalized_historical_audio": [
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/after.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 4734348,
+      "sha256": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/after_repeat.wav",
+      "classification": "L4_CANDIDATE",
+      "bytes": 4734348,
+      "sha256": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/before.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 4734348,
+      "sha256": "1614677fb6510f3642da69d232857b4c72fbaf3eea315b726dd09b460b78b4a8"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/before_vs_after.wav",
+      "classification": "L4_CANDIDATE",
+      "bytes": 9592128,
+      "sha256": "f2bea0cb81105f79be721723edd2abf9989281061c034b720fc39870f74853ee"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/after.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 3200128,
+      "sha256": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/after_repeat.wav",
+      "classification": "L4_CANDIDATE",
+      "bytes": 3200128,
+      "sha256": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/before.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 3200128,
+      "sha256": "7ea41c9cf3c26f812e320536c768a402b120f822a5bdabdc84c0a6c4e564ae01"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/before_vs_after.wav",
+      "classification": "L4_CANDIDATE",
+      "bytes": 6523688,
+      "sha256": "93fc6dcd0b93c7a1e63d2b3f60081c1e6e434dde9d75c3fba5870c2e4b2c84d7"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/after.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 4198772,
+      "sha256": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/after_repeat.wav",
+      "classification": "L4_CANDIDATE",
+      "bytes": 4198772,
+      "sha256": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/before.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 4198772,
+      "sha256": "16ef3632b22501172e2d2fa362b59a28cd6ba641daa88f686cdee90e45f822a4"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/before_vs_after.wav",
+      "classification": "L4_CANDIDATE",
+      "bytes": 8520976,
+      "sha256": "b514ce8d49c832222eb3c82513f2dcf89bc0b5ad372103d050c6a1f6ff31261e"
+    },
+    {
+      "path": "examples/v1.16/final_closure/v1.16_final_showcase_reel.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 12450680,
+      "sha256": "3cd8dc3477bd605bc407e75ca53b307059fe6590dd0a754f77483b0fd07c874a"
+    }
+  ],
+  "next": "S25_NON_CYMBAL_DRUM_CORE_HARDENING_PLAN_READY"
+}

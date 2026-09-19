@@ -1,0 +1,1617 @@
+{
+  "status": "S24_CYMBAL_PRESENCE_EXCITATION_HARDENING_CLOSED",
+  "version": "1.17.0",
+  "prior_release": {
+    "version": "1.16.0",
+    "status": "CLOSED",
+    "reopened": false,
+    "legacy_cleanup": "L0-L5 COMPLETE"
+  },
+  "closed_slices": [
+    "M1 MIDI Collaboration Export",
+    "M2 Code Composer Exchange Package",
+    "M3 External Delivery Hardening",
+    "S16",
+    "S17",
+    "S18",
+    "S19",
+    "S20",
+    "S21",
+    "S22",
+    "S23",
+    "S24"
+  ],
+  "m1": {
+    "midi_format": 1,
+    "default_ppq": 960,
+    "conductor_track": true,
+    "section_markers": true,
+    "track_separation": true,
+    "drum_channel": 10,
+    "gm_program_changes": false,
+    "collaboration_bundle": [
+      "Type 1 MIDI",
+      "reference_mix.wav",
+      "resolved_ir.json",
+      "manifest.json"
+    ],
+    "architecture": "one-way export adapter",
+    "validation": {
+      "focused": "16/16 PASS",
+      "full_regression": "268/268 PASS",
+      "coverage_percent": 88.78733474783743,
+      "external_mido_parse": "PASS",
+      "clean_wheel_install": "PASS",
+      "v116_baseline_files_changed": 0,
+      "dogfood_midi_sha256": {
+        "A_lyrical_piano": "134a387503ef4c7e7d851bb1545e3357049e527f2f40f5eebfba8c3b625e3931",
+        "B_rhythm_centered": "027486521afa5e44d5143998a6f41c5332f3c84824c9cbf268f9f061ac839d47",
+        "C_sparse_chamber_electronic": "0a472f11458e3eb30214972cb766758dcda83782105947387f1caba86bd0e926"
+      }
+    }
+  },
+  "next": "S25 Non-Cymbal Drum Core Hardening: kick → snare → tom dry-source hardening, then matched full-kit dogfood. Stateful Kit Interaction remains deferred pending post-S25 listening review.",
+  "m2": {
+    "format": "code-composer-exchange/v1",
+    "container_extension": ".ccx",
+    "authority": "canonical Music IR",
+    "checkpoint_model": "single-parent fast-forward",
+    "automatic_merge": false,
+    "dirty_workspace_guard": true,
+    "divergence_detection": true,
+    "revision_identity": "content-addressed provenance/state hashes",
+    "handoff": {
+      "statuses": [
+        "working",
+        "review",
+        "approved_internal"
+      ],
+      "requested_changes": true,
+      "notes": true,
+      "scope_locks": [
+        "transport",
+        "tonal",
+        "form",
+        "mix",
+        "arrangement",
+        "performance_ir",
+        "track:<id>",
+        "instrument:<id>",
+        "section:<id>"
+      ]
+    },
+    "payload": [
+      "manifest.json",
+      "composition/music_ir.json",
+      "composition/resolved_ir.json",
+      "composition/plan.json (optional)",
+      "composition/brief.json (optional)",
+      "provenance/revisions.json",
+      "handoff/handoff.json",
+      "audio/reference_mix.wav"
+    ],
+    "validation": {
+      "focused": "15/15 PASS",
+      "full_regression": "283/283 PASS",
+      "coverage_percent": 88.77488514548239,
+      "exchange_package_coverage_percent": 85.39944903581267,
+      "exchange_cli_coverage_percent": 97.36842105263158,
+      "clean_wheel_install": "PASS",
+      "console_entrypoints": "5/5 PRESENT; exchange executed from clean target",
+      "two_person_roundtrip": "PASS",
+      "scope_lock_guard": "PASS",
+      "dirty_workspace_guard": "PASS",
+      "divergence_guard": "PASS",
+      "package_tamper_guard": "PASS",
+      "import_modules": 105,
+      "import_failures": 0,
+      "static_modules": 106,
+      "import_edges": 138,
+      "cycles": 0,
+      "m1_existing_src_files_changed": 0,
+      "v116_final_wav_byte_identity": "A/B/C PASS",
+      "v115_legacy_wav_byte_identity": "PASS"
+    }
+  },
+  "m3": {
+    "format": "code-composer-external-delivery/v1",
+    "architecture": "one-way external delivery adapter",
+    "entrypoint": "code-composer-delivery",
+    "payload": [
+      "reference_mix.wav",
+      "full-song SMF Type 1 MIDI",
+      "per-track SMF Type 1 MIDI",
+      "time-aligned 32-bit float stereo track stems",
+      "resolved_ir.json",
+      "manifest.json",
+      "DELIVERY_NOTES.txt"
+    ],
+    "authority": {
+      "sound_mix": "reference_mix.wav",
+      "symbolic_performance_state": "resolved_ir.json",
+      "midi": "interchange only",
+      "stems": "aligned delivery sources, not additive master decomposition"
+    },
+    "stem_policy": {
+      "format": "IEEE float WAV 32-bit stereo",
+      "graph_mode": "instrument/performance + track route gain + track gain automation + track pan; shared sends/buses/sidechains/master omitted",
+      "legacy_mode": "legacy track gain/pan/track FX retained; shared master omitted"
+    },
+    "interchange_limits": {
+      "tempo_map": "not invented; current canonical IR has one BPM",
+      "time_signature": "beats_per_bar exported as n/4 because engine beat is quarter note",
+      "continuous_cc": "not invented; no canonical CC lane",
+      "pitch_bend": "not invented; no canonical pitch-bend lane",
+      "gm_program_changes": "omitted"
+    },
+    "validation": {
+      "focused": "10/10 PASS",
+      "full_regression": "293/293 PASS",
+      "clean_installed_full_regression": "293/293 PASS",
+      "source_coverage_percent": 90.64802285370621,
+      "delivery_module_coverage_percent": 94.48275862068965,
+      "delivery_cli_coverage_percent": 96.15384615384616,
+      "compileall": "PASS",
+      "clean_prefix_install": "PASS",
+      "console_entrypoints": "6/6 PRESENT; delivery executed from installed wheel",
+      "external_mido_parse": "PASS",
+      "external_scipy_float_wav_parse": "PASS",
+      "m2_existing_src_files_changed": 0,
+      "new_runtime_modules": [
+        "src/code_composer/export/delivery.py",
+        "src/code_composer/app/delivery_cli.py"
+      ],
+      "import_modules": 108,
+      "import_failures": 0,
+      "static_modules": 108,
+      "import_edges": 145,
+      "cycles": 0,
+      "wheel_sha256": "0189fc54b7841e45a9523af394ab06cc69f9ece1aa01976ca19f6cd543129b5e",
+      "v116_reference_wav_byte_identity": "A/B/C PASS",
+      "m1_full_midi_byte_identity": "A/B/C PASS"
+    }
+  },
+  "s1": {
+    "name": "Instrument Engine Extensibility",
+    "registry_boundary": true,
+    "builtins": [
+      "generic",
+      "piano",
+      "bowed_string"
+    ],
+    "bowed_string_family_engine": true,
+    "central_render_family_specific_branches": 0,
+    "taste_isolation": "no polished bowed-string preset in installed skill",
+    "validation": {
+      "full_regression": "310/310 PASS",
+      "coverage_percent": 89.49229246216943,
+      "import_modules": 115,
+      "import_failures": 0,
+      "static_modules": 115,
+      "static_edges": 161,
+      "cycles": 0,
+      "compileall": "PASS",
+      "s0r1_A_B_C_wav_byte_identity": "PASS",
+      "clean_wheel_bowed_string_smoke": "PASS"
+    }
+  },
+  "s2": {
+    "name": "Factory Preset System",
+    "format": "code-composer-factory-preset/v1",
+    "factory_preset_count": 6,
+    "policy": "presets provide sonic capability, not composition content",
+    "agent_catalog": "skills/code-composer/kit/presets/CATALOG.json",
+    "materialization": "fully resolved song-local patch with exact preset provenance",
+    "selection": [
+      "preset_id",
+      "preset_version",
+      "patch_overrides"
+    ],
+    "validation": {
+      "focused": "11/11 PASS",
+      "full_regression": "321/321 PASS",
+      "coverage_percent": 92.65225933202358,
+      "preset_module_coverage_percent": 84.21052631578948,
+      "preset_cli_coverage_percent": 90.47619047619048,
+      "clean_wheel": "PASS",
+      "legacy_A_B_C_wav_byte_identity": "PASS",
+      "import_modules": 118,
+      "import_failures": 0,
+      "static_modules": 118,
+      "static_edges": 165,
+      "cycles": 0,
+      "compileall": "PASS"
+    }
+  },
+  "s3": {
+    "slice": "S3 Violin Performance Model",
+    "scope": {
+      "instrument": "conventional violin",
+      "tuning": [
+        "G3",
+        "D4",
+        "A4",
+        "E5"
+      ],
+      "midi_range": [
+        55,
+        105
+      ],
+      "monophonic_only": true,
+      "physical_realization_only": true,
+      "supported": [
+        "string",
+        "position",
+        "finger",
+        "finger alteration",
+        "shift evidence",
+        "string crossing evidence",
+        "bow grouping",
+        "bow direction",
+        "normalized bow usage",
+        "bow force/speed targets"
+      ],
+      "not_yet_supported": [
+        "double stops",
+        "harmonics",
+        "pizzicato/arco switching",
+        "spiccato/ricochet physical bounce",
+        "scordatura",
+        "MusicXML/engraving"
+      ]
+    },
+    "authority": {
+      "composition_changed_for_playability": false,
+      "authored_instrument_expression_preserved": true,
+      "automatic_vibrato_style_invention": false,
+      "strict_comfort_default": true
+    },
+    "source_delta_from_s2": {
+      "python_before": 118,
+      "python_after": 121,
+      "existing_python_byte_identical": "118/118",
+      "added": [
+        "app/violin_cli.py",
+        "performance/__init__.py",
+        "performance/violin.py"
+      ],
+      "changed_existing": [],
+      "removed": []
+    },
+    "dogfood": {
+      "events": 48,
+      "classification": "comfortable",
+      "max_transition_score": 0.960887,
+      "strings": [
+        "G",
+        "D",
+        "A"
+      ],
+      "max_position_band": 6,
+      "wav_sha256": "1f7ee597435fa35dce92f0d44e0def7d131eac83edeaa256ad49f6fb2ba7329b",
+      "shipped_inside_skill": false
+    },
+    "validation": {
+      "focused": "12/12 PASS",
+      "source_regression": "333/333 PASS",
+      "clean_installed_regression": "333/333 PASS",
+      "coverage_percent": 92.70990922844176,
+      "violin_module_coverage_percent": 91.88191881918819,
+      "violin_cli_coverage_percent": 89.28571428571429,
+      "compileall": "PASS",
+      "import_modules": 120,
+      "import_failures": 0,
+      "static_modules": 121,
+      "static_edges": 173,
+      "cycles": 0,
+      "self_check": "PASS",
+      "skill_validation": "PASS",
+      "console_entrypoints": 8,
+      "legacy_A_B_C_wav_byte_identity": {
+        "A": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+        "B": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+        "C": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f"
+      }
+    },
+    "packaging": {
+      "standalone_skill_files": 181,
+      "codex_plugin_files": 183,
+      "claude_plugin_files": 183,
+      "forbidden_build_cache_audio_midi_files": 0,
+      "codex_skill_subtree_exact": true,
+      "claude_skill_subtree_exact": true,
+      "clean_wheel_sha256": "165845e1e0bd2886974d5cea4f0548e256704c2839eda7c41371a87d8433d3ae",
+      "artifact_sha256": {
+        "standalone_skill": "0ce1fe569d776f74c6f689c484b9bb0be48796ef0f98974a834d8c30bd9bbdf6",
+        "codex_plugin": "5680f2889b155d79f7fc9d074034d31a4ea38ba7a028983562e5d76fc7aca2cc",
+        "claude_plugin": "a61f7ce50061b7d143484bc7c94d78490d09cac60158eecf440b9b227eee0d5f"
+      }
+    }
+  },
+  "s4": {
+    "status": "CLOSED",
+    "slice": "S4 Violin Double-Stop Realization",
+    "date": "2026-09-17",
+    "engine_version": "1.17.0",
+    "scope": {
+      "instrument": "conventional violin",
+      "standard_tuning": [
+        "G3",
+        "D4",
+        "A4",
+        "E5"
+      ],
+      "midi_range": [
+        55,
+        105
+      ],
+      "supported_polyphony": "synchronous two-note double stops only",
+      "constraints": [
+        "adjacent strings only",
+        "equal duration per double-stop pair",
+        "shared articulation per pair",
+        "conservative hand-frame position/finger ordering/span checks",
+        "same-finger stopped fifth only at identical longitudinal stop point",
+        "no overlapping different onsets inside double-stop mode"
+      ],
+      "not_yet_supported": [
+        "triple/quadruple stops",
+        "rolled chords",
+        "staggered polyphony",
+        "harmonics",
+        "pizzicato/arco switching",
+        "spiccato/ricochet bounce",
+        "scordatura",
+        "MusicXML/engraving"
+      ]
+    },
+    "authority": {
+      "composition_changed_for_playability": false,
+      "intervals_revoiced_for_playability": false,
+      "authored_instrument_expression_preserved": true,
+      "strict_comfort_default": true,
+      "difficulty_scores": "internal deterministic planning evidence, not universal pedagogy grades"
+    },
+    "architecture": {
+      "public_surface": "performance/violin.py",
+      "shared_mechanics": "performance/violin_mechanics.py",
+      "double_stop_planner": "performance/violin_double_stop.py",
+      "dispatch": "same-onset duplicate start routes to double-stop planner; monophonic path remains S3 path",
+      "new_runtime_modules": 2,
+      "static_cycles": 0
+    },
+    "backward_compatibility": {
+      "s3_monophonic_dogfood_events_equal": true,
+      "s3_monophonic_dogfood_playability_equal": true,
+      "legacy_A_B_C_wav_byte_identity": {
+        "A": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+        "B": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+        "C": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f"
+      }
+    },
+    "dogfood": {
+      "events": 7,
+      "double_stop_events": 6,
+      "classification": "comfortable",
+      "max_transition_score": 0.37,
+      "max_gesture_score": 1.0,
+      "max_difficulty_score": 1.0,
+      "wav_sha256": "9fb55327feba2f0f6d1cdc76af757fa4d17602217b8842bdf07755c29a181f73",
+      "shipped_inside_skill": false
+    },
+    "validation": {
+      "focused": "23/23 PASS",
+      "source_regression": "344/344 PASS",
+      "clean_installed_regression": "344/344 PASS",
+      "coverage_percent": 92.79897520358679,
+      "violin_module_coverage_percent": 92.70833333333333,
+      "violin_mechanics_coverage_percent": 89.0,
+      "double_stop_module_coverage_percent": 94.65020576131687,
+      "violin_cli_coverage_percent": 89.28571428571429,
+      "compileall": "PASS",
+      "import_modules": 122,
+      "import_failures": 0,
+      "static_modules": 123,
+      "static_edges": 177,
+      "cycles": 0,
+      "self_check": "PASS",
+      "skill_validation": "PASS",
+      "console_entrypoints": 8,
+      "clean_wheel_sha256": "a9951e95821788af29231bed5fc293444a3ba1468656ccafdfec81488d19b8b9",
+      "clean_installed_double_stop_report_equal": true
+    },
+    "packaging": {
+      "standalone_skill_files": 183,
+      "codex_plugin_files": 185,
+      "claude_plugin_files": 185,
+      "forbidden_build_cache_audio_midi_files": 0,
+      "codex_skill_subtree_exact": true,
+      "claude_skill_subtree_exact": true,
+      "artifact_sha256": {
+        "standalone_skill": "a0fc943b7c1ec555cfb83c9bf53b788bbc6600606ad7922bc799cc349a7ac265",
+        "codex_plugin": "7c4df9614bf623197f5efa4e9d03c94148578ed065799c4337a53a973423e5d3",
+        "claude_plugin": "ca4b4eaa7d1b3d77f018244f4646feae1435c6f23761889058f27cc4b20fe5d7"
+      }
+    }
+  },
+  "s5": {
+    "status": "CLOSED",
+    "slice": "S5 Bowed-String Sound Hardening",
+    "engine": "bowed_waveguide",
+    "modeled_preset": "bowed.violin.modeled_open@1.0.0",
+    "scope": "causal sustained-bow note rendering"
+  },
+  "s6": {
+    "status": "CLOSED",
+    "slice": "S6 Continuous Bowed-String State & Bow-Change Transients",
+    "preset": "bowed.violin.modeled_continuous@1.0.0",
+    "architecture": {
+      "whole_track_engine_boundary": true,
+      "same_string_state_persistence": true,
+      "planned_bow_direction_consumed": true,
+      "finite_bow_reversal": true,
+      "string_change_resets_state": true,
+      "double_stop_continuity": false
+    },
+    "validation": {
+      "focused": "22/22 PASS",
+      "source_regression": "354/354 PASS",
+      "clean_installed_regression": "354/354 PASS",
+      "bowed_waveguide_focused_coverage_percent": 93,
+      "compileall": "PASS",
+      "import_modules": 124,
+      "import_failures": 0,
+      "static_modules": 124,
+      "static_edges": 180,
+      "cycles": 0,
+      "legacy_A_B_C_wav_byte_identity": "PASS"
+    },
+    "packaging": {
+      "standalone_skill_files": 189,
+      "codex_plugin_files": 191,
+      "claude_plugin_files": 191,
+      "forbidden_files": 0,
+      "codex_skill_exact": true,
+      "claude_skill_exact": true,
+      "artifact_sha256": {
+        "standalone": "dfbb90e102ebde8aad1a28f71451f4925aae883772ba99b8eee9f5c12cc2a53d",
+        "codex": "011a04f12902b34d98fb7226d1a75f3a655ad136f6565443d6c8d61459d6a7d5",
+        "claude": "e47f7e8a338434a4c5b1c10bc133aee0fb55e59153e414a17344dd43351614d8"
+      }
+    }
+  },
+  "s7": {
+    "status": "CLOSED",
+    "slice": "S7 Physical String-Crossing Continuity & Coupling",
+    "preset": "bowed.violin.modeled_coupled@1.0.0",
+    "architecture": {
+      "four_string_state_bank": true,
+      "adjacent_string_contact_overlap": true,
+      "released_string_bridge_residual": true,
+      "shared_body_stage": true,
+      "s6_preset_unchanged": true,
+      "continuous_double_stop_state": false
+    },
+    "validation": {
+      "focused_s7": "6/6 PASS",
+      "focused_bowed_violin": "39/39 PASS",
+      "source_regression": "360/360 PASS",
+      "clean_installed_regression": "360/360 PASS",
+      "bowed_waveguide_focused_coverage_percent": 93.22033898305085,
+      "full_suite_coverage": "not closure-gated; Python per-sample physical-model tracing is disproportionately expensive",
+      "self_check": "PASS",
+      "skill_validation": "PASS",
+      "compileall": "PASS",
+      "import_modules": 124,
+      "import_failures": 0,
+      "static_modules": 124,
+      "static_edges": 180,
+      "cycles": 0,
+      "clean_wheel_sha256": "b5988185e228ed3ed8741cd58e00918edba7fca5b435931ab1ca27c33d95ccd0"
+    },
+    "packaging": {
+      "standalone_skill_files": 190,
+      "codex_plugin_files": 192,
+      "claude_plugin_files": 192,
+      "forbidden_files": 0,
+      "codex_skill_exact": true,
+      "claude_skill_exact": true,
+      "artifact_sha256": {
+        "standalone": "d10918c09252fccf24da24eb5b4ffe4b26133b396a2d4f2e28e3e93735881f79",
+        "codex": "09c241d9b6bafa9bcffe4838e4bca35ade5d9aa14e13c2d70f1613a8c6e7b5f9",
+        "claude": "b5701840bfdb74a7a8e66cb10cc0c087804d8b8312c1d0541d988320cb33fa6c"
+      }
+    },
+    "dogfood": {
+      "phrase_strings": [
+        "G",
+        "D",
+        "A",
+        "E",
+        "E"
+      ],
+      "s7_coupled_wav_sha256": "55a43efd22104fb636910419c62cb88c1cf3513f932748a923418a8c7d57da9c",
+      "clean_installed_equal": true,
+      "crossing_post_30ms_rms": {
+        "beat1_s6": 0.0040976468,
+        "beat1_s7": 0.0197814354,
+        "beat2_s6": 0.0105853004,
+        "beat2_s7": 0.0312932701,
+        "beat3_s6": 0.0087667445,
+        "beat3_s7": 0.0258380427
+      },
+      "crossing_sample_jump": {
+        "beat1_s6": 0.0115970336,
+        "beat1_s7": 0.0038453322,
+        "beat2_s6": 0.0145878475,
+        "beat2_s7": 0.0003967406,
+        "beat3_s6": 0.0039063692,
+        "beat3_s7": 0.0013733329
+      },
+      "shipped_inside_skill": false
+    }
+  },
+  "s8": {
+    "status": "CLOSED",
+    "slice": "S8 Bridge Admittance & Body Feedback Hardening",
+    "preset": "bowed.violin.modeled_admittance@1.0.0",
+    "architecture": {
+      "causal_modal_body_state": true,
+      "radiation_and_admittance_share_modal_state": true,
+      "one_sample_delayed_bridge_feedback": true,
+      "feedback_gain_factory": 0.006,
+      "feedback_gain_authoring_max": 0.03,
+      "factory_feedback_velocity_limit": 0.012,
+      "s7_preset_unchanged": true
+    },
+    "validation": {
+      "focused_s8": "17/17 PASS",
+      "focused_bowed_violin": "48/48 PASS",
+      "source_regression": "365/365 PASS (split)",
+      "clean_installed_regression": "365/365 PASS (split)",
+      "bowed_waveguide_focused_coverage_percent": 93.45403899721448,
+      "self_check": "PASS",
+      "skill_validation": "PASS",
+      "compileall": "PASS",
+      "import_modules_including_root": 124,
+      "import_failures": 0,
+      "static_modules": 124,
+      "static_edges": 180,
+      "cycles": 0,
+      "clean_wheel_sha256": "98531d67bfd65e04606857565b4ad5b89a105077666e0c4e30ddbb4c79422643"
+    },
+    "compatibility": {
+      "s7_modeled_coupled_wav_sha256": "55a43efd22104fb636910419c62cb88c1cf3513f932748a923418a8c7d57da9c",
+      "s7_modeled_coupled_byte_identical": true,
+      "legacy_A_B_C_wav_identity": true
+    },
+    "dogfood": {
+      "phrase_strings": [
+        "G",
+        "D",
+        "A",
+        "E",
+        "E"
+      ],
+      "s8_wav_sha256": "8fe48c1608d20b40f91b67d85fe978dbe0a284a77486caca4afdd304780b9cd3",
+      "feedback_zero_wav_sha256": "a7ac7bb88f35f4ddad8c8663bdb7b6149908336a23e564793a034555422821f1",
+      "feedback_on_vs_zero_correlation": 0.9617785710123321,
+      "feedback_on_vs_zero_diff_rms": 0.011364392059967525,
+      "clean_installed_equal": true,
+      "shipped_inside_skill": false
+    },
+    "packaging": {
+      "standalone_skill_files": 191,
+      "codex_plugin_files": 193,
+      "claude_plugin_files": 193,
+      "forbidden_files": 0,
+      "codex_skill_exact": true,
+      "claude_skill_exact": true,
+      "artifact_sha256": {
+        "standalone": "348824ba2ec7d088a02479c25c3206393c7205ffca88591e9cbf3d9c411413e6",
+        "codex": "9b8c478bf9e3b9247a52c7ef7f9b3d06ce7f9410f9c178285920f235a4e00aa5",
+        "claude": "dcbdf96c751e6c78cb0ddae893d0a37e34dbc1ae6f7f61ffd507bca3a9b27ea3"
+      }
+    }
+  },
+  "s9": {
+    "slice": "S9 Measured Bridge-Admittance ERA Fitting",
+    "status": "CLOSED",
+    "date": "2026-09-18",
+    "engine_version": "1.17.0",
+    "scope": {
+      "fit_format": "code-composer-bridge-admittance-era/v1",
+      "method": "ERA",
+      "input_quantity": "preprocessed force-to-bridge-velocity impulse response",
+      "runtime": "O(M) pole/residue state",
+      "radiation_response_separate": true,
+      "named_measured_factory_preset_shipped": false,
+      "reason_no_measured_preset": "public research/data availability verified, but exact raw measurement asset and redistribution provenance were not independently imported/verified in this slice"
+    },
+    "validation": {
+      "focused_latest": "22/22 PASS (fitter/CLI/S8 integration/Skill surface)",
+      "source_regression": "374/374 PASS (57 bowed/violin/fitter + 317 remainder)",
+      "clean_installed_regression": "374/374 PASS (57 bowed/violin/fitter + 317 remainder)",
+      "fitter_cli_coverage_percent": 91,
+      "bridge_admittance_fit_coverage_percent": 92,
+      "admittance_fit_cli_coverage_percent": 86,
+      "self_check": "PASS",
+      "skill_validation": "PASS",
+      "compileall": "PASS",
+      "import_modules": 126,
+      "import_failures": 0,
+      "static_modules": 126,
+      "static_edges": 182,
+      "cycles": 0,
+      "clean_wheel_sha256": "0fdc903d34daff5eed0c87d772a8dabddfa190dc8dfb817e7892459fefb4655b",
+      "public_entrypoints": 9
+    },
+    "compatibility": {
+      "s8_modeled_admittance_raw_render_sha256_s8": "c871b3fea30327e73d901c40bba7286fa9486df1bcefe612671acf35002b8f37",
+      "s8_modeled_admittance_raw_render_sha256_s9": "c871b3fea30327e73d901c40bba7286fa9486df1bcefe612671acf35002b8f37",
+      "s8_modeled_admittance_byte_identical": true,
+      "legacy_A_B_C_guard": "PASS through regression suite"
+    },
+    "protocol_validation": {
+      "measured_data_used": false,
+      "synthetic_six_pole_fit_nmse": 5.558967221626991e-25,
+      "closed_loop_base_sha256": "7bee84452edf503609efc38d049905cbf8b85d83150d4f8a9b07759aafc1c433",
+      "closed_loop_fit_sha256": "3a50f7275f90b763cfbf4d1e5014ff280cf0779b02c4e8cfc9a46746b4f518b2",
+      "closed_loop_diff_rms": 0.013009961761815568
+    },
+    "packaging": {
+      "standalone_skill_files": 197,
+      "codex_plugin_files": 199,
+      "claude_plugin_files": 199,
+      "forbidden_files": 0,
+      "codex_skill_exact": true,
+      "claude_skill_exact": true,
+      "artifact_sha256": {
+        "standalone": "51eeb15a9468e9fb1fa321efb2f04dbb394f12c2cd1357450bb84c3b18122ed8",
+        "codex": "fc4d0f656c220e03144c253ef4838038c6a2652142de3d065b228074780ba446",
+        "claude": "54a8fb543b708c5e7df737375b1e6be2a299890072e64152f93cbac2d5e3d68a"
+      }
+    },
+    "next": "import and verify an exact redistributable measured bridge-admittance asset, then fit/audition it as a separately versioned measurement-derived resource; keep radiation transfer separate"
+  },
+  "s10": {
+    "status": "CLOSED",
+    "slice": "S10 Violin Performance-to-Timbre Expression Hardening",
+    "date": "2026-09-18",
+    "engine_version": "1.17.0",
+    "preset": "bowed.violin.modeled_expression@1.0.0",
+    "architecture": {
+      "base_path": "S9 modeled_admittance physical configuration",
+      "opt_in_expression_hardening": true,
+      "deterministic_seeded_microvariation": true,
+      "composition_mutation": false,
+      "controls": [
+        "bow pressure drift",
+        "bow speed drift",
+        "bow contact-position drift",
+        "event microvariation",
+        "attack transient variation",
+        "bow-change transient variation",
+        "vibrato excitation/amplitude coupling"
+      ]
+    },
+    "compatibility": {
+      "existing_s5_s9_presets_preserved": true,
+      "hardening_disabled_matches_s9_note_byte_identical": true,
+      "hardening_disabled_matches_s9_realized_track_byte_identical": true,
+      "legacy_A_B_C_guard": "PASS through regression suite"
+    },
+    "validation": {
+      "focused_s10": "6/6 PASS",
+      "source_regression": "380/380 PASS",
+      "clean_installed_regression": "380/380 PASS",
+      "self_check": "PASS",
+      "skill_validation": "PASS",
+      "compileall": "PASS",
+      "import_modules": 126,
+      "import_failures": 0,
+      "static_modules": 126,
+      "static_edges": 182,
+      "cycles": 0,
+      "clean_wheel_sha256": "9c99cc0af8167221bd5c98de6ce8d2b3de1d895e76fbcf86be4b5fb2c4036bd9",
+      "public_entrypoints": 9
+    },
+    "dogfood": {
+      "phrase": "fresh matched D natural minor 2-bar validation phrase",
+      "bpm": 84,
+      "sample_rate_hz": 22050,
+      "events": 8,
+      "performance_realization_equal": true,
+      "clipped_s9": 0.0,
+      "clipped_s10": 0.0,
+      "stft_log_spectrum_correlation_left": 0.9868219310073294,
+      "spectral_centroid_trajectory_correlation_left": 0.8216055706702423,
+      "s9_wav_sha256": "70473368c8c0cff5fd47fdd42db833d159b124db4895f0b1d05e04a9074454a5",
+      "s10_wav_sha256": "a542763fbbc3e4ae46400972a5697f2267b221ee83fe28cfdd13f184eeb2fd64",
+      "shipped_inside_skill": false
+    },
+    "packaging": {
+      "standalone_skill_files": 198,
+      "codex_plugin_files": 200,
+      "claude_plugin_files": 200,
+      "forbidden_files": 0,
+      "codex_skill_exact": true,
+      "claude_skill_exact": true,
+      "artifact_sha256": {
+        "standalone": "8d97d511ec938a55c47cf8c3ffa9473bb452b253340517ccc23c4f2a9614d3b4",
+        "codex": "41230b2f167858666671ad45eead3cd7d1af9a4da2d7857f04eeace37d2f22b4",
+        "claude": "8c9b0b6b68f071b56dd172d18249c4ba5fee5ac418a3f4b9d00d5115ac71fd4d"
+      }
+    }
+  },
+  "s11": {
+    "status": "CLOSED",
+    "slice": "S11 Expressive Phrase Modeling",
+    "date": "2026-09-18",
+    "engine_version": "1.17.0",
+    "architecture": {
+      "new_preset": false,
+      "new_synthesis_architecture": false,
+      "surface": "optional Performance IR phrase.instrument_expression_curves",
+      "controls": [
+        "bow_pressure",
+        "bow_speed",
+        "bow_position",
+        "bow_noise_gain",
+        "vibrato_depth_cents",
+        "vibrato_rate_hz",
+        "vibrato_onset_s"
+      ],
+      "event_local_expression_precedence": true,
+      "automatic_style_or_emotion_inference": false
+    },
+    "compatibility": {
+      "no_curve_s10_performance_ir_sha256": "cbee40dc921df9efc2cd3894e394396ea6fb346331bca401a1d261607c884b08",
+      "no_curve_s11_performance_ir_sha256": "cbee40dc921df9efc2cd3894e394396ea6fb346331bca401a1d261607c884b08",
+      "no_curve_s10_violin_realized_ir_sha256": "5ee0967b8d225909c759ae05bfe6f3349329dce224b6e7e1a15ad20fc96c3772",
+      "no_curve_s11_violin_realized_ir_sha256": "5ee0967b8d225909c759ae05bfe6f3349329dce224b6e7e1a15ad20fc96c3772",
+      "no_curve_byte_identity": true,
+      "factory_preset_count_unchanged": 11,
+      "violin_preset_count_unchanged": 6
+    },
+    "validation": {
+      "focused_s11": "6/6 PASS",
+      "source_regression": "386/386 PASS",
+      "clean_installed_regression": "386/386 PASS (64 isolated test-file processes; 0 failed files)",
+      "self_check": "PASS",
+      "skill_validation": "PASS",
+      "compileall": "PASS",
+      "import_modules": 126,
+      "import_failures": 0,
+      "static_modules": 126,
+      "static_edges": 182,
+      "cycles": 0,
+      "public_entrypoints": 9
+    },
+    "dogfood": {
+      "title": "Between Two Streetlights",
+      "bars": 20,
+      "bpm": 76,
+      "key": "E natural minor",
+      "violin_event_count": 60,
+      "playability": {
+        "classification": "comfortable",
+        "max_transition_score": 0.759033,
+        "warning_count": 0,
+        "warnings": []
+      },
+      "note_timing_velocity_identity_control_vs_s11": true,
+      "violin_physical_realization_equal": true,
+      "events_with_expression_change": 60,
+      "audition_sample_rate_hz": 11025,
+      "clipping_ratio_control": 0.0,
+      "clipping_ratio_s11": 0.0,
+      "rise_rms_control": 0.036617038829549094,
+      "rise_rms_s11": 0.04034335823822195,
+      "apex_rms_control": 0.03519134166503068,
+      "apex_rms_s11": 0.04637051127650115
+    },
+    "packaging": {
+      "standalone_skill_files": 198,
+      "codex_plugin_files": 200,
+      "claude_plugin_files": 200,
+      "forbidden_skill_files": 0,
+      "codex_skill_exact": true,
+      "claude_skill_exact": true,
+      "clean_wheel_sha256": "cbd2fcf261cd3347e676cdb28a61c09c5bd10b0ef700e161c911141f5cfceed0"
+    },
+    "next": "S12 Violin Realism Hardening — string crossing/position shift/bow retake/open-string vs stopped-string physical-performance detail."
+  },
+  "s12": {
+    "status": "CLOSED",
+    "slice": "S12 Violin Realism Hardening",
+    "date": "2026-09-18",
+    "engine_version": "1.17.0",
+    "architecture": {
+      "new_preset": "bowed.violin.modeled_realistic@1.0.0",
+      "new_synthesis_architecture": false,
+      "baseline": "S10 modeled_expression + S11 phrase expression",
+      "mechanisms": [
+        "open-string vibrato suppression",
+        "stopped-string finger damping",
+        "finite position-shift glide/contact transient",
+        "stopped-string crossing force transfer",
+        "same-direction bow retake after long gaps"
+      ],
+      "automatic_style_or_emotion_inference": false
+    },
+    "compatibility": {
+      "realism_disabled_matches_modeled_expression_events_byte_identical": true,
+      "realism_disabled_matches_modeled_expression_render_byte_identical": true,
+      "existing_s5_s11_presets_preserved": true,
+      "factory_preset_count": 12,
+      "violin_preset_count": 7
+    },
+    "validation": {
+      "focused_s12": "7/7 PASS",
+      "source_regression": "393/393 PASS",
+      "clean_installed_regression": "393/393 PASS (65 isolated test-file processes; 0 failed files; 0 timeouts)",
+      "self_check": "PASS",
+      "skill_validation": "PASS",
+      "compileall": "PASS",
+      "import_modules": 126,
+      "import_failures": 0,
+      "static_modules": 126,
+      "static_edges": 182,
+      "cycles": 0,
+      "public_entrypoints": 9
+    },
+    "dogfood": {
+      "title": "Between Two Streetlights",
+      "bars": 20,
+      "bpm": 76,
+      "key": "E natural minor",
+      "violin_event_count": 60,
+      "playability": {
+        "classification": "comfortable",
+        "max_transition_score": 0.759033,
+        "warning_count": 0,
+        "warnings": []
+      },
+      "note_timing_velocity_identity_s11_vs_s12": true,
+      "mechanism_event_counts": {
+        "open_strings": 9,
+        "stopped_strings": 51,
+        "position_shifts": 1,
+        "string_crossings": 11,
+        "bow_retakes": 0
+      },
+      "audition_sample_rate_hz": 11025,
+      "audition_event_count": 13,
+      "clipping_ratio_control": 0.0,
+      "clipping_ratio_s12": 0.0,
+      "retake_protocol": {
+        "directions_control": [
+          "down",
+          "up",
+          "down"
+        ],
+        "directions_s12": [
+          "down",
+          "down",
+          "down"
+        ],
+        "retakes_s12": [
+          false,
+          true,
+          true
+        ]
+      }
+    },
+    "packaging": {
+      "clean_wheel_sha256": "69f05f1a4f212387af2d559f6fde6c55b43bfcf89caeb398210f772f026423dc",
+      "standalone_skill_files": 199,
+      "codex_plugin_files": 201,
+      "claude_plugin_files": 201,
+      "forbidden_skill_files": 0,
+      "codex_skill_exact": true,
+      "claude_skill_exact": true,
+      "artifact_sha256": {
+        "standalone": "0e2519803299107056b2df5046f2880159906a47ebc6c07a57ffe39c7bd242b5",
+        "codex": "25472fbdd40548768fc9ca26b14abb5b7000d8f28ad7568779c6f265cae6b111",
+        "claude": "8a01e055d9188609856261886f2a27bbac26d10c43edbf387e4def2ceea0abc9"
+      }
+    },
+    "next": "S13 Articulation Expansion — pizzicato/harmonics/spiccato-family techniques as explicit opt-in performance vocabulary."
+  },
+  "s13": {
+    "status": "CLOSED",
+    "slice": "S13 Articulation Expansion",
+    "date": "2026-09-18",
+    "engine_version": "1.17.0",
+    "architecture": {
+      "new_preset": "bowed.violin.modeled_articulated@1.0.0",
+      "new_synthesis_architecture": false,
+      "baseline": "S12 modeled_realistic",
+      "explicit_articulations": [
+        "pizzicato",
+        "harmonic",
+        "spiccato"
+      ],
+      "automatic_articulation_style_or_emotion_inference": false
+    },
+    "compatibility": {
+      "articulation_disabled_matches_modeled_realistic_render_byte_identical": true,
+      "existing_s5_s12_presets_preserved": true,
+      "ordinary_arco_uses_s12_path": true,
+      "factory_preset_count": 13,
+      "violin_preset_count": 8
+    },
+    "validation": {
+      "focused_s13": "7/7 PASS",
+      "source_regression": "400/400 PASS (66 isolated test-file processes; 0 failed files; 0 timeouts)",
+      "clean_installed_regression": "400/400 PASS (66 isolated test-file processes; 0 failed files; 0 timeouts)",
+      "self_check": "PASS",
+      "skill_validation": "PASS",
+      "compileall": "PASS",
+      "import_modules": 126,
+      "import_failures": 0,
+      "static_modules": 126,
+      "static_edges": 182,
+      "cycles": 0,
+      "public_entrypoints": 9
+    },
+    "dogfood": {
+      "title": "Between Two Streetlights",
+      "audition_beats": [
+        40.0,
+        72.0
+      ],
+      "event_count": 31,
+      "special_event_count": 9,
+      "spiccato_events": 4,
+      "harmonic_events": 1,
+      "pizzicato_events": 4,
+      "playability": {
+        "classification": "comfortable",
+        "max_transition_score": 0.76,
+        "warning_count": 0,
+        "warnings": []
+      },
+      "clipping_ratio_control": 0.0,
+      "clipping_ratio_s13": 0.0
+    },
+    "packaging": {
+      "standalone_skill_files": 200,
+      "codex_plugin_files": 202,
+      "claude_plugin_files": 202,
+      "forbidden_skill_files": 0,
+      "codex_skill_exact": true,
+      "claude_skill_exact": true,
+      "clean_wheel_sha256": "528444d0b7d9adbb5e75713a41d2eb7c5f9d54c27dcac2fd8c81d4c82ecaf19a"
+    },
+    "next": "Fresh flagship composition/perceptual dogfood using the completed S11-S13 violin path before opening another engine slice."
+  },
+  "s14": {
+    "status": "CLOSED",
+    "slice": "S14 Acoustic Piano Release & Resonance Hardening",
+    "date": "2026-09-19",
+    "engine_version": "1.17.0",
+    "architecture": {
+      "engine_level_fix": true,
+      "preset_bypass": false,
+      "mechanisms": [
+        "damper-down modal soundboard shortening",
+        "no-pedal harmonic-only per-note resonance",
+        "release-only damping of secondary detuned unison strings"
+      ],
+      "presets_required": [
+        "concert_grand",
+        "studio_grand",
+        "upright"
+      ]
+    },
+    "validation": {
+      "focused_s14": "20/20 PASS",
+      "source_regression": "420/420 PASS (67 test files; grouped/isolated physical-render execution; 0 engine failures)",
+      "clean_installed_regression": "420/420 PASS (wheel target; source-path injection disabled; transient build hygiene fixed)",
+      "self_check": "PASS",
+      "skill_validation": "PASS",
+      "compileall": "PASS",
+      "import_modules": 126,
+      "import_failures": 0,
+      "static_modules": 126,
+      "static_edges": 182,
+      "cycles": 0,
+      "public_entrypoints": 9
+    },
+    "regression_metrics": {
+      "protocol": {
+        "sample_rate_hz": 12000,
+        "note_duration_s": 0.45,
+        "release_analysis_s": [
+          0.18,
+          0.8
+        ],
+        "pedal": false
+      },
+      "concert_grand_persistent_off_harmonic_peak_db": {
+        "single": {
+          "before": -41.68459489708178,
+          "after": -54.057233128681034
+        },
+        "dyad": {
+          "before": -41.70394804854855,
+          "after": -54.08677607546502
+        },
+        "triad": {
+          "before": -42.017483500220294,
+          "after": -54.24533865067965
+        }
+      },
+      "concert_grand_late_rms_db_relative_preoff": {
+        "single": {
+          "before": -39.886577948574654,
+          "after": -49.56690130835497
+        },
+        "dyad": {
+          "before": -42.54600127386087,
+          "after": -52.210545825158604
+        },
+        "triad": {
+          "before": -44.50624557175285,
+          "after": -54.08329402185728
+        }
+      },
+      "single_note_1_5x_ratio_db_relative_fundamental": {
+        "midi": 60,
+        "before": -41.48673411253608,
+        "after": -93.9978554265339
+      },
+      "pedal_body_preservation": {
+        "window_s": [
+          0.9,
+          1.3
+        ],
+        "dry_rms": 0.00016938602699587325,
+        "pedal_rms": 0.060628857919190635,
+        "ratio": 357.9354331437818
+      }
+    },
+    "packaging": {
+      "standalone_skill_files": 200,
+      "codex_plugin_files": 202,
+      "claude_plugin_files": 202,
+      "forbidden_skill_files": 0,
+      "codex_skill_exact": true,
+      "claude_skill_exact": true,
+      "clean_wheel_sha256": "7d7480abb98227e2e18e7b9af4c3ab6005e925d33ac74739aed78c8fa0d4bf76",
+      "artifact_sha256": {
+        "standalone": "283add050d75b169da439e232f2e85b8d49edb546525b4d0d32f258388536c29",
+        "codex": "4f6939c094a10d06ceac004b463f59d4299af224ca4a2b0f5466a217624d075c",
+        "claude": "370626e6c0129e3e103835d5a7a75c61a7eba454de3e0773332af3f74cee4c15"
+      }
+    },
+    "next": "S15 Ensemble / Orchestration Realism after S14 piano-tail closure."
+  },
+  "s15": {
+    "release": "Code Composer v1.17.0 S15",
+    "slice": "S15 Ensemble / Orchestration Realism",
+    "status": "CLOSED",
+    "date": "2026-09-19",
+    "baseline": "S14 acoustic-piano-release repository",
+    "scope": {
+      "automatic_orchestration": false,
+      "random_humanization": false,
+      "section_leader_role": true,
+      "role_timing_offsets_ms_bound": [
+        -30.0,
+        30.0
+      ],
+      "overlap_weighted_support_yielding": true,
+      "role_pan_offsets": true,
+      "multiple_tracks_per_role_supported": true,
+      "idempotent": true
+    },
+    "validation": {
+      "focused_s15": "15/15 PASS",
+      "source_regression": "435/435 PASS (68 isolated test-file processes; 0 failed files; 0 timeouts)",
+      "clean_installed_regression": "435/435 PASS (final wheel path; 68 isolated test-file processes; 0 failed files; 0 timeouts)",
+      "self_check": "PASS",
+      "skill_validation": "PASS",
+      "compileall": "PASS",
+      "import_modules": 127,
+      "import_failures": 0,
+      "static_modules": 127,
+      "static_edges": 185,
+      "cycles": 0,
+      "public_entrypoints": 9
+    },
+    "dogfood": {
+      "title": "Blue Hour Ensemble Rehearsal",
+      "sample_rate_hz": 24000,
+      "bars": 13,
+      "event_counts": {
+        "violin": 66,
+        "piano": 77,
+        "bass": 13,
+        "drums": 104
+      },
+      "note_content_identity": true,
+      "clipping": {
+        "control": 0.0,
+        "treatment": 0.0
+      },
+      "waveform_mono_correlation": 0.7137698885341979,
+      "difference_rms": 0.014181449042759071,
+      "sections": {
+        "spiccato_pulse": {
+          "leader_role": "violin",
+          "leader_event_count": 32,
+          "timing_adjusted_events": 57,
+          "yielded_events": 25,
+          "roles": {
+            "piano": {
+              "timing_offset_ms": 8.0,
+              "timing_adjusted_events": 21,
+              "overlap_velocity_scale": 0.86,
+              "yielded_events": 21,
+              "mean_leader_overlap_ratio": 0.717914
+            },
+            "bass": {
+              "timing_offset_ms": 11.0,
+              "timing_adjusted_events": 4,
+              "overlap_velocity_scale": 0.92,
+              "yielded_events": 4,
+              "mean_leader_overlap_ratio": 0.675565
+            },
+            "drums": {
+              "timing_offset_ms": -4.0,
+              "timing_adjusted_events": 32,
+              "overlap_velocity_scale": 1.0,
+              "yielded_events": 0,
+              "mean_leader_overlap_ratio": 0.0
+            }
+          }
+        },
+        "long_rise": {
+          "leader_role": "violin",
+          "leader_event_count": 19,
+          "timing_adjusted_events": 74,
+          "yielded_events": 34,
+          "roles": {
+            "piano": {
+              "timing_offset_ms": 10.0,
+              "timing_adjusted_events": 29,
+              "overlap_velocity_scale": 0.82,
+              "yielded_events": 29,
+              "mean_leader_overlap_ratio": 1.0
+            },
+            "bass": {
+              "timing_offset_ms": 13.0,
+              "timing_adjusted_events": 5,
+              "overlap_velocity_scale": 0.9,
+              "yielded_events": 5,
+              "mean_leader_overlap_ratio": 1.0
+            },
+            "drums": {
+              "timing_offset_ms": -2.0,
+              "timing_adjusted_events": 40,
+              "overlap_velocity_scale": 1.0,
+              "yielded_events": 0,
+              "mean_leader_overlap_ratio": 0.0
+            }
+          }
+        },
+        "harmonic_apex": {
+          "leader_role": "violin",
+          "leader_event_count": 15,
+          "timing_adjusted_events": 63,
+          "yielded_events": 31,
+          "roles": {
+            "piano": {
+              "timing_offset_ms": 6.0,
+              "timing_adjusted_events": 27,
+              "overlap_velocity_scale": 0.84,
+              "yielded_events": 27,
+              "mean_leader_overlap_ratio": 1.0
+            },
+            "bass": {
+              "timing_offset_ms": 9.0,
+              "timing_adjusted_events": 4,
+              "overlap_velocity_scale": 0.91,
+              "yielded_events": 4,
+              "mean_leader_overlap_ratio": 1.0
+            },
+            "drums": {
+              "timing_offset_ms": -3.0,
+              "timing_adjusted_events": 32,
+              "overlap_velocity_scale": 1.0,
+              "yielded_events": 0,
+              "mean_leader_overlap_ratio": 0.0
+            }
+          }
+        }
+      },
+      "role_pan_offsets": {
+        "violin": {
+          "base_pan": 0.0,
+          "offset": -0.1,
+          "final_pan": -0.1
+        },
+        "piano": {
+          "base_pan": 0.0,
+          "offset": 0.1,
+          "final_pan": 0.1
+        },
+        "bass": {
+          "base_pan": 0.0,
+          "offset": 0.02,
+          "final_pan": 0.02
+        },
+        "drums": {
+          "base_pan": 0.0,
+          "offset": -0.04,
+          "final_pan": -0.04
+        }
+      },
+      "near_onset_relationships": {
+        "piano": {
+          "control_near_pair_count": 43,
+          "treatment_near_pair_count": 40,
+          "control_mean_signed_ms": 12.4890672093018,
+          "treatment_mean_signed_ms": 20.575747249999797,
+          "control_exactish_under_1ms": 3,
+          "treatment_exactish_under_1ms": 0
+        },
+        "bass": {
+          "control_near_pair_count": 13,
+          "treatment_near_pair_count": 13,
+          "control_mean_signed_ms": 26.771172130176318,
+          "treatment_mean_signed_ms": 37.92501828402394,
+          "control_exactish_under_1ms": 0,
+          "treatment_exactish_under_1ms": 0
+        },
+        "drums": {
+          "control_near_pair_count": 66,
+          "treatment_near_pair_count": 66,
+          "control_mean_signed_ms": -0.25238279720295437,
+          "treatment_mean_signed_ms": -3.312988857809571,
+          "control_exactish_under_1ms": 52,
+          "treatment_exactish_under_1ms": 5
+        }
+      }
+    },
+    "compatibility": {
+      "absent_surface_preserves_ir": true,
+      "disabled_surface_preserves_ir": true,
+      "s14_piano_baseline_preserved": true,
+      "s13_violin_baseline_preserved": true,
+      "factory_preset_count": 13,
+      "violin_preset_count": 8
+    },
+    "packaging": {
+      "standalone_skill_files": 203,
+      "codex_plugin_files": 205,
+      "claude_plugin_files": 205,
+      "forbidden_skill_files": 0,
+      "codex_skill_exact": true,
+      "claude_skill_exact": true,
+      "clean_wheel_sha256": "7406afc2190408cca71df82679712cfe6589320ca3e391df08220076ac2a87fb",
+      "artifact_sha256": {
+        "standalone": "c38e2fcfb698f01891675dc1ec3d41f2789e9d2149b208e82f481d895a84823a",
+        "codex": "36fbb586ec55bbb00a6a41aaeb82054fab2e3c2aa907be0bcc1c40ea18f4a62a",
+        "claude": "22547574083403d998c618dd9fd23878f9066af17df24d001971f01ab1c46605"
+      }
+    },
+    "next": "Full multi-role flagship dogfood before selecting another engine slice."
+  },
+  "s16": {
+    "release": "Code Composer v1.17.0 S16",
+    "slice": "S16 Bass Acoustic Fidelity Hardening",
+    "status": "CLOSED",
+    "date": "2026-09-19",
+    "baseline": "S15 ensemble-realism repository",
+    "scope": {
+      "engine": "plucked_bass",
+      "preset": "bass.electric_finger_modeled@1.0.0",
+      "automatic_composition": false,
+      "samples_or_external_measurements": false,
+      "pluck_position_harmonic_weighting": true,
+      "pickup_position_response": true,
+      "frequency_dependent_damping": true,
+      "bounded_inharmonicity": true,
+      "deterministic_finger_attack": true,
+      "existing_bass_expression_compatible": true
+    },
+    "validation": {
+      "focused_s16": "8/8 PASS",
+      "source_regression": "443/443 PASS (69 isolated test-file processes; 0 failed files; 0 timeouts)",
+      "clean_installed_regression": "443/443 PASS (69 isolated test-file processes; 0 failed files; 0 timeouts)",
+      "import_modules": 129,
+      "import_failures": 0,
+      "static_modules": 129,
+      "static_edges": 189,
+      "cycles": 0,
+      "public_entrypoints": 9,
+      "self_check": "PASS",
+      "skill_validation": "PASS",
+      "isolated_skill_self_check": "PASS",
+      "isolated_skill_compileall": "PASS",
+      "forbidden_package_files": 0,
+      "embedded_skill_byte_exact": true,
+      "final_repository_zip_self_check": "PASS",
+      "final_external_skill_self_check": "PASS",
+      "final_repository_forbidden_files": 0,
+      "final_external_packages_forbidden_files": 0,
+      "final_plugin_embedded_skill_byte_exact": true
+    },
+    "dogfood": {
+      "slice": "S16 Bass Acoustic Fidelity Hardening",
+      "dogfood": "Last Light on Platform Three",
+      "sample_rate_hz": 24000,
+      "events_identity_all_tracks": true,
+      "changed_surface": "bass instrument patch only",
+      "control_bass": {
+        "peak": 0.0380565813165685,
+        "rms": 0.010764881395038497,
+        "spectral_centroid_hz": 142.50435681367338
+      },
+      "treatment_bass": {
+        "peak": 0.0597857600634785,
+        "rms": 0.010330279746598435,
+        "spectral_centroid_hz": 298.8408340458343
+      },
+      "bass_stem_rms_ratio": 0.9596278275169507,
+      "bass_centroid_ratio": 2.097064544044595,
+      "full_song_ab": {
+        "sample_rate": 24000,
+        "duration_s": 68.19833333333334,
+        "control_peak": 0.3465681936094241,
+        "treatment_peak": 0.3465681936094241,
+        "control_rms": 0.05336671823669116,
+        "treatment_rms": 0.0535219000007541,
+        "difference_rms": 0.011280119770107818,
+        "mono_waveform_correlation": 0.9772058715575718
+      },
+      "treatment_full": {
+        "duration_s": 68.19833333333334,
+        "peak": 0.3465681936094241,
+        "rms": 0.05352203276437851,
+        "clipped_sample_ratio": 0.0,
+        "section_metrics": [
+          {
+            "id": "hush",
+            "rms": 0.039400184789169644,
+            "peak": 0.24622333445234534
+          },
+          {
+            "id": "theme",
+            "rms": 0.06481480974288242,
+            "peak": 0.2535172582171087
+          },
+          {
+            "id": "pulse",
+            "rms": 0.0459995463307368,
+            "peak": 0.3465681936094241
+          },
+          {
+            "id": "rise",
+            "rms": 0.0556496539008733,
+            "peak": 0.2241983009733263
+          },
+          {
+            "id": "apex",
+            "rms": 0.07211507261689651,
+            "peak": 0.3317361980040895
+          },
+          {
+            "id": "return",
+            "rms": 0.03475805928218465,
+            "peak": 0.17438276314584797
+          }
+        ]
+      },
+      "model_evidence": {
+        "pluck_position": "harmonic weighting from string excitation position",
+        "pickup_position": "harmonic pickup sampling response",
+        "frequency_dependent_damping": "upper partials decay faster than fundamental",
+        "inharmonicity": "bounded stiffness-like partial stretch",
+        "finger_attack": "deterministic band-limited transient"
+      },
+      "next_candidate": "drum/percussion acoustic fidelity if listening confirms support percussion remains synthetic"
+    },
+    "compatibility": {
+      "generic_engine_preserved": true,
+      "s15_ensemble_preserved": true,
+      "s14_piano_preserved": true,
+      "s13_violin_preserved": true,
+      "factory_preset_count": 14,
+      "violin_preset_count": 8,
+      "bass_preset_count": 1,
+      "registered_engine_count": 5
+    },
+    "next": "Percussion acoustic fidelity as a separate candidate slice after listening review.",
+    "packaging": {
+      "standalone_skill_files": 207,
+      "codex_plugin_files": 209,
+      "claude_plugin_files": 209,
+      "forbidden_files": 0,
+      "codex_skill_exact": true,
+      "claude_skill_exact": true,
+      "artifact_sha256": {
+        "standalone": "9641d2357004e283edbb0aa9484735023d72c1dec1299ae7bfabf05d38d3dedb",
+        "codex": "792e7c34a3df3b4e77b9211b8f2fa7535f23256af243d2d16803900444094103",
+        "claude": "ab9ca870a1869421725c0c9b066bd191892a6d9bb1971bc29cd1c5a135505084",
+        "wheel": "fa5aa6ab48119a475cd4de6e4eeba57e15d942d8968f158a2484019b6da580aa"
+      }
+    }
+  },
+  "s17": {
+    "name": "Percussion Acoustic Fidelity Hardening",
+    "status": "CLOSED",
+    "engine": "percussion",
+    "preset": "drums.acoustic_kit_modeled@1.0.0",
+    "legacy_disabled_byte_identity": true,
+    "kick_membrane_modes": true,
+    "snare_wire_collision_rattle": true,
+    "hat_inharmonic_modal_decay": true,
+    "validation": {
+      "focused": "10/10 PASS",
+      "source": "453/453 PASS",
+      "clean_installed": "453/453 PASS"
+    },
+    "dogfood": "Last Light on Platform Three"
+  },
+  "s18": {
+    "name": "Track Gain Semantics / Mixer Predictability Hardening",
+    "status": "CLOSED",
+    "legacy_track_gain": "post-instrument post-track-insert linear amplitude fader",
+    "graph_mode_gain": "unchanged post-render route gain",
+    "velocity_and_expression_authority_preserved": true,
+    "validation": {
+      "focused": "7/7 PASS",
+      "source": "460/460 PASS",
+      "clean_installed": "460/460 PASS"
+    },
+    "dogfood": {
+      "song": "September Window, 5:42 PM",
+      "window_beats": [
+        72.0,
+        80.0
+      ],
+      "sample_rate_hz": 24000,
+      "expected_observed_ratio_match": true
+    },
+    "packaging": {
+      "standalone_skill_files": 210,
+      "codex_plugin_files": 212,
+      "claude_plugin_files": 212,
+      "forbidden_files": 0,
+      "codex_skill_exact": true,
+      "claude_skill_exact": true,
+      "artifact_sha256": {
+        "standalone": "43ec53852340677724f37ba46ab3e36a4120de3c56be5a49136e8dc37ff693e4",
+        "codex": "e1fdde03d481916651fe746786df6fe5918d891ae4b212b413bea49a274d9fca",
+        "claude": "eaaa3e7a97d87867dda673d2548eb92809aa7b56cf44d41b1dc5169d58d52f44",
+        "wheel": "112273d8aed1d9dd4c96a0386aee73decb4b6f84b6eb5e275931e7e20ea82fa1",
+        "dogfood": "f2bd176949738bd1ab7710290b25ad23078abd2f1db3e9606c93f67a35ad8821",
+        "validation": "b547bcf27d39c3ebefdb17fb4a115592a21968cc5d7eb5e38c767d241aa6a4a0"
+      }
+    }
+  },
+  "s19": {
+    "name": "Track Pan / Stereo Integrity Hardening",
+    "status": "CLOSED",
+    "legacy_track_pan_stereo_balance": true,
+    "intrinsic_stereo_preserved": true,
+    "graph_route_pan_unchanged": true,
+    "focused": "7/7 PASS",
+    "source": "467/467 PASS",
+    "clean_installed": "467/467 PASS"
+  },
+  "s20": {
+    "name": "Drum Articulation Foundation",
+    "status": "CLOSED",
+    "preset": "drums.acoustic_kit_modeled@1.0.0",
+    "existing_default_hits_byte_identical": true,
+    "explicit_articulation": true,
+    "stateful_interaction": false,
+    "focused": "11/11 PASS",
+    "source": "478/478 PASS",
+    "clean_installed": "478/478 PASS",
+    "audition": {
+      "sample_rate_hz": 24000,
+      "bars": 8,
+      "bpm": 96,
+      "events": 104,
+      "clipping": 0
+    },
+    "next_candidate": "S21 Performance-to-Timbre Dynamics after listening review"
+  },
+  "s21": {
+    "name": "Drum Acoustic Core Realism Hardening",
+    "status": "CLOSED",
+    "preset": "drums.acoustic_kit_modeled_realistic@1.0.0",
+    "opt_in": true,
+    "s20_preset_byte_identity": true,
+    "dry_source_only": true,
+    "room_overhead_mic_model": false,
+    "stateful_kit_interaction": false,
+    "performance_grammar": false,
+    "validation": {
+      "focused": "10/10 PASS",
+      "source_regression": "488/488 PASS",
+      "clean_installed_regression": "488/488 PASS"
+    }
+  },
+  "s22": {
+    "name": "Drum Acoustic Voicing & Timbre Polish",
+    "status": "CLOSED",
+    "preset": "drums.acoustic_kit_modeled_polished@1.0.0",
+    "opt_in": true,
+    "s21_preset_preserved": true,
+    "dry_source_only": true,
+    "room_overhead_mic_model": false,
+    "new_articulations": false,
+    "stateful_kit_interaction": false,
+    "validation": {
+      "focused": "10/10 PASS",
+      "source_regression": "498/498 PASS",
+      "clean_installed_regression": "498/498 PASS"
+    }
+  },
+  "s23": {
+    "name": "Drum Performance-to-Timbre Dynamics",
+    "status": "CLOSED",
+    "preset": "drums.acoustic_kit_modeled_expressive@1.0.0",
+    "opt_in": true,
+    "s22_preset_byte_identity_when_controls_omitted": true,
+    "controls": [
+      "strike_force",
+      "strike_position"
+    ],
+    "velocity_authority_preserved": true,
+    "validation": {
+      "focused": "10/10 PASS",
+      "source_regression": "508/508 PASS",
+      "clean_installed_regression": "508/508 PASS"
+    },
+    "next_candidate": "S24 Stateful Kit Interaction after listening review",
+    "packaging": {
+      "standalone_skill_files": 213,
+      "codex_plugin_files": 215,
+      "claude_plugin_files": 215,
+      "codex_skill_exact": true,
+      "claude_skill_exact": true,
+      "forbidden_files": 0,
+      "artifact_sha256": {
+        "standalone_skill": "b47f110454c3fb42c7a18b148fcd4d06314d596e90b3ba00caa63c9b9f11c09d",
+        "codex_plugin": "a0e496f031a331d3b837e6991cb886b8e02fbf671fc83279ca2ce889938f619b",
+        "claude_plugin": "01c65f2ada9a3ce7556c6e66e8b2ee7a074b3c2631febb69efde8ed7283e479c",
+        "dogfood": "90737543141ede561927975c0ff4e8f5c0b20d97fa4089e764978224f93c891d",
+        "validation": "53a4cb37835d92b0733b5c693fa4e8b6c5fd1e81e6d4e0a32e4216a45efbae43",
+        "wheel": "b3ebf18cf64f6237b500ac86449d29ee2500f262dd9bd9154313739e740cb82a"
+      }
+    }
+  },
+  "s24": {
+    "name": "Cymbal Presence & Excitation Hardening",
+    "status": "CLOSED",
+    "preset": "drums.acoustic_kit_modeled_cymbal_presence@1.0.0",
+    "opt_in": true,
+    "s23_preset_preserved": true,
+    "non_cymbal_byte_identical_s23": true,
+    "modal_correlated_colored_wash": true,
+    "validation": {
+      "focused": "10/10 PASS",
+      "source_regression": "518/518 PASS",
+      "clean_installed_regression": "518/518 PASS"
+    },
+    "next_candidate": "Stateful Kit Interaction after listening review"
+  },
+  "repository_mode": "github_source_first",
+  "repository_policy": {
+    "default_branch": "main",
+    "canonical_skill": "skills/code-composer",
+    "plugin_sources": "adapter-only; canonical Skill injected by tools/build_plugins.py",
+    "generated_artifacts": "not committed; publish via releases/CI artifacts as appropriate",
+    "license": "AGPL-3.0-only",
+    "next_slice": "S25_NON_CYMBAL_DRUM_CORE_HARDENING_PLAN_READY"
+  }
+}

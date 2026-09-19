@@ -1,0 +1,176 @@
+{
+  "release": "Code Composer v1.17.0 S17",
+  "slice": "S17 Percussion Acoustic Fidelity Hardening",
+  "status": "CLOSED",
+  "date": "2026-09-19",
+  "baseline": "S16 bass-fidelity repository",
+  "scope": {
+    "engine": "percussion",
+    "preset": "drums.acoustic_kit_modeled@1.0.0",
+    "automatic_composition": false,
+    "samples_or_external_measurements": false,
+    "legacy_percussion_byte_identity_when_disabled": true,
+    "kick_membrane_modes": true,
+    "kick_tension_relaxation": true,
+    "snare_wire_collision_rattle": true,
+    "hat_inharmonic_modal_decay": true,
+    "velocity_timbre_response": true,
+    "seeded_strike_variation": true,
+    "new_drum_hits_inferred": false
+  },
+  "validation": {
+    "focused_s17": "10/10 PASS",
+    "source_regression": "453/453 PASS (70 isolated test-file processes; 0 failed files; 0 timeouts)",
+    "clean_installed_regression": "453/453 PASS (70 isolated test-file processes; 0 failed files; 0 timeouts)",
+    "import_modules": 130,
+    "import_failures": 0,
+    "static_modules": 130,
+    "static_edges": 191,
+    "cycles": 0,
+    "public_entrypoints": 9,
+    "self_check": "PASS",
+    "skill_validation": "PASS",
+    "isolated_skill_self_check": "PASS",
+    "isolated_skill_compileall": "PASS",
+    "forbidden_package_files": 0,
+    "embedded_skill_byte_exact": true,
+    "final_repository_zip_self_check": "PASS",
+    "final_external_skill_self_check": "PASS",
+    "final_repository_forbidden_files": 0,
+    "final_external_packages_forbidden_files": 0,
+    "final_plugin_embedded_skill_byte_exact": true
+  },
+  "dogfood": {
+    "dogfood": "Last Light on Platform Three",
+    "sample_rate_hz": 24000,
+    "tracks_identical": true,
+    "mix_identical": true,
+    "violin_patch_identical": true,
+    "piano_patch_identical": true,
+    "bass_patch_identical": true,
+    "changed_surface": "drums instrument patch only",
+    "drum_stem": {
+      "sample_rate": 24000,
+      "control": {
+        "rms": 0.006724463961899674,
+        "peak": 0.08930854607051167,
+        "centroid_hz": 446.7064759889843,
+        "crest_factor": 13.264644950499353
+      },
+      "modeled": {
+        "rms": 0.006723916440749993,
+        "peak": 0.0918514807442699,
+        "centroid_hz": 377.419232108092,
+        "crest_factor": 13.643453091790349
+      },
+      "mono_corr": 0.12438137385064238,
+      "difference_rms": 0.008898516685699544
+    },
+    "hit_audition": {
+      "kick": {
+        "legacy_peak": 0.5402541842102029,
+        "modeled_peak": 0.5686728516215451,
+        "legacy_rms": 0.15639200796946043,
+        "modeled_rms": 0.16256726446445138,
+        "corr": 0.10644747433197799
+      },
+      "snare": {
+        "legacy_peak": 0.3859463387889349,
+        "modeled_peak": 0.2915844366856748,
+        "legacy_rms": 0.06293569910953041,
+        "modeled_rms": 0.0632201459960989,
+        "corr": 0.20265698822678516
+      },
+      "hat": {
+        "legacy_peak": 0.06156867911815186,
+        "modeled_peak": 0.05983238839643536,
+        "legacy_rms": 0.008293411820089771,
+        "modeled_rms": 0.007303529072543084,
+        "corr": 0.10775258111297799
+      }
+    },
+    "full_song_ab": {
+      "sample_rate": 24000,
+      "duration_s": 68.19833333333334,
+      "event_identity_except_drums_patch": true,
+      "control_peak": 0.3465681936094241,
+      "treatment_peak": 0.36271248512222665,
+      "control_rms": 0.0535219000007541,
+      "treatment_rms": 0.05351893252944691,
+      "control_treatment_mono_correlation": 0.9865547677688055,
+      "difference_rms": 0.008675362465790216,
+      "control_clipping": 0.0,
+      "treatment_clipping": 0.0
+    },
+    "treatment_full": {
+      "duration_s": 68.19833333333334,
+      "peak": 0.36271248512222665,
+      "rms": 0.053519062575695754,
+      "clipped_sample_ratio": 0.0,
+      "section_metrics": [
+        {
+          "id": "hush",
+          "rms": 0.039400184789169644,
+          "peak": 0.24622333445234534
+        },
+        {
+          "id": "theme",
+          "rms": 0.0648027140126005,
+          "peak": 0.2535172582171087
+        },
+        {
+          "id": "pulse",
+          "rms": 0.046083291383680725,
+          "peak": 0.36271248512222665
+        },
+        {
+          "id": "rise",
+          "rms": 0.055699640953465766,
+          "peak": 0.23997181553780822
+        },
+        {
+          "id": "apex",
+          "rms": 0.07200932496595629,
+          "peak": 0.3507115088735264
+        },
+        {
+          "id": "return",
+          "rms": 0.03475805928218465,
+          "peak": 0.17438276314584797
+        }
+      ]
+    },
+    "model_evidence": {
+      "kick": "compact struck-membrane modal response with velocity-scaled tension relaxation and band-limited impact",
+      "snare": "membrane/body modal response plus deterministic stochastic wire-collision envelope",
+      "hat": "inharmonic metallic modal cluster with velocity-scaled brightness/decay and bounded seeded variation"
+    }
+  },
+  "compatibility": {
+    "legacy_percussion_preserved": true,
+    "s16_bass_preserved": true,
+    "s15_ensemble_preserved": true,
+    "s14_piano_preserved": true,
+    "s13_violin_preserved": true,
+    "factory_preset_count": 15,
+    "violin_preset_count": 8,
+    "bass_preset_count": 1,
+    "percussion_preset_count": 1,
+    "registered_engine_count": 6
+  },
+  "next": "Post-S17 full-song listening review before opening another feature slice.",
+  "packaging": {
+    "standalone_skill_files": 210,
+    "codex_plugin_files": 212,
+    "claude_plugin_files": 212,
+    "forbidden_files": 0,
+    "codex_skill_exact": true,
+    "claude_skill_exact": true,
+    "artifact_sha256": {
+      "standalone": "d960ecfdf8644aa8213c92af53cbb8318a20208cef742032b43381e9a15a0f8b",
+      "codex": "12e69936c49ec9f882312bb210d76227817950101282f07ade9d1f4776905f60",
+      "claude": "14642bae8862331db9fded84c970e4da4b38c55b0b4f015b495c3321572d846f",
+      "wheel": "1ce7087bdff3b984f0ddefd27d26a7754bc33eb76d94dffc1414547ea980e2da"
+    }
+  }
+}

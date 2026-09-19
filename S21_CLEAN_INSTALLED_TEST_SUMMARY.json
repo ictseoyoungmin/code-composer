@@ -1,0 +1,9 @@
+{
+  "slice": "S21",
+  "tests": 488,
+  "test_files": 74,
+  "status": "PASS",
+  "failures": 0,
+  "source_path_injection": false,
+  "install_root": "/mnt/data/cc_s21_work/clean_site"
+}

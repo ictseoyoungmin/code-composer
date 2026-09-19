@@ -1,0 +1,94 @@
+{
+  "status": "S6_CONTINUOUS_BOWED_STRING_STATE_CLOSED",
+  "date": "2026-09-17",
+  "engine_version": "1.17.0",
+  "scope": {
+    "same_string_continuous_waveguide_state": true,
+    "planned_bow_direction": true,
+    "finite_bow_velocity_reversal": true,
+    "short_same_string_gap_decay": true,
+    "physical_string_change_resets_state": true,
+    "continuous_double_stop_state": false,
+    "string_crossing_overlap_model": false,
+    "advanced_bounce": false
+  },
+  "presets": {
+    "s5_note_reset": "bowed.violin.modeled_open@1.0.0",
+    "s6_continuous": "bowed.violin.modeled_continuous@1.0.0",
+    "legacy_synthetic": "bowed.violin.synthetic_warm@1.0.0"
+  },
+  "validation": {
+    "focused": "22/22 PASS",
+    "source_regression": "354/354 PASS",
+    "clean_installed_regression": "354/354 PASS",
+    "bowed_waveguide_focused_coverage_percent": 93,
+    "standalone_self_check": "PASS",
+    "isolated_skill_validation": "PASS",
+    "compileall": "PASS",
+    "import_modules": 124,
+    "import_failures": 0,
+    "static_modules": 124,
+    "static_edges": 180,
+    "cycles": 0,
+    "clean_wheel_sha256": "27f1c926a98eb3373f192d654df6a2490bb479d2e3cb9ed4092f1253d28ded58"
+  },
+  "legacy_wav_identity": {
+    "A_lyrical_piano": {
+      "rerender": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+      "reference": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+      "equal": true
+    },
+    "B_rhythm_centered": {
+      "rerender": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+      "reference": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+      "equal": true
+    },
+    "C_sparse_chamber_electronic": {
+      "rerender": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f",
+      "reference": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f",
+      "equal": true
+    }
+  },
+  "audio_evidence": {
+    "AB_S5_reset_then_S6_bow_changes.wav": {
+      "sha256": "477c0a4559a1fcfd1ae41c3b9b84e2b8bf6ffdda022fc6be77b2d44a9a12d91b",
+      "bytes": 1605280
+    },
+    "AB_S5_reset_then_S6_continuous.wav": {
+      "sha256": "2a95996763be814957bc3011d1f2093a8881d6d10f7e9678d0c427f4d2351d3b",
+      "bytes": 1887520
+    },
+    "S5_bow_change_reset.wav": {
+      "sha256": "5cbec3e5019ecffe74c52922079f727312a5bb40d1675e4f6903477755f617aa",
+      "bytes": 740924
+    },
+    "S5_note_reset_phrase.wav": {
+      "sha256": "72e6c5fa380fac0068fb2c864e153cf3f91d769229c6d947e8acd5ff4c3631d7",
+      "bytes": 882044
+    },
+    "S6_bow_change_continuous.wav": {
+      "sha256": "be09775500e38df72ee0791f2ea0f6edcb5e429214d7882ca50e9050ead21236",
+      "bytes": 740924
+    },
+    "S6_continuous_phrase.wav": {
+      "sha256": "8aaebcfbc5f088fcd182120a2e31d528dc13a5f16488287f5196c5d94be14dd5",
+      "bytes": 882044
+    }
+  },
+  "packaging": {
+    "standalone_files": 189,
+    "artifact_sha256": {
+      "standalone": "dfbb90e102ebde8aad1a28f71451f4925aae883772ba99b8eee9f5c12cc2a53d",
+      "codex": "011a04f12902b34d98fb7226d1a75f3a655ad136f6565443d6c8d61459d6a7d5",
+      "claude": "e47f7e8a338434a4c5b1c10bc133aee0fb55e59153e414a17344dd43351614d8"
+    },
+    "codex_skill_exact": true,
+    "claude_skill_exact": true
+  },
+  "research_basis": [
+    "Maestre et al. 2010 \u2014 continuous bow velocity/force/bow-bridge-distance contours driving bowed-string synthesis",
+    "STK bowed-string lineage \u2014 continuously ticking physical model with setFrequency/control changes",
+    "Schoonderwaldt & Altenmuller 2014 \u2014 coordinated bow changes/string crossings",
+    "Schoonderwaldt et al. 2013 \u2014 perceptual timing of simulated bow/string transition patterns"
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "status": "S5_BOWED_STRING_SOUND_HARDENING_CLOSED",
+  "engine_version": "1.17.0",
+  "date": "2026-09-17",
+  "engine": {
+    "legacy": "bowed_string",
+    "modeled": "bowed_waveguide",
+    "legacy_preset": "bowed.violin.synthetic_warm@1.0.0",
+    "modeled_preset": "bowed.violin.modeled_open@1.0.0"
+  },
+  "architecture": {
+    "string": "two-segment fractional-delay digital waveguide",
+    "excitation": "nonlinear relative-velocity bow scattering",
+    "body": "explicit modal/radiativity filter",
+    "third_party_code_vendored": false
+  },
+  "focused": "6/6 PASS",
+  "source_regression": "350/350 PASS",
+  "clean_installed_regression": "350/350 PASS",
+  "coverage_percent": 92.83045721401886,
+  "waveguide_coverage_percent": 92.3076923076923,
+  "compileall": "PASS",
+  "import_modules": 124,
+  "import_failures": 0,
+  "static_modules": 124,
+  "static_edges": 175,
+  "cycles": 0,
+  "clean_wheel_sha256": "2ec887bf979a4ac2831b2d0d475c0475fb67efcc1e27197fcb6be99ef396f31d",
+  "audio_metrics": {
+    "synthetic": {
+      "steady_rms": 0.1402779609311516,
+      "dominant_hz": 439.99445711190333,
+      "pitch_error_cents": -0.021809311469468864,
+      "spectral_centroid_hz": 4072.6170578720903,
+      "peak": 0.4368814599835821
+    },
+    "modeled": {
+      "steady_rms": 0.08671384216599168,
+      "dominant_hz": 438.3278114410249,
+      "pitch_error_cents": -6.5919653908507465,
+      "spectral_centroid_hz": 2523.9235664437306,
+      "peak": 0.20421207825332402
+    },
+    "modeled_vs_synthetic_correlation": -0.02924737111065222
+  },
+  "legacy_hashes": {
+    "A": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+    "B": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+    "C": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f"
+  },
+  "packaging": {
+    "standalone_skill_files": 188,
+    "codex_plugin_files": 190,
+    "claude_plugin_files": 190,
+    "forbidden_files": 0,
+    "codex_skill_exact": true,
+    "claude_skill_exact": true,
+    "artifact_sha256": {
+      "standalone": "e831261afd9f3f6a57fd764af5d0bac9991e04d947cfb2717a776020363ddaeb",
+      "codex": "c282c021fe7a351c1bf4091d1a04fb144a30d421978bf31228358eb39fe10231",
+      "claude": "3b86eda3e39c69bf44437e4c419de7648e0066fb39fe0624a5e69180e314fc69"
+    }
+  },
+  "next": "continuous cross-note string state and explicit bow-change transient hardening"
+}

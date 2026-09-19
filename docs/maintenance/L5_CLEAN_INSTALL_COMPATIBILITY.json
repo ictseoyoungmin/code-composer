@@ -1,0 +1,94 @@
+{
+  "status": "CLOSED",
+  "release_baseline": "v1.16.0 CLOSED",
+  "release_reopened": false,
+  "slice": "L5 Clean Install / Compatibility",
+  "scope": "Validate the L4-cleaned distribution from outside the source tree without changing runtime/schema behavior.",
+  "clean_install": {
+    "python": "3.13.5",
+    "build_mode": "PEP 517 wheel, --no-deps --no-build-isolation",
+    "version_attr": "1.16.0",
+    "metadata_version": "1.16.0",
+    "source_tree_on_import_path": false,
+    "declared_runtime_dependencies": [
+      "numpy>=1.24",
+      "scipy>=1.10"
+    ],
+    "wheel_python_modules": 99,
+    "wheel_reference_schemas": 4,
+    "wheel_reference_examples": 10,
+    "retained_public_imports": {
+      "passed": 34,
+      "failed": 0
+    },
+    "removed_flat_imports": {
+      "absent": 4,
+      "unexpectedly_present": 0
+    },
+    "removed_nested_targets": {
+      "absent": 4,
+      "unexpectedly_present": 0
+    },
+    "console_entrypoints": {
+      "code-composer": "PASS",
+      "code-composer-compose": "PASS"
+    },
+    "legacy_wav": {
+      "sha256": "589ac3efdc466a1a7c191caa0e614a63b1a28e4dea566b08164df3730f4490e0",
+      "expected": "589ac3efdc466a1a7c191caa0e614a63b1a28e4dea566b08164df3730f4490e0",
+      "byte_identical": true
+    },
+    "wheel_file": "code_composer-1.16.0-py3-none-any.whl",
+    "wheel_sha256": "edf09467944daa6dfee6699fc3008e548d5a0fca97d252a923556914e22d3b3c",
+    "wheel_members": 118,
+    "install_target": "isolated target outside repository",
+    "runtime_dependencies_provisioned_offline": {
+      "numpy": "2.3.5",
+      "scipy": "1.17.0",
+      "constraints_satisfied": true
+    },
+    "reference_assets": {
+      "schemas": 4,
+      "examples": 10,
+      "readable": true
+    },
+    "final_dogfood_rerender": {
+      "A_lyrical_piano": {
+        "sha256": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+        "byte_identical": true
+      },
+      "B_rhythm_centered": {
+        "sha256": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+        "byte_identical": true
+      },
+      "C_sparse_chamber_electronic": {
+        "sha256": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f",
+        "byte_identical": true
+      }
+    }
+  },
+  "src_schema_aggregate_sha256": "bcee602c1f5d96246910acf1052496923fb4aafc52cf0a8becd84759f6318ea4",
+  "runtime_schema_changed_from_l4": false,
+  "maintenance_chain_complete": true,
+  "validation": {
+    "focused_l3_l4_l5": {
+      "passed": 17,
+      "failed": 0
+    },
+    "full_regression": {
+      "passed": 252,
+      "failed": 0
+    },
+    "coverage_percent": 89,
+    "compileall": true,
+    "runtime_graph": {
+      "import_modules": 98,
+      "import_failures": [],
+      "static_modules": 99,
+      "static_edges": 121,
+      "cycles": 0
+    },
+    "src_schema_byte_identical_to_l4": true
+  },
+  "next": "Legacy cleanup L0-L5 complete. Start a new explicitly scoped maintenance/version slice for any further work."
+}

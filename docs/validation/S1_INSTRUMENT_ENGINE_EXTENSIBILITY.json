@@ -1,0 +1,87 @@
+{
+  "status": "CLOSED",
+  "slice": "S1 Instrument Engine Extensibility",
+  "date": "2026-09-17",
+  "engine_version": "1.17.0",
+  "architecture": {
+    "registry": "skills/code-composer/kit/src/code_composer/audio/engines/registry.py",
+    "builtins": [
+      "generic",
+      "piano",
+      "bowed_string"
+    ],
+    "central_render_family_specific_branches": 0,
+    "engine_interface": [
+      "render_note",
+      "tail_seconds",
+      "post_process_track",
+      "validate_ir_patch",
+      "validate_runtime_patch",
+      "validate_authoring_patch",
+      "capabilities"
+    ],
+    "bowed_string_family_engine": true,
+    "polished_bowed_string_preset_in_agent_skill": false
+  },
+  "source_delta_from_s0r1": {
+    "python_modules_before": 108,
+    "python_modules_after": 115,
+    "added": 7,
+    "removed": 0,
+    "changed_existing": 5,
+    "added_files": [
+      "audio/engines/__init__.py",
+      "audio/engines/base.py",
+      "audio/engines/bowed_string.py",
+      "audio/engines/generic.py",
+      "audio/engines/piano.py",
+      "audio/engines/registry.py",
+      "audio/generic_synth.py"
+    ],
+    "changed_files": [
+      "agent/composition_brief.py",
+      "audio/instrument.py",
+      "core/ir.py",
+      "render.py",
+      "validation_contracts.py"
+    ]
+  },
+  "validation": {
+    "focused": "29/29 PASS",
+    "full_regression": "310/310 PASS",
+    "coverage_percent": 89.49229246216943,
+    "bowed_string_module_coverage_percent": 88.64864864864865,
+    "registry_coverage_percent": 86.44067796610169,
+    "compileall": "PASS",
+    "self_check": "PASS",
+    "import_modules": 115,
+    "import_failures": 0,
+    "static_modules": 115,
+    "static_edges": 161,
+    "cycles": 0,
+    "clean_wheel_install_and_bowed_render": "PASS",
+    "external_delivery_with_bowed_string": "PASS",
+    "legacy_wav_byte_identity": {
+      "A": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+      "B": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+      "C": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f"
+    },
+    "violin_dogfood_wav_sha256": "5ad2f64ab85642001c074b688c7005961b8c08eccfb0cc060dce6371ec4b50b0"
+  },
+  "packaging": {
+    "standalone_skill_files": 162,
+    "codex_plugin_files": 164,
+    "claude_plugin_files": 164,
+    "forbidden_build_cache_audio_midi_files": 0,
+    "codex_skill_subtree_exact": true,
+    "claude_skill_subtree_exact": true,
+    "artifact_sha256": {
+      "standalone_skill": "945c4e2fff8430bf059539219355b569e587b3a1da9ef883369c9e9296cd4384",
+      "codex_plugin": "c7f43c90bf19208bb7b4ccbe54d74f2517f5b277a52e184bb2e3ba6a44146c99",
+      "claude_plugin": "58040787f3d86ac32e52396658f80785dd415d20257b85e1f9e624929d02bf15",
+      "clean_wheel": "2593c417a6c8606c698dd1568b93c41b141f209e5e0371c294b0f44da73efd5f",
+      "violin_dogfood_wav": "5ad2f64ab85642001c074b688c7005961b8c08eccfb0cc060dce6371ec4b50b0"
+    }
+  },
+  "historical_provenance": "docs/maintenance/POST_V116_INTENTIONAL_SOURCE_CHANGES.json"
+}

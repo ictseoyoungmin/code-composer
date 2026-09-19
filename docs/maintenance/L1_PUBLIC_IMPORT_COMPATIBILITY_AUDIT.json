@@ -1,0 +1,550 @@
+{
+  "status": "L1_PUBLIC_IMPORT_COMPATIBILITY_AUDIT_CLOSED",
+  "release_baseline": "1.16.0",
+  "release_reopened": false,
+  "policy": {
+    "v1_maintenance": "Do not break generic flat import compatibility during 1.16.x cleanup.",
+    "canonical_imports": "New code/tests should import domain modules directly: core/composition/audio/mix/analysis/pipeline/agent/app.",
+    "explicit_keep": "code_composer.resolve remains compatibility-locked because current v1.16 docs explicitly promise it.",
+    "semantic_exception": "Legacy surfaces that violate the v1.16 architecture are removed even if a shim exists; STRUCTURE explicitly says removed architectural paths are not retained merely for import compatibility."
+  },
+  "decision_counts": {
+    "DEPRECATE_FLAT_IMPORT": 31,
+    "REMOVE_IN_L2": 4,
+    "KEEP_CANONICAL": 2,
+    "KEEP_COMPAT_V1": 1
+  },
+  "flat_surface_decisions": [
+    {
+      "module": "code_composer.arrange",
+      "target": [
+        "code_composer.composition.arrange"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_arrangement.py",
+        "tests/test_pre_hook_build.py",
+        "tests/test_rhythm.py",
+        "tests/test_topline.py",
+        "tests/test_transition_material.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.arrangement_analysis",
+      "target": [
+        "code_composer.analysis.arrangement_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_arrangement.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.automation",
+      "target": [
+        "code_composer.mix.automation"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.bass_analysis",
+      "target": [
+        "code_composer.analysis.bass_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.cli",
+      "target": [
+        "code_composer.app.cli"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_graph_boundaries.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.composer_cli",
+      "target": [
+        "code_composer.app.composer_cli"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [],
+      "docs_refs": [
+        "docs/validation/V1_12_COMPOSER_PLANNER.md"
+      ],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.composer_planner",
+      "target": [
+        "code_composer.agent.composer_planner"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.drum_analysis",
+      "target": [
+        "code_composer.analysis.drum_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_drum_sound.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.dsp",
+      "target": [
+        "code_composer.audio.dsp"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.form_development_analysis",
+      "target": [
+        "code_composer.analysis.form_development_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.harmonic_analysis",
+      "target": [
+        "code_composer.analysis.harmonic_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.instrument",
+      "target": [
+        "code_composer.audio.instrument"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_instrument.py",
+        "tests/test_whistle_timbre.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.instrument_analysis",
+      "target": [
+        "code_composer.analysis.instrument_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_instrument.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.ir",
+      "target": [
+        "code_composer.pipeline.validation"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_pipeline_validation.py",
+        "tests/test_structured_cli_surface.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.mixer",
+      "target": [
+        "code_composer.mix.mixer"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_mixer.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.orchestration_analysis",
+      "target": [
+        "code_composer.analysis.orchestration_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.percussion",
+      "target": [
+        "code_composer.audio.percussion"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_drum_sound.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.phrase",
+      "target": [
+        "code_composer.composition.phrase"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_phrase.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.phrase_analysis",
+      "target": [
+        "code_composer.analysis.phrase_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_phrase.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.piano_design",
+      "target": [
+        "code_composer.audio.piano_design"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.pre_hook_build",
+      "target": [
+        "code_composer.composition.pre_hook_build"
+      ],
+      "decision": "REMOVE_IN_L2",
+      "removal_boundary": "post-release maintenance L2",
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Legacy analysis-driven mutation/transition surface conflicts with v1.16 Agent-owned revision/transition semantics."
+    },
+    {
+      "module": "code_composer.render",
+      "target": [
+        "code_composer.audio.dsp",
+        "code_composer.audio.instrument",
+        "code_composer.audio.percussion",
+        "code_composer.audio.synth",
+        "code_composer.composition.arrange",
+        "code_composer.composition.performance",
+        "code_composer.composition.resolve",
+        "code_composer.core.constraints",
+        "code_composer.core.ir",
+        "code_composer.mix.mixer",
+        "code_composer.validation_contracts"
+      ],
+      "decision": "KEEP_CANONICAL",
+      "removal_boundary": null,
+      "test_refs": [
+        "tests/test_constraint_integrity.py",
+        "tests/test_validation_closure.py"
+      ],
+      "docs_refs": [],
+      "reason": "Canonical runtime surface."
+    },
+    {
+      "module": "code_composer.resolve",
+      "target": [
+        "code_composer.composition.resolve"
+      ],
+      "decision": "KEEP_COMPAT_V1",
+      "removal_boundary": null,
+      "test_refs": [
+        "tests/test_resolve.py"
+      ],
+      "docs_refs": [
+        "README.md",
+        "STRUCTURE.md",
+        "docs/architecture/ARCHITECTURE.md",
+        "docs/validation/R3_CANONICAL_SURFACE_CLEANUP.md"
+      ],
+      "reason": "Current README/STRUCTURE/ARCHITECTURE explicitly document this compatibility shim."
+    },
+    {
+      "module": "code_composer.rhythm",
+      "target": [
+        "code_composer.composition.rhythm"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_rhythm.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.rhythm_analysis",
+      "target": [
+        "code_composer.analysis.rhythm_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_rhythm.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.section_analysis",
+      "target": [
+        "code_composer.analysis.section_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_section_analysis.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.section_calibration",
+      "target": [
+        "code_composer.composition.section_calibration"
+      ],
+      "decision": "REMOVE_IN_L2",
+      "removal_boundary": "post-release maintenance L2",
+      "test_refs": [
+        "tests/test_section_calibration.py"
+      ],
+      "docs_refs": [],
+      "reason": "Legacy analysis-driven mutation/transition surface conflicts with v1.16 Agent-owned revision/transition semantics."
+    },
+    {
+      "module": "code_composer.sound_palette_analysis",
+      "target": [
+        "code_composer.analysis.sound_palette_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.synth",
+      "target": [
+        "code_composer.audio.synth"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.theory",
+      "target": [
+        "code_composer.core.theory"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_theory.py",
+        "tests/test_whistle_timbre.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.timbre_analysis",
+      "target": [
+        "code_composer.analysis.timbre_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_whistle_timbre.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.topline",
+      "target": [
+        "code_composer.composition.topline"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_topline.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.topline_analysis",
+      "target": [
+        "code_composer.analysis.topline_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_topline.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.topline_grammar_analysis",
+      "target": [
+        "code_composer.analysis.topline_grammar_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Flat re-export points to a current domain or diagnostic utility but is not a canonical documented import surface."
+    },
+    {
+      "module": "code_composer.transition_automation",
+      "target": [
+        "code_composer.mix.transition_automation"
+      ],
+      "decision": "REMOVE_IN_L2",
+      "removal_boundary": "post-release maintenance L2",
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Legacy analysis-driven mutation/transition surface conflicts with v1.16 Agent-owned revision/transition semantics."
+    },
+    {
+      "module": "code_composer.transition_material",
+      "target": [
+        "code_composer.composition.transition_material"
+      ],
+      "decision": "REMOVE_IN_L2",
+      "removal_boundary": "post-release maintenance L2",
+      "test_refs": [
+        "tests/test_transition_material.py"
+      ],
+      "docs_refs": [],
+      "reason": "Legacy analysis-driven mutation/transition surface conflicts with v1.16 Agent-owned revision/transition semantics."
+    },
+    {
+      "module": "code_composer.transition_material_analysis",
+      "target": [
+        "code_composer.analysis.transition_material_analysis"
+      ],
+      "decision": "DEPRECATE_FLAT_IMPORT",
+      "removal_boundary": "future compatibility-breaking release; not 1.16.x maintenance",
+      "test_refs": [
+        "tests/test_transition_material.py"
+      ],
+      "docs_refs": [],
+      "reason": "Flat alias is noncanonical, but nested analyzer remains useful for canonical E5 transition provenance."
+    },
+    {
+      "module": "code_composer.validation_contracts",
+      "target": [
+        "code_composer.audio.piano_design",
+        "code_composer.composition.harmonic_grammar",
+        "code_composer.composition.orchestration"
+      ],
+      "decision": "KEEP_CANONICAL",
+      "removal_boundary": null,
+      "test_refs": [],
+      "docs_refs": [],
+      "reason": "Canonical runtime surface."
+    }
+  ],
+  "legacy_semantic_targets": [
+    {
+      "module": "code_composer.composition.transition_material",
+      "decision": "REMOVE_IN_L2",
+      "reason": "Reads transition analysis/discontinuity and invents pad tails, drum pickups, bass anticipation and topline pickups."
+    },
+    {
+      "module": "code_composer.composition.pre_hook_build",
+      "decision": "REMOVE_IN_L2",
+      "reason": "Reads analysis discontinuity and automatically authors withdrawal/pickup/swell material."
+    },
+    {
+      "module": "code_composer.mix.transition_automation",
+      "decision": "REMOVE_IN_L2",
+      "reason": "Reads measured transition RMS/direction and automatically authors master gain automation."
+    },
+    {
+      "module": "code_composer.composition.section_calibration",
+      "decision": "REMOVE_IN_L2",
+      "reason": "Reads measured vs expected section energy and automatically mutates arrangement profile gain."
+    }
+  ],
+  "runtime_branches": [
+    {
+      "file": "src/code_composer/composition/arrange.py",
+      "fields": [
+        "transition_analysis",
+        "pre_hook_build",
+        "pre_hook_analysis"
+      ],
+      "decision": "REMOVE_IN_L2",
+      "reason": "These fields activate analyzer-driven musical material generation before canonical E5."
+    }
+  ],
+  "next": "L2 Proven-unused / Superseded Legacy Removal",
+  "amendment": {
+    "during": "L2",
+    "reason": "Canonical E5 resolved events also use transition_material provenance tags.",
+    "change": "Retain code_composer.analysis.transition_material_analysis; deprecate only its flat alias."
+  }
+}

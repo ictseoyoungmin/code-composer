@@ -1,0 +1,13 @@
+{
+  "standalone_files": 210,
+  "codex_files": 212,
+  "claude_files": 212,
+  "forbidden": {
+    "standalone": [],
+    "codex": [],
+    "claude": []
+  },
+  "codex_skill_exact": true,
+  "claude_skill_exact": true,
+  "skill_files": 210
+}

@@ -1,0 +1,1262 @@
+{
+  "status": "L0_LEGACY_SURFACE_INVENTORY_CLOSED",
+  "release_baseline": "1.16.0",
+  "release_reopened": false,
+  "module_graph": {
+    "modules": 107,
+    "edges": 127
+  },
+  "root_surface_summary": {
+    "COMPATIBILITY_SHIM_REPO_BOUND": 22,
+    "REMOVE_CANDIDATE_UNREFERENCED_SHIM": 13,
+    "COMPATIBILITY_SHIM_REFERENCED": 1,
+    "CANONICAL_RUNTIME": 2
+  },
+  "root_surfaces": [
+    {
+      "module": "code_composer.arrange",
+      "file": "src/code_composer/arrange.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.composition.arrange"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.composition.arrange"
+      ],
+      "test_refs": [
+        "tests/test_arrangement.py",
+        "tests/test_pre_hook_build.py",
+        "tests/test_rhythm.py",
+        "tests/test_topline.py",
+        "tests/test_transition_material.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_arrangement.py",
+        "tests/test_pre_hook_build.py",
+        "tests/test_rhythm.py",
+        "tests/test_topline.py",
+        "tests/test_transition_material.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.arrangement_analysis",
+      "file": "src/code_composer/arrangement_analysis.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.analysis.arrangement_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.arrangement_analysis"
+      ],
+      "test_refs": [
+        "tests/test_arrangement.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_arrangement.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.automation",
+      "file": "src/code_composer/automation.py",
+      "classification": "REMOVE_CANDIDATE_UNREFERENCED_SHIM",
+      "shim_target": [
+        "code_composer.mix.automation"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.mix.automation"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.bass_analysis",
+      "file": "src/code_composer/bass_analysis.py",
+      "classification": "REMOVE_CANDIDATE_UNREFERENCED_SHIM",
+      "shim_target": [
+        "code_composer.analysis.bass_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.bass_analysis"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 2
+    },
+    {
+      "module": "code_composer.cli",
+      "file": "src/code_composer/cli.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.app.cli"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.app.cli"
+      ],
+      "test_refs": [
+        "tests/test_graph_boundaries.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "src/code_composer/app/cli.py",
+        "tests/test_graph_boundaries.py"
+      ],
+      "lines": 7
+    },
+    {
+      "module": "code_composer.composer_cli",
+      "file": "src/code_composer/composer_cli.py",
+      "classification": "COMPATIBILITY_SHIM_REFERENCED",
+      "shim_target": [
+        "code_composer.app.composer_cli"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.app.composer_cli"
+      ],
+      "test_refs": [],
+      "docs_refs": [
+        "docs/validation/V1_12_COMPOSER_PLANNER.md"
+      ],
+      "all_repo_refs": [
+        "docs/validation/V1_12_COMPOSER_PLANNER.md",
+        "src/code_composer/app/composer_cli.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.composer_planner",
+      "file": "src/code_composer/composer_planner.py",
+      "classification": "REMOVE_CANDIDATE_UNREFERENCED_SHIM",
+      "shim_target": [
+        "code_composer.agent.composer_planner"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.agent.composer_planner"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 2
+    },
+    {
+      "module": "code_composer.drum_analysis",
+      "file": "src/code_composer/drum_analysis.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.analysis.drum_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.drum_analysis"
+      ],
+      "test_refs": [
+        "tests/test_drum_sound.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_drum_sound.py"
+      ],
+      "lines": 2
+    },
+    {
+      "module": "code_composer.dsp",
+      "file": "src/code_composer/dsp.py",
+      "classification": "REMOVE_CANDIDATE_UNREFERENCED_SHIM",
+      "shim_target": [
+        "code_composer.audio.dsp"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.audio.dsp"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.form_development_analysis",
+      "file": "src/code_composer/form_development_analysis.py",
+      "classification": "REMOVE_CANDIDATE_UNREFERENCED_SHIM",
+      "shim_target": [
+        "code_composer.analysis.form_development_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.form_development_analysis"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 2
+    },
+    {
+      "module": "code_composer.harmonic_analysis",
+      "file": "src/code_composer/harmonic_analysis.py",
+      "classification": "REMOVE_CANDIDATE_UNREFERENCED_SHIM",
+      "shim_target": [
+        "code_composer.analysis.harmonic_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.harmonic_analysis"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 2
+    },
+    {
+      "module": "code_composer.instrument",
+      "file": "src/code_composer/instrument.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.audio.instrument"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.audio.instrument"
+      ],
+      "test_refs": [
+        "tests/test_instrument.py",
+        "tests/test_whistle_timbre.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_instrument.py",
+        "tests/test_whistle_timbre.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.instrument_analysis",
+      "file": "src/code_composer/instrument_analysis.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.analysis.instrument_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.instrument_analysis"
+      ],
+      "test_refs": [
+        "tests/test_instrument.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_instrument.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.ir",
+      "file": "src/code_composer/ir.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.pipeline.validation"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.pipeline.validation"
+      ],
+      "test_refs": [
+        "tests/test_pipeline_validation.py",
+        "tests/test_structured_cli_surface.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_pipeline_validation.py",
+        "tests/test_structured_cli_surface.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.mixer",
+      "file": "src/code_composer/mixer.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.mix.mixer"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.mix.mixer"
+      ],
+      "test_refs": [
+        "tests/test_mixer.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_mixer.py"
+      ],
+      "lines": 3
+    },
+    {
+      "module": "code_composer.orchestration_analysis",
+      "file": "src/code_composer/orchestration_analysis.py",
+      "classification": "REMOVE_CANDIDATE_UNREFERENCED_SHIM",
+      "shim_target": [
+        "code_composer.analysis.orchestration_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.orchestration_analysis"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 2
+    },
+    {
+      "module": "code_composer.percussion",
+      "file": "src/code_composer/percussion.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.audio.percussion"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.audio.percussion"
+      ],
+      "test_refs": [
+        "tests/test_drum_sound.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_drum_sound.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.phrase",
+      "file": "src/code_composer/phrase.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.composition.phrase"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.composition.phrase"
+      ],
+      "test_refs": [
+        "tests/test_phrase.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_phrase.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.phrase_analysis",
+      "file": "src/code_composer/phrase_analysis.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.analysis.phrase_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.phrase_analysis"
+      ],
+      "test_refs": [
+        "tests/test_phrase.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_phrase.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.piano_design",
+      "file": "src/code_composer/piano_design.py",
+      "classification": "REMOVE_CANDIDATE_UNREFERENCED_SHIM",
+      "shim_target": [
+        "code_composer.audio.piano_design"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.audio.piano_design"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 13
+    },
+    {
+      "module": "code_composer.pre_hook_build",
+      "file": "src/code_composer/pre_hook_build.py",
+      "classification": "REMOVE_CANDIDATE_UNREFERENCED_SHIM",
+      "shim_target": [
+        "code_composer.composition.pre_hook_build"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.composition.pre_hook_build"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.render",
+      "file": "src/code_composer/render.py",
+      "classification": "CANONICAL_RUNTIME",
+      "shim_target": [
+        "code_composer.audio.dsp",
+        "code_composer.audio.instrument",
+        "code_composer.audio.percussion",
+        "code_composer.audio.synth",
+        "code_composer.composition.arrange",
+        "code_composer.composition.performance",
+        "code_composer.composition.resolve",
+        "code_composer.core.constraints",
+        "code_composer.core.ir",
+        "code_composer.mix.mixer",
+        "code_composer.validation_contracts"
+      ],
+      "internal_inbound": [
+        "code_composer.pipeline.service"
+      ],
+      "internal_outbound": [
+        "code_composer.audio.dsp",
+        "code_composer.audio.instrument",
+        "code_composer.audio.percussion",
+        "code_composer.audio.piano",
+        "code_composer.audio.synth",
+        "code_composer.composition.arrange",
+        "code_composer.composition.performance",
+        "code_composer.composition.resolve",
+        "code_composer.core.constraints",
+        "code_composer.core.ir",
+        "code_composer.mix.mixer",
+        "code_composer.validation_contracts"
+      ],
+      "test_refs": [
+        "tests/test_constraint_integrity.py",
+        "tests/test_validation_closure.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_constraint_integrity.py",
+        "tests/test_validation_closure.py"
+      ],
+      "lines": 135
+    },
+    {
+      "module": "code_composer.resolve",
+      "file": "src/code_composer/resolve.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.composition.resolve"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.composition.resolve"
+      ],
+      "test_refs": [
+        "tests/test_resolve.py"
+      ],
+      "docs_refs": [
+        "README.md",
+        "STRUCTURE.md",
+        "docs/architecture/ARCHITECTURE.md",
+        "docs/validation/R3_CANONICAL_SURFACE_CLEANUP.md"
+      ],
+      "all_repo_refs": [
+        "README.md",
+        "STRUCTURE.md",
+        "docs/architecture/ARCHITECTURE.md",
+        "docs/validation/R3_CANONICAL_SURFACE_CLEANUP.md",
+        "tests/test_resolve.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.rhythm",
+      "file": "src/code_composer/rhythm.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.composition.rhythm"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.composition.rhythm"
+      ],
+      "test_refs": [
+        "tests/test_rhythm.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_rhythm.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.rhythm_analysis",
+      "file": "src/code_composer/rhythm_analysis.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.analysis.rhythm_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.rhythm_analysis"
+      ],
+      "test_refs": [
+        "tests/test_rhythm.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_rhythm.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.section_analysis",
+      "file": "src/code_composer/section_analysis.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.analysis.section_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.section_analysis"
+      ],
+      "test_refs": [
+        "tests/test_section_analysis.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_section_analysis.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.section_calibration",
+      "file": "src/code_composer/section_calibration.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.composition.section_calibration"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.composition.section_calibration"
+      ],
+      "test_refs": [
+        "tests/test_section_calibration.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_section_calibration.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.sound_palette_analysis",
+      "file": "src/code_composer/sound_palette_analysis.py",
+      "classification": "REMOVE_CANDIDATE_UNREFERENCED_SHIM",
+      "shim_target": [
+        "code_composer.analysis.sound_palette_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.sound_palette_analysis"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 2
+    },
+    {
+      "module": "code_composer.synth",
+      "file": "src/code_composer/synth.py",
+      "classification": "REMOVE_CANDIDATE_UNREFERENCED_SHIM",
+      "shim_target": [
+        "code_composer.audio.synth"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.audio.synth"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.theory",
+      "file": "src/code_composer/theory.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.core.theory"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.core.theory"
+      ],
+      "test_refs": [
+        "tests/test_theory.py",
+        "tests/test_whistle_timbre.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_theory.py",
+        "tests/test_whistle_timbre.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.timbre_analysis",
+      "file": "src/code_composer/timbre_analysis.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.analysis.timbre_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.timbre_analysis"
+      ],
+      "test_refs": [
+        "tests/test_whistle_timbre.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_whistle_timbre.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.topline",
+      "file": "src/code_composer/topline.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.composition.topline"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.composition.topline"
+      ],
+      "test_refs": [
+        "tests/test_topline.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_topline.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.topline_analysis",
+      "file": "src/code_composer/topline_analysis.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.analysis.topline_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.topline_analysis"
+      ],
+      "test_refs": [
+        "tests/test_topline.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_topline.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.topline_grammar_analysis",
+      "file": "src/code_composer/topline_grammar_analysis.py",
+      "classification": "REMOVE_CANDIDATE_UNREFERENCED_SHIM",
+      "shim_target": [
+        "code_composer.analysis.topline_grammar_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.topline_grammar_analysis"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 2
+    },
+    {
+      "module": "code_composer.transition_automation",
+      "file": "src/code_composer/transition_automation.py",
+      "classification": "REMOVE_CANDIDATE_UNREFERENCED_SHIM",
+      "shim_target": [
+        "code_composer.mix.transition_automation"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.mix.transition_automation"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.transition_material",
+      "file": "src/code_composer/transition_material.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.composition.transition_material"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.composition.transition_material"
+      ],
+      "test_refs": [
+        "tests/test_transition_material.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_transition_material.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.transition_material_analysis",
+      "file": "src/code_composer/transition_material_analysis.py",
+      "classification": "COMPATIBILITY_SHIM_REPO_BOUND",
+      "shim_target": [
+        "code_composer.analysis.transition_material_analysis"
+      ],
+      "internal_inbound": [],
+      "internal_outbound": [
+        "code_composer.analysis.transition_material_analysis"
+      ],
+      "test_refs": [
+        "tests/test_transition_material.py"
+      ],
+      "docs_refs": [],
+      "all_repo_refs": [
+        "tests/test_transition_material.py"
+      ],
+      "lines": 4
+    },
+    {
+      "module": "code_composer.validation_contracts",
+      "file": "src/code_composer/validation_contracts.py",
+      "classification": "CANONICAL_RUNTIME",
+      "shim_target": [
+        "code_composer.audio.piano_design",
+        "code_composer.composition.harmonic_grammar",
+        "code_composer.composition.orchestration"
+      ],
+      "internal_inbound": [
+        "code_composer.agent.composition_brief",
+        "code_composer.pipeline.validation",
+        "code_composer.render"
+      ],
+      "internal_outbound": [
+        "code_composer.audio.piano_design",
+        "code_composer.composition.harmonic_grammar",
+        "code_composer.composition.orchestration"
+      ],
+      "test_refs": [],
+      "docs_refs": [],
+      "all_repo_refs": [],
+      "lines": 340
+    }
+  ],
+  "documentation": [
+    {
+      "file": "docs/BUILD.md",
+      "classification": "CURRENT_CANONICAL",
+      "lines": 49
+    },
+    {
+      "file": "docs/architecture/ARCHITECTURE.md",
+      "classification": "CURRENT_CANONICAL",
+      "lines": 79
+    },
+    {
+      "file": "docs/architecture/COMPOSER_AGENT_CONTRACT.md",
+      "classification": "CURRENT_CANONICAL",
+      "lines": 52
+    },
+    {
+      "file": "docs/architecture/EXPRESSIVE_COMPOSITION_V116.md",
+      "classification": "CURRENT_CANONICAL",
+      "lines": 469
+    },
+    {
+      "file": "docs/architecture/MOTIF_DEVELOPMENT_V116.md",
+      "classification": "CURRENT_CANONICAL",
+      "lines": 77
+    },
+    {
+      "file": "docs/architecture/PIANO_AGENT_SELECTION.md",
+      "classification": "HISTORICAL_OR_DOMAIN_REFERENCE_REVIEW",
+      "lines": 89
+    },
+    {
+      "file": "docs/architecture/PIANO_ENGINE.md",
+      "classification": "HISTORICAL_OR_DOMAIN_REFERENCE_REVIEW",
+      "lines": 30
+    },
+    {
+      "file": "docs/architecture/PIANO_FAMILY_ARCHITECTURE.md",
+      "classification": "HISTORICAL_OR_DOMAIN_REFERENCE_REVIEW",
+      "lines": 79
+    },
+    {
+      "file": "docs/architecture/PIANO_PARAMETER_MODEL.md",
+      "classification": "HISTORICAL_OR_DOMAIN_REFERENCE_REVIEW",
+      "lines": 87
+    },
+    {
+      "file": "docs/architecture/REFERENCE_SURFACE.md",
+      "classification": "HISTORICAL_OR_DOMAIN_REFERENCE_REVIEW",
+      "lines": 39
+    },
+    {
+      "file": "docs/architecture/SOUND_PALETTE_CONTRACT.md",
+      "classification": "HISTORICAL_OR_DOMAIN_REFERENCE_REVIEW",
+      "lines": 18
+    },
+    {
+      "file": "docs/architecture/V1_5_TIMBRE.md",
+      "classification": "HISTORICAL_OR_DOMAIN_REFERENCE_REVIEW",
+      "lines": 40
+    },
+    {
+      "file": "docs/roadmap/SLICES.md",
+      "classification": "HISTORICAL_ROADMAP_KEEP",
+      "lines": 46
+    },
+    {
+      "file": "docs/roadmap/V116_EXPRESSIVE_SLICES.md",
+      "classification": "CURRENT_CANONICAL",
+      "lines": 204
+    },
+    {
+      "file": "docs/validation/E0_CONTRACT_FOUNDATION.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 94
+    },
+    {
+      "file": "docs/validation/E1_PHRASE_EXPRESSION.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 91
+    },
+    {
+      "file": "docs/validation/E2_MOTIF_DEVELOPMENT.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 91
+    },
+    {
+      "file": "docs/validation/E3_REGISTER_VOICING.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 104
+    },
+    {
+      "file": "docs/validation/E4_ORCHESTRATION_BUDGET.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 87
+    },
+    {
+      "file": "docs/validation/E5_MUSICAL_TRANSITIONS.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 87
+    },
+    {
+      "file": "docs/validation/E6_EXPRESSIVE_QA.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 93
+    },
+    {
+      "file": "docs/validation/H1_E6_QA_CORRECTNESS.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 76
+    },
+    {
+      "file": "docs/validation/H2_CONTRACT_PARITY.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 88
+    },
+    {
+      "file": "docs/validation/H3_E2_SEMANTIC_CLOSURE.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 118
+    },
+    {
+      "file": "docs/validation/H4_REVISION_SURFACE_CLEANUP.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 83
+    },
+    {
+      "file": "docs/validation/H5_REFERENCE_PACKAGE_HYGIENE.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 140
+    },
+    {
+      "file": "docs/validation/R1_CONSTRAINT_INTEGRITY.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 73
+    },
+    {
+      "file": "docs/validation/R2_VALIDATION_CLOSURE.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 59
+    },
+    {
+      "file": "docs/validation/R3_CANONICAL_SURFACE_CLEANUP.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 62
+    },
+    {
+      "file": "docs/validation/R4_REFERENCE_HYGIENE.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 52
+    },
+    {
+      "file": "docs/validation/R5R1_PIANO_FIDELITY_CORRECTION.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 63
+    },
+    {
+      "file": "docs/validation/R5_PIANO_FAMILY_HARDENING.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 104
+    },
+    {
+      "file": "docs/validation/V116_FINAL_CLOSURE.md",
+      "classification": "CURRENT_CANONICAL",
+      "lines": 180
+    },
+    {
+      "file": "docs/validation/V1_10_ORCHESTRATION_GRAMMAR.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 28
+    },
+    {
+      "file": "docs/validation/V1_11_MACRO_FORM_DEVELOPMENT.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 43
+    },
+    {
+      "file": "docs/validation/V1_12_COMPOSER_PLANNER.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 44
+    },
+    {
+      "file": "docs/validation/V1_12_REOPEN_CLOSURE.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 32
+    },
+    {
+      "file": "docs/validation/V1_13_SOUND_PALETTE.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 33
+    },
+    {
+      "file": "docs/validation/V1_14_PIANO_ENGINE.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 26
+    },
+    {
+      "file": "docs/validation/V1_2_DOGFOOD.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 36
+    },
+    {
+      "file": "docs/validation/V1_3_DOGFOOD.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 24
+    },
+    {
+      "file": "docs/validation/V1_4_DOGFOOD.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 33
+    },
+    {
+      "file": "docs/validation/V1_5_1_GRAPH_HARDENING.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 12
+    },
+    {
+      "file": "docs/validation/V1_5_1_GRAPH_HARDENING_CLOSURE.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 79
+    },
+    {
+      "file": "docs/validation/V1_5_DOGFOOD.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 25
+    },
+    {
+      "file": "docs/validation/V1_6_DRUM_SOUND_DESIGN.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 27
+    },
+    {
+      "file": "docs/validation/V1_7_BASS_ARTICULATION.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 31
+    },
+    {
+      "file": "docs/validation/V1_8_TOPLINE_PHRASE_GRAMMAR.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 52
+    },
+    {
+      "file": "docs/validation/V1_9_HARMONIC_COLOR_GRAMMAR.md",
+      "classification": "HISTORICAL_EVIDENCE_KEEP",
+      "lines": 61
+    }
+  ],
+  "examples": [
+    {
+      "file": "examples/basic/composition_brief.json",
+      "classification": "LEGACY_COMPATIBILITY_FIXTURE_LOCKED"
+    },
+    {
+      "file": "examples/basic/demo_ir.json",
+      "classification": "LEGACY_COMPATIBILITY_FIXTURE_LOCKED"
+    },
+    {
+      "file": "examples/basic/high_level_ir.json",
+      "classification": "LEGACY_COMPATIBILITY_FIXTURE_LOCKED"
+    },
+    {
+      "file": "examples/basic/seed_ir.json",
+      "classification": "LEGACY_COMPATIBILITY_FIXTURE_LOCKED"
+    },
+    {
+      "file": "examples/concert_piano_patch.json",
+      "classification": "CURRENT_DOMAIN_REFERENCE"
+    },
+    {
+      "file": "examples/electric_fm_piano_patch.json",
+      "classification": "CURRENT_DOMAIN_REFERENCE"
+    },
+    {
+      "file": "examples/electric_reed_piano_patch.json",
+      "classification": "CURRENT_DOMAIN_REFERENCE"
+    },
+    {
+      "file": "examples/electric_tine_piano_patch.json",
+      "classification": "CURRENT_DOMAIN_REFERENCE"
+    },
+    {
+      "file": "examples/upright_piano_patch.json",
+      "classification": "CURRENT_DOMAIN_REFERENCE"
+    },
+    {
+      "file": "examples/v1.16/after_the_rain_expressive_score_plan.json",
+      "classification": "CURRENT_V116_REFERENCE"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/agent_revision.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/analysis_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/analysis_after_repeat.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/analysis_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/base_ir.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/music_ir_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/music_ir_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/performance_ir_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/performance_ir_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/plan_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/plan_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/resolved_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/resolved_after_repeat.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/resolved_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/A_lyrical_piano/revision_comparison.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/agent_revision.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/analysis_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/analysis_after_repeat.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/analysis_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/base_ir.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/music_ir_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/music_ir_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/performance_ir_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/performance_ir_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/plan_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/plan_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/resolved_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/resolved_after_repeat.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/resolved_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/B_rhythm_centered/revision_comparison.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/agent_revision.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/analysis_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/analysis_after_repeat.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/analysis_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/base_ir.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/music_ir_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/music_ir_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/performance_ir_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/performance_ir_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/plan_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/plan_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/resolved_after.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/resolved_after_repeat.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/resolved_before.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/C_sparse_chamber_electronic/revision_comparison.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/final_closure_manifest.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    },
+    {
+      "file": "examples/v1.16/final_closure/final_closure_revision_summary.json",
+      "classification": "FINAL_CLOSURE_EVIDENCE_KEEP"
+    }
+  ],
+  "policy": {
+    "delete_rule": "No surface is removed in L0. Removal requires evidence in L1/L2 that it is not canonical, not repository-required, and not an intentional compatibility promise.",
+    "historical_rule": "Historical validation evidence and legacy byte-compatibility fixtures are retained unless proven redundant and externally reproduced elsewhere.",
+    "release_rule": "v1.16.0 remains CLOSED; legacy cleanup is post-release maintenance."
+  },
+  "next": "L1 Public Import / Compatibility Audit"
+}

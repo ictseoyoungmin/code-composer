@@ -1,0 +1,108 @@
+{
+  "status": "CLOSED",
+  "slice": "S3 Violin Performance Model",
+  "date": "2026-09-17",
+  "engine_version": "1.17.0",
+  "scope": {
+    "instrument": "conventional violin",
+    "tuning": [
+      "G3",
+      "D4",
+      "A4",
+      "E5"
+    ],
+    "midi_range": [
+      55,
+      105
+    ],
+    "monophonic_only": true,
+    "physical_realization_only": true,
+    "supported": [
+      "string",
+      "position",
+      "finger",
+      "finger alteration",
+      "shift evidence",
+      "string crossing evidence",
+      "bow grouping",
+      "bow direction",
+      "normalized bow usage",
+      "bow force/speed targets"
+    ],
+    "not_yet_supported": [
+      "double stops",
+      "harmonics",
+      "pizzicato/arco switching",
+      "spiccato/ricochet physical bounce",
+      "scordatura",
+      "MusicXML/engraving"
+    ]
+  },
+  "authority": {
+    "composition_changed_for_playability": false,
+    "authored_instrument_expression_preserved": true,
+    "automatic_vibrato_style_invention": false,
+    "strict_comfort_default": true
+  },
+  "source_delta_from_s2": {
+    "python_before": 118,
+    "python_after": 121,
+    "existing_python_byte_identical": "118/118",
+    "added": [
+      "app/violin_cli.py",
+      "performance/__init__.py",
+      "performance/violin.py"
+    ],
+    "changed_existing": [],
+    "removed": []
+  },
+  "dogfood": {
+    "events": 48,
+    "classification": "comfortable",
+    "max_transition_score": 0.960887,
+    "strings": [
+      "G",
+      "D",
+      "A"
+    ],
+    "max_position_band": 6,
+    "wav_sha256": "1f7ee597435fa35dce92f0d44e0def7d131eac83edeaa256ad49f6fb2ba7329b",
+    "shipped_inside_skill": false
+  },
+  "validation": {
+    "focused": "12/12 PASS",
+    "source_regression": "333/333 PASS",
+    "clean_installed_regression": "333/333 PASS",
+    "coverage_percent": 92.70990922844176,
+    "violin_module_coverage_percent": 91.88191881918819,
+    "violin_cli_coverage_percent": 89.28571428571429,
+    "compileall": "PASS",
+    "import_modules": 120,
+    "import_failures": 0,
+    "static_modules": 121,
+    "static_edges": 173,
+    "cycles": 0,
+    "self_check": "PASS",
+    "skill_validation": "PASS",
+    "console_entrypoints": 8,
+    "legacy_A_B_C_wav_byte_identity": {
+      "A": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+      "B": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+      "C": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f"
+    }
+  },
+  "packaging": {
+    "standalone_skill_files": 181,
+    "codex_plugin_files": 183,
+    "claude_plugin_files": 183,
+    "forbidden_build_cache_audio_midi_files": 0,
+    "codex_skill_subtree_exact": true,
+    "claude_skill_subtree_exact": true,
+    "clean_wheel_sha256": "165845e1e0bd2886974d5cea4f0548e256704c2839eda7c41371a87d8433d3ae",
+    "artifact_sha256": {
+      "standalone_skill": "0ce1fe569d776f74c6f689c484b9bb0be48796ef0f98974a834d8c30bd9bbdf6",
+      "codex_plugin": "5680f2889b155d79f7fc9d074034d31a4ea38ba7a028983562e5d76fc7aca2cc",
+      "claude_plugin": "a61f7ce50061b7d143484bc7c94d78490d09cac60158eecf440b9b227eee0d5f"
+    }
+  }
+}

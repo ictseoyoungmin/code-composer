@@ -1,0 +1,79 @@
+{
+  "release": "Code Composer v1.17.0 S19",
+  "slice": "S19 Track Pan / Stereo Integrity Hardening",
+  "status": "CLOSED",
+  "date": "2026-09-19",
+  "baseline": "S18 track-gain-semantics repository",
+  "scope": {
+    "legacy_track_pan_post_instrument_stereo_balance": true,
+    "legacy_track_pan_post_track_insert_fx": true,
+    "graph_route_pan_operator_unchanged": true,
+    "explicit_event_pan_semantics_unchanged": true,
+    "track_gain_semantics_unchanged": true,
+    "musical_content_changed": false
+  },
+  "validation": {
+    "focused_s19": "7/7 PASS",
+    "source_regression": "467/467 PASS (72 test files; 0 failures/timeouts)",
+    "clean_installed_regression": "467/467 PASS (72 test files; source-path injection disabled)",
+    "import_modules": 130,
+    "import_failures": 0,
+    "static_modules": 130,
+    "static_edges": 191,
+    "cycles": 0,
+    "public_entrypoints": 9,
+    "self_check": "PASS",
+    "compileall": "PASS",
+    "skill_validation": "PASS",
+    "isolated_skill_self_check": "PASS",
+    "isolated_skill_compileall": "PASS",
+    "forbidden_package_files": 0,
+    "embedded_skill_byte_exact": true,
+    "final_repository_zip_self_check": "PASS",
+    "final_repository_forbidden_files": 0
+  },
+  "dogfood": {
+    "song": "September Window, 5:42 PM",
+    "sample_rate_hz": 24000,
+    "duration_seconds": 69.54891666666667,
+    "same_ir_except_runtime_pan_semantics": true,
+    "global_stereo_width": {
+      "s18": 0.054928760851425326,
+      "s19": 0.06868703743866478
+    },
+    "open_field_stereo_width": {
+      "s18": 0.03560157104901993,
+      "s19": 0.06131446733987831
+    },
+    "last_bell_stereo_width": {
+      "s18": 0.058669421604094336,
+      "s19": 0.0779324353871771
+    },
+    "master_mono_correlation": 0.9979321513211932,
+    "difference_rms": 0.0023812930465960847
+  },
+  "compatibility": {
+    "zero_track_pan_unpanned_image_preserved": true,
+    "explicit_event_pan_preserved": true,
+    "graph_route_pan_preserved": true,
+    "s18_track_gain_preserved": true,
+    "legacy_nonzero_track_pan_byte_identity": false,
+    "legacy_nonzero_track_pan_change_reason": "intentional semantic correction from instrument/event fallback mono-collapse to mixer-level stereo balance"
+  },
+  "next": "Post-S19 full-song listening review before opening S20.",
+  "packaging": {
+    "standalone_skill_files": 210,
+    "codex_plugin_files": 212,
+    "claude_plugin_files": 212,
+    "forbidden_files": 0,
+    "codex_skill_exact": true,
+    "claude_skill_exact": true,
+    "artifact_sha256": {
+      "standalone": "0f311c0ea5cf189c39a20965124d11617dbe5bb3fdc6c7968e90ee5b89d3e8e3",
+      "codex": "8150fc75b7dc7c45c938c2e9f76ab420d4d3497a6d0685dfe8a7f29832c1c70d",
+      "claude": "d862bb27c02a0c78a1c9e50f0cee311595448dd37d377721a1c4706e9fe882e7",
+      "wheel": "1f436921238b66472a6b3910b58172aabe56c3580b5cbc2eeda00db5be6b89a1",
+      "dogfood": "8845f376707ad4493091ebc069850ba7a3145d1e788e23994c8bbbfcb55ffbfd"
+    }
+  }
+}

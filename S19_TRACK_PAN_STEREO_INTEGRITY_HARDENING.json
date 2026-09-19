@@ -1,0 +1,111 @@
+{
+  "slice": "S19 Track Pan / Stereo Integrity Hardening",
+  "status": "CLOSED",
+  "date": "2026-09-19",
+  "engine_version": "1.17.0",
+  "baseline": "S18 track-gain-semantics repository",
+  "scope": {
+    "legacy_track_pan_post_instrument_stereo_balance": true,
+    "legacy_track_pan_post_track_insert_fx": true,
+    "graph_route_pan_operator_unchanged": true,
+    "explicit_event_pan_semantics_unchanged": true,
+    "track_gain_semantics_unchanged": true,
+    "musical_content_changed": false
+  },
+  "focused_regression": "7/7 PASS",
+  "source_regression": "467/467 PASS (72 test files)",
+  "clean_installed_regression": "467/467 PASS (72 test files; source-path injection disabled)",
+  "dogfood": {
+    "song": "September Window, 5:42 PM",
+    "sample_rate_hz": 24000,
+    "duration_seconds": 69.54891666666667,
+    "matched_condition": {
+      "same_ir": true,
+      "notes_velocity_gain_fx_pan_values_identical": true,
+      "only_runtime_pan_semantics_changed": true
+    },
+    "global": {
+      "s18": {
+        "peak": 0.34776667294990127,
+        "rms": 0.026721480492643866,
+        "stereo_width": 0.054928760851425326,
+        "clipped_sample_ratio": 0.0
+      },
+      "s19": {
+        "peak": 0.347766681840433,
+        "rms": 0.02714455245659192,
+        "stereo_width": 0.06868703743866478,
+        "clipped_sample_ratio": 0.0
+      }
+    },
+    "section_stereo_width": {
+      "window_light": {
+        "s18": 0.09913467683596187,
+        "s19": 0.10085298123045548
+      },
+      "hallway": {
+        "s18": 0.07870633782077387,
+        "s19": 0.07894030816160467
+      },
+      "stairwell": {
+        "s18": 0.05609387332245944,
+        "s19": 0.0607276635644306
+      },
+      "open_field": {
+        "s18": 0.03560157104901993,
+        "s19": 0.06131446733987831
+      },
+      "last_bell": {
+        "s18": 0.058669421604094336,
+        "s19": 0.0779324353871771
+      }
+    },
+    "open_field_width_ratio": 1.7222404948212593,
+    "diagnostic_excerpt_no_fx": {
+      "lead": {
+        "pan": 0.12,
+        "events": 25,
+        "current": {
+          "left_rms": 0.026977550957697362,
+          "right_rms": 0.03261025723045,
+          "lr_corr": 0.9999999999999761,
+          "mid_rms": 0.04213494324588228,
+          "side_rms": 0.0039829248018953935,
+          "side_mid_ratio": 0.09452783117928212
+        },
+        "zero_pan": {
+          "left_rms": 0.043019976562631235,
+          "right_rms": 0.04301997643567107,
+          "lr_corr": 0.9356992977602068,
+          "mid_rms": 0.059853439872930854,
+          "side_rms": 0.010908826304992021,
+          "side_mid_ratio": 0.18225897004669261
+        }
+      },
+      "pad": {
+        "pan": -0.14,
+        "events": 30,
+        "current": {
+          "left_rms": 0.15026994067468216,
+          "right_rms": 0.12052113649395238,
+          "lr_corr": 0.9999916495338318,
+          "mid_rms": 0.1914778120416158,
+          "side_rms": 0.021039175552336566,
+          "side_mid_ratio": 0.10987787737914986
+        },
+        "zero_pan": {
+          "left_rms": 0.1516994045276528,
+          "right_rms": 0.13074638740945138,
+          "lr_corr": 0.9782185550486153,
+          "mid_rms": 0.19863483162814627,
+          "side_rms": 0.02552510173779459,
+          "side_mid_ratio": 0.12850264743888815
+        }
+      }
+    },
+    "source_regression": "467/467 PASS (72 test files)",
+    "clean_installed_regression": "467/467 PASS (159 + 201 + 107 across the same 72 test files; source-path injection disabled)",
+    "master_mono_correlation": 0.9979321513211932,
+    "master_difference_rms": 0.0023812930465960847
+  }
+}

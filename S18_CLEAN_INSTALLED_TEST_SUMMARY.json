@@ -1,0 +1,364 @@
+{
+  "summary": {
+    "test_files": 71,
+    "tests_passed": 460,
+    "failed_files": []
+  },
+  "files": [
+    {
+      "file": "test_admittance_fit_cli.py",
+      "exit_code": 0,
+      "passed": 2
+    },
+    {
+      "file": "test_arrangement.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_automation.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_bass_articulation.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_bowed_string_engine.py",
+      "exit_code": 0,
+      "passed": 4
+    },
+    {
+      "file": "test_bowed_waveguide_admittance.py",
+      "exit_code": 0,
+      "passed": 5
+    },
+    {
+      "file": "test_bowed_waveguide_continuous.py",
+      "exit_code": 0,
+      "passed": 4
+    },
+    {
+      "file": "test_bowed_waveguide_coupling.py",
+      "exit_code": 0,
+      "passed": 6
+    },
+    {
+      "file": "test_bowed_waveguide_engine.py",
+      "exit_code": 0,
+      "passed": 6
+    },
+    {
+      "file": "test_bowed_waveguide_expression.py",
+      "exit_code": 0,
+      "passed": 6
+    },
+    {
+      "file": "test_bridge_admittance_fit.py",
+      "exit_code": 0,
+      "passed": 7
+    },
+    {
+      "file": "test_composer_cli.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_composer_planner.py",
+      "exit_code": 0,
+      "passed": 6
+    },
+    {
+      "file": "test_constraint_integrity.py",
+      "exit_code": 0,
+      "passed": 15
+    },
+    {
+      "file": "test_contract_parity_h2.py",
+      "exit_code": 0,
+      "passed": 16
+    },
+    {
+      "file": "test_drum_sound.py",
+      "exit_code": 0,
+      "passed": 2
+    },
+    {
+      "file": "test_exchange_package.py",
+      "exit_code": 0,
+      "passed": 15
+    },
+    {
+      "file": "test_expressive_contracts.py",
+      "exit_code": 0,
+      "passed": 16
+    },
+    {
+      "file": "test_expressive_qa.py",
+      "exit_code": 0,
+      "passed": 8
+    },
+    {
+      "file": "test_external_delivery.py",
+      "exit_code": 0,
+      "passed": 10
+    },
+    {
+      "file": "test_factory_presets.py",
+      "exit_code": 0,
+      "passed": 11
+    },
+    {
+      "file": "test_form_development.py",
+      "exit_code": 0,
+      "passed": 3
+    },
+    {
+      "file": "test_graph_boundaries.py",
+      "exit_code": 0,
+      "passed": 8
+    },
+    {
+      "file": "test_h4_revision_surface.py",
+      "exit_code": 0,
+      "passed": 4
+    },
+    {
+      "file": "test_h5_package_hygiene.py",
+      "exit_code": 0,
+      "passed": 6
+    },
+    {
+      "file": "test_harmonic_grammar.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_instrument.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_instrument_engine_registry.py",
+      "exit_code": 0,
+      "passed": 5
+    },
+    {
+      "file": "test_legacy_cleanup_l2.py",
+      "exit_code": 0,
+      "passed": 15
+    },
+    {
+      "file": "test_legacy_cleanup_l3.py",
+      "exit_code": 0,
+      "passed": 5
+    },
+    {
+      "file": "test_legacy_cleanup_l4.py",
+      "exit_code": 0,
+      "passed": 7
+    },
+    {
+      "file": "test_legacy_cleanup_l5.py",
+      "exit_code": 0,
+      "passed": 5
+    },
+    {
+      "file": "test_midi_export.py",
+      "exit_code": 0,
+      "passed": 16
+    },
+    {
+      "file": "test_mixer.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_motif_development.py",
+      "exit_code": 0,
+      "passed": 21
+    },
+    {
+      "file": "test_motif_semantics_h3.py",
+      "exit_code": 0,
+      "passed": 6
+    },
+    {
+      "file": "test_musical_transitions.py",
+      "exit_code": 0,
+      "passed": 8
+    },
+    {
+      "file": "test_orchestration_budget.py",
+      "exit_code": 0,
+      "passed": 7
+    },
+    {
+      "file": "test_orchestration_grammar.py",
+      "exit_code": 0,
+      "passed": 5
+    },
+    {
+      "file": "test_phrase.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_phrase_expression.py",
+      "exit_code": 0,
+      "passed": 8
+    },
+    {
+      "file": "test_piano_design.py",
+      "exit_code": 0,
+      "passed": 8
+    },
+    {
+      "file": "test_piano_engine.py",
+      "exit_code": 0,
+      "passed": 8
+    },
+    {
+      "file": "test_piano_family.py",
+      "exit_code": 0,
+      "passed": 6
+    },
+    {
+      "file": "test_piano_fidelity.py",
+      "exit_code": 0,
+      "passed": 2
+    },
+    {
+      "file": "test_piano_release_tail.py",
+      "exit_code": 0,
+      "passed": 20
+    },
+    {
+      "file": "test_pipeline_service.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_pipeline_validation.py",
+      "exit_code": 0,
+      "passed": 2
+    },
+    {
+      "file": "test_reference_hygiene.py",
+      "exit_code": 0,
+      "passed": 6
+    },
+    {
+      "file": "test_register_voicing.py",
+      "exit_code": 0,
+      "passed": 9
+    },
+    {
+      "file": "test_resolve.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_rhythm.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_s11_phrase_expression_modeling.py",
+      "exit_code": 0,
+      "passed": 6
+    },
+    {
+      "file": "test_s12_violin_realism_hardening.py",
+      "exit_code": 0,
+      "passed": 7
+    },
+    {
+      "file": "test_s13_articulation_expansion.py",
+      "exit_code": 0,
+      "passed": 7
+    },
+    {
+      "file": "test_s15_ensemble_interaction.py",
+      "exit_code": 0,
+      "passed": 15
+    },
+    {
+      "file": "test_s16_bass_acoustic_fidelity.py",
+      "exit_code": 0,
+      "passed": 8
+    },
+    {
+      "file": "test_s17_percussion_acoustic_fidelity.py",
+      "exit_code": 0,
+      "passed": 10
+    },
+    {
+      "file": "test_s18_track_gain_semantics.py",
+      "exit_code": 0,
+      "passed": 7
+    },
+    {
+      "file": "test_section_analysis.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_skill_repository_s0.py",
+      "exit_code": 0,
+      "passed": 8
+    },
+    {
+      "file": "test_sound_palette.py",
+      "exit_code": 0,
+      "passed": 5
+    },
+    {
+      "file": "test_structured_cli_surface.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_theory.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_topline.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_topline_grammar.py",
+      "exit_code": 0,
+      "passed": 1
+    },
+    {
+      "file": "test_v116_final_closure.py",
+      "exit_code": 0,
+      "passed": 6
+    },
+    {
+      "file": "test_validation_closure.py",
+      "exit_code": 0,
+      "passed": 12
+    },
+    {
+      "file": "test_violin_double_stop.py",
+      "exit_code": 0,
+      "passed": 11
+    },
+    {
+      "file": "test_violin_performance.py",
+      "exit_code": 0,
+      "passed": 12
+    },
+    {
+      "file": "test_whistle_timbre.py",
+      "exit_code": 0,
+      "passed": 1
+    }
+  ]
+}

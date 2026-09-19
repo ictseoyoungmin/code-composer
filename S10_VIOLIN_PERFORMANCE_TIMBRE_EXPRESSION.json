@@ -1,0 +1,68 @@
+{
+  "slice": "S10 Violin Performance-to-Timbre Expression Hardening",
+  "status": "CLOSED",
+  "date": "2026-09-18",
+  "engine_version": "1.17.0",
+  "preset": "bowed.violin.modeled_expression@1.0.0",
+  "authority": {
+    "composition_changed": false,
+    "deterministic": true,
+    "s9_disabled_byte_identity_required": true
+  },
+  "controls": [
+    "bow pressure drift",
+    "bow speed drift",
+    "bow contact-position drift",
+    "event microvariation",
+    "attack transient variation",
+    "bow-change transient variation",
+    "vibrato excitation/amplitude coupling"
+  ],
+  "research_references": [
+    "Schoonderwaldt 2009 DOI 10.3813/AAA.918221",
+    "Mellody & Wakefield 2000 DOI 10.1121/1.428326",
+    "Guettler 2002 Acta Acustica 88(6)"
+  ],
+  "validation": {
+    "focused": "6/6 PASS",
+    "source_regression": "380/380 PASS",
+    "clean_installed_regression": "380/380 PASS",
+    "self_check": "PASS",
+    "skill_validation": "PASS",
+    "compileall": "PASS",
+    "clean_wheel_sha256": "9c99cc0af8167221bd5c98de6ce8d2b3de1d895e76fbcf86be4b5fb2c4036bd9",
+    "import_modules": 126,
+    "import_failures": 0,
+    "static_modules": 126,
+    "static_edges": 182,
+    "cycles": 0
+  },
+  "packaging": {
+    "standalone_skill_files": 198,
+    "codex_plugin_files": 200,
+    "claude_plugin_files": 200,
+    "artifact_sha256": {
+      "standalone": "8d97d511ec938a55c47cf8c3ffa9473bb452b253340517ccc23c4f2a9614d3b4",
+      "codex": "41230b2f167858666671ad45eead3cd7d1af9a4da2d7857f04eeace37d2f22b4",
+      "claude": "8c9b0b6b68f071b56dd172d18249c4ba5fee5ac418a3f4b9d00d5115ac71fd4d"
+    }
+  },
+  "compatibility": {
+    "hardening_disabled_s9_note_byte_identical": true,
+    "hardening_disabled_s9_realized_track_byte_identical": true,
+    "existing_s5_s9_presets_preserved": true
+  },
+  "dogfood": {
+    "phrase": "fresh matched D natural minor 2-bar validation phrase",
+    "events": 8,
+    "bpm": 84,
+    "sample_rate_hz": 22050,
+    "performance_realization_equal": true,
+    "clipping_s9": 0.0,
+    "clipping_s10": 0.0,
+    "stft_log_spectrum_correlation_left": 0.9868219310073294,
+    "spectral_centroid_trajectory_correlation_left": 0.8216055706702423,
+    "s9_sha256": "70473368c8c0cff5fd47fdd42db833d159b124db4895f0b1d05e04a9074454a5",
+    "s10_sha256": "a542763fbbc3e4ae46400972a5697f2267b221ee83fe28cfdd13f184eeb2fd64"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "standalone_files": 210,
+  "codex_files": 212,
+  "claude_files": 212,
+  "forbidden": {
+    "standalone": [],
+    "codex": [],
+    "claude": []
+  },
+  "codex_skill_exact": true,
+  "claude_skill_exact": true,
+  "skill_files": 210,
+  "artifact_sha256": {
+    "standalone": "b1e62d0993424b241a145eecb26386def4822c1b637791b55552048d8dd68bcf",
+    "codex": "0ad81180bbb693c71a3c7c80f22f228c992bdd59c1bb8dab562dce7b3d9d5d27",
+    "claude": "b02c44a5d670d9217876ef91c2e0aad0c4dd6bae9892403481616fc4af1f8959",
+    "wheel": "725b32d0c0e5f0c4b6d892d73b4a43fba22dac8c133acd5b94a08c78299e1dac",
+    "dogfood": "d689c913f43020026398fe196def0c738e91a60d1c0c5f7ddbaa0e1dc68ff13d"
+  }
+}

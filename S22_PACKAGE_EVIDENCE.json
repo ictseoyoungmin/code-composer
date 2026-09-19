@@ -1,0 +1,17 @@
+{
+  "slice": "S22",
+  "standalone_skill_files": 212,
+  "codex_plugin_files": 214,
+  "claude_plugin_files": 214,
+  "codex_embedded_skill_byte_exact": true,
+  "claude_embedded_skill_byte_exact": true,
+  "forbidden_artifacts": 0,
+  "artifacts": {
+    "code-composer-skill-v1.17.0-s22.zip": "933185bf5d451eaa23f94ed3fbdeb43b265600fb7f8151b1968eb5e8db2adaab",
+    "code-composer-codex-plugin-v1.17.0-s22.zip": "c2a10df0671679c75af0ddc8876adfff05dd528ae8a73b7d2ca7950614193d50",
+    "code-composer-claude-plugin-v1.17.0-s22.zip": "de3b9a17cb0ef27b19c8a8cd7eb44bb53abbca6e24dbf77211e82e31b596f8a4",
+    "S22_DRUM_ACOUSTIC_VOICING_POLISH_DOGFOOD.zip": "7f3dc2ea7981f4efd9631c0ff90f4b437b12bb2e68e4338bf4a55120c0bf1c1a",
+    "S22_DRUM_ACOUSTIC_VOICING_TIMBRE_POLISH_VALIDATION.zip": "6efa294e0be542f1cfa882f7e4fdbf3261c48e74cf72ccf212625d7bdd27084f",
+    "code_composer-1.17.0-py3-none-any.whl": "d5f625eddc3418999eac5fdf3467fed8fee7f24dab74518fc23f36a2aeb962cb"
+  }
+}

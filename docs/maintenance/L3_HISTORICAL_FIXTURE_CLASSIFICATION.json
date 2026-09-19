@@ -1,0 +1,1102 @@
+{
+  "status": "L3_HISTORICAL_FIXTURE_CLASSIFICATION_CLOSED",
+  "release_baseline": "1.16.0",
+  "release_reopened": false,
+  "scope_roots": [
+    "README.md",
+    "STRUCTURE.md",
+    "V1.16_DESIGN_STATUS.json",
+    "docs/",
+    "examples/",
+    "schemas/",
+    "tests/fixtures/",
+    "src/code_composer/reference/"
+  ],
+  "classification_definitions": {
+    "CURRENT": "Current repository/release navigation or authority.",
+    "ACTIVE_DOMAIN": "Live supported domain contract or executable authoring reference.",
+    "HISTORICAL_EVIDENCE": "Closed design, validation, dogfood, release, or maintenance evidence retained for provenance.",
+    "COMPATIBILITY_FIXTURE": "Stable regression fixture; may intentionally preserve older metadata/shape.",
+    "PACKAGE_MIRROR": "Wheel-shipped synchronized copy of a top-level public reference.",
+    "L4_CANDIDATE": "Retained in L3 but explicitly eligible for separate L4 deletion review."
+  },
+  "summary": {
+    "files_classified": 163,
+    "counts": {
+      "ACTIVE_DOMAIN": 17,
+      "COMPATIBILITY_FIXTURE": 15,
+      "CURRENT": 7,
+      "HISTORICAL_EVIDENCE": 97,
+      "L4_CANDIDATE": 12,
+      "PACKAGE_MIRROR": 15
+    },
+    "l4_candidate_count": 12,
+    "l4_candidate_bytes": 37197041,
+    "bytes_excluding_self_manifest": {
+      "ACTIVE_DOMAIN": 124975,
+      "COMPATIBILITY_FIXTURE": 146148,
+      "CURRENT": 29958,
+      "HISTORICAL_EVIDENCE": 38113965,
+      "L4_CANDIDATE": 37197041,
+      "PACKAGE_MIRROR": 163242
+    },
+    "self_manifest_size_excluded": true
+  },
+  "l4_policy": "L4 may review only paths classified L4_CANDIDATE unless L3 is formally reopened.",
+  "entries": [
+    {
+      "path": "README.md",
+      "classification": "CURRENT",
+      "bytes": 13887,
+      "sha256": "6a86829c326a2b799ed1ef18ba8847685b6f5787c3d23b4a242ce624614524e0"
+    },
+    {
+      "path": "STRUCTURE.md",
+      "classification": "CURRENT",
+      "bytes": 5340,
+      "sha256": "6f0f34c661323c63111180b001c77c7946dea3b049e1a1eccf1e4b76973b4ee0"
+    },
+    {
+      "path": "V1.16_DESIGN_STATUS.json",
+      "classification": "CURRENT",
+      "bytes": 1237,
+      "sha256": "bebfc993f4de982c6a062a3992d2c73476f1884fe3b9c4aec8340156bb59235c"
+    },
+    {
+      "path": "docs/BUILD.md",
+      "classification": "CURRENT",
+      "bytes": 1213,
+      "sha256": "3a44baf1dd2e4b5ac8f056cf5d1499213b086c3ee656a866d23b5f1af2977d98"
+    },
+    {
+      "path": "docs/INDEX.md",
+      "classification": "CURRENT",
+      "bytes": 3135,
+      "sha256": "8d4f5857acfb4797df9d9fe14b1389ef851f6fcc6fd2ee9488eab5728d8d3df2"
+    },
+    {
+      "path": "docs/architecture/ARCHITECTURE.md",
+      "classification": "CURRENT",
+      "bytes": 2757,
+      "sha256": "54e313c3676da2104819b6fd9675a9a1115345667afbdbeb4805f279f8d2037f"
+    },
+    {
+      "path": "docs/architecture/COMPOSER_AGENT_CONTRACT.md",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 1890,
+      "sha256": "d7b256cffcbd1ffe7e8306b639cfe252c22ecddbc93d30a0d12ae299f5dde457"
+    },
+    {
+      "path": "docs/architecture/EXPRESSIVE_COMPOSITION_V116.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 11762,
+      "sha256": "37af32a911665c496beb1dc5c17dfb05192f75ae291508cf3047fbab02f4b7ec"
+    },
+    {
+      "path": "docs/architecture/MOTIF_DEVELOPMENT_V116.md",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 3138,
+      "sha256": "1483a6514111f5d3e64ef43c6d2c3b50eee0399f6044eb9692044f28ecee6394"
+    },
+    {
+      "path": "docs/architecture/PIANO_AGENT_SELECTION.md",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 2296,
+      "sha256": "04ebc1fb36b938a8125074e683a56905e9ab377fb084339acd918b09965f5fba"
+    },
+    {
+      "path": "docs/architecture/PIANO_ENGINE.md",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 1755,
+      "sha256": "881b718397477e678498e6491ff95fbd2631682dba6a4c4e5e75acc6c149c484"
+    },
+    {
+      "path": "docs/architecture/PIANO_FAMILY_ARCHITECTURE.md",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 2121,
+      "sha256": "595634abae1d6a83bd0bbdaeb26c7615d70b9c10dd7a47f717b2ae7c3cfcf79c"
+    },
+    {
+      "path": "docs/architecture/PIANO_PARAMETER_MODEL.md",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 2138,
+      "sha256": "08975a633bf8c66abbd6ef463934cac3a84b49ef23064eb8fbed475c8c1b6eb3"
+    },
+    {
+      "path": "docs/architecture/REFERENCE_SURFACE.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 1999,
+      "sha256": "8cfd3c4a7c91388b0224b5ec95c70cbec1f0b5ca9a136882465092d4a4468f70"
+    },
+    {
+      "path": "docs/architecture/SOUND_PALETTE_CONTRACT.md",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 922,
+      "sha256": "9c6cc201a80a6aabad214486b4830631c2c210a973693a2256147da47c7afade"
+    },
+    {
+      "path": "docs/architecture/V1_5_TIMBRE.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 1014,
+      "sha256": "6811cb889503ea00a7ac3b0c9ee481ac5755192696312ec12904a20530f28895"
+    },
+    {
+      "path": "docs/maintenance/L0_LEGACY_SURFACE_INVENTORY.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 4623,
+      "sha256": "61a4b0ffd187f7d745c8620adaf93f16d9d45f0bf2b4a1d7f52d2037dd508e59"
+    },
+    {
+      "path": "docs/maintenance/L1_PUBLIC_IMPORT_COMPATIBILITY_AUDIT.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 20879,
+      "sha256": "d648f5f6bda9e4d3983329552d45ead9cf7c16b8e3afa4d20754d35bed21cb59"
+    },
+    {
+      "path": "docs/maintenance/L1_PUBLIC_IMPORT_COMPATIBILITY_AUDIT.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 7055,
+      "sha256": "2b77aa609f0f2b444f849bc27fcd175f1ee35e4c8848e74b0b171651bcd76d67"
+    },
+    {
+      "path": "docs/maintenance/L2_SUPERSEDED_LEGACY_REMOVAL.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 2378,
+      "sha256": "17644a7f49bd5e28f29d4877b2d9c6c82be7b6c200cbe09845c77dd100927f4b"
+    },
+    {
+      "path": "docs/maintenance/L2_SUPERSEDED_LEGACY_REMOVAL.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 5720,
+      "sha256": "080ece8d7c947b785b1414f90f86b175227a3029246151a91db8edf682062875"
+    },
+    {
+      "path": "docs/maintenance/L3_HISTORICAL_FIXTURE_CLASSIFICATION.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": null,
+      "sha256": null,
+      "self_referential_metadata_omitted": true
+    },
+    {
+      "path": "docs/maintenance/L3_HISTORICAL_FIXTURE_CLASSIFICATION.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 4863,
+      "sha256": "8fdf5ff34164a236c58869b8e6f6844defebe85d4c631b223417501134b8f0f1"
+    },
+    {
+      "path": "docs/maintenance/LEGACY_SURFACE_INVENTORY.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 38021,
+      "sha256": "31e2c14291e3d5322ef81ac54510fbc0fe0c7e63851c8406438e0695f65e4224"
+    },
+    {
+      "path": "docs/roadmap/SLICES.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 1540,
+      "sha256": "d9302f38f76cbfe4b5d388de526cb1a9fbfdbc75f1cea84f2fa45be2781a9ede"
+    },
+    {
+      "path": "docs/roadmap/V116_EXPRESSIVE_SLICES.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 5555,
+      "sha256": "f0dd8b5843f5a71a748e747efab2029dcb956710654df80761ff4b765f6be905"
+    },
+    {
+      "path": "docs/validation/E0_CONTRACT_FOUNDATION.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 2278,
+      "sha256": "8c2feb7ba158efaa548e17508f72a5dd72fdd25b6114c1d54fbde6d5c64fa953"
+    },
+    {
+      "path": "docs/validation/E1_PHRASE_EXPRESSION.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 2298,
+      "sha256": "0bfb999600b2c4efab5ec626517aaa9e80362e092bb0c51e56ad32ebd7142b10"
+    },
+    {
+      "path": "docs/validation/E2_MOTIF_DEVELOPMENT.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 3136,
+      "sha256": "d5167b1d14d1de6de58e1fe0f952be28484188d1281cbfe59072a24728e74dee"
+    },
+    {
+      "path": "docs/validation/E3_REGISTER_VOICING.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 3195,
+      "sha256": "5d7c9280ebdd99054da972165ea19289de2adef64f4a8c76ae8d7ab0522d6ddf"
+    },
+    {
+      "path": "docs/validation/E4_ORCHESTRATION_BUDGET.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 2660,
+      "sha256": "55625d0efebcc5fe8d215108d5f23f704a667580cf68a05dea28a1d2ce63df4c"
+    },
+    {
+      "path": "docs/validation/E5_MUSICAL_TRANSITIONS.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 2931,
+      "sha256": "4fcc4411e085ebc905e8a307f49319084ff02eff3ec201ac454af893ef104b4b"
+    },
+    {
+      "path": "docs/validation/E6_EXPRESSIVE_QA.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 2241,
+      "sha256": "b8e31d013e8a441567add46cb842a5733aec513c77c55d7cd2e0c905020022f0"
+    },
+    {
+      "path": "docs/validation/H1_E6_QA_CORRECTNESS.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 2153,
+      "sha256": "261564401bb7fad8de532c4439433a99f6a83b69d77031c12d8c4577f1092af9"
+    },
+    {
+      "path": "docs/validation/H2_CONTRACT_PARITY.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 2985,
+      "sha256": "8234201a6a7e0e339347a7ae8c6049c8dac9ca2275184e86a26e32ff455a4041"
+    },
+    {
+      "path": "docs/validation/H3_E2_SEMANTIC_CLOSURE.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 2800,
+      "sha256": "2a6063173fe4a88eb530938c82408d50d86bd0f1d180755567939b20a84eb607"
+    },
+    {
+      "path": "docs/validation/H4_REVISION_SURFACE_CLEANUP.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 2324,
+      "sha256": "97cbbe2166c503ee3a29142c0ca820a9febf3183970af25d63274177717dccdf"
+    },
+    {
+      "path": "docs/validation/H5_REFERENCE_PACKAGE_HYGIENE.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 3830,
+      "sha256": "5295b67a7b4d1c4b8d781af41080827c98ae8d69331fc67ed21693480f2a952f"
+    },
+    {
+      "path": "docs/validation/R1_CONSTRAINT_INTEGRITY.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 1784,
+      "sha256": "318e41ad7c975e43cf6304ffeb001e4dd39b3a15cf0fbe9492222bcf6e66d45f"
+    },
+    {
+      "path": "docs/validation/R2_VALIDATION_CLOSURE.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 1949,
+      "sha256": "2870a2f82fccef2c83be00b4deec44b8961251835a4dc0bb0362b922dbb7e745"
+    },
+    {
+      "path": "docs/validation/R3_CANONICAL_SURFACE_CLEANUP.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 1862,
+      "sha256": "1421e8123c9f36458eeba76472373d80eb01f934324545f0f7a4f6a988cc73cc"
+    },
+    {
+      "path": "docs/validation/R4_REFERENCE_HYGIENE.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 2034,
+      "sha256": "d31e55d0d2d657c0c699806d66fbea7053cc4d79a5871f9317e822a6c1b93c8b"
+    },
+    {
+      "path": "docs/validation/R5R1_PIANO_FIDELITY_CORRECTION.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 1951,
+      "sha256": "f6f8e459cbc9801749e037983dd9cb03aa596f37d380c4d26e0ca973c729908e"
+    },
+    {
+      "path": "docs/validation/R5_PIANO_FAMILY_HARDENING.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 2373,
+      "sha256": "e027cb1090554bfd8932fa9dd73221329e3ed4c4ad1f4d8f1393deb80e23c246"
+    },
+    {
+      "path": "docs/validation/V116_FINAL_CLOSURE.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 5278,
+      "sha256": "ab0570b66597be93d3f586938458305cbaf50c5e3d7e84ebb6c8d0daa6bccd7c"
+    },
+    {
+      "path": "docs/validation/V1_10_ORCHESTRATION_GRAMMAR.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 694,
+      "sha256": "75496cf2897225c06950f17ad0f0dd5c51a961be3fdbd6002e352e7c7cfe6ec7"
+    },
+    {
+      "path": "docs/validation/V1_11_MACRO_FORM_DEVELOPMENT.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 989,
+      "sha256": "8aa2afdf967f516119cd5d1dd7db3a56c7d643411545200956ac615e6cc376e1"
+    },
+    {
+      "path": "docs/validation/V1_12_COMPOSER_PLANNER.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 1094,
+      "sha256": "49a5d4943dacbc34d23be6ab4f1625dbbbe3eb9e6379cf8906d9fd24ff001a0b"
+    },
+    {
+      "path": "docs/validation/V1_12_REOPEN_CLOSURE.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 965,
+      "sha256": "49a1507e6c50393868d9d38f3787e08249f2f2191b8e60ae37a3ed340c3cf4e6"
+    },
+    {
+      "path": "docs/validation/V1_13_SOUND_PALETTE.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 1122,
+      "sha256": "6144f58144fd08d8725b9500d4683fd0b3bb3c05e66822213385bf3950d16069"
+    },
+    {
+      "path": "docs/validation/V1_14_PIANO_ENGINE.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 805,
+      "sha256": "7aa0a619da20f7ef7806f05f56f0adf9fe108c91fd050990410558865e971634"
+    },
+    {
+      "path": "docs/validation/V1_2_DOGFOOD.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 1083,
+      "sha256": "58d7555ac6dc54240e4304de05f8f1dd9689449f1756527cda6cc2d6815b4892"
+    },
+    {
+      "path": "docs/validation/V1_3_DOGFOOD.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 695,
+      "sha256": "d42b33e6355adfd2980880f4f221edeeb4e4268f5c07592f33368c661ee98e8a"
+    },
+    {
+      "path": "docs/validation/V1_4_DOGFOOD.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 867,
+      "sha256": "768c1ffcb003c31666e9866d7d6b5af4275b1cde62a16edfddd52b4e38a57cff"
+    },
+    {
+      "path": "docs/validation/V1_5_1_GRAPH_HARDENING.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 663,
+      "sha256": "59d3846d61dd702f506c5c63db75b869d91915a69803636f740dd03cfbef5e8d"
+    },
+    {
+      "path": "docs/validation/V1_5_1_GRAPH_HARDENING_CLOSURE.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 2121,
+      "sha256": "7e6f8d86d9b805bc245d36f2d75ee0696bdbafdb72b634c3a3230fab779d8507"
+    },
+    {
+      "path": "docs/validation/V1_5_DOGFOOD.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 765,
+      "sha256": "ec067386d84442a5d0b1260fe70677a57fe8cfd9799a6e0f4c45439b755cd2d3"
+    },
+    {
+      "path": "docs/validation/V1_6_DRUM_SOUND_DESIGN.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 890,
+      "sha256": "458d1c7f3930756f3589c093c371018593a8e6aa613bdcd30def2cf987fbe8c6"
+    },
+    {
+      "path": "docs/validation/V1_7_BASS_ARTICULATION.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 729,
+      "sha256": "91c0c40a21f5204108c2d73ade15575d7ec0a4372b766b4613de8dcc9739332a"
+    },
+    {
+      "path": "docs/validation/V1_8_TOPLINE_PHRASE_GRAMMAR.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 1096,
+      "sha256": "81e69fb105657885f47345a9bf887a6bba7ce3053ffbf055cadcd16ebc55af36"
+    },
+    {
+      "path": "docs/validation/V1_9_HARMONIC_COLOR_GRAMMAR.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 1192,
+      "sha256": "3984f6b341a4e4243cfa122303498ac1cd5ad1c3b444b7d355727624f0d9f3fa"
+    },
+    {
+      "path": "examples/README.md",
+      "classification": "CURRENT",
+      "bytes": 2389,
+      "sha256": "f3ddd3c2113f901e61eec1d896816760287288ca4f95ad740ca35274c7d0addb"
+    },
+    {
+      "path": "examples/basic/composition_brief.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 4780,
+      "sha256": "572d793488541ad9db2176464c17b24f7b68bdf1f173c87778f099ee029c169f"
+    },
+    {
+      "path": "examples/basic/demo_ir.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 8235,
+      "sha256": "9e8c5f7c58f63cd63338767e13e1a7c7328fb7a61b88d8f309e9f8a0eeb4fd2c"
+    },
+    {
+      "path": "examples/basic/high_level_ir.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 24400,
+      "sha256": "05ffa2e7b61f3fd6c2b3b58e6ccdce1fca65e0c84fb536686e28d39e9f152972"
+    },
+    {
+      "path": "examples/basic/seed_ir.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 15023,
+      "sha256": "d2cc4ac0b4bcaf6a19f3d03bda114a65e4a621be771ba1bc5ea9035233938c69"
+    },
+    {
+      "path": "examples/concert_piano_patch.json",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 491,
+      "sha256": "1efe951234e74668a20180c9936f3a1bda5209d3ce02273c1dbb44dd4a5c3420"
+    },
+    {
+      "path": "examples/electric_fm_piano_patch.json",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 427,
+      "sha256": "ae1c3260b97eab6af60a3f4c79dcbc897a89e063694a7a97ba2568ccdb573b7c"
+    },
+    {
+      "path": "examples/electric_reed_piano_patch.json",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 413,
+      "sha256": "c23f398766b3b7d3f16f1983c5656aeed8a9cb5869b4c463a7f1f5b6a724ad5a"
+    },
+    {
+      "path": "examples/electric_tine_piano_patch.json",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 449,
+      "sha256": "30af19de1688ef11de42c4d8734f84b6639207eb4dac328e357b63365ab8756a"
+    },
+    {
+      "path": "examples/upright_piano_patch.json",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 387,
+      "sha256": "aec9e61e2dafa5f752d076c5ae766e682be652e19fa493be662b0b3d03f0c60e"
+    },
+    {
+      "path": "examples/v1.16/after_the_rain_expressive_score_plan.json",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 18341,
+      "sha256": "ff6ed20502d3f14aff5bf026a0ea542f95cd5a9d3956798caf9821e7fe234d82"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/after.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 4734348,
+      "sha256": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/after_repeat.wav",
+      "classification": "L4_CANDIDATE",
+      "bytes": 4734348,
+      "sha256": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/A_lyrical_piano/after.wav",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/agent_revision.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 614,
+      "sha256": "9cf6949fddc7b78cae56441c0dd9a6ab2b4ee522a6ccb252dfcc1c2c9fcf553e"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/analysis_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 7916,
+      "sha256": "d19271f63533c1ca18628e0d47dfa95c00c207b756a8eba14f76d5f2a5094e69"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/analysis_after_repeat.json",
+      "classification": "L4_CANDIDATE",
+      "bytes": 7916,
+      "sha256": "d19271f63533c1ca18628e0d47dfa95c00c207b756a8eba14f76d5f2a5094e69",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/A_lyrical_piano/analysis_after.json",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/analysis_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 15858,
+      "sha256": "b0a82bf035f23905998e15a211d4536524f8d0ea3cc1ae54b77dd6e449edf8ae"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/base_ir.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 8888,
+      "sha256": "6fd091aa7233b427e37c46cff61fec893f1a3de3d7efdd5b51df8a65140c1bf6"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/before.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 4734348,
+      "sha256": "1614677fb6510f3642da69d232857b4c72fbaf3eea315b726dd09b460b78b4a8"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/before_vs_after.wav",
+      "classification": "L4_CANDIDATE",
+      "bytes": 9592128,
+      "sha256": "f2bea0cb81105f79be721723edd2abf9989281061c034b720fc39870f74853ee",
+      "candidate_reason": "derived_listening_convenience_reconstructible_from_before_after",
+      "retained_peers": [
+        "examples/v1.16/final_closure/A_lyrical_piano/before.wav",
+        "examples/v1.16/final_closure/A_lyrical_piano/after.wav"
+      ]
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/music_ir_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 20217,
+      "sha256": "d77516ddc6d495c5f9e0837e26a75eed9f9b29d07e99df25c80e9979ce64e808"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/music_ir_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 19301,
+      "sha256": "e30a878c34e71215b8edc593a21363c0ea3b89b3df9f213d94567a0aeb0c0c64"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/performance_ir_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 10176,
+      "sha256": "d53876edfe4df14ff4eddac05589cfa700551a7635485e9f18f67824e1ac32d8"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/performance_ir_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 9352,
+      "sha256": "3c4587acfd47bedbd2a27850e28df382fbfe505be074386b1e21ce93a2508ed7"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/plan_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 10009,
+      "sha256": "a85d1e9b7a18a78ff0cd2f8248f06c2357b21b2d45a732d85a0b70088f7451a1"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/plan_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 9185,
+      "sha256": "63fd2346ff5ebdf2603ec850c7e18d1f3d711b3b46026c3807b36ff1bb122b87"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/resolved_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 128590,
+      "sha256": "e4414609096ab97adc130763a17d0ab1136ff2eabe0d629fb2a8e3a71ce4e804"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/resolved_after_repeat.json",
+      "classification": "L4_CANDIDATE",
+      "bytes": 128590,
+      "sha256": "e4414609096ab97adc130763a17d0ab1136ff2eabe0d629fb2a8e3a71ce4e804",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/A_lyrical_piano/resolved_after.json",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/resolved_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 116600,
+      "sha256": "f2b418ca9f51d0bfdb6661027a03d2798f1b90364087367746e53764e1b6457d"
+    },
+    {
+      "path": "examples/v1.16/final_closure/A_lyrical_piano/revision_comparison.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 939,
+      "sha256": "b3dcf4411819e0bedfe963857a8cab14ef4ea640afeccbd88c9a2266a3d471f1"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/after.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 3200128,
+      "sha256": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/after_repeat.wav",
+      "classification": "L4_CANDIDATE",
+      "bytes": 3200128,
+      "sha256": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/B_rhythm_centered/after.wav",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/agent_revision.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 552,
+      "sha256": "f226c151b6ce67a187dae91d3981031ba0c887ce4c2c2cd87b84609684b0a1e3"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/analysis_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 14940,
+      "sha256": "b884ac1f71ec51eeefafc931eb4a05f2b68770be62085dfccd3134fd9fc44f9c"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/analysis_after_repeat.json",
+      "classification": "L4_CANDIDATE",
+      "bytes": 14940,
+      "sha256": "b884ac1f71ec51eeefafc931eb4a05f2b68770be62085dfccd3134fd9fc44f9c",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/B_rhythm_centered/analysis_after.json",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/analysis_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 19754,
+      "sha256": "162670ca52af3b7658f572781cfed7c92e9ac6136db62216802e48f67349fc64"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/base_ir.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 22111,
+      "sha256": "5db1c65f96ac368f6911c94671e1bffe63f991d1c45027006f057d119437461d"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/before.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 3200128,
+      "sha256": "7ea41c9cf3c26f812e320536c768a402b120f822a5bdabdc84c0a6c4e564ae01"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/before_vs_after.wav",
+      "classification": "L4_CANDIDATE",
+      "bytes": 6523688,
+      "sha256": "93fc6dcd0b93c7a1e63d2b3f60081c1e6e434dde9d75c3fba5870c2e4b2c84d7",
+      "candidate_reason": "derived_listening_convenience_reconstructible_from_before_after",
+      "retained_peers": [
+        "examples/v1.16/final_closure/B_rhythm_centered/before.wav",
+        "examples/v1.16/final_closure/B_rhythm_centered/after.wav"
+      ]
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/music_ir_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 35499,
+      "sha256": "087b3af056eb4c18aad44a01e4dcbb8ab481e4734d603e2bf1e64b90576e6420"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/music_ir_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 33268,
+      "sha256": "7c57bf91d1a954a9dbfbbbf4fa6599ff2541ac6a695d09aea9b1c02db29e1212"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/performance_ir_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 12053,
+      "sha256": "6f14ca77baabead19c170947336d1aec2b42d195081baa3ad4ae41f7272067bf"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/performance_ir_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 10030,
+      "sha256": "cbdc8839f478b63e7e61be3b844f1647568cd1e419e27354146450fac403918d"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/plan_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 11905,
+      "sha256": "4eaf2d12fd4803ff3a08177637b3c467499322bdd5f30faef541cf966b3443fe"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/plan_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 9882,
+      "sha256": "45ce1f49c83619c77f8fd29df3ea11ec738d800ea5efee36a8a9ba846107f366"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/resolved_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 156679,
+      "sha256": "81dbf014f3d97e9ea751ca100801d5a1e4aa2c23b38ba69e408401cf54dd0702"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/resolved_after_repeat.json",
+      "classification": "L4_CANDIDATE",
+      "bytes": 156679,
+      "sha256": "81dbf014f3d97e9ea751ca100801d5a1e4aa2c23b38ba69e408401cf54dd0702",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/B_rhythm_centered/resolved_after.json",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/resolved_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 138211,
+      "sha256": "504d8476febb9696d2f507968f77b1aa99d7a8b26285e256347dca1aabaae9d3"
+    },
+    {
+      "path": "examples/v1.16/final_closure/B_rhythm_centered/revision_comparison.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 827,
+      "sha256": "d7edc2efc6f3bf5145a2af3a27211940ff7e82ceef0a57138420870fe4b73b8d"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/after.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 4198772,
+      "sha256": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/after_repeat.wav",
+      "classification": "L4_CANDIDATE",
+      "bytes": 4198772,
+      "sha256": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/C_sparse_chamber_electronic/after.wav",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/agent_revision.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 729,
+      "sha256": "f53eaa24837c67530387ad2e54b4f39bc1dd00c7b19d2c312231880e6f12694e"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/analysis_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 8611,
+      "sha256": "1691490fe60b92d10c79c2885c6d888a22b6fe2cbfdaabdb7a2bb6fa94bc59ce"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/analysis_after_repeat.json",
+      "classification": "L4_CANDIDATE",
+      "bytes": 8611,
+      "sha256": "1691490fe60b92d10c79c2885c6d888a22b6fe2cbfdaabdb7a2bb6fa94bc59ce",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/C_sparse_chamber_electronic/analysis_after.json",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/analysis_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 38143,
+      "sha256": "b551d0399e04a84c4664a70bdbf5e8740a2b1c5689dc3031f78b34cdc52cad55"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/base_ir.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 14747,
+      "sha256": "37039cc8f23fd7ff9281d3148b84aac38ee7d505644a6c5d6541a1e790aca3aa"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/before.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 4198772,
+      "sha256": "16ef3632b22501172e2d2fa362b59a28cd6ba641daa88f686cdee90e45f822a4"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/before_vs_after.wav",
+      "classification": "L4_CANDIDATE",
+      "bytes": 8520976,
+      "sha256": "b514ce8d49c832222eb3c82513f2dcf89bc0b5ad372103d050c6a1f6ff31261e",
+      "candidate_reason": "derived_listening_convenience_reconstructible_from_before_after",
+      "retained_peers": [
+        "examples/v1.16/final_closure/C_sparse_chamber_electronic/before.wav",
+        "examples/v1.16/final_closure/C_sparse_chamber_electronic/after.wav"
+      ]
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/music_ir_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 26115,
+      "sha256": "0c74522fa17eecbfc1cee720a5866e4f4915f8513c4385378700ddbb13ad08d1"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/music_ir_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 25599,
+      "sha256": "1311ee58a413a2879ca9809ff2039be91890f5bf0da8978a45e71ffe7b202867"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/performance_ir_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 10193,
+      "sha256": "17ce0bef51fb29441861dfc821600f5dd5fd93187f88ef64f2bba55352135c0b"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/performance_ir_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 9741,
+      "sha256": "017c03d5d2ce8c6dc9a7d1659597f3b8a311d9d47b275af998d82cdfad575e03"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/plan_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 10062,
+      "sha256": "3f3f1b16485d8a73e27aa7cdc949e79c8ad46a2244f4fd6f4c4fce17877cd32e"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/plan_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 9610,
+      "sha256": "59a31ecd5d318fed9214c74fa23be3ea86134093730611c5d1940478d1d8a98d"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/resolved_after.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 110265,
+      "sha256": "90ab30d13d0832c0785d01d5380586863ab97f386a55aec3a5d79f066594edbb"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/resolved_after_repeat.json",
+      "classification": "L4_CANDIDATE",
+      "bytes": 110265,
+      "sha256": "90ab30d13d0832c0785d01d5380586863ab97f386a55aec3a5d79f066594edbb",
+      "candidate_reason": "exact_duplicate_of_retained_evidence",
+      "retained_peer": "examples/v1.16/final_closure/C_sparse_chamber_electronic/resolved_after.json",
+      "duplicate_sha256_match": true
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/resolved_before.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 124397,
+      "sha256": "40ac5e991813f6ba7763df9bc9c115101b676a55ebe1d88be0741095bd2a417d"
+    },
+    {
+      "path": "examples/v1.16/final_closure/C_sparse_chamber_electronic/revision_comparison.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 832,
+      "sha256": "282848651c5f76286797d74a641e454cae58e07bfb4978e896b40cdb22a9bb9b"
+    },
+    {
+      "path": "examples/v1.16/final_closure/README.md",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 1351,
+      "sha256": "123f19e4c6744584e262bfcc2102cba07948b64efb67bc7313c9a6314ae08d9f"
+    },
+    {
+      "path": "examples/v1.16/final_closure/final_closure_manifest.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 7229,
+      "sha256": "f7848e652da5ce4ff5484a4c1bd305b3cc08a5f12210d01a990a40746a849f0a"
+    },
+    {
+      "path": "examples/v1.16/final_closure/final_closure_revision_summary.json",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 4568,
+      "sha256": "0e5529bc80469d81ec8bdc756fd5753f489cfb1af2216bda0f92f869b95a9a60"
+    },
+    {
+      "path": "examples/v1.16/final_closure/v1.16_final_showcase_reel.wav",
+      "classification": "HISTORICAL_EVIDENCE",
+      "bytes": 12450680,
+      "sha256": "3cd8dc3477bd605bc407e75ca53b307059fe6590dd0a754f77483b0fd07c874a"
+    },
+    {
+      "path": "schemas/composition_brief.schema.json",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 22426,
+      "sha256": "a46773c36defdcf3170808ff8074ff2f5f103619ea182d2848703b6b08a343b4"
+    },
+    {
+      "path": "schemas/expressive_score_plan.schema.json",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 28319,
+      "sha256": "371b324a5853676141fcc9013658d67cc877ec75aea74e71ccb5f49f2e274f65"
+    },
+    {
+      "path": "schemas/performance_ir.schema.json",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 29258,
+      "sha256": "da12ac5334926caefd3c73e9cb1bd9ce8461536e9b3a521864d02afe12716c32"
+    },
+    {
+      "path": "schemas/piano_design.schema.json",
+      "classification": "ACTIVE_DOMAIN",
+      "bytes": 10204,
+      "sha256": "5d615aeefe2f13c7475dc9a88d9ca2699e02115dee8135098e6f1b3d4d2831b4"
+    },
+    {
+      "path": "src/code_composer/reference/__init__.py",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 89,
+      "sha256": "37fef754168304356176e67ed27e069b5e88657e1bd90879546dd47d6ff7a4d3"
+    },
+    {
+      "path": "src/code_composer/reference/examples/after_the_rain_expressive_score_plan.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 18341,
+      "sha256": "ff6ed20502d3f14aff5bf026a0ea542f95cd5a9d3956798caf9821e7fe234d82"
+    },
+    {
+      "path": "src/code_composer/reference/examples/composition_brief.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 4780,
+      "sha256": "572d793488541ad9db2176464c17b24f7b68bdf1f173c87778f099ee029c169f"
+    },
+    {
+      "path": "src/code_composer/reference/examples/concert_piano_patch.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 491,
+      "sha256": "1efe951234e74668a20180c9936f3a1bda5209d3ce02273c1dbb44dd4a5c3420"
+    },
+    {
+      "path": "src/code_composer/reference/examples/demo_ir.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 8235,
+      "sha256": "9e8c5f7c58f63cd63338767e13e1a7c7328fb7a61b88d8f309e9f8a0eeb4fd2c"
+    },
+    {
+      "path": "src/code_composer/reference/examples/electric_fm_piano_patch.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 427,
+      "sha256": "ae1c3260b97eab6af60a3f4c79dcbc897a89e063694a7a97ba2568ccdb573b7c"
+    },
+    {
+      "path": "src/code_composer/reference/examples/electric_reed_piano_patch.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 413,
+      "sha256": "c23f398766b3b7d3f16f1983c5656aeed8a9cb5869b4c463a7f1f5b6a724ad5a"
+    },
+    {
+      "path": "src/code_composer/reference/examples/electric_tine_piano_patch.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 449,
+      "sha256": "30af19de1688ef11de42c4d8734f84b6639207eb4dac328e357b63365ab8756a"
+    },
+    {
+      "path": "src/code_composer/reference/examples/high_level_ir.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 24400,
+      "sha256": "05ffa2e7b61f3fd6c2b3b58e6ccdce1fca65e0c84fb536686e28d39e9f152972"
+    },
+    {
+      "path": "src/code_composer/reference/examples/seed_ir.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 15023,
+      "sha256": "d2cc4ac0b4bcaf6a19f3d03bda114a65e4a621be771ba1bc5ea9035233938c69"
+    },
+    {
+      "path": "src/code_composer/reference/examples/upright_piano_patch.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 387,
+      "sha256": "aec9e61e2dafa5f752d076c5ae766e682be652e19fa493be662b0b3d03f0c60e"
+    },
+    {
+      "path": "src/code_composer/reference/schemas/composition_brief.schema.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 22426,
+      "sha256": "a46773c36defdcf3170808ff8074ff2f5f103619ea182d2848703b6b08a343b4"
+    },
+    {
+      "path": "src/code_composer/reference/schemas/expressive_score_plan.schema.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 28319,
+      "sha256": "371b324a5853676141fcc9013658d67cc877ec75aea74e71ccb5f49f2e274f65"
+    },
+    {
+      "path": "src/code_composer/reference/schemas/performance_ir.schema.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 29258,
+      "sha256": "da12ac5334926caefd3c73e9cb1bd9ce8461536e9b3a521864d02afe12716c32"
+    },
+    {
+      "path": "src/code_composer/reference/schemas/piano_design.schema.json",
+      "classification": "PACKAGE_MIRROR",
+      "bytes": 10204,
+      "sha256": "5d615aeefe2f13c7475dc9a88d9ca2699e02115dee8135098e6f1b3d4d2831b4"
+    },
+    {
+      "path": "tests/fixtures/agent_final_ir.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 13628,
+      "sha256": "0744e6a6d34d74e01d4967d82410303bad997e4305465d9aca837b0665ebcc50"
+    },
+    {
+      "path": "tests/fixtures/analysis_report.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 4593,
+      "sha256": "cc097921eeb3a20e039e1d200f0ca6092d152a8d8e007336310674586023b2ad"
+    },
+    {
+      "path": "tests/fixtures/arrangement_ir.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 4446,
+      "sha256": "ac0eaecbeba0a44854e2d4aa16134a76ad3b86683a343cdfef05f9b9dff01507"
+    },
+    {
+      "path": "tests/fixtures/composition_brief.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 4780,
+      "sha256": "572d793488541ad9db2176464c17b24f7b68bdf1f173c87778f099ee029c169f"
+    },
+    {
+      "path": "tests/fixtures/high_level_ir.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 3245,
+      "sha256": "401bc3655873cd36c68dd056aca68bce6ac9d6766189845fc7e6915a80ed9570"
+    },
+    {
+      "path": "tests/fixtures/instrument_ir.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 10458,
+      "sha256": "d2055b9aed8960f55f94afa391083cd843358c981d7a5cf8a7d241d006478899"
+    },
+    {
+      "path": "tests/fixtures/mix_ir.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 13547,
+      "sha256": "68f7e368f650e322669864db845fb4d230ccd99f0b73ea03203710f08662aa91"
+    },
+    {
+      "path": "tests/fixtures/phrase_ir.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 3170,
+      "sha256": "1710aca100fff24d305c8f2d3f479cb67ea7bd8e0f391c0676061cd1f090b209"
+    },
+    {
+      "path": "tests/fixtures/revision_ir.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 13546,
+      "sha256": "0a7c3b0caf85b4dd8589595ef5d955f4405f3368083a634aa602c22497ca7722"
+    },
+    {
+      "path": "tests/fixtures/rhythm_ir.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 7280,
+      "sha256": "9bb70103ff9f6e8b7813823b10855453b4c04a30ce63f25d3bad6034727577ca"
+    },
+    {
+      "path": "tests/fixtures/topline_ir.json",
+      "classification": "COMPATIBILITY_FIXTURE",
+      "bytes": 15017,
+      "sha256": "902c2903031df74b492311039917bf3fee19172bac8943bb77a965f6f01951a3"
+    }
+  ],
+  "next": "L4 Dead Test / Reference Cleanup",
+  "validation": {
+    "focused_l3": {
+      "passed": 9,
+      "failed": 0
+    },
+    "focused_cross_boundary": {
+      "passed": 42,
+      "failed": 0
+    },
+    "full_regression": {
+      "passed": 244,
+      "failed": 0
+    },
+    "coverage_percent": 88,
+    "compileall": true,
+    "runtime_graph": {
+      "import_modules": 98,
+      "static_modules": 99,
+      "edges": 121,
+      "cycles": 0,
+      "import_failures": 0
+    },
+    "legacy_representative_wav_sha256": "589ac3efdc466a1a7c191caa0e614a63b1a28e4dea566b08164df3730f4490e0",
+    "final_dogfood_rerender": {
+      "A_lyrical_piano": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+      "B_rhythm_centered": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+      "C_sparse_chamber_electronic": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f",
+      "byte_identical": true,
+      "clipped_frame_ratio": 0.0
+    },
+    "runtime_schema_changes_vs_l2": 0
+  }
+}

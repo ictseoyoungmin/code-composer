@@ -1,0 +1,89 @@
+{
+  "slice": "S20 Drum Articulation Foundation",
+  "status": "CLOSED",
+  "date": "2026-09-19",
+  "engine_version": "1.17.0",
+  "baseline": "S19 track-pan-stereo-integrity repository",
+  "scope": {
+    "existing_s17_default_hits_byte_identical": true,
+    "explicit_event_articulation": true,
+    "snare_articulations": [
+      "center",
+      "ghost",
+      "rimshot",
+      "cross_stick"
+    ],
+    "hihat_articulations": [
+      "closed",
+      "half_open",
+      "open",
+      "pedal",
+      "choke"
+    ],
+    "ride_articulations": [
+      "bow",
+      "bell",
+      "choke"
+    ],
+    "crash_articulations": [
+      "crash",
+      "choke"
+    ],
+    "tom_elements": [
+      "tom_high",
+      "tom_mid",
+      "tom_floor"
+    ],
+    "tom_articulations": [
+      "center",
+      "edge"
+    ],
+    "stateful_choke_or_residual_interaction": false,
+    "auto_generated_hits_or_fills": false
+  },
+  "focused_regression": "11/11 PASS",
+  "source_regression": "478/478 PASS (73 test files)",
+  "clean_installed_regression": "478/478 PASS (73 test files; source-path injection disabled)",
+  "audition": {
+    "sample_rate_hz": 24000,
+    "bpm": 96,
+    "bars": 8,
+    "events": 104,
+    "peak": 0.7576899472348477,
+    "rms": 0.09784665831099534,
+    "clipped_sample_ratio": 0.0,
+    "hat_decay_s": {
+      "closed": 0.06641666666666667,
+      "half_open": 0.33845833333333336,
+      "open": 1.1209166666666666,
+      "pedal": 0.065875,
+      "choke": 0.04829166666666666
+    },
+    "ride_centroid_hz": {
+      "bow": 4200.648435407645,
+      "bell": 5049.910925592573
+    },
+    "ride_decay_s": {
+      "bow": 1.7877916666666667,
+      "bell": 1.23575
+    },
+    "crash_decay_s": {
+      "crash": 1.95625,
+      "choke": 0.05429166666666667
+    },
+    "tom_center_centroid_hz": {
+      "tom_high": 195.89654753458723,
+      "tom_mid": 143.98388430093337,
+      "tom_floor": 96.78754431126218
+    }
+  },
+  "compatibility": {
+    "kick_default_s19_hash_preserved": true,
+    "snare_center_s19_hash_preserved": true,
+    "hat_closed_s19_hash_preserved": true,
+    "legacy_percussion_without_s17_realism_preserved": true,
+    "s18_track_gain_preserved": true,
+    "s19_track_pan_preserved": true
+  },
+  "next": "Post-S20 listening review; S21 Performance-to-Timbre Dynamics remains a candidate and is not opened automatically."
+}

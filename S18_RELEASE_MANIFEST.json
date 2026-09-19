@@ -1,0 +1,102 @@
+{
+  "release": "Code Composer v1.17.0 S18",
+  "slice": "S18 Track Gain Semantics / Mixer Predictability Hardening",
+  "status": "CLOSED",
+  "date": "2026-09-19",
+  "baseline": "S17 percussion-fidelity repository",
+  "scope": {
+    "legacy_track_gain_post_instrument_linear_fader": true,
+    "legacy_track_gain_post_track_insert_fx": true,
+    "graph_route_gain_unchanged": true,
+    "event_velocity_semantics_unchanged": true,
+    "instrument_expression_semantics_unchanged": true,
+    "track_pan_changed": false,
+    "musical_content_changed": false
+  },
+  "validation": {
+    "focused_s18": "7/7 PASS",
+    "source_regression": "460/460 PASS (71 isolated test-file processes; 0 failed files; 0 timeouts)",
+    "clean_installed_regression": "460/460 PASS (71 isolated test-file processes; source-path injection disabled)",
+    "import_modules": 130,
+    "import_failures": 0,
+    "static_modules": 130,
+    "static_edges": 191,
+    "cycles": 0,
+    "public_entrypoints": 9,
+    "self_check": "PASS",
+    "skill_validation": "PASS",
+    "compileall": "PASS",
+    "isolated_skill_self_check": "PASS",
+    "forbidden_package_files": 0,
+    "embedded_skill_byte_exact": true
+  },
+  "dogfood": {
+    "song": "September Window, 5:42 PM",
+    "sample_rate_hz": 24000,
+    "window_beats": [
+      72.0,
+      80.0
+    ],
+    "event_and_track_state_identical_except_gain": true,
+    "ratios": {
+      "lead": {
+        "expected": 1.263157894736842,
+        "observed": 1.263157894736842,
+        "error": 0.0
+      },
+      "pad": {
+        "expected": 0.6521739130434782,
+        "observed": 0.6521739130434782,
+        "error": 0.0
+      },
+      "bass": {
+        "expected": 2.4516129032258065,
+        "observed": 2.4516129032258065,
+        "error": 0.0
+      },
+      "drums": {
+        "expected": 0.8611111111111112,
+        "observed": 0.8611111111111114,
+        "error": 2.220446049250313e-16
+      }
+    },
+    "r2_excerpt": {
+      "duration_s": 8.336083333333333,
+      "peak": 0.3123272377388796,
+      "rms": 0.035155726845716634
+    },
+    "r3_excerpt": {
+      "duration_s": 8.336083333333333,
+      "peak": 0.2734893458983833,
+      "rms": 0.03080844012867068
+    }
+  },
+  "compatibility": {
+    "gain_1_instrument_render_preserved": true,
+    "graph_mode_gain_preserved": true,
+    "legacy_nonunity_gain_byte_identity": false,
+    "legacy_nonunity_gain_change_reason": "intentional semantic correction from performance-velocity multiplier to mixer fader",
+    "s13_violin_preserved": true,
+    "s14_piano_preserved": true,
+    "s15_ensemble_preserved": true,
+    "s16_bass_preserved": true,
+    "s17_percussion_preserved": true
+  },
+  "packaging": {
+    "standalone_skill_files": 210,
+    "codex_plugin_files": 212,
+    "claude_plugin_files": 212,
+    "forbidden_files": 0,
+    "codex_skill_exact": true,
+    "claude_skill_exact": true,
+    "artifact_sha256": {
+      "standalone": "43ec53852340677724f37ba46ab3e36a4120de3c56be5a49136e8dc37ff693e4",
+      "codex": "e1fdde03d481916651fe746786df6fe5918d891ae4b212b413bea49a274d9fca",
+      "claude": "eaaa3e7a97d87867dda673d2548eb92809aa7b56cf44d41b1dc5169d58d52f44",
+      "wheel": "112273d8aed1d9dd4c96a0386aee73decb4b6f84b6eb5e275931e7e20ea82fa1",
+      "dogfood": "f2bd176949738bd1ab7710290b25ad23078abd2f1db3e9606c93f67a35ad8821",
+      "validation": "b547bcf27d39c3ebefdb17fb4a115592a21968cc5d7eb5e38c767d241aa6a4a0"
+    }
+  },
+  "next": "Post-S18 full-song listening review before opening S19."
+}

@@ -1,0 +1,104 @@
+{
+  "status": "CLOSED",
+  "slice": "M1 MIDI Collaboration Export",
+  "version": "1.17.0",
+  "prior_release": {
+    "version": "1.16.0",
+    "status": "CLOSED",
+    "reopened": false
+  },
+  "scope": {
+    "midi_format": 1,
+    "default_ppq": 960,
+    "conductor_track": true,
+    "section_markers": true,
+    "per_track_export": true,
+    "drum_channel": 10,
+    "drum_map": {
+      "kick": 36,
+      "snare": 38,
+      "hat": 42
+    },
+    "program_changes": false,
+    "unicode_manifest": true,
+    "midi_text_ascii_safe": true,
+    "collaboration_bundle": [
+      "<song>.mid",
+      "reference_mix.wav",
+      "resolved_ir.json",
+      "manifest.json"
+    ]
+  },
+  "validation": {
+    "focused_m1": "16/16 PASS",
+    "full_regression": "268/268 PASS",
+    "coverage_percent": 88.78733474783743,
+    "compileall": "PASS",
+    "external_parser": "mido PASS",
+    "static_modules": 103,
+    "static_edges": 132,
+    "cycles": 0,
+    "import_modules": 103,
+    "import_failures": 0,
+    "v116_baseline_files_checked": 116,
+    "v116_baseline_files_changed": 0
+  },
+  "wheel": {
+    "name": "code_composer-1.17.0-py3-none-any.whl",
+    "sha256": "2e1aa1141e04dc17b4eae65f705f0215eaf0ecc602ab0856730e96eb791dc300",
+    "clean_target_install": true,
+    "executed_outside_repository": true,
+    "entry_points": [
+      "code-composer",
+      "code-composer-compose",
+      "code-composer-midi",
+      "code-composer-collab"
+    ],
+    "final_clean_install": true
+  },
+  "clean_midi_smoke": {
+    "source": "examples/basic/high_level_ir.json",
+    "format": 1,
+    "ppq": 960,
+    "track_count": 7
+  },
+  "dogfood_collaboration_bundles": {
+    "A_lyrical_piano": {
+      "midi_sha256": "134a387503ef4c7e7d851bb1545e3357049e527f2f40f5eebfba8c3b625e3931",
+      "reference_mix_sha256": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+      "resolved_ir_sha256": "e4414609096ab97adc130763a17d0ab1136ff2eabe0d629fb2a8e3a71ce4e804",
+      "midi_tracks": 3,
+      "note_events": 69
+    },
+    "B_rhythm_centered": {
+      "midi_sha256": "027486521afa5e44d5143998a6f41c5332f3c84824c9cbf268f9f061ac839d47",
+      "reference_mix_sha256": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+      "resolved_ir_sha256": "81dbf014f3d97e9ea751ca100801d5a1e4aa2c23b38ba69e408401cf54dd0702",
+      "midi_tracks": 5,
+      "note_events": 116
+    },
+    "C_sparse_chamber_electronic": {
+      "midi_sha256": "0a472f11458e3eb30214972cb766758dcda83782105947387f1caba86bd0e926",
+      "reference_mix_sha256": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f",
+      "resolved_ir_sha256": "90ab30d13d0832c0785d01d5380586863ab97f386a55aec3a5d79f066594edbb",
+      "midi_tracks": 4,
+      "note_events": 52
+    }
+  },
+  "legacy_current_fixture_parity": {
+    "comparison": "untouched L5 source vs clean-installed v1.17 wheel using identical checked-in fixtures",
+    "plan_sha256": "417b3fde1e5a9621668f6a8f0b7e43c6a0f64ecc37ec3a0c0f2dfbf88af61cf4",
+    "music_ir_sha256": "ea6738eaa6699922f6e59b278bdcb9356d26c5bc296f914343627ceac0721526",
+    "wav_sha256": "589ac3efdc466a1a7c191caa0e614a63b1a28e4dea566b08164df3730f4490e0",
+    "byte_identical": true
+  },
+  "historical_provenance_note": {
+    "recorded_v116_plan_sha256": "f7f16714e9d98666ae29d27b0c183d89fdd14aa82de9d4d4869cdb45ef2ee302",
+    "recorded_v116_music_ir_sha256": "ef60c5f7388bddb0cd6eff857ee2dc937f3d819deb017a87a95d4146faa04b51",
+    "recorded_v116_wav_sha256": "589ac3efdc466a1a7c191caa0e614a63b1a28e4dea566b08164df3730f4490e0",
+    "finding": "The recorded Plan/Music IR hashes are not reproducible from the current checked-in L5 seed/brief pair even in the untouched L5 tree. Direct L5\u2192v1.17 current-fixture outputs are byte-identical; the recorded WAV hash remains reproducible. Historical v1.16 evidence was not rewritten.",
+    "blocks_m1": false
+  },
+  "architecture": "one-way export adapter; no analyzer-driven mutation; no MIDI feedback into canonical IR",
+  "next": "New explicitly scoped v1.17 slice only if further collaboration interchange is required."
+}

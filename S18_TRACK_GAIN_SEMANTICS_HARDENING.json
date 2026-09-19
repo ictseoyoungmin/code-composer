@@ -1,0 +1,35 @@
+{
+  "slice": "S18",
+  "name": "Track Gain Semantics / Mixer Predictability Hardening",
+  "status": "CLOSED",
+  "date": "2026-09-19",
+  "engine_version": "1.17.0",
+  "problem": "legacy non-graph track.gain was multiplied into event velocity before synthesis, making level control engine-dependent and timbre-changing",
+  "semantics": {
+    "event_velocity": "performance/excitation authority",
+    "instrument_expression": "timbre/expression authority",
+    "legacy_track_gain": "post-instrument post-track-insert linear amplitude fader",
+    "graph_track_gain": "unchanged post-render route gain",
+    "track_pan_changed": false,
+    "automatic_humanization": false,
+    "music_content_changed": false
+  },
+  "validation": {
+    "focused": "7/7 PASS",
+    "source_regression": "460/460 PASS (71 isolated test files)",
+    "clean_installed_regression": "460/460 PASS (71 isolated test files)"
+  },
+  "dogfood": {
+    "song": "September Window, 5:42 PM",
+    "window_beats": [72.0, 80.0],
+    "sample_rate_hz": 24000,
+    "event_and_track_state_identical_except_gain": true,
+    "ratios": {
+      "lead": {"expected": 1.263157894736842, "observed": 1.263157894736842, "error": 0.0},
+      "pad": {"expected": 0.6521739130434782, "observed": 0.6521739130434782, "error": 0.0},
+      "bass": {"expected": 2.4516129032258065, "observed": 2.4516129032258065, "error": 0.0},
+      "drums": {"expected": 0.8611111111111112, "observed": 0.8611111111111114, "error": 2.220446049250313e-16}
+    }
+  },
+  "next": "Full-song listening review before opening S19."
+}

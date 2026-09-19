@@ -1,0 +1,16 @@
+{
+  "release": "Code Composer v1.17.0 S19",
+  "status": "PASS",
+  "test_files": 72,
+  "tests": 467,
+  "failed": 0,
+  "timeouts": 0,
+  "batches": [
+    "159/159 PASS",
+    "201/201 PASS",
+    "107/107 PASS after removal of wheel-build residue"
+  ],
+  "source_path_injection": false,
+  "installed_root": "clean target outside canonical source tree",
+  "wheel_sha256": "1f436921238b66472a6b3910b58172aabe56c3580b5cbc2eeda00db5be6b89a1"
+}

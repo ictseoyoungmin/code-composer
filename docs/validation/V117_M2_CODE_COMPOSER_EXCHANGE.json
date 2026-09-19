@@ -1,0 +1,116 @@
+{
+  "status": "CLOSED",
+  "slice": "v1.17 M2 Code Composer Exchange Package",
+  "version": "1.17.0",
+  "format": "code-composer-exchange/v1",
+  "container_extension": ".ccx",
+  "authority": "canonical Music IR",
+  "features": {
+    "format": "code-composer-exchange/v1",
+    "container_extension": ".ccx",
+    "authority": "canonical Music IR",
+    "checkpoint_model": "single-parent fast-forward",
+    "automatic_merge": false,
+    "dirty_workspace_guard": true,
+    "divergence_detection": true,
+    "revision_identity": "content-addressed provenance/state hashes",
+    "handoff": {
+      "statuses": [
+        "working",
+        "review",
+        "approved_internal"
+      ],
+      "requested_changes": true,
+      "notes": true,
+      "scope_locks": [
+        "transport",
+        "tonal",
+        "form",
+        "mix",
+        "arrangement",
+        "performance_ir",
+        "track:<id>",
+        "instrument:<id>",
+        "section:<id>"
+      ]
+    },
+    "payload": [
+      "manifest.json",
+      "composition/music_ir.json",
+      "composition/resolved_ir.json",
+      "composition/plan.json (optional)",
+      "composition/brief.json (optional)",
+      "provenance/revisions.json",
+      "handoff/handoff.json",
+      "audio/reference_mix.wav"
+    ],
+    "validation": {
+      "focused": "15/15 PASS",
+      "full_regression": "283/283 PASS",
+      "coverage_percent": 88.77488514548239,
+      "exchange_package_coverage_percent": 85.39944903581267,
+      "exchange_cli_coverage_percent": 97.36842105263158,
+      "clean_wheel_install": "PASS",
+      "console_entrypoints": "5/5 PRESENT; exchange executed from clean target",
+      "two_person_roundtrip": "PASS",
+      "scope_lock_guard": "PASS",
+      "dirty_workspace_guard": "PASS",
+      "divergence_guard": "PASS",
+      "package_tamper_guard": "PASS",
+      "import_modules": 105,
+      "import_failures": 0,
+      "static_modules": 106,
+      "import_edges": 138,
+      "cycles": 0,
+      "m1_existing_src_files_changed": 0,
+      "v116_final_wav_byte_identity": "A/B/C PASS",
+      "v115_legacy_wav_byte_identity": "PASS"
+    }
+  },
+  "validation": {
+    "focused": "15/15 PASS",
+    "full_regression": "283/283 PASS",
+    "coverage_percent": 88.77488514548239,
+    "exchange_package_coverage_percent": 85.39944903581267,
+    "exchange_cli_coverage_percent": 97.36842105263158,
+    "clean_wheel_install": "PASS",
+    "console_entrypoints": "5/5 PRESENT; exchange executed from clean target",
+    "two_person_roundtrip": "PASS",
+    "scope_lock_guard": "PASS",
+    "dirty_workspace_guard": "PASS",
+    "divergence_guard": "PASS",
+    "package_tamper_guard": "PASS",
+    "import_modules": 105,
+    "import_failures": 0,
+    "static_modules": 106,
+    "import_edges": 138,
+    "cycles": 0,
+    "m1_existing_src_files_changed": 0,
+    "v116_final_wav_byte_identity": "A/B/C PASS",
+    "v115_legacy_wav_byte_identity": "PASS"
+  },
+  "wheel": {
+    "name": "code_composer-1.17.0-py3-none-any.whl",
+    "sha256": "5d816da55180c2da3cc577a33386f3604eee0a8604aff904588b6106605802dc"
+  },
+  "clean_wheel_dogfood": {
+    "r1": {
+      "revision_id": "5796838a1aafa2e6c442f79842b56e2113161ff20f0c294eff2e4a5cca8b4374",
+      "package_sha256": "7b63e5a47c487ce9341fa4d6b191bc40a68cf747f8e1e98e10eef7d5a48e0043"
+    },
+    "r2": {
+      "parent_revision_id": "5796838a1aafa2e6c442f79842b56e2113161ff20f0c294eff2e4a5cca8b4374",
+      "revision_id": "9597d2a25d864356baed99eab82855369e4a64eca503b17d4bf1a3c067af1670",
+      "package_sha256": "ae1626ddfcc01daba8516d0454d24fba23985d0bf0cfc967265515d62886714d"
+    }
+  },
+  "audio_compatibility": {
+    "v116_final_dogfood": {
+      "A_lyrical_piano": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+      "B_rhythm_centered": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+      "C_sparse_chamber_electronic": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f"
+    },
+    "v115_legacy_wav": "589ac3efdc466a1a7c191caa0e614a63b1a28e4dea566b08164df3730f4490e0"
+  },
+  "next": "v1.17 M3 External Delivery Hardening"
+}

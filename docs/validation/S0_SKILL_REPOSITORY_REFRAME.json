@@ -1,0 +1,84 @@
+{
+  "slice": "S0_SKILL_REPOSITORY_REFRAME",
+  "status": "CLOSED",
+  "date": "2026-09-17",
+  "engine_version": "1.17.0",
+  "regression": {
+    "focused": "7/7 PASS",
+    "full": "300/300 PASS",
+    "coverage_percent": 93,
+    "compileall": "PASS (isolated skill validation)"
+  },
+  "canonical_skill": "skills/code-composer",
+  "progressive_disclosure": "SKILL.md -> kit/INDEX.md -> workflow -> contract/schema -> command/script -> source only by exception",
+  "source_policy": {
+    "default": "do_not_read_kit_src",
+    "source_map": "kit/SOURCE_MAP.md"
+  },
+  "example_policy": {
+    "rule": "Examples teach operation, never taste",
+    "forbidden_rich_media_files": [],
+    "parent_references": [],
+    "packaged_reference_example_json": []
+  },
+  "runtime_comparison_to_m3": {
+    "python_files_old": 108,
+    "python_files_new": 108,
+    "changed_python_files": [
+      "reference/__init__.py"
+    ],
+    "added_python_files": [],
+    "removed_python_files": [],
+    "note": "Only reference/__init__.py docstring changed; music engine Python modules are byte-identical."
+  },
+  "module_graph": {
+    "modules": 108,
+    "static_edges": 142,
+    "cycles": 0
+  },
+  "artifacts": {
+    "canonical_skill_file_count": 262,
+    "standalone_sha256": "d578e97613a115c6eeea1b70c0ba599bb6e2b4f31feedf15fa531787df3c4a3b",
+    "platforms": {
+      "codex": {
+        "artifact_sha256": "03c21ade8d2294fd6698f19e20a9b68bff04cc7b682ded46b5fce2808df4572d",
+        "skill_file_count": 262,
+        "exact_canonical_skill_copy": true
+      },
+      "claude": {
+        "artifact_sha256": "4d8827ef07db9892eb65a30fad469f4fd9243ffbd029862e51ced17fe0dd2dad",
+        "skill_file_count": 262,
+        "exact_canonical_skill_copy": true
+      }
+    },
+    "forbidden_rich_media_in_skill": false,
+    "parent_references_in_skill": 0
+  },
+  "wheel": {
+    "wheel": "code_composer-1.17.0-py3-none-any.whl",
+    "wheel_sha256": "e013d7cacb78bb5207227f84eb9c26a2665f789dc88096ffe0884c5d6395f637",
+    "wheel_file_count": 117,
+    "packaged_reference_example_json": [],
+    "entry_points_metadata": [
+      "code_composer-1.17.0.dist-info/entry_points.txt"
+    ],
+    "synthetic_smoke": {
+      "render": true,
+      "midi": true,
+      "collab_manifest": true,
+      "delivery_manifest": true,
+      "exchange_package": true,
+      "exchange_import": true
+    }
+  },
+  "platform_adapters": {
+    "codex_source": ".codex_plugins/code-composer",
+    "claude_source": ".claude_plugins/code-composer",
+    "canonical_skill_injected_at_build": true
+  },
+  "root_examples_policy": "maintainer-only; excluded from installed skill/plugin artifacts",
+  "import_sweep": {
+    "modules": 108,
+    "failures": []
+  }
+}

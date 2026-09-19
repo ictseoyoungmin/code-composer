@@ -1,0 +1,95 @@
+{
+  "status": "ACTIVE_ALLOWLIST_FOR_POST_V116_FEATURE_WORK",
+  "purpose": "Preserve the historical v1.16 runtime baseline while requiring every intentional modification of a baseline file in later feature slices to be explicit and hash-pinned.",
+  "slice": "S23 Drum Performance-to-Timbre Dynamics",
+  "files": {
+    "src/code_composer/agent/composition_brief.py": {
+      "sha256": "aea59e60d0c0b0a7815ae3584c1927980bbc98101cc57f540a42306a11efc171",
+      "reason": "S17 allows the drums sound-palette role to select an explicit versioned percussion factory preset while retaining direct drum_graph authoring and deterministic validation."
+    },
+    "src/code_composer/audio/instrument.py": {
+      "sha256": "ce4e30a415efa0596817c6bfaea42cb7a820b87f149e737bd6e0d224b217e7d0",
+      "reason": "Convert the historical instrument entry point into a compatibility facade over registered engines."
+    },
+    "src/code_composer/core/ir.py": {
+      "sha256": "301ba2a00f2b48121d94da1d0a000e8ee5884015e5c604531a72cdde19b7a652",
+      "reason": "Delegate pitched-instrument IR validation to engine-owned validators."
+    },
+    "src/code_composer/render.py": {
+      "sha256": "b9d601c611eefae80545177c0409a9ff59e82420cd993b7fe883ad13633093b0",
+      "reason": "S23 forwards optional event-local strike_force and strike_position to percussion rendering while preserving S18 gain and S19 pan semantics."
+    },
+    "src/code_composer/validation_contracts.py": {
+      "sha256": "fdbc50df2d33629857ee956b2d28d8dcc9cb668ece6e76961c45d88db2bea6fb",
+      "reason": "Route runtime instrument validation through registered engines while retaining the legacy piano validator facade."
+    },
+    "src/code_composer/agent/composer_planner.py": {
+      "sha256": "e2f3923e97f818d64a73e2b415ed0f059bac21aa08ddac89c60b01e3f4d2923e",
+      "reason": "Materialize selected factory presets into explicit song-local instrument patches during plan application."
+    },
+    "src/code_composer/reference/schemas/composition_brief.schema.json": {
+      "sha256": "400ef05f5d04781911c5aa12b3aa3a6a1999f4524153c465e31815bd7d83085e",
+      "reason": "Extend the agent-authored brief contract with preset_id, preset_version, and patch_overrides."
+    },
+    "schemas/composition_brief.schema.json": {
+      "sha256": "400ef05f5d04781911c5aa12b3aa3a6a1999f4524153c465e31815bd7d83085e",
+      "reason": "Mirror the S2 composition-brief preset selection contract in the standalone agent-facing schema."
+    },
+    "src/code_composer/agent/expressive_score_plan.py": {
+      "sha256": "deeb8120da2248278d862903befb883a97ad98035fca44c7c9c2f15c223dde1a",
+      "reason": "S23 validates normalized optional strike_force/strike_position controls on authored rhythm-fill drum events."
+    },
+    "src/code_composer/composition/performance.py": {
+      "sha256": "cb5330d1108999ec8c414835b8c729e03cd28a5bc633b1d63cad29cea1a5268b",
+      "reason": "S15 invokes deterministic ensemble interaction only after existing phrase realization and validates the new contract while preserving absent/disabled identity."
+    },
+    "src/code_composer/reference/schemas/expressive_score_plan.schema.json": {
+      "sha256": "6e3fc31710f1f8109ca3df0ed195bfaa5ce8221e14e7689cb6074a48f2648b06",
+      "reason": "Packaged S23 expressive-score schema permits normalized optional percussion strike controls."
+    },
+    "src/code_composer/reference/schemas/performance_ir.schema.json": {
+      "sha256": "f8750e77ce87c9e430e75fabb6f7605cb24047a12867f5264483dceef8ad3934",
+      "reason": "Packaged S23 Performance IR schema mirrors normalized optional percussion strike controls."
+    },
+    "schemas/expressive_score_plan.schema.json": {
+      "sha256": "6e3fc31710f1f8109ca3df0ed195bfaa5ce8221e14e7689cb6074a48f2648b06",
+      "reason": "Standalone S23 expressive-score schema mirrors normalized optional percussion strike controls."
+    },
+    "schemas/performance_ir.schema.json": {
+      "sha256": "f8750e77ce87c9e430e75fabb6f7605cb24047a12867f5264483dceef8ad3934",
+      "reason": "Standalone S23 Performance IR schema mirrors normalized optional percussion strike controls."
+    },
+    "src/code_composer/audio/piano.py": {
+      "sha256": "5d1d3cf239b2b0bab942112d3ae306be4686b4c6600cc45d6d8c8aa973760572",
+      "reason": "S14 damper-aware acoustic release hardening: remove no-pedal non-harmonic resonance tones, damp detuned unison components after note-off, and separate short damper-down soundboard modes from pedal-authorized long modal response."
+    },
+    "src/code_composer/audio/piano_design.py": {
+      "sha256": "598cbe568ac7b1a514539d1ded9822f546b1a7d09f079d1fa1698c6c42a285f0",
+      "reason": "S14 acoustic defaults add release-only unison damping and damper-down modal/resonance scaling while replacing the historical 1.5x resonance ratio with harmonic-only defaults."
+    },
+    "src/code_composer/agent/performance_ir.py": {
+      "sha256": "e1f27f8f7ad2bbcb64353ce78c2ea4fdeb3cf0de099b5db9b14471689b65c280",
+      "reason": "S15 extends Performance IR realization with optional bounded role pan offsets while preserving the pre-S15 surface when absent."
+    },
+    "src/code_composer/analysis/expressive_qa.py": {
+      "sha256": "1907f7356f87fcb148e75d29a91e5a015b592c64c1b1bf7013a15e8397bb98f5",
+      "reason": "S15 makes orchestration masking QA aware of explicitly authored dynamic yielding and reports realized ensemble-interaction evidence."
+    },
+    "src/code_composer/pipeline/validation.py": {
+      "sha256": "c17c7f676174fdb6cb8812138fbfdf87478b58ac19186aabb2b38dc200585dfa",
+      "reason": "S15 surfaces ensemble-interaction contract failures through the aggregate IR validation boundary."
+    },
+    "src/code_composer/audio/percussion.py": {
+      "sha256": "73733163639d166f64fb69eeeb77d9b38ff386f0944284ffa794f0dc579c54a8",
+      "reason": "S24 cymbal presence hardening: modal-body reinforcement plus plate-correlated colored wash; S23 behavior preserved when the new opt-in block is absent."
+    },
+    "src/code_composer/composition/musical_transitions.py": {
+      "sha256": "62248dace647ff87a559d4290702f54935aba9037211b0192b5d0966217d8697",
+      "reason": "S23 propagates explicitly authored strike_force/strike_position from rhythm-fill plans into generated drum events without inventing values."
+    },
+    "src/code_composer/percussion.py": {
+      "sha256": "5357b048ec2816ffa068f43dc68a2ab5d07e04e27c6528a997f9234627ce41d2",
+      "reason": "S20 compatibility facade exposes supported percussion articulation metadata alongside the existing render functions."
+    }
+  }
+}
