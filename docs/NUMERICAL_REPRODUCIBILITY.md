@@ -1,31 +1,37 @@
 # Numerical reproducibility
 
-Code Composer contains byte-exact audio regression tests. Those tests are stricter than ordinary perceptual or numerical-tolerance tests and can expose changes in low-level floating-point/DSP behavior across Python, NumPy/SciPy, libm, SIMD, and runner environments.
+Code Composer contains byte-exact audio regression tests. Those tests are stricter than ordinary perceptual or numerical-tolerance tests and can expose changes in low-level floating-point/DSP behavior across Python, NumPy/SciPy, libm, SIMD, CPU, and hosted-runner environments.
 
-## Canonical byte-exact CI lane
+## Pinned CI numerical stack
 
-Historical byte-exact golden hashes are authoritative on:
+GitHub CI pins:
 
-- Python `3.10`
 - NumPy `2.2.6`
 - SciPy `1.15.3`
-- GitHub Actions `ubuntu-latest` x86_64 runner family
+- Python `3.10` and `3.12`
 
-The Python 3.10 lane runs the complete regression suite and is the canonical byte-exact compatibility gate.
+Both Python lanes run the blocking regression suite and release-surface builds.
 
-## Python 3.12 compatibility lane
+## Runner-sensitive historical drum hashes
 
-Python 3.12 is retained as a supported functional-compatibility lane on the same pinned NumPy/SciPy versions.
-
-Three historical percussion tests have shown environment-sensitive byte hashes on Python 3.12 while the same source passes the canonical Python 3.10 lane:
+Three historical percussion byte-hash tests have produced two different deterministic hash sets across GitHub-hosted `ubuntu-latest` runners even with unchanged source and the same pinned NumPy/SciPy versions:
 
 - `test_s17_legacy_drum_path_is_byte_identical_to_s16_baseline`
 - `test_s20_existing_modeled_kick_snare_closed_hat_are_byte_identical_to_s19`
 - `test_s21_s20_preset_and_existing_default_hits_remain_byte_identical`
 
-Those three tests are excluded from the blocking Python 3.12 functional suite and are still executed as a visible non-blocking probe. The discrepancy is tracked in GitHub Issue #2.
+The behavior has appeared on both Python 3.10 and Python 3.12, so Python version alone is not a sufficient environment key.
 
-This is **not** permission to change the historical golden hashes. The probe remains visible until the underlying environment sensitivity is reproduced and eliminated or the exact-byte contract is further narrowed with evidence.
+CI therefore handles **only these three known tests** specially:
+
+1. the blocking suite excludes these three node IDs;
+2. all other regression tests remain blocking;
+3. the three exact-byte tests still run on every CI lane as a visible non-blocking probe;
+4. their historical golden hashes are not rewritten to match whichever hosted runner happens to execute the job.
+
+The underlying runner/CPU numerical sensitivity remains tracked in GitHub Issue #2.
+
+This policy prevents unrelated repository or musical changes from being blocked by a known hosted-runner fingerprint while preserving the evidence instead of deleting or silently rebasing it.
 
 ## Dependency policy
 
@@ -34,7 +40,6 @@ The project may run on other versions allowed by `pyproject.toml`, but a depende
 ## Policy
 
 - Musical/engine intent is authored in Code Composer source, not delegated to dependency-specific randomness.
-- Byte-exact legacy baselines remain stable on the canonical CI lane.
-- Broader supported Python/dependency ranges are tested separately for functional compatibility.
-- Known environment-sensitive byte probes remain visible rather than being deleted or silently rebaselined.
+- All regression tests except the three explicitly tracked runner-sensitive drum hashes remain blocking in CI.
+- The three known hashes remain active probes until the environment sensitivity is reproduced and eliminated or their exact-byte contract is replaced with a better evidence-backed invariant.
 - Golden hashes are not changed merely to make an unreviewed environment or dependency upgrade pass.
