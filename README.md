@@ -173,7 +173,7 @@ python tools/validate_skill.py
 python tools/verify_plugin_distribution.py
 ```
 
-CI uses Python 3.10 as the canonical byte-exact regression lane and Python 3.12 as a functional-compatibility lane, while also validating the canonical skill boundary, plugin-discovery layout, and release-surface builds.
+CI runs blocking regression and release builds on Python 3.10 and 3.12. Three historical drum byte-hash tests known to vary across hosted runners remain visible non-blocking probes under Issue #2; their golden hashes are not silently rebased.
 
 ## License and generated music
 
