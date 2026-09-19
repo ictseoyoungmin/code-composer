@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "code-composer://schemas/bowed-string-engine/v1",
+  "title": "Code Composer Bowed String Instrument Patch",
+  "type": "object",
+  "required": ["kind", "engine", "bowed_string_graph"],
+  "properties": {
+    "kind": {"const": "bowed_string"},
+    "engine": {"const": "bowed_string"},
+    "family": {"type": "string", "description": "Optional semantic family label such as a user-authored instrument family. No bundled preset is implied."},
+    "bowed_string_graph": {
+      "type": "object",
+      "required": ["strings", "bow", "vibrato", "envelope"],
+      "properties": {
+        "strings": {
+          "type": "object",
+          "properties": {
+            "max_partials": {"type": "integer", "minimum": 2, "maximum": 32},
+            "spectral_rolloff": {"type": "number", "minimum": 0.4, "maximum": 3.5},
+            "inharmonicity": {"type": "number", "minimum": 0, "maximum": 0.01}
+          },
+          "additionalProperties": false
+        },
+        "bow": {
+          "type": "object",
+          "properties": {
+            "position": {"type": "number", "minimum": 0.02, "maximum": 0.49},
+            "pressure": {"type": "number", "minimum": 0, "maximum": 1},
+            "speed": {"type": "number", "minimum": 0, "maximum": 1},
+            "noise_gain": {"type": "number", "minimum": 0, "maximum": 0.2},
+            "noise_low_hz": {"type": "number", "minimum": 20, "maximum": 19000},
+            "noise_high_hz": {"type": "number", "minimum": 30, "maximum": 20000},
+            "seed": {"type": "integer"}
+          },
+          "additionalProperties": false
+        },
+        "vibrato": {
+          "type": "object",
+          "properties": {
+            "rate_hz": {"type": "number", "minimum": 0, "maximum": 12},
+            "depth_cents": {"type": "number", "minimum": 0, "maximum": 100},
+            "onset_s": {"type": "number", "minimum": 0, "maximum": 4},
+            "fade_s": {"type": "number", "exclusiveMinimum": 0, "maximum": 4}
+          },
+          "additionalProperties": false
+        },
+        "envelope": {
+          "type": "object",
+          "properties": {
+            "attack_s": {"type": "number", "exclusiveMinimum": 0, "maximum": 2},
+            "release_s": {"type": "number", "exclusiveMinimum": 0, "maximum": 4}
+          },
+          "additionalProperties": false
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "resonances_hz": {"type": "array", "maxItems": 16, "items": {"type": "number", "minimum": 20, "maximum": 19000}},
+            "gains": {"type": "array", "maxItems": 16, "items": {"type": "number", "minimum": 0, "maximum": 2}},
+            "q": {"type": "array", "maxItems": 16, "items": {"type": "number", "minimum": 0.25, "maximum": 30}},
+            "mix": {"type": "number", "minimum": 0, "maximum": 1}
+          },
+          "additionalProperties": false
+        },
+        "stereo_width": {"type": "number", "minimum": 0, "maximum": 1},
+        "output_gain": {"type": "number", "minimum": 0, "maximum": 2}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

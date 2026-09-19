@@ -1,0 +1,399 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "code-composer://schemas/bowed-waveguide-engine/v1",
+  "title": "Code Composer Modeled Bowed Waveguide Patch",
+  "type": "object",
+  "required": [
+    "kind",
+    "engine",
+    "bowed_waveguide_graph"
+  ],
+  "properties": {
+    "kind": {
+      "const": "bowed_waveguide"
+    },
+    "engine": {
+      "const": "bowed_waveguide"
+    },
+    "family": {
+      "type": "string"
+    },
+    "bowed_waveguide_graph": {
+      "type": "object",
+      "required": [
+        "string",
+        "bow",
+        "vibrato",
+        "envelope",
+        "body"
+      ],
+      "properties": {
+        "string": {
+          "type": "object"
+        },
+        "bow": {
+          "type": "object"
+        },
+        "vibrato": {
+          "type": "object"
+        },
+        "envelope": {
+          "type": "object"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "bridge_feedback": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "feedback_gain": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 0.03
+                },
+                "max_feedback_velocity": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 0.2
+                },
+                "admittance_gains": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 20,
+                  "items": {
+                    "type": "number",
+                    "minimum": -3,
+                    "maximum": 3
+                  }
+                },
+                "fitted_response": {
+                  "type": "object",
+                  "required": [
+                    "format",
+                    "method",
+                    "reference_sample_rate_hz",
+                    "order",
+                    "poles",
+                    "residues",
+                    "direct",
+                    "output_scale"
+                  ],
+                  "properties": {
+                    "format": {
+                      "const": "code-composer-bridge-admittance-era/v1"
+                    },
+                    "method": {
+                      "const": "era"
+                    },
+                    "reference_sample_rate_hz": {
+                      "type": "integer",
+                      "minimum": 4000,
+                      "maximum": 384000
+                    },
+                    "order": {
+                      "type": "integer",
+                      "minimum": 2,
+                      "maximum": 64
+                    },
+                    "poles": {
+                      "type": "array",
+                      "minItems": 2,
+                      "maxItems": 64,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "residues": {
+                      "type": "array",
+                      "minItems": 2,
+                      "maxItems": 64,
+                      "items": {
+                        "type": "array",
+                        "minItems": 2,
+                        "maxItems": 2,
+                        "items": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "direct": {
+                      "type": "number"
+                    },
+                    "output_scale": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    },
+                    "stabilized_poles": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "hankel_rows": {
+                      "type": "integer",
+                      "minimum": 2
+                    },
+                    "hankel_cols": {
+                      "type": "integer",
+                      "minimum": 2
+                    },
+                    "source": {
+                      "type": "object"
+                    },
+                    "fit_metrics": {
+                      "type": "object"
+                    }
+                  },
+                  "additionalProperties": true
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "stereo_width": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "output_gain": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "continuous": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "initial_attack_s": {
+              "type": "number",
+              "minimum": 0.002,
+              "maximum": 2
+            },
+            "bow_change_s": {
+              "type": "number",
+              "minimum": 0.002,
+              "maximum": 0.12
+            },
+            "control_slew_s": {
+              "type": "number",
+              "minimum": 0.0005,
+              "maximum": 0.08
+            },
+            "pitch_transition_s": {
+              "type": "number",
+              "minimum": 0.0001,
+              "maximum": 0.05
+            },
+            "state_gap_limit_s": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.25
+            },
+            "string_crossing": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "contact_overlap_s": {
+                  "type": "number",
+                  "minimum": 0.001,
+                  "maximum": 0.12
+                },
+                "residual_decay_s": {
+                  "type": "number",
+                  "minimum": 0.01,
+                  "maximum": 1.0
+                },
+                "residual_bridge_mix": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "adjacent_only": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "expression_hardening": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "seed": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "drift_rate_hz": {
+              "type": "number",
+              "minimum": 0.02,
+              "maximum": 4
+            },
+            "drift_rate_secondary_hz": {
+              "type": "number",
+              "minimum": 0.02,
+              "maximum": 4
+            },
+            "pressure_drift": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.12
+            },
+            "speed_drift": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.12
+            },
+            "position_drift": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.03
+            },
+            "event_variation": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.08
+            },
+            "attack_time_variation": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.5
+            },
+            "attack_window_s": {
+              "type": "number",
+              "minimum": 0.002,
+              "maximum": 0.15
+            },
+            "attack_pressure_overshoot": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.2
+            },
+            "attack_noise_boost": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 3
+            },
+            "bow_change_window_s": {
+              "type": "number",
+              "minimum": 0.002,
+              "maximum": 0.15
+            },
+            "bow_change_pressure_dip": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.2
+            },
+            "bow_change_noise_boost": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 3
+            },
+            "vibrato_excitation_coupling": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.15
+            },
+            "vibrato_pressure_coupling": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.08
+            }
+          },
+          "additionalProperties": false
+        },
+        "realism_hardening": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "open_string_vibrato_scale": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "stopped_string_reflection_scale": {
+              "type": "number",
+              "minimum": 0.9,
+              "maximum": 1
+            },
+            "position_shift_base_s": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 0.05
+            },
+            "position_shift_per_position_s": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.02
+            },
+            "position_shift_max_s": {
+              "type": "number",
+              "minimum": 0.005,
+              "maximum": 0.08
+            },
+            "position_shift_pressure_dip": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.3
+            },
+            "position_shift_noise_boost": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 3
+            },
+            "string_crossing_stopped_extra_s": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.05
+            },
+            "string_crossing_force_preload": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.5
+            },
+            "bow_retake_gap_beats": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 4
+            },
+            "bow_retake_contact_s": {
+              "type": "number",
+              "minimum": 0.002,
+              "maximum": 0.12
+            },
+            "bow_retake_pressure_dip": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.3
+            },
+            "bow_retake_noise_boost": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 3
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

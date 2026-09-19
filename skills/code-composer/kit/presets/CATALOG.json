@@ -1,0 +1,722 @@
+{
+  "policy": "presets provide sonic capability, not musical content",
+  "presets": [
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "bass.electric_finger_modeled",
+      "version": "1.0.0",
+      "name": "Electric Finger Bass — Modeled",
+      "engine": "plucked_bass",
+      "family": "electric_bass",
+      "character": [
+        "fingerstyle",
+        "rounded",
+        "physical-parametric",
+        "focused-low-end"
+      ],
+      "strengths": [
+        "pluck and pickup position shape harmonic balance without fixed unrelated resonances",
+        "frequency-dependent damping makes upper partials decay faster than the fundamental",
+        "supports deterministic pitch approaches and bass articulation attack/release scaling"
+      ],
+      "limitations": [
+        "single-note fingerstyle model; slap/pop, pick scrape, fret collision and continuous slide-state are outside this preset",
+        "not calibrated to a specific commercial bass or pickup measurement"
+      ],
+      "recommended_roles": [
+        "bass"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "pitch_approach",
+        "attack_scale",
+        "release_scale"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "bowed.violin.modeled_admittance",
+      "version": "1.0.0",
+      "name": "Modeled Admittance Violin",
+      "engine": "bowed_waveguide",
+      "family": "violin",
+      "character": [
+        "bowed",
+        "modeled",
+        "continuous",
+        "coupled",
+        "body-feedback",
+        "acoustic-leaning"
+      ],
+      "strengths": [
+        "connected arco phrases across strings",
+        "modeled adjacent-string crossings",
+        "causal bridge-admittance/body feedback into string motion"
+      ],
+      "limitations": [
+        "physically inspired deterministic model, not a sampled concert violin or fitted named instrument",
+        "bridge admittance uses a compact modal approximation; full measured impulse-response fitting, advanced bow bounce, and continuous double stops remain outside this preset"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline",
+        "pad"
+      ],
+      "expression_capabilities": {
+        "bow_pressure": true,
+        "bow_speed": true,
+        "bow_position": true,
+        "bow_noise_gain": true,
+        "vibrato_rate_hz": true,
+        "vibrato_depth_cents": true,
+        "vibrato_onset_s": true,
+        "attack_s": true,
+        "release_s": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "bowed.violin.modeled_articulated",
+      "version": "1.0.0",
+      "name": "Modeled Articulated Violin",
+      "engine": "bowed_waveguide",
+      "family": "violin",
+      "character": [
+        "bowed",
+        "modeled",
+        "continuous",
+        "coupled",
+        "body-feedback",
+        "performance-reactive",
+        "technique-aware",
+        "articulation-expanded",
+        "acoustic-leaning"
+      ],
+      "strengths": [
+        "S12 realistic arco with S10/S11 expression and phrase control",
+        "pizzicato pluck excitation with deterministic free-string decay",
+        "harmonic touch voicing and detached spiccato bow-contact gestures"
+      ],
+      "limitations": [
+        "physically inspired deterministic model, not a sampled concert violin or fitted named performer",
+        "harmonic MIDI denotes sounding pitch; ricochet, sautillé, col legno, sul ponticello/tasto notation, and continuous double-stop special articulations remain outside this preset"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline",
+        "pad"
+      ],
+      "expression_capabilities": {
+        "bow_pressure": true,
+        "bow_speed": true,
+        "bow_position": true,
+        "bow_noise_gain": true,
+        "vibrato_rate_hz": true,
+        "vibrato_depth_cents": true,
+        "vibrato_onset_s": true,
+        "attack_s": true,
+        "release_s": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "bowed.violin.modeled_continuous",
+      "version": "1.0.0",
+      "name": "Modeled Continuous Violin",
+      "engine": "bowed_waveguide",
+      "family": "violin",
+      "character": [
+        "bowed",
+        "modeled",
+        "continuous",
+        "acoustic-leaning"
+      ],
+      "strengths": [
+        "connected arco phrases",
+        "continuous same-string legato",
+        "modeled bow-direction changes"
+      ],
+      "limitations": [
+        "physically inspired deterministic model, not a sampled concert violin",
+        "continuous state currently targets monophonic same-string phrases; double-stop continuity and advanced bow bounce remain outside this preset"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline",
+        "pad"
+      ],
+      "expression_capabilities": {
+        "bow_pressure": true,
+        "bow_speed": true,
+        "bow_position": true,
+        "bow_noise_gain": true,
+        "vibrato_rate_hz": true,
+        "vibrato_depth_cents": true,
+        "vibrato_onset_s": true,
+        "attack_s": true,
+        "release_s": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "bowed.violin.modeled_coupled",
+      "version": "1.0.0",
+      "name": "Modeled Coupled Violin",
+      "engine": "bowed_waveguide",
+      "family": "violin",
+      "character": [
+        "bowed",
+        "modeled",
+        "continuous",
+        "coupled",
+        "acoustic-leaning"
+      ],
+      "strengths": [
+        "connected arco phrases across strings",
+        "modeled adjacent-string crossings",
+        "residual bridge/body continuity after string changes"
+      ],
+      "limitations": [
+        "physically inspired deterministic model, not a sampled concert violin",
+        "coupling is a conservative bridge/body approximation; double-stop continuity, advanced bow bounce, and full body-feedback mechanics remain outside this preset"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline",
+        "pad"
+      ],
+      "expression_capabilities": {
+        "bow_pressure": true,
+        "bow_speed": true,
+        "bow_position": true,
+        "bow_noise_gain": true,
+        "vibrato_rate_hz": true,
+        "vibrato_depth_cents": true,
+        "vibrato_onset_s": true,
+        "attack_s": true,
+        "release_s": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "bowed.violin.modeled_expression",
+      "version": "1.0.0",
+      "name": "Modeled Expression Violin",
+      "engine": "bowed_waveguide",
+      "family": "violin",
+      "character": [
+        "bowed",
+        "modeled",
+        "continuous",
+        "coupled",
+        "body-feedback",
+        "performance-reactive",
+        "acoustic-leaning"
+      ],
+      "strengths": [
+        "connected arco phrases across strings",
+        "deterministic performance-to-timbre microvariation without changing composition",
+        "bow attack/reversal irregularity and vibrato-coupled excitation on the S8/S9 physical model"
+      ],
+      "limitations": [
+        "physically inspired deterministic model, not a sampled concert violin or fitted named instrument",
+        "microvariation is a conservative control-layer model; advanced bow bounce, continuous double stops, harmonics, and pizzicato remain outside this preset"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline",
+        "pad"
+      ],
+      "expression_capabilities": {
+        "bow_pressure": true,
+        "bow_speed": true,
+        "bow_position": true,
+        "bow_noise_gain": true,
+        "vibrato_rate_hz": true,
+        "vibrato_depth_cents": true,
+        "vibrato_onset_s": true,
+        "attack_s": true,
+        "release_s": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "bowed.violin.modeled_open",
+      "version": "1.0.0",
+      "name": "Modeled Open Violin",
+      "engine": "bowed_waveguide",
+      "family": "violin",
+      "character": [
+        "bowed",
+        "modeled",
+        "open",
+        "acoustic-leaning"
+      ],
+      "strengths": [
+        "sustained arco lines",
+        "bow-pressure and bow-speed response",
+        "exposed modeled-string texture"
+      ],
+      "limitations": [
+        "physically inspired deterministic model, not a sampled concert violin",
+        "advanced bow bounce, pizzicato, and harmonic fingering are not rendered by this preset"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline",
+        "pad"
+      ],
+      "expression_capabilities": {
+        "bow_pressure": true,
+        "bow_speed": true,
+        "bow_position": true,
+        "bow_noise_gain": true,
+        "vibrato_rate_hz": true,
+        "vibrato_depth_cents": true,
+        "vibrato_onset_s": true,
+        "attack_s": true,
+        "release_s": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "bowed.violin.modeled_realistic",
+      "version": "1.0.0",
+      "name": "Modeled Realistic Violin",
+      "engine": "bowed_waveguide",
+      "family": "violin",
+      "character": [
+        "bowed",
+        "modeled",
+        "continuous",
+        "coupled",
+        "body-feedback",
+        "performance-reactive",
+        "technique-aware",
+        "acoustic-leaning"
+      ],
+      "strengths": [
+        "connected arco phrases with S10/S11 expression control",
+        "open/stopped-string damping and vibrato behavior derived from violin realization",
+        "finite position-shift, string-crossing, and bow-retake mechanics without changing authored notes"
+      ],
+      "limitations": [
+        "physically inspired deterministic model, not a sampled concert violin or fitted named performer",
+        "technique hardening is conservative; harmonics, pizzicato, ricochet/spiccato bounce, and continuous double stops remain outside this preset"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline",
+        "pad"
+      ],
+      "expression_capabilities": {
+        "bow_pressure": true,
+        "bow_speed": true,
+        "bow_position": true,
+        "bow_noise_gain": true,
+        "vibrato_rate_hz": true,
+        "vibrato_depth_cents": true,
+        "vibrato_onset_s": true,
+        "attack_s": true,
+        "release_s": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "bowed.violin.synthetic_warm",
+      "version": "1.0.0",
+      "name": "Synthetic Warm Violin",
+      "engine": "bowed_string",
+      "family": "violin",
+      "character": [
+        "warm",
+        "bowed",
+        "synthetic",
+        "sustained"
+      ],
+      "strengths": [
+        "sustained melody",
+        "supporting counterline",
+        "hybrid arrangements"
+      ],
+      "limitations": [
+        "not intended as a highly realistic exposed virtuoso solo",
+        "no pizzicato/tremolo/portamento model in this preset"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline",
+        "pad"
+      ],
+      "expression_capabilities": {
+        "bow_pressure": true,
+        "bow_speed": true,
+        "bow_position": true,
+        "bow_noise_gain": true,
+        "vibrato_rate_hz": true,
+        "vibrato_depth_cents": true,
+        "vibrato_onset_s": true,
+        "attack_s": true,
+        "release_s": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.acoustic_kit_modeled",
+      "version": "1.0.0",
+      "name": "Acoustic Kit — Modeled",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "acoustic-leaning",
+        "impact-driven",
+        "deterministic",
+        "modal-percussion"
+      ],
+      "strengths": [
+        "kick membrane modes include bounded strike-dependent tension relaxation instead of a single pitch-swept oscillator",
+        "snare combines membrane/body modes with deterministic stochastic wire collisions and explicit center/ghost/rimshot/cross-stick articulations",
+        "hi-hat exposes closed/half-open/open/pedal/choke articulations with distinct decay and excitation profiles",
+        "ride, crash and high/mid/floor tom elements are explicit authored kit voices rather than inferred extra hits"
+      ],
+      "limitations": [
+        "compact real-time approximation, not a fitted or sampled named drum kit",
+        "S20 articulations are independent hit responses; stateful open-hat/cymbal muting and residual-hit interaction are reserved for S22",
+        "brushes and mallet techniques remain outside this preset"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "explicit_articulation"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.acoustic_kit_modeled_cymbal_presence",
+      "version": "1.0.0",
+      "name": "Acoustic Kit Modeled — Cymbal Presence Hardened",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "acoustic-leaning",
+        "coupled-head",
+        "dense-cymbal",
+        "voicing-polished",
+        "performance-responsive",
+        "cymbal-presence-hardened",
+        "deterministic",
+        "dry-close-mic"
+      ],
+      "strengths": [
+        "retains the S22 polished dry-source acoustic core while adding explicit strike-force and strike-position timbre control",
+        "omitting strike controls follows the exact S22 hit path for compatibility and matched A/B work",
+        "strike force changes brightness, contact/body balance and modal excitation without acting as a second loudness fader",
+        "strike position changes membrane/cymbal mode emphasis deterministically while preserving authored articulation identity",
+        "cymbal strike/body energy is emphasized ahead of stochastic wash",
+        "wash excitation is colored and correlated to plate modal energy rather than sounding like an independent static layer"
+      ],
+      "limitations": [
+        "performance-to-timbre control only; no room, overhead, microphone-array or mastering coloration",
+        "reduced-order independent physical approximation, not a sampled or measured named drum kit",
+        "stateful choke/residual-hit interaction remains a later slice",
+        "drummer hand/foot grammar and impossible-limb prevention remain later slices",
+        "stateful open-hat/cymbal choke and shared residual vibration are not implemented in S24",
+        "room/overhead/microphone coloration remains intentionally out of scope"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "explicit_articulation",
+        "coupled_acoustic_core",
+        "voicing_polish",
+        "strike_force",
+        "strike_position",
+        "cymbal_presence_hardening"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.acoustic_kit_modeled_expressive",
+      "version": "1.0.0",
+      "name": "Acoustic Kit — Modeled Expressive",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "acoustic-leaning",
+        "coupled-head",
+        "dense-cymbal",
+        "voicing-polished",
+        "performance-responsive",
+        "deterministic",
+        "dry-close-mic"
+      ],
+      "strengths": [
+        "retains the S22 polished dry-source acoustic core while adding explicit strike-force and strike-position timbre control",
+        "omitting strike controls follows the exact S22 hit path for compatibility and matched A/B work",
+        "strike force changes brightness, contact/body balance and modal excitation without acting as a second loudness fader",
+        "strike position changes membrane/cymbal mode emphasis deterministically while preserving authored articulation identity"
+      ],
+      "limitations": [
+        "performance-to-timbre control only; no room, overhead, microphone-array or mastering coloration",
+        "reduced-order independent physical approximation, not a sampled or measured named drum kit",
+        "stateful choke/residual-hit interaction remains a later slice",
+        "drummer hand/foot grammar and impossible-limb prevention remain later slices"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "explicit_articulation",
+        "coupled_acoustic_core",
+        "voicing_polish",
+        "strike_force",
+        "strike_position"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.acoustic_kit_modeled_polished",
+      "version": "1.0.0",
+      "name": "Acoustic Kit — Modeled Polished",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "acoustic-leaning",
+        "coupled-head",
+        "dense-cymbal",
+        "voicing-polished",
+        "deterministic",
+        "dry-close-mic"
+      ],
+      "strengths": [
+        "retains the S21 coupled-head/cavity/shell acoustic core while smoothing dry-source attack-to-body transitions",
+        "snare wire and impact bands are blended into the head/body response instead of reading as separate bright layers",
+        "cymbal modal peaks are denser and less dominant, with frequency-dependent high-frequency damping and softer contact onset",
+        "preserves explicit S20 articulation vocabulary and deterministic authored-event behavior"
+      ],
+      "limitations": [
+        "dry-source voicing polish only; no room, overhead, microphone-array or mastering coloration",
+        "reduced-order independent physical approximation, not a sampled or measured named drum kit",
+        "stateful choke/residual-hit interaction remains a later slice",
+        "strike-position authoring and drummer performance grammar remain later slices"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "explicit_articulation",
+        "coupled_acoustic_core",
+        "voicing_polish"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.acoustic_kit_modeled_realistic",
+      "version": "1.0.0",
+      "name": "Acoustic Kit — Modeled Realistic",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "acoustic-leaning",
+        "coupled-head",
+        "dense-cymbal",
+        "deterministic",
+        "dry-close-mic"
+      ],
+      "strengths": [
+        "kick, snare and tom dry sources use reduced-order coupled batter/resonant-head, cavity and shell responses",
+        "snare wire energy is driven by resonant-head motion instead of an independent noise tail",
+        "hi-hat, ride and crash use dense deterministic inharmonic paired modal fields with natural beating",
+        "preserves the S20 explicit articulation vocabulary while replacing the toy-like sparse acoustic core"
+      ],
+      "limitations": [
+        "reduced-order independent physical approximation, not a fitted, sampled, or FDTD named drum kit",
+        "room, overhead and microphone-array behavior are intentionally absent from S21 dry-source hardening",
+        "stateful choke/residual-hit interaction remains a later state-interaction concern",
+        "strike-position authoring and drummer performance grammar remain later slices"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "explicit_articulation",
+        "coupled_acoustic_core"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "generic.clean_lead",
+      "version": "1.0.0",
+      "name": "Clean Synthetic Lead",
+      "engine": "generic",
+      "family": null,
+      "character": [
+        "clean",
+        "focused",
+        "synthetic"
+      ],
+      "strengths": [
+        "melodic lead",
+        "guide melody",
+        "clear foreground line"
+      ],
+      "limitations": [
+        "synthetic character",
+        "limited acoustic articulation"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline"
+      ],
+      "expression_capabilities": {
+        "pitch_start_cents": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "generic.soft_pad",
+      "version": "1.0.0",
+      "name": "Soft Synthetic Pad",
+      "engine": "generic",
+      "family": null,
+      "character": [
+        "soft",
+        "wide",
+        "sustained"
+      ],
+      "strengths": [
+        "harmonic support",
+        "slow-moving pads",
+        "background layers"
+      ],
+      "limitations": [
+        "synthetic character",
+        "not intended to imitate an acoustic ensemble"
+      ],
+      "recommended_roles": [
+        "pad"
+      ],
+      "expression_capabilities": {
+        "pitch_start_cents": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "piano.concert_grand",
+      "version": "1.0.0",
+      "name": "Concert Grand",
+      "engine": "piano",
+      "family": "acoustic",
+      "character": [
+        "open",
+        "full",
+        "acoustic"
+      ],
+      "strengths": [
+        "foreground piano",
+        "lyrical accompaniment",
+        "wide dynamic writing"
+      ],
+      "limitations": [
+        "deterministic modeled piano, not a sampled concert instrument"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline",
+        "pad"
+      ],
+      "expression_capabilities": {
+        "pedal": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "piano.electric_tine_warm",
+      "version": "1.0.0",
+      "name": "Warm Electric Tine",
+      "engine": "piano",
+      "family": "electric",
+      "character": [
+        "warm",
+        "electric",
+        "rounded"
+      ],
+      "strengths": [
+        "chordal support",
+        "warm sustained chordal texture",
+        "soft foreground parts"
+      ],
+      "limitations": [
+        "modeled electric piano character; not a hardware emulation claim"
+      ],
+      "recommended_roles": [
+        "lead",
+        "pad",
+        "arp"
+      ],
+      "expression_capabilities": {
+        "pedal": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "piano.upright_intimate",
+      "version": "1.0.0",
+      "name": "Intimate Upright",
+      "engine": "piano",
+      "family": "acoustic",
+      "character": [
+        "dry",
+        "close",
+        "compact"
+      ],
+      "strengths": [
+        "intimate accompaniment",
+        "rhythmic piano",
+        "close perspective writing"
+      ],
+      "limitations": [
+        "shorter and drier than a concert grand"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline",
+        "pad"
+      ],
+      "expression_capabilities": {
+        "pedal": true
+      },
+      "musical_content": false
+    }
+  ]
+}

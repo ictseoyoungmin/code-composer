@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "title": "Synthetic Protocol Fixture",
+    "version": "1.17.0",
+    "sample_rate": 8000,
+    "global_seed": 1
+  },
+  "transport": {
+    "bpm": 120,
+    "beats_per_bar": 4
+  },
+  "tonal": {
+    "root": "C",
+    "scale": "chromatic"
+  },
+  "form": [
+    {
+      "id": "fixture",
+      "start_bar": 0,
+      "bars": 1,
+      "energy": 0.5
+    }
+  ],
+  "materials": {
+    "motifs": {},
+    "progressions": {},
+    "rhythms": {}
+  },
+  "instruments": {
+    "probe": {
+      "graph": {
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "gain": 0.1
+          }
+        ],
+        "envelope": {
+          "attack": 0.001,
+          "decay": 0.01,
+          "sustain": 0.1,
+          "release": 0.01
+        },
+        "output_gain": 0.1
+      }
+    }
+  },
+  "tracks": [
+    {
+      "id": "probe",
+      "instrument": "probe",
+      "gain": 0.1,
+      "pan": 0.0,
+      "source": {
+        "type": "resolved"
+      },
+      "events": [
+        {
+          "start_beat": 0.0,
+          "duration_beats": 0.125,
+          "midi": 60,
+          "velocity": 0.1
+        }
+      ]
+    }
+  ],
+  "mix": {
+    "tail_seconds": 0.0,
+    "drive": 1.0,
+    "ceiling": 0.9
+  }
+}

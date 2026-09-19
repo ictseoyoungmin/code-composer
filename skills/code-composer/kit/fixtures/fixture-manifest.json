@@ -1,0 +1,8 @@
+{
+  "synthetic-minimal-ir.json": {
+    "purpose": "protocol_fixture",
+    "musical_reference": false,
+    "synthetic": true,
+    "event_count": 1
+  }
+}

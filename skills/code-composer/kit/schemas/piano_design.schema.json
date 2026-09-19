@@ -1,0 +1,401 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://code-composer.local/schemas/piano_design.schema.json",
+  "title": "Code Composer Piano Design v1.15.5",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "family": {
+      "enum": [
+        "acoustic",
+        "electric"
+      ]
+    },
+    "categories": {
+      "type": "object"
+    },
+    "controls": {
+      "type": "object"
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "family": {
+          "enum": [
+            "acoustic"
+          ]
+        },
+        "categories": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "body": {
+              "enum": [
+                "concert_grand",
+                "studio_grand",
+                "upright"
+              ]
+            },
+            "hammer": {
+              "enum": [
+                "soft_felt",
+                "medium_felt",
+                "dense_felt"
+              ]
+            },
+            "stringing": {
+              "enum": [
+                "concert",
+                "compact",
+                "aged"
+              ]
+            },
+            "soundboard": {
+              "enum": [
+                "open_board",
+                "balanced_board",
+                "dry_board"
+              ]
+            },
+            "perspective": {
+              "enum": [
+                "player",
+                "audience",
+                "close"
+              ]
+            }
+          }
+        },
+        "controls": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "max_partials": {
+              "type": "integer",
+              "minimum": 3,
+              "maximum": 28
+            },
+            "base_decay_s": {
+              "type": "number",
+              "minimum": 0.15,
+              "maximum": 12
+            },
+            "decay_keytrack": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "partial_decay_power": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "spectral_rolloff": {
+              "type": "number",
+              "minimum": 0.5,
+              "maximum": 3
+            },
+            "velocity_brightness": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 2
+            },
+            "inharmonicity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.005
+            },
+            "detune_cents": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "stereo_width": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "low_strings": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3
+            },
+            "mid_strings": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3
+            },
+            "high_strings": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 3
+            },
+            "hammer_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.8
+            },
+            "hammer_noise_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.5
+            },
+            "hammer_decay_s": {
+              "type": "number",
+              "minimum": 0.001,
+              "maximum": 0.2
+            },
+            "hammer_low_cutoff_hz": {
+              "type": "number",
+              "minimum": 20,
+              "maximum": 18000
+            },
+            "hammer_soft_high_cutoff_hz": {
+              "type": "number",
+              "minimum": 100,
+              "maximum": 20000
+            },
+            "hammer_hard_high_cutoff_hz": {
+              "type": "number",
+              "minimum": 100,
+              "maximum": 20000
+            },
+            "release_s": {
+              "type": "number",
+              "minimum": 0.02,
+              "maximum": 5
+            },
+            "pedal_release_s": {
+              "type": "number",
+              "minimum": 0.02,
+              "maximum": 8
+            },
+            "resonance_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.4
+            },
+            "resonance_pedal_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.5
+            },
+            "resonance_decay_s": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 8
+            },
+            "soundboard_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.25
+            },
+            "soundboard_pedal_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.35
+            },
+            "soundboard_cross": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "bridge_coupling": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "bridge_low_cutoff_hz": {
+              "type": "number",
+              "minimum": 20,
+              "maximum": 2000
+            },
+            "bridge_high_cutoff_hz": {
+              "type": "number",
+              "minimum": 1000,
+              "maximum": 20000
+            },
+            "modal_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.4
+            },
+            "modal_decay_scale": {
+              "type": "number",
+              "minimum": 0.2,
+              "maximum": 4
+            },
+            "key_noise_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.25
+            },
+            "damper_noise_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.25
+            },
+            "body_soft_cutoff_hz": {
+              "type": "number",
+              "minimum": 100,
+              "maximum": 19000
+            },
+            "body_hard_cutoff_hz": {
+              "type": "number",
+              "minimum": 200,
+              "maximum": 20000
+            },
+            "output_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 2
+            }
+          }
+        }
+      }
+    },
+    {
+      "required": [
+        "family"
+      ],
+      "properties": {
+        "family": {
+          "const": "electric"
+        },
+        "categories": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mechanism": {
+              "enum": [
+                "tine",
+                "reed",
+                "digital_fm"
+              ]
+            },
+            "pickup": {
+              "enum": [
+                "mellow",
+                "neutral",
+                "bright"
+              ]
+            },
+            "amp": {
+              "enum": [
+                "direct",
+                "clean_combo",
+                "warm_combo"
+              ]
+            },
+            "modulation": {
+              "enum": [
+                "none",
+                "tremolo",
+                "chorus"
+              ]
+            },
+            "perspective": {
+              "enum": [
+                "centered",
+                "wide",
+                "close"
+              ]
+            }
+          }
+        },
+        "controls": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "decay_s": {
+              "type": "number",
+              "minimum": 0.15,
+              "maximum": 12
+            },
+            "release_s": {
+              "type": "number",
+              "minimum": 0.02,
+              "maximum": 6
+            },
+            "bell_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1.5
+            },
+            "bark_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1.5
+            },
+            "velocity_brightness": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 3
+            },
+            "inharmonicity": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.02
+            },
+            "pickup_drive": {
+              "type": "number",
+              "minimum": 0.1,
+              "maximum": 8
+            },
+            "pickup_cutoff_hz": {
+              "type": "number",
+              "minimum": 200,
+              "maximum": 20000
+            },
+            "amp_drive": {
+              "type": "number",
+              "minimum": 0.1,
+              "maximum": 8
+            },
+            "amp_cutoff_hz": {
+              "type": "number",
+              "minimum": 200,
+              "maximum": 20000
+            },
+            "tremolo_rate_hz": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 15
+            },
+            "tremolo_depth": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "chorus_rate_hz": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 10
+            },
+            "chorus_depth_cents": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 30
+            },
+            "stereo_width": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "key_noise_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.25
+            },
+            "output_gain": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 2
+            }
+          }
+        }
+      }
+    }
+  ]
+}
