@@ -1,0 +1,40 @@
+{
+  "targets": [
+    "ORCHESTRATION_MASKING",
+    "REGISTER_COLLISION",
+    "TRANSITION_DISCONTINUITY"
+  ],
+  "before_issue_count": 18,
+  "after_issue_count": 0,
+  "resolved_count": 18,
+  "introduced_count": 0,
+  "by_code": [
+    {
+      "code": "ORCHESTRATION_MASKING",
+      "before": 4,
+      "after": 0,
+      "delta": -4
+    },
+    {
+      "code": "REGISTER_COLLISION",
+      "before": 12,
+      "after": 0,
+      "delta": -12
+    },
+    {
+      "code": "TRANSITION_DISCONTINUITY",
+      "before": 2,
+      "after": 0,
+      "delta": -2
+    }
+  ],
+  "target_improved": true,
+  "global_before_issue_count": 18,
+  "global_after_issue_count": 0,
+  "introduced_non_target": [],
+  "introduced_non_target_count": 0,
+  "introduced_high_medium": [],
+  "introduced_high_medium_count": 0,
+  "regression_free": true,
+  "improved": true
+}
