@@ -1,0 +1,148 @@
+{
+  "global": {
+    "duration_seconds": 61.58748299319728,
+    "peak": 0.5078890346995453,
+    "rms": 0.11010367061059473,
+    "headroom_db": 5.8846232693539005,
+    "clipped_sample_ratio": 0.0,
+    "silence_ratio": 0.02727311554310591,
+    "stereo_width": 0.22739673527058363
+  },
+  "sections": {
+    "intro": {
+      "start_seconds": 0.0,
+      "end_seconds": 10.0,
+      "expected_energy": 0.32,
+      "rms": 0.040605856526049484,
+      "peak": 0.2663655507065035,
+      "crest_factor": 6.559781605287024,
+      "stereo_width": 0.25044852849618404,
+      "silence_ratio": 0.018845804988662132,
+      "transient_density_hz": 2.7,
+      "centroid_hz": 1431.741201348356,
+      "low_ratio": 2.8236963851102954e-05,
+      "mid_ratio": 0.9635959131945894,
+      "high_ratio": 0.03637584984155939,
+      "measured_energy_norm": 0.27761508479043917,
+      "expected_energy_norm": 0.32,
+      "energy_error": -0.042384915209560836
+    },
+    "build": {
+      "start_seconds": 10.0,
+      "end_seconds": 20.0,
+      "expected_energy": 0.58,
+      "rms": 0.10347562322454425,
+      "peak": 0.45588549455244604,
+      "crest_factor": 4.405728425168941,
+      "stereo_width": 0.193652766047741,
+      "silence_ratio": 0.00636281179138322,
+      "transient_density_hz": 5.2,
+      "centroid_hz": 1857.3781125227156,
+      "low_ratio": 0.002716060014599122,
+      "mid_ratio": 0.8821443734926837,
+      "high_ratio": 0.1151395664927171,
+      "measured_energy_norm": 0.7074445996920867,
+      "expected_energy_norm": 0.58,
+      "energy_error": 0.12744459969208677
+    },
+    "main": {
+      "start_seconds": 20.0,
+      "end_seconds": 35.0,
+      "expected_energy": 0.88,
+      "rms": 0.13828976171723034,
+      "peak": 0.4857631153294473,
+      "crest_factor": 3.5126469906189968,
+      "stereo_width": 0.21123516024035127,
+      "silence_ratio": 0.0010763416477702192,
+      "transient_density_hz": 4.733333333333333,
+      "centroid_hz": 2211.4727340468985,
+      "low_ratio": 0.00412667424662466,
+      "mid_ratio": 0.7985171686729887,
+      "high_ratio": 0.19735615708038645,
+      "measured_energy_norm": 0.9454627290068297,
+      "expected_energy_norm": 0.88,
+      "energy_error": 0.0654627290068297
+    },
+    "break": {
+      "start_seconds": 35.0,
+      "end_seconds": 45.0,
+      "expected_energy": 0.42,
+      "rms": 0.03907296487823684,
+      "peak": 0.30344553971984006,
+      "crest_factor": 7.766125265012984,
+      "stereo_width": 0.3049032081040592,
+      "silence_ratio": 0.03312925170068027,
+      "transient_density_hz": 3.2,
+      "centroid_hz": 5615.4023798145,
+      "low_ratio": 0.002054871562057386,
+      "mid_ratio": 0.46041311579074573,
+      "high_ratio": 0.5375320126471967,
+      "measured_energy_norm": 0.26713497474746883,
+      "expected_energy_norm": 0.42,
+      "energy_error": -0.15286502525253115
+    },
+    "final": {
+      "start_seconds": 45.0,
+      "end_seconds": 60.0,
+      "expected_energy": 1.0,
+      "rms": 0.14626675116268004,
+      "peak": 0.5078890346995453,
+      "crest_factor": 3.47234782110299,
+      "stereo_width": 0.24601154753552112,
+      "silence_ratio": 0.0009584278155706727,
+      "transient_density_hz": 4.333333333333333,
+      "centroid_hz": 2702.8231350285237,
+      "low_ratio": 0.0038624469961815724,
+      "mid_ratio": 0.7193510727032352,
+      "high_ratio": 0.2767864803005831,
+      "measured_energy_norm": 1.0,
+      "expected_energy_norm": 1.0,
+      "energy_error": 0.0
+    }
+  },
+  "transitions": {
+    "build": {
+      "discontinuity": 0.6586596096180684
+    },
+    "main": {
+      "discontinuity": 0.7672879994995788
+    },
+    "break": {
+      "discontinuity": 0.1546276025808043
+    },
+    "final": {
+      "discontinuity": 0.8281591424265417
+    }
+  },
+  "energy_correlation": 0.9623783714784856,
+  "issues": [
+    {
+      "code": "BRIGHTNESS_EXCESS",
+      "section": "break",
+      "severity": "low",
+      "observed": 0.5375,
+      "message": "break is dominated by high-frequency energy."
+    },
+    {
+      "code": "ABRUPT_TRANSITION",
+      "section": "build",
+      "severity": "medium",
+      "observed": 0.6587,
+      "message": "Transition into build has a large short-term energy jump."
+    },
+    {
+      "code": "ABRUPT_TRANSITION",
+      "section": "main",
+      "severity": "medium",
+      "observed": 0.7673,
+      "message": "Transition into main has a large short-term energy jump."
+    },
+    {
+      "code": "ABRUPT_TRANSITION",
+      "section": "final",
+      "severity": "medium",
+      "observed": 0.8282,
+      "message": "Transition into final has a large short-term energy jump."
+    }
+  ]
+}

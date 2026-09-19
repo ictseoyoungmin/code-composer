@@ -1,0 +1,192 @@
+{
+  "meta": {
+    "title": "First Light v0.2",
+    "version": "0.2",
+    "sample_rate": 44100,
+    "global_seed": 20260916
+  },
+  "transport": {
+    "bpm": 96,
+    "beats_per_bar": 4
+  },
+  "tonal": {
+    "root": "D",
+    "scale": "natural_minor"
+  },
+  "form": [
+    {
+      "id": "intro",
+      "start_bar": 0,
+      "bars": 2,
+      "energy": 0.35
+    },
+    {
+      "id": "build",
+      "start_bar": 2,
+      "bars": 2,
+      "energy": 0.58
+    },
+    {
+      "id": "main",
+      "start_bar": 4,
+      "bars": 4,
+      "energy": 0.9
+    }
+  ],
+  "materials": {
+    "motifs": {
+      "main": {
+        "intervals": [
+          0,
+          2,
+          4,
+          6,
+          4,
+          3,
+          2,
+          1
+        ],
+        "rhythm": [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "progressions": {
+      "home": {
+        "degrees": [
+          1,
+          6,
+          3,
+          7
+        ]
+      }
+    },
+    "rhythms": {
+      "four_on_floor": {
+        "steps": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "pad": {
+      "kind": "pad",
+      "adsr": {
+        "attack": 0.25,
+        "decay": 0.4,
+        "sustain": 0.75,
+        "release": 0.6
+      }
+    },
+    "lead": {
+      "kind": "lead",
+      "adsr": {
+        "attack": 0.008,
+        "decay": 0.08,
+        "sustain": 0.6,
+        "release": 0.14
+      }
+    },
+    "bass": {
+      "kind": "bass",
+      "adsr": {
+        "attack": 0.005,
+        "decay": 0.05,
+        "sustain": 0.8,
+        "release": 0.1
+      }
+    }
+  },
+  "tracks": [
+    {
+      "id": "pad",
+      "instrument": "pad",
+      "gain": 0.1,
+      "pan": -0.05,
+      "fx": {
+        "reverb": true
+      },
+      "source": {
+        "type": "chords",
+        "progression": "home",
+        "chord_beats": 4,
+        "octave": 3,
+        "voice_center": 58,
+        "seventh": true,
+        "velocity": 0.55,
+        "gate": 0.92
+      }
+    },
+    {
+      "id": "bass",
+      "instrument": "bass",
+      "gain": 0.18,
+      "pan": 0.0,
+      "source": {
+        "type": "bass",
+        "progression": "home",
+        "octave": 2,
+        "pattern": [
+          0.0,
+          2.0
+        ],
+        "duration_beats": 0.7,
+        "velocity": 0.72
+      }
+    },
+    {
+      "id": "lead",
+      "instrument": "lead",
+      "gain": 0.13,
+      "pan": 0.08,
+      "fx": {
+        "delay": {
+          "time": 0.24,
+          "feedback": 0.22,
+          "repeats": 3,
+          "cross": 0.55
+        }
+      },
+      "source": {
+        "type": "motif",
+        "motif": "main",
+        "base_degree": 1,
+        "octave": 4,
+        "start_beat": 8,
+        "until_beat": 32,
+        "transform_cycle": [
+          "identity",
+          "reverse",
+          "invert",
+          "octave_up"
+        ],
+        "velocity": 0.62,
+        "velocity_jitter": 0.04,
+        "timing_jitter_beats": 0.015,
+        "gate": 0.82,
+        "humanize_pitch": true
+      }
+    }
+  ],
+  "automation": [],
+  "mix": {
+    "tail_seconds": 1.2,
+    "drive": 1.35,
+    "ceiling": 0.93
+  }
+}

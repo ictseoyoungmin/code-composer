@@ -1,0 +1,6 @@
+{
+  "author": "<name>",
+  "status": "<working|review|approved>",
+  "request": [],
+  "locked_scopes": []
+}

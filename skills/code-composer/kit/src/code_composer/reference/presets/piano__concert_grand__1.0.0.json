@@ -1,0 +1,52 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "piano.concert_grand",
+  "version": "1.0.0",
+  "name": "Concert Grand",
+  "engine": "piano",
+  "family": "acoustic",
+  "character": [
+    "open",
+    "full",
+    "acoustic"
+  ],
+  "strengths": [
+    "foreground piano",
+    "lyrical accompaniment",
+    "wide dynamic writing"
+  ],
+  "limitations": [
+    "deterministic modeled piano, not a sampled concert instrument"
+  ],
+  "recommended_roles": [
+    "lead",
+    "topline",
+    "pad"
+  ],
+  "expression_capabilities": {
+    "pedal": true
+  },
+  "musical_content": false,
+  "patch": {
+    "kind": "piano",
+    "piano_design": {
+      "categories": {
+        "body": "concert_grand",
+        "hammer": "medium_felt",
+        "stringing": "concert",
+        "soundboard": "open_board",
+        "perspective": "player"
+      },
+      "controls": {
+        "stereo_width": 0.82,
+        "base_decay_s": 4.4,
+        "velocity_brightness": 0.8,
+        "hammer_noise_gain": 0.052,
+        "resonance_gain": 0.034,
+        "soundboard_gain": 0.032,
+        "output_gain": 0.6
+      },
+      "family": "acoustic"
+    }
+  }
+}

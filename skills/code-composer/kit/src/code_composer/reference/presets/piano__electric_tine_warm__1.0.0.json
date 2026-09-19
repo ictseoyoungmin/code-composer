@@ -1,0 +1,52 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "piano.electric_tine_warm",
+  "version": "1.0.0",
+  "name": "Warm Electric Tine",
+  "engine": "piano",
+  "family": "electric",
+  "character": [
+    "warm",
+    "electric",
+    "rounded"
+  ],
+  "strengths": [
+    "chordal support",
+    "warm sustained chordal texture",
+    "soft foreground parts"
+  ],
+  "limitations": [
+    "modeled electric piano character; not a hardware emulation claim"
+  ],
+  "recommended_roles": [
+    "lead",
+    "pad",
+    "arp"
+  ],
+  "expression_capabilities": {
+    "pedal": true
+  },
+  "musical_content": false,
+  "patch": {
+    "kind": "piano",
+    "piano_design": {
+      "family": "electric",
+      "categories": {
+        "mechanism": "tine",
+        "pickup": "mellow",
+        "amp": "clean_combo",
+        "modulation": "tremolo",
+        "perspective": "wide"
+      },
+      "controls": {
+        "decay_s": 2.9,
+        "bell_gain": 0.34,
+        "bark_gain": 0.12,
+        "tremolo_rate_hz": 4.4,
+        "tremolo_depth": 0.16,
+        "stereo_width": 0.82,
+        "output_gain": 0.62
+      }
+    }
+  }
+}

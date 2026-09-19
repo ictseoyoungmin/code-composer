@@ -1,0 +1,77 @@
+{
+  "name": "code-composer",
+  "version": "1.17.0",
+  "skill_root": ".",
+  "principles": {
+    "examples_teach": "operation_never_taste",
+    "source_read_default": "avoid"
+  },
+  "capabilities": {
+    "render": {
+      "entrypoint": "code-composer",
+      "workflow": "workflows/render-and-qa.md"
+    },
+    "compose": {
+      "entrypoint": "code-composer-compose",
+      "workflow": "workflows/compose.md"
+    },
+    "midi": {
+      "entrypoint": "code-composer-midi",
+      "workflow": "workflows/midi-export.md"
+    },
+    "collab_bundle": {
+      "entrypoint": "code-composer-collab",
+      "workflow": "workflows/midi-export.md"
+    },
+    "exchange": {
+      "entrypoint": "code-composer-exchange",
+      "workflow": "workflows/exchange.md"
+    },
+    "delivery": {
+      "entrypoint": "code-composer-delivery",
+      "workflow": "workflows/deliver.md"
+    },
+    "presets": {
+      "entrypoint": "code-composer-presets",
+      "workflow": "workflows/select-preset.md"
+    },
+    "violin_performance": {
+      "entrypoint": "code-composer-violin",
+      "workflow": "workflows/violin-performance.md"
+    },
+    "bridge_admittance_fit": {
+      "entrypoint": "code-composer-admittance-fit",
+      "workflow": "workflows/fit-bridge-admittance.md"
+    }
+  },
+  "instrument_engines": {
+    "registry": "src/code_composer/audio/engines/registry.py",
+    "builtins": [
+      "generic",
+      "piano",
+      "bowed_string",
+      "bowed_waveguide",
+      "plucked_bass",
+      "percussion"
+    ],
+    "contract": "contracts/instrument-engines.md",
+    "bowed_string_contract": "contracts/bowed-string.md",
+    "policy": "engine-specific patches extend through the registry; central render has no family-specific branch",
+    "percussion_contract": "contracts/percussion.md"
+  },
+  "factory_presets": {
+    "catalog": "presets/CATALOG.json",
+    "contract": "contracts/factory-presets.md",
+    "policy": "sonic capability only; no musical content; fully materialized into canonical Music IR"
+  },
+  "violin_performance": {
+    "contract": "contracts/violin-performance.md",
+    "schema": "schemas/violin_performance.schema.json",
+    "policy": "physical realization only; monophonic plus synchronous adjacent-string double-stop fingering/bow planning; preserve authored notes and expression"
+  },
+  "bridge_admittance_fitting": {
+    "contract": "contracts/bridge-admittance-fit.md",
+    "schema": "schemas/bridge_admittance_era.schema.json",
+    "policy": "fit explicit measured force-to-bridge-velocity impulse responses into compact ERA profiles; do not infer radiation transfer or instrument identity"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "bowed.violin.synthetic_warm",
+  "version": "1.0.0",
+  "name": "Synthetic Warm Violin",
+  "engine": "bowed_string",
+  "family": "violin",
+  "character": [
+    "warm",
+    "bowed",
+    "synthetic",
+    "sustained"
+  ],
+  "strengths": [
+    "sustained melody",
+    "supporting counterline",
+    "hybrid arrangements"
+  ],
+  "limitations": [
+    "not intended as a highly realistic exposed virtuoso solo",
+    "no pizzicato/tremolo/portamento model in this preset"
+  ],
+  "recommended_roles": [
+    "lead",
+    "topline",
+    "pad"
+  ],
+  "expression_capabilities": {
+    "bow_pressure": true,
+    "bow_speed": true,
+    "bow_position": true,
+    "bow_noise_gain": true,
+    "vibrato_rate_hz": true,
+    "vibrato_depth_cents": true,
+    "vibrato_onset_s": true,
+    "attack_s": true,
+    "release_s": true
+  },
+  "musical_content": false,
+  "patch": {
+    "kind": "bowed_string",
+    "engine": "bowed_string",
+    "family": "violin",
+    "bowed_string_graph": {
+      "strings": {
+        "max_partials": 15,
+        "spectral_rolloff": 1.28,
+        "inharmonicity": 0.0001
+      },
+      "bow": {
+        "position": 0.19,
+        "pressure": 0.54,
+        "speed": 0.63,
+        "noise_gain": 0.014,
+        "noise_low_hz": 900,
+        "noise_high_hz": 7600,
+        "seed": 83
+      },
+      "vibrato": {
+        "rate_hz": 5.4,
+        "depth_cents": 17,
+        "onset_s": 0.2,
+        "fade_s": 0.15
+      },
+      "envelope": {
+        "attack_s": 0.045,
+        "release_s": 0.24
+      },
+      "body": {
+        "resonances_hz": [
+          470,
+          860,
+          1510,
+          2840
+        ],
+        "gains": [
+          0.24,
+          0.19,
+          0.13,
+          0.08
+        ],
+        "q": [
+          3.4,
+          4.0,
+          4.8,
+          5.6
+        ],
+        "mix": 0.16
+      },
+      "stereo_width": 0.18,
+      "output_gain": 0.46
+    }
+  }
+}

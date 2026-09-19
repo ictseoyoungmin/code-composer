@@ -1,0 +1,408 @@
+{
+  "meta": {
+    "title": "Groove Architecture Study",
+    "version": "0.5",
+    "sample_rate": 44100,
+    "global_seed": 20260916
+  },
+  "transport": {
+    "bpm": 96,
+    "beats_per_bar": 4
+  },
+  "tonal": {
+    "root": "D",
+    "scale": "natural_minor"
+  },
+  "form": [
+    {
+      "id": "intro",
+      "start_bar": 0,
+      "bars": 4,
+      "energy": 0.32
+    },
+    {
+      "id": "build",
+      "start_bar": 4,
+      "bars": 4,
+      "energy": 0.58
+    },
+    {
+      "id": "main",
+      "start_bar": 8,
+      "bars": 6,
+      "energy": 0.88
+    },
+    {
+      "id": "break",
+      "start_bar": 14,
+      "bars": 4,
+      "energy": 0.42
+    },
+    {
+      "id": "final",
+      "start_bar": 18,
+      "bars": 6,
+      "energy": 1.0
+    }
+  ],
+  "materials": {
+    "motifs": {
+      "main": {
+        "intervals": [
+          0,
+          2,
+          4,
+          6,
+          4,
+          3,
+          2,
+          1
+        ],
+        "rhythm": [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "progressions": {
+      "home": {
+        "degrees": [
+          1,
+          6,
+          3,
+          7
+        ]
+      }
+    },
+    "rhythms": {
+      "default": {
+        "steps_per_bar": 16,
+        "roles": {
+          "kick": [
+            1.0,
+            0,
+            0,
+            0,
+            0.45,
+            0,
+            0.25,
+            0,
+            0.95,
+            0,
+            0.2,
+            0,
+            0.55,
+            0,
+            0.2,
+            0
+          ],
+          "snare": [
+            0,
+            0,
+            0,
+            0,
+            1.0,
+            0,
+            0.18,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1.0,
+            0,
+            0.22,
+            0
+          ],
+          "hat": [
+            0.82,
+            0,
+            0.6,
+            0,
+            0.72,
+            0,
+            0.58,
+            0,
+            0.8,
+            0,
+            0.62,
+            0,
+            0.75,
+            0,
+            0.66,
+            0
+          ]
+        },
+        "fills": {
+          "default": [
+            [
+              12,
+              "snare",
+              0.55
+            ],
+            [
+              13,
+              "snare",
+              0.68
+            ],
+            [
+              14,
+              "snare",
+              0.82
+            ],
+            [
+              15,
+              "snare",
+              1.0
+            ]
+          ],
+          "final": [
+            [
+              10,
+              "snare",
+              0.55
+            ],
+            [
+              11,
+              "hat",
+              0.7
+            ],
+            [
+              12,
+              "snare",
+              0.65
+            ],
+            [
+              13,
+              "snare",
+              0.78
+            ],
+            [
+              14,
+              "snare",
+              0.9
+            ],
+            [
+              15,
+              "snare",
+              1.0
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "instruments": {
+    "pad": {
+      "kind": "pad",
+      "adsr": {
+        "attack": 0.25,
+        "decay": 0.4,
+        "sustain": 0.75,
+        "release": 0.6
+      }
+    },
+    "lead": {
+      "kind": "lead",
+      "adsr": {
+        "attack": 0.008,
+        "decay": 0.08,
+        "sustain": 0.6,
+        "release": 0.14
+      }
+    },
+    "bass": {
+      "kind": "bass",
+      "adsr": {
+        "attack": 0.005,
+        "decay": 0.05,
+        "sustain": 0.8,
+        "release": 0.1
+      }
+    },
+    "arp": {
+      "kind": "pluck",
+      "adsr": {
+        "attack": 0.005,
+        "decay": 0.08,
+        "sustain": 0.25,
+        "release": 0.08
+      }
+    },
+    "drums": {
+      "kind": "percussion"
+    }
+  },
+  "tracks": [],
+  "automation": [],
+  "mix": {
+    "tail_seconds": 1.2,
+    "drive": 1.35,
+    "ceiling": 0.93
+  },
+  "arrangement": {
+    "motif": "main",
+    "profiles": {
+      "intro": {
+        "lead_density": 0.45,
+        "lead_fragment": 0.5,
+        "register_shift": -12
+      },
+      "build": {
+        "lead_density": 0.68,
+        "lead_fragment": 0.78
+      },
+      "main": {
+        "lead_density": 0.88,
+        "lead_fragment": 1.0
+      },
+      "break": {
+        "lead_density": 0.44,
+        "lead_fragment": 0.5,
+        "register_shift": 12
+      },
+      "final": {
+        "lead_density": 0.96,
+        "lead_fragment": 1.0,
+        "register_shift": 12
+      }
+    },
+    "roles": {
+      "lead": {
+        "instrument": "lead",
+        "gain": 0.13,
+        "pan": 0.08,
+        "tension": 0.72,
+        "cadence_strength": 0.9,
+        "max_leap_semitones": 7,
+        "fx": {
+          "delay": {
+            "time": 0.24,
+            "feedback": 0.22,
+            "repeats": 3,
+            "cross": 0.55
+          }
+        }
+      },
+      "pad": {
+        "instrument": "pad",
+        "gain": 0.1,
+        "pan": -0.05,
+        "fx": {
+          "reverb": true
+        },
+        "source": {
+          "progression": "home",
+          "chord_beats": 4,
+          "octave": 3,
+          "voice_center": 58,
+          "seventh": true,
+          "velocity": 0.55,
+          "gate": 0.92
+        }
+      },
+      "bass": {
+        "instrument": "bass",
+        "gain": 0.18,
+        "pan": 0.0,
+        "source": {
+          "progression": "home",
+          "octave": 2,
+          "pattern": [
+            0.0,
+            2.0
+          ],
+          "duration_beats": 0.7,
+          "velocity": 0.72
+        }
+      },
+      "arp": {
+        "instrument": "arp",
+        "gain": 0.085,
+        "pan": 0.14,
+        "fx": {
+          "delay": {
+            "time": 0.18,
+            "feedback": 0.17,
+            "repeats": 2,
+            "cross": 0.35
+          }
+        },
+        "source": {
+          "progression": "home",
+          "octave": 4,
+          "step_beats": 0.5,
+          "degree_offsets": [
+            0,
+            2,
+            4,
+            2,
+            6,
+            4,
+            2,
+            0
+          ],
+          "velocity": 0.34,
+          "gate": 0.55
+        }
+      },
+      "drums": {
+        "instrument": "drums",
+        "gain": 0.72,
+        "pan": 0.0
+      }
+    }
+  },
+  "rhythm_engine": {
+    "groove": "default",
+    "steps_per_bar": 16,
+    "swing": 0.1,
+    "humanize_beats": 0.006,
+    "velocity_jitter": 0.035,
+    "fill_probability": 0.85,
+    "bass_coupling": 0.78,
+    "section_profiles": {
+      "intro": {
+        "density": 0.1,
+        "kick": 0.2,
+        "snare": 0.0,
+        "hat": 0.22,
+        "fill": 0.0
+      },
+      "build": {
+        "density": 0.58,
+        "kick": 0.78,
+        "snare": 0.72,
+        "hat": 0.66,
+        "fill": 0.55
+      },
+      "main": {
+        "density": 0.92,
+        "kick": 1.0,
+        "snare": 1.0,
+        "hat": 0.92,
+        "fill": 0.7
+      },
+      "break": {
+        "density": 0.28,
+        "kick": 0.28,
+        "snare": 0.32,
+        "hat": 0.42,
+        "fill": 0.35
+      },
+      "final": {
+        "density": 1.0,
+        "kick": 1.0,
+        "snare": 1.0,
+        "hat": 1.0,
+        "fill": 1.0
+      }
+    }
+  }
+}

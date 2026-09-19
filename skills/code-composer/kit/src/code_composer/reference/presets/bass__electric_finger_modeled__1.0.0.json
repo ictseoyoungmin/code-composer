@@ -1,0 +1,63 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "bass.electric_finger_modeled",
+  "version": "1.0.0",
+  "name": "Electric Finger Bass — Modeled",
+  "engine": "plucked_bass",
+  "family": "electric_bass",
+  "character": [
+    "fingerstyle",
+    "rounded",
+    "physical-parametric",
+    "focused-low-end"
+  ],
+  "strengths": [
+    "pluck and pickup position shape harmonic balance without fixed unrelated resonances",
+    "frequency-dependent damping makes upper partials decay faster than the fundamental",
+    "supports deterministic pitch approaches and bass articulation attack/release scaling"
+  ],
+  "limitations": [
+    "single-note fingerstyle model; slap/pop, pick scrape, fret collision and continuous slide-state are outside this preset",
+    "not calibrated to a specific commercial bass or pickup measurement"
+  ],
+  "recommended_roles": [
+    "bass"
+  ],
+  "expression_capabilities": [
+    "velocity",
+    "pitch_approach",
+    "attack_scale",
+    "release_scale"
+  ],
+  "musical_content": false,
+  "patch": {
+    "kind": "plucked_bass",
+    "engine": "plucked_bass",
+    "family": "electric_bass",
+    "plucked_bass_graph": {
+      "max_partials": 22,
+      "pluck_position": 0.19,
+      "pickup_position": 0.23,
+      "partial_rolloff": 1.03,
+      "inharmonicity": 5e-05,
+      "base_decay_s": 1.7,
+      "frequency_damping": 0.19,
+      "damping_power": 1.12,
+      "decay_keytrack": 0.011,
+      "attack_s": 0.006,
+      "release_s": 0.075,
+      "finger_noise_gain": 0.01,
+      "finger_noise_low_hz": 520.0,
+      "finger_noise_high_hz": 3900.0,
+      "finger_noise_decay_s": 0.024,
+      "finger_noise_attack_s": 0.0014,
+      "highpass_hz": 24.0,
+      "pickup_lowpass_hz": 4300.0,
+      "drive": 1.1,
+      "output_gain": 0.31,
+      "stereo_width": 0.03,
+      "side_highpass_hz": 700.0,
+      "seed": 1701
+    }
+  }
+}

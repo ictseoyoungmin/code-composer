@@ -1,0 +1,8 @@
+{
+  "kind": "<instrument-family-kind>",
+  "engine": "<registered-engine-name>",
+  "family": "<optional-semantic-family>",
+  "<engine-graph-field>": {
+    "<explicit-parameter>": "<value chosen from current task>"
+  }
+}

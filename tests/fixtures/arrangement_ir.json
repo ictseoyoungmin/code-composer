@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "title": "Section Identity Study",
+    "version": "0.4",
+    "sample_rate": 44100,
+    "global_seed": 20260916
+  },
+  "transport": {
+    "bpm": 96,
+    "beats_per_bar": 4
+  },
+  "tonal": {
+    "root": "D",
+    "scale": "natural_minor"
+  },
+  "form": [
+    {
+      "id": "intro",
+      "start_bar": 0,
+      "bars": 4,
+      "energy": 0.32
+    },
+    {
+      "id": "build",
+      "start_bar": 4,
+      "bars": 4,
+      "energy": 0.58
+    },
+    {
+      "id": "main",
+      "start_bar": 8,
+      "bars": 6,
+      "energy": 0.88
+    },
+    {
+      "id": "break",
+      "start_bar": 14,
+      "bars": 4,
+      "energy": 0.42
+    },
+    {
+      "id": "final",
+      "start_bar": 18,
+      "bars": 6,
+      "energy": 1.0
+    }
+  ],
+  "materials": {
+    "motifs": {
+      "main": {
+        "intervals": [
+          0,
+          2,
+          4,
+          6,
+          4,
+          3,
+          2,
+          1
+        ],
+        "rhythm": [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "progressions": {
+      "home": {
+        "degrees": [
+          1,
+          6,
+          3,
+          7
+        ]
+      }
+    },
+    "rhythms": {
+      "four_on_floor": {
+        "steps": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "instruments": {
+    "pad": {
+      "kind": "pad",
+      "adsr": {
+        "attack": 0.25,
+        "decay": 0.4,
+        "sustain": 0.75,
+        "release": 0.6
+      }
+    },
+    "lead": {
+      "kind": "lead",
+      "adsr": {
+        "attack": 0.008,
+        "decay": 0.08,
+        "sustain": 0.6,
+        "release": 0.14
+      }
+    },
+    "bass": {
+      "kind": "bass",
+      "adsr": {
+        "attack": 0.005,
+        "decay": 0.05,
+        "sustain": 0.8,
+        "release": 0.1
+      }
+    },
+    "arp": {
+      "kind": "pluck",
+      "adsr": {
+        "attack": 0.005,
+        "decay": 0.08,
+        "sustain": 0.25,
+        "release": 0.08
+      }
+    }
+  },
+  "tracks": [],
+  "automation": [],
+  "mix": {
+    "tail_seconds": 1.2,
+    "drive": 1.35,
+    "ceiling": 0.93
+  },
+  "arrangement": {
+    "motif": "main",
+    "profiles": {
+      "intro": {
+        "lead_density": 0.45,
+        "lead_fragment": 0.5,
+        "register_shift": -12
+      },
+      "build": {
+        "lead_density": 0.68,
+        "lead_fragment": 0.78
+      },
+      "main": {
+        "lead_density": 0.88,
+        "lead_fragment": 1.0
+      },
+      "break": {
+        "lead_density": 0.44,
+        "lead_fragment": 0.5,
+        "register_shift": 12
+      },
+      "final": {
+        "lead_density": 0.96,
+        "lead_fragment": 1.0,
+        "register_shift": 12
+      }
+    },
+    "roles": {
+      "lead": {
+        "instrument": "lead",
+        "gain": 0.13,
+        "pan": 0.08,
+        "tension": 0.72,
+        "cadence_strength": 0.9,
+        "max_leap_semitones": 7,
+        "fx": {
+          "delay": {
+            "time": 0.24,
+            "feedback": 0.22,
+            "repeats": 3,
+            "cross": 0.55
+          }
+        }
+      },
+      "pad": {
+        "instrument": "pad",
+        "gain": 0.1,
+        "pan": -0.05,
+        "fx": {
+          "reverb": true
+        },
+        "source": {
+          "progression": "home",
+          "chord_beats": 4,
+          "octave": 3,
+          "voice_center": 58,
+          "seventh": true,
+          "velocity": 0.55,
+          "gate": 0.92
+        }
+      },
+      "bass": {
+        "instrument": "bass",
+        "gain": 0.18,
+        "pan": 0.0,
+        "source": {
+          "progression": "home",
+          "octave": 2,
+          "pattern": [
+            0.0,
+            2.0
+          ],
+          "duration_beats": 0.7,
+          "velocity": 0.72
+        }
+      },
+      "arp": {
+        "instrument": "arp",
+        "gain": 0.085,
+        "pan": 0.14,
+        "fx": {
+          "delay": {
+            "time": 0.18,
+            "feedback": 0.17,
+            "repeats": 2,
+            "cross": 0.35
+          }
+        },
+        "source": {
+          "progression": "home",
+          "octave": 4,
+          "step_beats": 0.5,
+          "degree_offsets": [
+            0,
+            2,
+            4,
+            2,
+            6,
+            4,
+            2,
+            0
+          ],
+          "velocity": 0.34,
+          "gate": 0.55
+        }
+      }
+    }
+  }
+}

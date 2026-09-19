@@ -1,0 +1,159 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "bowed.violin.modeled_expression",
+  "version": "1.0.0",
+  "name": "Modeled Expression Violin",
+  "engine": "bowed_waveguide",
+  "family": "violin",
+  "character": [
+    "bowed",
+    "modeled",
+    "continuous",
+    "coupled",
+    "body-feedback",
+    "performance-reactive",
+    "acoustic-leaning"
+  ],
+  "strengths": [
+    "connected arco phrases across strings",
+    "deterministic performance-to-timbre microvariation without changing composition",
+    "bow attack/reversal irregularity and vibrato-coupled excitation on the S8/S9 physical model"
+  ],
+  "limitations": [
+    "physically inspired deterministic model, not a sampled concert violin or fitted named instrument",
+    "microvariation is a conservative control-layer model; advanced bow bounce, continuous double stops, harmonics, and pizzicato remain outside this preset"
+  ],
+  "recommended_roles": [
+    "lead",
+    "topline",
+    "pad"
+  ],
+  "expression_capabilities": {
+    "bow_pressure": true,
+    "bow_speed": true,
+    "bow_position": true,
+    "bow_noise_gain": true,
+    "vibrato_rate_hz": true,
+    "vibrato_depth_cents": true,
+    "vibrato_onset_s": true,
+    "attack_s": true,
+    "release_s": true
+  },
+  "musical_content": false,
+  "patch": {
+    "kind": "bowed_waveguide",
+    "engine": "bowed_waveguide",
+    "family": "violin",
+    "bowed_waveguide_graph": {
+      "string": {
+        "minimum_hz": 150,
+        "loop_gain": 0.9974,
+        "loss_lowpass_hz": 6500,
+        "nut_reflection": 0.998,
+        "dispersion": 0.00045,
+        "delay_compensation": 0.2
+      },
+      "bow": {
+        "position": 0.12,
+        "pressure": 0.58,
+        "speed": 0.57,
+        "noise_gain": 0.004,
+        "friction_slope_high_pressure": 1.0,
+        "friction_slope_low_pressure": 4.7,
+        "friction_offset": 0.78,
+        "minimum_reflection": 0.012,
+        "maximum_reflection": 0.985,
+        "seed": 211
+      },
+      "vibrato": {
+        "rate_hz": 5.4,
+        "depth_cents": 13,
+        "onset_s": 0.22,
+        "fade_s": 0.17,
+        "amplitude_coupling": 0.045
+      },
+      "envelope": {
+        "attack_s": 0.055,
+        "release_s": 0.16
+      },
+      "body": {
+        "resonances_hz": [
+          280,
+          465,
+          540,
+          1200,
+          2400,
+          3500
+        ],
+        "gains": [
+          0.34,
+          0.29,
+          0.37,
+          0.19,
+          0.25,
+          0.14
+        ],
+        "q": [
+          7.0,
+          8.0,
+          9.0,
+          5.0,
+          3.0,
+          3.2
+        ],
+        "direct_mix": 0.22,
+        "high_cut_hz": 4700,
+        "highpass_hz": 70,
+        "bridge_feedback": {
+          "enabled": true,
+          "feedback_gain": 0.006,
+          "max_feedback_velocity": 0.012,
+          "admittance_gains": [
+            0.24,
+            -0.16,
+            0.22,
+            -0.1,
+            0.07,
+            -0.045
+          ]
+        }
+      },
+      "stereo_width": 0.08,
+      "output_gain": 0.82,
+      "continuous": {
+        "enabled": true,
+        "initial_attack_s": 0.05,
+        "bow_change_s": 0.026,
+        "control_slew_s": 0.005,
+        "pitch_transition_s": 0.0035,
+        "state_gap_limit_s": 0.045,
+        "string_crossing": {
+          "enabled": true,
+          "contact_overlap_s": 0.018,
+          "residual_decay_s": 0.18,
+          "residual_bridge_mix": 0.34,
+          "adjacent_only": true
+        }
+      },
+      "expression_hardening": {
+        "enabled": true,
+        "seed": 7331,
+        "drift_rate_hz": 0.31,
+        "drift_rate_secondary_hz": 0.53,
+        "pressure_drift": 0.026,
+        "speed_drift": 0.02,
+        "position_drift": 0.0038,
+        "event_variation": 0.014,
+        "attack_time_variation": 0.16,
+        "attack_window_s": 0.042,
+        "attack_pressure_overshoot": 0.04,
+        "attack_noise_boost": 0.5,
+        "bow_change_window_s": 0.03,
+        "bow_change_pressure_dip": 0.03,
+        "bow_change_noise_boost": 0.4,
+        "vibrato_excitation_coupling": 0.02,
+        "vibrato_pressure_coupling": 0.008
+      }
+    }
+  }
+}

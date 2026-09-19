@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "code-composer/bridge_admittance_era.schema.json",
+  "title": "Code Composer ERA Bridge Admittance Profile",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "format",
+    "method",
+    "reference_sample_rate_hz",
+    "order",
+    "poles",
+    "residues",
+    "direct",
+    "output_scale"
+  ],
+  "properties": {
+    "format": {
+      "const": "code-composer-bridge-admittance-era/v1"
+    },
+    "method": {
+      "const": "era"
+    },
+    "reference_sample_rate_hz": {
+      "type": "integer",
+      "minimum": 4000,
+      "maximum": 384000
+    },
+    "order": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 64
+    },
+    "poles": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/complex"
+      }
+    },
+    "residues": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/complex"
+      }
+    },
+    "direct": {
+      "type": "number"
+    },
+    "output_scale": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "stabilized_poles": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "hankel_rows": {
+      "type": "integer",
+      "minimum": 2
+    },
+    "hankel_cols": {
+      "type": "integer",
+      "minimum": 2
+    },
+    "source": {
+      "type": "object"
+    },
+    "fit_metrics": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "complex": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    }
+  }
+}

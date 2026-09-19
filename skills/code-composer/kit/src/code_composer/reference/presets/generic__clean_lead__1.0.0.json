@@ -1,0 +1,78 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "generic.clean_lead",
+  "version": "1.0.0",
+  "name": "Clean Synthetic Lead",
+  "engine": "generic",
+  "family": null,
+  "character": [
+    "clean",
+    "focused",
+    "synthetic"
+  ],
+  "strengths": [
+    "melodic lead",
+    "guide melody",
+    "clear foreground line"
+  ],
+  "limitations": [
+    "synthetic character",
+    "limited acoustic articulation"
+  ],
+  "recommended_roles": [
+    "lead",
+    "topline"
+  ],
+  "expression_capabilities": {
+    "pitch_start_cents": true
+  },
+  "musical_content": false,
+  "patch": {
+    "graph": {
+      "oscillators": [
+        {
+          "waveform": "triangle",
+          "gain": 0.66,
+          "octave": 0
+        },
+        {
+          "waveform": "sine",
+          "gain": 0.24,
+          "octave": 1
+        },
+        {
+          "waveform": "square",
+          "gain": 0.1,
+          "octave": 0,
+          "detune_cents": 3
+        }
+      ],
+      "unison": {
+        "voices": 2,
+        "detune_cents": 5,
+        "stereo_width": 0.28
+      },
+      "envelope": {
+        "attack": 0.008,
+        "decay": 0.08,
+        "sustain": 0.58,
+        "release": 0.14
+      },
+      "filter": {
+        "type": "lowpass",
+        "cutoff": 5200,
+        "env_amount": 0.12
+      },
+      "lfo": {
+        "rate_hz": 5.1,
+        "pitch_cents": 2.4,
+        "amp_depth": 0.0
+      },
+      "waveshaper": {
+        "type": "softclip",
+        "drive": 1.35
+      },
+      "output_gain": 0.72
+    }
+  }
+}

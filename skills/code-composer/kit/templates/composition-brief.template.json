@@ -1,0 +1,6 @@
+{
+  "_template_note": "Fill from the user's current request. Do not copy musical content from fixtures.",
+  "intent": "<describe current musical intent>",
+  "constraints": [],
+  "sections": []
+}

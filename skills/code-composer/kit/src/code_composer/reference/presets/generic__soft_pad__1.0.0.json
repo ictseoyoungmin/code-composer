@@ -1,0 +1,73 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "generic.soft_pad",
+  "version": "1.0.0",
+  "name": "Soft Synthetic Pad",
+  "engine": "generic",
+  "family": null,
+  "character": [
+    "soft",
+    "wide",
+    "sustained"
+  ],
+  "strengths": [
+    "harmonic support",
+    "slow-moving pads",
+    "background layers"
+  ],
+  "limitations": [
+    "synthetic character",
+    "not intended to imitate an acoustic ensemble"
+  ],
+  "recommended_roles": [
+    "pad"
+  ],
+  "expression_capabilities": {
+    "pitch_start_cents": true
+  },
+  "musical_content": false,
+  "patch": {
+    "graph": {
+      "oscillators": [
+        {
+          "waveform": "sine",
+          "gain": 0.72,
+          "octave": 0,
+          "detune_cents": 0
+        },
+        {
+          "waveform": "triangle",
+          "gain": 0.28,
+          "octave": 1,
+          "detune_cents": -4
+        }
+      ],
+      "unison": {
+        "voices": 3,
+        "detune_cents": 9,
+        "stereo_width": 0.75
+      },
+      "envelope": {
+        "attack": 0.3,
+        "decay": 0.48,
+        "sustain": 0.74,
+        "release": 0.65
+      },
+      "filter": {
+        "type": "lowpass",
+        "cutoff": 2400,
+        "env_amount": 0.22
+      },
+      "lfo": {
+        "rate_hz": 0.18,
+        "pitch_cents": 4.5,
+        "amp_depth": 0.04
+      },
+      "waveshaper": {
+        "type": "tanh",
+        "drive": 1.08
+      },
+      "output_gain": 0.62
+    }
+  }
+}

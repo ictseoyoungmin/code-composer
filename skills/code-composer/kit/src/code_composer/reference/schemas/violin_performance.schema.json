@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://code-composer.local/schemas/violin_performance.schema.json",
+  "title": "Code Composer Violin Performance Realization v1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "track_id",
+    "instrument_id",
+    "family",
+    "event_count",
+    "playability",
+    "config",
+    "events",
+    "scope"
+  ],
+  "properties": {
+    "version": {
+      "const": "1.0"
+    },
+    "track_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "instrument_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "family": {
+      "const": "violin"
+    },
+    "event_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "playability": {
+      "type": "object",
+      "required": [
+        "classification",
+        "max_transition_score",
+        "warning_count",
+        "warnings"
+      ],
+      "properties": {
+        "classification": {
+          "enum": [
+            "empty",
+            "comfortable",
+            "challenging",
+            "impractical"
+          ]
+        },
+        "max_transition_score": {
+          "type": "number",
+          "minimum": 0
+        },
+        "warning_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "warnings": {
+          "type": "array"
+        },
+        "max_gesture_score": {
+          "type": "number",
+          "minimum": 0
+        },
+        "max_difficulty_score": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "config": {
+      "type": "object"
+    },
+    "events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "event_index",
+          "midi",
+          "start_beat",
+          "duration_beats",
+          "left_hand",
+          "transition",
+          "bow"
+        ],
+        "properties": {
+          "event_index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "gesture_id": {
+            "type": "string"
+          },
+          "gesture_type": {
+            "enum": [
+              "single",
+              "double_stop"
+            ]
+          },
+          "midi": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 127
+          },
+          "start_beat": {
+            "type": "number",
+            "minimum": 0
+          },
+          "duration_beats": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "left_hand": {
+            "type": "object"
+          },
+          "transition": {
+            "type": "object"
+          },
+          "bow": {
+            "type": "object"
+          },
+          "double_stop": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "scope": {
+      "type": "object"
+    }
+  }
+}

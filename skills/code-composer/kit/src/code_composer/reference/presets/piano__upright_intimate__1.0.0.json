@@ -1,0 +1,49 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "piano.upright_intimate",
+  "version": "1.0.0",
+  "name": "Intimate Upright",
+  "engine": "piano",
+  "family": "acoustic",
+  "character": [
+    "dry",
+    "close",
+    "compact"
+  ],
+  "strengths": [
+    "intimate accompaniment",
+    "rhythmic piano",
+    "close perspective writing"
+  ],
+  "limitations": [
+    "shorter and drier than a concert grand"
+  ],
+  "recommended_roles": [
+    "lead",
+    "topline",
+    "pad"
+  ],
+  "expression_capabilities": {
+    "pedal": true
+  },
+  "musical_content": false,
+  "patch": {
+    "kind": "piano",
+    "piano_design": {
+      "categories": {
+        "body": "upright",
+        "hammer": "dense_felt",
+        "stringing": "compact",
+        "soundboard": "dry_board",
+        "perspective": "close"
+      },
+      "controls": {
+        "stereo_width": 0.36,
+        "base_decay_s": 2.45,
+        "hammer_noise_gain": 0.085,
+        "output_gain": 0.58
+      },
+      "family": "acoustic"
+    }
+  }
+}

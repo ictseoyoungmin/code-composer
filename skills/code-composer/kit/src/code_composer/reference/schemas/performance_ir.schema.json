@@ -1,0 +1,1686 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://code-composer.local/schemas/performance_ir.schema.json",
+  "title": "Code Composer Performance IR v1.16",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "phrases",
+    "motif_statements",
+    "register_plans",
+    "orchestration_sections",
+    "transitions",
+    "realization"
+  ],
+  "properties": {
+    "version": {
+      "const": "1.16"
+    },
+    "phrases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/phrase"
+      }
+    },
+    "motif_statements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/motifStatement"
+      }
+    },
+    "register_plans": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/registerPlan"
+      }
+    },
+    "orchestration_sections": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/orchestrationSection"
+      }
+    },
+    "transitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/transition"
+      }
+    },
+    "realization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "seed",
+        "microtiming",
+        "velocity_variation"
+      ],
+      "properties": {
+        "seed": {
+          "type": "integer"
+        },
+        "microtiming": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "enabled",
+            "max_abs_ms"
+          ],
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "max_abs_ms": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 30
+            }
+          }
+        },
+        "velocity_variation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "enabled",
+            "max_abs"
+          ],
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "max_abs": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 0.15
+            }
+          }
+        },
+        "timing_quantization_guard_ms": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "minimum_note_gap_ms": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "ensemble": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "role_pan_offsets": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number",
+                "minimum": -0.5,
+                "maximum": 0.5
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "curvePoint": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "number"
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "phrase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phrase_id",
+        "section_id",
+        "role",
+        "source_material",
+        "start_beat",
+        "duration_beats",
+        "dynamic_curve",
+        "timing_curve_ms",
+        "gate_curve",
+        "articulation_curve",
+        "accent_points",
+        "breath_after_beats"
+      ],
+      "properties": {
+        "phrase_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "section_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_material": {
+          "type": "string",
+          "minLength": 1
+        },
+        "start_beat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "duration_beats": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "dynamic_curve": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dynamicPoint"
+          },
+          "minItems": 2,
+          "allOf": [
+            {
+              "contains": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "const": 0
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "const": 1
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "minContains": 1
+            }
+          ]
+        },
+        "timing_curve_ms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/timingPoint"
+          },
+          "minItems": 2,
+          "allOf": [
+            {
+              "contains": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "const": 0
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "const": 1
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "minContains": 1
+            }
+          ]
+        },
+        "gate_curve": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/gatePoint"
+          },
+          "minItems": 2,
+          "allOf": [
+            {
+              "contains": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "const": 0
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "const": 1
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "minContains": 1
+            }
+          ]
+        },
+        "articulation_curve": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "position",
+              "articulation"
+            ],
+            "properties": {
+              "position": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "articulation": {
+                "enum": [
+                  "legato",
+                  "tenuto",
+                  "neutral",
+                  "staccato",
+                  "accent",
+                  "marcato",
+                  "pizzicato",
+                  "harmonic",
+                  "spiccato"
+                ]
+              }
+            }
+          }
+        },
+        "accent_points": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "position",
+              "amount"
+            ],
+            "properties": {
+              "position": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "amount": {
+                "type": "number",
+                "minimum": -1,
+                "maximum": 1
+              }
+            }
+          }
+        },
+        "apex_position": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "breath_after_beats": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "instrument_expression_curves": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "bow_pressure": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "allOf": [
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 0
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                },
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 1
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                }
+              ]
+            },
+            "bow_speed": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "allOf": [
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 0
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                },
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 1
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                }
+              ]
+            },
+            "bow_position": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0.035,
+                    "maximum": 0.45
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "allOf": [
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 0
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                },
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 1
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                }
+              ]
+            },
+            "bow_noise_gain": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 0.05
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "allOf": [
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 0
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                },
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 1
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                }
+              ]
+            },
+            "vibrato_rate_hz": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 12
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "allOf": [
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 0
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                },
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 1
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                }
+              ]
+            },
+            "vibrato_depth_cents": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "allOf": [
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 0
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                },
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 1
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                }
+              ]
+            },
+            "vibrato_onset_s": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "array",
+                "prefixItems": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 4
+                  }
+                ],
+                "minItems": 2,
+                "maxItems": 2
+              },
+              "allOf": [
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 0
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                },
+                {
+                  "contains": {
+                    "type": "array",
+                    "prefixItems": [
+                      {
+                        "const": 1
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minContains": 1
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "transform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "op"
+      ],
+      "properties": {
+        "op": {
+          "enum": [
+            "exact",
+            "fragment",
+            "sequence",
+            "transpose",
+            "register_shift",
+            "rhythm_scale",
+            "rhythm_rewrite",
+            "inversion",
+            "retrograde",
+            "cadence_rewrite",
+            "ornament",
+            "call",
+            "response"
+          ]
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "length": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "semitones": {
+          "type": "integer",
+          "minimum": -36,
+          "maximum": 36
+        },
+        "scale_degrees": {
+          "type": "integer",
+          "minimum": -14,
+          "maximum": 14
+        },
+        "factor": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 8
+        },
+        "rhythm": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "minItems": 1
+        },
+        "intervals": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": -24,
+            "maximum": 24
+          },
+          "minItems": 1
+        },
+        "responds_to": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "fragment"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "start",
+              "length"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "sequence"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "scale_degrees"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "enum": [
+                  "transpose",
+                  "register_shift"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "semitones"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "rhythm_scale"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "factor"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "rhythm_rewrite"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "rhythm"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "cadence_rewrite"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "intervals"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "ornament"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "start",
+              "intervals",
+              "rhythm"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "call"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "intervals",
+              "rhythm"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "op": {
+                "const": "response"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "intervals",
+              "rhythm",
+              "responds_to"
+            ]
+          }
+        }
+      ]
+    },
+    "motifStatement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statement_id",
+        "source_motif_id",
+        "section_id",
+        "transform_chain",
+        "identity_floor"
+      ],
+      "properties": {
+        "statement_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_motif_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "section_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "transform_chain": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/transform"
+          },
+          "minItems": 1
+        },
+        "identity_floor": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "cadence_rule": {
+          "type": "string"
+        },
+        "identity_hard_min": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "registerPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hard_range",
+        "preferred_range",
+        "center",
+        "max_span",
+        "min_intervoice_distance"
+      ],
+      "properties": {
+        "hard_range": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 127
+            },
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 127
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "preferred_range": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 127
+            },
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 127
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "center": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 127
+        },
+        "max_span": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 60
+        },
+        "min_intervoice_distance": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 24
+        },
+        "overlap_policy": {
+          "enum": [
+            "allow",
+            "avoid",
+            "primary_wins",
+            "short_only"
+          ]
+        },
+        "motion_policy": {
+          "enum": [
+            "free",
+            "smooth",
+            "contrary",
+            "oblique",
+            "stepwise_preferred"
+          ]
+        }
+      }
+    },
+    "orchestrationSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary_roles",
+        "secondary_roles",
+        "decorative_roles",
+        "max_simultaneous_roles",
+        "silence_roles"
+      ],
+      "properties": {
+        "primary_roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "secondary_roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "decorative_roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "max_simultaneous_roles": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16
+        },
+        "allowed_overlaps": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 2,
+            "maxItems": 2,
+            "uniqueItems": true
+          }
+        },
+        "phrase_gap_only_roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "silence_roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "ensemble_interaction": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "leader_role": {
+              "type": "string",
+              "minLength": 1
+            },
+            "timing_offsets_ms": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number",
+                "minimum": -30,
+                "maximum": 30
+              }
+            },
+            "overlap_velocity_scales": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number",
+                "minimum": 0.5,
+                "maximum": 1.0
+              }
+            }
+          }
+        }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from_section",
+        "to_section"
+      ],
+      "properties": {
+        "from_section": {
+          "type": "string",
+          "minLength": 1
+        },
+        "to_section": {
+          "type": "string",
+          "minLength": 1
+        },
+        "harmonic_anticipation": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "role": {
+              "type": "string",
+              "minLength": 1
+            },
+            "beats": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 8
+            },
+            "target_degree": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 7
+            },
+            "chord_intervals": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": -14,
+                "maximum": 14
+              },
+              "minItems": 1,
+              "maxItems": 8,
+              "uniqueItems": true
+            },
+            "velocity": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 1
+            },
+            "gate": {
+              "type": "number",
+              "minimum": 0.05,
+              "maximum": 2
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "enabled": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "enabled"
+                ]
+              },
+              "then": {
+                "required": [
+                  "role",
+                  "beats",
+                  "target_degree",
+                  "chord_intervals",
+                  "velocity",
+                  "gate"
+                ],
+                "properties": {
+                  "beats": {
+                    "exclusiveMinimum": 0,
+                    "maximum": 8
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "pickup": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "role": {
+              "type": "string",
+              "minLength": 1
+            },
+            "beats": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 8
+            },
+            "degrees": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": -14,
+                "maximum": 21
+              },
+              "minItems": 1,
+              "maxItems": 16
+            },
+            "rhythm": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 8
+              },
+              "minItems": 1,
+              "maxItems": 16
+            },
+            "octave": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 8
+            },
+            "velocity": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 1
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "enabled": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "enabled"
+                ]
+              },
+              "then": {
+                "required": [
+                  "role",
+                  "beats",
+                  "degrees",
+                  "rhythm",
+                  "octave",
+                  "velocity"
+                ],
+                "properties": {
+                  "beats": {
+                    "exclusiveMinimum": 0,
+                    "maximum": 8
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "bass_approach": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "none",
+                "step",
+                "chromatic",
+                "scale",
+                "pedal"
+              ]
+            },
+            "beats": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 8
+            },
+            "direction": {
+              "enum": [
+                "below",
+                "above"
+              ]
+            },
+            "steps": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 8
+            },
+            "velocity": {
+              "type": "number",
+              "minimum": 0.01,
+              "maximum": 1
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "type": {
+                    "enum": [
+                      "step",
+                      "chromatic",
+                      "scale"
+                    ]
+                  }
+                },
+                "required": [
+                  "type"
+                ]
+              },
+              "then": {
+                "required": [
+                  "beats",
+                  "velocity",
+                  "direction",
+                  "steps"
+                ],
+                "properties": {
+                  "beats": {
+                    "exclusiveMinimum": 0,
+                    "maximum": 8
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "type": {
+                    "const": "pedal"
+                  }
+                },
+                "required": [
+                  "type"
+                ]
+              },
+              "then": {
+                "required": [
+                  "beats",
+                  "velocity"
+                ],
+                "properties": {
+                  "beats": {
+                    "exclusiveMinimum": 0,
+                    "maximum": 8
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "cadence_extension": {
+          "oneOf": [
+            {
+              "type": "object",
+              "maxProperties": 0
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "roles": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true
+                },
+                "beats": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 16
+                }
+              },
+              "required": [
+                "roles",
+                "beats"
+              ]
+            }
+          ]
+        },
+        "texture_subtraction": {
+          "oneOf": [
+            {
+              "type": "object",
+              "maxProperties": 0
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "roles": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true
+                },
+                "beats": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "maximum": 16
+                }
+              },
+              "required": [
+                "roles",
+                "beats"
+              ]
+            }
+          ]
+        },
+        "silence_beats": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "register_preparation": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "semitones",
+              "beats"
+            ],
+            "properties": {
+              "semitones": {
+                "type": "integer",
+                "minimum": -24,
+                "maximum": 24
+              },
+              "beats": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "maximum": 16
+              }
+            }
+          }
+        },
+        "rhythm_fill": {
+          "oneOf": [
+            {
+              "type": "object",
+              "maxProperties": 0
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "events": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 32,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "offset_beats",
+                      "drum",
+                      "duration_beats",
+                      "velocity"
+                    ],
+                    "properties": {
+                      "offset_beats": {
+                        "type": "number",
+                        "minimum": -8,
+                        "exclusiveMaximum": 0
+                      },
+                      "drum": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "duration_beats": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "maximum": 2
+                      },
+                      "velocity": {
+                        "type": "number",
+                        "minimum": 0.01,
+                        "maximum": 1
+                      },
+                      "pan": {
+                        "type": "number",
+                        "minimum": -1,
+                        "maximum": 1
+                      },
+                      "articulation": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "strike_force": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "strike_position": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      }
+                    }
+                  }
+                }
+              },
+              "required": [
+                "role",
+                "events"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "dynamicPoint": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "timingPoint": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "number",
+          "minimum": -30,
+          "maximum": 30
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "gatePoint": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        {
+          "type": "number",
+          "minimum": 0.05,
+          "maximum": 2
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2
+    }
+  },
+  "x-python-only-invariants": [
+    "section/role/source-material cross references and section adjacency",
+    "unique phrase/statement IDs and phrase/breath overlap",
+    "curve control-point ordering (JSON Schema enforces endpoints/ranges, Python enforces monotonic order)",
+    "range ordering/containment/center/max-span relational constraints",
+    "orchestration role-group disjointness, role membership, budget cardinality, reverse-pair duplicate detection",
+    "pickup rhythm length equality and total-rhythm <= pickup beats",
+    "transform rhythm/interval length relationships and source-material-dependent motif execution",
+    "identity_hard_min <= identity_floor and response responds_to statement-order/call-reference integrity"
+  ]
+}
