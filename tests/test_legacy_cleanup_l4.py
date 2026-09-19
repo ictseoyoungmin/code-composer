@@ -56,7 +56,7 @@ def test_l4_predelete_duplicate_and_comparison_proofs_are_complete():
 
 
 def test_l4_closure_remains_recorded_after_later_maintenance():
-    status = json.loads((ROOT / "V1.16_DESIGN_STATUS.json").read_text())
+    status = json.loads((ROOT / "docs/history/status/V1.16_DESIGN_STATUS.json").read_text())
     assert status["status"] == "V1.16_FINAL_CLOSED"
     assert status["v1.16_final_closed"] is True
     cleanup = status["maintenance"]["legacy_cleanup"]
@@ -99,7 +99,7 @@ def test_l4_v116_runtime_baseline_is_preserved_when_future_features_are_added():
 
 
 def test_l4_current_navigation_does_not_present_removed_files_as_available_artifacts():
-    current = [ROOT/"README.md", ROOT/"STRUCTURE.md", ROOT/"docs/INDEX.md", ROOT/"examples/README.md", ROOT/"examples/v1.16/final_closure/README.md"]
+    current = [ROOT/"README.md", ROOT/"docs/STRUCTURE.md", ROOT/"docs/INDEX.md", ROOT/"examples/README.md", ROOT/"examples/v1.16/final_closure/README.md"]
     forbidden_phrases = ("retained through L3 only as explicit L4 review candidates", "are **L4 candidates only** and are not deleted in L3")
     text="\n".join(p.read_text(encoding="utf-8") for p in current)
     for phrase in forbidden_phrases:

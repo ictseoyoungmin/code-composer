@@ -1,25 +1,143 @@
 # Code Composer
 
-> Current percussion closure: **S24 Cymbal Presence & Excitation Hardening — CLOSED**. `drums.acoustic_kit_modeled_cymbal_presence@1.0.0` strengthens metallic cymbal body/presence while reducing independent static-like wash; S23 remains unchanged.
+[![CI](https://github.com/ictseoyoungmin/code-composer/actions/workflows/ci.yml/badge.svg)](https://github.com/ictseoyoungmin/code-composer/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![License](https://img.shields.io/badge/license-AGPL--3.0--only-green)
 
-Code Composer is a deterministic music composition/rendering engine packaged as a self-contained agent skill.
+**Deterministic, model-free music composition and rendering for AI agents and programmable workflows.**
 
-## Repository layout
+Code Composer turns explicit musical intent into editable structured music, deterministic audio, MIDI, exchange packages, and production handoff files. The **agent or user decides the music**; the engine validates and realizes those decisions reproducibly.
 
-- `skills/code-composer/` — **canonical installable skill**. It is self-contained and must never reference repository-parent files.
-- `.codex_plugins/` — Codex plugin adapter source; release tooling injects the canonical skill into an installable plugin artifact.
-- `.claude_plugins/` — Claude plugin adapter source; release tooling injects the canonical skill into an installable plugin artifact.
-- `docs/` — maintainer architecture, validation, maintenance history and design decisions.
-- `examples/` — maintainer-only regression/showcase/integration material. **Not shipped in the agent skill.**
-- `tests/` — repository regression and packaging tests.
-- `tools/` — build/validation/release helpers.
-- `CREDITS.md` — research acknowledgements, external-reference provenance, and third-party attribution policy.
+It is designed for workflows where you want the composition to remain inspectable and editable instead of disappearing inside a black-box generation step.
 
-## Agent-facing boundary
+## What you can do
 
-Normal agents start at `skills/code-composer/SKILL.md`, then use the progressive-disclosure graph under `kit/`. They should not inspect `kit/src/` unless a source-level exception applies.
+| Capability | What it gives you |
+|---|---|
+| Compose | Compile an explicit composition brief into canonical Music IR |
+| Render | Deterministically render Music IR to WAV |
+| Export MIDI | Create deterministic SMF Type 1 MIDI for DAWs and collaborators |
+| Use modeled instruments | Piano, bowed-string/violin, plucked bass, percussion, and generic instrument engines |
+| Shape performance | Violin realization, articulation, dynamics, factory sound presets, mix automation |
+| Exchange projects | Lossless `.ccx` handoff between Code Composer users |
+| Deliver externally | Reference mix, full/per-track MIDI, aligned stems, resolved IR, manifest, notes |
+| Work as an agent skill | Self-contained `skills/code-composer/` package with progressive-disclosure workflows |
 
-The installed skill follows the policy: **Examples teach operation, never taste.** Completed songs, polished MIDI/WAV, dogfood compositions and showcase material remain outside `skills/code-composer/`.
+Code Composer does **not** use a bundled model to decide melody, harmony, rhythm, form, or style. Musical decisions come from the current user brief, current composition, and the agent/user workflow.
+
+## Quick start
+
+### 1. Install the engine
+
+Requirements: **Python 3.10+**.
+
+```bash
+git clone https://github.com/ictseoyoungmin/code-composer.git
+cd code-composer
+python -m pip install ./skills/code-composer/kit
+```
+
+Check the available commands and factory presets:
+
+```bash
+code-composer --help
+code-composer-presets list
+```
+
+### 2. Render a minimal deterministic fixture
+
+The repository includes a tiny synthetic protocol fixture for smoke testing:
+
+```bash
+code-composer \
+  skills/code-composer/kit/fixtures/synthetic-minimal-ir.json \
+  demo.wav
+```
+
+This fixture is intentionally minimal and is **not** a musical style reference.
+
+### 3. Use Code Composer as an agent skill
+
+The canonical skill is:
+
+```text
+skills/code-composer/
+```
+
+Its entry point is [`skills/code-composer/SKILL.md`](skills/code-composer/SKILL.md). The skill routes an agent into only the workflow/contracts it needs instead of requiring source-code inspection.
+
+To build standalone skill and platform plugin artifacts:
+
+```bash
+python tools/build_skill.py
+python tools/build_plugins.py
+```
+
+## Core workflow
+
+```text
+user brief / current song
+        ↓
+agent musical decisions
+        ↓
+canonical Music IR
+        ↓
+deterministic validation + realization
+        ↓
+render / MIDI / .ccx / delivery package
+        ↓
+analysis evidence
+        ↓
+explicit revision
+```
+
+Analyzers provide evidence; they do not silently rewrite the composition. The editable authority remains the canonical Music IR.
+
+## Public commands
+
+```text
+code-composer                 render Music IR
+code-composer-compose         compile an explicit composition brief
+code-composer-midi            export MIDI
+code-composer-collab          create a collaboration bundle
+code-composer-exchange        export/import/inspect .ccx projects
+code-composer-delivery        create external production handoff files
+code-composer-presets         inspect/materialize factory presets
+code-composer-violin          realize violin performance mechanics
+code-composer-admittance-fit  fit measured bridge-admittance responses
+```
+
+See [`skills/code-composer/kit/COMMANDS.md`](skills/code-composer/kit/COMMANDS.md) for command syntax and [`skills/code-composer/kit/CAPABILITIES.md`](skills/code-composer/kit/CAPABILITIES.md) for the full capability surface.
+
+## Instruments and sound
+
+Current built-in engine families include:
+
+- piano;
+- bowed string and physically-inspired bowed waveguide / violin;
+- plucked electric bass;
+- acoustic-kit percussion;
+- generic graph-based instruments.
+
+Factory presets are **sonic resources only**. They do not contain melodies, rhythms, progressions, arrangements, or completed songs.
+
+## Reproducibility
+
+Code Composer is designed for deterministic re-rendering from the same authored state and seed. Historical byte-exact DSP regression tests run on a pinned numerical CI stack; see [`docs/NUMERICAL_REPRODUCIBILITY.md`](docs/NUMERICAL_REPRODUCIBILITY.md).
+
+The current `main` branch is the stable source baseline. Active engine work is developed on feature branches and validated before it lands.
+
+## Documentation
+
+- [Documentation index](docs/INDEX.md)
+- [Public commands](skills/code-composer/kit/COMMANDS.md)
+- [Capabilities](skills/code-composer/kit/CAPABILITIES.md)
+- [Build and packaging](docs/BUILD.md)
+- [Repository structure](docs/STRUCTURE.md)
+- [Changelog](CHANGELOG.md)
+- [Research and attribution notes](CREDITS.md)
+
+Historical slice reports, release manifests, checksums, maintenance evidence, and old design status files are retained under `docs/history/`, `docs/validation/`, and `docs/maintenance/`. They are **not** the user entry point.
 
 ## Development
 
@@ -29,33 +147,15 @@ python skills/code-composer/kit/scripts/self_check.py
 python tools/validate_skill.py
 ```
 
-Build standalone artifacts with:
+CI validates Python 3.10 and 3.12, the canonical skill boundary, the full regression suite, and release-surface builds.
 
-```bash
-python tools/build_skill.py
-python tools/build_plugins.py
-```
+## License and generated music
 
-Current music-engine feature baseline: v1.17.0 (M1 MIDI export, M2 `.ccx` exchange, M3 external delivery, S1 instrument-engine extensibility, S2 factory preset system, S3 violin performance model, S4 violin double-stop realization, S5 bowed-string sound hardening, S6 continuous bowed-string state/bow-change transients, S7 physical string-crossing continuity/coupling, S8 bridge admittance & body feedback hardening, S9 measured bridge-admittance ERA fitting, S10 violin performance-to-timbre expression hardening, S11 expressive phrase modeling, S12 violin realism hardening, S13 articulation expansion, S14 acoustic-piano release/resonance hardening, S15 ensemble/orchestration realism, S16 modeled bass acoustic fidelity, S17 modeled percussion acoustic fidelity, S18 predictable track-gain semantics, S19 stereo-preserving track-pan semantics, S20 drum articulation foundation, S21 drum acoustic-core realism hardening, S22 drum acoustic voicing & timbre polish, S23 drum performance-to-timbre dynamics, S24 cymbal presence & excitation hardening).
+Code Composer software is licensed under **GNU AGPL v3.0 only (`AGPL-3.0-only`)**. See [`LICENSE`](LICENSE).
 
-Repository packaging closure: **S0R1 Canonical Skill Hygiene — CLOSED**. Instrument architecture closure: **S1 Instrument Engine Extensibility — CLOSED**. Factory sound-resource closure: **S2 Factory Preset System — CLOSED**. Violin physical-realization closure: **S3 Violin Performance Model — CLOSED**. Double-stop realization closure: **S4 Violin Double-Stop Realization — CLOSED**. Bowed-string sound closure: **S5 Bowed-String Sound Hardening — CLOSED**. Continuous bowed-state closure: **S6 Continuous Bowed-String State & Bow-Change Transients — CLOSED**. String-crossing coupling closure: **S7 Physical String-Crossing Continuity & Coupling — CLOSED**. Bridge/body feedback closure: **S8 Bridge Admittance & Body Feedback Hardening — CLOSED**. Measured-response fitting closure: **S9 Measured Bridge-Admittance ERA Fitting — CLOSED**. Performance-to-timbre expression closure: **S10 Violin Performance-to-Timbre Expression Hardening — CLOSED**. Phrase-level expression closure: **S11 Expressive Phrase Modeling — CLOSED**. Player-mechanics realism closure: **S12 Violin Realism Hardening — CLOSED**. Articulation closure: **S13 Articulation Expansion — CLOSED**. Acoustic-piano release closure: **S14 Acoustic Piano Release & Resonance Hardening — CLOSED**. Ensemble interaction closure: **S15 Ensemble / Orchestration Realism — CLOSED**. Mixer predictability closures: **S18 Track Gain Semantics — CLOSED**, **S19 Track Pan / Stereo Integrity — CLOSED**. Percussion articulation closure: **S20 Drum Articulation Foundation — CLOSED**. Drum dry-source acoustic-core closure: **S21 Drum Acoustic Core Realism Hardening — CLOSED**. Drum dry-source voicing closure: **S22 Drum Acoustic Voicing & Timbre Polish — CLOSED**. Drum performance-to-timbre closure: **S23 Drum Performance-to-Timbre Dynamics — CLOSED**. Cymbal presence/excitation closure: **S24 Cymbal Presence & Excitation Hardening — CLOSED**. The next planned slice is **S25 Non-Cymbal Drum Core Hardening** (kick → snare → tom), and Stateful Kit Interaction remains deferred until dry-source hardening is complete. The canonical skill contains one implementation tree (`kit/src`) and no persisted build output.
+The project separates the software license from ordinary musical output policy:
 
+- [`COPYRIGHT_POLICY.md`](COPYRIGHT_POLICY.md) — responsibility for lawful inputs, references, and use of third-party material;
+- [`OUTPUT_POLICY.md`](OUTPUT_POLICY.md) — explains the project's position that ordinary music/audio/MIDI/score output is not intended to become AGPL-licensed merely because Code Composer generated or rendered it.
 
-### Factory presets
-
-S2 adds a small versioned factory preset catalog. Presets are sonic resources only; composition content remains agent-authored from the user brief/current song. The installed Skill exposes capability metadata through `kit/presets/CATALOG.json` and `code-composer-presets`.
-
-
-## License and output policy
-
-Code Composer software is licensed under **GNU AGPL v3.0 only (`AGPL-3.0-only`)**. See `LICENSE`.
-
-- `COPYRIGHT_POLICY.md` — user responsibility for lawful inputs, references, and publication/distribution of outputs.
-- `OUTPUT_POLICY.md` — explains that ordinary musical outputs are not intended to become AGPL-licensed merely because they were generated or rendered with Code Composer.
-- `CREDITS.md` — research/reference provenance and third-party attribution policy.
-
-These policy documents do not modify the AGPL. If Code Composer is later operated as a hosted web/API service, service-specific terms can be added separately without changing the software license.
-
-## Repository policy
-
-`main` is the stable source baseline. Generated wheels, plugin ZIPs, dogfood audio, and other release artifacts are not committed to source history; release tooling regenerates them from the canonical Skill and adapter sources. Feature work proceeds on branches and lands through validated commits/PRs.
+These policy documents do not modify the AGPL. Users remain responsible for determining whether third-party rights apply to material they provide or publish.
