@@ -50,7 +50,7 @@ The resulting ZIP contains only `code-composer/` and must remain valid when extr
 python tools/build_plugins.py
 ```
 
-Repository-root `.codex-plugin/` and `.claude-plugin/` directories store thin platform manifests, while `.agents/plugins/` provides generic marketplace discovery. All three route to the canonical `./skills/` tree, matching the RefAs-style source layout. The build copies the canonical `skills/code-composer/` tree into generated platform artifacts; there is no independently edited duplicate skill source.
+Repository-root `.codex-plugin/` and `.claude-plugin/` directories store thin platform manifests, while `.agents/plugins/` provides generic marketplace discovery. All three route to the canonical `./skills/` tree. The build copies the canonical `skills/code-composer/` tree into generated platform artifacts; there is no independently edited duplicate skill source.
 
 ## Release checks
 
