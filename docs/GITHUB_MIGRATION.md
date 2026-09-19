@@ -5,7 +5,7 @@ The repository was migrated from ZIP-first development to a source-first GitHub 
 ## Source of truth
 
 - `skills/code-composer/` is the one canonical installable Skill.
-- `.codex_plugins/` and `.claude_plugins/` contain adapter source only. `tools/build_plugins.py` injects the canonical Skill into generated plugin artifacts.
+- `.codex-plugin/`, `.claude-plugin/`, and `.agents/plugins/` are thin discovery adapters that route to the canonical `./skills/` tree. `tools/build_plugins.py` injects the canonical Skill into generated platform artifacts.
 - `dist/`, rendered WAV dogfood, wheels, and ZIP releases are generated artifacts and are not committed.
 
 ## Baseline
