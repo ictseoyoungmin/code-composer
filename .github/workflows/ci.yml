@@ -30,6 +30,8 @@ jobs:
         run: python skills/code-composer/kit/scripts/self_check.py
       - name: Validate canonical Skill
         run: python tools/validate_skill.py
+      - name: Verify plugin distribution
+        run: python tools/verify_plugin_distribution.py
       - name: Full regression
         run: pytest -q
       - name: Build release surfaces
