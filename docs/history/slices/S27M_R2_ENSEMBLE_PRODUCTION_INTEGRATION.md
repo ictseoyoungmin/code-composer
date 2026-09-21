@@ -1,6 +1,6 @@
 # S27-M R2 — Ensemble / Production Integration
 
-Status: ENGINEERING CANDIDATE / PERCEPTUAL GATE OPEN
+Status: CLOSED / PERCEPTUAL PASS
 
 S27-M R2 was rebuilt on the complete S28-H source baseline after the earlier local S27-M working directory was found to contain only root documents. The incomplete historical prototype was not promoted or copied wholesale.
 
@@ -37,4 +37,6 @@ Realization order:
 
 `Crossing Signal` is the existing 8-bar A/B listening artifact. A/B preserve score, instrument engines, seed, mix, and existing S15 timing/pan. B adds only authored section role scales and kick-selected targeted onset yields. No music-bus ducking is used.
 
-The slice remains listening-gated. Do not call it CLOSED solely from regression evidence.
+## Perceptual closure
+
+On 2026-09-22, the user completed production listening of the S27-M R2 full-song A/B and marked the perceptual gate **PASS**. S27-M R2 is therefore CLOSED. Engineering regression evidence remains supporting evidence; the closure authority is the user listening decision.
