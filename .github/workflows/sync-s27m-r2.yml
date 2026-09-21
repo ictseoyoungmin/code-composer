@@ -1,0 +1,101 @@
+name: One-shot S27-M R2 source sync
+
+on:
+  push:
+    branches:
+      - sync/zip-first-through-s27m-r2
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: skills/code-composer/kit/src
+      PAYLOAD_SHA256: 302796efda1b618a45b26ff4e192f359a0a12d29dd917c6408ddad4bd641c020
+      MANIFEST_SHA256: 8bc4bdb0c33afef358925292e5ae9dc793b095f953057bc793e5e28c28515034
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruct and verify source payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/s27m-sync
+          cat .sync-s27m-r2/chunk-*.b64 | tr -d '\r\n' | base64 --decode > /tmp/s27m-sync/payload.tar.gz
+          echo "${PAYLOAD_SHA256}  /tmp/s27m-sync/payload.tar.gz" | sha256sum -c -
+          tar -xzf /tmp/s27m-sync/payload.tar.gz -C /tmp/s27m-sync
+          cd /tmp/s27m-sync/payload
+          echo "${MANIFEST_SHA256}  .sync-meta/manifest.txt" | sha256sum -c -
+          sort -u .sync-meta/manifest.txt > /tmp/s27m-sync/manifest.lst
+          find . -type f ! -path './.sync-meta/*' -printf '%P\n' | sort -u > /tmp/s27m-sync/payload-files.lst
+          comm -23 /tmp/s27m-sync/payload-files.lst /tmp/s27m-sync/manifest.lst > /tmp/s27m-sync/unexpected.lst
+          test ! -s /tmp/s27m-sync/unexpected.lst
+
+      - name: Apply exact source manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' path; do
+            if ! grep -Fxq "$path" /tmp/s27m-sync/manifest.lst; then
+              rm -f -- "$path"
+            fi
+          done < <(git ls-files -z)
+
+          rsync -a --exclude='.sync-meta/' /tmp/s27m-sync/payload/ ./
+          rm -rf .sync-s27m-r2
+          rm -f .github/workflows/sync-s27m-r2.yml
+
+          find . -path './.git' -prune -o -type f -printf '%P\n' | sort -u > /tmp/s27m-sync/final-files.lst
+          diff -u /tmp/s27m-sync/manifest.lst /tmp/s27m-sync/final-files.lst
+
+          test -z "$(find . -type f \( -name '*.wav' -o -name '*.mid' -o -name '*.midi' -o -name '*.pyc' \) -print -quit)"
+          test -z "$(find . -type d \( -name '__pycache__' -o -name '.pytest_cache' -o -name 'dist' -o -name 'build' \) -print -quit)"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "numpy==2.2.6" "scipy==1.15.3" "pytest>=8" "jsonschema>=4.20"
+
+      - name: Validate reconstructed source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python skills/code-composer/kit/scripts/self_check.py
+          python tools/validate_skill.py
+          python tools/verify_plugin_distribution.py
+          python -m compileall -q skills/code-composer/kit/src
+          pytest -q -k "not test_s17_legacy_drum_path_is_byte_identical_to_s16_baseline and not test_s20_existing_modeled_kick_snare_closed_hat_are_byte_identical_to_s19 and not test_s21_s20_preset_and_existing_default_hits_remain_byte_identical"
+          python tools/build_skill.py
+          python tools/build_plugins.py
+
+      - name: Clean generated validation residue
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf dist .pytest_cache build
+          find . -type d -name '__pycache__' -prune -exec rm -rf {} +
+          find . -type f -name '*.pyc' -delete
+          find . -path './.git' -prune -o -type f -printf '%P\n' | sort -u > /tmp/s27m-sync/final-clean-files.lst
+          diff -u /tmp/s27m-sync/manifest.lst /tmp/s27m-sync/final-clean-files.lst
+
+      - name: Commit source-only sync
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          test -z "$(git diff --cached --name-only | grep -E '(^|/)(dist|build|__pycache__|\.pytest_cache)(/|$)|\.(wav|mid|midi|pyc)$' || true)"
+          git status --short
+          git commit -m "Sync ZIP-first source through S27-M R2 and S28 piano naturalism"
+          git push origin HEAD:sync/zip-first-through-s27m-r2
