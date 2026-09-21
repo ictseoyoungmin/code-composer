@@ -14,7 +14,7 @@ The repository was migrated from ZIP-first development to a source-first GitHub 
 - ZIP-first engine development was recovered and validated through the S27 authenticated drum chain and the accepted S28 piano-naturalism source chain through S28-H.
 - S27-M R2 Ensemble / Production Integration was then rebuilt on that complete S28-H source baseline.
 - S27-M R2 source validation reached **95 test files / 636/636 PASS** before GitHub history-preservation reconciliation.
-- The GitHub synchronization preserves existing source-first plugin layout, historical S20-S24 evidence/tests/examples, and compatibility presets instead of treating omissions from a clean ZIP package as deletions.
+- The GitHub synchronization preserves the existing source-first plugin layout, historical S20-S24 reports/checksums and repository examples. Superseded S20-S24 runtime tests/presets/tools are retained under `docs/history/superseded/s20-s24/` rather than being reactivated against the later S19-core-derived runtime.
 
 ## Current gate
 
