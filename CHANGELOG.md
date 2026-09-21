@@ -5,7 +5,7 @@
 - Targeted yielding is attack-only, proximity-weighted, deterministic and never acts as global sustain ducking; `*_control` events are untouched.
 - Existing S15 timing offsets, overlap-weighted yielding and role-pan offsets remain compatible and ordered.
 - Full repository: **95 test files / 636/636 PASS** (partitioned); standalone self-check, skill validation, plugin distribution, compileall and Skill/Codex/Claude builds PASS.
-- Status remains **ENGINEERING CANDIDATE / PERCEPTUAL GATE OPEN** pending listening.
+- Status: **CLOSED / PERCEPTUAL PASS** on 2026-09-22 after full-song A/B production listening.
 - Full-song flagship `Crossing Meridian`: 12 bars / 24 kHz / 112 BPM / 27.91425 s; piano 121 / bass 46 / violin 42 / drums 175 events; A/B RMS 0.15855/0.15815; clipping 0.
 
 ## v1.17.0 — S28-H Piano Naturalism Production Closure — ENGINEERING CANDIDATE
