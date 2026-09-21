@@ -1,6 +1,6 @@
 # S27-M R2 Full-Song Flagship — Crossing Meridian
 
-Status: LISTENING GATE OPEN
+Status: CLOSED / PERCEPTUAL PASS
 
 `Crossing Meridian` reuses the accepted S28-H/S28-G acoustic-piano source, modeled bass, articulated violin, and locked S27 drum chain in a 12-bar / 24 kHz / 112 BPM production context.
 
@@ -30,3 +30,7 @@ These counts describe event-level authored attack ownership, not bus compression
 Primary listening files:
 - `03_A_then_B_FULL.wav`
 - `04_A_then_B_CHORUS.wav`
+
+## Closure
+
+On 2026-09-22, the user completed production listening and marked the full-song S27-M R2 A/B gate **PASS**. This closes the flagship listening gate; `Crossing Meridian` remains the perceptual closure evidence for S27-M R2.
