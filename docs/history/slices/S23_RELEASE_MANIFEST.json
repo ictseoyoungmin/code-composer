@@ -1,0 +1,186 @@
+{
+  "slice": "S23 Drum Performance-to-Timbre Dynamics",
+  "status": "CLOSED",
+  "date": "2026-09-19",
+  "engine_version": "1.17.0",
+  "baseline": "S22 Drum Acoustic Voicing & Timbre Polish",
+  "preset": {
+    "s22": "drums.acoustic_kit_modeled_polished@1.0.0",
+    "s23": "drums.acoustic_kit_modeled_expressive@1.0.0",
+    "opt_in": true
+  },
+  "scope": {
+    "dry_source_only": true,
+    "new_articulations": false,
+    "room_overhead_reverb_mic_model": false,
+    "stateful_choke_or_shared_residual_state": false,
+    "drummer_performance_grammar": false,
+    "auto_generated_hits_or_fills": false,
+    "controls": [
+      "strike_force",
+      "strike_position"
+    ],
+    "velocity_authority_preserved": true
+  },
+  "compatibility": {
+    "s22_preset_unchanged": true,
+    "omitted_controls_byte_identical_s22": true,
+    "s20_articulation_surface_preserved": true,
+    "s18_track_gain_preserved": true,
+    "s19_track_pan_preserved": true
+  },
+  "validation": {
+    "focused_s23": "10/10 PASS",
+    "source_regression": "508/508 PASS (76 test files; 0 failures/timeouts)",
+    "clean_installed_regression": "508/508 PASS (76 test files; source-path injection disabled)",
+    "import_modules": 130,
+    "import_failures": 0,
+    "static_modules": 130,
+    "static_edges": 191,
+    "cycles": 0,
+    "public_entrypoints": 9
+  },
+  "dogfood": {
+    "sample_rate": 24000,
+    "bpm": 96,
+    "bars": 8,
+    "explicit_events": 114,
+    "preset": "drums.acoustic_kit_modeled_expressive@1.0.0",
+    "control_semantics": "same S23 preset with strike_force/strike_position omitted; byte-identical S22 hit path",
+    "snare_force": {
+      "soft": {
+        "low_ratio_20_120": 0.02858987702382571,
+        "body_ratio_120_500": 0.7002751814456332,
+        "presence_ratio_1k_5k": 0.12624535483424706,
+        "air_ratio_7k_16k": 0.08137596824320979,
+        "centroid_hz": 1633.1066303036766,
+        "crest_factor": 6.536325885069703,
+        "onset_click_score": 7.04136510793455,
+        "decay_time_s": 0.28570833333333334
+      },
+      "hard": {
+        "low_ratio_20_120": 0.018943341185805082,
+        "body_ratio_120_500": 0.4679264424287344,
+        "presence_ratio_1k_5k": 0.191139693650588,
+        "air_ratio_7k_16k": 0.19451865050928463,
+        "centroid_hz": 3308.2403738218873,
+        "crest_factor": 7.802098700864498,
+        "onset_click_score": 10.568765133451981,
+        "decay_time_s": 0.20725
+      }
+    },
+    "snare_position": {
+      "center": {
+        "low_ratio_20_120": 0.02801061568300243,
+        "body_ratio_120_500": 0.7027447303593654,
+        "presence_ratio_1k_5k": 0.11348666476968786,
+        "air_ratio_7k_16k": 0.09193276246999267,
+        "centroid_hz": 1733.1776062198248,
+        "crest_factor": 6.114789356393691,
+        "onset_click_score": 6.054164144792017,
+        "decay_time_s": 0.26245833333333335
+      },
+      "edge": {
+        "low_ratio_20_120": 0.01891063690158679,
+        "body_ratio_120_500": 0.47981292859311186,
+        "presence_ratio_1k_5k": 0.17971193207345915,
+        "air_ratio_7k_16k": 0.19709836855090282,
+        "centroid_hz": 3305.3531634706383,
+        "crest_factor": 6.557616832261537,
+        "onset_click_score": 8.379277588269133,
+        "decay_time_s": 0.21516666666666667
+      }
+    },
+    "tom_mid_position": {
+      "center": {
+        "low_ratio_20_120": 3.714316222772095e-05,
+        "body_ratio_120_500": 0.9997680543156989,
+        "presence_ratio_1k_5k": 1.952481064157256e-07,
+        "air_ratio_7k_16k": 2.5927493845865203e-08,
+        "centroid_hz": 142.94179924224395,
+        "crest_factor": 3.4479811695162206,
+        "onset_click_score": 0.5298619964387749,
+        "decay_time_s": 0.7382916666666667
+      },
+      "edge": {
+        "low_ratio_20_120": 3.656218278787591e-05,
+        "body_ratio_120_500": 0.999691974839165,
+        "presence_ratio_1k_5k": 4.614593887969016e-07,
+        "air_ratio_7k_16k": 9.210952903536006e-08,
+        "centroid_hz": 143.50239787358157,
+        "crest_factor": 3.4749816296132554,
+        "onset_click_score": 0.9477580594747192,
+        "decay_time_s": 0.7382083333333334
+      }
+    },
+    "ride_force": {
+      "soft": {
+        "low_ratio_20_120": 4.223681974695082e-06,
+        "body_ratio_120_500": 0.0027055872328523877,
+        "presence_ratio_1k_5k": 0.527011891660779,
+        "air_ratio_7k_16k": 0.26968459486886576,
+        "centroid_hz": 5079.450851923754,
+        "crest_factor": 6.426496425162265,
+        "onset_click_score": 8.08109561412086,
+        "decay_time_s": 1.7553333333333334
+      },
+      "hard": {
+        "low_ratio_20_120": 2.499410908621772e-06,
+        "body_ratio_120_500": 0.0016149973353599674,
+        "presence_ratio_1k_5k": 0.42475469366486013,
+        "air_ratio_7k_16k": 0.3593287281975005,
+        "centroid_hz": 5891.669959432439,
+        "crest_factor": 6.577760595944223,
+        "onset_click_score": 9.672156942616363,
+        "decay_time_s": 1.67625
+      }
+    },
+    "crash_position": {
+      "centerward": {
+        "low_ratio_20_120": 3.0259344844717082e-05,
+        "body_ratio_120_500": 0.009052715790098507,
+        "presence_ratio_1k_5k": 0.4278601865546867,
+        "air_ratio_7k_16k": 0.3327118863226089,
+        "centroid_hz": 5553.111411604956,
+        "crest_factor": 6.566329597457362,
+        "onset_click_score": 10.411041644451181,
+        "decay_time_s": 2.0265416666666667
+      },
+      "edgeward": {
+        "low_ratio_20_120": 3.213183518376228e-05,
+        "body_ratio_120_500": 0.009611162168356719,
+        "presence_ratio_1k_5k": 0.4422192130640616,
+        "air_ratio_7k_16k": 0.31776035652782153,
+        "centroid_hz": 5421.366945368151,
+        "crest_factor": 6.453704018414141,
+        "onset_click_score": 8.95992591323921,
+        "decay_time_s": 2.2383333333333333
+      }
+    },
+    "groove": {
+      "shared_scale": 1.0,
+      "control_peak": 0.6909921020113581,
+      "control_rms": 0.07487907155912782,
+      "treatment_peak": 0.7165776673987423,
+      "treatment_rms": 0.07487814115307327
+    },
+    "scope": "dry source only; same notes/articulations/velocities/timing; only explicit S23 strike controls differ"
+  },
+  "next": "Post-S23 listening review; S24 Stateful Kit Interaction remains a candidate and opens only if shared residual/choke behavior is the next audible bottleneck.",
+  "packaging": {
+    "standalone_skill_files": 213,
+    "codex_plugin_files": 215,
+    "claude_plugin_files": 215,
+    "codex_skill_exact": true,
+    "claude_skill_exact": true,
+    "forbidden_files": 0
+  },
+  "artifact_sha256": {
+    "standalone_skill": "b47f110454c3fb42c7a18b148fcd4d06314d596e90b3ba00caa63c9b9f11c09d",
+    "codex_plugin": "a0e496f031a331d3b837e6991cb886b8e02fbf671fc83279ca2ce889938f619b",
+    "claude_plugin": "01c65f2ada9a3ce7556c6e66e8b2ee7a074b3c2631febb69efde8ed7283e479c",
+    "dogfood": "90737543141ede561927975c0ff4e8f5c0b20d97fa4089e764978224f93c891d",
+    "validation": "53a4cb37835d92b0733b5c693fa4e8b6c5fd1e81e6d4e0a32e4216a45efbae43",
+    "wheel": "b3ebf18cf64f6237b500ac86449d29ee2500f262dd9bd9154313739e740cb82a"
+  }
+}

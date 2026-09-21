@@ -1,0 +1,9 @@
+{
+  "slice": "S24",
+  "import_modules": 130,
+  "import_failures": 0,
+  "static_modules": 130,
+  "static_edges": 191,
+  "cycles": 0,
+  "public_entrypoints": 9
+}

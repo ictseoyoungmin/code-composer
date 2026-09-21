@@ -1,0 +1,47 @@
+{
+  "targets": [
+    "FLAT_DYNAMICS",
+    "MECHANICAL_TIMING",
+    "REGISTER_COLLISION",
+    "TRANSITION_DISCONTINUITY"
+  ],
+  "before_issue_count": 6,
+  "after_issue_count": 0,
+  "resolved_count": 6,
+  "introduced_count": 0,
+  "by_code": [
+    {
+      "code": "FLAT_DYNAMICS",
+      "before": 1,
+      "after": 0,
+      "delta": -1
+    },
+    {
+      "code": "MECHANICAL_TIMING",
+      "before": 1,
+      "after": 0,
+      "delta": -1
+    },
+    {
+      "code": "REGISTER_COLLISION",
+      "before": 2,
+      "after": 0,
+      "delta": -2
+    },
+    {
+      "code": "TRANSITION_DISCONTINUITY",
+      "before": 2,
+      "after": 0,
+      "delta": -2
+    }
+  ],
+  "target_improved": true,
+  "global_before_issue_count": 6,
+  "global_after_issue_count": 0,
+  "introduced_non_target": [],
+  "introduced_non_target_count": 0,
+  "introduced_high_medium": [],
+  "introduced_high_medium_count": 0,
+  "regression_free": true,
+  "improved": true
+}

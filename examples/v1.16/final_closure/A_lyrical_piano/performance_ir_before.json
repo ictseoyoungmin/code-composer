@@ -1,0 +1,521 @@
+{
+  "version": "1.16",
+  "phrases": [
+    {
+      "phrase_id": "p_dawn",
+      "section_id": "dawn",
+      "role": "lead",
+      "source_material": "m_dawn",
+      "start_beat": 0.25,
+      "duration_beats": 5.0,
+      "dynamic_curve": [
+        [
+          0,
+          0.42
+        ],
+        [
+          0.58,
+          0.72
+        ],
+        [
+          1,
+          0.44
+        ]
+      ],
+      "timing_curve_ms": [
+        [
+          0,
+          0
+        ],
+        [
+          0.6,
+          4
+        ],
+        [
+          1,
+          9
+        ]
+      ],
+      "gate_curve": [
+        [
+          0,
+          0.92
+        ],
+        [
+          0.62,
+          1.04
+        ],
+        [
+          1,
+          0.62
+        ]
+      ],
+      "articulation_curve": [
+        {
+          "position": 0.0,
+          "articulation": "legato"
+        }
+      ],
+      "accent_points": [],
+      "apex_position": 0.58,
+      "breath_after_beats": 0.38
+    },
+    {
+      "phrase_id": "p_memory",
+      "section_id": "memory",
+      "role": "lead",
+      "source_material": "m_memory",
+      "start_beat": 8.25,
+      "duration_beats": 5.0,
+      "dynamic_curve": [
+        [
+          0,
+          0.54
+        ],
+        [
+          1,
+          0.54
+        ]
+      ],
+      "timing_curve_ms": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "gate_curve": [
+        [
+          0,
+          0.92
+        ],
+        [
+          1,
+          0.92
+        ]
+      ],
+      "articulation_curve": [
+        {
+          "position": 0.0,
+          "articulation": "legato"
+        }
+      ],
+      "accent_points": [],
+      "apex_position": 0.58,
+      "breath_after_beats": 0.38
+    },
+    {
+      "phrase_id": "p_lift",
+      "section_id": "lift",
+      "role": "lead",
+      "source_material": "m_lift",
+      "start_beat": 16.25,
+      "duration_beats": 5.0,
+      "dynamic_curve": [
+        [
+          0,
+          0.42
+        ],
+        [
+          0.58,
+          0.72
+        ],
+        [
+          1,
+          0.44
+        ]
+      ],
+      "timing_curve_ms": [
+        [
+          0,
+          0
+        ],
+        [
+          0.6,
+          4
+        ],
+        [
+          1,
+          9
+        ]
+      ],
+      "gate_curve": [
+        [
+          0,
+          0.92
+        ],
+        [
+          0.62,
+          1.04
+        ],
+        [
+          1,
+          0.62
+        ]
+      ],
+      "articulation_curve": [
+        {
+          "position": 0.0,
+          "articulation": "legato"
+        }
+      ],
+      "accent_points": [],
+      "apex_position": 0.58,
+      "breath_after_beats": 0.38
+    },
+    {
+      "phrase_id": "p_return",
+      "section_id": "return",
+      "role": "lead",
+      "source_material": "m_return",
+      "start_beat": 24.25,
+      "duration_beats": 5.0,
+      "dynamic_curve": [
+        [
+          0,
+          0.42
+        ],
+        [
+          0.58,
+          0.72
+        ],
+        [
+          1,
+          0.44
+        ]
+      ],
+      "timing_curve_ms": [
+        [
+          0,
+          0
+        ],
+        [
+          0.6,
+          4
+        ],
+        [
+          1,
+          9
+        ]
+      ],
+      "gate_curve": [
+        [
+          0,
+          0.92
+        ],
+        [
+          0.62,
+          1.04
+        ],
+        [
+          1,
+          0.62
+        ]
+      ],
+      "articulation_curve": [
+        {
+          "position": 0.0,
+          "articulation": "legato"
+        }
+      ],
+      "accent_points": [],
+      "apex_position": 0.58,
+      "breath_after_beats": 0.38
+    }
+  ],
+  "motif_statements": [
+    {
+      "statement_id": "m_dawn",
+      "source_motif_id": "motif_A",
+      "section_id": "dawn",
+      "transform_chain": [
+        {
+          "op": "exact"
+        }
+      ],
+      "identity_floor": 0.95,
+      "cadence_rule": "authored"
+    },
+    {
+      "statement_id": "m_memory",
+      "source_motif_id": "motif_A",
+      "section_id": "memory",
+      "transform_chain": [
+        {
+          "op": "rhythm_scale",
+          "factor": 1.08
+        },
+        {
+          "op": "cadence_rewrite",
+          "intervals": [
+            1,
+            0
+          ],
+          "rhythm": [
+            0.45,
+            0.75
+          ]
+        }
+      ],
+      "identity_floor": 0.8,
+      "cadence_rule": "authored"
+    },
+    {
+      "statement_id": "m_lift",
+      "source_motif_id": "motif_A",
+      "section_id": "lift",
+      "transform_chain": [
+        {
+          "op": "fragment",
+          "start": 0,
+          "length": 6
+        },
+        {
+          "op": "sequence",
+          "scale_degrees": 1
+        }
+      ],
+      "identity_floor": 0.66,
+      "cadence_rule": "authored"
+    },
+    {
+      "statement_id": "m_return",
+      "source_motif_id": "motif_A",
+      "section_id": "return",
+      "transform_chain": [
+        {
+          "op": "rhythm_scale",
+          "factor": 1.12
+        },
+        {
+          "op": "cadence_rewrite",
+          "intervals": [
+            1,
+            0
+          ],
+          "rhythm": [
+            0.45,
+            0.9
+          ]
+        }
+      ],
+      "identity_floor": 0.8,
+      "cadence_rule": "authored"
+    }
+  ],
+  "register_plans": {
+    "lead": {
+      "hard_range": [
+        48,
+        88
+      ],
+      "preferred_range": [
+        58,
+        78
+      ],
+      "center": 67,
+      "max_span": 24,
+      "min_intervoice_distance": 0,
+      "overlap_policy": "primary_wins",
+      "motion_policy": "smooth"
+    },
+    "pad": {
+      "hard_range": [
+        36,
+        65
+      ],
+      "preferred_range": [
+        43,
+        57
+      ],
+      "center": 50,
+      "max_span": 20,
+      "min_intervoice_distance": 3,
+      "overlap_policy": "avoid",
+      "motion_policy": "oblique"
+    }
+  },
+  "orchestration_sections": {
+    "dawn": {
+      "primary_roles": [
+        "lead"
+      ],
+      "secondary_roles": [
+        "pad"
+      ],
+      "decorative_roles": [],
+      "max_simultaneous_roles": 2,
+      "allowed_overlaps": [
+        [
+          "lead",
+          "pad"
+        ]
+      ],
+      "phrase_gap_only_roles": [],
+      "silence_roles": []
+    },
+    "memory": {
+      "primary_roles": [
+        "lead"
+      ],
+      "secondary_roles": [
+        "pad"
+      ],
+      "decorative_roles": [],
+      "max_simultaneous_roles": 2,
+      "allowed_overlaps": [
+        [
+          "lead",
+          "pad"
+        ]
+      ],
+      "phrase_gap_only_roles": [],
+      "silence_roles": []
+    },
+    "lift": {
+      "primary_roles": [
+        "lead"
+      ],
+      "secondary_roles": [
+        "pad"
+      ],
+      "decorative_roles": [],
+      "max_simultaneous_roles": 2,
+      "allowed_overlaps": [
+        [
+          "lead",
+          "pad"
+        ]
+      ],
+      "phrase_gap_only_roles": [],
+      "silence_roles": []
+    },
+    "return": {
+      "primary_roles": [
+        "lead"
+      ],
+      "secondary_roles": [
+        "pad"
+      ],
+      "decorative_roles": [],
+      "max_simultaneous_roles": 2,
+      "allowed_overlaps": [
+        [
+          "lead",
+          "pad"
+        ]
+      ],
+      "phrase_gap_only_roles": [],
+      "silence_roles": []
+    }
+  },
+  "transitions": [
+    {
+      "from_section": "dawn",
+      "to_section": "memory",
+      "harmonic_anticipation": {
+        "enabled": false
+      },
+      "pickup": {
+        "enabled": false
+      },
+      "bass_approach": {
+        "type": "none"
+      },
+      "cadence_extension": {},
+      "texture_subtraction": {
+        "roles": [
+          "pad"
+        ],
+        "beats": 0.75
+      },
+      "silence_beats": 0.25,
+      "register_preparation": {},
+      "rhythm_fill": {}
+    },
+    {
+      "from_section": "memory",
+      "to_section": "lift",
+      "harmonic_anticipation": {
+        "enabled": true,
+        "role": "pad",
+        "beats": 0.65,
+        "target_degree": 5,
+        "chord_intervals": [
+          0,
+          2,
+          4
+        ],
+        "velocity": 0.2,
+        "gate": 0.92
+      },
+      "pickup": {
+        "enabled": true,
+        "role": "lead",
+        "beats": 0.5,
+        "degrees": [
+          5,
+          6
+        ],
+        "rhythm": [
+          0.25,
+          0.25
+        ],
+        "octave": 4,
+        "velocity": 0.44
+      },
+      "bass_approach": {
+        "type": "none"
+      },
+      "cadence_extension": {},
+      "texture_subtraction": {},
+      "silence_beats": 0.0,
+      "register_preparation": {},
+      "rhythm_fill": {}
+    },
+    {
+      "from_section": "lift",
+      "to_section": "return",
+      "harmonic_anticipation": {
+        "enabled": false
+      },
+      "pickup": {
+        "enabled": false
+      },
+      "bass_approach": {
+        "type": "none"
+      },
+      "cadence_extension": {
+        "roles": [
+          "lead"
+        ],
+        "beats": 0.5
+      },
+      "texture_subtraction": {},
+      "silence_beats": 0.0,
+      "register_preparation": {
+        "lead": {
+          "semitones": -12,
+          "beats": 0.5
+        }
+      },
+      "rhythm_fill": {}
+    }
+  ],
+  "realization": {
+    "seed": 11601,
+    "microtiming": {
+      "enabled": true,
+      "max_abs_ms": 3.5
+    },
+    "velocity_variation": {
+      "enabled": true,
+      "max_abs": 0.012
+    },
+    "timing_quantization_guard_ms": 0.5,
+    "minimum_note_gap_ms": 1.5
+  }
+}

@@ -1,11 +1,19 @@
 {
   "name": "code-composer",
-  "interface": {"displayName": "Code Composer"},
+  "interface": {
+    "displayName": "Code Composer"
+  },
   "plugins": [
     {
       "name": "code-composer",
-      "source": {"source": "local", "path": "./skills/"},
-      "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+      "source": {
+        "source": "local",
+        "path": "./skills/"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
       "category": "Creative Tools"
     }
   ]

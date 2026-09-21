@@ -9,6 +9,14 @@
   "homepage": "https://github.com/ictseoyoungmin/code-composer",
   "repository": "https://github.com/ictseoyoungmin/code-composer",
   "license": "AGPL-3.0-only",
-  "keywords": ["music", "composition", "midi", "audio", "agent-skill", "deterministic", "rendering"],
+  "keywords": [
+    "music",
+    "composition",
+    "midi",
+    "audio",
+    "agent-skill",
+    "deterministic",
+    "rendering"
+  ],
   "skills": "./skills/"
 }

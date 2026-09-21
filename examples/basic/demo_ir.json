@@ -1,0 +1,405 @@
+{
+  "meta": {
+    "title": "First Light — Minimal Music IR",
+    "version": "1.15.4",
+    "sample_rate": 44100,
+    "global_seed": 20260916
+  },
+  "transport": {
+    "bpm": 96,
+    "beats_per_bar": 4
+  },
+  "tonal": {
+    "root": "D",
+    "scale": "natural_minor"
+  },
+  "form": [
+    {
+      "id": "main",
+      "start_bar": 0,
+      "bars": 4,
+      "energy": 1.0
+    }
+  ],
+  "materials": {
+    "motifs": {},
+    "progressions": {},
+    "rhythms": {}
+  },
+  "instruments": {
+    "pad": {
+      "graph": {
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "gain": 0.72
+          },
+          {
+            "waveform": "triangle",
+            "gain": 0.18,
+            "octave": 1
+          }
+        ],
+        "unison": {
+          "voices": 2,
+          "detune_cents": 3.0,
+          "stereo_width": 0.55
+        },
+        "envelope": {
+          "attack": 0.12,
+          "decay": 0.28,
+          "sustain": 0.66,
+          "release": 0.38
+        },
+        "filter": {
+          "type": "lowpass",
+          "cutoff": 4200
+        },
+        "declick": {
+          "ms": 1.5
+        },
+        "output_gain": 0.34
+      }
+    },
+    "bass": {
+      "graph": {
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "gain": 0.92
+          },
+          {
+            "waveform": "triangle",
+            "gain": 0.12,
+            "octave": 1
+          }
+        ],
+        "envelope": {
+          "attack": 0.008,
+          "decay": 0.12,
+          "sustain": 0.72,
+          "release": 0.12
+        },
+        "filter": {
+          "type": "lowpass",
+          "cutoff": 1200
+        },
+        "declick": {
+          "ms": 1.0
+        },
+        "output_gain": 0.33
+      }
+    },
+    "lead": {
+      "graph": {
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "gain": 0.72
+          },
+          {
+            "waveform": "sine",
+            "gain": 0.28
+          }
+        ],
+        "envelope": {
+          "attack": 0.012,
+          "decay": 0.1,
+          "sustain": 0.48,
+          "release": 0.16
+        },
+        "filter": {
+          "type": "lowpass",
+          "cutoff": 5400
+        },
+        "declick": {
+          "ms": 1.0
+        },
+        "output_gain": 0.26
+      }
+    }
+  },
+  "tracks": [
+    {
+      "id": "pad",
+      "instrument": "pad",
+      "gain": 0.72,
+      "pan": -0.04,
+      "source": {
+        "type": "resolved"
+      },
+      "events": [
+        {
+          "start_beat": 0,
+          "duration_beats": 3.75,
+          "midi": 50,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 0,
+          "duration_beats": 3.75,
+          "midi": 53,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 0,
+          "duration_beats": 3.75,
+          "midi": 57,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 0,
+          "duration_beats": 3.75,
+          "midi": 60,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 4,
+          "duration_beats": 3.75,
+          "midi": 46,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 4,
+          "duration_beats": 3.75,
+          "midi": 50,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 4,
+          "duration_beats": 3.75,
+          "midi": 53,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 4,
+          "duration_beats": 3.75,
+          "midi": 57,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 8,
+          "duration_beats": 3.75,
+          "midi": 53,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 8,
+          "duration_beats": 3.75,
+          "midi": 57,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 8,
+          "duration_beats": 3.75,
+          "midi": 60,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 8,
+          "duration_beats": 3.75,
+          "midi": 65,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 12,
+          "duration_beats": 3.75,
+          "midi": 48,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 12,
+          "duration_beats": 3.75,
+          "midi": 52,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 12,
+          "duration_beats": 3.75,
+          "midi": 55,
+          "velocity": 0.54
+        },
+        {
+          "start_beat": 12,
+          "duration_beats": 3.75,
+          "midi": 60,
+          "velocity": 0.54
+        }
+      ],
+      "fx": {
+        "reverb": true
+      }
+    },
+    {
+      "id": "bass",
+      "instrument": "bass",
+      "gain": 0.62,
+      "pan": 0.0,
+      "source": {
+        "type": "resolved"
+      },
+      "events": [
+        {
+          "start_beat": 0,
+          "duration_beats": 0.72,
+          "midi": 38,
+          "velocity": 0.63
+        },
+        {
+          "start_beat": 2,
+          "duration_beats": 0.72,
+          "midi": 38,
+          "velocity": 0.63
+        },
+        {
+          "start_beat": 4,
+          "duration_beats": 0.72,
+          "midi": 34,
+          "velocity": 0.63
+        },
+        {
+          "start_beat": 6,
+          "duration_beats": 0.72,
+          "midi": 34,
+          "velocity": 0.63
+        },
+        {
+          "start_beat": 8,
+          "duration_beats": 0.72,
+          "midi": 41,
+          "velocity": 0.63
+        },
+        {
+          "start_beat": 10,
+          "duration_beats": 0.72,
+          "midi": 41,
+          "velocity": 0.63
+        },
+        {
+          "start_beat": 12,
+          "duration_beats": 0.72,
+          "midi": 36,
+          "velocity": 0.63
+        },
+        {
+          "start_beat": 14,
+          "duration_beats": 0.72,
+          "midi": 36,
+          "velocity": 0.63
+        }
+      ]
+    },
+    {
+      "id": "lead",
+      "instrument": "lead",
+      "gain": 0.58,
+      "pan": 0.06,
+      "source": {
+        "type": "resolved"
+      },
+      "events": [
+        {
+          "start_beat": 0,
+          "duration_beats": 0.74,
+          "midi": 62,
+          "velocity": 0.58
+        },
+        {
+          "start_beat": 1,
+          "duration_beats": 0.74,
+          "midi": 65,
+          "velocity": 0.52
+        },
+        {
+          "start_beat": 2,
+          "duration_beats": 0.74,
+          "midi": 69,
+          "velocity": 0.52
+        },
+        {
+          "start_beat": 3,
+          "duration_beats": 0.74,
+          "midi": 67,
+          "velocity": 0.52
+        },
+        {
+          "start_beat": 4,
+          "duration_beats": 0.74,
+          "midi": 65,
+          "velocity": 0.58
+        },
+        {
+          "start_beat": 5,
+          "duration_beats": 0.74,
+          "midi": 64,
+          "velocity": 0.52
+        },
+        {
+          "start_beat": 6,
+          "duration_beats": 0.74,
+          "midi": 62,
+          "velocity": 0.52
+        },
+        {
+          "start_beat": 7,
+          "duration_beats": 0.74,
+          "midi": 60,
+          "velocity": 0.52
+        },
+        {
+          "start_beat": 8,
+          "duration_beats": 0.74,
+          "midi": 62,
+          "velocity": 0.58
+        },
+        {
+          "start_beat": 9,
+          "duration_beats": 0.74,
+          "midi": 65,
+          "velocity": 0.52
+        },
+        {
+          "start_beat": 10,
+          "duration_beats": 0.74,
+          "midi": 67,
+          "velocity": 0.52
+        },
+        {
+          "start_beat": 11,
+          "duration_beats": 0.74,
+          "midi": 69,
+          "velocity": 0.52
+        },
+        {
+          "start_beat": 12,
+          "duration_beats": 0.74,
+          "midi": 67,
+          "velocity": 0.58
+        },
+        {
+          "start_beat": 13,
+          "duration_beats": 0.74,
+          "midi": 65,
+          "velocity": 0.52
+        },
+        {
+          "start_beat": 14,
+          "duration_beats": 0.74,
+          "midi": 64,
+          "velocity": 0.52
+        },
+        {
+          "start_beat": 15,
+          "duration_beats": 0.74,
+          "midi": 62,
+          "velocity": 0.52
+        }
+      ]
+    }
+  ],
+  "mix": {
+    "tail_seconds": 1.0,
+    "drive": 1.15,
+    "ceiling": 0.9
+  }
+}

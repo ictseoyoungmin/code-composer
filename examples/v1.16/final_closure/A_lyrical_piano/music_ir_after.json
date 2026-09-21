@@ -1,0 +1,970 @@
+{
+  "meta": {
+    "title": "Light Between Measures",
+    "version": "1.16-final",
+    "sample_rate": 44100,
+    "global_seed": 11601
+  },
+  "transport": {
+    "bpm": 78,
+    "beats_per_bar": 4
+  },
+  "tonal": {
+    "root": "D",
+    "scale": "major"
+  },
+  "form": [
+    {
+      "id": "dawn",
+      "start_bar": 0,
+      "bars": 2,
+      "energy": 0.3
+    },
+    {
+      "id": "memory",
+      "start_bar": 2,
+      "bars": 2,
+      "energy": 0.44
+    },
+    {
+      "id": "lift",
+      "start_bar": 4,
+      "bars": 2,
+      "energy": 0.62
+    },
+    {
+      "id": "return",
+      "start_bar": 6,
+      "bars": 2,
+      "energy": 0.48
+    }
+  ],
+  "materials": {
+    "motifs": {
+      "motif_A": {
+        "intervals": [
+          0,
+          1,
+          3,
+          4,
+          3,
+          1,
+          2,
+          0
+        ],
+        "rhythm": [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "progressions": {},
+    "rhythms": {}
+  },
+  "instruments": {
+    "lead": {
+      "kind": "piano",
+      "piano_design": {
+        "family": "acoustic",
+        "categories": {
+          "body": "studio_grand",
+          "hammer": "soft_felt",
+          "stringing": "concert",
+          "soundboard": "balanced_board",
+          "perspective": "player"
+        },
+        "controls": {
+          "base_decay_s": 3.35,
+          "velocity_brightness": 0.46,
+          "bridge_coupling": 0.35,
+          "modal_gain": 0.046,
+          "stereo_width": 0.72,
+          "output_gain": 0.46
+        }
+      }
+    },
+    "pad": {
+      "graph": {
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "gain": 0.74
+          },
+          {
+            "waveform": "triangle",
+            "gain": 0.24,
+            "octave": 1
+          }
+        ],
+        "unison": {
+          "voices": 3,
+          "detune_cents": 7,
+          "stereo_width": 0.68
+        },
+        "envelope": {
+          "attack": 0.18,
+          "decay": 0.32,
+          "sustain": 0.7,
+          "release": 0.55
+        },
+        "filter": {
+          "type": "lowpass",
+          "cutoff": 2600
+        },
+        "declick": {
+          "ms": 1.0
+        },
+        "output_gain": 0.22
+      }
+    }
+  },
+  "tracks": [
+    {
+      "id": "lead",
+      "instrument": "lead",
+      "source": {
+        "type": "resolved"
+      },
+      "events": [
+        {
+          "start_beat": 0.25,
+          "duration_beats": 0.6,
+          "midi": 62,
+          "velocity": 0.54,
+          "section_id": "dawn",
+          "arrangement_role": "lead"
+        },
+        {
+          "start_beat": 8.25,
+          "duration_beats": 0.6,
+          "midi": 62,
+          "velocity": 0.54,
+          "section_id": "memory",
+          "arrangement_role": "lead"
+        },
+        {
+          "start_beat": 16.25,
+          "duration_beats": 0.6,
+          "midi": 64,
+          "velocity": 0.54,
+          "section_id": "lift",
+          "arrangement_role": "lead"
+        },
+        {
+          "start_beat": 24.25,
+          "duration_beats": 0.6,
+          "midi": 62,
+          "velocity": 0.54,
+          "section_id": "return",
+          "arrangement_role": "lead"
+        }
+      ]
+    },
+    {
+      "id": "pad",
+      "instrument": "pad",
+      "source": {
+        "type": "resolved"
+      },
+      "events": [
+        {
+          "start_beat": 0.0,
+          "duration_beats": 3.25,
+          "midi": 50,
+          "velocity": 0.16,
+          "section_id": "dawn",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 0.0,
+          "duration_beats": 3.25,
+          "midi": 54,
+          "velocity": 0.16,
+          "section_id": "dawn",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 0.0,
+          "duration_beats": 3.25,
+          "midi": 57,
+          "velocity": 0.16,
+          "section_id": "dawn",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 4.0,
+          "duration_beats": 3.25,
+          "midi": 50,
+          "velocity": 0.16,
+          "section_id": "dawn",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 4.0,
+          "duration_beats": 3.25,
+          "midi": 53,
+          "velocity": 0.16,
+          "section_id": "dawn",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 4.0,
+          "duration_beats": 3.25,
+          "midi": 57,
+          "velocity": 0.16,
+          "section_id": "dawn",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 8.0,
+          "duration_beats": 3.25,
+          "midi": 47,
+          "velocity": 0.18,
+          "section_id": "memory",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 8.0,
+          "duration_beats": 3.25,
+          "midi": 51,
+          "velocity": 0.18,
+          "section_id": "memory",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 8.0,
+          "duration_beats": 3.25,
+          "midi": 54,
+          "velocity": 0.18,
+          "section_id": "memory",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 12.0,
+          "duration_beats": 3.25,
+          "midi": 47,
+          "velocity": 0.18,
+          "section_id": "memory",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 12.0,
+          "duration_beats": 3.25,
+          "midi": 50,
+          "velocity": 0.18,
+          "section_id": "memory",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 12.0,
+          "duration_beats": 3.25,
+          "midi": 54,
+          "velocity": 0.18,
+          "section_id": "memory",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 16.0,
+          "duration_beats": 3.25,
+          "midi": 55,
+          "velocity": 0.22,
+          "section_id": "lift",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 16.0,
+          "duration_beats": 3.25,
+          "midi": 59,
+          "velocity": 0.22,
+          "section_id": "lift",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 16.0,
+          "duration_beats": 3.25,
+          "midi": 62,
+          "velocity": 0.22,
+          "section_id": "lift",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 20.0,
+          "duration_beats": 3.25,
+          "midi": 55,
+          "velocity": 0.22,
+          "section_id": "lift",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 20.0,
+          "duration_beats": 3.25,
+          "midi": 58,
+          "velocity": 0.22,
+          "section_id": "lift",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 20.0,
+          "duration_beats": 3.25,
+          "midi": 62,
+          "velocity": 0.22,
+          "section_id": "lift",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 24.0,
+          "duration_beats": 3.25,
+          "midi": 50,
+          "velocity": 0.15,
+          "section_id": "return",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 24.0,
+          "duration_beats": 3.25,
+          "midi": 54,
+          "velocity": 0.15,
+          "section_id": "return",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 24.0,
+          "duration_beats": 3.25,
+          "midi": 57,
+          "velocity": 0.15,
+          "section_id": "return",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 28.0,
+          "duration_beats": 3.25,
+          "midi": 50,
+          "velocity": 0.15,
+          "section_id": "return",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 28.0,
+          "duration_beats": 3.25,
+          "midi": 53,
+          "velocity": 0.15,
+          "section_id": "return",
+          "arrangement_role": "pad"
+        },
+        {
+          "start_beat": 28.0,
+          "duration_beats": 3.25,
+          "midi": 57,
+          "velocity": 0.15,
+          "section_id": "return",
+          "arrangement_role": "pad"
+        }
+      ]
+    }
+  ],
+  "mix": {
+    "tail_seconds": 2.8,
+    "graph": {
+      "tracks": {
+        "lead": {
+          "gain": 0.9,
+          "pan": 0.0,
+          "output": "music",
+          "sends": {}
+        },
+        "pad": {
+          "gain": 0.38,
+          "pan": 0.0,
+          "output": "music",
+          "sends": {}
+        }
+      },
+      "buses": {
+        "music": {
+          "kind": "group",
+          "gain": 0.94,
+          "output": "master",
+          "fx": []
+        }
+      },
+      "sidechains": [],
+      "master": {
+        "gain": 0.9,
+        "fx": []
+      }
+    }
+  },
+  "performance_ir": {
+    "version": "1.16",
+    "phrases": [
+      {
+        "phrase_id": "p_dawn",
+        "section_id": "dawn",
+        "role": "lead",
+        "source_material": "m_dawn",
+        "start_beat": 0.25,
+        "duration_beats": 5.0,
+        "dynamic_curve": [
+          [
+            0,
+            0.15
+          ],
+          [
+            0.58,
+            0.23
+          ],
+          [
+            1,
+            0.17
+          ]
+        ],
+        "timing_curve_ms": [
+          [
+            0,
+            0
+          ],
+          [
+            0.6,
+            4
+          ],
+          [
+            1,
+            9
+          ]
+        ],
+        "gate_curve": [
+          [
+            0,
+            0.92
+          ],
+          [
+            0.62,
+            1.04
+          ],
+          [
+            1,
+            0.62
+          ]
+        ],
+        "articulation_curve": [
+          {
+            "position": 0.0,
+            "articulation": "legato"
+          }
+        ],
+        "accent_points": [],
+        "apex_position": 0.58,
+        "breath_after_beats": 0.38
+      },
+      {
+        "phrase_id": "p_memory",
+        "section_id": "memory",
+        "role": "lead",
+        "source_material": "m_memory",
+        "start_beat": 8.25,
+        "duration_beats": 5.0,
+        "dynamic_curve": [
+          [
+            0,
+            0.24
+          ],
+          [
+            0.58,
+            0.42
+          ],
+          [
+            1,
+            0.26
+          ]
+        ],
+        "timing_curve_ms": [
+          [
+            0,
+            0
+          ],
+          [
+            0.6,
+            4
+          ],
+          [
+            1,
+            9
+          ]
+        ],
+        "gate_curve": [
+          [
+            0,
+            0.92
+          ],
+          [
+            0.62,
+            1.04
+          ],
+          [
+            1,
+            0.62
+          ]
+        ],
+        "articulation_curve": [
+          {
+            "position": 0.0,
+            "articulation": "legato"
+          }
+        ],
+        "accent_points": [],
+        "apex_position": 0.58,
+        "breath_after_beats": 0.38
+      },
+      {
+        "phrase_id": "p_lift",
+        "section_id": "lift",
+        "role": "lead",
+        "source_material": "m_lift",
+        "start_beat": 16.25,
+        "duration_beats": 5.0,
+        "dynamic_curve": [
+          [
+            0,
+            0.54
+          ],
+          [
+            0.58,
+            0.9
+          ],
+          [
+            1,
+            0.52
+          ]
+        ],
+        "timing_curve_ms": [
+          [
+            0,
+            0
+          ],
+          [
+            0.6,
+            4
+          ],
+          [
+            1,
+            9
+          ]
+        ],
+        "gate_curve": [
+          [
+            0,
+            0.92
+          ],
+          [
+            0.62,
+            1.04
+          ],
+          [
+            1,
+            0.62
+          ]
+        ],
+        "articulation_curve": [
+          {
+            "position": 0.0,
+            "articulation": "legato"
+          }
+        ],
+        "accent_points": [],
+        "apex_position": 0.58,
+        "breath_after_beats": 0.38
+      },
+      {
+        "phrase_id": "p_return",
+        "section_id": "return",
+        "role": "lead",
+        "source_material": "m_return",
+        "start_beat": 24.25,
+        "duration_beats": 5.0,
+        "dynamic_curve": [
+          [
+            0,
+            0.28
+          ],
+          [
+            0.58,
+            0.48
+          ],
+          [
+            1,
+            0.3
+          ]
+        ],
+        "timing_curve_ms": [
+          [
+            0,
+            0
+          ],
+          [
+            0.6,
+            4
+          ],
+          [
+            1,
+            9
+          ]
+        ],
+        "gate_curve": [
+          [
+            0,
+            0.92
+          ],
+          [
+            0.62,
+            1.04
+          ],
+          [
+            1,
+            0.62
+          ]
+        ],
+        "articulation_curve": [
+          {
+            "position": 0.0,
+            "articulation": "legato"
+          }
+        ],
+        "accent_points": [],
+        "apex_position": 0.58,
+        "breath_after_beats": 0.38
+      }
+    ],
+    "motif_statements": [
+      {
+        "statement_id": "m_dawn",
+        "source_motif_id": "motif_A",
+        "section_id": "dawn",
+        "transform_chain": [
+          {
+            "op": "exact"
+          }
+        ],
+        "identity_floor": 0.95,
+        "cadence_rule": "authored"
+      },
+      {
+        "statement_id": "m_memory",
+        "source_motif_id": "motif_A",
+        "section_id": "memory",
+        "transform_chain": [
+          {
+            "op": "rhythm_scale",
+            "factor": 1.08
+          },
+          {
+            "op": "cadence_rewrite",
+            "intervals": [
+              1,
+              0
+            ],
+            "rhythm": [
+              0.45,
+              0.75
+            ]
+          }
+        ],
+        "identity_floor": 0.8,
+        "cadence_rule": "authored"
+      },
+      {
+        "statement_id": "m_lift",
+        "source_motif_id": "motif_A",
+        "section_id": "lift",
+        "transform_chain": [
+          {
+            "op": "fragment",
+            "start": 0,
+            "length": 6
+          },
+          {
+            "op": "sequence",
+            "scale_degrees": 1
+          }
+        ],
+        "identity_floor": 0.66,
+        "cadence_rule": "authored"
+      },
+      {
+        "statement_id": "m_return",
+        "source_motif_id": "motif_A",
+        "section_id": "return",
+        "transform_chain": [
+          {
+            "op": "rhythm_scale",
+            "factor": 1.12
+          },
+          {
+            "op": "cadence_rewrite",
+            "intervals": [
+              1,
+              0
+            ],
+            "rhythm": [
+              0.45,
+              0.9
+            ]
+          }
+        ],
+        "identity_floor": 0.8,
+        "cadence_rule": "authored"
+      }
+    ],
+    "register_plans": {
+      "lead": {
+        "hard_range": [
+          48,
+          88
+        ],
+        "preferred_range": [
+          58,
+          78
+        ],
+        "center": 67,
+        "max_span": 24,
+        "min_intervoice_distance": 0,
+        "overlap_policy": "primary_wins",
+        "motion_policy": "smooth"
+      },
+      "pad": {
+        "hard_range": [
+          28,
+          56
+        ],
+        "preferred_range": [
+          35,
+          49
+        ],
+        "center": 43,
+        "max_span": 18,
+        "min_intervoice_distance": 3,
+        "overlap_policy": "avoid",
+        "motion_policy": "oblique"
+      }
+    },
+    "orchestration_sections": {
+      "dawn": {
+        "primary_roles": [
+          "lead"
+        ],
+        "secondary_roles": [
+          "pad"
+        ],
+        "decorative_roles": [],
+        "max_simultaneous_roles": 2,
+        "allowed_overlaps": [
+          [
+            "lead",
+            "pad"
+          ]
+        ],
+        "phrase_gap_only_roles": [],
+        "silence_roles": []
+      },
+      "memory": {
+        "primary_roles": [
+          "lead"
+        ],
+        "secondary_roles": [
+          "pad"
+        ],
+        "decorative_roles": [],
+        "max_simultaneous_roles": 2,
+        "allowed_overlaps": [
+          [
+            "lead",
+            "pad"
+          ]
+        ],
+        "phrase_gap_only_roles": [],
+        "silence_roles": []
+      },
+      "lift": {
+        "primary_roles": [
+          "lead"
+        ],
+        "secondary_roles": [
+          "pad"
+        ],
+        "decorative_roles": [],
+        "max_simultaneous_roles": 2,
+        "allowed_overlaps": [
+          [
+            "lead",
+            "pad"
+          ]
+        ],
+        "phrase_gap_only_roles": [],
+        "silence_roles": []
+      },
+      "return": {
+        "primary_roles": [
+          "lead"
+        ],
+        "secondary_roles": [
+          "pad"
+        ],
+        "decorative_roles": [],
+        "max_simultaneous_roles": 2,
+        "allowed_overlaps": [
+          [
+            "lead",
+            "pad"
+          ]
+        ],
+        "phrase_gap_only_roles": [],
+        "silence_roles": []
+      }
+    },
+    "transitions": [
+      {
+        "from_section": "dawn",
+        "to_section": "memory",
+        "harmonic_anticipation": {
+          "enabled": true,
+          "role": "pad",
+          "beats": 0.75,
+          "target_degree": 6,
+          "chord_intervals": [
+            0,
+            2,
+            4
+          ],
+          "velocity": 0.19,
+          "gate": 0.92
+        },
+        "pickup": {
+          "enabled": true,
+          "role": "lead",
+          "beats": 0.5,
+          "degrees": [
+            3,
+            5
+          ],
+          "rhythm": [
+            0.25,
+            0.25
+          ],
+          "octave": 4,
+          "velocity": 0.37
+        },
+        "bass_approach": {
+          "type": "none"
+        },
+        "cadence_extension": {},
+        "texture_subtraction": {},
+        "silence_beats": 0.0,
+        "register_preparation": {},
+        "rhythm_fill": {}
+      },
+      {
+        "from_section": "memory",
+        "to_section": "lift",
+        "harmonic_anticipation": {
+          "enabled": true,
+          "role": "pad",
+          "beats": 0.75,
+          "target_degree": 5,
+          "chord_intervals": [
+            0,
+            2,
+            4
+          ],
+          "velocity": 0.23,
+          "gate": 0.92
+        },
+        "pickup": {
+          "enabled": true,
+          "role": "lead",
+          "beats": 0.5,
+          "degrees": [
+            5,
+            6
+          ],
+          "rhythm": [
+            0.25,
+            0.25
+          ],
+          "octave": 4,
+          "velocity": 0.41000000000000003
+        },
+        "bass_approach": {
+          "type": "none"
+        },
+        "cadence_extension": {},
+        "texture_subtraction": {},
+        "silence_beats": 0.0,
+        "register_preparation": {},
+        "rhythm_fill": {}
+      },
+      {
+        "from_section": "lift",
+        "to_section": "return",
+        "harmonic_anticipation": {
+          "enabled": true,
+          "role": "pad",
+          "beats": 0.75,
+          "target_degree": 1,
+          "chord_intervals": [
+            0,
+            2,
+            4
+          ],
+          "velocity": 0.18,
+          "gate": 0.92
+        },
+        "pickup": {
+          "enabled": true,
+          "role": "lead",
+          "beats": 0.5,
+          "degrees": [
+            2,
+            1
+          ],
+          "rhythm": [
+            0.25,
+            0.25
+          ],
+          "octave": 4,
+          "velocity": 0.36
+        },
+        "bass_approach": {
+          "type": "none"
+        },
+        "cadence_extension": {
+          "roles": [
+            "lead"
+          ],
+          "beats": 0.4
+        },
+        "texture_subtraction": {},
+        "silence_beats": 0.0,
+        "register_preparation": {},
+        "rhythm_fill": {}
+      }
+    ],
+    "realization": {
+      "seed": 11601,
+      "microtiming": {
+        "enabled": true,
+        "max_abs_ms": 3.5
+      },
+      "velocity_variation": {
+        "enabled": true,
+        "max_abs": 0.012
+      },
+      "timing_quantization_guard_ms": 0.5,
+      "minimum_note_gap_ms": 1.5
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "slice": "S21",
+  "status": "PASS",
+  "standalone_skill_files": 211,
+  "codex_plugin_files": 213,
+  "claude_plugin_files": 213,
+  "forbidden_files": 0,
+  "codex_skill_exact": true,
+  "claude_skill_exact": true,
+  "final_wheel_focused_s21": "10/10 PASS",
+  "artifact_sha256": {
+    "standalone": "64fa54d9987c88db15a8eefcf4aa22a208116acdf2435cff1e90f5c21e6237e6",
+    "codex": "6e69be0160d18c3409aa5b99d43d01537b1687c6b59995a957ff0818fcb330c9",
+    "claude": "335d0182b63b8e708f9b7cb522d123a432a3df23ef6d736ab38ea8128ed0de1b",
+    "wheel": "c27e845f68b60ecbaf5c145901abc90493b5ee89f806f8edf89fd66c7665da4f",
+    "dogfood": "b42ee4850cf3e3124d3ed56482fb8699afb27ad0a0b0c3cb9b37475b830df539"
+  }
+}

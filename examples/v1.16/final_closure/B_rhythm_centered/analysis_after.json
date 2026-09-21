@@ -1,0 +1,534 @@
+{
+  "global": {
+    "duration_seconds": 18.14106575963719,
+    "peak": 0.33697931082856686,
+    "rms": 0.03652430142009217,
+    "headroom_db": 9.447935244817158,
+    "clipped_sample_ratio": 0.0,
+    "silence_ratio": 0.2056283522557533,
+    "stereo_width": 0.06975446778784186
+  },
+  "sections": {
+    "pulse": {
+      "start_seconds": 0.0,
+      "end_seconds": 4.285714285714286,
+      "expected_energy": 0.42,
+      "rms": 0.030695930671345455,
+      "peak": 0.2316005374108389,
+      "crest_factor": 7.544991545965316,
+      "stereo_width": 0.11056615335161137,
+      "silence_ratio": 0.0537989417989418,
+      "transient_density_hz": 4.433333333333334,
+      "centroid_hz": 837.4633851394456,
+      "low_ratio": 0.4959801454851139,
+      "mid_ratio": 0.4188637017208385,
+      "high_ratio": 0.08515615279404752,
+      "measured_energy_norm": 0.6971535794679294,
+      "expected_energy_norm": 0.5121951219512195,
+      "energy_error": 0.18495845751670992
+    },
+    "drive": {
+      "start_seconds": 4.285714285714286,
+      "end_seconds": 8.571428571428571,
+      "expected_energy": 0.72,
+      "rms": 0.044030370890116806,
+      "peak": 0.33697931082856686,
+      "crest_factor": 7.653338003205562,
+      "stereo_width": 0.06536120182116702,
+      "silence_ratio": 0.036238095238095236,
+      "transient_density_hz": 3.966666666666667,
+      "centroid_hz": 544.9259428514947,
+      "low_ratio": 0.29783174554189573,
+      "mid_ratio": 0.685852494033115,
+      "high_ratio": 0.01631576042498919,
+      "measured_energy_norm": 1.0,
+      "expected_energy_norm": 0.8780487804878049,
+      "energy_error": 0.12195121951219512
+    },
+    "break": {
+      "start_seconds": 8.571428571428571,
+      "end_seconds": 12.857142857142858,
+      "expected_energy": 0.407,
+      "rms": 0.030608084147248197,
+      "peak": 0.25380186253961573,
+      "crest_factor": 8.291987872178979,
+      "stereo_width": 0.05101710457032145,
+      "silence_ratio": 0.42162962962962963,
+      "transient_density_hz": 2.3333333333333335,
+      "centroid_hz": 408.1045639850544,
+      "low_ratio": 0.4068327450718861,
+      "mid_ratio": 0.5551560507663416,
+      "high_ratio": 0.038011204161772165,
+      "measured_energy_norm": 0.6951584446934237,
+      "expected_energy_norm": 0.49634146341463414,
+      "energy_error": 0.19881698127878955
+    },
+    "final": {
+      "start_seconds": 12.857142857142858,
+      "end_seconds": 17.142857142857142,
+      "expected_energy": 0.82,
+      "rms": 0.04276733143875457,
+      "peak": 0.3330177287917675,
+      "crest_factor": 7.786731544582556,
+      "stereo_width": 0.05382621465895918,
+      "silence_ratio": 0.1258253968253968,
+      "transient_density_hz": 3.5,
+      "centroid_hz": 541.376063446247,
+      "low_ratio": 0.2905885614625394,
+      "mid_ratio": 0.692495565966155,
+      "high_ratio": 0.016915872571305564,
+      "measured_energy_norm": 0.9713143581162579,
+      "expected_energy_norm": 1.0,
+      "energy_error": -0.02868564188374212
+    }
+  },
+  "transitions": {
+    "drive": {
+      "discontinuity": 0.5483726935727313,
+      "before_rms": 0.037181069215916886,
+      "after_rms": 0.1274727003271549,
+      "direction": "up"
+    },
+    "break": {
+      "discontinuity": 0.3685365482229128,
+      "before_rms": 0.04657549857146747,
+      "after_rms": 0.10094055620697782,
+      "direction": "up"
+    },
+    "final": {
+      "discontinuity": 0.5588124778535868,
+      "before_rms": 0.036079062686622115,
+      "after_rms": 0.12747525775786617,
+      "direction": "up"
+    }
+  },
+  "energy_correlation": 0.964697274701583,
+  "issues": [],
+  "register_collisions": {
+    "collision_score": 0.362631,
+    "pair_count": 4,
+    "pairs": [
+      {
+        "section_id": "drive",
+        "roles": [
+          "bass",
+          "pad"
+        ],
+        "event_pair_count": 1,
+        "shared_beats": 0.175,
+        "collision_score": 0.0105,
+        "closest_pitch_distance": 11,
+        "overlap_policies": {
+          "bass": "avoid",
+          "pad": "avoid"
+        },
+        "policy_intent": [
+          {
+            "role": "bass",
+            "policy": "avoid"
+          },
+          {
+            "role": "pad",
+            "policy": "avoid"
+          }
+        ]
+      },
+      {
+        "section_id": "drive",
+        "roles": [
+          "lead",
+          "pad"
+        ],
+        "event_pair_count": 3,
+        "shared_beats": 0.883393,
+        "collision_score": 0.173174,
+        "closest_pitch_distance": 7,
+        "overlap_policies": {
+          "lead": "primary_wins",
+          "pad": "avoid"
+        },
+        "policy_intent": [
+          {
+            "role": "lead",
+            "policy": "primary_wins"
+          },
+          {
+            "role": "pad",
+            "policy": "avoid"
+          }
+        ]
+      },
+      {
+        "section_id": "final",
+        "roles": [
+          "lead",
+          "pad"
+        ],
+        "event_pair_count": 5,
+        "shared_beats": 0.529266,
+        "collision_score": 0.111926,
+        "closest_pitch_distance": 5,
+        "overlap_policies": {
+          "lead": "primary_wins",
+          "pad": "avoid"
+        },
+        "policy_intent": [
+          {
+            "role": "lead",
+            "policy": "primary_wins"
+          },
+          {
+            "role": "pad",
+            "policy": "avoid"
+          }
+        ]
+      },
+      {
+        "section_id": "pulse",
+        "roles": [
+          "bass",
+          "pad"
+        ],
+        "event_pair_count": 2,
+        "shared_beats": 0.4,
+        "collision_score": 0.067031,
+        "closest_pitch_distance": 8,
+        "overlap_policies": {
+          "bass": "avoid",
+          "pad": "avoid"
+        },
+        "policy_intent": [
+          {
+            "role": "bass",
+            "policy": "avoid"
+          },
+          {
+            "role": "pad",
+            "policy": "avoid"
+          }
+        ]
+      }
+    ],
+    "semantics": "time overlap × within-octave pitch proximity × authored role importance"
+  },
+  "expressive_qa": {
+    "issue_count": 0,
+    "issue_counts": {},
+    "issues": [],
+    "evidence": {
+      "phrases": [
+        {
+          "phrase_id": "p_pulse",
+          "role": "lead",
+          "event_count": 8,
+          "authored_timing_span_ms": 7.0,
+          "realized_timing_span_ms": 7.38078,
+          "authored_dynamic_span": 0.28,
+          "realized_velocity_span": 0.246274
+        },
+        {
+          "phrase_id": "p_drive",
+          "role": "lead",
+          "event_count": 8,
+          "authored_timing_span_ms": 7.0,
+          "realized_timing_span_ms": 4.788363,
+          "authored_dynamic_span": 0.28,
+          "realized_velocity_span": 0.268092
+        },
+        {
+          "phrase_id": "p_break",
+          "role": "lead",
+          "event_count": 5,
+          "authored_timing_span_ms": 7.0,
+          "realized_timing_span_ms": 8.007074,
+          "authored_dynamic_span": 0.14,
+          "realized_velocity_span": 0.311429
+        },
+        {
+          "phrase_id": "p_final",
+          "role": "lead",
+          "event_count": 8,
+          "authored_timing_span_ms": 7.0,
+          "realized_timing_span_ms": 2.959649,
+          "authored_dynamic_span": 0.28,
+          "realized_velocity_span": 0.270401
+        }
+      ],
+      "motif_identity": [
+        {
+          "statement_id": "m_break",
+          "identity_score": 0.8055,
+          "identity_floor": 0.66,
+          "margin": 0.1455
+        },
+        {
+          "statement_id": "m_drive",
+          "identity_score": 1.0,
+          "identity_floor": 0.72,
+          "margin": 0.28
+        },
+        {
+          "statement_id": "m_final",
+          "identity_score": 0.9275,
+          "identity_floor": 0.78,
+          "margin": 0.1475
+        },
+        {
+          "statement_id": "m_pulse",
+          "identity_score": 1.0,
+          "identity_floor": 0.95,
+          "margin": 0.05
+        }
+      ],
+      "register_collisions": {
+        "collision_score": 0.362631,
+        "pair_count": 4,
+        "pairs": [
+          {
+            "section_id": "drive",
+            "roles": [
+              "bass",
+              "pad"
+            ],
+            "event_pair_count": 1,
+            "shared_beats": 0.175,
+            "collision_score": 0.0105,
+            "closest_pitch_distance": 11,
+            "overlap_policies": {
+              "bass": "avoid",
+              "pad": "avoid"
+            },
+            "policy_intent": [
+              {
+                "role": "bass",
+                "policy": "avoid"
+              },
+              {
+                "role": "pad",
+                "policy": "avoid"
+              }
+            ]
+          },
+          {
+            "section_id": "drive",
+            "roles": [
+              "lead",
+              "pad"
+            ],
+            "event_pair_count": 3,
+            "shared_beats": 0.883393,
+            "collision_score": 0.173174,
+            "closest_pitch_distance": 7,
+            "overlap_policies": {
+              "lead": "primary_wins",
+              "pad": "avoid"
+            },
+            "policy_intent": [
+              {
+                "role": "lead",
+                "policy": "primary_wins"
+              },
+              {
+                "role": "pad",
+                "policy": "avoid"
+              }
+            ]
+          },
+          {
+            "section_id": "final",
+            "roles": [
+              "lead",
+              "pad"
+            ],
+            "event_pair_count": 5,
+            "shared_beats": 0.529266,
+            "collision_score": 0.111926,
+            "closest_pitch_distance": 5,
+            "overlap_policies": {
+              "lead": "primary_wins",
+              "pad": "avoid"
+            },
+            "policy_intent": [
+              {
+                "role": "lead",
+                "policy": "primary_wins"
+              },
+              {
+                "role": "pad",
+                "policy": "avoid"
+              }
+            ]
+          },
+          {
+            "section_id": "pulse",
+            "roles": [
+              "bass",
+              "pad"
+            ],
+            "event_pair_count": 2,
+            "shared_beats": 0.4,
+            "collision_score": 0.067031,
+            "closest_pitch_distance": 8,
+            "overlap_policies": {
+              "bass": "avoid",
+              "pad": "avoid"
+            },
+            "policy_intent": [
+              {
+                "role": "bass",
+                "policy": "avoid"
+              },
+              {
+                "role": "pad",
+                "policy": "avoid"
+              }
+            ]
+          }
+        ],
+        "semantics": "time overlap × within-octave pitch proximity × authored role importance"
+      },
+      "orchestration_masking": [
+        {
+          "section_id": "pulse",
+          "primary_role": "lead",
+          "subordinate_role": "bass",
+          "shared_beats": 1.830468,
+          "primary_active_beats": 3.658357,
+          "overlap_ratio": 0.500352,
+          "explicitly_allowed": false
+        },
+        {
+          "section_id": "pulse",
+          "primary_role": "lead",
+          "subordinate_role": "drums",
+          "shared_beats": 0.14,
+          "primary_active_beats": 3.658357,
+          "overlap_ratio": 0.038269,
+          "explicitly_allowed": false
+        },
+        {
+          "section_id": "pulse",
+          "primary_role": "lead",
+          "subordinate_role": "pad",
+          "shared_beats": 3.020365,
+          "primary_active_beats": 3.658357,
+          "overlap_ratio": 0.825607,
+          "explicitly_allowed": true
+        },
+        {
+          "section_id": "drive",
+          "primary_role": "lead",
+          "subordinate_role": "bass",
+          "shared_beats": 1.457126,
+          "primary_active_beats": 3.295296,
+          "overlap_ratio": 0.442184,
+          "explicitly_allowed": false
+        },
+        {
+          "section_id": "drive",
+          "primary_role": "lead",
+          "subordinate_role": "drums",
+          "shared_beats": 0.283793,
+          "primary_active_beats": 3.295296,
+          "overlap_ratio": 0.086121,
+          "explicitly_allowed": false
+        },
+        {
+          "section_id": "drive",
+          "primary_role": "lead",
+          "subordinate_role": "pad",
+          "shared_beats": 2.650657,
+          "primary_active_beats": 3.295296,
+          "overlap_ratio": 0.804376,
+          "explicitly_allowed": true
+        },
+        {
+          "section_id": "break",
+          "primary_role": "lead",
+          "subordinate_role": "bass",
+          "shared_beats": 0.912471,
+          "primary_active_beats": 3.075955,
+          "overlap_ratio": 0.296646,
+          "explicitly_allowed": false
+        },
+        {
+          "section_id": "break",
+          "primary_role": "lead",
+          "subordinate_role": "drums",
+          "shared_beats": 0.14,
+          "primary_active_beats": 3.075955,
+          "overlap_ratio": 0.045514,
+          "explicitly_allowed": false
+        },
+        {
+          "section_id": "break",
+          "primary_role": "lead",
+          "subordinate_role": "pad",
+          "shared_beats": 0.0,
+          "primary_active_beats": 3.075955,
+          "overlap_ratio": 0.0,
+          "explicitly_allowed": false
+        },
+        {
+          "section_id": "final",
+          "primary_role": "lead",
+          "subordinate_role": "bass",
+          "shared_beats": 0.705295,
+          "primary_active_beats": 2.505275,
+          "overlap_ratio": 0.281524,
+          "explicitly_allowed": false
+        },
+        {
+          "section_id": "final",
+          "primary_role": "lead",
+          "subordinate_role": "drums",
+          "shared_beats": 0.162153,
+          "primary_active_beats": 2.505275,
+          "overlap_ratio": 0.064725,
+          "explicitly_allowed": false
+        },
+        {
+          "section_id": "final",
+          "primary_role": "lead",
+          "subordinate_role": "pad",
+          "shared_beats": 1.908317,
+          "primary_active_beats": 2.505275,
+          "overlap_ratio": 0.76172,
+          "explicitly_allowed": true
+        }
+      ],
+      "transition_discontinuity": [
+        {
+          "from_section": "pulse",
+          "to_section": "drive",
+          "discontinuity": 0.548373,
+          "direction": "up"
+        },
+        {
+          "from_section": "drive",
+          "to_section": "break",
+          "discontinuity": 0.368537,
+          "direction": "up"
+        },
+        {
+          "from_section": "break",
+          "to_section": "final",
+          "discontinuity": 0.558812,
+          "direction": "up"
+        }
+      ]
+    },
+    "semantics": {
+      "role": "measurement only; no automatic musical rewrite",
+      "codes": [
+        "MECHANICAL_TIMING",
+        "FLAT_DYNAMICS",
+        "MOTIF_IDENTITY_LOSS",
+        "REGISTER_COLLISION",
+        "ORCHESTRATION_MASKING",
+        "TRANSITION_DISCONTINUITY",
+        "PHRASE_NO_BREATH"
+      ]
+    }
+  }
+}

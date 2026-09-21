@@ -1,0 +1,20 @@
+{
+  "release": "Code Composer v1.17.0 S20",
+  "status": "PASS",
+  "test_files": 73,
+  "tests": 478,
+  "failed": 0,
+  "timeouts": 0,
+  "batches": [
+    "36/36 PASS",
+    "96/96 PASS",
+    "59/59 PASS",
+    "77/77 PASS",
+    "70/70 PASS",
+    "69/69 PASS",
+    "71/71 PASS"
+  ],
+  "source_path_injection": false,
+  "installed_root": "/mnt/data/cc_s20_work/clean_site",
+  "wheel_sha256": "725b32d0c0e5f0c4b6d892d73b4a43fba22dac8c133acd5b94a08c78299e1dac"
+}

@@ -1,0 +1,4991 @@
+{
+  "meta": {
+    "title": "Empty Room, Electric Air",
+    "version": "1.16-final",
+    "sample_rate": 44100,
+    "global_seed": 11603
+  },
+  "transport": {
+    "bpm": 86,
+    "beats_per_bar": 4
+  },
+  "tonal": {
+    "root": "A",
+    "scale": "natural_minor"
+  },
+  "form": [
+    {
+      "id": "room",
+      "start_bar": 0,
+      "bars": 2,
+      "energy": 0.38
+    },
+    {
+      "id": "answer",
+      "start_bar": 2,
+      "bars": 2,
+      "energy": 0.48
+    },
+    {
+      "id": "void",
+      "start_bar": 4,
+      "bars": 2,
+      "energy": 0.25
+    },
+    {
+      "id": "afterglow",
+      "start_bar": 6,
+      "bars": 2,
+      "energy": 0.52
+    }
+  ],
+  "materials": {
+    "motifs": {
+      "motif_A": {
+        "intervals": [
+          0,
+          2,
+          3,
+          5,
+          3,
+          2,
+          1,
+          0
+        ],
+        "rhythm": [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    },
+    "progressions": {},
+    "rhythms": {}
+  },
+  "instruments": {
+    "lead": {
+      "graph": {
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "gain": 0.72
+          },
+          {
+            "waveform": "sine",
+            "gain": 0.28
+          }
+        ],
+        "unison": {
+          "voices": 2,
+          "detune_cents": 4,
+          "stereo_width": 0.28
+        },
+        "envelope": {
+          "attack": 0.01,
+          "decay": 0.09,
+          "sustain": 0.52,
+          "release": 0.16
+        },
+        "filter": {
+          "type": "lowpass",
+          "cutoff": 4600
+        },
+        "declick": {
+          "ms": 1.0
+        },
+        "output_gain": 0.29
+      }
+    },
+    "pad": {
+      "graph": {
+        "oscillators": [
+          {
+            "waveform": "sine",
+            "gain": 0.74
+          },
+          {
+            "waveform": "triangle",
+            "gain": 0.24,
+            "octave": 1
+          }
+        ],
+        "unison": {
+          "voices": 3,
+          "detune_cents": 7,
+          "stereo_width": 0.68
+        },
+        "envelope": {
+          "attack": 0.18,
+          "decay": 0.32,
+          "sustain": 0.7,
+          "release": 0.55
+        },
+        "filter": {
+          "type": "lowpass",
+          "cutoff": 2600
+        },
+        "declick": {
+          "ms": 1.0
+        },
+        "output_gain": 0.22
+      }
+    },
+    "arp": {
+      "graph": {
+        "oscillators": [
+          {
+            "waveform": "triangle",
+            "gain": 0.78
+          },
+          {
+            "waveform": "sine",
+            "gain": 0.22
+          }
+        ],
+        "envelope": {
+          "attack": 0.004,
+          "decay": 0.04,
+          "sustain": 0.18,
+          "release": 0.08
+        },
+        "filter": {
+          "type": "highpass",
+          "cutoff": 650
+        },
+        "declick": {
+          "ms": 0.8
+        },
+        "output_gain": 0.16
+      }
+    }
+  },
+  "tracks": [
+    {
+      "id": "lead",
+      "instrument": "lead",
+      "source": {
+        "type": "resolved"
+      },
+      "events": [
+        {
+          "velocity": 0.406871,
+          "section_id": "room",
+          "arrangement_role": "lead",
+          "start_beat": 0.252233985,
+          "duration_beats": 0.42768,
+          "midi": 69,
+          "motif_statement": {
+            "statement_id": "m_room",
+            "source_motif_id": "motif_A",
+            "note_index": 0,
+            "source_interval": 0,
+            "transformed_interval": 0,
+            "semitone_shift": 0,
+            "identity_score": 0.8525,
+            "identity_floor": 0.7,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": {
+              "role": "call"
+            }
+          },
+          "register_voicing": {
+            "base_midi": 69,
+            "resolved_midi": 69,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_room",
+            "phrase_position": 0.0,
+            "base_start_beat": 0.25,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.4,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.9,
+            "gate_multiplier": 0.972,
+            "authored_timing_ms": 0.0,
+            "microtiming_ms": 1.558594,
+            "timing_offset_ms": 1.558594,
+            "velocity_microvariation": 0.006871
+          }
+        },
+        {
+          "velocity": 0.440036,
+          "section_id": "room",
+          "arrangement_role": "lead",
+          "start_beat": 0.75,
+          "duration_beats": 0.43824,
+          "midi": 72,
+          "motif_statement": {
+            "statement_id": "m_room",
+            "source_motif_id": "motif_A",
+            "note_index": 1,
+            "source_interval": null,
+            "transformed_interval": 2,
+            "semitone_shift": 0,
+            "identity_score": 0.8525,
+            "identity_floor": 0.7,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": {
+              "role": "call"
+            }
+          },
+          "register_voicing": {
+            "base_midi": 72,
+            "resolved_midi": 72,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_room",
+            "phrase_position": 0.111111,
+            "base_start_beat": 0.75,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.444444,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.922222,
+            "gate_multiplier": 0.996,
+            "authored_timing_ms": 0.740741,
+            "microtiming_ms": -0.753561,
+            "timing_offset_ms": 0.0,
+            "velocity_microvariation": -0.004408
+          }
+        },
+        {
+          "velocity": 0.491839,
+          "section_id": "room",
+          "arrangement_role": "lead",
+          "start_beat": 1.25280124,
+          "duration_beats": 0.4488,
+          "midi": 74,
+          "motif_statement": {
+            "statement_id": "m_room",
+            "source_motif_id": "motif_A",
+            "note_index": 2,
+            "source_interval": null,
+            "transformed_interval": 3,
+            "semitone_shift": 0,
+            "identity_score": 0.8525,
+            "identity_floor": 0.7,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": {
+              "role": "call"
+            }
+          },
+          "register_voicing": {
+            "base_midi": 74,
+            "resolved_midi": 74,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_room",
+            "phrase_position": 0.222222,
+            "base_start_beat": 1.25,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.488889,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.944444,
+            "gate_multiplier": 1.02,
+            "authored_timing_ms": 1.481481,
+            "microtiming_ms": 0.472872,
+            "timing_offset_ms": 1.954354,
+            "velocity_microvariation": 0.00295
+          }
+        },
+        {
+          "velocity": 0.523438,
+          "section_id": "room",
+          "arrangement_role": "lead",
+          "start_beat": 1.755611254,
+          "duration_beats": 0.45936,
+          "midi": 77,
+          "motif_statement": {
+            "statement_id": "m_room",
+            "source_motif_id": "motif_A",
+            "note_index": 3,
+            "source_interval": null,
+            "transformed_interval": 5,
+            "semitone_shift": 0,
+            "identity_score": 0.8525,
+            "identity_floor": 0.7,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": {
+              "role": "call"
+            }
+          },
+          "register_voicing": {
+            "base_midi": 77,
+            "resolved_midi": 77,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_room",
+            "phrase_position": 0.333333,
+            "base_start_beat": 1.75,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.533333,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.966667,
+            "gate_multiplier": 1.044,
+            "authored_timing_ms": 2.222222,
+            "microtiming_ms": 1.692606,
+            "timing_offset_ms": 3.914828,
+            "velocity_microvariation": -0.009895
+          }
+        },
+        {
+          "velocity": 0.576671,
+          "section_id": "room",
+          "arrangement_role": "lead",
+          "start_beat": 2.25,
+          "duration_beats": 0.46992,
+          "midi": 74,
+          "motif_statement": {
+            "statement_id": "m_room",
+            "source_motif_id": "motif_A",
+            "note_index": 4,
+            "source_interval": null,
+            "transformed_interval": 3,
+            "semitone_shift": 0,
+            "identity_score": 0.8525,
+            "identity_floor": 0.7,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": {
+              "role": "call"
+            }
+          },
+          "register_voicing": {
+            "base_midi": 74,
+            "resolved_midi": 74,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_room",
+            "phrase_position": 0.444444,
+            "base_start_beat": 2.25,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.577778,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.988889,
+            "gate_multiplier": 1.068,
+            "authored_timing_ms": 2.962963,
+            "microtiming_ms": -2.772461,
+            "timing_offset_ms": 0.0,
+            "velocity_microvariation": -0.001106
+          }
+        },
+        {
+          "velocity": 0.628046,
+          "section_id": "room",
+          "arrangement_role": "lead",
+          "start_beat": 2.752949552,
+          "duration_beats": 0.72072,
+          "midi": 72,
+          "motif_statement": {
+            "statement_id": "m_room",
+            "source_motif_id": "motif_A",
+            "note_index": 5,
+            "source_interval": null,
+            "transformed_interval": 2,
+            "semitone_shift": 0,
+            "identity_score": 0.8525,
+            "identity_floor": 0.7,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": {
+              "role": "call"
+            }
+          },
+          "register_voicing": {
+            "base_midi": 72,
+            "resolved_midi": 72,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_room",
+            "phrase_position": 0.555556,
+            "base_start_beat": 2.75,
+            "base_duration_beats": 0.66,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.622222,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 1.011111,
+            "gate_multiplier": 1.092,
+            "authored_timing_ms": 3.703704,
+            "microtiming_ms": -1.645877,
+            "timing_offset_ms": 2.057827,
+            "velocity_microvariation": 0.005823
+          }
+        },
+        {
+          "start_beat": 7.5,
+          "duration_beats": 0.23,
+          "midi": 72,
+          "velocity": 0.38,
+          "section_id": "room",
+          "arrangement_role": "lead",
+          "transition_material": "pickup",
+          "musical_transition": {
+            "type": "pickup",
+            "to_section": "answer"
+          },
+          "register_voicing": {
+            "base_midi": 72,
+            "resolved_midi": 72,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "lead",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 7.75,
+          "duration_beats": 0.23,
+          "midi": 76,
+          "velocity": 0.38,
+          "section_id": "room",
+          "arrangement_role": "lead",
+          "transition_material": "pickup",
+          "musical_transition": {
+            "type": "pickup",
+            "to_section": "answer"
+          },
+          "register_voicing": {
+            "base_midi": 76,
+            "resolved_midi": 76,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "lead",
+            "kept": true
+          }
+        },
+        {
+          "velocity": 0.407037,
+          "section_id": "answer",
+          "arrangement_role": "lead",
+          "start_beat": 8.252791738,
+          "duration_beats": 0.42768,
+          "midi": 72,
+          "motif_statement": {
+            "statement_id": "m_answer",
+            "source_motif_id": "motif_A",
+            "note_index": 0,
+            "source_interval": 0,
+            "transformed_interval": 0,
+            "semitone_shift": 0,
+            "identity_score": 0.6758,
+            "identity_floor": 0.62,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": {
+              "role": "response",
+              "responds_to": "m_room"
+            }
+          },
+          "register_voicing": {
+            "base_midi": 72,
+            "resolved_midi": 72,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_answer",
+            "phrase_position": 0.0,
+            "base_start_beat": 8.25,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.4,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.9,
+            "gate_multiplier": 0.972,
+            "authored_timing_ms": 0.0,
+            "microtiming_ms": 1.947724,
+            "timing_offset_ms": 1.947724,
+            "velocity_microvariation": 0.007037
+          }
+        },
+        {
+          "velocity": 0.452642,
+          "section_id": "answer",
+          "arrangement_role": "lead",
+          "start_beat": 8.75,
+          "duration_beats": 0.43824,
+          "midi": 76,
+          "motif_statement": {
+            "statement_id": "m_answer",
+            "source_motif_id": "motif_A",
+            "note_index": 1,
+            "source_interval": null,
+            "transformed_interval": 2,
+            "semitone_shift": 0,
+            "identity_score": 0.6758,
+            "identity_floor": 0.62,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": {
+              "role": "response",
+              "responds_to": "m_room"
+            }
+          },
+          "register_voicing": {
+            "base_midi": 76,
+            "resolved_midi": 76,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_answer",
+            "phrase_position": 0.111111,
+            "base_start_beat": 8.75,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.444444,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.922222,
+            "gate_multiplier": 0.996,
+            "authored_timing_ms": 0.740741,
+            "microtiming_ms": -0.813312,
+            "timing_offset_ms": 0.0,
+            "velocity_microvariation": 0.008197
+          }
+        },
+        {
+          "velocity": 0.496246,
+          "section_id": "answer",
+          "arrangement_role": "lead",
+          "start_beat": 9.248954144,
+          "duration_beats": 0.4488,
+          "midi": 77,
+          "motif_statement": {
+            "statement_id": "m_answer",
+            "source_motif_id": "motif_A",
+            "note_index": 2,
+            "source_interval": null,
+            "transformed_interval": 3,
+            "semitone_shift": 0,
+            "identity_score": 0.6758,
+            "identity_floor": 0.62,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": {
+              "role": "response",
+              "responds_to": "m_room"
+            }
+          },
+          "register_voicing": {
+            "base_midi": 77,
+            "resolved_midi": 77,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_answer",
+            "phrase_position": 0.222222,
+            "base_start_beat": 9.25,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.488889,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.944444,
+            "gate_multiplier": 1.02,
+            "authored_timing_ms": 1.481481,
+            "microtiming_ms": -2.211148,
+            "timing_offset_ms": -0.729667,
+            "velocity_microvariation": 0.007357
+          }
+        },
+        {
+          "velocity": 0.52699,
+          "section_id": "answer",
+          "arrangement_role": "lead",
+          "start_beat": 9.753880718,
+          "duration_beats": 0.45936,
+          "midi": 79,
+          "motif_statement": {
+            "statement_id": "m_answer",
+            "source_motif_id": "motif_A",
+            "note_index": 3,
+            "source_interval": null,
+            "transformed_interval": 4,
+            "semitone_shift": 0,
+            "identity_score": 0.6758,
+            "identity_floor": 0.62,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": {
+              "role": "response",
+              "responds_to": "m_room"
+            }
+          },
+          "register_voicing": {
+            "base_midi": 79,
+            "resolved_midi": 79,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_answer",
+            "phrase_position": 0.333333,
+            "base_start_beat": 9.75,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.533333,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.966667,
+            "gate_multiplier": 1.044,
+            "authored_timing_ms": 2.222222,
+            "microtiming_ms": 0.485256,
+            "timing_offset_ms": 2.707478,
+            "velocity_microvariation": -0.006344
+          }
+        },
+        {
+          "velocity": 0.568598,
+          "section_id": "answer",
+          "arrangement_role": "lead",
+          "start_beat": 10.251817302,
+          "duration_beats": 0.46992,
+          "midi": 76,
+          "motif_statement": {
+            "statement_id": "m_answer",
+            "source_motif_id": "motif_A",
+            "note_index": 4,
+            "source_interval": null,
+            "transformed_interval": 2,
+            "semitone_shift": 0,
+            "identity_score": 0.6758,
+            "identity_floor": 0.62,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": {
+              "role": "response",
+              "responds_to": "m_room"
+            }
+          },
+          "register_voicing": {
+            "base_midi": 76,
+            "resolved_midi": 76,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_answer",
+            "phrase_position": 0.444444,
+            "base_start_beat": 10.25,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.577778,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.988889,
+            "gate_multiplier": 1.068,
+            "authored_timing_ms": 2.962963,
+            "microtiming_ms": -1.695078,
+            "timing_offset_ms": 1.267885,
+            "velocity_microvariation": -0.00918
+          }
+        },
+        {
+          "velocity": 0.614865,
+          "section_id": "answer",
+          "arrangement_role": "lead",
+          "start_beat": 10.757569154,
+          "duration_beats": 0.72072,
+          "midi": 74,
+          "motif_statement": {
+            "statement_id": "m_answer",
+            "source_motif_id": "motif_A",
+            "note_index": 5,
+            "source_interval": null,
+            "transformed_interval": 1,
+            "semitone_shift": 0,
+            "identity_score": 0.6758,
+            "identity_floor": 0.62,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": {
+              "role": "response",
+              "responds_to": "m_room"
+            }
+          },
+          "register_voicing": {
+            "base_midi": 74,
+            "resolved_midi": 74,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_answer",
+            "phrase_position": 0.555556,
+            "base_start_beat": 10.75,
+            "base_duration_beats": 0.66,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.622222,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 1.011111,
+            "gate_multiplier": 1.092,
+            "authored_timing_ms": 3.703704,
+            "microtiming_ms": 1.577101,
+            "timing_offset_ms": 5.280805,
+            "velocity_microvariation": -0.007358
+          }
+        },
+        {
+          "velocity": 0.408543,
+          "section_id": "void",
+          "arrangement_role": "lead",
+          "start_beat": 16.252345983,
+          "duration_beats": 0.577368,
+          "midi": 69,
+          "motif_statement": {
+            "statement_id": "m_void",
+            "source_motif_id": "motif_A",
+            "note_index": 0,
+            "source_interval": 0,
+            "transformed_interval": 0,
+            "semitone_shift": 0,
+            "identity_score": 0.774,
+            "identity_floor": 0.62,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": null
+          },
+          "register_voicing": {
+            "base_midi": 69,
+            "resolved_midi": 69,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_void",
+            "phrase_position": 0.0,
+            "base_start_beat": 16.25,
+            "base_duration_beats": 0.594,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.4,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.9,
+            "gate_multiplier": 0.972,
+            "authored_timing_ms": 0.0,
+            "microtiming_ms": 1.636733,
+            "timing_offset_ms": 1.636733,
+            "velocity_microvariation": 0.008543
+          }
+        },
+        {
+          "velocity": 0.456784,
+          "section_id": "void",
+          "arrangement_role": "lead",
+          "start_beat": 16.929911874,
+          "duration_beats": 0.5966136,
+          "midi": 72,
+          "motif_statement": {
+            "statement_id": "m_void",
+            "source_motif_id": "motif_A",
+            "note_index": 1,
+            "source_interval": null,
+            "transformed_interval": 2,
+            "semitone_shift": 0,
+            "identity_score": 0.774,
+            "identity_floor": 0.62,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": null
+          },
+          "register_voicing": {
+            "base_midi": 72,
+            "resolved_midi": 72,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_void",
+            "phrase_position": 0.15,
+            "base_start_beat": 16.925,
+            "base_duration_beats": 0.594,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.46,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.93,
+            "gate_multiplier": 1.0044,
+            "authored_timing_ms": 1.0,
+            "microtiming_ms": 2.426889,
+            "timing_offset_ms": 3.426889,
+            "velocity_microvariation": -0.003216
+          }
+        },
+        {
+          "velocity": 0.511803,
+          "section_id": "void",
+          "arrangement_role": "lead",
+          "start_beat": 17.601715741,
+          "duration_beats": 0.6158592,
+          "midi": 74,
+          "motif_statement": {
+            "statement_id": "m_void",
+            "source_motif_id": "motif_A",
+            "note_index": 2,
+            "source_interval": null,
+            "transformed_interval": 3,
+            "semitone_shift": 0,
+            "identity_score": 0.774,
+            "identity_floor": 0.62,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": null
+          },
+          "register_voicing": {
+            "base_midi": 74,
+            "resolved_midi": 74,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_void",
+            "phrase_position": 0.3,
+            "base_start_beat": 17.6,
+            "base_duration_beats": 0.594,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.52,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.96,
+            "gate_multiplier": 1.0368,
+            "authored_timing_ms": 2.0,
+            "microtiming_ms": -0.802971,
+            "timing_offset_ms": 1.197029,
+            "velocity_microvariation": -0.008197
+          }
+        },
+        {
+          "velocity": 0.54,
+          "section_id": "void",
+          "arrangement_role": "lead",
+          "start_beat": 18.275,
+          "duration_beats": 1.0940000000000012,
+          "midi": 77,
+          "motif_statement": {
+            "statement_id": "m_void",
+            "source_motif_id": "motif_A",
+            "note_index": 3,
+            "source_interval": null,
+            "transformed_interval": 5,
+            "semitone_shift": 0,
+            "identity_score": 0.774,
+            "identity_floor": 0.62,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": null
+          },
+          "musical_transition": {
+            "cadence_extension_beats": 0.5
+          },
+          "register_voicing": {
+            "base_midi": 77,
+            "resolved_midi": 77,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "lead",
+            "kept": true
+          }
+        },
+        {
+          "velocity": 0.54,
+          "section_id": "afterglow",
+          "arrangement_role": "lead",
+          "start_beat": 24.25,
+          "duration_beats": 0.44,
+          "midi": 71,
+          "motif_statement": {
+            "statement_id": "m_afterglow",
+            "source_motif_id": "motif_A",
+            "note_index": 0,
+            "source_interval": 0,
+            "transformed_interval": 0,
+            "semitone_shift": 0,
+            "identity_score": 0.975,
+            "identity_floor": 0.76,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": null
+          },
+          "musical_transition": {
+            "register_preparation": 12,
+            "base_midi": 71
+          },
+          "register_voicing": {
+            "base_midi": 83,
+            "resolved_midi": 71,
+            "octave_shift": -12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "lead",
+            "kept": true
+          }
+        },
+        {
+          "velocity": 0.442434,
+          "section_id": "afterglow",
+          "arrangement_role": "lead",
+          "start_beat": 24.752681552,
+          "duration_beats": 0.43824,
+          "midi": 74,
+          "motif_statement": {
+            "statement_id": "m_afterglow",
+            "source_motif_id": "motif_A",
+            "note_index": 1,
+            "source_interval": null,
+            "transformed_interval": 2,
+            "semitone_shift": 0,
+            "identity_score": 0.975,
+            "identity_floor": 0.76,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": null
+          },
+          "register_voicing": {
+            "base_midi": 74,
+            "resolved_midi": 74,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_afterglow",
+            "phrase_position": 0.111111,
+            "base_start_beat": 24.75,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.444444,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.922222,
+            "gate_multiplier": 0.996,
+            "authored_timing_ms": 0.740741,
+            "microtiming_ms": 1.130109,
+            "timing_offset_ms": 1.87085,
+            "velocity_microvariation": -0.00201
+          }
+        },
+        {
+          "velocity": 0.489385,
+          "section_id": "afterglow",
+          "arrangement_role": "lead",
+          "start_beat": 25.249227589,
+          "duration_beats": 0.4488,
+          "midi": 76,
+          "motif_statement": {
+            "statement_id": "m_afterglow",
+            "source_motif_id": "motif_A",
+            "note_index": 2,
+            "source_interval": null,
+            "transformed_interval": 3,
+            "semitone_shift": 0,
+            "identity_score": 0.975,
+            "identity_floor": 0.76,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": null
+          },
+          "register_voicing": {
+            "base_midi": 76,
+            "resolved_midi": 76,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_afterglow",
+            "phrase_position": 0.222222,
+            "base_start_beat": 25.25,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.488889,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.944444,
+            "gate_multiplier": 1.02,
+            "authored_timing_ms": 1.481481,
+            "microtiming_ms": -2.020373,
+            "timing_offset_ms": -0.538892,
+            "velocity_microvariation": 0.000496
+          }
+        },
+        {
+          "velocity": 0.534076,
+          "section_id": "afterglow",
+          "arrangement_role": "lead",
+          "start_beat": 25.754755883,
+          "duration_beats": 0.45936,
+          "midi": 79,
+          "motif_statement": {
+            "statement_id": "m_afterglow",
+            "source_motif_id": "motif_A",
+            "note_index": 3,
+            "source_interval": null,
+            "transformed_interval": 5,
+            "semitone_shift": 0,
+            "identity_score": 0.975,
+            "identity_floor": 0.76,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": null
+          },
+          "register_voicing": {
+            "base_midi": 79,
+            "resolved_midi": 79,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_afterglow",
+            "phrase_position": 0.333333,
+            "base_start_beat": 25.75,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.533333,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.966667,
+            "gate_multiplier": 1.044,
+            "authored_timing_ms": 2.222222,
+            "microtiming_ms": 1.095836,
+            "timing_offset_ms": 3.318058,
+            "velocity_microvariation": 0.000743
+          }
+        },
+        {
+          "velocity": 0.576593,
+          "section_id": "afterglow",
+          "arrangement_role": "lead",
+          "start_beat": 26.251209311,
+          "duration_beats": 0.46992,
+          "midi": 76,
+          "motif_statement": {
+            "statement_id": "m_afterglow",
+            "source_motif_id": "motif_A",
+            "note_index": 4,
+            "source_interval": null,
+            "transformed_interval": 3,
+            "semitone_shift": 0,
+            "identity_score": 0.975,
+            "identity_floor": 0.76,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": null
+          },
+          "register_voicing": {
+            "base_midi": 76,
+            "resolved_midi": 76,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_afterglow",
+            "phrase_position": 0.444444,
+            "base_start_beat": 26.25,
+            "base_duration_beats": 0.44,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.577778,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.988889,
+            "gate_multiplier": 1.068,
+            "authored_timing_ms": 2.962963,
+            "microtiming_ms": -2.119257,
+            "timing_offset_ms": 0.843706,
+            "velocity_microvariation": -0.001185
+          }
+        },
+        {
+          "velocity": 0.614799,
+          "section_id": "afterglow",
+          "arrangement_role": "lead",
+          "start_beat": 26.753080808,
+          "duration_beats": 0.432432,
+          "midi": 74,
+          "motif_statement": {
+            "statement_id": "m_afterglow",
+            "source_motif_id": "motif_A",
+            "note_index": 5,
+            "source_interval": null,
+            "transformed_interval": 2,
+            "semitone_shift": 0,
+            "identity_score": 0.975,
+            "identity_floor": 0.76,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": null
+          },
+          "register_voicing": {
+            "base_midi": 74,
+            "resolved_midi": 74,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_afterglow",
+            "phrase_position": 0.555556,
+            "base_start_beat": 26.75,
+            "base_duration_beats": 0.396,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.622222,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 1.011111,
+            "gate_multiplier": 1.092,
+            "authored_timing_ms": 3.703704,
+            "microtiming_ms": -1.554303,
+            "timing_offset_ms": 2.149401,
+            "velocity_microvariation": -0.007423
+          }
+        },
+        {
+          "velocity": 0.614026,
+          "section_id": "afterglow",
+          "arrangement_role": "lead",
+          "start_beat": 27.204795466,
+          "duration_beats": 0.4124736,
+          "midi": 72,
+          "motif_statement": {
+            "statement_id": "m_afterglow",
+            "source_motif_id": "motif_A",
+            "note_index": 6,
+            "source_interval": null,
+            "transformed_interval": 1,
+            "semitone_shift": 0,
+            "identity_score": 0.975,
+            "identity_floor": 0.76,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": null
+          },
+          "register_voicing": {
+            "base_midi": 72,
+            "resolved_midi": 72,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_afterglow",
+            "phrase_position": 0.655556,
+            "base_start_beat": 27.2,
+            "base_duration_beats": 0.396,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.609444,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.964444,
+            "gate_multiplier": 1.0416,
+            "authored_timing_ms": 4.555556,
+            "microtiming_ms": -1.209882,
+            "timing_offset_ms": 3.345674,
+            "velocity_microvariation": 0.004582
+          }
+        },
+        {
+          "velocity": 0.551805,
+          "section_id": "afterglow",
+          "arrangement_role": "lead",
+          "start_beat": 27.658773443,
+          "duration_beats": 0.7394112,
+          "midi": 71,
+          "motif_statement": {
+            "statement_id": "m_afterglow",
+            "source_motif_id": "motif_A",
+            "note_index": 7,
+            "source_interval": null,
+            "transformed_interval": 0,
+            "semitone_shift": 0,
+            "identity_score": 0.975,
+            "identity_floor": 0.76,
+            "identity_hard_min": null,
+            "identity_target_met": true,
+            "relation": null
+          },
+          "register_voicing": {
+            "base_midi": 71,
+            "resolved_midi": 71,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "smooth"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "lead",
+            "kept": true
+          },
+          "performance": {
+            "phrase_id": "p_afterglow",
+            "phrase_position": 0.755556,
+            "base_start_beat": 27.65,
+            "base_duration_beats": 0.792,
+            "base_velocity": 0.54,
+            "dynamic_target": 0.554444,
+            "accent_amount": 0.0,
+            "articulation": "legato",
+            "gate_curve": 0.864444,
+            "gate_multiplier": 0.9336,
+            "authored_timing_ms": 5.555556,
+            "microtiming_ms": 0.565451,
+            "timing_offset_ms": 6.121007,
+            "velocity_microvariation": -0.002639
+          }
+        }
+      ]
+    },
+    {
+      "id": "pad",
+      "instrument": "pad",
+      "source": {
+        "type": "resolved"
+      },
+      "events": [
+        {
+          "start_beat": 0.0,
+          "duration_beats": 3.25,
+          "midi": 69,
+          "velocity": 0.18,
+          "section_id": "room",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 57,
+            "resolved_midi": 69,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 0.0,
+          "duration_beats": 3.25,
+          "midi": 73,
+          "velocity": 0.18,
+          "section_id": "room",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 61,
+            "resolved_midi": 73,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 0.0,
+          "duration_beats": 3.25,
+          "midi": 76,
+          "velocity": 0.18,
+          "section_id": "room",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 64,
+            "resolved_midi": 76,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 4.0,
+          "duration_beats": 3.25,
+          "midi": 69,
+          "velocity": 0.18,
+          "section_id": "room",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 57,
+            "resolved_midi": 69,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 4.0,
+          "duration_beats": 3.25,
+          "midi": 72,
+          "velocity": 0.18,
+          "section_id": "room",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 60,
+            "resolved_midi": 72,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 4.0,
+          "duration_beats": 3.25,
+          "midi": 76,
+          "velocity": 0.18,
+          "section_id": "room",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 64,
+            "resolved_midi": 76,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 8.0,
+          "duration_beats": 3.25,
+          "midi": 72,
+          "velocity": 0.22,
+          "section_id": "answer",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 60,
+            "resolved_midi": 72,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 8.0,
+          "duration_beats": 3.25,
+          "midi": 76,
+          "velocity": 0.22,
+          "section_id": "answer",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 64,
+            "resolved_midi": 76,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 8.0,
+          "duration_beats": 3.25,
+          "midi": 79,
+          "velocity": 0.22,
+          "section_id": "answer",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 67,
+            "resolved_midi": 79,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 12.0,
+          "duration_beats": 3.25,
+          "midi": 72,
+          "velocity": 0.22,
+          "section_id": "answer",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 60,
+            "resolved_midi": 72,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 12.0,
+          "duration_beats": 3.25,
+          "midi": 75,
+          "velocity": 0.22,
+          "section_id": "answer",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 63,
+            "resolved_midi": 75,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 12.0,
+          "duration_beats": 3.25,
+          "midi": 79,
+          "velocity": 0.22,
+          "section_id": "answer",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 67,
+            "resolved_midi": 79,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 16.0,
+          "duration_beats": 3.25,
+          "midi": 69,
+          "velocity": 0.1,
+          "section_id": "void",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 57,
+            "resolved_midi": 69,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 16.0,
+          "duration_beats": 3.25,
+          "midi": 73,
+          "velocity": 0.1,
+          "section_id": "void",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 61,
+            "resolved_midi": 73,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 16.0,
+          "duration_beats": 3.25,
+          "midi": 76,
+          "velocity": 0.1,
+          "section_id": "void",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 64,
+            "resolved_midi": 76,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 20.0,
+          "duration_beats": 3.25,
+          "midi": 69,
+          "velocity": 0.1,
+          "section_id": "void",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 57,
+            "resolved_midi": 69,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 20.0,
+          "duration_beats": 3.25,
+          "midi": 72,
+          "velocity": 0.1,
+          "section_id": "void",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 60,
+            "resolved_midi": 72,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 20.0,
+          "duration_beats": 3.25,
+          "midi": 76,
+          "velocity": 0.1,
+          "section_id": "void",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 64,
+            "resolved_midi": 76,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 24.0,
+          "duration_beats": 3.25,
+          "midi": 71,
+          "velocity": 0.2,
+          "section_id": "afterglow",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 59,
+            "resolved_midi": 71,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 24.0,
+          "duration_beats": 3.25,
+          "midi": 75,
+          "velocity": 0.2,
+          "section_id": "afterglow",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 63,
+            "resolved_midi": 75,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 24.0,
+          "duration_beats": 3.25,
+          "midi": 78,
+          "velocity": 0.2,
+          "section_id": "afterglow",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 66,
+            "resolved_midi": 78,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 28.0,
+          "duration_beats": 3.25,
+          "midi": 71,
+          "velocity": 0.2,
+          "section_id": "afterglow",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 59,
+            "resolved_midi": 71,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 28.0,
+          "duration_beats": 3.25,
+          "midi": 74,
+          "velocity": 0.2,
+          "section_id": "afterglow",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 62,
+            "resolved_midi": 74,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "pad",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 28.0,
+          "duration_beats": 3.25,
+          "midi": 78,
+          "velocity": 0.2,
+          "section_id": "afterglow",
+          "arrangement_role": "pad",
+          "register_voicing": {
+            "base_midi": 66,
+            "resolved_midi": 78,
+            "octave_shift": 12,
+            "hard_range": [
+              60,
+              84
+            ],
+            "preferred_range": [
+              66,
+              78
+            ],
+            "center": 71.0,
+            "motion_policy": "oblique"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "pad",
+            "kept": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "arp",
+      "instrument": "arp",
+      "source": {
+        "type": "resolved"
+      },
+      "events": [
+        {
+          "start_beat": 0.5,
+          "duration_beats": 0.26,
+          "midi": 72,
+          "velocity": 0.24,
+          "section_id": "room",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 72,
+            "resolved_midi": 72,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 1.0,
+          "duration_beats": 0.26,
+          "midi": 76,
+          "velocity": 0.24,
+          "section_id": "room",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 76,
+            "resolved_midi": 76,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 1.5,
+          "duration_beats": 0.26,
+          "midi": 79,
+          "velocity": 0.24,
+          "section_id": "room",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 79,
+            "resolved_midi": 79,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 4.5,
+          "duration_beats": 0.26,
+          "midi": 83,
+          "velocity": 0.24,
+          "section_id": "room",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 83,
+            "resolved_midi": 83,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 5.0,
+          "duration_beats": 0.26,
+          "midi": 79,
+          "velocity": 0.24,
+          "section_id": "room",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 79,
+            "resolved_midi": 79,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 5.5,
+          "duration_beats": 0.26,
+          "midi": 76,
+          "velocity": 0.24,
+          "section_id": "room",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 76,
+            "resolved_midi": 76,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "room",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 8.5,
+          "duration_beats": 0.26,
+          "midi": 72,
+          "velocity": 0.24,
+          "section_id": "answer",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 72,
+            "resolved_midi": 72,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 9.0,
+          "duration_beats": 0.26,
+          "midi": 76,
+          "velocity": 0.24,
+          "section_id": "answer",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 76,
+            "resolved_midi": 76,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 9.5,
+          "duration_beats": 0.26,
+          "midi": 79,
+          "velocity": 0.24,
+          "section_id": "answer",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 79,
+            "resolved_midi": 79,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 12.5,
+          "duration_beats": 0.26,
+          "midi": 83,
+          "velocity": 0.24,
+          "section_id": "answer",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 83,
+            "resolved_midi": 83,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 13.0,
+          "duration_beats": 0.26,
+          "midi": 79,
+          "velocity": 0.24,
+          "section_id": "answer",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 79,
+            "resolved_midi": 79,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 13.5,
+          "duration_beats": 0.26,
+          "midi": 76,
+          "velocity": 0.24,
+          "section_id": "answer",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 76,
+            "resolved_midi": 76,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "answer",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 16.5,
+          "duration_beats": 0.26,
+          "midi": 72,
+          "velocity": 0.24,
+          "section_id": "void",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 72,
+            "resolved_midi": 72,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 17.0,
+          "duration_beats": 0.26,
+          "midi": 76,
+          "velocity": 0.24,
+          "section_id": "void",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 76,
+            "resolved_midi": 76,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 17.5,
+          "duration_beats": 0.26,
+          "midi": 79,
+          "velocity": 0.24,
+          "section_id": "void",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 79,
+            "resolved_midi": 79,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 20.5,
+          "duration_beats": 0.26,
+          "midi": 83,
+          "velocity": 0.24,
+          "section_id": "void",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 83,
+            "resolved_midi": 83,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 21.0,
+          "duration_beats": 0.26,
+          "midi": 79,
+          "velocity": 0.24,
+          "section_id": "void",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 79,
+            "resolved_midi": 79,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 21.5,
+          "duration_beats": 0.26,
+          "midi": 76,
+          "velocity": 0.24,
+          "section_id": "void",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 76,
+            "resolved_midi": 76,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "void",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 24.5,
+          "duration_beats": 0.26,
+          "midi": 72,
+          "velocity": 0.24,
+          "section_id": "afterglow",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 72,
+            "resolved_midi": 72,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 25.0,
+          "duration_beats": 0.26,
+          "midi": 76,
+          "velocity": 0.24,
+          "section_id": "afterglow",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 76,
+            "resolved_midi": 76,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 25.5,
+          "duration_beats": 0.26,
+          "midi": 79,
+          "velocity": 0.24,
+          "section_id": "afterglow",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 79,
+            "resolved_midi": 79,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 28.5,
+          "duration_beats": 0.26,
+          "midi": 83,
+          "velocity": 0.24,
+          "section_id": "afterglow",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 83,
+            "resolved_midi": 83,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 29.0,
+          "duration_beats": 0.26,
+          "midi": 79,
+          "velocity": 0.24,
+          "section_id": "afterglow",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 79,
+            "resolved_midi": 79,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "arp",
+            "kept": true
+          }
+        },
+        {
+          "start_beat": 29.5,
+          "duration_beats": 0.26,
+          "midi": 76,
+          "velocity": 0.24,
+          "section_id": "afterglow",
+          "arrangement_role": "arp",
+          "register_voicing": {
+            "base_midi": 76,
+            "resolved_midi": 76,
+            "octave_shift": 0,
+            "hard_range": [
+              60,
+              88
+            ],
+            "preferred_range": [
+              68,
+              82
+            ],
+            "center": 75.0,
+            "motion_policy": "free"
+          },
+          "orchestration_budget": {
+            "section_id": "afterglow",
+            "role": "arp",
+            "kept": true
+          }
+        }
+      ]
+    }
+  ],
+  "mix": {
+    "tail_seconds": 2.0,
+    "graph": {
+      "tracks": {
+        "lead": {
+          "gain": 0.68,
+          "pan": 0.0,
+          "output": "music",
+          "sends": {}
+        },
+        "pad": {
+          "gain": 0.34,
+          "pan": 0.0,
+          "output": "music",
+          "sends": {}
+        },
+        "arp": {
+          "gain": 0.42,
+          "pan": 0.0,
+          "output": "music",
+          "sends": {}
+        }
+      },
+      "buses": {
+        "music": {
+          "kind": "group",
+          "gain": 0.94,
+          "output": "master",
+          "fx": []
+        }
+      },
+      "sidechains": [],
+      "master": {
+        "gain": 0.9,
+        "fx": []
+      }
+    }
+  },
+  "performance_ir": {
+    "version": "1.16",
+    "phrases": [
+      {
+        "phrase_id": "p_room",
+        "section_id": "room",
+        "role": "lead",
+        "source_material": "m_room",
+        "start_beat": 0.25,
+        "duration_beats": 4.5,
+        "dynamic_curve": [
+          [
+            0,
+            0.4
+          ],
+          [
+            0.6,
+            0.64
+          ],
+          [
+            1,
+            0.42
+          ]
+        ],
+        "timing_curve_ms": [
+          [
+            0,
+            0
+          ],
+          [
+            0.6,
+            4
+          ],
+          [
+            1,
+            8
+          ]
+        ],
+        "gate_curve": [
+          [
+            0,
+            0.9
+          ],
+          [
+            0.6,
+            1.02
+          ],
+          [
+            1,
+            0.62
+          ]
+        ],
+        "articulation_curve": [
+          {
+            "position": 0.0,
+            "articulation": "legato"
+          }
+        ],
+        "accent_points": [],
+        "apex_position": 0.58,
+        "breath_after_beats": 0.42
+      },
+      {
+        "phrase_id": "p_answer",
+        "section_id": "answer",
+        "role": "lead",
+        "source_material": "m_answer",
+        "start_beat": 8.25,
+        "duration_beats": 4.5,
+        "dynamic_curve": [
+          [
+            0,
+            0.4
+          ],
+          [
+            0.6,
+            0.64
+          ],
+          [
+            1,
+            0.42
+          ]
+        ],
+        "timing_curve_ms": [
+          [
+            0,
+            0
+          ],
+          [
+            0.6,
+            4
+          ],
+          [
+            1,
+            8
+          ]
+        ],
+        "gate_curve": [
+          [
+            0,
+            0.9
+          ],
+          [
+            0.6,
+            1.02
+          ],
+          [
+            1,
+            0.62
+          ]
+        ],
+        "articulation_curve": [
+          {
+            "position": 0.0,
+            "articulation": "legato"
+          }
+        ],
+        "accent_points": [],
+        "apex_position": 0.58,
+        "breath_after_beats": 0.42
+      },
+      {
+        "phrase_id": "p_void",
+        "section_id": "void",
+        "role": "lead",
+        "source_material": "m_void",
+        "start_beat": 16.25,
+        "duration_beats": 4.5,
+        "dynamic_curve": [
+          [
+            0,
+            0.4
+          ],
+          [
+            0.6,
+            0.64
+          ],
+          [
+            1,
+            0.42
+          ]
+        ],
+        "timing_curve_ms": [
+          [
+            0,
+            0
+          ],
+          [
+            0.6,
+            4
+          ],
+          [
+            1,
+            8
+          ]
+        ],
+        "gate_curve": [
+          [
+            0,
+            0.9
+          ],
+          [
+            0.6,
+            1.02
+          ],
+          [
+            1,
+            0.62
+          ]
+        ],
+        "articulation_curve": [
+          {
+            "position": 0.0,
+            "articulation": "legato"
+          }
+        ],
+        "accent_points": [],
+        "apex_position": 0.58,
+        "breath_after_beats": 0.42
+      },
+      {
+        "phrase_id": "p_afterglow",
+        "section_id": "afterglow",
+        "role": "lead",
+        "source_material": "m_afterglow",
+        "start_beat": 24.25,
+        "duration_beats": 4.5,
+        "dynamic_curve": [
+          [
+            0,
+            0.4
+          ],
+          [
+            0.6,
+            0.64
+          ],
+          [
+            1,
+            0.42
+          ]
+        ],
+        "timing_curve_ms": [
+          [
+            0,
+            0
+          ],
+          [
+            0.6,
+            4
+          ],
+          [
+            1,
+            8
+          ]
+        ],
+        "gate_curve": [
+          [
+            0,
+            0.9
+          ],
+          [
+            0.6,
+            1.02
+          ],
+          [
+            1,
+            0.62
+          ]
+        ],
+        "articulation_curve": [
+          {
+            "position": 0.0,
+            "articulation": "legato"
+          }
+        ],
+        "accent_points": [],
+        "apex_position": 0.58,
+        "breath_after_beats": 0.42
+      }
+    ],
+    "motif_statements": [
+      {
+        "statement_id": "m_room",
+        "source_motif_id": "motif_A",
+        "section_id": "room",
+        "transform_chain": [
+          {
+            "op": "call",
+            "intervals": [
+              0,
+              2,
+              3,
+              5,
+              3,
+              2
+            ],
+            "rhythm": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.75
+            ]
+          }
+        ],
+        "identity_floor": 0.7,
+        "cadence_rule": "authored"
+      },
+      {
+        "statement_id": "m_answer",
+        "source_motif_id": "motif_A",
+        "section_id": "answer",
+        "transform_chain": [
+          {
+            "op": "response",
+            "responds_to": "m_room",
+            "intervals": [
+              0,
+              2,
+              3,
+              4,
+              2,
+              1
+            ],
+            "rhythm": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.75
+            ]
+          }
+        ],
+        "identity_floor": 0.62,
+        "cadence_rule": "authored"
+      },
+      {
+        "statement_id": "m_void",
+        "source_motif_id": "motif_A",
+        "section_id": "void",
+        "transform_chain": [
+          {
+            "op": "fragment",
+            "start": 0,
+            "length": 4
+          },
+          {
+            "op": "rhythm_scale",
+            "factor": 1.35
+          }
+        ],
+        "identity_floor": 0.62,
+        "cadence_rule": "authored"
+      },
+      {
+        "statement_id": "m_afterglow",
+        "source_motif_id": "motif_A",
+        "section_id": "afterglow",
+        "transform_chain": [
+          {
+            "op": "cadence_rewrite",
+            "intervals": [
+              2,
+              1,
+              0
+            ],
+            "rhythm": [
+              0.45,
+              0.45,
+              0.9
+            ]
+          }
+        ],
+        "identity_floor": 0.76,
+        "cadence_rule": "authored"
+      }
+    ],
+    "register_plans": {
+      "lead": {
+        "hard_range": [
+          60,
+          84
+        ],
+        "preferred_range": [
+          66,
+          78
+        ],
+        "center": 71,
+        "max_span": 24,
+        "min_intervoice_distance": 0,
+        "overlap_policy": "primary_wins",
+        "motion_policy": "smooth"
+      },
+      "pad": {
+        "hard_range": [
+          60,
+          84
+        ],
+        "preferred_range": [
+          66,
+          78
+        ],
+        "center": 71,
+        "max_span": 18,
+        "min_intervoice_distance": 3,
+        "overlap_policy": "avoid",
+        "motion_policy": "oblique"
+      },
+      "arp": {
+        "hard_range": [
+          60,
+          88
+        ],
+        "preferred_range": [
+          68,
+          82
+        ],
+        "center": 75,
+        "max_span": 24,
+        "min_intervoice_distance": 0,
+        "overlap_policy": "short_only",
+        "motion_policy": "free"
+      }
+    },
+    "orchestration_sections": {
+      "room": {
+        "primary_roles": [
+          "lead"
+        ],
+        "secondary_roles": [
+          "pad"
+        ],
+        "decorative_roles": [
+          "arp"
+        ],
+        "max_simultaneous_roles": 3,
+        "allowed_overlaps": [],
+        "phrase_gap_only_roles": [],
+        "silence_roles": []
+      },
+      "answer": {
+        "primary_roles": [
+          "lead"
+        ],
+        "secondary_roles": [
+          "pad"
+        ],
+        "decorative_roles": [
+          "arp"
+        ],
+        "max_simultaneous_roles": 3,
+        "allowed_overlaps": [],
+        "phrase_gap_only_roles": [],
+        "silence_roles": []
+      },
+      "void": {
+        "primary_roles": [
+          "lead"
+        ],
+        "secondary_roles": [
+          "pad"
+        ],
+        "decorative_roles": [
+          "arp"
+        ],
+        "max_simultaneous_roles": 3,
+        "allowed_overlaps": [],
+        "phrase_gap_only_roles": [],
+        "silence_roles": []
+      },
+      "afterglow": {
+        "primary_roles": [
+          "lead"
+        ],
+        "secondary_roles": [
+          "pad"
+        ],
+        "decorative_roles": [
+          "arp"
+        ],
+        "max_simultaneous_roles": 3,
+        "allowed_overlaps": [],
+        "phrase_gap_only_roles": [],
+        "silence_roles": []
+      }
+    },
+    "transitions": [
+      {
+        "from_section": "room",
+        "to_section": "answer",
+        "harmonic_anticipation": {
+          "enabled": false
+        },
+        "pickup": {
+          "enabled": true,
+          "role": "lead",
+          "beats": 0.5,
+          "degrees": [
+            3,
+            5
+          ],
+          "rhythm": [
+            0.25,
+            0.25
+          ],
+          "octave": 4,
+          "velocity": 0.38
+        },
+        "bass_approach": {
+          "type": "none"
+        },
+        "cadence_extension": {},
+        "texture_subtraction": {},
+        "silence_beats": 0.0,
+        "register_preparation": {},
+        "rhythm_fill": {}
+      },
+      {
+        "from_section": "answer",
+        "to_section": "void",
+        "harmonic_anticipation": {
+          "enabled": false
+        },
+        "pickup": {
+          "enabled": false
+        },
+        "bass_approach": {
+          "type": "none"
+        },
+        "cadence_extension": {},
+        "texture_subtraction": {
+          "roles": [
+            "pad",
+            "arp"
+          ],
+          "beats": 0.75
+        },
+        "silence_beats": 0.55,
+        "register_preparation": {},
+        "rhythm_fill": {}
+      },
+      {
+        "from_section": "void",
+        "to_section": "afterglow",
+        "harmonic_anticipation": {
+          "enabled": false
+        },
+        "pickup": {
+          "enabled": false
+        },
+        "bass_approach": {
+          "type": "none"
+        },
+        "cadence_extension": {
+          "roles": [
+            "lead"
+          ],
+          "beats": 0.5
+        },
+        "texture_subtraction": {},
+        "silence_beats": 0.0,
+        "register_preparation": {
+          "lead": {
+            "semitones": 12,
+            "beats": 0.5
+          }
+        },
+        "rhythm_fill": {}
+      }
+    ],
+    "realization": {
+      "seed": 11603,
+      "microtiming": {
+        "enabled": true,
+        "max_abs_ms": 3.0
+      },
+      "velocity_variation": {
+        "enabled": true,
+        "max_abs": 0.01
+      },
+      "timing_quantization_guard_ms": 0.5,
+      "minimum_note_gap_ms": 1.2
+    }
+  },
+  "motif_development_resolved": true,
+  "motif_development_report": {
+    "statement_count": 4,
+    "realized_phrase_count": 4,
+    "statements": [
+      {
+        "statement_id": "m_afterglow",
+        "source_motif_id": "motif_A",
+        "intervals": [
+          0,
+          2,
+          3,
+          5,
+          3,
+          2,
+          1,
+          0
+        ],
+        "rhythm": [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.45,
+          0.45,
+          0.9
+        ],
+        "semitone_shift": 0,
+        "identity": {
+          "score": 0.975,
+          "interval_shape": 1.0,
+          "contour": 1.0,
+          "rhythm_landmarks": 0.875,
+          "anchors": 1.0,
+          "length_ratio": 1.0
+        },
+        "identity_floor": 0.76,
+        "identity_hard_min": null,
+        "identity_target_met": true,
+        "relation": null,
+        "transform_trace": [
+          {
+            "index": 0,
+            "op": {
+              "op": "cadence_rewrite",
+              "intervals": [
+                2,
+                1,
+                0
+              ],
+              "rhythm": [
+                0.45,
+                0.45,
+                0.9
+              ]
+            },
+            "before": {
+              "intervals": [
+                0,
+                2,
+                3,
+                5,
+                3,
+                2,
+                1,
+                0
+              ],
+              "rhythm": [
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5
+              ],
+              "semitone_shift": 0
+            },
+            "after": {
+              "intervals": [
+                0,
+                2,
+                3,
+                5,
+                3,
+                2,
+                1,
+                0
+              ],
+              "rhythm": [
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.45,
+                0.45,
+                0.9
+              ],
+              "semitone_shift": 0
+            }
+          }
+        ],
+        "cadence_rule": "authored"
+      },
+      {
+        "statement_id": "m_answer",
+        "source_motif_id": "motif_A",
+        "intervals": [
+          0,
+          2,
+          3,
+          4,
+          2,
+          1
+        ],
+        "rhythm": [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.75
+        ],
+        "semitone_shift": 0,
+        "identity": {
+          "score": 0.6758,
+          "interval_shape": 0.5,
+          "contour": 1.0,
+          "rhythm_landmarks": 0.833333,
+          "anchors": 0.666667,
+          "length_ratio": 0.75
+        },
+        "identity_floor": 0.62,
+        "identity_hard_min": null,
+        "identity_target_met": true,
+        "relation": {
+          "role": "response",
+          "responds_to": "m_room"
+        },
+        "transform_trace": [
+          {
+            "index": 0,
+            "op": {
+              "op": "response",
+              "responds_to": "m_room",
+              "intervals": [
+                0,
+                2,
+                3,
+                4,
+                2,
+                1
+              ],
+              "rhythm": [
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.75
+              ]
+            },
+            "before": {
+              "intervals": [
+                0,
+                2,
+                3,
+                5,
+                3,
+                2,
+                1,
+                0
+              ],
+              "rhythm": [
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5
+              ],
+              "semitone_shift": 0
+            },
+            "after": {
+              "intervals": [
+                0,
+                2,
+                3,
+                4,
+                2,
+                1
+              ],
+              "rhythm": [
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.75
+              ],
+              "semitone_shift": 0
+            }
+          }
+        ],
+        "cadence_rule": "authored"
+      },
+      {
+        "statement_id": "m_room",
+        "source_motif_id": "motif_A",
+        "intervals": [
+          0,
+          2,
+          3,
+          5,
+          3,
+          2
+        ],
+        "rhythm": [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.75
+        ],
+        "semitone_shift": 0,
+        "identity": {
+          "score": 0.8525,
+          "interval_shape": 1.0,
+          "contour": 1.0,
+          "rhythm_landmarks": 0.833333,
+          "anchors": 0.666667,
+          "length_ratio": 0.75
+        },
+        "identity_floor": 0.7,
+        "identity_hard_min": null,
+        "identity_target_met": true,
+        "relation": {
+          "role": "call"
+        },
+        "transform_trace": [
+          {
+            "index": 0,
+            "op": {
+              "op": "call",
+              "intervals": [
+                0,
+                2,
+                3,
+                5,
+                3,
+                2
+              ],
+              "rhythm": [
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.75
+              ]
+            },
+            "before": {
+              "intervals": [
+                0,
+                2,
+                3,
+                5,
+                3,
+                2,
+                1,
+                0
+              ],
+              "rhythm": [
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5
+              ],
+              "semitone_shift": 0
+            },
+            "after": {
+              "intervals": [
+                0,
+                2,
+                3,
+                5,
+                3,
+                2
+              ],
+              "rhythm": [
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.75
+              ],
+              "semitone_shift": 0
+            }
+          }
+        ],
+        "cadence_rule": "authored"
+      },
+      {
+        "statement_id": "m_void",
+        "source_motif_id": "motif_A",
+        "intervals": [
+          0,
+          2,
+          3,
+          5
+        ],
+        "rhythm": [
+          0.675,
+          0.675,
+          0.675,
+          0.675
+        ],
+        "semitone_shift": 0,
+        "identity": {
+          "score": 0.774,
+          "interval_shape": 1.0,
+          "contour": 1.0,
+          "rhythm_landmarks": 1.0,
+          "anchors": 0.333333,
+          "length_ratio": 0.5
+        },
+        "identity_floor": 0.62,
+        "identity_hard_min": null,
+        "identity_target_met": true,
+        "relation": null,
+        "transform_trace": [
+          {
+            "index": 0,
+            "op": {
+              "op": "fragment",
+              "start": 0,
+              "length": 4
+            },
+            "before": {
+              "intervals": [
+                0,
+                2,
+                3,
+                5,
+                3,
+                2,
+                1,
+                0
+              ],
+              "rhythm": [
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5,
+                0.5
+              ],
+              "semitone_shift": 0
+            },
+            "after": {
+              "intervals": [
+                0,
+                2,
+                3,
+                5
+              ],
+              "rhythm": [
+                0.5,
+                0.5,
+                0.5,
+                0.5
+              ],
+              "semitone_shift": 0
+            }
+          },
+          {
+            "index": 1,
+            "op": {
+              "op": "rhythm_scale",
+              "factor": 1.35
+            },
+            "before": {
+              "intervals": [
+                0,
+                2,
+                3,
+                5
+              ],
+              "rhythm": [
+                0.5,
+                0.5,
+                0.5,
+                0.5
+              ],
+              "semitone_shift": 0
+            },
+            "after": {
+              "intervals": [
+                0,
+                2,
+                3,
+                5
+              ],
+              "rhythm": [
+                0.675,
+                0.675,
+                0.675,
+                0.675
+              ],
+              "semitone_shift": 0
+            }
+          }
+        ],
+        "cadence_rule": "authored"
+      }
+    ],
+    "phrases": [
+      {
+        "phrase_id": "p_room",
+        "role": "lead",
+        "statement_id": "m_room",
+        "removed_event_count": 1,
+        "generated_event_count": 6,
+        "identity": {
+          "score": 0.8525,
+          "interval_shape": 1.0,
+          "contour": 1.0,
+          "rhythm_landmarks": 0.833333,
+          "anchors": 0.666667,
+          "length_ratio": 0.75
+        },
+        "duration_beats": 3.25
+      },
+      {
+        "phrase_id": "p_answer",
+        "role": "lead",
+        "statement_id": "m_answer",
+        "removed_event_count": 1,
+        "generated_event_count": 6,
+        "identity": {
+          "score": 0.6758,
+          "interval_shape": 0.5,
+          "contour": 1.0,
+          "rhythm_landmarks": 0.833333,
+          "anchors": 0.666667,
+          "length_ratio": 0.75
+        },
+        "duration_beats": 3.25
+      },
+      {
+        "phrase_id": "p_void",
+        "role": "lead",
+        "statement_id": "m_void",
+        "removed_event_count": 1,
+        "generated_event_count": 4,
+        "identity": {
+          "score": 0.774,
+          "interval_shape": 1.0,
+          "contour": 1.0,
+          "rhythm_landmarks": 1.0,
+          "anchors": 0.333333,
+          "length_ratio": 0.5
+        },
+        "duration_beats": 2.7
+      },
+      {
+        "phrase_id": "p_afterglow",
+        "role": "lead",
+        "statement_id": "m_afterglow",
+        "removed_event_count": 1,
+        "generated_event_count": 8,
+        "identity": {
+          "score": 0.975,
+          "interval_shape": 1.0,
+          "contour": 1.0,
+          "rhythm_landmarks": 0.875,
+          "anchors": 1.0,
+          "length_ratio": 1.0
+        },
+        "duration_beats": 4.3
+      }
+    ]
+  },
+  "musical_transitions_resolved": true,
+  "musical_transition_report": {
+    "transition_count": 3,
+    "transitions": [
+      {
+        "index": 0,
+        "from_section": "room",
+        "to_section": "answer",
+        "boundary_beat": 8.0,
+        "texture_subtraction_removed": 0,
+        "texture_subtraction_truncated": 0,
+        "cadence_extended_events": 0,
+        "silence_removed": 0,
+        "silence_truncated": 0,
+        "register_prepared_events": 0,
+        "harmonic_anticipation_events": 0,
+        "pickup_events": 2,
+        "bass_approach_events": 0,
+        "rhythm_fill_events": 0
+      },
+      {
+        "index": 1,
+        "from_section": "answer",
+        "to_section": "void",
+        "boundary_beat": 16.0,
+        "texture_subtraction_removed": 0,
+        "texture_subtraction_truncated": 0,
+        "cadence_extended_events": 0,
+        "silence_removed": 0,
+        "silence_truncated": 0,
+        "register_prepared_events": 0,
+        "harmonic_anticipation_events": 0,
+        "pickup_events": 0,
+        "bass_approach_events": 0,
+        "rhythm_fill_events": 0
+      },
+      {
+        "index": 2,
+        "from_section": "void",
+        "to_section": "afterglow",
+        "boundary_beat": 24.0,
+        "texture_subtraction_removed": 0,
+        "texture_subtraction_truncated": 0,
+        "cadence_extended_events": 1,
+        "silence_removed": 0,
+        "silence_truncated": 0,
+        "register_prepared_events": 1,
+        "harmonic_anticipation_events": 0,
+        "pickup_events": 0,
+        "bass_approach_events": 0,
+        "rhythm_fill_events": 0
+      }
+    ],
+    "semantics": {
+      "silence": "removes existing material before explicit transition events are authored",
+      "harmonic_anticipation": "explicit scale-degree chord, role and voicing intervals authored by Agent",
+      "pickup": "explicit scale degrees/rhythm/octave authored by Agent",
+      "bass_approach": "deterministic operation into existing destination bass target",
+      "register_preparation": "explicit semitone shift in a bounded destination window before E3 allocation",
+      "rhythm_fill": "explicit drum events relative to the section boundary"
+    }
+  },
+  "register_voicing_resolved": true,
+  "register_voicing_report": {
+    "role_count": 3,
+    "roles": [
+      {
+        "role": "lead",
+        "event_count": 26,
+        "shifted_event_count": 1,
+        "outside_preferred_count": 2,
+        "max_observed_simultaneous_span": 0,
+        "hard_range": [
+          60,
+          84
+        ],
+        "preferred_range": [
+          66,
+          78
+        ],
+        "motion_policy": "smooth",
+        "onsets": [
+          {
+            "start_beat": 0.25,
+            "base_pitches": [
+              69
+            ],
+            "resolved_pitches": [
+              69
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 0.75,
+            "base_pitches": [
+              72
+            ],
+            "resolved_pitches": [
+              72
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 1.25,
+            "base_pitches": [
+              74
+            ],
+            "resolved_pitches": [
+              74
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 1.75,
+            "base_pitches": [
+              77
+            ],
+            "resolved_pitches": [
+              77
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 2.25,
+            "base_pitches": [
+              74
+            ],
+            "resolved_pitches": [
+              74
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 2.75,
+            "base_pitches": [
+              72
+            ],
+            "resolved_pitches": [
+              72
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 7.5,
+            "base_pitches": [
+              72
+            ],
+            "resolved_pitches": [
+              72
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 7.75,
+            "base_pitches": [
+              76
+            ],
+            "resolved_pitches": [
+              76
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 8.25,
+            "base_pitches": [
+              72
+            ],
+            "resolved_pitches": [
+              72
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 8.75,
+            "base_pitches": [
+              76
+            ],
+            "resolved_pitches": [
+              76
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 9.25,
+            "base_pitches": [
+              77
+            ],
+            "resolved_pitches": [
+              77
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 9.75,
+            "base_pitches": [
+              79
+            ],
+            "resolved_pitches": [
+              79
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 10.25,
+            "base_pitches": [
+              76
+            ],
+            "resolved_pitches": [
+              76
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 10.75,
+            "base_pitches": [
+              74
+            ],
+            "resolved_pitches": [
+              74
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 16.25,
+            "base_pitches": [
+              69
+            ],
+            "resolved_pitches": [
+              69
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 16.925,
+            "base_pitches": [
+              72
+            ],
+            "resolved_pitches": [
+              72
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 17.6,
+            "base_pitches": [
+              74
+            ],
+            "resolved_pitches": [
+              74
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 18.275,
+            "base_pitches": [
+              77
+            ],
+            "resolved_pitches": [
+              77
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 24.25,
+            "base_pitches": [
+              83
+            ],
+            "resolved_pitches": [
+              71
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 24.75,
+            "base_pitches": [
+              74
+            ],
+            "resolved_pitches": [
+              74
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 25.25,
+            "base_pitches": [
+              76
+            ],
+            "resolved_pitches": [
+              76
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 25.75,
+            "base_pitches": [
+              79
+            ],
+            "resolved_pitches": [
+              79
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 26.25,
+            "base_pitches": [
+              76
+            ],
+            "resolved_pitches": [
+              76
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 26.75,
+            "base_pitches": [
+              74
+            ],
+            "resolved_pitches": [
+              74
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 27.2,
+            "base_pitches": [
+              72
+            ],
+            "resolved_pitches": [
+              72
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 27.65,
+            "base_pitches": [
+              71
+            ],
+            "resolved_pitches": [
+              71
+            ],
+            "span": 0
+          }
+        ]
+      },
+      {
+        "role": "pad",
+        "event_count": 24,
+        "shifted_event_count": 24,
+        "outside_preferred_count": 2,
+        "max_observed_simultaneous_span": 7,
+        "hard_range": [
+          60,
+          84
+        ],
+        "preferred_range": [
+          66,
+          78
+        ],
+        "motion_policy": "oblique",
+        "onsets": [
+          {
+            "start_beat": 0.0,
+            "base_pitches": [
+              57,
+              61,
+              64
+            ],
+            "resolved_pitches": [
+              69,
+              73,
+              76
+            ],
+            "span": 7
+          },
+          {
+            "start_beat": 4.0,
+            "base_pitches": [
+              57,
+              60,
+              64
+            ],
+            "resolved_pitches": [
+              69,
+              72,
+              76
+            ],
+            "span": 7
+          },
+          {
+            "start_beat": 8.0,
+            "base_pitches": [
+              60,
+              64,
+              67
+            ],
+            "resolved_pitches": [
+              72,
+              76,
+              79
+            ],
+            "span": 7
+          },
+          {
+            "start_beat": 12.0,
+            "base_pitches": [
+              60,
+              63,
+              67
+            ],
+            "resolved_pitches": [
+              72,
+              75,
+              79
+            ],
+            "span": 7
+          },
+          {
+            "start_beat": 16.0,
+            "base_pitches": [
+              57,
+              61,
+              64
+            ],
+            "resolved_pitches": [
+              69,
+              73,
+              76
+            ],
+            "span": 7
+          },
+          {
+            "start_beat": 20.0,
+            "base_pitches": [
+              57,
+              60,
+              64
+            ],
+            "resolved_pitches": [
+              69,
+              72,
+              76
+            ],
+            "span": 7
+          },
+          {
+            "start_beat": 24.0,
+            "base_pitches": [
+              59,
+              63,
+              66
+            ],
+            "resolved_pitches": [
+              71,
+              75,
+              78
+            ],
+            "span": 7
+          },
+          {
+            "start_beat": 28.0,
+            "base_pitches": [
+              59,
+              62,
+              66
+            ],
+            "resolved_pitches": [
+              71,
+              74,
+              78
+            ],
+            "span": 7
+          }
+        ]
+      },
+      {
+        "role": "arp",
+        "event_count": 24,
+        "shifted_event_count": 0,
+        "outside_preferred_count": 4,
+        "max_observed_simultaneous_span": 0,
+        "hard_range": [
+          60,
+          88
+        ],
+        "preferred_range": [
+          68,
+          82
+        ],
+        "motion_policy": "free",
+        "onsets": [
+          {
+            "start_beat": 0.5,
+            "base_pitches": [
+              72
+            ],
+            "resolved_pitches": [
+              72
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 1.0,
+            "base_pitches": [
+              76
+            ],
+            "resolved_pitches": [
+              76
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 1.5,
+            "base_pitches": [
+              79
+            ],
+            "resolved_pitches": [
+              79
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 4.5,
+            "base_pitches": [
+              83
+            ],
+            "resolved_pitches": [
+              83
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 5.0,
+            "base_pitches": [
+              79
+            ],
+            "resolved_pitches": [
+              79
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 5.5,
+            "base_pitches": [
+              76
+            ],
+            "resolved_pitches": [
+              76
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 8.5,
+            "base_pitches": [
+              72
+            ],
+            "resolved_pitches": [
+              72
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 9.0,
+            "base_pitches": [
+              76
+            ],
+            "resolved_pitches": [
+              76
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 9.5,
+            "base_pitches": [
+              79
+            ],
+            "resolved_pitches": [
+              79
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 12.5,
+            "base_pitches": [
+              83
+            ],
+            "resolved_pitches": [
+              83
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 13.0,
+            "base_pitches": [
+              79
+            ],
+            "resolved_pitches": [
+              79
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 13.5,
+            "base_pitches": [
+              76
+            ],
+            "resolved_pitches": [
+              76
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 16.5,
+            "base_pitches": [
+              72
+            ],
+            "resolved_pitches": [
+              72
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 17.0,
+            "base_pitches": [
+              76
+            ],
+            "resolved_pitches": [
+              76
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 17.5,
+            "base_pitches": [
+              79
+            ],
+            "resolved_pitches": [
+              79
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 20.5,
+            "base_pitches": [
+              83
+            ],
+            "resolved_pitches": [
+              83
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 21.0,
+            "base_pitches": [
+              79
+            ],
+            "resolved_pitches": [
+              79
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 21.5,
+            "base_pitches": [
+              76
+            ],
+            "resolved_pitches": [
+              76
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 24.5,
+            "base_pitches": [
+              72
+            ],
+            "resolved_pitches": [
+              72
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 25.0,
+            "base_pitches": [
+              76
+            ],
+            "resolved_pitches": [
+              76
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 25.5,
+            "base_pitches": [
+              79
+            ],
+            "resolved_pitches": [
+              79
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 28.5,
+            "base_pitches": [
+              83
+            ],
+            "resolved_pitches": [
+              83
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 29.0,
+            "base_pitches": [
+              79
+            ],
+            "resolved_pitches": [
+              79
+            ],
+            "span": 0
+          },
+          {
+            "start_beat": 29.5,
+            "base_pitches": [
+              76
+            ],
+            "resolved_pitches": [
+              76
+            ],
+            "span": 0
+          }
+        ]
+      }
+    ],
+    "semantics": {
+      "pitch_change": "octave-equivalent only",
+      "max_span": "simultaneous voicing span",
+      "preferred_range": "optimization target, not hard constraint"
+    }
+  },
+  "orchestration_budget_resolved": true,
+  "orchestration_budget_report": {
+    "section_count": 4,
+    "removed_event_count": 0,
+    "sections": {
+      "room": {
+        "primary_roles": [
+          "lead"
+        ],
+        "secondary_roles": [
+          "pad"
+        ],
+        "decorative_roles": [
+          "arp"
+        ],
+        "max_simultaneous_roles": 3,
+        "phrase_gap_only_roles": [],
+        "silence_roles": [],
+        "removed": {
+          "silence_role": 0,
+          "primary_phrase_overlap": 0,
+          "simultaneous_role_budget": 0
+        }
+      },
+      "answer": {
+        "primary_roles": [
+          "lead"
+        ],
+        "secondary_roles": [
+          "pad"
+        ],
+        "decorative_roles": [
+          "arp"
+        ],
+        "max_simultaneous_roles": 3,
+        "phrase_gap_only_roles": [],
+        "silence_roles": [],
+        "removed": {
+          "silence_role": 0,
+          "primary_phrase_overlap": 0,
+          "simultaneous_role_budget": 0
+        }
+      },
+      "void": {
+        "primary_roles": [
+          "lead"
+        ],
+        "secondary_roles": [
+          "pad"
+        ],
+        "decorative_roles": [
+          "arp"
+        ],
+        "max_simultaneous_roles": 3,
+        "phrase_gap_only_roles": [],
+        "silence_roles": [],
+        "removed": {
+          "silence_role": 0,
+          "primary_phrase_overlap": 0,
+          "simultaneous_role_budget": 0
+        }
+      },
+      "afterglow": {
+        "primary_roles": [
+          "lead"
+        ],
+        "secondary_roles": [
+          "pad"
+        ],
+        "decorative_roles": [
+          "arp"
+        ],
+        "max_simultaneous_roles": 3,
+        "phrase_gap_only_roles": [],
+        "silence_roles": [],
+        "removed": {
+          "silence_role": 0,
+          "primary_phrase_overlap": 0,
+          "simultaneous_role_budget": 0
+        }
+      }
+    },
+    "semantics": {
+      "priority_order": [
+        "primary",
+        "secondary",
+        "decorative"
+      ],
+      "allowed_overlaps": "protected during budget arbitration; not a blanket ban on unlisted pairs",
+      "phrase_gap_only": "decorative event must not overlap authored primary phrase body",
+      "silence_roles": "hard event gate after arrangement/transition generation"
+    }
+  },
+  "performance_resolved": true,
+  "performance_report": {
+    "phrase_count": 4,
+    "phrases": [
+      {
+        "phrase_id": "p_room",
+        "role": "lead",
+        "event_count": 6,
+        "removed_for_breath": 0,
+        "start_beat": 0.25,
+        "duration_beats": 4.5,
+        "breath_after_beats": 0.42
+      },
+      {
+        "phrase_id": "p_answer",
+        "role": "lead",
+        "event_count": 6,
+        "removed_for_breath": 0,
+        "start_beat": 8.25,
+        "duration_beats": 4.5,
+        "breath_after_beats": 0.42
+      },
+      {
+        "phrase_id": "p_void",
+        "role": "lead",
+        "event_count": 3,
+        "removed_for_breath": 0,
+        "start_beat": 16.25,
+        "duration_beats": 4.5,
+        "breath_after_beats": 0.42
+      },
+      {
+        "phrase_id": "p_afterglow",
+        "role": "lead",
+        "event_count": 7,
+        "removed_for_breath": 0,
+        "start_beat": 24.25,
+        "duration_beats": 4.5,
+        "breath_after_beats": 0.42
+      }
+    ],
+    "realization": {
+      "seed": 11603,
+      "microtiming": {
+        "enabled": true,
+        "max_abs_ms": 3.0
+      },
+      "velocity_variation": {
+        "enabled": true,
+        "max_abs": 0.01
+      },
+      "timing_quantization_guard_ms": 0.5,
+      "minimum_note_gap_ms": 1.2
+    }
+  },
+  "mix_resolved": {
+    "tracks": {
+      "lead": {
+        "dry_peak": 0.0867883324958231,
+        "post_route_peak": 0.05901606609715971,
+        "post_route_rms": 0.008411519320154204,
+        "output": "music",
+        "sends": {}
+      },
+      "pad": {
+        "dry_peak": 0.0493085156169813,
+        "post_route_peak": 0.016764895309773643,
+        "post_route_rms": 0.0027956022629612655,
+        "output": "music",
+        "sends": {}
+      },
+      "arp": {
+        "dry_peak": 0.013156638203992013,
+        "post_route_peak": 0.005525788045676645,
+        "post_route_rms": 0.0005677433612912349,
+        "output": "music",
+        "sends": {}
+      }
+    },
+    "buses": {
+      "music": {
+        "kind": "group",
+        "input_peak": 0.062389122035482455,
+        "input_rms": 0.008877097009279255,
+        "output_peak": 0.058645774713353506,
+        "output_rms": 0.008344471188722499,
+        "ducking": [],
+        "fx": []
+      }
+    },
+    "master": {
+      "pre_fx_peak": 0.058645774713353506,
+      "pre_fx_rms": 0.008344471188722499,
+      "output_peak": 0.05278119724201816,
+      "output_rms": 0.007510024069850249,
+      "headroom_db": 25.550415257042825,
+      "clipped_sample_ratio": 0.0,
+      "fx": []
+    }
+  }
+}

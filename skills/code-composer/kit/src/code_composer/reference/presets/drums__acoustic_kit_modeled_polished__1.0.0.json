@@ -1,0 +1,382 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "drums.acoustic_kit_modeled_polished",
+  "version": "1.0.0",
+  "name": "Acoustic Kit — Modeled Polished",
+  "engine": "percussion",
+  "family": "acoustic_drum_kit",
+  "character": [
+    "acoustic-leaning",
+    "coupled-head",
+    "dense-cymbal",
+    "voicing-polished",
+    "deterministic",
+    "dry-close-mic"
+  ],
+  "strengths": [
+    "retains the S21 coupled-head/cavity/shell acoustic core while smoothing dry-source attack-to-body transitions",
+    "snare wire and impact bands are blended into the head/body response instead of reading as separate bright layers",
+    "cymbal modal peaks are denser and less dominant, with frequency-dependent high-frequency damping and softer contact onset",
+    "preserves explicit S20 articulation vocabulary and deterministic authored-event behavior"
+  ],
+  "limitations": [
+    "dry-source voicing polish only; no room, overhead, microphone-array or mastering coloration",
+    "reduced-order independent physical approximation, not a sampled or measured named drum kit",
+    "stateful choke/residual-hit interaction remains a later slice",
+    "strike-position authoring and drummer performance grammar remain later slices"
+  ],
+  "recommended_roles": [
+    "drums"
+  ],
+  "expression_capabilities": [
+    "velocity",
+    "seeded_strike_variation",
+    "explicit_articulation",
+    "coupled_acoustic_core",
+    "voicing_polish"
+  ],
+  "musical_content": false,
+  "patch": {
+    "kind": "percussion",
+    "engine": "percussion",
+    "family": "acoustic_drum_kit",
+    "drum_graph": {
+      "kick": {
+        "pitch_start_hz": 165.0,
+        "pitch_end_hz": 48.0,
+        "pitch_decay_s": 0.045,
+        "body_decay_s": 0.105,
+        "sub_decay_s": 0.155,
+        "body_gain": 0.92,
+        "sub_gain": 0.12,
+        "click_gain": 0.055,
+        "click_hz": 2200.0,
+        "click_decay_s": 0.01,
+        "click_attack_s": 0.0012,
+        "lowpass_hz": 5200.0,
+        "drive": 1.1,
+        "declick_ms": 0.8,
+        "output_gain": 1.0166
+      },
+      "snare": {
+        "body_hz": 185.0,
+        "body2_hz": 335.0,
+        "body_gain": 0.34,
+        "body2_gain": 0.3,
+        "body_decay_s": 0.085,
+        "noise_low_hz": 1200.0,
+        "noise_high_hz": 9000.0,
+        "noise_gain": 0.48,
+        "noise_decay_s": 0.06,
+        "crack_hz": 2700.0,
+        "crack_gain": 0.055,
+        "crack_decay_s": 0.015,
+        "lowpass_hz": 10500.0,
+        "drive": 1.08,
+        "declick_ms": 0.65,
+        "output_gain": 0.6188
+      },
+      "hat": {
+        "metal_freqs": [
+          5600.0,
+          7100.0,
+          8450.0,
+          10150.0,
+          11200.0
+        ],
+        "metal_gains": [
+          1.0,
+          0.72,
+          0.48,
+          0.32,
+          0.2
+        ],
+        "metal_gain": 0.33,
+        "noise_gain": 0.15,
+        "decay_s": 0.03,
+        "noise_highpass_hz": 5200.0,
+        "noise_lowpass_hz": 11200.0,
+        "output_highpass_hz": 4300.0,
+        "drive": 1.04,
+        "declick_ms": 0.45,
+        "output_gain": 0.3978
+      },
+      "realism_hardening": {
+        "enabled": true,
+        "kick_tail_s": 0.36,
+        "snare_tail_s": 0.34,
+        "hat_tail_s": 0.13,
+        "strike_variation": 0.045,
+        "velocity_brightness": 0.46,
+        "kick_mode_ratios": [
+          1.0,
+          1.594,
+          2.136,
+          2.296,
+          2.653
+        ],
+        "kick_mode_gains": [
+          1.0,
+          0.36,
+          0.2,
+          0.13,
+          0.08
+        ],
+        "kick_tension_shift_cents": 62.0,
+        "kick_tension_decay_s": 0.036,
+        "kick_beater_noise_gain": 0.052,
+        "snare_mode_ratios": [
+          1.0,
+          1.47,
+          1.93,
+          2.54
+        ],
+        "snare_mode_gains": [
+          1.0,
+          0.54,
+          0.32,
+          0.17
+        ],
+        "snare_wire_delay_s": 0.0025,
+        "snare_wire_rattle_hz": 70.0,
+        "snare_wire_decay_s": 0.19,
+        "snare_wire_gain": 0.36,
+        "hat_mode_jitter": 0.0055,
+        "hat_decay_velocity_scale": 0.58
+      },
+      "ride": {
+        "bow_freqs": [
+          1350.0,
+          2260.0,
+          3560.0,
+          5230.0,
+          7480.0,
+          10100.0
+        ],
+        "bow_gains": [
+          1.0,
+          0.78,
+          0.56,
+          0.36,
+          0.22,
+          0.12
+        ],
+        "bow_decay_s": 1.15,
+        "bow_noise_gain": 0.13,
+        "bow_tonal_gain": 0.4,
+        "bow_output_gain": 0.3,
+        "bell_freqs": [
+          3180.0,
+          4780.0,
+          6620.0,
+          8460.0,
+          10700.0
+        ],
+        "bell_gains": [
+          1.0,
+          0.78,
+          0.54,
+          0.32,
+          0.18
+        ],
+        "bell_decay_s": 0.72,
+        "bell_noise_gain": 0.075,
+        "bell_tonal_gain": 0.64,
+        "bell_output_gain": 0.34
+      },
+      "crash": {
+        "freqs": [
+          780.0,
+          1260.0,
+          2110.0,
+          3380.0,
+          5120.0,
+          7460.0,
+          10150.0
+        ],
+        "gains": [
+          1.0,
+          0.84,
+          0.66,
+          0.49,
+          0.34,
+          0.22,
+          0.12
+        ],
+        "decay_s": 1.35,
+        "noise_gain": 0.21,
+        "tonal_gain": 0.34,
+        "output_gain": 0.3
+      },
+      "tom_high": {
+        "base_hz": 180.0,
+        "mode_ratios": [
+          1.0,
+          1.59,
+          2.14,
+          2.3,
+          2.65
+        ],
+        "center_mode_gains": [
+          1.0,
+          0.38,
+          0.2,
+          0.13,
+          0.08
+        ],
+        "edge_mode_gains": [
+          0.72,
+          0.58,
+          0.46,
+          0.28,
+          0.16
+        ],
+        "decay_s": 0.4,
+        "tension_shift_cents": 38.0,
+        "tension_decay_s": 0.055,
+        "lowpass_hz": 7600.0,
+        "drive": 1.05,
+        "output_gain": 0.43
+      },
+      "tom_mid": {
+        "base_hz": 132.0,
+        "mode_ratios": [
+          1.0,
+          1.59,
+          2.14,
+          2.3,
+          2.65
+        ],
+        "center_mode_gains": [
+          1.0,
+          0.38,
+          0.2,
+          0.13,
+          0.08
+        ],
+        "edge_mode_gains": [
+          0.72,
+          0.58,
+          0.46,
+          0.28,
+          0.16
+        ],
+        "decay_s": 0.49,
+        "tension_shift_cents": 38.0,
+        "tension_decay_s": 0.055,
+        "lowpass_hz": 7600.0,
+        "drive": 1.05,
+        "output_gain": 0.46
+      },
+      "tom_floor": {
+        "base_hz": 88.0,
+        "mode_ratios": [
+          1.0,
+          1.59,
+          2.14,
+          2.3,
+          2.65
+        ],
+        "center_mode_gains": [
+          1.0,
+          0.38,
+          0.2,
+          0.13,
+          0.08
+        ],
+        "edge_mode_gains": [
+          0.72,
+          0.58,
+          0.46,
+          0.28,
+          0.16
+        ],
+        "decay_s": 0.62,
+        "tension_shift_cents": 38.0,
+        "tension_decay_s": 0.055,
+        "lowpass_hz": 7600.0,
+        "drive": 1.05,
+        "output_gain": 0.49
+      },
+      "articulation_foundation": {
+        "enabled": true,
+        "snare_ghost_tail_s": 0.24,
+        "snare_rimshot_tail_s": 0.24,
+        "snare_cross_stick_tail_s": 0.16,
+        "snare_ghost_gain": 0.62,
+        "snare_rimshot_gain": 0.9,
+        "snare_cross_stick_gain": 0.72,
+        "hat_half_open_tail_s": 0.52,
+        "hat_open_tail_s": 1.15,
+        "hat_pedal_tail_s": 0.13,
+        "hat_choke_tail_s": 0.09,
+        "hat_half_open_decay_s": 0.22,
+        "hat_open_decay_s": 0.62,
+        "hat_half_open_gain": 0.36,
+        "hat_open_gain": 0.34,
+        "hat_pedal_gain": 0.27,
+        "hat_choke_gain": 0.22,
+        "ride_bow_tail_s": 1.9,
+        "ride_bell_tail_s": 1.35,
+        "crash_tail_s": 2.25,
+        "cymbal_choke_tail_s": 0.12,
+        "cymbal_choke_gain": 0.24,
+        "tom_tail_s": 0.74,
+        "tom_edge_gain": 0.82
+      },
+      "acoustic_core_hardening": {
+        "enabled": true,
+        "kick_head_pair_split": 0.038,
+        "kick_resonant_head_gain": 0.34,
+        "kick_shell_gain": 0.055,
+        "kick_cavity_hz": 63.0,
+        "kick_cavity_gain": 0.16,
+        "kick_contact_gain": 0.075,
+        "snare_head_pair_split": 0.03,
+        "snare_resonant_head_gain": 0.42,
+        "snare_shell_gain": 0.11,
+        "snare_cavity_hz": 116.0,
+        "snare_cavity_gain": 0.075,
+        "snare_wire_driver_hz": 115.0,
+        "snare_wire_delay_s": 0.0018,
+        "snare_wire_decay_s": 0.24,
+        "snare_wire_coupling_gain": 0.44,
+        "tom_head_pair_split": 0.028,
+        "tom_resonant_head_gain": 0.36,
+        "tom_shell_gain": 0.095,
+        "tom_cavity_gain": 0.095,
+        "tom_high_cavity_hz": 205.0,
+        "tom_mid_cavity_hz": 148.0,
+        "tom_floor_cavity_hz": 92.0,
+        "cymbal_mode_count": 46,
+        "cymbal_pair_spread": 0.0072,
+        "cymbal_velocity_brightness": 0.62,
+        "cymbal_noise_decay_ratio": 0.5,
+        "cymbal_modal_gain": 0.72,
+        "cymbal_noise_gain": 0.19
+      },
+      "voicing_polish": {
+        "enabled": true,
+        "kick_contact_lowpass_hz": 3600.0,
+        "kick_contact_gain_scale": 0.78,
+        "kick_body_gain_scale": 1.04,
+        "snare_wire_lowpass_hz": 9800.0,
+        "snare_impact_lowpass_hz": 9000.0,
+        "snare_body_gain_scale": 1.04,
+        "snare_wire_gain_scale": 0.9,
+        "snare_impact_gain_scale": 0.84,
+        "tom_impact_lowpass_hz": 5800.0,
+        "tom_impact_gain_scale": 0.76,
+        "tom_body_gain_scale": 1.04,
+        "cymbal_contact_lowpass_hz": 9000.0,
+        "cymbal_modal_gain_scale": 0.92,
+        "cymbal_noise_gain_scale": 1.08,
+        "cymbal_contact_gain_scale": 0.68,
+        "cymbal_hf_damping_hz": 8800.0,
+        "cymbal_hf_decay_ratio": 0.3,
+        "cymbal_attack_glue_ms": 0.85,
+        "cymbal_initial_gain": 0.76
+      }
+    }
+  }
+}
