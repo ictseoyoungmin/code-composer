@@ -10,9 +10,9 @@ The repository was migrated from ZIP-first development to a source-first GitHub 
 
 ## Baseline
 
-- Stable import baseline: S24 Cymbal Presence & Excitation Hardening — CLOSED.
-- Regression baseline: 518/518 source and 518/518 clean-installed wheel tests passed before migration.
-- Next planned work: S25 Non-Cymbal Drum Core Hardening (kick → snare → tom).
+- Stable GitHub packaging baseline: `main@2ee4d372c79b04bcc791c3ec42265438cdc576d3`.
+- Local engine research lineage currently extends through S27-G as an engineering candidate.
+- S27 engine work must be transplanted onto the stable source-first structure; the old ZIP-first plugin directories are not source authority.
 
 ## Workflow
 

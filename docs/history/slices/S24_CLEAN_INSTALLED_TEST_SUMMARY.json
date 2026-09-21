@@ -1,9 +1,0 @@
-{
-  "slice": "S24",
-  "tests": 518,
-  "test_files": 77,
-  "status": "PASS",
-  "failures": 0,
-  "source_path_injection": false,
-  "install_root": "/mnt/data/cc_s24_work/clean_site"
-}

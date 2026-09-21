@@ -77,6 +77,17 @@ ACOUSTIC_CONTROL_SPECS = {
     'body_soft_cutoff_hz': ('body_filter.soft_cutoff_hz', 100.0, 19000.0, float),
     'body_hard_cutoff_hz': ('body_filter.hard_cutoff_hz', 200.0, 20000.0, float),
     'output_gain': ('output_gain', 0.0, 2.0, float),
+    'strike_phase_jitter_rad': ('strike_identity.phase_jitter_rad', 0.0, 0.8, float),
+    'strike_unison_phase_jitter_rad': ('strike_identity.unison_phase_jitter_rad', 0.0, 0.5, float),
+    'strike_partial_phase_jitter_rad': ('strike_identity.partial_phase_jitter_rad', 0.0, 0.25, float),
+    'strike_hammer_noise_mix': ('strike_identity.hammer_noise_mix', 0.0, 1.0, float),
+    'strike_hammer_gain_variation': ('strike_identity.hammer_gain_variation', 0.0, 0.20, float),
+    'strike_hammer_decay_variation': ('strike_identity.hammer_decay_variation', 0.0, 0.30, float),
+    'unison_partial_mistune_cents': ('strings.unison_decoherence.partial_mistune_cents', 0.0, 0.25, float),
+    'unison_inharmonicity_spread': ('strings.unison_decoherence.inharmonicity_spread', 0.0, 0.12, float),
+    'unison_decay_spread': ('strings.unison_decoherence.decay_spread', 0.0, 0.20, float),
+    'unison_level_spread': ('strings.unison_decoherence.level_spread', 0.0, 0.12, float),
+    'unison_decoherence_start_midi': ('strings.unison_decoherence.start_midi', 21, 108, int),
 }
 # Historical export retained for callers/tests; it means acoustic direct controls.
 CONTROL_SPECS=ACOUSTIC_CONTROL_SPECS
@@ -108,9 +119,18 @@ def _base_acoustic_graph():
             'max_partials': 16, 'base_decay_s': 3.2, 'decay_keytrack': 0.55,
             'partial_decay_power': 0.58, 'spectral_rolloff': 1.36,
             'velocity_brightness': 0.72, 'inharmonicity': 0.00016,
-            'detune_cents': 0.65, 'release_detune_damping_s': 0.070, 'stereo_width': 0.72,
+            'detune_cents': 0.65, 'release_detune_damping_s': 0.070,
+            'pedal_damper_contact_spread_s': 0.0045, 'pedal_damper_unison_decay_s': 0.105,
+            'stereo_width': 0.72,
             'low_strings': 1, 'mid_strings': 2, 'high_strings': 3,
             'low_split_midi': 43, 'high_split_midi': 61, 'attack_s': 0.0018,
+            # Disabled by default.  S28-G opt-in treble presets may add tiny
+            # deterministic string/partial asymmetry while preserving 3-string
+            # unison and the authored mean detune.
+            'unison_decoherence': {
+                'partial_mistune_cents': 0.0, 'inharmonicity_spread': 0.0,
+                'decay_spread': 0.0, 'level_spread': 0.0, 'start_midi': 61,
+            },
         },
         'hammer': {
             'gain': 0.11, 'noise_gain': 0.055, 'decay_s': 0.018, 'attack_s': 0.0005,
@@ -129,6 +149,7 @@ def _base_acoustic_graph():
             'model':'modal',
             'gain': 0.014, 'pedal_gain': 0.034, 'cross': 0.30,
             'modal_gain':0.050, 'modal_decay_scale':1.0, 'no_pedal_modal_decay_scale':0.10,
+            'explicit_pedal_up_modal_decay_scale':0.035,
             'modes_hz':[92.0,137.0,203.0,296.0,421.0,617.0,895.0,1290.0],
             'mode_weights':[1.0,.82,.72,.60,.48,.36,.26,.17],
             'mode_decays':[1.45,1.32,1.18,1.04,.88,.72,.56,.42],
@@ -136,6 +157,13 @@ def _base_acoustic_graph():
             'taps_ms': [13.1, 21.7, 34.9], 'weights': [1.0, 0.45, 0.20],
         },
         'mechanics':{'key_noise_gain':0.012,'damper_noise_gain':0.010,'seed':271},
+        # Disabled by default so every historical piano preset remains byte-exact.
+        # New opt-in presets can author bounded deterministic per-strike variation.
+        'strike_identity':{
+            'phase_jitter_rad':0.0, 'unison_phase_jitter_rad':0.0,
+            'partial_phase_jitter_rad':0.0, 'hammer_noise_mix':0.0,
+            'hammer_gain_variation':0.0, 'hammer_decay_variation':0.0,
+        },
         'body_filter': {'soft_cutoff_hz': 3800.0, 'hard_cutoff_hz': 14500.0},
         'declick_ms': 0.35, 'output_gain': 0.62,
     }

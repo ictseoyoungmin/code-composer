@@ -40,3 +40,7 @@ Older slice reports and machine evidence are intentionally kept away from the re
 - [`internal/REPOSITORY_STATUS.json`](internal/REPOSITORY_STATUS.json) — current maintainer-oriented machine status.
 
 Historical files may mention paths or terminology that were current when that evidence was produced. They are records, not current user navigation authority.
+
+## Current engineering slice
+
+- [`history/slices/S28A_CONTINUOUS_PIANO_PEDAL_STATE.md`](history/slices/S28A_CONTINUOUS_PIANO_PEDAL_STATE.md) — explicit acoustic sustain-pedal down/up/repedal state; perceptual gate open.

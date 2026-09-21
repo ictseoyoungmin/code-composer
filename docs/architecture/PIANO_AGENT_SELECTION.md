@@ -87,3 +87,11 @@ Electric:
   }
 }
 ```
+
+## Current modeled-acoustic production baseline
+
+For exposed foreground acoustic-piano parts that require the S28 naturalism chain, the current production preset is `piano.concert_grand_natural_unison_subtle@1.0.0`. It preserves concert-grand 3-string treble and mean detune while adding bounded deterministic per-strike identity and subtle treble-unison decoherence.
+
+This is a **structural capability choice**, not a semantic keyword mapping. The Agent may still choose another acoustic preset when the musical role requires a different body/stringing character. Sustain-pedal timing, chord hand-roll, phrase timing/gate, and any ensemble ducking remain explicitly authored performance/mix decisions rather than hidden preset behavior.
+
+The canonical source-piano baseline uses no automatic music-bus ducking. If ensemble masking later requires sidechain gain reduction, the Composer/mix plan must author it explicitly.

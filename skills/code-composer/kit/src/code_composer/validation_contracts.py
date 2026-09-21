@@ -308,6 +308,100 @@ REMOVED_ANALYZER_MUTATION_FIELDS = {
     "pre_hook_analysis",
 }
 
+
+def validate_drum_control_events(ir):
+    instruments = ir.get("instruments", {})
+    for track in ir.get("tracks", []):
+        patch = instruments.get(track.get("instrument"), {})
+        controls = []
+        for i, event in enumerate(track.get("events", [])):
+            if event.get("event_type") != "drum_control":
+                continue
+            name = f"track {track.get('id','<unknown>')} drum_control[{i}]"
+            if not isinstance(patch, dict) or patch.get("kind") != "percussion":
+                raise ContractValidationError(f"{name} requires a percussion instrument")
+            _unknown(event, {"event_type","control","start_beat","duration_beats","points","section_id"}, name)
+            if event.get("control") != "hi_hat_pedal_openness":
+                raise ContractValidationError(f"{name}.control unsupported")
+            start = _num(event.get("start_beat", 0.0), f"{name}.start_beat", 0.0)
+            duration = _num(event.get("duration_beats", 0.0), f"{name}.duration_beats", 1e-9)
+            points = event.get("points")
+            if not isinstance(points, list) or len(points) < 2:
+                raise ContractValidationError(f"{name}.points must contain at least two points")
+            previous = None
+            for j, point in enumerate(points):
+                if not isinstance(point, dict):
+                    raise ContractValidationError(f"{name}.points[{j}] must be an object")
+                _unknown(point, {"offset_beats","openness"}, f"{name}.points[{j}]")
+                offset = _num(point.get("offset_beats"), f"{name}.points[{j}].offset_beats", 0.0, duration)
+                _num(point.get("openness"), f"{name}.points[{j}].openness", 0.0, 1.0)
+                if previous is not None and offset <= previous + 1e-12:
+                    raise ContractValidationError(f"{name}.points offsets must be strictly increasing")
+                previous = offset
+            if abs(float(points[0]["offset_beats"])) > 1e-12:
+                raise ContractValidationError(f"{name}.points must start at offset_beats=0")
+            if abs(float(points[-1]["offset_beats"]) - duration) > 1e-9:
+                raise ContractValidationError(f"{name}.points must end at duration_beats")
+            controls.append((start, start + duration, name))
+        controls.sort()
+        for (_, end, prev_name), (start, _, name) in zip(controls, controls[1:]):
+            if start < end - 1e-12:
+                raise ContractValidationError(f"{name} overlaps {prev_name}; hi-hat pedal curves must be sequential")
+
+
+
+def validate_piano_control_events(ir):
+    instruments=ir.get("instruments",{})
+    for track in ir.get("tracks",[]):
+        patch=instruments.get(track.get("instrument"),{})
+        controls=[]
+        bpm=float(ir.get("transport",{}).get("bpm",120.0))
+        beat_ms=60000.0/max(1e-9,bpm)
+        for i,event in enumerate(track.get("events",[])):
+            if "midi" in event and event.get("event_type") != "piano_control":
+                perf=event.get("performance")
+                if isinstance(perf,dict) and "piano_attack_offset_ms" in perf:
+                    name=f"track {track.get('id','<unknown>')} piano note[{i}].performance.piano_attack_offset_ms"
+                    offset=_num(perf.get("piano_attack_offset_ms"),name,-20.0,20.0)
+                    effective=float(event.get("start_beat",0.0)) + offset/beat_ms
+                    if effective < -1e-12:
+                        raise ContractValidationError(f"{name} moves note before beat 0")
+            if event.get("event_type") != "piano_control":
+                continue
+            name=f"track {track.get('id','<unknown>')} piano_control[{i}]"
+            if not isinstance(patch,dict) or patch.get("kind") != "piano":
+                raise ContractValidationError(f"{name} requires a piano instrument")
+            if patch.get("piano_engine")=="electric" or "electric_piano_graph" in patch:
+                raise ContractValidationError(f"{name} currently requires an acoustic piano instrument")
+            _unknown(event,{"event_type","control","start_beat","duration_beats","points","section_id"},name)
+            if event.get("control") != "sustain_pedal":
+                raise ContractValidationError(f"{name}.control unsupported")
+            start=_num(event.get("start_beat",0.0),f"{name}.start_beat",0.0)
+            duration=_num(event.get("duration_beats",0.0),f"{name}.duration_beats",1e-9)
+            points=event.get("points")
+            if not isinstance(points,list) or len(points)<2:
+                raise ContractValidationError(f"{name}.points must contain at least two points")
+            previous=None
+            for j,point in enumerate(points):
+                if not isinstance(point,dict):
+                    raise ContractValidationError(f"{name}.points[{j}] must be an object")
+                _unknown(point,{"offset_beats","position"},f"{name}.points[{j}]")
+                offset=_num(point.get("offset_beats"),f"{name}.points[{j}].offset_beats",0.0,duration)
+                _num(point.get("position"),f"{name}.points[{j}].position",0.0,1.0)
+                if previous is not None and offset <= previous+1e-12:
+                    raise ContractValidationError(f"{name}.points offsets must be strictly increasing")
+                previous=offset
+            if abs(float(points[0]["offset_beats"]))>1e-12:
+                raise ContractValidationError(f"{name}.points must start at offset_beats=0")
+            if abs(float(points[-1]["offset_beats"])-duration)>1e-9:
+                raise ContractValidationError(f"{name}.points must end at duration_beats")
+            controls.append((start,start+duration,name))
+        controls.sort()
+        for (_,end,prev_name),(start,_,name) in zip(controls,controls[1:]):
+            if start < end-1e-12:
+                raise ContractValidationError(f"{name} overlaps {prev_name}; sustain-pedal curves must be sequential")
+
+
 def validate_runtime_extensions(ir):
     removed = REMOVED_ANALYZER_MUTATION_FIELDS & set(ir)
     if removed:
@@ -327,10 +421,12 @@ def validate_runtime_extensions(ir):
         validate_development_config(ir["arrangement_development"],section_ids,runtime=True)
     validate_runtime_rhythm(ir,section_ids)
     validate_arrangement_profiles(ir,section_ids)
+    validate_drum_control_events(ir)
+    validate_piano_control_events(ir)
 
 __all__=[
     "ContractValidationError","validate_transition_map","validate_development_config",
     "validate_brief_harmony","validate_runtime_harmony","validate_orchestration_config",
     "validate_brief_rhythm","validate_runtime_rhythm","validate_piano_instrument_patch","validate_instrument_patch",
-    "validate_arrangement_profiles","validate_runtime_extensions","REMOVED_ANALYZER_MUTATION_FIELDS",
+    "validate_arrangement_profiles","validate_drum_control_events","validate_piano_control_events","validate_runtime_extensions","REMOVED_ANALYZER_MUTATION_FIELDS",
 ]

@@ -1,9 +1,0 @@
-{
-  "slice": "S23",
-  "tests": 508,
-  "test_files": 76,
-  "status": "PASS",
-  "failures": 0,
-  "timeouts": 0,
-  "focused_s23": "10/10 PASS"
-}

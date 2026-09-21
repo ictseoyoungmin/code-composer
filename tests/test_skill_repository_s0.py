@@ -58,8 +58,6 @@ def test_skill_self_check_passes_when_skill_is_copied_alone():
         shutil.copytree(SKILL_ROOT,lone,ignore=shutil.ignore_patterns("__pycache__","*.pyc","*.egg-info",".pytest_cache",".coverage"))
         subprocess.run([sys.executable,str(lone/"kit/scripts/self_check.py")],cwd=lone,check=True,capture_output=True,text=True)
 
-
-
 def test_canonical_skill_contains_no_persistent_build_outputs():
     assert not (KIT_ROOT/"build").exists()
     assert not (KIT_ROOT/"dist").exists()

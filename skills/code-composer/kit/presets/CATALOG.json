@@ -1,11 +1,12 @@
 {
+  "format": "code-composer-factory-preset-catalog/v1",
   "policy": "presets provide sonic capability, not musical content",
   "presets": [
     {
       "format": "code-composer-factory-preset/v1",
       "preset_id": "bass.electric_finger_modeled",
       "version": "1.0.0",
-      "name": "Electric Finger Bass — Modeled",
+      "name": "Electric Finger Bass \u2014 Modeled",
       "engine": "plucked_bass",
       "family": "electric_bass",
       "character": [
@@ -101,7 +102,7 @@
       ],
       "limitations": [
         "physically inspired deterministic model, not a sampled concert violin or fitted named performer",
-        "harmonic MIDI denotes sounding pitch; ricochet, sautillé, col legno, sul ponticello/tasto notation, and continuous double-stop special articulations remain outside this preset"
+        "harmonic MIDI denotes sounding pitch; ricochet, sautill\u00e9, col legno, sul ponticello/tasto notation, and continuous double-stop special articulations remain outside this preset"
       ],
       "recommended_roles": [
         "lead",
@@ -373,7 +374,7 @@
       "format": "code-composer-factory-preset/v1",
       "preset_id": "drums.acoustic_kit_modeled",
       "version": "1.0.0",
-      "name": "Acoustic Kit — Modeled",
+      "name": "Acoustic Kit \u2014 Modeled",
       "engine": "percussion",
       "family": "acoustic_drum_kit",
       "character": [
@@ -384,100 +385,76 @@
       ],
       "strengths": [
         "kick membrane modes include bounded strike-dependent tension relaxation instead of a single pitch-swept oscillator",
-        "snare combines membrane/body modes with deterministic stochastic wire collisions and explicit center/ghost/rimshot/cross-stick articulations",
-        "hi-hat exposes closed/half-open/open/pedal/choke articulations with distinct decay and excitation profiles",
-        "ride, crash and high/mid/floor tom elements are explicit authored kit voices rather than inferred extra hits"
+        "snare combines membrane/body modes with deterministic stochastic wire collisions",
+        "closed hi-hat uses velocity-sensitive inharmonic modal decay with bounded strike variation"
       ],
       "limitations": [
         "compact real-time approximation, not a fitted or sampled named drum kit",
-        "S20 articulations are independent hit responses; stateful open-hat/cymbal muting and residual-hit interaction are reserved for S22",
-        "brushes and mallet techniques remain outside this preset"
+        "currently covers kick, snare and closed hi-hat; toms, ride, crash, brushes and open-hat choke state are outside this preset"
       ],
       "recommended_roles": [
         "drums"
       ],
       "expression_capabilities": [
         "velocity",
-        "seeded_strike_variation",
-        "explicit_articulation"
+        "seeded_strike_variation"
       ],
       "musical_content": false
     },
     {
       "format": "code-composer-factory-preset/v1",
-      "preset_id": "drums.acoustic_kit_modeled_cymbal_presence",
+      "preset_id": "drums.s19_core_cymbal_extension",
       "version": "1.0.0",
-      "name": "Acoustic Kit Modeled — Cymbal Presence Hardened",
+      "name": "S19 Core + Ride/Crash Extension",
       "engine": "percussion",
       "family": "acoustic_drum_kit",
       "character": [
-        "acoustic-leaning",
-        "coupled-head",
-        "dense-cymbal",
-        "voicing-polished",
-        "performance-responsive",
-        "cymbal-presence-hardened",
+        "s19-core-preserved",
         "deterministic",
-        "dry-close-mic"
+        "ride-crash-extension",
+        "perceptual-first"
       ],
       "strengths": [
-        "retains the S22 polished dry-source acoustic core while adding explicit strike-force and strike-position timbre control",
-        "omitting strike controls follows the exact S22 hit path for compatibility and matched A/B work",
-        "strike force changes brightness, contact/body balance and modal excitation without acting as a second loudness fader",
-        "strike position changes membrane/cymbal mode emphasis deterministically while preserving authored articulation identity",
-        "cymbal strike/body energy is emphasized ahead of stochastic wash",
-        "wash excitation is colored and correlated to plate modal energy rather than sounding like an independent static layer"
+        "kick, snare and closed hi-hat preserve the S19 legacy renderer exactly",
+        "ride keeps the R2/R4 decay lock while mapping authored velocity into drummer-like stick-contact authority: soft timekeeping stays plate-forward and stronger accents bring the tip transient forward without extending sustain",
+        "crash preserves delayed bloom and R4 spectral balance while authored velocity opens contact and mid/high excitation nonlinearly for stronger section accents without lengthening the tail"
       ],
       "limitations": [
-        "performance-to-timbre control only; no room, overhead, microphone-array or mastering coloration",
-        "reduced-order independent physical approximation, not a sampled or measured named drum kit",
-        "stateful choke/residual-hit interaction remains a later slice",
-        "drummer hand/foot grammar and impossible-limb prevention remain later slices",
-        "stateful open-hat/cymbal choke and shared residual vibration are not implemented in S24",
-        "room/overhead/microphone coloration remains intentionally out of scope"
+        "ride currently exposes one bow-like voice; bell articulation remains deferred",
+        "crash is a compact deterministic plate approximation, not a fitted or sampled named cymbal",
+        "open hi-hat, choke state, toms and additional percussion articulations remain outside this preservation slice"
       ],
       "recommended_roles": [
         "drums"
       ],
       "expression_capabilities": [
         "velocity",
-        "seeded_strike_variation",
-        "explicit_articulation",
-        "coupled_acoustic_core",
-        "voicing_polish",
-        "strike_force",
-        "strike_position",
-        "cymbal_presence_hardening"
+        "seeded_strike_variation"
       ],
       "musical_content": false
     },
     {
       "format": "code-composer-factory-preset/v1",
-      "preset_id": "drums.acoustic_kit_modeled_expressive",
+      "preset_id": "drums.s19_core_powerful_room",
       "version": "1.0.0",
-      "name": "Acoustic Kit — Modeled Expressive",
+      "name": "S19 Core + Powerful Room Integration",
       "engine": "percussion",
       "family": "acoustic_drum_kit",
       "character": [
-        "acoustic-leaning",
-        "coupled-head",
-        "dense-cymbal",
-        "voicing-polished",
-        "performance-responsive",
+        "s19-core-preserved",
         "deterministic",
-        "dry-close-mic"
+        "shared-kit-room",
+        "performance-integrated"
       ],
       "strengths": [
-        "retains the S22 polished dry-source acoustic core while adding explicit strike-force and strike-position timbre control",
-        "omitting strike controls follows the exact S22 hit path for compatibility and matched A/B work",
-        "strike force changes brightness, contact/body balance and modal excitation without acting as a second loudness fader",
-        "strike position changes membrane/cymbal mode emphasis deterministically while preserving authored articulation identity"
+        "kick, snare and closed hi-hat preserve the S19 event renderer exactly before kit-level processing",
+        "ride/crash retain the R5 performance-context source model and decay locks",
+        "shared overhead, small-room early reflections, diffuse late field and gentle parallel bus glue make authored accents excite one coherent kit space instead of isolated synthetic hits"
       ],
       "limitations": [
-        "performance-to-timbre control only; no room, overhead, microphone-array or mastering coloration",
-        "reduced-order independent physical approximation, not a sampled or measured named drum kit",
-        "stateful choke/residual-hit interaction remains a later slice",
-        "drummer hand/foot grammar and impossible-limb prevention remain later slices"
+        "compact deterministic recording-room approximation rather than measured microphone or room impulse responses",
+        "room/overhead integration is intentionally tuned for one close, punchy rock/pop kit perspective in this slice",
+        "ride bell, open hi-hat, choke state, toms and additional percussion articulations remain outside this slice"
       ],
       "recommended_roles": [
         "drums"
@@ -485,40 +462,33 @@
       "expression_capabilities": [
         "velocity",
         "seeded_strike_variation",
-        "explicit_articulation",
-        "coupled_acoustic_core",
-        "voicing_polish",
-        "strike_force",
-        "strike_position"
+        "velocity_dependent_room_excitation"
       ],
       "musical_content": false
     },
     {
       "format": "code-composer-factory-preset/v1",
-      "preset_id": "drums.acoustic_kit_modeled_polished",
+      "preset_id": "drums.s19_core_powerful_room_authentic_strike",
       "version": "1.0.0",
-      "name": "Acoustic Kit — Modeled Polished",
+      "name": "S19 Core + Powerful Room + Authentic Cymbal Strike",
       "engine": "percussion",
       "family": "acoustic_drum_kit",
       "character": [
-        "acoustic-leaning",
-        "coupled-head",
-        "dense-cymbal",
-        "voicing-polished",
+        "s19-core-preserved",
         "deterministic",
-        "dry-close-mic"
+        "physical-cymbal-strike",
+        "shared-kit-room",
+        "performance-integrated"
       ],
       "strengths": [
-        "retains the S21 coupled-head/cavity/shell acoustic core while smoothing dry-source attack-to-body transitions",
-        "snare wire and impact bands are blended into the head/body response instead of reading as separate bright layers",
-        "cymbal modal peaks are denser and less dominant, with frequency-dependent high-frequency damping and softer contact onset",
-        "preserves explicit S20 articulation vocabulary and deterministic authored-event behavior"
+        "kick, snare and closed hi-hat preserve the S19 event renderer exactly before kit-level processing",
+        "ride/crash replace noise-led contact and arbitrary modal start phase with one velocity-dependent mechanical impact event",
+        "R2/R3 short cymbal tail targets and S26 shared-kit room remain preserved"
       ],
       "limitations": [
-        "dry-source voicing polish only; no room, overhead, microphone-array or mastering coloration",
-        "reduced-order independent physical approximation, not a sampled or measured named drum kit",
-        "stateful choke/residual-hit interaction remains a later slice",
-        "strike-position authoring and drummer performance grammar remain later slices"
+        "compact real-time strike approximation rather than a full FEM/BEM cymbal simulation",
+        "ride bow and crash edge/shoulder are the only cymbal gestures in S27-A",
+        "ride bell, hi-hat openness state, toms and full drummer limb validation remain later S27 slices"
       ],
       "recommended_roles": [
         "drums"
@@ -526,37 +496,35 @@
       "expression_capabilities": [
         "velocity",
         "seeded_strike_variation",
-        "explicit_articulation",
-        "coupled_acoustic_core",
-        "voicing_polish"
+        "velocity_dependent_room_excitation"
       ],
       "musical_content": false
     },
     {
       "format": "code-composer-factory-preset/v1",
-      "preset_id": "drums.acoustic_kit_modeled_realistic",
+      "preset_id": "drums.s19_core_powerful_room_authentic_strike_v2",
       "version": "1.0.0",
-      "name": "Acoustic Kit — Modeled Realistic",
+      "name": "S19 Core + Powerful Room + Authentic Cymbal Strike V2",
       "engine": "percussion",
       "family": "acoustic_drum_kit",
       "character": [
-        "acoustic-leaning",
-        "coupled-head",
-        "dense-cymbal",
+        "s19-core-preserved",
         "deterministic",
-        "dry-close-mic"
+        "shared-kit-room",
+        "performance-integrated",
+        "physical-cymbal-strike",
+        "dense-inharmonic-plate",
+        "bow-edge-radiation"
       ],
       "strengths": [
-        "kick, snare and tom dry sources use reduced-order coupled batter/resonant-head, cavity and shell responses",
-        "snare wire energy is driven by resonant-head motion instead of an independent noise tail",
-        "hi-hat, ride and crash use dense deterministic inharmonic paired modal fields with natural beating",
-        "preserves the S20 explicit articulation vocabulary while replacing the toy-like sparse acoustic core"
+        "kick, snare and closed hi-hat preserve the S19 event renderer exactly before kit-level processing",
+        "ride bow and crash edge use one short stick-force event followed by a dense rapidly de-phasing inharmonic plate field rather than sparse stable partials",
+        "low-order bell/gong radiation is suppressed for bow/edge strikes while R2/R3 short-tail targets and S26 shared-kit room remain preserved"
       ],
       "limitations": [
-        "reduced-order independent physical approximation, not a fitted, sampled, or FDTD named drum kit",
-        "room, overhead and microphone-array behavior are intentionally absent from S21 dry-source hardening",
-        "stateful choke/residual-hit interaction remains a later state-interaction concern",
-        "strike-position authoring and drummer performance grammar remain later slices"
+        "compact deterministic modal-density approximation rather than a full nonlinear FEM/BEM cymbal simulation",
+        "S27-A2 currently fixes ride to bow-like and crash to edge/shoulder-like radiation; explicit strike-position authoring remains a later contract",
+        "ride bell, hi-hat openness state, toms and full drummer limb validation remain later S27 slices"
       ],
       "recommended_roles": [
         "drums"
@@ -564,8 +532,556 @@
       "expression_capabilities": [
         "velocity",
         "seeded_strike_variation",
-        "explicit_articulation",
-        "coupled_acoustic_core"
+        "velocity_dependent_room_excitation"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.s19_core_powerful_room_authentic_strike_v2_hihat",
+      "version": "1.0.0",
+      "name": "S19 Core + Dense Cymbals + Two-Plate Hi-Hat",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "s19-core-preserved",
+        "deterministic",
+        "shared-kit-room",
+        "performance-integrated",
+        "physical-cymbal-strike",
+        "dense-inharmonic-plate",
+        "bow-edge-radiation",
+        "two-plate-hi-hat",
+        "pedal-contact-state"
+      ],
+      "strengths": [
+        "kick, snare and legacy closed hi-hat event rendering remain byte-preserved; the new two-plate hi-hat is explicit opt-in articulation surface",
+        "ride/crash preserve S27-A2 dense inharmonic plate behavior and short-tail constraints",
+        "new hi-hat articulations model separate top/bottom plate fields plus pedal-dependent inelastic edge-collision rattle rather than decay-only variants"
+      ],
+      "limitations": [
+        "compact event-scale collision approximation rather than a full finite-difference two-shell simulation",
+        "pedal separation is authored per articulation in S27-B; continuous within-note pedal trajectories and full limb-state validation remain later slices",
+        "legacy drum role generator still authors kick/snare/hat only unless a Composer Agent explicitly emits the new hi-hat articulation names"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "velocity_dependent_room_excitation",
+        "hi_hat_plate_state",
+        "hi_hat_pedal_articulation"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.s19_core_powerful_room_authentic_strike_v2_hihat_snare",
+      "version": "1.0.0",
+      "name": "S19 Core + Dense Cymbals + Two-Plate Hi-Hat + Articulated Snare",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "s19-core-preserved",
+        "deterministic",
+        "shared-kit-room",
+        "performance-integrated",
+        "physical-cymbal-strike",
+        "dense-inharmonic-plate",
+        "bow-edge-radiation",
+        "two-plate-hi-hat",
+        "pedal-contact-state",
+        "coupled-snare-heads",
+        "snare-wire-coupling",
+        "rim-articulations"
+      ],
+      "strengths": [
+        "kick, legacy snare and legacy closed hi-hat event rendering remain byte-preserved; new hi-hat/snare articulations are explicit opt-in surfaces",
+        "ride/crash preserve S27-A2 dense inharmonic plate behavior and short-tail constraints",
+        "two-plate hi-hat preserves S27-B pedal/contact state behavior",
+        "snare center/ghost/rimshot/cross-stick use distinct head/wire/rim excitation paths rather than gain/EQ-only variants"
+      ],
+      "limitations": [
+        "compact modal/coupling approximation rather than a full finite-element two-head shell simulation",
+        "snare-wire coupling is event-scale and deterministic; continuous strainer tension/state remains later work",
+        "legacy drum role generator still authors kick/snare/hat only unless a Composer Agent explicitly emits articulation names"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "velocity_dependent_room_excitation",
+        "hi_hat_plate_state",
+        "hi_hat_pedal_articulation",
+        "snare_strike_position",
+        "snare_rim_articulation",
+        "snare_wire_response"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.s19_core_powerful_room_authentic_strike_v2_hihat_snare_toms",
+      "version": "1.0.0",
+      "name": "S19 Core + Dense Cymbals + Two-Plate Hi-Hat + Articulated Snare + Coupled Tom Family",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "s19-core-preserved",
+        "deterministic",
+        "shared-kit-room",
+        "performance-integrated",
+        "physical-cymbal-strike",
+        "dense-inharmonic-plate",
+        "bow-edge-radiation",
+        "two-plate-hi-hat",
+        "pedal-contact-state",
+        "coupled-snare-heads",
+        "snare-wire-coupling",
+        "rim-articulations",
+        "coupled-tom-heads",
+        "size-specific-tom-family",
+        "tom-center-edge-articulation"
+      ],
+      "strengths": [
+        "kick, legacy snare and legacy closed hi-hat event rendering remain byte-preserved; new hi-hat/snare articulations are explicit opt-in surfaces",
+        "ride/crash preserve S27-A2 dense inharmonic plate behavior and short-tail constraints",
+        "two-plate hi-hat preserves S27-B pedal/contact state behavior",
+        "snare center/ghost/rimshot/cross-stick use distinct head/wire/rim excitation paths rather than gain/EQ-only variants",
+        "high/mid/floor toms use size-specific two-head, cavity and shell parameters rather than pitch-shifted copies",
+        "tom center/edge articulations change membrane-mode excitation and shell/contact balance causally"
+      ],
+      "limitations": [
+        "compact modal/coupling approximation rather than a full finite-element two-head shell simulation",
+        "snare-wire coupling is event-scale and deterministic; continuous strainer tension/state remains later work",
+        "tom model is a compact event-scale coupled-head/cavity/shell approximation, not a full finite-element shell simulation",
+        "legacy drum role generator still authors kick/snare/hat only unless a Composer Agent explicitly emits articulation names"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "velocity_dependent_room_excitation",
+        "hi_hat_plate_state",
+        "hi_hat_pedal_articulation",
+        "snare_strike_position",
+        "snare_rim_articulation",
+        "snare_wire_response",
+        "tom_family_size",
+        "tom_strike_position"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.s19_core_powerful_room_authentic_strike_v2_hihat_snare_toms_integrated",
+      "version": "1.0.0",
+      "name": "S19 Authentic Full Kit + Performance-Aware Shared Room",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "s19-core-preserved",
+        "deterministic",
+        "shared-kit-room",
+        "performance-integrated",
+        "physical-cymbal-strike",
+        "dense-inharmonic-plate",
+        "bow-edge-radiation",
+        "two-plate-hi-hat",
+        "pedal-contact-state",
+        "coupled-snare-heads",
+        "snare-wire-coupling",
+        "rim-articulations",
+        "coupled-tom-heads",
+        "size-specific-tom-family",
+        "tom-center-edge-articulation",
+        "articulation-aware-room",
+        "propagated-overhead",
+        "flagship-kit-integration"
+      ],
+      "strengths": [
+        "kick, legacy snare and legacy closed hi-hat event rendering remain byte-preserved; new hi-hat/snare articulations are explicit opt-in surfaces",
+        "ride/crash preserve S27-A2 dense inharmonic plate behavior and short-tail constraints",
+        "two-plate hi-hat preserves S27-B pedal/contact state behavior",
+        "snare center/ghost/rimshot/cross-stick use distinct head/wire/rim excitation paths rather than gain/EQ-only variants",
+        "high/mid/floor toms use size-specific two-head, cavity and shell parameters rather than pitch-shifted copies",
+        "tom center/edge articulations change membrane-mode excitation and shell/contact balance causally",
+        "shared room send follows authenticated articulation identity instead of treating all post-S19 events as generic hits",
+        "overhead path includes a small propagation delay so dry close transients lead the room image instead of being doubled at zero time",
+        "early-reflection-dominant studio room and lighter bus glue preserve stick attack while making the full kit move as one instrument"
+      ],
+      "limitations": [
+        "compact deterministic studio-room approximation rather than measured microphone or room impulse responses",
+        "articulation-aware room weights are authored acoustic defaults, not automatic style mapping",
+        "continuous microphone bleed and stateful room geometry remain outside this slice",
+        "legacy drum role generator still authors kick/snare/hat only unless a Composer Agent explicitly emits authenticated articulation names"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "velocity_dependent_room_excitation",
+        "hi_hat_plate_state",
+        "hi_hat_pedal_articulation",
+        "snare_strike_position",
+        "snare_rim_articulation",
+        "snare_wire_response",
+        "tom_family_size",
+        "tom_strike_position",
+        "articulation_aware_room_excitation",
+        "overhead_propagation"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.s19_core_powerful_room_authentic_strike_v2_hihat_snare_toms_integrated_continuous_hihat",
+      "version": "1.0.0",
+      "name": "S19 Authentic Full Kit + Shared Room + Continuous Hi-Hat Pedal",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "s19-core-preserved",
+        "deterministic",
+        "shared-kit-room",
+        "performance-integrated",
+        "physical-cymbal-strike",
+        "dense-inharmonic-plate",
+        "bow-edge-radiation",
+        "two-plate-hi-hat",
+        "pedal-contact-state",
+        "coupled-snare-heads",
+        "snare-wire-coupling",
+        "rim-articulations",
+        "coupled-tom-heads",
+        "size-specific-tom-family",
+        "tom-center-edge-articulation",
+        "articulation-aware-room",
+        "propagated-overhead",
+        "flagship-kit-integration",
+        "continuous-hi-hat-pedal",
+        "authored-openness-trajectory"
+      ],
+      "strengths": [
+        "kick, legacy snare and legacy closed hi-hat event rendering remain byte-preserved; new hi-hat/snare articulations are explicit opt-in surfaces",
+        "ride/crash preserve S27-A2 dense inharmonic plate behavior and short-tail constraints",
+        "two-plate hi-hat preserves S27-B pedal/contact state behavior",
+        "snare center/ghost/rimshot/cross-stick use distinct head/wire/rim excitation paths rather than gain/EQ-only variants",
+        "high/mid/floor toms use size-specific two-head, cavity and shell parameters rather than pitch-shifted copies",
+        "tom center/edge articulations change membrane-mode excitation and shell/contact balance causally",
+        "shared room send follows authenticated articulation identity instead of treating all post-S19 events as generic hits",
+        "overhead path includes a small propagation delay so dry close transients lead the room image instead of being doubled at zero time",
+        "early-reflection-dominant studio room and lighter bus glue preserve stick attack while making the full kit move as one instrument",
+        "explicit hi_hat_pedal_openness control curves continuously damp an already-ringing open/half-open hi-hat without synthesizing hidden pedal gestures",
+        "continuous closure uses separate body/wash energy-loss constants so partial contact changes spectral decay rather than acting as one global fader",
+        "S27-H discrete authored closure events remain available as exact event-time choke anchors"
+      ],
+      "limitations": [
+        "compact deterministic studio-room approximation rather than measured microphone or room impulse responses",
+        "articulation-aware room weights are authored acoustic defaults, not automatic style mapping",
+        "legacy drum role generator still authors kick/snare/hat only unless a Composer Agent explicitly emits authenticated articulation names",
+        "genre-specific hi-hat performance grammar is not inferred by the runtime",
+        "continuous pedal trajectories must be authored explicitly as drum_control events; the runtime does not infer foot motion from genre or neighboring hits",
+        "current MIDI export omits the continuous control curve while retaining audible drum notes; canonical Music IR remains the authoritative editable source"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "velocity_dependent_room_excitation",
+        "hi_hat_plate_state",
+        "hi_hat_pedal_articulation",
+        "snare_strike_position",
+        "snare_rim_articulation",
+        "snare_wire_response",
+        "tom_family_size",
+        "tom_strike_position",
+        "articulation_aware_room_excitation",
+        "overhead_propagation",
+        "stateful_hi_hat_closure",
+        "continuous_hi_hat_pedal_openness"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.s19_core_powerful_room_authentic_strike_v2_hihat_snare_toms_integrated_foot_gesture",
+      "version": "1.0.0",
+      "name": "S19 Core Powerful Room Authentic Strike V2 Hi-Hat Snare Toms Integrated Foot Gesture",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "persistent pedal state",
+        "motion-coupled chick",
+        "motion-coupled foot splash",
+        "smoothed foot micro-contact field"
+      ],
+      "strengths": [
+        "kick, legacy snare and legacy closed hi-hat event rendering remain byte-preserved; new hi-hat/snare articulations are explicit opt-in surfaces",
+        "ride/crash preserve S27-A2 dense inharmonic plate behavior and short-tail constraints",
+        "two-plate hi-hat preserves S27-B pedal/contact state behavior",
+        "snare center/ghost/rimshot/cross-stick use distinct head/wire/rim excitation paths rather than gain/EQ-only variants",
+        "high/mid/floor toms use size-specific two-head, cavity and shell parameters rather than pitch-shifted copies",
+        "tom center/edge articulations change membrane-mode excitation and shell/contact balance causally",
+        "shared room send follows authenticated articulation identity instead of treating all post-S19 events as generic hits",
+        "overhead path includes a small propagation delay so dry close transients lead the room image instead of being doubled at zero time",
+        "early-reflection-dominant studio room and lighter bus glue preserve stick attack while making the full kit move as one instrument",
+        "explicit hi_hat_pedal_openness control curves continuously damp an already-ringing open/half-open hi-hat without synthesizing hidden pedal gestures",
+        "continuous closure uses separate body/wash energy-loss constants so partial contact changes spectral decay rather than acting as one global fader",
+        "S27-H discrete authored closure events remain available as exact event-time choke anchors",
+        "persistent authored pedal state shapes subsequent hi-hat stick strikes without hidden automation",
+        "authored hi-hat pedal curves can produce physically coupled chick/splash contact audio from motion speed and direction",
+        "control-derived chick/splash use short distributed micro-contact pulses so edge re-contact remains noisy/physical without sparse digital crackle"
+      ],
+      "limitations": [
+        "compact deterministic studio-room approximation rather than measured microphone or room impulse responses",
+        "articulation-aware room weights are authored acoustic defaults, not automatic style mapping",
+        "legacy drum role generator still authors kick/snare/hat only unless a Composer Agent explicitly emits authenticated articulation names",
+        "genre-specific hi-hat performance grammar is not inferred by the runtime",
+        "continuous pedal trajectories must be authored explicitly as drum_control events; the runtime does not infer foot motion from genre or neighboring hits",
+        "current MIDI export omits the continuous control curve while retaining audible drum notes; canonical Music IR remains the authoritative editable source",
+        "pedal curves remain explicit authored controls; no genre-specific performance grammar or automatic foot motion",
+        "foot chick/splash audio is derived only from explicit authored pedal motion; no genre/style pedal gesture inference"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "velocity_dependent_room_excitation",
+        "hi_hat_plate_state",
+        "hi_hat_pedal_articulation",
+        "snare_strike_position",
+        "snare_rim_articulation",
+        "snare_wire_response",
+        "tom_family_size",
+        "tom_strike_position",
+        "articulation_aware_room_excitation",
+        "overhead_propagation",
+        "stateful_hi_hat_closure",
+        "continuous_hi_hat_pedal_openness",
+        "persistent_hi_hat_strike_state",
+        "authored hi-hat pedal curves can produce physically coupled chick/splash contact audio from motion speed and direction"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.s19_core_powerful_room_authentic_strike_v2_hihat_snare_toms_integrated_foot_gesture_metal_hihat",
+      "version": "1.0.0",
+      "name": "S19 Core Powerful Room Authentic Strike V2 Hi-Hat Snare Toms Integrated Foot Gesture Metal Hi-Hat",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "persistent pedal state",
+        "motion-coupled chick",
+        "motion-coupled foot splash",
+        "resonant two-plate hi-hat re-contact"
+      ],
+      "strengths": [
+        "kick, legacy snare and legacy closed hi-hat event rendering remain byte-preserved; new hi-hat/snare articulations are explicit opt-in surfaces",
+        "ride/crash preserve S27-A2 dense inharmonic plate behavior and short-tail constraints",
+        "two-plate hi-hat preserves S27-B pedal/contact state behavior",
+        "snare center/ghost/rimshot/cross-stick use distinct head/wire/rim excitation paths rather than gain/EQ-only variants",
+        "high/mid/floor toms use size-specific two-head, cavity and shell parameters rather than pitch-shifted copies",
+        "tom center/edge articulations change membrane-mode excitation and shell/contact balance causally",
+        "shared room send follows authenticated articulation identity instead of treating all post-S19 events as generic hits",
+        "overhead path includes a small propagation delay so dry close transients lead the room image instead of being doubled at zero time",
+        "early-reflection-dominant studio room and lighter bus glue preserve stick attack while making the full kit move as one instrument",
+        "explicit hi_hat_pedal_openness control curves continuously damp an already-ringing open/half-open hi-hat without synthesizing hidden pedal gestures",
+        "continuous closure uses separate body/wash energy-loss constants so partial contact changes spectral decay rather than acting as one global fader",
+        "S27-H discrete authored closure events remain available as exact event-time choke anchors",
+        "persistent authored pedal state shapes subsequent hi-hat stick strikes without hidden automation",
+        "authored hi-hat pedal curves can produce physically coupled chick/splash contact audio from motion speed and direction",
+        "hi-hat edge re-contact excites dense inharmonic metal modes instead of adding a normalized broadband collision-noise layer"
+      ],
+      "limitations": [
+        "compact deterministic studio-room approximation rather than measured microphone or room impulse responses",
+        "articulation-aware room weights are authored acoustic defaults, not automatic style mapping",
+        "legacy drum role generator still authors kick/snare/hat only unless a Composer Agent explicitly emits authenticated articulation names",
+        "genre-specific hi-hat performance grammar is not inferred by the runtime",
+        "continuous pedal trajectories must be authored explicitly as drum_control events; the runtime does not infer foot motion from genre or neighboring hits",
+        "current MIDI export omits the continuous control curve while retaining audible drum notes; canonical Music IR remains the authoritative editable source",
+        "pedal curves remain explicit authored controls; no genre-specific performance grammar or automatic foot motion",
+        "compact modal plate/contact model is an independent deterministic approximation, not a sampled or measured commercial hi-hat"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "velocity_dependent_room_excitation",
+        "hi_hat_plate_state",
+        "hi_hat_pedal_articulation",
+        "snare_strike_position",
+        "snare_rim_articulation",
+        "snare_wire_response",
+        "tom_family_size",
+        "tom_strike_position",
+        "articulation_aware_room_excitation",
+        "overhead_propagation",
+        "stateful_hi_hat_closure",
+        "continuous_hi_hat_pedal_openness",
+        "persistent_hi_hat_strike_state",
+        "authored hi-hat pedal curves can produce physically coupled chick/splash contact audio from motion speed and direction"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.s19_core_powerful_room_authentic_strike_v2_hihat_snare_toms_integrated_persistent_hihat",
+      "version": "1.0.0",
+      "name": "S19 Core Powerful Room Authentic Strike v2 + Hi-Hat + Snare + Toms + Persistent Hi-Hat Pedal State",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "s19-core-preserved",
+        "deterministic",
+        "shared-kit-room",
+        "performance-integrated",
+        "physical-cymbal-strike",
+        "dense-inharmonic-plate",
+        "bow-edge-radiation",
+        "two-plate-hi-hat",
+        "pedal-contact-state",
+        "coupled-snare-heads",
+        "snare-wire-coupling",
+        "rim-articulations",
+        "coupled-tom-heads",
+        "size-specific-tom-family",
+        "tom-center-edge-articulation",
+        "articulation-aware-room",
+        "propagated-overhead",
+        "flagship-kit-integration",
+        "continuous-hi-hat-pedal",
+        "authored-openness-trajectory",
+        "persistent-pedal-state",
+        "pedal-coupled-strike"
+      ],
+      "strengths": [
+        "kick, legacy snare and legacy closed hi-hat event rendering remain byte-preserved; new hi-hat/snare articulations are explicit opt-in surfaces",
+        "ride/crash preserve S27-A2 dense inharmonic plate behavior and short-tail constraints",
+        "two-plate hi-hat preserves S27-B pedal/contact state behavior",
+        "snare center/ghost/rimshot/cross-stick use distinct head/wire/rim excitation paths rather than gain/EQ-only variants",
+        "high/mid/floor toms use size-specific two-head, cavity and shell parameters rather than pitch-shifted copies",
+        "tom center/edge articulations change membrane-mode excitation and shell/contact balance causally",
+        "shared room send follows authenticated articulation identity instead of treating all post-S19 events as generic hits",
+        "overhead path includes a small propagation delay so dry close transients lead the room image instead of being doubled at zero time",
+        "early-reflection-dominant studio room and lighter bus glue preserve stick attack while making the full kit move as one instrument",
+        "explicit hi_hat_pedal_openness control curves continuously damp an already-ringing open/half-open hi-hat without synthesizing hidden pedal gestures",
+        "continuous closure uses separate body/wash energy-loss constants so partial contact changes spectral decay rather than acting as one global fader",
+        "S27-H discrete authored closure events remain available as exact event-time choke anchors",
+        "persistent authored pedal state shapes subsequent hi-hat stick strikes without hidden automation"
+      ],
+      "limitations": [
+        "compact deterministic studio-room approximation rather than measured microphone or room impulse responses",
+        "articulation-aware room weights are authored acoustic defaults, not automatic style mapping",
+        "legacy drum role generator still authors kick/snare/hat only unless a Composer Agent explicitly emits authenticated articulation names",
+        "genre-specific hi-hat performance grammar is not inferred by the runtime",
+        "continuous pedal trajectories must be authored explicitly as drum_control events; the runtime does not infer foot motion from genre or neighboring hits",
+        "current MIDI export omits the continuous control curve while retaining audible drum notes; canonical Music IR remains the authoritative editable source",
+        "pedal curves remain explicit authored controls; no genre-specific performance grammar or automatic foot motion"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "velocity_dependent_room_excitation",
+        "hi_hat_plate_state",
+        "hi_hat_pedal_articulation",
+        "snare_strike_position",
+        "snare_rim_articulation",
+        "snare_wire_response",
+        "tom_family_size",
+        "tom_strike_position",
+        "articulation_aware_room_excitation",
+        "overhead_propagation",
+        "stateful_hi_hat_closure",
+        "continuous_hi_hat_pedal_openness",
+        "persistent_hi_hat_strike_state"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "drums.s19_core_powerful_room_authentic_strike_v2_hihat_snare_toms_integrated_stateful_hihat",
+      "version": "1.0.0",
+      "name": "S19 Authentic Full Kit + Shared Room + Stateful Hi-Hat Closure",
+      "engine": "percussion",
+      "family": "acoustic_drum_kit",
+      "character": [
+        "s19-core-preserved",
+        "deterministic",
+        "shared-kit-room",
+        "performance-integrated",
+        "physical-cymbal-strike",
+        "dense-inharmonic-plate",
+        "bow-edge-radiation",
+        "two-plate-hi-hat",
+        "pedal-contact-state",
+        "coupled-snare-heads",
+        "snare-wire-coupling",
+        "rim-articulations",
+        "coupled-tom-heads",
+        "size-specific-tom-family",
+        "tom-center-edge-articulation",
+        "articulation-aware-room",
+        "propagated-overhead",
+        "flagship-kit-integration",
+        "stateful-hi-hat-closure",
+        "authored-pedal-choke"
+      ],
+      "strengths": [
+        "kick, legacy snare and legacy closed hi-hat event rendering remain byte-preserved; new hi-hat/snare articulations are explicit opt-in surfaces",
+        "ride/crash preserve S27-A2 dense inharmonic plate behavior and short-tail constraints",
+        "two-plate hi-hat preserves S27-B pedal/contact state behavior",
+        "snare center/ghost/rimshot/cross-stick use distinct head/wire/rim excitation paths rather than gain/EQ-only variants",
+        "high/mid/floor toms use size-specific two-head, cavity and shell parameters rather than pitch-shifted copies",
+        "tom center/edge articulations change membrane-mode excitation and shell/contact balance causally",
+        "shared room send follows authenticated articulation identity instead of treating all post-S19 events as generic hits",
+        "overhead path includes a small propagation delay so dry close transients lead the room image instead of being doubled at zero time",
+        "early-reflection-dominant studio room and lighter bus glue preserve stick attack while making the full kit move as one instrument",
+        "an authored pedal/closed/half-open event can damp the tail of an already-ringing open or half-open hi-hat without touching other kit voices",
+        "closure operates as deterministic source-energy damping before shared-room integration rather than as a global mix gate"
+      ],
+      "limitations": [
+        "compact deterministic studio-room approximation rather than measured microphone or room impulse responses",
+        "articulation-aware room weights are authored acoustic defaults, not automatic style mapping",
+        "legacy drum role generator still authors kick/snare/hat only unless a Composer Agent explicitly emits authenticated articulation names",
+        "continuous within-note pedal trajectories remain outside this slice; closure timing comes only from explicit authored hi-hat events",
+        "genre-specific hi-hat performance grammar is not inferred by the runtime"
+      ],
+      "recommended_roles": [
+        "drums"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "seeded_strike_variation",
+        "velocity_dependent_room_excitation",
+        "hi_hat_plate_state",
+        "hi_hat_pedal_articulation",
+        "snare_strike_position",
+        "snare_rim_articulation",
+        "snare_wire_response",
+        "tom_family_size",
+        "tom_strike_position",
+        "articulation_aware_room_excitation",
+        "overhead_propagation",
+        "stateful_hi_hat_closure"
       ],
       "musical_content": false
     },
@@ -655,6 +1171,73 @@
       ],
       "expression_capabilities": {
         "pedal": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "piano.concert_grand_natural",
+      "version": "1.0.0",
+      "name": "Concert Grand Natural",
+      "engine": "piano",
+      "family": "acoustic",
+      "character": [
+        "open",
+        "full",
+        "acoustic",
+        "per-strike"
+      ],
+      "strengths": [
+        "foreground piano",
+        "repeated-note realism",
+        "wide dynamic writing"
+      ],
+      "limitations": [
+        "deterministic modeled piano, not a sampled concert instrument"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline",
+        "pad"
+      ],
+      "expression_capabilities": {
+        "pedal": true,
+        "per_strike_identity": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "piano.concert_grand_natural_unison_subtle",
+      "version": "1.0.0",
+      "name": "Concert Grand Natural \u2014 Subtle Treble Unison",
+      "engine": "piano",
+      "family": "acoustic",
+      "character": [
+        "open",
+        "full",
+        "acoustic",
+        "per-strike",
+        "treble-unison-decoherent"
+      ],
+      "strengths": [
+        "foreground piano",
+        "repeated-note realism",
+        "wide dynamic writing",
+        "treble chord naturalism"
+      ],
+      "limitations": [
+        "deterministic modeled piano, not a sampled concert instrument",
+        "opt-in production naturalism preset; piano.concert_grand_natural remains available for backward-compatible voicing"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline",
+        "pad"
+      ],
+      "expression_capabilities": {
+        "pedal": true,
+        "per_strike_identity": true
       },
       "musical_content": false
     },

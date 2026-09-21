@@ -1,0 +1,212 @@
+{
+  "release": "Code Composer v1.17.0 S15",
+  "slice": "S15 Ensemble / Orchestration Realism",
+  "status": "CLOSED",
+  "date": "2026-09-19",
+  "baseline": "S14 acoustic-piano-release repository",
+  "scope": {
+    "automatic_orchestration": false,
+    "random_humanization": false,
+    "section_leader_role": true,
+    "role_timing_offsets_ms_bound": [
+      -30.0,
+      30.0
+    ],
+    "overlap_weighted_support_yielding": true,
+    "role_pan_offsets": true,
+    "multiple_tracks_per_role_supported": true,
+    "idempotent": true
+  },
+  "validation": {
+    "focused_s15": "15/15 PASS",
+    "source_regression": "435/435 PASS (68 isolated test-file processes; 0 failed files; 0 timeouts)",
+    "clean_installed_regression": "435/435 PASS (final wheel path; 68 isolated test-file processes; 0 failed files; 0 timeouts)",
+    "self_check": "PASS",
+    "skill_validation": "PASS",
+    "compileall": "PASS",
+    "import_modules": 127,
+    "import_failures": 0,
+    "static_modules": 127,
+    "static_edges": 185,
+    "cycles": 0,
+    "public_entrypoints": 9
+  },
+  "dogfood": {
+    "title": "Blue Hour Ensemble Rehearsal",
+    "sample_rate_hz": 24000,
+    "bars": 13,
+    "event_counts": {
+      "violin": 66,
+      "piano": 77,
+      "bass": 13,
+      "drums": 104
+    },
+    "note_content_identity": true,
+    "clipping": {
+      "control": 0.0,
+      "treatment": 0.0
+    },
+    "waveform_mono_correlation": 0.7137698885341979,
+    "difference_rms": 0.014181449042759071,
+    "sections": {
+      "spiccato_pulse": {
+        "leader_role": "violin",
+        "leader_event_count": 32,
+        "timing_adjusted_events": 57,
+        "yielded_events": 25,
+        "roles": {
+          "piano": {
+            "timing_offset_ms": 8.0,
+            "timing_adjusted_events": 21,
+            "overlap_velocity_scale": 0.86,
+            "yielded_events": 21,
+            "mean_leader_overlap_ratio": 0.717914
+          },
+          "bass": {
+            "timing_offset_ms": 11.0,
+            "timing_adjusted_events": 4,
+            "overlap_velocity_scale": 0.92,
+            "yielded_events": 4,
+            "mean_leader_overlap_ratio": 0.675565
+          },
+          "drums": {
+            "timing_offset_ms": -4.0,
+            "timing_adjusted_events": 32,
+            "overlap_velocity_scale": 1.0,
+            "yielded_events": 0,
+            "mean_leader_overlap_ratio": 0.0
+          }
+        }
+      },
+      "long_rise": {
+        "leader_role": "violin",
+        "leader_event_count": 19,
+        "timing_adjusted_events": 74,
+        "yielded_events": 34,
+        "roles": {
+          "piano": {
+            "timing_offset_ms": 10.0,
+            "timing_adjusted_events": 29,
+            "overlap_velocity_scale": 0.82,
+            "yielded_events": 29,
+            "mean_leader_overlap_ratio": 1.0
+          },
+          "bass": {
+            "timing_offset_ms": 13.0,
+            "timing_adjusted_events": 5,
+            "overlap_velocity_scale": 0.9,
+            "yielded_events": 5,
+            "mean_leader_overlap_ratio": 1.0
+          },
+          "drums": {
+            "timing_offset_ms": -2.0,
+            "timing_adjusted_events": 40,
+            "overlap_velocity_scale": 1.0,
+            "yielded_events": 0,
+            "mean_leader_overlap_ratio": 0.0
+          }
+        }
+      },
+      "harmonic_apex": {
+        "leader_role": "violin",
+        "leader_event_count": 15,
+        "timing_adjusted_events": 63,
+        "yielded_events": 31,
+        "roles": {
+          "piano": {
+            "timing_offset_ms": 6.0,
+            "timing_adjusted_events": 27,
+            "overlap_velocity_scale": 0.84,
+            "yielded_events": 27,
+            "mean_leader_overlap_ratio": 1.0
+          },
+          "bass": {
+            "timing_offset_ms": 9.0,
+            "timing_adjusted_events": 4,
+            "overlap_velocity_scale": 0.91,
+            "yielded_events": 4,
+            "mean_leader_overlap_ratio": 1.0
+          },
+          "drums": {
+            "timing_offset_ms": -3.0,
+            "timing_adjusted_events": 32,
+            "overlap_velocity_scale": 1.0,
+            "yielded_events": 0,
+            "mean_leader_overlap_ratio": 0.0
+          }
+        }
+      }
+    },
+    "role_pan_offsets": {
+      "violin": {
+        "base_pan": 0.0,
+        "offset": -0.1,
+        "final_pan": -0.1
+      },
+      "piano": {
+        "base_pan": 0.0,
+        "offset": 0.1,
+        "final_pan": 0.1
+      },
+      "bass": {
+        "base_pan": 0.0,
+        "offset": 0.02,
+        "final_pan": 0.02
+      },
+      "drums": {
+        "base_pan": 0.0,
+        "offset": -0.04,
+        "final_pan": -0.04
+      }
+    },
+    "near_onset_relationships": {
+      "piano": {
+        "control_near_pair_count": 43,
+        "treatment_near_pair_count": 40,
+        "control_mean_signed_ms": 12.4890672093018,
+        "treatment_mean_signed_ms": 20.575747249999797,
+        "control_exactish_under_1ms": 3,
+        "treatment_exactish_under_1ms": 0
+      },
+      "bass": {
+        "control_near_pair_count": 13,
+        "treatment_near_pair_count": 13,
+        "control_mean_signed_ms": 26.771172130176318,
+        "treatment_mean_signed_ms": 37.92501828402394,
+        "control_exactish_under_1ms": 0,
+        "treatment_exactish_under_1ms": 0
+      },
+      "drums": {
+        "control_near_pair_count": 66,
+        "treatment_near_pair_count": 66,
+        "control_mean_signed_ms": -0.25238279720295437,
+        "treatment_mean_signed_ms": -3.312988857809571,
+        "control_exactish_under_1ms": 52,
+        "treatment_exactish_under_1ms": 5
+      }
+    }
+  },
+  "compatibility": {
+    "absent_surface_preserves_ir": true,
+    "disabled_surface_preserves_ir": true,
+    "s14_piano_baseline_preserved": true,
+    "s13_violin_baseline_preserved": true,
+    "factory_preset_count": 13,
+    "violin_preset_count": 8
+  },
+  "packaging": {
+    "standalone_skill_files": 203,
+    "codex_plugin_files": 205,
+    "claude_plugin_files": 205,
+    "forbidden_skill_files": 0,
+    "codex_skill_exact": true,
+    "claude_skill_exact": true,
+    "clean_wheel_sha256": "7406afc2190408cca71df82679712cfe6589320ca3e391df08220076ac2a87fb",
+    "artifact_sha256": {
+      "standalone": "c38e2fcfb698f01891675dc1ec3d41f2789e9d2149b208e82f481d895a84823a",
+      "codex": "36fbb586ec55bbb00a6a41aaeb82054fab2e3c2aa907be0bcc1c40ea18f4a62a",
+      "claude": "22547574083403d998c618dd9fd23878f9066af17df24d001971f01ab1c46605"
+    }
+  },
+  "next": "Full multi-role flagship dogfood before selecting another engine slice."
+}

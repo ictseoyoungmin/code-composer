@@ -1,7 +1,7 @@
 {
   "status": "ACTIVE_ALLOWLIST_FOR_POST_V116_FEATURE_WORK",
   "purpose": "Preserve the historical v1.16 runtime baseline while requiring every intentional modification of a baseline file in later feature slices to be explicit and hash-pinned.",
-  "slice": "S23 Drum Performance-to-Timbre Dynamics",
+  "slice": "Post-v1.16 through S27-M R2 ensemble production integration on S28-H baseline",
   "files": {
     "src/code_composer/agent/composition_brief.py": {
       "sha256": "aea59e60d0c0b0a7815ae3584c1927980bbc98101cc57f540a42306a11efc171",
@@ -16,12 +16,12 @@
       "reason": "Delegate pitched-instrument IR validation to engine-owned validators."
     },
     "src/code_composer/render.py": {
-      "sha256": "b9d601c611eefae80545177c0409a9ff59e82420cd993b7fe883ad13633093b0",
-      "reason": "S23 forwards optional event-local strike_force and strike_position to percussion rendering while preserving S18 gain and S19 pan semantics."
+      "sha256": "068c2157b54391e9d002cedbb2ebd4173b51179e04dc6b92f925b4a993145396",
+      "reason": "S18/S19 mixer semantics and S27 stateful drum behavior retained. S28-B attaches deterministic per-strike piano identity on render-local event copies. S28-C applies explicitly authored piano_attack_offset_ms hand/chord attack timing on render-local piano notes without mutating canonical score onsets."
     },
     "src/code_composer/validation_contracts.py": {
-      "sha256": "fdbc50df2d33629857ee956b2d28d8dcc9cb668ece6e76961c45d88db2bea6fb",
-      "reason": "Route runtime instrument validation through registered engines while retaining the legacy piano validator facade."
+      "sha256": "86d0dd93e6cd9c9117c62a2739c2b9633ce6dffe1713ff6c589cd498142b423b",
+      "reason": "Existing runtime contracts retained. S28-A validates explicit sustain-pedal curves. S28-C additionally validates bounded explicit piano_attack_offset_ms performance timing and rejects offsets that move notes before beat zero."
     },
     "src/code_composer/agent/composer_planner.py": {
       "sha256": "e2f3923e97f818d64a73e2b415ed0f059bac21aa08ddac89c60b01e3f4d2923e",
@@ -36,36 +36,36 @@
       "reason": "Mirror the S2 composition-brief preset selection contract in the standalone agent-facing schema."
     },
     "src/code_composer/agent/expressive_score_plan.py": {
-      "sha256": "deeb8120da2248278d862903befb883a97ad98035fca44c7c9c2f15c223dde1a",
-      "reason": "S23 validates normalized optional strike_force/strike_position controls on authored rhythm-fill drum events."
+      "sha256": "59922e8889958d178af8bcbf43f6827957e3393483bb3ce8bceaf3132b937a7e",
+      "reason": "S15 authoring retained. S27-M R2 adds explicit section role_velocity_scales and selector-scoped targeted_onset_yields with bounded authored values; no style-derived automatic orchestration."
     },
     "src/code_composer/composition/performance.py": {
-      "sha256": "cb5330d1108999ec8c414835b8c729e03cd28a5bc633b1d63cad29cea1a5268b",
-      "reason": "S15 invokes deterministic ensemble interaction only after existing phrase realization and validates the new contract while preserving absent/disabled identity."
+      "sha256": "1ce98218bd370ed63e57d2ab5b09c21b60a071fc944b28b708b0b230bb723253",
+      "reason": "S15 ensemble interaction remains after phrase realization. S28-H additionally hardens E1 phrase realization so explicit *_control events pass through byte-preserved and never receive note-only timing/gate/velocity/performance metadata or breath deletion."
     },
     "src/code_composer/reference/schemas/expressive_score_plan.schema.json": {
-      "sha256": "6e3fc31710f1f8109ca3df0ed195bfaa5ce8221e14e7689cb6074a48f2648b06",
-      "reason": "Packaged S23 expressive-score schema permits normalized optional percussion strike controls."
+      "sha256": "102969c49172f5bccc547f643df89af62bfa8ac07305e62461fd8ddb1a009832",
+      "reason": "Packaged expressive-score schema mirrors S27-M R2 role_velocity_scales and targeted_onset_yields."
     },
     "src/code_composer/reference/schemas/performance_ir.schema.json": {
-      "sha256": "f8750e77ce87c9e430e75fabb6f7605cb24047a12867f5264483dceef8ad3934",
-      "reason": "Packaged S23 Performance IR schema mirrors normalized optional percussion strike controls."
+      "sha256": "ca695d97859aa07fe20192ea742e9544f68aa39e4ab8bfd25b35326d174916f4",
+      "reason": "Packaged Performance IR schema mirrors S27-M R2 role_velocity_scales and targeted_onset_yields."
     },
     "schemas/expressive_score_plan.schema.json": {
-      "sha256": "6e3fc31710f1f8109ca3df0ed195bfaa5ce8221e14e7689cb6074a48f2648b06",
-      "reason": "Standalone S23 expressive-score schema mirrors normalized optional percussion strike controls."
+      "sha256": "102969c49172f5bccc547f643df89af62bfa8ac07305e62461fd8ddb1a009832",
+      "reason": "Standalone expressive-score schema mirrors S27-M R2 role_velocity_scales and targeted_onset_yields."
     },
     "schemas/performance_ir.schema.json": {
-      "sha256": "f8750e77ce87c9e430e75fabb6f7605cb24047a12867f5264483dceef8ad3934",
-      "reason": "Standalone S23 Performance IR schema mirrors normalized optional percussion strike controls."
+      "sha256": "ca695d97859aa07fe20192ea742e9544f68aa39e4ab8bfd25b35326d174916f4",
+      "reason": "Standalone Performance IR schema mirrors S27-M R2 role_velocity_scales and targeted_onset_yields."
     },
     "src/code_composer/audio/piano.py": {
-      "sha256": "5d1d3cf239b2b0bab942112d3ae306be4686b4c6600cc45d6d8c8aa973760572",
-      "reason": "S14 damper-aware acoustic release hardening: remove no-pedal non-harmonic resonance tones, damp detuned unison components after note-off, and separate short damper-down soundboard modes from pedal-authorized long modal response."
+      "sha256": "05ba9188a54c6f6cfa5500bf24c44f2b8db5483708562324979d6466aaa66ac5",
+      "reason": "S14 release hardening retained. S28-A adds explicit continuous sustain-pedal state; S28-A R2 damps detuned unison strings with short staggered damper contacts and shortens fixed soundboard modal state after authored pedal-up so the release does not produce synthetic wah/meow tails. S28-B adds opt-in deterministic per-strike phase/hammer excitation identity while historical presets remain byte-stable. S28-G adds an opt-in high-register 3-string unison decoherence path with tiny deterministic per-partial/string asymmetry; the canonical natural preset remains unchanged."
     },
     "src/code_composer/audio/piano_design.py": {
-      "sha256": "598cbe568ac7b1a514539d1ded9822f546b1a7d09f079d1fa1698c6c42a285f0",
-      "reason": "S14 acoustic defaults add release-only unison damping and damper-down modal/resonance scaling while replacing the historical 1.5x resonance ratio with harmonic-only defaults."
+      "sha256": "996a21392f7cbe1f1021453816bc7b79e58f0962ea7f22a70161ea1d0fbf400f",
+      "reason": "S14 acoustic defaults retained. S28-A R2 adds bounded pedal-up unison/soundboard damping controls. S28-B adds disabled-by-default strike_identity controls resolved only by the new opt-in natural concert-grand preset. S28-G adds disabled-by-default bounded unison-decoherence controls for an opt-in listening preset."
     },
     "src/code_composer/agent/performance_ir.py": {
       "sha256": "e1f27f8f7ad2bbcb64353ce78c2ea4fdeb3cf0de099b5db9b14471689b65c280",
@@ -80,16 +80,20 @@
       "reason": "S15 surfaces ensemble-interaction contract failures through the aggregate IR validation boundary."
     },
     "src/code_composer/audio/percussion.py": {
-      "sha256": "73733163639d166f64fb69eeeb77d9b38ff386f0944284ffa794f0dc579c54a8",
-      "reason": "S24 cymbal presence hardening: modal-body reinforcement plus plate-correlated colored wash; S23 behavior preserved when the new opt-in block is absent."
+      "sha256": "ecf1e7affe15456fd49725efe901923a601d180d11057ee4dfd162250d9bce53",
+      "reason": "S17 modeled percussion plus preservation-first S25-S27 authenticated drum sources. S27-H/I/J add discrete closure, continuous pedal openness, and persistent pedal-coupled strike state. S27-K derives chick/foot-splash contact audio only from explicitly authored pedal motion speed/direction; slow/non-contact motion stays silent and legacy/direct hit sources remain unchanged. S27-K R1: control-derived hi-hat foot chick/splash collision micro-contact smoothing removes sparse crackle while preserving locked direct sources. S27-K R2: production listening removes the R1 additive control-foot micro-contact bed and calibrates plate/contact-only chick/splash output. S27-B R1 reopens only the latest opt-in hi-hat collision radiation path: irregular edge re-contact is converted to finite force that excites dense inharmonic plate modes instead of emitting normalized broadband collision audio; historical presets retain their byte-preserved branch."
     },
-    "src/code_composer/composition/musical_transitions.py": {
-      "sha256": "62248dace647ff87a559d4290702f54935aba9037211b0192b5d0966217d8697",
-      "reason": "S23 propagates explicitly authored strike_force/strike_position from rhythm-fill plans into generated drum events without inventing values."
+    "src/code_composer/analysis/__init__.py": {
+      "sha256": "4c6a04b60fa7abcdc6b762686ab9296b4a2bc0799bc9a109acaff70e75d06065",
+      "reason": "S27-F exports the evidence-only drummer limb/performance analyzer through the public analysis API while preserving all existing analysis exports."
     },
-    "src/code_composer/percussion.py": {
-      "sha256": "5357b048ec2816ffa068f43dc68a2ab5d07e04e27c6528a997f9234627ce41d2",
-      "reason": "S20 compatibility facade exposes supported percussion articulation metadata alongside the existing render functions."
+    "src/code_composer/pipeline/service.py": {
+      "sha256": "5330e736907c940e91edf0d9b06fc972f4ab6b230890b7f39675b4920cb98220",
+      "reason": "S27-F adds drummer-performance evidence to analysis output when resolved drum events are present. It mirrors evidence into the aggregate issue list without rewriting authored events or changing sound synthesis."
+    },
+    "src/code_composer/composition/orchestration_budget.py": {
+      "sha256": "2471cf91a7cd36f926c577b012ab26af0655deefea20d2b41929b32eedc66092",
+      "reason": "Existing E4 orchestration budgets retained. S28-D integration hardening passes explicit *_control events through budget realization unchanged so piano/drum control surfaces are not decorated or arbitrated as sounding note events."
     }
   }
 }

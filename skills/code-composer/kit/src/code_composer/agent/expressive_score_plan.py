@@ -482,6 +482,7 @@ def validate_expressive_score_plan(
             _obj(interaction,f"{name}.ensemble_interaction")
             allowed_interaction={
                 "enabled","leader_role","timing_offsets_ms","overlap_velocity_scales",
+                "role_velocity_scales","targeted_onset_yields",
             }
             unknown=set(interaction)-allowed_interaction
             if unknown:
@@ -527,6 +528,60 @@ def validate_expressive_score_plan(
                         f"{name}.ensemble_interaction.overlap_velocity_scales.{role}",
                         .5,1.0,
                     )
+                role_scales=interaction.get("role_velocity_scales",{})
+                _obj(role_scales,f"{name}.ensemble_interaction.role_velocity_scales")
+                for role,value in role_scales.items():
+                    if role not in active:
+                        _fail(
+                            f"{name}.ensemble_interaction.role_velocity_scales references "
+                            f"inactive role {role}"
+                        )
+                    _num(
+                        value,
+                        f"{name}.ensemble_interaction.role_velocity_scales.{role}",
+                        .5,1.0,
+                    )
+                targeted=_list(interaction.get("targeted_onset_yields",[]),f"{name}.ensemble_interaction.targeted_onset_yields")
+                for j,rule in enumerate(targeted):
+                    rname=f"{name}.ensemble_interaction.targeted_onset_yields[{j}]"
+                    _obj(rule,rname)
+                    allowed_rule={"leader_role","leader_event_selector","window_ms","support_velocity_scales"}
+                    unknown_rule=set(rule)-allowed_rule
+                    if unknown_rule:
+                        _fail(f"{rname} has unknown field(s): {sorted(unknown_rule)}")
+                    rleader=rule.get("leader_role")
+                    if not isinstance(rleader,str) or not rleader:
+                        _fail(f"{rname}.leader_role must be non-empty string")
+                    if rleader not in active:
+                        _fail(f"{rname}.leader_role must be active in section")
+                    selector=rule.get("leader_event_selector",{})
+                    _obj(selector,f"{rname}.leader_event_selector")
+                    selector_unknown=set(selector)-{"event_type","drums"}
+                    if selector_unknown:
+                        _fail(f"{rname}.leader_event_selector has unknown field(s): {sorted(selector_unknown)}")
+                    et=selector.get("event_type")
+                    if et is not None and (not isinstance(et,str) or not et):
+                        _fail(f"{rname}.leader_event_selector.event_type must be non-empty string")
+                    drums=selector.get("drums")
+                    if drums is not None:
+                        vals=_list(drums,f"{rname}.leader_event_selector.drums")
+                        if not vals or any(not isinstance(x,str) or not x for x in vals):
+                            _fail(f"{rname}.leader_event_selector.drums must be non-empty string array")
+                        if len(vals)!=len(set(vals)):
+                            _fail(f"{rname}.leader_event_selector.drums contains duplicates")
+                        if et not in (None,"drum"):
+                            _fail(f"{rname}.leader_event_selector.drums requires event_type drum")
+                    _num(rule.get("window_ms"),f"{rname}.window_ms",10,250)
+                    support=rule.get("support_velocity_scales")
+                    _obj(support,f"{rname}.support_velocity_scales")
+                    if not support:
+                        _fail(f"{rname}.support_velocity_scales must be non-empty")
+                    for role,value in support.items():
+                        if role not in active:
+                            _fail(f"{rname}.support_velocity_scales references inactive role {role}")
+                        if role==rleader:
+                            _fail(f"{rname} leader role cannot yield to itself")
+                        _num(value,f"{rname}.support_velocity_scales.{role}",.5,1.0)
 
     transition_pairs=[]
     section_index={sid:i for i,sid in enumerate(sections)}
@@ -659,7 +714,7 @@ def validate_expressive_score_plan(
             for j,event in enumerate(events):
                 en=f"{name}.rhythm_fill.events[{j}]"
                 _obj(event,en)
-                allowed_event={"offset_beats","drum","duration_beats","velocity","pan","articulation","strike_force","strike_position"}
+                allowed_event={"offset_beats","drum","duration_beats","velocity","pan"}
                 unknown_event=set(event)-allowed_event
                 if unknown_event: _fail(f"{en} unknown field(s): {sorted(unknown_event)}")
                 req={"offset_beats","drum","duration_beats","velocity"}
@@ -670,9 +725,6 @@ def validate_expressive_score_plan(
                 _num(event["duration_beats"],f"{en}.duration_beats",1e-9,2)
                 _num(event["velocity"],f"{en}.velocity",.01,1)
                 if "pan" in event: _num(event["pan"],f"{en}.pan",-1,1)
-                if "articulation" in event and (not isinstance(event["articulation"],str) or not event["articulation"]): _fail(f"{en}.articulation must be non-empty string")
-                if "strike_force" in event: _num(event["strike_force"],f"{en}.strike_force",0,1)
-                if "strike_position" in event: _num(event["strike_position"],f"{en}.strike_position",0,1)
 
 
 def build_validation_context_from_composition(

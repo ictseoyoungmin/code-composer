@@ -209,7 +209,8 @@ def _realize_phrase_on_track(
 
     inside=[
         e for e in events
-        if start-1e-9 <= float(e.get("start_beat",-1)) < end-1e-9
+        if not str(e.get("event_type","")).endswith("_control")
+        and start-1e-9 <= float(e.get("start_beat",-1)) < end-1e-9
     ]
     onset_values=sorted({round(float(e["start_beat"]),9) for e in inside})
     accent_map=_accent_by_onset(phrase,onset_values)
@@ -250,6 +251,12 @@ def _realize_phrase_on_track(
     removed_for_breath=0
     for event_index,e in enumerate(events):
         old_start=float(e.get("start_beat",-1))
+        # Control events describe continuous/non-note state and must never inherit
+        # E1 note velocity, gate, articulation or timing metadata. They also remain
+        # authoritative through phrase breath regions.
+        if str(e.get("event_type","")).endswith("_control"):
+            output.append(dict(e))
+            continue
         # E5 transition material is already explicitly authored. It must not be
         # re-shaped by an adjacent E1 phrase envelope or deleted by phrase breath.
         if isinstance(e.get("musical_transition"),dict):

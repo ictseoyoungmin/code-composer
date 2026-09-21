@@ -1184,6 +1184,65 @@
                 "minimum": 0.5,
                 "maximum": 1.0
               }
+            },
+            "role_velocity_scales": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "number",
+                "minimum": 0.5,
+                "maximum": 1.0
+              }
+            },
+            "targeted_onset_yields": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "leader_role",
+                  "window_ms",
+                  "support_velocity_scales"
+                ],
+                "properties": {
+                  "leader_role": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "leader_event_selector": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "event_type": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "drums": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "minItems": 1,
+                        "uniqueItems": true
+                      }
+                    }
+                  },
+                  "window_ms": {
+                    "type": "number",
+                    "minimum": 10,
+                    "maximum": 250
+                  },
+                  "support_velocity_scales": {
+                    "type": "object",
+                    "minProperties": 1,
+                    "additionalProperties": {
+                      "type": "number",
+                      "minimum": 0.5,
+                      "maximum": 1.0
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -1592,20 +1651,6 @@
                       "pan": {
                         "type": "number",
                         "minimum": -1,
-                        "maximum": 1
-                      },
-                      "articulation": {
-                        "type": "string",
-                        "minLength": 1
-                      },
-                      "strike_force": {
-                        "type": "number",
-                        "minimum": 0,
-                        "maximum": 1
-                      },
-                      "strike_position": {
-                        "type": "number",
-                        "minimum": 0,
                         "maximum": 1
                       }
                     }

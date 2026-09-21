@@ -30,7 +30,7 @@ def _brief(preset_id, **extra):
 
 def test_factory_catalog_is_small_versioned_and_contains_no_musical_content():
     presets=list_presets()
-    assert 4 <= len(presets) <= 19
+    assert 4 <= len(presets) <= 32
     assert any(x['preset_id']=='bowed.violin.synthetic_warm' for x in presets)
     for meta in presets:
         assert meta['version']=='1.0.0'

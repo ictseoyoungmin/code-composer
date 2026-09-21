@@ -1,0 +1,106 @@
+{
+  "status": "CLOSED",
+  "slice": "S4 Violin Double-Stop Realization",
+  "date": "2026-09-17",
+  "engine_version": "1.17.0",
+  "scope": {
+    "instrument": "conventional violin",
+    "standard_tuning": [
+      "G3",
+      "D4",
+      "A4",
+      "E5"
+    ],
+    "midi_range": [
+      55,
+      105
+    ],
+    "supported_polyphony": "synchronous two-note double stops only",
+    "constraints": [
+      "adjacent strings only",
+      "equal duration per double-stop pair",
+      "shared articulation per pair",
+      "conservative hand-frame position/finger ordering/span checks",
+      "same-finger stopped fifth only at identical longitudinal stop point",
+      "no overlapping different onsets inside double-stop mode"
+    ],
+    "not_yet_supported": [
+      "triple/quadruple stops",
+      "rolled chords",
+      "staggered polyphony",
+      "harmonics",
+      "pizzicato/arco switching",
+      "spiccato/ricochet bounce",
+      "scordatura",
+      "MusicXML/engraving"
+    ]
+  },
+  "authority": {
+    "composition_changed_for_playability": false,
+    "intervals_revoiced_for_playability": false,
+    "authored_instrument_expression_preserved": true,
+    "strict_comfort_default": true,
+    "difficulty_scores": "internal deterministic planning evidence, not universal pedagogy grades"
+  },
+  "architecture": {
+    "public_surface": "performance/violin.py",
+    "shared_mechanics": "performance/violin_mechanics.py",
+    "double_stop_planner": "performance/violin_double_stop.py",
+    "dispatch": "same-onset duplicate start routes to double-stop planner; monophonic path remains S3 path",
+    "new_runtime_modules": 2,
+    "static_cycles": 0
+  },
+  "backward_compatibility": {
+    "s3_monophonic_dogfood_events_equal": true,
+    "s3_monophonic_dogfood_playability_equal": true,
+    "legacy_A_B_C_wav_byte_identity": {
+      "A": "93aa85955b7aa8715b65721bc6388310be87006666cb9d7241889d66993116ba",
+      "B": "7d18321f4986c324b75e2ae45e88cc061e8409dcaa16ae0b051bf4998b368377",
+      "C": "db524b79b30fbd3d79fa97b157ddb83bb84c71d71cbf09d7c48c391aa3a3834f"
+    }
+  },
+  "dogfood": {
+    "events": 7,
+    "double_stop_events": 6,
+    "classification": "comfortable",
+    "max_transition_score": 0.37,
+    "max_gesture_score": 1.0,
+    "max_difficulty_score": 1.0,
+    "wav_sha256": "9fb55327feba2f0f6d1cdc76af757fa4d17602217b8842bdf07755c29a181f73",
+    "shipped_inside_skill": false
+  },
+  "validation": {
+    "focused": "23/23 PASS",
+    "source_regression": "344/344 PASS",
+    "clean_installed_regression": "344/344 PASS",
+    "coverage_percent": 92.79897520358679,
+    "violin_module_coverage_percent": 92.70833333333333,
+    "violin_mechanics_coverage_percent": 89.0,
+    "double_stop_module_coverage_percent": 94.65020576131687,
+    "violin_cli_coverage_percent": 89.28571428571429,
+    "compileall": "PASS",
+    "import_modules": 122,
+    "import_failures": 0,
+    "static_modules": 123,
+    "static_edges": 177,
+    "cycles": 0,
+    "self_check": "PASS",
+    "skill_validation": "PASS",
+    "console_entrypoints": 8,
+    "clean_wheel_sha256": "a9951e95821788af29231bed5fc293444a3ba1468656ccafdfec81488d19b8b9",
+    "clean_installed_double_stop_report_equal": true
+  },
+  "packaging": {
+    "standalone_skill_files": 183,
+    "codex_plugin_files": 185,
+    "claude_plugin_files": 185,
+    "forbidden_build_cache_audio_midi_files": 0,
+    "codex_skill_subtree_exact": true,
+    "claude_skill_subtree_exact": true,
+    "artifact_sha256": {
+      "standalone_skill": "a0fc943b7c1ec555cfb83c9bf53b788bbc6600606ad7922bc799cc349a7ac265",
+      "codex_plugin": "7c4df9614bf623197f5efa4e9d03c94148578ed065799c4337a53a973423e5d3",
+      "claude_plugin": "ca4b4eaa7d1b3d77f018244f4646feae1435c6f23761889058f27cc4b20fe5d7"
+    }
+  }
+}
