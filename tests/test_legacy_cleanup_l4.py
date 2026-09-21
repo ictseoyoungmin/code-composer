@@ -71,10 +71,6 @@ def test_l4_closure_remains_recorded_after_later_maintenance():
 
 def test_l4_v116_runtime_baseline_is_preserved_when_future_features_are_added():
     report = _report()
-    # The L4 aggregate is historical evidence for the v1.16 tree, not a rule that
-    # future releases may never add runtime modules.  Protect every v1.16 runtime
-    # file individually (except the package version declaration) while allowing
-    # additive v1.17 export adapters.
     assert report["src_schema_aggregate_sha256"] == "bcee602c1f5d96246910acf1052496923fb4aafc52cf0a8becd84759f6318ea4"
     baseline=json.loads((ROOT/"docs/maintenance/V116_RUNTIME_BASELINE.json").read_text(encoding="utf-8"))
     assert baseline["status"] == "V1.16.0_CLOSED_RUNTIME_BASELINE"
@@ -93,7 +89,6 @@ def test_l4_v116_runtime_baseline_is_preserved_when_future_features_are_added():
             assert declared[rel].get("reason"), rel
         else:
             assert current == expected, rel
-    # Intentional-change records may only name files that existed in the closed v1.16 baseline.
     assert set(declared) <= set(baseline["files"])
     assert not list((SOURCE_ROOT/"reference"/"examples").glob("*.json"))
 

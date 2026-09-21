@@ -11,3 +11,13 @@ Use this only after the notes, roles, register plans and orchestration budget ar
 7. Inspect expressive QA for masking evidence. Treat it as evidence only; revise the authored interaction explicitly if needed.
 
 Do not use S15 to repair bad composition, register planning, wrong instrumentation, or a defective instrument engine. Fix those upstream first.
+
+## S27-M R2: attack ownership without global ducking
+
+When a mix needs kick/bass/piano attack separation but the sustained body already sounds natural:
+
+1. Keep bus sidechain/ducking off unless listening evidence specifically requires it.
+2. If an entire section role is too forward, author a small `role_velocity_scales` value first.
+3. For a specific collision such as kick vs piano/bass attack, add `targeted_onset_yields` with a narrow 40–100 ms window and the exact leader selector (`event_type: drum`, `drums: [kick]`).
+4. Do not use targeted onset yield to lower notes that began before the leader attack. It is attack ownership, not sustained compression.
+5. Re-render the same score/seed/mix A/B and verify that unrelated attacks and all controls are unchanged.

@@ -42,13 +42,27 @@ def _note_pan(midi,width):
     return max(-width,min(width,(float(midi)-60.0)/36.0*width))
 
 
-def _hammer_layer(base_hz,n,sr,midi,velocity,cfg):
+def _hammer_layer(base_hz,n,sr,midi,velocity,cfg,strike_seed=None,strike_cfg=None):
     gain=float(cfg.get('gain',0.11))
     noise_gain=float(cfg.get('noise_gain',0.055))
     decay=max(0.001,float(cfg.get('decay_s',0.018)))
     tonal_gain=float(cfg.get('tonal_gain',0.035))
     seed=int(cfg.get('seed',193)) + int(midi)*7919 + n%65521
     rng=np.random.default_rng(seed)
+    strike_cfg=strike_cfg if isinstance(strike_cfg,dict) else {}
+    identity_active=bool(strike_seed is not None and any(float(strike_cfg.get(k,0.0))>0 for k in (
+        'phase_jitter_rad','unison_phase_jitter_rad','partial_phase_jitter_rad',
+        'hammer_noise_mix','hammer_gain_variation','hammer_decay_variation'
+    )))
+    strike_rng=np.random.default_rng(int(strike_seed)&0xFFFFFFFF) if identity_active else None
+    gain_scale=1.0
+    tonal_phase_offset=0.0
+    if strike_rng is not None:
+        decay_var=max(0.0,min(.30,float(strike_cfg.get('hammer_decay_variation',0.0))))
+        gain_var=max(0.0,min(.20,float(strike_cfg.get('hammer_gain_variation',0.0))))
+        decay*=1.0 + float(strike_rng.uniform(-decay_var,decay_var))
+        gain_scale*=1.0 + float(strike_rng.uniform(-gain_var,gain_var))
+        tonal_phase_offset=float(strike_rng.uniform(-1.0,1.0))*float(strike_cfg.get('phase_jitter_rad',0.0))*.35
     t=np.arange(n,dtype=np.float64)/sr
     env=np.exp(-t/decay)
     ma=min(n,max(1,int(float(cfg.get('attack_s',0.0005))*sr)))
@@ -64,6 +78,11 @@ def _hammer_layer(base_hz,n,sr,midi,velocity,cfg):
     high*=0.9+0.2*register
     high=min(high,sr*0.44)
     noise=rng.standard_normal(n).astype(np.float64)
+    if strike_rng is not None:
+        mix=max(0.0,min(1.0,float(strike_cfg.get('hammer_noise_mix',0.0))))
+        if mix>0:
+            strike_noise=strike_rng.standard_normal(n).astype(np.float64)
+            noise=noise*(1.0-mix)+strike_noise*mix
     noise=_one_pole_highpass(noise,sr,low)
     noise=_one_pole_lowpass(noise,sr,high)
     nrms=float(np.sqrt(np.mean(noise*noise))+1e-12)
@@ -71,8 +90,8 @@ def _hammer_layer(base_hz,n,sr,midi,velocity,cfg):
 
     harmonic=float(cfg.get('tonal_harmonic',7.0))
     tonal_hz=min(base_hz*harmonic,sr*0.43)
-    tonal=np.sin(2*np.pi*tonal_hz*t + 0.17*midi)
-    amp=(gain*(0.48+0.72*v))*env
+    tonal=np.sin(2*np.pi*tonal_hz*t + 0.17*midi + tonal_phase_offset)
+    amp=(gain*(0.48+0.72*v))*env*gain_scale
     return noise*amp*noise_gain + tonal*env*tonal_gain*(0.35+0.8*v)
 
 
@@ -192,6 +211,220 @@ def _modal_soundboard(x,sr,cfg,decay_scale_multiplier=1.0):
         out[:,0]+=ml; out[:,1]+=mr
     return out*gain
 
+
+
+def _sustain_pedal_controls(events):
+    return sorted(
+        [
+            ev for ev in (events or [])
+            if ev.get('event_type') == 'piano_control'
+            and ev.get('control') == 'sustain_pedal'
+        ],
+        key=lambda ev: (float(ev.get('start_beat', 0.0)), float(ev.get('duration_beats', 0.0))),
+    )
+
+
+def _interp_pedal_points(control, beat):
+    start=float(control.get('start_beat',0.0))
+    duration=max(1e-12,float(control.get('duration_beats',0.0)))
+    local=max(0.0,min(duration,float(beat)-start))
+    points=control.get('points') or []
+    if not points:
+        return 0.0
+    if local <= float(points[0]['offset_beats']):
+        return float(points[0]['position'])
+    for a,b in zip(points,points[1:]):
+        xa=float(a['offset_beats']); xb=float(b['offset_beats'])
+        if local <= xb + 1e-12:
+            ya=float(a['position']); yb=float(b['position'])
+            if xb <= xa + 1e-12:
+                return yb
+            u=(local-xa)/(xb-xa)
+            return ya+(yb-ya)*u
+    return float(points[-1]['position'])
+
+
+def resolve_sustain_pedal_position(events, beat):
+    """Resolve authored sustain-pedal state at ``beat`` with persistent final state.
+
+    Explicit piano-control curves are the authority whenever present.  Between curves,
+    the final position of the previous curve remains active, matching a physical pedal
+    that stays where the performer left it until another authored motion changes it.
+    """
+    controls=_sustain_pedal_controls(events)
+    if not controls:
+        return 0.0
+    state=0.0
+    t=float(beat)
+    for control in controls:
+        start=float(control.get('start_beat',0.0))
+        duration=float(control.get('duration_beats',0.0))
+        end=start+duration
+        if t < start - 1e-12:
+            return max(0.0,min(1.0,state))
+        if t <= end + 1e-12:
+            return max(0.0,min(1.0,_interp_pedal_points(control,t)))
+        points=control.get('points') or []
+        if points:
+            state=float(points[-1]['position'])
+    return max(0.0,min(1.0,state))
+
+
+def _next_sustain_pedal_release_beat(events, beat, threshold=0.5):
+    """Return the first future down->up threshold crossing after ``beat``."""
+    t=float(beat)
+    threshold=float(threshold)
+    if resolve_sustain_pedal_position(events,t) < threshold:
+        return None
+    controls=_sustain_pedal_controls(events)
+    state=resolve_sustain_pedal_position(events,t)
+    for control in controls:
+        start=float(control.get('start_beat',0.0))
+        end=start+float(control.get('duration_beats',0.0))
+        if end <= t + 1e-12:
+            continue
+        points=control.get('points') or []
+        if not points:
+            continue
+        first=float(points[0]['position'])
+        if start > t + 1e-12 and state >= threshold and first < threshold:
+            return start
+        abs_points=[(start+float(p['offset_beats']),float(p['position'])) for p in points]
+        for (ta,ya),(tb,yb) in zip(abs_points,abs_points[1:]):
+            if tb <= t + 1e-12:
+                continue
+            seg_start=max(t,ta)
+            if seg_start > ta + 1e-12:
+                u=(seg_start-ta)/max(1e-12,tb-ta)
+                ya=ya+(yb-ya)*u
+                ta=seg_start
+            if ya >= threshold and yb < threshold:
+                if abs(yb-ya) <= 1e-12:
+                    return tb
+                u=(threshold-ya)/(yb-ya)
+                return ta+(tb-ta)*u
+        state=float(points[-1]['position'])
+        t=max(t,end)
+    return None
+
+
+def _max_sustain_pedal_position(events, start_beat, end_beat):
+    start=float(start_beat); end=max(start,float(end_beat))
+    values=[resolve_sustain_pedal_position(events,start),resolve_sustain_pedal_position(events,end)]
+    for control in _sustain_pedal_controls(events):
+        cstart=float(control.get('start_beat',0.0))
+        for point in control.get('points') or []:
+            at=cstart+float(point['offset_beats'])
+            if start-1e-12 <= at <= end+1e-12:
+                values.append(float(point['position']))
+    return max(values or [0.0])
+
+
+def _explicit_sustain_pedal_envelope(events,n,sr,beat_s):
+    controls=_sustain_pedal_controls(events)
+    if not controls or n<=0:
+        return None
+    out=np.zeros(int(n),dtype=np.float64)
+    cursor=0
+    state=0.0
+    samples_per_beat=float(sr)*float(beat_s)
+    for control in controls:
+        start=max(0,min(n,int(round(float(control.get('start_beat',0.0))*samples_per_beat))))
+        if start>cursor:
+            out[cursor:start]=state
+        points=control.get('points') or []
+        if not points:
+            cursor=max(cursor,start)
+            continue
+        abs_samples=[]
+        for point in points:
+            idx=max(0,min(n-1,int(round((float(control.get('start_beat',0.0))+float(point['offset_beats']))*samples_per_beat))))
+            abs_samples.append((idx,float(point['position'])))
+        for (ia,ya),(ib,yb) in zip(abs_samples,abs_samples[1:]):
+            if ib<=ia:
+                continue
+            lo=max(cursor,ia); hi=min(n,ib+1)
+            if hi<=lo:
+                continue
+            denom=max(1,ib-ia)
+            u=(np.arange(lo,hi,dtype=np.float64)-ia)/denom
+            out[lo:hi]=ya+(yb-ya)*u
+        cursor=max(cursor,min(n,abs_samples[-1][0]+1))
+        state=float(points[-1]['position'])
+    if cursor<n:
+        out[cursor:]=state
+    return np.clip(out,0.0,1.0)
+
+
+def _causal_pedal_smooth(x,sr,time_s=0.012):
+    x=np.asarray(x,dtype=np.float64)
+    if len(x)==0 or time_s<=0:
+        return x
+    alpha=1.0-math.exp(-1.0/max(1.0,float(time_s)*float(sr)))
+    y=np.empty_like(x)
+    state=float(x[0])
+    for i,value in enumerate(x):
+        state += alpha*(float(value)-state)
+        y[i]=state
+    return y
+
+
+def render_piano_track_with_controls(events,n,sr,patch,beat_s):
+    """Render acoustic piano with explicit persistent sustain-pedal control state.
+
+    Legacy note-local ``performance.pedal`` behavior is untouched when a track has no
+    ``piano_control`` events.  Once explicit sustain control is present, that timeline
+    becomes authoritative: a released key remains undamped only until the next authored
+    pedal-up crossing, then the normal S14 damper release takes over.  A later repedal
+    does not resurrect energy that has already been damped.
+    """
+    controls=_sustain_pedal_controls(events)
+    if not controls:
+        return None
+    if patch.get('piano_engine')=='electric' or 'electric_piano_graph' in patch:
+        return None
+    graph=patch.get('piano_graph',patch.get('graph',{}))
+    normal_release=max(.02,float(graph.get('damper',{}).get('release_s',.20)))
+    threshold=.5
+    buf=np.zeros((n,2),dtype=np.float64)
+    total_beats=float(n)/(float(sr)*float(beat_s))
+    for ev in events or []:
+        if ev.get('event_type')=='piano_control':
+            continue
+        if 'midi' not in ev:
+            continue
+        start_beat=float(ev.get('start_beat',0.0))
+        key_duration=max(1e-9,float(ev.get('duration_beats',0.0)))
+        key_off=start_beat+key_duration
+        effective_off=key_off
+        if resolve_sustain_pedal_position(events,key_off) >= threshold:
+            release_beat=_next_sustain_pedal_release_beat(events,key_off,threshold)
+            if release_beat is None:
+                # No authored release: keep the strings undamped through the rendered
+                # track, leaving room for the ordinary damper release at the tail.
+                release_margin=normal_release/max(1e-12,float(beat_s))
+                effective_off=max(key_off,max(start_beat,total_beats-release_margin))
+            else:
+                effective_off=max(key_off,float(release_beat))
+        duration_s=max(1e-9,(effective_off-start_beat)*float(beat_s))
+        perf=dict(ev.get('performance') or {})
+        perf['pedal']=bool(_max_sustain_pedal_position(events,start_beat,effective_off)>=threshold)
+        perf['pedal_controlled']=True
+        stereo=render_piano_note(
+            int(ev['midi']),duration_s,int(sr),patch,
+            velocity=float(ev.get('velocity',.8)),performance=perf,
+        )
+        event_pan=float(ev.get('pan',0.0))
+        if abs(event_pan)>1e-9:
+            mono=.5*(stereo[:,0]+stereo[:,1])
+            l,r=_equal_power(mono,event_pan)
+            stereo=np.stack([l,r],axis=1)
+        start=max(0,int(start_beat*float(beat_s)*int(sr)))
+        end=min(len(buf),start+len(stereo))
+        if end>start:
+            buf[start:end]+=stereo[:end-start]
+    return buf
+
 def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float=1.0,performance:dict|None=None):
     """Deterministic sample-free piano approximation.
 
@@ -210,9 +443,16 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
     perf=performance or {}
     v=max(0.01,min(1.0,float(velocity)))
     pedal=bool(perf.get('pedal',graph.get('pedal',False)))
+    pedal_controlled=bool(perf.get('pedal_controlled',False))
 
     damper=graph.get('damper',{})
-    release_s=float(damper.get('pedal_release_s',1.65) if pedal else damper.get('release_s',0.20))
+    if pedal_controlled:
+        # Explicit pedal state owns note sustain duration at track level.  Once that
+        # state reaches pedal-up, use the ordinary damper release instead of attaching
+        # another long per-note pedal tail.
+        release_s=float(damper.get('release_s',0.20))
+    else:
+        release_s=float(damper.get('pedal_release_s',1.65) if pedal else damper.get('release_s',0.20))
     release_s=max(0.02,min(5.0,release_s*float(perf.get('release_scale',1.0))))
     total_s=max(0.01,float(duration_s))+release_s
     n=max(1,int(total_s*sr))
@@ -236,6 +476,23 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
     inharm*=1.0+0.7*abs((midi-60)/48.0)
     key_factor=2.0**(-(midi-60)/48.0*decay_keytrack)
 
+    strike_cfg=graph.get('strike_identity',{}) if isinstance(graph.get('strike_identity',{}),dict) else {}
+    strike_seed=perf.get('piano_strike_seed')
+    strike_active=bool(strike_seed is not None and any(float(strike_cfg.get(k,0.0))>0 for k in (
+        'phase_jitter_rad','unison_phase_jitter_rad','partial_phase_jitter_rad',
+        'hammer_noise_mix','hammer_gain_variation','hammer_decay_variation'
+    )))
+    strike_rng=np.random.default_rng(int(strike_seed)&0xFFFFFFFF) if strike_active else None
+    strike_global_phase=(float(strike_rng.uniform(-1.0,1.0))*float(strike_cfg.get('phase_jitter_rad',0.0)) if strike_rng is not None else 0.0)
+    partial_phase_offsets=(
+        strike_rng.uniform(-1.0,1.0,partials+1)*float(strike_cfg.get('partial_phase_jitter_rad',0.0))
+        if strike_rng is not None else np.zeros(partials+1,dtype=np.float64)
+    )
+    unison_phase_offsets=(
+        strike_rng.uniform(-1.0,1.0,string_count)*float(strike_cfg.get('unison_phase_jitter_rad',0.0))
+        if strike_rng is not None else np.zeros(string_count,dtype=np.float64)
+    )
+
     note_pan=_note_pan(midi,stereo_width)
     left=np.zeros(n,dtype=np.float64)
     right=np.zeros(n,dtype=np.float64)
@@ -256,6 +513,16 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
     else:
         spreads=[-1.0,0.0,1.0]
 
+    decoh=strings.get('unison_decoherence',{}) if isinstance(strings.get('unison_decoherence',{}),dict) else {}
+    decoh_start=int(decoh.get('start_midi',61))
+    decoh_active=string_count>=3 and midi>=decoh_start and any(float(decoh.get(name,0.0))>0.0 for name in (
+        'partial_mistune_cents','inharmonicity_spread','decay_spread','level_spread'
+    ))
+    # Register weighting keeps the transition continuous instead of switching to an
+    # unrelated treble instrument at one MIDI note.  It reaches full strength two
+    # octaves above the authored start point.
+    decoh_register=(min(1.0,max(0.0,(midi-decoh_start)/24.0)) if decoh_active else 0.0)
+
     for k in range(1,partials+1):
         stretch=math.sqrt(max(1e-9,1.0+inharm*(k*k)))
         fundamental=base_hz*k*stretch
@@ -266,27 +533,66 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
         decay=base_decay*key_factor/(k**partial_decay_power)
         env=attack_env*np.exp(-t/max(0.02,decay))*noteoff
         for si,spread in enumerate(spreads):
-            cents=spread*detune*(0.65+0.35*min(1.0,(midi-36)/48.0))
-            freq=fundamental*(2.0**(cents/1200.0))
-            phase=0.19*midi + 0.37*k + 0.53*si
-            component_env=env
+            # S28-G: retain the physical 3-string unison and its mean detune, but
+            # avoid making every partial of every string a perfectly coherent
+            # fixed-offset oscillator.  Tiny deterministic asymmetries model the
+            # fact that real unison strings do not share identical stiffness, decay,
+            # excitation and partial mistuning.  The offsets are symmetric across
+            # the outer strings, so center pitch / mean detune do not drift.
+            pattern=math.sin(0.73*k + 0.11*midi)
+            partial_mistune=float(decoh.get('partial_mistune_cents',0.0))*decoh_register*pattern
+            cents=spread*(detune*(0.65+0.35*min(1.0,(midi-36)/48.0)) + partial_mistune)
+            string_inharm=inharm*(1.0 + spread*float(decoh.get('inharmonicity_spread',0.0))*decoh_register*(0.55+0.45*pattern))
+            string_stretch=math.sqrt(max(1e-9,1.0+string_inharm*(k*k)))
+            string_fundamental=base_hz*k*string_stretch
+            freq=string_fundamental*(2.0**(cents/1200.0))
+            phase=0.19*midi + 0.37*k + 0.53*si + strike_global_phase + float(partial_phase_offsets[k]) + float(unison_phase_offsets[si])
+            string_decay=decay*(1.0 + spread*float(decoh.get('decay_spread',0.0))*decoh_register*(0.70+0.30*pattern))
+            string_level=1.0 + spread*float(decoh.get('level_spread',0.0))*decoh_register*(0.65-0.35*pattern)
+            component_env=attack_env*np.exp(-t/max(0.02,string_decay))*noteoff if decoh_active else env
             if off<n and string_count>1:
-                # Preserve subtle unison beating while the key is held, but collapse
-                # secondary detuned strings quickly once the damper falls.  Otherwise
-                # the final 100–200 ms exposes a slow chorus/wah that is much louder
-                # perceptually than it was during sustain.
-                anchor=(string_count-1)//2
-                if si!=anchor:
-                    tau=max(.015,float(strings.get('release_detune_damping_s',0.070)))
+                if pedal_controlled:
+                    # S28-A R2: a pedal-up damper does not leave a coherent detuned
+                    # unison beating under one shared 200 ms envelope, nor should it
+                    # erase only the side strings.  Model felt contact on every string
+                    # with a few milliseconds of deterministic contact spread and
+                    # slightly different short damping constants.  All strings are
+                    # damped; none is privileged, and pitch is never swept.
+                    spread_s=max(0.0,min(.012,float(strings.get('pedal_damper_contact_spread_s',0.0045))))
+                    base_tau=max(.035,min(.18,float(strings.get('pedal_damper_unison_decay_s',0.105))))
+                    if string_count<=1:
+                        order=[0]
+                    elif midi % 2:
+                        order=list(reversed(range(string_count)))
+                    else:
+                        order=list(range(string_count))
+                    rank=order.index(si)
+                    contact_delay=spread_s*(rank/max(1,string_count-1))
+                    # Keep the variations bounded and symmetric around the nominal
+                    # damping time so the result reads as felt contact, not a filter.
+                    center=(string_count-1)/2.0
+                    tau=base_tau*(1.0+0.10*(rank-center)/max(1.0,center))
                     extra=np.ones(n,dtype=np.float64)
-                    extra[off:]=np.exp(-(t[off:]-t[off])/tau)
+                    contact=off+int(round(contact_delay*sr))
+                    if contact<n:
+                        extra[contact:]=np.exp(-(t[contact:]-t[contact])/tau)
                     component_env=env*extra
-            sig=np.sin(2*np.pi*freq*t+phase)*component_env*amp/string_count
+                else:
+                    # Legacy/no-pedal S14 behavior remains byte-stable: collapse
+                    # secondary detuned strings quickly after an ordinary key damper
+                    # falls so a long exposed unison beating tail cannot emerge.
+                    anchor=(string_count-1)//2
+                    if si!=anchor:
+                        tau=max(.015,float(strings.get('release_detune_damping_s',0.070)))
+                        extra=np.ones(n,dtype=np.float64)
+                        extra[off:]=np.exp(-(t[off:]-t[off])/tau)
+                        component_env=env*extra
+            sig=np.sin(2*np.pi*freq*t+phase)*component_env*amp*string_level/string_count
             pan=note_pan + spread*stereo_width*0.16
             l,r=_equal_power(sig,pan)
             left+=l; right+=r
 
-    hammer=_hammer_layer(base_hz,n,sr,midi,v,graph.get('hammer',{}))
+    hammer=_hammer_layer(base_hz,n,sr,midi,v,graph.get('hammer',{}),strike_seed=strike_seed,strike_cfg=strike_cfg)
     hl,hr=_equal_power(hammer,note_pan*0.55)
     left+=hl; right+=hr
 
@@ -379,23 +685,29 @@ def apply_piano_soundboard(stereo,sr,patch,events=None,beat_s=1.0):
         swap=src[:,::-1]*cross
         wet[d:]+=(same+swap)*(float(w)/norm)
 
-    # Only an explicit authored pedal event increases sympathetic coupling.
-    mask=np.zeros(len(x),dtype=np.float64)
-    pedal_release=float(graph.get('damper',{}).get('pedal_release_s',1.65))
-    for ev in events or []:
-        perf=ev.get('performance') or {}
-        if not perf.get('pedal',False):
-            continue
-        start=max(0,int(float(ev.get('start_beat',0))*beat_s*sr))
-        note_end=float(ev.get('start_beat',0))+float(ev.get('duration_beats',0))
-        end=min(len(x),int((note_end*beat_s+pedal_release)*sr))
-        if end>start:
-            mask[start:end]=1.0
-    if np.any(mask):
-        # Smooth pedal on/off so the resonant body does not jump.
-        smooth=max(1,int(.025*sr))
-        kernel=np.ones(smooth,dtype=np.float64)/smooth
-        mask=np.convolve(mask,kernel,mode='same')
+    # S28-A: explicit track-level sustain-pedal curves supersede legacy note-local
+    # pedal booleans for sympathetic coupling.  Legacy projects take the byte-stable
+    # historical path below when no piano_control event is present.
+    explicit_mask=_explicit_sustain_pedal_envelope(events,len(x),sr,beat_s)
+    if explicit_mask is not None:
+        mask=_causal_pedal_smooth(explicit_mask,sr,.012)
+    else:
+        mask=np.zeros(len(x),dtype=np.float64)
+        pedal_release=float(graph.get('damper',{}).get('pedal_release_s',1.65))
+        for ev in events or []:
+            perf=ev.get('performance') or {}
+            if not perf.get('pedal',False):
+                continue
+            start=max(0,int(float(ev.get('start_beat',0))*beat_s*sr))
+            note_end=float(ev.get('start_beat',0))+float(ev.get('duration_beats',0))
+            end=min(len(x),int((note_end*beat_s+pedal_release)*sr))
+            if end>start:
+                mask[start:end]=1.0
+        if np.any(mask):
+            # Preserve the historical smoothing exactly for note-local pedal projects.
+            smooth=max(1,int(.025*sr))
+            kernel=np.ones(smooth,dtype=np.float64)/smooth
+            mask=np.convolve(mask,kernel,mode='same')
 
     # Damper-down body response must not behave like a bank of free-running synth
     # resonators.  Use a deliberately short modal state for the always-on body, then
@@ -403,6 +715,13 @@ def apply_piano_soundboard(stereo,sr,patch,events=None,beat_s=1.0):
     # the strings undamped.  This prevents fixed soundboard modes from singing after
     # an ordinary no-pedal chord release.
     no_pedal_decay=max(.02,min(1.0,float(cfg.get('no_pedal_modal_decay_scale',0.10))))
+    if explicit_mask is not None:
+        # S28-A R2: after an authored pedal lift, fixed soundboard modes must not
+        # continue as a free-running low-frequency resonator bank after the dampers
+        # have already stopped the strings.  Keep the long pedal-coupled body while
+        # the pedal is down, but use a much shorter structural body state underneath
+        # explicit pedal control so release does not leave a pitched 'wah/meow' tail.
+        no_pedal_decay=max(.02,min(no_pedal_decay,float(cfg.get('explicit_pedal_up_modal_decay_scale',0.035))))
     modal=_modal_soundboard(x,sr,cfg,decay_scale_multiplier=no_pedal_decay)
     if np.any(mask):
         pedal_modal=_modal_soundboard(x*mask[:,None],sr,cfg,decay_scale_multiplier=1.0)
@@ -417,4 +736,4 @@ def apply_piano_soundboard(stereo,sr,patch,events=None,beat_s=1.0):
     return y
 
 
-__all__=['render_piano_note','piano_tail_seconds','apply_piano_soundboard']
+__all__=['render_piano_note','piano_tail_seconds','apply_piano_soundboard','render_piano_track_with_controls','resolve_sustain_pedal_position']

@@ -188,6 +188,7 @@ def realize_orchestration_budget(ir: dict) -> dict:
             x["_event_index"]=ei
             x["_orchestration_role"]=role
             x["_orchestration_section"]=sid
+            x["_orchestration_passthrough_control"]=bool(str(x.get("event_type","")).endswith("_control"))
             flat.append(x)
 
     removed=[]
@@ -197,6 +198,9 @@ def realize_orchestration_budget(ir: dict) -> dict:
     # fills may not reintroduce a silent role. A sustain that begins in the preceding section is
     # truncated at the first silent-section boundary instead of being allowed to ring through it.
     for e in flat:
+        if e.get("_orchestration_passthrough_control"):
+            stage.append(e)
+            continue
         role=e["_orchestration_role"]
         a0,a1=_event_interval(e)
         first_silent_start=None
@@ -246,9 +250,11 @@ def realize_orchestration_budget(ir: dict) -> dict:
 
     # 3. Section-local unique-role budget. Higher authored role class wins. Protected overlap
     # pairs are tie-breakers, never hidden creative decisions.
-    accepted=[]
+    accepted=[e for e in stage2 if e.get("_orchestration_passthrough_control")]
     by_section={}
     for e in stage2:
+        if e.get("_orchestration_passthrough_control"):
+            continue
         by_section.setdefault(e["_orchestration_section"],[]).append(e)
 
     for sid,events in by_section.items():
@@ -302,13 +308,15 @@ def realize_orchestration_budget(ir: dict) -> dict:
         for ei,e in enumerate(track.get("events",[])):
             kept=kept_map.get((ti,ei))
             if kept is not None:
+                passthrough=bool(kept.get("_orchestration_passthrough_control"))
                 x={k:v for k,v in kept.items() if not k.startswith("_orchestration_") and k not in {"_track_index","_event_index"}}
-                x["orchestration_budget"]={
-                    **(x.get("orchestration_budget",{}) if isinstance(x.get("orchestration_budget"),dict) else {}),
-                    "section_id":_section_for_event(x,spans),
-                    "role":_role_for_track(track),
-                    "kept":True,
-                }
+                if not passthrough:
+                    x["orchestration_budget"]={
+                        **(x.get("orchestration_budget",{}) if isinstance(x.get("orchestration_budget"),dict) else {}),
+                        "section_id":_section_for_event(x,spans),
+                        "role":_role_for_track(track),
+                        "kept":True,
+                    }
                 new.append(x)
         track["events"]=sorted(new,key=lambda e:(float(e.get("start_beat",0.0)),int(e.get("midi",-1)),str(e.get("drum",""))))
 

@@ -95,6 +95,8 @@ def validate_ensemble_interaction_contract(
             "leader_role",
             "timing_offsets_ms",
             "overlap_velocity_scales",
+            "role_velocity_scales",
+            "targeted_onset_yields",
         }
         unknown = set(interaction) - allowed
         if unknown:
@@ -152,6 +154,73 @@ def validate_ensemble_interaction_contract(
                 )
             _num(value, f"section {sid} overlap velocity scale {role}", 0.5, 1.0)
 
+        role_scales = interaction.get("role_velocity_scales", {})
+        if not isinstance(role_scales, dict):
+            raise EnsembleInteractionError(
+                f"section {sid}: role_velocity_scales must be an object"
+            )
+        for role, value in role_scales.items():
+            if role not in active:
+                raise EnsembleInteractionError(
+                    f"section {sid}: role velocity scale role {role} must be active"
+                )
+            _num(value, f"section {sid} role velocity scale {role}", 0.5, 1.0)
+
+        targeted = interaction.get("targeted_onset_yields", [])
+        if not isinstance(targeted, list):
+            raise EnsembleInteractionError(
+                f"section {sid}: targeted_onset_yields must be an array"
+            )
+        for i, rule in enumerate(targeted):
+            prefix = f"section {sid} targeted_onset_yields[{i}]"
+            if not isinstance(rule, dict):
+                raise EnsembleInteractionError(f"{prefix} must be an object")
+            allowed_rule = {
+                "leader_role", "leader_event_selector", "window_ms",
+                "support_velocity_scales",
+            }
+            unknown_rule = set(rule) - allowed_rule
+            if unknown_rule:
+                raise EnsembleInteractionError(
+                    f"{prefix} unknown field(s): {sorted(unknown_rule)}"
+                )
+            rule_leader = rule.get("leader_role")
+            if not isinstance(rule_leader, str) or not rule_leader:
+                raise EnsembleInteractionError(f"{prefix}.leader_role must be non-empty string")
+            if rule_leader not in active:
+                raise EnsembleInteractionError(f"{prefix}.leader_role must be active")
+            if known_roles and rule_leader not in known_roles:
+                raise EnsembleInteractionError(f"{prefix}.leader_role has no track")
+            selector = rule.get("leader_event_selector", {})
+            if not isinstance(selector, dict):
+                raise EnsembleInteractionError(f"{prefix}.leader_event_selector must be object")
+            selector_unknown = set(selector) - {"event_type", "drums"}
+            if selector_unknown:
+                raise EnsembleInteractionError(
+                    f"{prefix}.leader_event_selector unknown field(s): {sorted(selector_unknown)}"
+                )
+            event_type = selector.get("event_type")
+            if event_type is not None and (not isinstance(event_type, str) or not event_type):
+                raise EnsembleInteractionError(f"{prefix}.leader_event_selector.event_type must be non-empty string")
+            drums = selector.get("drums")
+            if drums is not None:
+                if not isinstance(drums, list) or not drums or any(not isinstance(x, str) or not x for x in drums):
+                    raise EnsembleInteractionError(f"{prefix}.leader_event_selector.drums must be non-empty string array")
+                if len(drums) != len(set(drums)):
+                    raise EnsembleInteractionError(f"{prefix}.leader_event_selector.drums contains duplicates")
+                if event_type not in (None, "drum"):
+                    raise EnsembleInteractionError(f"{prefix}.leader_event_selector.drums requires event_type drum")
+            _num(rule.get("window_ms"), f"{prefix}.window_ms", 10.0, 250.0)
+            support = rule.get("support_velocity_scales", {})
+            if not isinstance(support, dict) or not support:
+                raise EnsembleInteractionError(f"{prefix}.support_velocity_scales must be non-empty object")
+            for role, value in support.items():
+                if role not in active:
+                    raise EnsembleInteractionError(f"{prefix}.support_velocity_scales role {role} must be active")
+                if role == rule_leader:
+                    raise EnsembleInteractionError(f"{prefix}: leader role cannot yield to itself")
+                _num(value, f"{prefix}.support_velocity_scales.{role}", 0.5, 1.0)
+
     ensemble = perf.realization.get("ensemble")
     if ensemble is None:
         return
@@ -179,6 +248,47 @@ def validate_ensemble_interaction_contract(
                 f"realization.ensemble.role_pan_offsets references unknown role {role}"
             )
         _num(value, f"realization.ensemble.role_pan_offsets.{role}", -0.5, 0.5)
+
+
+def _is_control_event(event: dict) -> bool:
+    et = event.get("event_type")
+    return isinstance(et, str) and et.endswith("_control")
+
+
+def _selector_matches(event: dict, selector: dict) -> bool:
+    if _is_control_event(event):
+        return False
+    event_type = selector.get("event_type")
+    if event_type is not None and event.get("event_type") != event_type:
+        return False
+    drums = selector.get("drums")
+    if drums is not None and event.get("drum") not in set(drums):
+        return False
+    return True
+
+
+def _selected_onsets(
+    tracks: list[dict], sid: str, spans: dict[str, tuple[float, float]], selector: dict
+) -> list[float]:
+    out = []
+    for track in tracks:
+        for event in track.get("events", []):
+            if _section_for_event(event, spans) != sid:
+                continue
+            if _selector_matches(event, selector):
+                out.append(float(event.get("start_beat", 0.0)))
+    return sorted(out)
+
+
+def _nearest_onset_scale(start_beat: float, onsets: list[float], window_beats: float, authored_scale: float) -> tuple[float, float | None]:
+    if not onsets or window_beats <= EPS:
+        return 1.0, None
+    nearest = min(abs(start_beat - x) for x in onsets)
+    if nearest > window_beats + EPS:
+        return 1.0, nearest
+    proximity = max(0.0, min(1.0, 1.0 - nearest / window_beats))
+    effective = 1.0 - proximity * (1.0 - authored_scale)
+    return effective, nearest
 
 
 def _leader_intervals(track: dict, sid: str, spans: dict[str, tuple[float, float]]) -> list[tuple[float, float]]:
@@ -323,7 +433,87 @@ def realize_ensemble_interaction(ir: dict) -> dict:
             }
             sec_rep["timing_adjusted_events"] += adjusted
 
-        # Phase 2: measure overlap against the shifted leader and make support
+        # Phase 2: apply authored section role balance. This is a static
+        # performance decision, not a detector-driven compressor. Controls are
+        # never treated as sounding events.
+        role_velocity_scales = interaction.get("role_velocity_scales", {})
+        role_scaled_events = 0
+        for role, tracks in role_tracks.items():
+            scale = float(role_velocity_scales.get(role, 1.0))
+            if scale >= 1.0 - EPS:
+                continue
+            for track in tracks:
+                for event in track.get("events", []):
+                    if _section_for_event(event, spans) != sid or _is_control_event(event):
+                        continue
+                    if "velocity" not in event:
+                        continue
+                    base_velocity = float(event.get("velocity", 0.8))
+                    final = max(0.01, min(1.0, base_velocity * scale))
+                    event["velocity"] = round(final, 6)
+                    meta = event.get("ensemble_interaction", {}) if isinstance(event.get("ensemble_interaction"), dict) else {}
+                    event["ensemble_interaction"] = {
+                        **meta,
+                        "role_velocity_scale": round(scale, 6),
+                        "role_velocity_base": round(base_velocity, 6),
+                    }
+                    role_scaled_events += 1
+        sec_rep["role_scaled_events"] = role_scaled_events
+
+        # Phase 3: targeted attack ownership. Only support events whose own
+        # onsets fall inside an authored window around selected leader attacks
+        # yield. Already-ringing sustain is not gain-ridden or ducked.
+        targeted_applied = 0
+        targeted_rules_report = []
+        for rule_index, rule in enumerate(interaction.get("targeted_onset_yields", [])):
+            rule_leader = rule["leader_role"]
+            selector = rule.get("leader_event_selector", {})
+            onsets = _selected_onsets(role_tracks.get(rule_leader, []), sid, spans, selector)
+            window_ms = float(rule["window_ms"])
+            window_beats = window_ms / beat_ms
+            per_rule = {
+                "rule_index": rule_index,
+                "leader_role": rule_leader,
+                "leader_event_count": len(onsets),
+                "window_ms": round(window_ms, 6),
+                "yielded_events": 0,
+            }
+            for support_role, authored_scale_raw in rule["support_velocity_scales"].items():
+                authored_scale = float(authored_scale_raw)
+                for track in role_tracks.get(support_role, []):
+                    for event in track.get("events", []):
+                        if _section_for_event(event, spans) != sid or _is_control_event(event):
+                            continue
+                        if "velocity" not in event:
+                            continue
+                        start = float(event.get("start_beat", 0.0))
+                        effective, distance_beats = _nearest_onset_scale(
+                            start, onsets, window_beats, authored_scale
+                        )
+                        if effective >= 1.0 - EPS:
+                            continue
+                        base_velocity = float(event.get("velocity", 0.8))
+                        final = max(0.01, min(1.0, base_velocity * effective))
+                        event["velocity"] = round(final, 6)
+                        meta = event.get("ensemble_interaction", {}) if isinstance(event.get("ensemble_interaction"), dict) else {}
+                        event["ensemble_interaction"] = {
+                            **meta,
+                            "targeted_onset_yield": {
+                                "leader_role": rule_leader,
+                                "authored_velocity_scale": round(authored_scale, 6),
+                                "effective_velocity_scale": round(effective, 6),
+                                "distance_ms": round(float(distance_beats or 0.0) * beat_ms, 6),
+                                "window_ms": round(window_ms, 6),
+                                "base_velocity": round(base_velocity, 6),
+                            },
+                        }
+                        targeted_applied += 1
+                        per_rule["yielded_events"] += 1
+            targeted_rules_report.append(per_rule)
+        sec_rep["targeted_onset_yielded_events"] = targeted_applied
+        sec_rep["targeted_onset_rules"] = targeted_rules_report
+
+        # Phase 4: measure overlap against the shifted leader and make support
         # roles yield only for the fraction of each note that actually overlaps.
         leader_intervals = []
         for leader_track in role_tracks.get(leader, []):

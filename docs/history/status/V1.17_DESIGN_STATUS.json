@@ -1,5 +1,5 @@
 {
-  "status": "S24_CYMBAL_PRESENCE_EXCITATION_HARDENING_CLOSED",
+  "status": "S26_DRUM_KIT_POWERFUL_REALISM_ENGINEERING_CANDIDATE_PERCEPTUAL_GATE_OPEN",
   "version": "1.17.0",
   "prior_release": {
     "version": "1.16.0",
@@ -14,12 +14,7 @@
     "S16",
     "S17",
     "S18",
-    "S19",
-    "S20",
-    "S21",
-    "S22",
-    "S23",
-    "S24"
+    "S19"
   ],
   "m1": {
     "midi_format": 1,
@@ -50,7 +45,7 @@
       }
     }
   },
-  "next": "S25 Non-Cymbal Drum Core Hardening: kick → snare → tom dry-source hardening, then matched full-kit dogfood. Stateful Kit Interaction remains deferred pending post-S25 listening review.",
+  "next": "Perceptual listening gate for S26 4-bar actual-performance dry/integrated A/B; S19/R5 source remains locked.",
   "m2": {
     "format": "code-composer-exchange/v1",
     "container_extension": ".ccx",
@@ -820,7 +815,7 @@
       "claude_skill_exact": true,
       "clean_wheel_sha256": "cbd2fcf261cd3347e676cdb28a61c09c5bd10b0ef700e161c911141f5cfceed0"
     },
-    "next": "S12 Violin Realism Hardening — string crossing/position shift/bow retake/open-string vs stopped-string physical-performance detail."
+    "next": "S12 Violin Realism Hardening \u2014 string crossing/position shift/bow retake/open-string vs stopped-string physical-performance detail."
   },
   "s12": {
     "status": "CLOSED",
@@ -917,7 +912,7 @@
         "claude": "8a01e055d9188609856261886f2a27bbac26d10c43edbf387e4def2ceea0abc9"
       }
     },
-    "next": "S13 Articulation Expansion — pizzicato/harmonics/spiccato-family techniques as explicit opt-in performance vocabulary."
+    "next": "S13 Articulation Expansion \u2014 pizzicato/harmonics/spiccato-family techniques as explicit opt-in performance vocabulary."
   },
   "s13": {
     "status": "CLOSED",
@@ -1505,113 +1500,14 @@
     "source": "467/467 PASS",
     "clean_installed": "467/467 PASS"
   },
-  "s20": {
-    "name": "Drum Articulation Foundation",
-    "status": "CLOSED",
-    "preset": "drums.acoustic_kit_modeled@1.0.0",
-    "existing_default_hits_byte_identical": true,
-    "explicit_articulation": true,
-    "stateful_interaction": false,
-    "focused": "11/11 PASS",
-    "source": "478/478 PASS",
-    "clean_installed": "478/478 PASS",
-    "audition": {
-      "sample_rate_hz": 24000,
-      "bars": 8,
-      "bpm": 96,
-      "events": 104,
-      "clipping": 0
-    },
-    "next_candidate": "S21 Performance-to-Timbre Dynamics after listening review"
-  },
-  "s21": {
-    "name": "Drum Acoustic Core Realism Hardening",
-    "status": "CLOSED",
-    "preset": "drums.acoustic_kit_modeled_realistic@1.0.0",
-    "opt_in": true,
-    "s20_preset_byte_identity": true,
-    "dry_source_only": true,
-    "room_overhead_mic_model": false,
-    "stateful_kit_interaction": false,
-    "performance_grammar": false,
-    "validation": {
-      "focused": "10/10 PASS",
-      "source_regression": "488/488 PASS",
-      "clean_installed_regression": "488/488 PASS"
-    }
-  },
-  "s22": {
-    "name": "Drum Acoustic Voicing & Timbre Polish",
-    "status": "CLOSED",
-    "preset": "drums.acoustic_kit_modeled_polished@1.0.0",
-    "opt_in": true,
-    "s21_preset_preserved": true,
-    "dry_source_only": true,
-    "room_overhead_mic_model": false,
-    "new_articulations": false,
-    "stateful_kit_interaction": false,
-    "validation": {
-      "focused": "10/10 PASS",
-      "source_regression": "498/498 PASS",
-      "clean_installed_regression": "498/498 PASS"
-    }
-  },
-  "s23": {
-    "name": "Drum Performance-to-Timbre Dynamics",
-    "status": "CLOSED",
-    "preset": "drums.acoustic_kit_modeled_expressive@1.0.0",
-    "opt_in": true,
-    "s22_preset_byte_identity_when_controls_omitted": true,
-    "controls": [
-      "strike_force",
-      "strike_position"
-    ],
-    "velocity_authority_preserved": true,
-    "validation": {
-      "focused": "10/10 PASS",
-      "source_regression": "508/508 PASS",
-      "clean_installed_regression": "508/508 PASS"
-    },
-    "next_candidate": "S24 Stateful Kit Interaction after listening review",
-    "packaging": {
-      "standalone_skill_files": 213,
-      "codex_plugin_files": 215,
-      "claude_plugin_files": 215,
-      "codex_skill_exact": true,
-      "claude_skill_exact": true,
-      "forbidden_files": 0,
-      "artifact_sha256": {
-        "standalone_skill": "b47f110454c3fb42c7a18b148fcd4d06314d596e90b3ba00caa63c9b9f11c09d",
-        "codex_plugin": "a0e496f031a331d3b837e6991cb886b8e02fbf671fc83279ca2ce889938f619b",
-        "claude_plugin": "01c65f2ada9a3ce7556c6e66e8b2ee7a074b3c2631febb69efde8ed7283e479c",
-        "dogfood": "90737543141ede561927975c0ff4e8f5c0b20d97fa4089e764978224f93c891d",
-        "validation": "53a4cb37835d92b0733b5c693fa4e8b6c5fd1e81e6d4e0a32e4216a45efbae43",
-        "wheel": "b3ebf18cf64f6237b500ac86449d29ee2500f262dd9bd9154313739e740cb82a"
-      }
-    }
-  },
-  "s24": {
-    "name": "Cymbal Presence & Excitation Hardening",
-    "status": "CLOSED",
-    "preset": "drums.acoustic_kit_modeled_cymbal_presence@1.0.0",
-    "opt_in": true,
-    "s23_preset_preserved": true,
-    "non_cymbal_byte_identical_s23": true,
-    "modal_correlated_colored_wash": true,
-    "validation": {
-      "focused": "10/10 PASS",
-      "source_regression": "518/518 PASS",
-      "clean_installed_regression": "518/518 PASS"
-    },
-    "next_candidate": "Stateful Kit Interaction after listening review"
-  },
-  "repository_mode": "github_source_first",
-  "repository_policy": {
-    "default_branch": "main",
-    "canonical_skill": "skills/code-composer",
-    "plugin_sources": "adapter-only; canonical Skill injected by tools/build_plugins.py",
-    "generated_artifacts": "not committed; publish via releases/CI artifacts as appropriate",
-    "license": "AGPL-3.0-only",
-    "next_slice": "S25_NON_CYMBAL_DRUM_CORE_HARDENING_PLAN_READY"
+  "active_s26": {
+    "name": "Drum Kit Powerful Realism / Performance & Room Integration",
+    "status": "ENGINEERING_CANDIDATE_PERCEPTUAL_GATE_OPEN",
+    "preset": "drums.s19_core_powerful_room@1.0.0",
+    "source_checkpoint": "pre-S20 S19 core + R5 cymbal source",
+    "source_preserved": true,
+    "track_level_only": true,
+    "validation": "483/483 partitioned full-suite PASS; single-process run limited by 120s execution timeout",
+    "closure_requires_user_listening": true
   }
 }

@@ -17,9 +17,7 @@ def test_l5_closes_legacy_cleanup_without_reopening_v116():
 
 
 def test_l1_retained_and_l2_removed_flat_surfaces_match_source_tree():
-    audit = json.loads(
-        (ROOT / "docs/maintenance/L1_PUBLIC_IMPORT_COMPATIBILITY_AUDIT.json").read_text(encoding="utf-8")
-    )
+    audit = json.loads((ROOT / "docs/maintenance/L1_PUBLIC_IMPORT_COMPATIBILITY_AUDIT.json").read_text(encoding="utf-8"))
     retained = [row["module"] for row in audit["flat_surface_decisions"] if row["decision"] != "REMOVE_IN_L2"]
     removed = [row["module"] for row in audit["flat_surface_decisions"] if row["decision"] == "REMOVE_IN_L2"]
     assert len(retained) == 34
@@ -31,9 +29,7 @@ def test_l1_retained_and_l2_removed_flat_surfaces_match_source_tree():
 
 
 def test_nested_superseded_mutation_targets_stay_removed():
-    audit = json.loads(
-        (ROOT / "docs/maintenance/L1_PUBLIC_IMPORT_COMPATIBILITY_AUDIT.json").read_text(encoding="utf-8")
-    )
+    audit = json.loads((ROOT / "docs/maintenance/L1_PUBLIC_IMPORT_COMPATIBILITY_AUDIT.json").read_text(encoding="utf-8"))
     targets = [row["module"] for row in audit["legacy_semantic_targets"]]
     assert len(targets) == 4
     for module in targets:
@@ -50,9 +46,7 @@ def test_clean_install_gate_is_documented_as_source_tree_independent():
 
 
 def test_l5_machine_evidence_records_installed_distribution_proofs():
-    evidence = json.loads(
-        (ROOT / "docs/maintenance/L5_CLEAN_INSTALL_COMPATIBILITY.json").read_text(encoding="utf-8")
-    )
+    evidence = json.loads((ROOT / "docs/maintenance/L5_CLEAN_INSTALL_COMPATIBILITY.json").read_text(encoding="utf-8"))
     assert evidence["status"] == "CLOSED"
     assert evidence["release_baseline"] == "v1.16.0 CLOSED"
     assert evidence["release_reopened"] is False

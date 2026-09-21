@@ -308,9 +308,6 @@ def _add_rhythm_fill(track_map, transition, boundary, report):
             "musical_transition":{"type":"rhythm_fill","to_section":transition["to_section"]},
         }
         if "pan" in item: event["pan"]=float(item["pan"])
-        if "articulation" in item: event["articulation"]=str(item["articulation"])
-        if "strike_force" in item: event["strike_force"]=float(item["strike_force"])
-        if "strike_position" in item: event["strike_position"]=float(item["strike_position"])
         _append_event(track,event)
         report["rhythm_fill_events"]+=1
 

@@ -1,0 +1,37 @@
+{
+  "status": "CLEAN_ENGINEERING_CANDIDATE",
+  "version": "1.17.0",
+  "github_structural_baseline": "2ee4d372c79b04bcc791c3ec42265438cdc576d3",
+  "engine_candidate": "S27-G Shared Kit / Room Final Integration",
+  "engine_preservation": {
+    "checked_files": 198,
+    "byte_exact": 198,
+    "changed": 0
+  },
+  "validation": {
+    "test_files": 81,
+    "tests_collected": 537,
+    "tests_passed": 537,
+    "s27f_s27g_focused": "16/16 PASS",
+    "repository_hygiene": "22/22 PASS",
+    "legacy_cleanup_source_first": "17/17 PASS",
+    "v116_externalized_audio_closure": "6/6 PASS",
+    "verify_plugin_distribution": "PASS",
+    "validate_skill": "PASS",
+    "self_check": "PASS",
+    "compileall": "PASS"
+  },
+  "source_policy": {
+    "canonical_skill": "skills/code-composer/",
+    "plugin_adapters": [
+      ".codex-plugin/",
+      ".claude-plugin/",
+      ".agents/plugins/"
+    ],
+    "legacy_plugin_copies_present": false,
+    "generated_audio_in_source": false,
+    "build_cache_residue": false
+  },
+  "github_write": false,
+  "s27g_perceptual_gate": "OPEN"
+}

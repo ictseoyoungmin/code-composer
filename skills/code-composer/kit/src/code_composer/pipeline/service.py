@@ -6,6 +6,7 @@ from ..analysis.analysis import analyze_audio
 from ..analysis.section_analysis import analyze_sections
 from ..analysis.register_analysis import analyze_register_collisions
 from ..analysis.expressive_qa import analyze_expressive_qa
+from ..analysis.drummer_performance_analysis import analyze_drummer_performance
 
 def render_to_files(ir: dict, wav_path, resolved_path=None, analysis_path=None):
     wav_path = Path(wav_path)
@@ -13,13 +14,21 @@ def render_to_files(ir: dict, wav_path, resolved_path=None, analysis_path=None):
     audio, sr, resolved = render(ir, str(wav_path))
     metrics = analyze_audio(audio, sr)
     analysis = analyze_sections(audio, sr, resolved) if analysis_path is not None else None
-    if analysis is not None and resolved.get("performance_ir"):
-        analysis["register_collisions"] = analyze_register_collisions(resolved)
-        analysis["expressive_qa"] = analyze_expressive_qa(resolved, analysis)
-        for issue in analysis["expressive_qa"].get("issues",[]):
-            tagged=dict(issue)
-            tagged.setdefault("source","expressive_qa")
-            analysis["issues"].append(tagged)
+    if analysis is not None:
+        drum_perf = analyze_drummer_performance(resolved)
+        if drum_perf.get("event_count", 0):
+            analysis["drummer_performance"] = drum_perf
+            for issue in drum_perf.get("issues", []):
+                tagged=dict(issue)
+                tagged.setdefault("source", "drummer_performance")
+                analysis["issues"].append(tagged)
+        if resolved.get("performance_ir"):
+            analysis["register_collisions"] = analyze_register_collisions(resolved)
+            analysis["expressive_qa"] = analyze_expressive_qa(resolved, analysis)
+            for issue in analysis["expressive_qa"].get("issues",[]):
+                tagged=dict(issue)
+                tagged.setdefault("source","expressive_qa")
+                analysis["issues"].append(tagged)
     if resolved_path is not None:
         Path(resolved_path).write_text(json.dumps(resolved, ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
     if analysis_path is not None:

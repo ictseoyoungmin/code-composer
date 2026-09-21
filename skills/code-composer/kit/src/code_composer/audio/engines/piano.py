@@ -28,6 +28,20 @@ class PianoEngine(InstrumentEngine):
         from ..piano import piano_tail_seconds
         return float(piano_tail_seconds(patch))
 
+    def render_track(self, events, n, sr, patch, beat_s, *, gain=1.0, pan=0.0):
+        if not any(
+            ev.get("event_type") == "piano_control" and ev.get("control") == "sustain_pedal"
+            for ev in (events or [])
+        ):
+            return None
+        resolved = self._resolve("piano track", patch)
+        if resolved.get("piano_engine") == "electric" or "electric_piano_graph" in resolved:
+            raise InstrumentEngineValidationError(
+                "explicit piano sustain-pedal control currently requires an acoustic piano engine"
+            )
+        from ..piano import render_piano_track_with_controls
+        return render_piano_track_with_controls(events, n, sr, resolved, beat_s)
+
     def post_process_track(self, stereo, sr, patch, events, beat_s):
         from ..piano import apply_piano_soundboard
         return apply_piano_soundboard(stereo, sr, patch, events, beat_s)
@@ -221,6 +235,16 @@ class PianoEngine(InstrumentEngine):
                 raise InstrumentEngineValidationError(
                     f"{role}: piano bridge low cutoff must be below high cutoff"
                 )
+        strike = graph.get("strike_identity", {})
+        if strike:
+            if not isinstance(strike, dict):
+                raise InstrumentEngineValidationError(f"{role}.piano.strike_identity must be an object")
+            _num(strike.get("phase_jitter_rad", 0.0), f"{role}.piano.strike_identity.phase_jitter_rad", 0, .8)
+            _num(strike.get("unison_phase_jitter_rad", 0.0), f"{role}.piano.strike_identity.unison_phase_jitter_rad", 0, .5)
+            _num(strike.get("partial_phase_jitter_rad", 0.0), f"{role}.piano.strike_identity.partial_phase_jitter_rad", 0, .25)
+            _num(strike.get("hammer_noise_mix", 0.0), f"{role}.piano.strike_identity.hammer_noise_mix", 0, 1)
+            _num(strike.get("hammer_gain_variation", 0.0), f"{role}.piano.strike_identity.hammer_gain_variation", 0, .2)
+            _num(strike.get("hammer_decay_variation", 0.0), f"{role}.piano.strike_identity.hammer_decay_variation", 0, .3)
         soundboard = graph.get("soundboard", {})
         _num(soundboard.get("gain", .018), f"{role}.piano.soundboard.gain", 0, .25)
         _num(soundboard.get("pedal_gain", .045), f"{role}.piano.soundboard.pedal_gain", 0, .35)
@@ -276,6 +300,7 @@ class PianoEngine(InstrumentEngine):
     def capabilities(self):
         return EngineCapabilities(
             name=self.name,
+            track_rendering=True,
             track_post_process=True,
             extended_tail=True,
             instrument_expression=("pedal",),

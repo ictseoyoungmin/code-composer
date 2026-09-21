@@ -62,5 +62,4 @@ def test_s0_preserves_schema_mirrors_but_intentionally_retires_packaged_musical_
     for name in ("composition_brief.schema.json","expressive_score_plan.schema.json","performance_ir.schema.json","piano_design.schema.json"):
         assert (SCHEMA_ROOT/name).read_bytes() == (PACKAGED_SCHEMA_ROOT/name).read_bytes()
     assert not list((SOURCE_ROOT/"reference"/"examples").glob("*.json"))
-    # L3 remains historical evidence and is not rewritten to pretend this later S0 policy existed then.
     assert _inventory()["status"] == "L3_HISTORICAL_FIXTURE_CLASSIFICATION_CLOSED"

@@ -2,7 +2,7 @@
   "format": "code-composer-factory-preset/v1",
   "preset_id": "drums.acoustic_kit_modeled",
   "version": "1.0.0",
-  "name": "Acoustic Kit \u2014 Modeled",
+  "name": "Acoustic Kit — Modeled",
   "engine": "percussion",
   "family": "acoustic_drum_kit",
   "character": [
@@ -13,22 +13,19 @@
   ],
   "strengths": [
     "kick membrane modes include bounded strike-dependent tension relaxation instead of a single pitch-swept oscillator",
-    "snare combines membrane/body modes with deterministic stochastic wire collisions and explicit center/ghost/rimshot/cross-stick articulations",
-    "hi-hat exposes closed/half-open/open/pedal/choke articulations with distinct decay and excitation profiles",
-    "ride, crash and high/mid/floor tom elements are explicit authored kit voices rather than inferred extra hits"
+    "snare combines membrane/body modes with deterministic stochastic wire collisions",
+    "closed hi-hat uses velocity-sensitive inharmonic modal decay with bounded strike variation"
   ],
   "limitations": [
     "compact real-time approximation, not a fitted or sampled named drum kit",
-    "S20 articulations are independent hit responses; stateful open-hat/cymbal muting and residual-hit interaction are reserved for S22",
-    "brushes and mallet techniques remain outside this preset"
+    "currently covers kick, snare and closed hi-hat; toms, ride, crash, brushes and open-hat choke state are outside this preset"
   ],
   "recommended_roles": [
     "drums"
   ],
   "expression_capabilities": [
     "velocity",
-    "seeded_strike_variation",
-    "explicit_articulation"
+    "seeded_strike_variation"
   ],
   "musical_content": false,
   "patch": {
@@ -138,186 +135,6 @@
         "snare_wire_gain": 0.36,
         "hat_mode_jitter": 0.0055,
         "hat_decay_velocity_scale": 0.58
-      },
-      "ride": {
-        "bow_freqs": [
-          1350.0,
-          2260.0,
-          3560.0,
-          5230.0,
-          7480.0,
-          10100.0
-        ],
-        "bow_gains": [
-          1.0,
-          0.78,
-          0.56,
-          0.36,
-          0.22,
-          0.12
-        ],
-        "bow_decay_s": 1.15,
-        "bow_noise_gain": 0.13,
-        "bow_tonal_gain": 0.4,
-        "bow_output_gain": 0.3,
-        "bell_freqs": [
-          3180.0,
-          4780.0,
-          6620.0,
-          8460.0,
-          10700.0
-        ],
-        "bell_gains": [
-          1.0,
-          0.78,
-          0.54,
-          0.32,
-          0.18
-        ],
-        "bell_decay_s": 0.72,
-        "bell_noise_gain": 0.075,
-        "bell_tonal_gain": 0.64,
-        "bell_output_gain": 0.34
-      },
-      "crash": {
-        "freqs": [
-          780.0,
-          1260.0,
-          2110.0,
-          3380.0,
-          5120.0,
-          7460.0,
-          10150.0
-        ],
-        "gains": [
-          1.0,
-          0.84,
-          0.66,
-          0.49,
-          0.34,
-          0.22,
-          0.12
-        ],
-        "decay_s": 1.35,
-        "noise_gain": 0.21,
-        "tonal_gain": 0.34,
-        "output_gain": 0.3
-      },
-      "tom_high": {
-        "base_hz": 180.0,
-        "mode_ratios": [
-          1.0,
-          1.59,
-          2.14,
-          2.3,
-          2.65
-        ],
-        "center_mode_gains": [
-          1.0,
-          0.38,
-          0.2,
-          0.13,
-          0.08
-        ],
-        "edge_mode_gains": [
-          0.72,
-          0.58,
-          0.46,
-          0.28,
-          0.16
-        ],
-        "decay_s": 0.4,
-        "tension_shift_cents": 38.0,
-        "tension_decay_s": 0.055,
-        "lowpass_hz": 7600.0,
-        "drive": 1.05,
-        "output_gain": 0.43
-      },
-      "tom_mid": {
-        "base_hz": 132.0,
-        "mode_ratios": [
-          1.0,
-          1.59,
-          2.14,
-          2.3,
-          2.65
-        ],
-        "center_mode_gains": [
-          1.0,
-          0.38,
-          0.2,
-          0.13,
-          0.08
-        ],
-        "edge_mode_gains": [
-          0.72,
-          0.58,
-          0.46,
-          0.28,
-          0.16
-        ],
-        "decay_s": 0.49,
-        "tension_shift_cents": 38.0,
-        "tension_decay_s": 0.055,
-        "lowpass_hz": 7600.0,
-        "drive": 1.05,
-        "output_gain": 0.46
-      },
-      "tom_floor": {
-        "base_hz": 88.0,
-        "mode_ratios": [
-          1.0,
-          1.59,
-          2.14,
-          2.3,
-          2.65
-        ],
-        "center_mode_gains": [
-          1.0,
-          0.38,
-          0.2,
-          0.13,
-          0.08
-        ],
-        "edge_mode_gains": [
-          0.72,
-          0.58,
-          0.46,
-          0.28,
-          0.16
-        ],
-        "decay_s": 0.62,
-        "tension_shift_cents": 38.0,
-        "tension_decay_s": 0.055,
-        "lowpass_hz": 7600.0,
-        "drive": 1.05,
-        "output_gain": 0.49
-      },
-      "articulation_foundation": {
-        "enabled": true,
-        "snare_ghost_tail_s": 0.24,
-        "snare_rimshot_tail_s": 0.24,
-        "snare_cross_stick_tail_s": 0.16,
-        "snare_ghost_gain": 0.62,
-        "snare_rimshot_gain": 0.9,
-        "snare_cross_stick_gain": 0.72,
-        "hat_half_open_tail_s": 0.52,
-        "hat_open_tail_s": 1.15,
-        "hat_pedal_tail_s": 0.13,
-        "hat_choke_tail_s": 0.09,
-        "hat_half_open_decay_s": 0.22,
-        "hat_open_decay_s": 0.62,
-        "hat_half_open_gain": 0.36,
-        "hat_open_gain": 0.34,
-        "hat_pedal_gain": 0.27,
-        "hat_choke_gain": 0.22,
-        "ride_bow_tail_s": 1.9,
-        "ride_bell_tail_s": 1.35,
-        "crash_tail_s": 2.25,
-        "cymbal_choke_tail_s": 0.12,
-        "cymbal_choke_gain": 0.24,
-        "tom_tail_s": 0.74,
-        "tom_edge_gain": 0.82
       }
     }
   }

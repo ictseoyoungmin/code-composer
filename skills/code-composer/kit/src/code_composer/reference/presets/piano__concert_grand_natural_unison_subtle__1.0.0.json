@@ -1,0 +1,67 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "piano.concert_grand_natural_unison_subtle",
+  "version": "1.0.0",
+  "name": "Concert Grand Natural \u2014 Subtle Treble Unison",
+  "engine": "piano",
+  "family": "acoustic",
+  "character": [
+    "open",
+    "full",
+    "acoustic",
+    "per-strike",
+    "treble-unison-decoherent"
+  ],
+  "strengths": [
+    "foreground piano",
+    "repeated-note realism",
+    "wide dynamic writing",
+    "treble chord naturalism"
+  ],
+  "limitations": [
+    "deterministic modeled piano, not a sampled concert instrument",
+    "opt-in production naturalism preset; piano.concert_grand_natural remains available for backward-compatible voicing"
+  ],
+  "recommended_roles": [
+    "lead",
+    "topline",
+    "pad"
+  ],
+  "expression_capabilities": {
+    "pedal": true,
+    "per_strike_identity": true
+  },
+  "musical_content": false,
+  "patch": {
+    "kind": "piano",
+    "piano_design": {
+      "categories": {
+        "body": "concert_grand",
+        "hammer": "medium_felt",
+        "stringing": "concert",
+        "soundboard": "open_board",
+        "perspective": "player"
+      },
+      "controls": {
+        "stereo_width": 0.82,
+        "base_decay_s": 4.4,
+        "velocity_brightness": 0.8,
+        "hammer_noise_gain": 0.052,
+        "resonance_gain": 0.034,
+        "soundboard_gain": 0.032,
+        "output_gain": 0.6,
+        "strike_phase_jitter_rad": 0.18,
+        "strike_unison_phase_jitter_rad": 0.12,
+        "strike_partial_phase_jitter_rad": 0.045,
+        "strike_hammer_noise_mix": 0.45,
+        "strike_hammer_gain_variation": 0.035,
+        "strike_hammer_decay_variation": 0.08,
+        "unison_partial_mistune_cents": 0.032,
+        "unison_inharmonicity_spread": 0.018,
+        "unison_decay_spread": 0.026,
+        "unison_level_spread": 0.018,
+        "unison_decoherence_start_midi": 61
+      }
+    }
+  }
+}

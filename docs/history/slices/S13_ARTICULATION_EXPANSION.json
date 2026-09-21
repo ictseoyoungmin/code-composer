@@ -1,0 +1,223 @@
+{
+  "release": "Code Composer v1.17.0 S13",
+  "slice": "S13 Articulation Expansion",
+  "status": "CLOSED",
+  "date": "2026-09-18",
+  "baseline": "S12 violin realism repository",
+  "engine_preset": "bowed.violin.modeled_articulated@1.0.0",
+  "scope": {
+    "new_preset": true,
+    "new_synthesis_architecture": false,
+    "mechanisms": [
+      "pizzicato pluck excitation and free decay",
+      "harmonic technique realization with sounding-pitch MIDI preserved",
+      "spiccato finite bow contact and free decay"
+    ],
+    "composition_mutation": false,
+    "automatic_articulation_style_or_emotion_inference": false,
+    "explicit_articulations": [
+      "pizzicato",
+      "harmonic",
+      "spiccato"
+    ]
+  },
+  "validation": {
+    "focused_s13": "7/7 PASS",
+    "source_regression": "400/400 PASS (66 isolated test-file processes; 0 failed files; 0 timeouts)",
+    "clean_installed_regression": "400/400 PASS (66 isolated test-file processes; 0 failed files; 0 timeouts)",
+    "self_check": "PASS",
+    "skill_validation": "PASS",
+    "compileall": "PASS",
+    "import_modules": 126,
+    "import_failures": 0,
+    "static_modules": 126,
+    "static_edges": 182,
+    "cycles": 0,
+    "public_entrypoints": 9
+  },
+  "compatibility": {
+    "articulation_disabled_matches_modeled_realistic_render_byte_identical": true,
+    "existing_s5_s12_presets_preserved": true,
+    "ordinary_arco_uses_s12_path": true,
+    "factory_preset_count": 13,
+    "violin_preset_count": 8
+  },
+  "dogfood": {
+    "title": "Between Two Streetlights \u2014 S13 articulation dogfood",
+    "sample_rate_hz": 11025,
+    "bpm": 76.0,
+    "audition_beats": [
+      40.0,
+      72.0
+    ],
+    "event_count": 31,
+    "special_event_count": 9,
+    "special_events": [
+      {
+        "beat": 40.0,
+        "midi": 64,
+        "articulation": "spiccato",
+        "technique": {
+          "mode": "spiccato",
+          "right_hand": "bouncing_bow",
+          "bow_contact": "intermittent"
+        }
+      },
+      {
+        "beat": 41.0,
+        "midi": 67,
+        "articulation": "spiccato",
+        "technique": {
+          "mode": "spiccato",
+          "right_hand": "bouncing_bow",
+          "bow_contact": "intermittent"
+        }
+      },
+      {
+        "beat": 42.0,
+        "midi": 69,
+        "articulation": "spiccato",
+        "technique": {
+          "mode": "spiccato",
+          "right_hand": "bouncing_bow",
+          "bow_contact": "intermittent"
+        }
+      },
+      {
+        "beat": 43.0,
+        "midi": 71,
+        "articulation": "spiccato",
+        "technique": {
+          "mode": "spiccato",
+          "right_hand": "bouncing_bow",
+          "bow_contact": "intermittent"
+        }
+      },
+      {
+        "beat": 56.0,
+        "midi": 74,
+        "articulation": "harmonic",
+        "technique": {
+          "mode": "harmonic",
+          "harmonic_type": "natural",
+          "string": "D",
+          "string_index": 1,
+          "open_midi": 62,
+          "partial": 2,
+          "touch_fraction": 0.5,
+          "sounding_midi": 74,
+          "tuning_error_semitones": 0.0
+        }
+      },
+      {
+        "beat": 68.0,
+        "midi": 69,
+        "articulation": "pizzicato",
+        "technique": {
+          "mode": "pizzicato",
+          "right_hand": "finger_pluck",
+          "bow_contact": false
+        }
+      },
+      {
+        "beat": 69.0,
+        "midi": 71,
+        "articulation": "pizzicato",
+        "technique": {
+          "mode": "pizzicato",
+          "right_hand": "finger_pluck",
+          "bow_contact": false
+        }
+      },
+      {
+        "beat": 70.0,
+        "midi": 74,
+        "articulation": "pizzicato",
+        "technique": {
+          "mode": "pizzicato",
+          "right_hand": "finger_pluck",
+          "bow_contact": false
+        }
+      },
+      {
+        "beat": 71.0,
+        "midi": 76,
+        "articulation": "pizzicato",
+        "technique": {
+          "mode": "pizzicato",
+          "right_hand": "finger_pluck",
+          "bow_contact": false
+        }
+      }
+    ],
+    "control_peak": 0.09281410360986607,
+    "s13_peak": 0.09302550093879008,
+    "control_clipping_ratio": 0.0,
+    "s13_clipping_ratio": 0.0,
+    "control_rms": 0.03084048683788521,
+    "s13_rms": 0.02746451702736881,
+    "difference_rms": 0.03998442877249686,
+    "left_waveform_correlation": 0.06297424859398588,
+    "playability": {
+      "classification": "comfortable",
+      "max_transition_score": 0.76,
+      "warning_count": 0,
+      "warnings": []
+    },
+    "BETWEEN_TWO_STREETLIGHTS_S12_CONTROL_VIOLIN.wav_sha256": "ce1cd5da32cc3f2050e545ad3fe01eb89649de3881ac4dcab52df3e96bcc8f3f",
+    "BETWEEN_TWO_STREETLIGHTS_S13_ARTICULATED_VIOLIN.wav_sha256": "9e532ea9095cda9bb191a0bb091ec480105e9d0b5db150c3481f3c44e23b48d9",
+    "BETWEEN_TWO_STREETLIGHTS_AB_S12_then_S13_VIOLIN.wav_sha256": "c6579ac3e26d7f599c77ed4bbce897c4233eceec702561fc73909629ffba71ca"
+  },
+  "packaging": {
+    "standalone_skill_files": 200,
+    "codex_plugin_files": 202,
+    "claude_plugin_files": 202,
+    "forbidden_skill_files": 0,
+    "codex_skill_exact": true,
+    "claude_skill_exact": true,
+    "clean_wheel_sha256": "528444d0b7d9adbb5e75713a41d2eb7c5f9d54c27dcac2fd8c81d4c82ecaf19a"
+  },
+  "artifacts": {
+    "code-composer-skill-v1.17.0-s13.zip": {
+      "bytes": 277231,
+      "sha256": "4319e0afb621b947fcae0289dcb202f916cd49e3a417c7db53e4c76b0841a2f5"
+    },
+    "code-composer-codex-plugin-v1.17.0-s13.zip": {
+      "bytes": 286321,
+      "sha256": "bf4ba528d198a1f697bc87b1e94452cd24eef67543d1828f4109872207094c85"
+    },
+    "code-composer-claude-plugin-v1.17.0-s13.zip": {
+      "bytes": 286309,
+      "sha256": "0eb4b92ed20b49c4c131b1c7cd1cea439ebfc6107a9e6226514e563ce427aaae"
+    },
+    "code_composer-1.17.0-py3-none-any.whl": {
+      "bytes": 226376,
+      "sha256": "528444d0b7d9adbb5e75713a41d2eb7c5f9d54c27dcac2fd8c81d4c82ecaf19a"
+    },
+    "validation/BETWEEN_TWO_STREETLIGHTS_S12_CONTROL_VIOLIN.wav": {
+      "bytes": 1169272,
+      "sha256": "ce1cd5da32cc3f2050e545ad3fe01eb89649de3881ac4dcab52df3e96bcc8f3f"
+    },
+    "validation/BETWEEN_TWO_STREETLIGHTS_S13_ARTICULATED_VIOLIN.wav": {
+      "bytes": 1169272,
+      "sha256": "9e532ea9095cda9bb191a0bb091ec480105e9d0b5db150c3481f3c44e23b48d9"
+    },
+    "validation/BETWEEN_TWO_STREETLIGHTS_AB_S12_then_S13_VIOLIN.wav": {
+      "bytes": 2369368,
+      "sha256": "c6579ac3e26d7f599c77ed4bbce897c4233eceec702561fc73909629ffba71ca"
+    },
+    "validation/BETWEEN_TWO_STREETLIGHTS_S13_DOGFOOD_REPORT.json": {
+      "bytes": 3157,
+      "sha256": "c16c4983afda0874e99991a1263395b5062ae398f0664214c4cfb1fe1f3db15c"
+    },
+    "validation/BETWEEN_TWO_STREETLIGHTS_S12_CONTROL_IR.json": {
+      "bytes": 216789,
+      "sha256": "80e2ad7fabe3ed984fdc201407e9d8f14723d864ee4b271524245eff9f7f9128"
+    },
+    "validation/BETWEEN_TWO_STREETLIGHTS_S13_IR.json": {
+      "bytes": 220689,
+      "sha256": "913bbc25ca07ea408f3c3325e17a4b18e3187faf626e378b01f09c6aef829eb2"
+    }
+  },
+  "next": "Fresh flagship composition/perceptual dogfood using the completed S11-S13 violin path before opening another engine slice."
+}

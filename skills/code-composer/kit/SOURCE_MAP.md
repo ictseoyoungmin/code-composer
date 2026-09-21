@@ -11,10 +11,12 @@ Do not read source to learn normal usage. Use this map only after a source-inspe
 | Instrument engine registry | `src/code_composer/audio/engines/registry.py`, then one engine module only |
 | Modeled bowed-string synthesis | `src/code_composer/audio/engines/bowed_waveguide.py` |
 | Percussion synthesis / modeled acoustic kit | `src/code_composer/audio/percussion.py`, `src/code_composer/audio/engines/percussion.py` |
+| S26 drum-kit overhead / room / bus integration | `src/code_composer/audio/drum_kit.py` |
 | Measured bridge-admittance ERA fitting | `src/code_composer/audio/bridge_admittance_fit.py`, `app/admittance_fit_cli.py` |
 | Low-level synthesis/DSP | `src/code_composer/audio/generic_synth.py`, `src/code_composer/audio/piano.py`, or the selected engine module |
 | Mixing | `src/code_composer/mix/` |
 | Analysis evidence | `src/code_composer/analysis/` |
+| S27-F drummer limb/performance feasibility | `src/code_composer/analysis/drummer_performance_analysis.py` |
 | Render pipeline | `src/code_composer/pipeline/` |
 | MIDI export | `src/code_composer/export/midi.py` |
 | `.ccx` exchange | `src/code_composer/exchange/package.py`, `app/exchange_cli.py` |

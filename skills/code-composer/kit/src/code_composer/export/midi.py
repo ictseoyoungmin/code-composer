@@ -19,14 +19,16 @@ from ..mix.mixer import validate_mix_graph
 from ..validation_contracts import validate_runtime_extensions
 
 DEFAULT_PPQ = 960
-DRUM_NOTES = {"kick": 36, "snare": 38, "hat": 42, "ride": 51, "crash": 49, "tom_high": 50, "tom_mid": 47, "tom_floor": 43}
-DRUM_ARTICULATION_NOTES = {
-    ("snare","cross_stick"): 37,
-    ("snare","rimshot"): 40,
-    ("hat","open"): 46,
-    ("hat","half_open"): 46,
-    ("hat","pedal"): 44,
-    ("ride","bell"): 53,
+DRUM_NOTES = {
+    "kick": 36, "snare": 38, "hat": 42,
+    "snare_center": 38, "snare_ghost": 38, "snare_rimshot": 38, "snare_cross_stick": 37,
+    "hat_tight_closed": 42, "hat_closed": 42,
+    "hat_half_open": 46, "hat_open": 46,
+    "hat_pedal": 44, "hat_foot_splash": 44,
+    "tom_floor": 43, "tom_floor_edge": 43,
+    "tom_mid": 47, "tom_mid_edge": 47,
+    "tom_high": 50, "tom_high_edge": 50,
+    "crash": 49, "ride": 51,
 }
 _MELODIC_CHANNELS = tuple(list(range(0, 9)) + list(range(10, 16)))
 
@@ -167,10 +169,6 @@ def _track_channel(track_index: int, percussion: bool) -> int:
 def _midi_note_for_event(event: dict[str, Any]) -> int:
     if event.get("event_type") == "drum":
         drum = str(event.get("drum", ""))
-        articulation = str(event.get("articulation", ""))
-        key = (drum, articulation.replace("-", "_"))
-        if key in DRUM_ARTICULATION_NOTES:
-            return DRUM_ARTICULATION_NOTES[key]
         try:
             return DRUM_NOTES[drum]
         except KeyError as exc:
@@ -209,6 +207,8 @@ def _build_track(ir: dict[str, Any], track: dict[str, Any], channel: int, ppq: i
     section_ids: set[str] = set()
     note_count = 0
     for event in track.get("events", []):
+        if event.get("event_type") == "drum_control":
+            continue
         start = _tick(float(event.get("start_beat", 0.0)), ppq)
         duration = max(1, _tick(float(event.get("duration_beats", 0.0)), ppq))
         end = start + duration

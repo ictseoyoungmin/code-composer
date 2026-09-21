@@ -1,0 +1,148 @@
+{
+  "release": "Code Composer v1.17.0 S12",
+  "slice": "S12 Violin Realism Hardening",
+  "status": "CLOSED",
+  "date": "2026-09-18",
+  "baseline": "S11 expressive phrase repository",
+  "engine_preset": "bowed.violin.modeled_realistic@1.0.0",
+  "scope": {
+    "new_preset": true,
+    "new_synthesis_architecture": false,
+    "mechanisms": [
+      "open-string vibrato suppression",
+      "stopped-string finger damping",
+      "finite position-shift glide/contact transient",
+      "stopped-string crossing force transfer",
+      "same-direction bow retake after long gaps"
+    ],
+    "composition_mutation": false,
+    "automatic_style_or_emotion_inference": false
+  },
+  "validation": {
+    "focused_s12": "7/7 PASS",
+    "source_regression": "393/393 PASS",
+    "clean_installed_regression": "393/393 PASS (65 isolated test-file processes; 0 failed files; 0 timeouts)",
+    "self_check": "PASS",
+    "skill_validation": "PASS",
+    "compileall": "PASS",
+    "import_modules": 126,
+    "import_failures": 0,
+    "static_modules": 126,
+    "static_edges": 182,
+    "cycles": 0,
+    "public_entrypoints": 9
+  },
+  "compatibility": {
+    "realism_disabled_matches_modeled_expression_events_byte_identical": true,
+    "realism_disabled_matches_modeled_expression_render_byte_identical": true,
+    "existing_s5_s11_presets_preserved": true,
+    "factory_preset_count": 12,
+    "violin_preset_count": 7
+  },
+  "dogfood": {
+    "title": "Between Two Streetlights",
+    "bars": 20,
+    "bpm": 76,
+    "key": "E natural minor",
+    "violin_event_count": 60,
+    "playability": {
+      "classification": "comfortable",
+      "max_transition_score": 0.759033,
+      "warning_count": 0,
+      "warnings": []
+    },
+    "note_timing_velocity_identity_s11_vs_s12": true,
+    "mechanism_event_counts": {
+      "open_strings": 9,
+      "stopped_strings": 51,
+      "position_shifts": 1,
+      "string_crossings": 11,
+      "bow_retakes": 0
+    },
+    "audition_sample_rate_hz": 11025,
+    "audition_event_count": 13,
+    "clipping_ratio_control": 0.0,
+    "clipping_ratio_s12": 0.0,
+    "retake_protocol": {
+      "directions_control": [
+        "down",
+        "up",
+        "down"
+      ],
+      "directions_s12": [
+        "down",
+        "down",
+        "down"
+      ],
+      "retakes_s12": [
+        false,
+        true,
+        true
+      ]
+    }
+  },
+  "packaging": {
+    "standalone_skill_files": 199,
+    "codex_plugin_files": 201,
+    "claude_plugin_files": 201,
+    "forbidden_skill_files": 0,
+    "codex_skill_exact": true,
+    "claude_skill_exact": true,
+    "clean_wheel_sha256": "69f05f1a4f212387af2d559f6fde6c55b43bfcf89caeb398210f772f026423dc"
+  },
+  "artifacts": {
+    "code-composer-skill-v1.17.0-s12.zip": {
+      "bytes": 271081,
+      "sha256": "0e2519803299107056b2df5046f2880159906a47ebc6c07a57ffe39c7bd242b5"
+    },
+    "code-composer-codex-plugin-v1.17.0-s12.zip": {
+      "bytes": 280129,
+      "sha256": "25472fbdd40548768fc9ca26b14abb5b7000d8f28ad7568779c6f265cae6b111"
+    },
+    "code-composer-claude-plugin-v1.17.0-s12.zip": {
+      "bytes": 280117,
+      "sha256": "8a01e055d9188609856261886f2a27bbac26d10c43edbf387e4def2ceea0abc9"
+    },
+    "code_composer-1.17.0-py3-none-any.whl": {
+      "bytes": 221641,
+      "sha256": "69f05f1a4f212387af2d559f6fde6c55b43bfcf89caeb398210f772f026423dc"
+    },
+    "validation/BETWEEN_TWO_STREETLIGHTS_S11_REALISM_CONTROL_VIOLIN.wav": {
+      "bytes": 509512,
+      "sha256": "a31e20fc501cb7da0e6b489ddf878be5b44334e674e93a2cc28b49292de50286"
+    },
+    "validation/BETWEEN_TWO_STREETLIGHTS_S12_REALISM_VIOLIN.wav": {
+      "bytes": 509512,
+      "sha256": "0ccf78709cdeb71a41b2da217504dbd2e807d02c1685dbb45ab81642421612ba"
+    },
+    "validation/BETWEEN_TWO_STREETLIGHTS_AB_S11_then_S12_VIOLIN.wav": {
+      "bytes": 1049848,
+      "sha256": "e04066d1145fb11ac4f624fbab8284b5d2390642e1924f1802c6ba248de4e959"
+    },
+    "validation/BETWEEN_TWO_STREETLIGHTS_S12_AUDIO_AB_REPORT.json": {
+      "bytes": 1281,
+      "sha256": "6670c040494e682c816145028b8f6d5cd528cbea190a39fdef3422aee1c91177"
+    },
+    "validation/BETWEEN_TWO_STREETLIGHTS_S12_DOGFOOD_REPORT.json": {
+      "bytes": 4234,
+      "sha256": "ab076b164055b92fbf0c853ff4714dbbb47b6a666d362fa9500e8fc01e2f4d71"
+    },
+    "validation/S12_RETAKE_CONTROL.wav": {
+      "bytes": 64044,
+      "sha256": "6a5f465eebb58d124eeb594bcb5f45e314a3b5b852f5be02feeeac444fb87f83"
+    },
+    "validation/S12_RETAKE_REALISTIC.wav": {
+      "bytes": 64044,
+      "sha256": "14f6f0ab71946951d5abc5520d9f8e69f6f33bcda4819980a7c12a1e8151436b"
+    },
+    "validation/S12_RETAKE_AB.wav": {
+      "bytes": 144044,
+      "sha256": "ff964d7cb0ccaa4b3e3fa5f5c582d6590619ec09c270829243408d1814ace09e"
+    },
+    "validation/S12_RETAKE_PROTOCOL_REPORT.json": {
+      "bytes": 275,
+      "sha256": "fc1f45dea2bde7aa492530c8d467579f56f1e51820a608507d435e682fd522fc"
+    }
+  },
+  "next": "S13 Articulation Expansion \u2014 add explicit pizzicato/harmonics/spiccato-family technique vocabulary while preserving S12 realism."
+}

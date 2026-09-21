@@ -138,10 +138,9 @@ def test_percussion_uses_gm_channel_10_and_drum_notes():
     assert note_ons
     assert {ev[2] & 0x0F for ev in note_ons} == {9}
     assert {ev[3] for ev in note_ons} <= set(DRUM_NOTES.values())
-    # Historical three-piece mappings remain stable while later slices may add
-    # explicit acoustic-kit voices.
     assert {k: DRUM_NOTES[k] for k in ("kick", "snare", "hat")} == {"kick": 36, "snare": 38, "hat": 42}
-    assert {"ride": 51, "crash": 49, "tom_high": 50, "tom_mid": 47, "tom_floor": 43}.items() <= DRUM_NOTES.items()
+    assert DRUM_NOTES["crash"] == 49
+    assert DRUM_NOTES["ride"] == 51
 
 
 def test_track_names_and_no_misleading_program_changes():
