@@ -1,14 +1,14 @@
 {
   "project": "Code Composer",
   "version": "1.17.0",
-  "source_baseline": "GitHub main@2ee4d372c79b04bcc791c3ec42265438cdc576d3 packaging layout + validated local S27-L baseline + accepted S28 piano-naturalism chain through S28-G; S28-E rejected",
+  "source_baseline": "source-first GitHub packaging baseline preserved from main@2ee4d372c79b04bcc791c3ec42265438cdc576d3 + recovered ZIP-first engine lineage through S28-H + S27-M R2 integration candidate",
   "engine_state": {
     "S27_B_two_cymbal_hihat": "CLOSED_R1_USER_PASS",
     "S27_C_snare_articulations": "CLOSED",
     "S27_D_tom_family": "CLOSED",
     "S27_F_drummer_performance_validator": "CLOSED",
     "S27_G_shared_kit_room_final_integration": "CLOSED",
-    "perceptual_gate": "OPEN_S28_H_PIANO_NATURALISM_PRODUCTION_CLOSURE",
+    "perceptual_gate": "OPEN_S27_M_R2_FULL_SONG_CROSSING_MERIDIAN",
     "S27_H_stateful_hihat_closure": "CLOSED",
     "S27_I_continuous_hihat_pedal": "CLOSED",
     "S27_J_persistent_hihat_strike_state": "CLOSED",
@@ -21,10 +21,11 @@
     "S28_E_coupled_unison_sustain": "REJECTED_USER_PREFERS_A_S28_D",
     "S28_F_piano_phrase_safe_ducking": "ENGINEERING_AUDIT_CANDIDATE",
     "S28_G_treble_unison_subtle": "ACCEPTED_PRODUCTION_CANDIDATE_USER_PROCEEDED",
-    "S28_H_piano_naturalism_production_closure": "ENGINEERING_CANDIDATE_PERCEPTUAL_GATE_OPEN"
+    "S28_H_piano_naturalism_production_closure": "ENGINEERING_CANDIDATE_PERCEPTUAL_GATE_OPEN",
+    "S27_M_ensemble_production_integration": "ENGINEERING_CANDIDATE_PERCEPTUAL_GATE_OPEN"
   },
   "validation_record": {
-    "repository_tests": "589/589 PASS (87 test files; S27-L full-song production candidate)",
+    "repository_tests": "636/636 PASS (95 test files; S27-M R2 source snapshot before GitHub history-preservation merge)",
     "s27g_focused": "7/7 PASS",
     "s27f_focused": "9/9 PASS",
     "s27g_flagship_replay": "269 events; 189 hands / 65 right foot / 15 left foot; playable=true; strained=false; issues=0/0/0",
@@ -40,12 +41,12 @@
     "s27j_focused": "10/10 PASS",
     "s27j_related_focused": "80/80 PASS",
     "s27j_dogfood": "48 events = 43 audible hits + 5 pedal controls; 28 hands / 15 right foot / 5 left foot; playable=true; strained=false; issues=0/0/0",
-    "s27j_persistent_strike_evidence": "completed curve openness 1.0\u21920.22 persists into later hat_open; isolated late RMS S27-J/S27-I \u2248 0.1320; no-control S27-I compatibility byte-exact; whole-room RMS 0.13491873\u21920.13498884",
+    "s27j_persistent_strike_evidence": "completed curve openness 1.0→0.22 persists into later hat_open; isolated late RMS S27-J/S27-I ≈ 0.1320; no-control S27-I compatibility byte-exact; whole-room RMS 0.13491873→0.13498884",
     "s27j_perceptual": "USER PASS / CLOSED 2026-09-20",
     "s27k_focused": "12/12 PASS",
     "s27k_dogfood": "47 events = 41 audible hits + 6 pedal controls; 26 hands / 15 right foot / 6 left foot; playable=true; strained=false; issues=0/0/0",
-    "s27k_foot_gesture_evidence": "fast close produces authored-motion chick; slow close max abs diff 0 vs S27-J; close/reopen produces splash late RMS 0.00081389; whole-room RMS 0.13401324\u21920.13403392",
-    "s27k_r1_crackle_evidence": "chick max-step 0.24936\u21920.03877; splash 180\u2013420ms max-step 0.08415\u21920.00342 and crest 28.81\u219214.77; slow close remains silent; direct foot sources byte-exact",
+    "s27k_foot_gesture_evidence": "fast close produces authored-motion chick; slow close max abs diff 0 vs S27-J; close/reopen produces splash late RMS 0.00081389; whole-room RMS 0.13401324→0.13403392",
+    "s27k_r1_crackle_evidence": "chick max-step 0.24936→0.03877; splash 180–420ms max-step 0.08415→0.00342 and crest 28.81→14.77; slow close remains silent; direct foot sources byte-exact",
     "s27l_focused": "4/4 PASS",
     "s27l_related": "61/61 PASS",
     "s27l_dogfood": "Cobalt Meridian: 24 kHz / 112 BPM / 12 bars / 27.8339 s render; piano 109 / bass 46 / violin 42 / drums 175 events",
@@ -58,7 +59,7 @@
     "s28a_pedal_clear_evidence": "prior-chord RMS 300-1200 ms after boundary 0.05332677 -> 0.00005948; ratio 0.0011154",
     "s28a_r2_perceptual": "USER PASS / CLOSED 2026-09-21",
     "s28b_identity_evidence": "8 identical C4 attacks: static first-vs-later correlation mean ~0.9999998; opt-in per-strike mean ~0.99219; same score/seed deterministic.",
-    "s28c_hand_attack": "explicit piano_attack_offset_ms bounded \u00b120 ms; representative wide chord 0/4/8/11/13/15 ms.",
+    "s28c_hand_attack": "explicit piano_attack_offset_ms bounded ±20 ms; representative wide chord 0/4/8/11/13/15 ms.",
     "s28d_phrase_timing": "existing E1 timing_curve_ms + gate_curve; random microtiming and velocity variation disabled in naturalism dogfood.",
     "repository_current": "94 test files / 629/629 PASS",
     "s28b_to_d_related": "piano/contract/factory related 114/114 PASS",
@@ -68,12 +69,15 @@
     "s28f_audit": "exact S28-D A baseline; no-duck vs current 1.8dB/8ms/150ms vs light 0.7dB/10ms/80ms; focused 21/21 PASS",
     "s28f_current_duck": "RMS ratio 0.93603; active fraction 0.28688; mean active gain -1.2356 dB",
     "s28f_light_duck": "RMS ratio 0.97727; active fraction 0.22338; mean active gain -0.50245 dB",
-    "s28g_perceptual": "USER: improved; stop further \uc9c0\uc544\uc639 tuning and proceed to planned slices 2026-09-21",
+    "s28g_perceptual": "USER: improved; stop further 지아옹 tuning and proceed to planned slices 2026-09-21",
     "s28h_chain": "S28-A R2 + S28-B + S28-C + S28-D + S28-G subtle; S28-F source baseline no automatic duck; S28-E rejected",
     "s28h_dogfood": "Quiet Mechanics of Light: 24 kHz / 92 BPM / 16 bars / 43.389125 s / 84 notes / 16 piano-control events / MIDI 31-76 / clipping 0",
     "s28h_control_fix": "E1 phrase realization skips *_control events byte-preserved; no note velocity/gate/timing/performance metadata and no breath deletion",
     "s28h_focused": "S28-A-H+piano focused 84/84 PASS; contract/package related 80/80 PASS",
-    "s28h_full_repository": "94 test files / 629/629 PASS (partitioned); failure 0"
+    "s28h_full_repository": "94 test files / 629/629 PASS (partitioned); failure 0",
+    "s27m_r2_focused": "S15 + S27-M R2 focused 22/22 PASS",
+    "s27m_r2_maintenance": "maintenance/package/contract gate PASS; standalone self-check / Skill validation / plugin distribution / compileall / Skill+Codex+Claude builds PASS",
+    "s27m_r2_full_song": "Crossing Meridian: 24 kHz / 112 BPM / 12 bars / 27.91425 s; piano 121 / bass 46 / violin 42 / drums 175; A RMS 0.1585459155 -> B 0.1581531034; B clipping 0"
   },
   "repository_hygiene": {
     "canonical_skill": "skills/code-composer/",
@@ -81,7 +85,7 @@
     "generated_audio_removed_from_source_candidate": true,
     "historical_root_evidence_moved_under_docs": true
   },
-  "note": "GitHub main and Draft PR #5 remain unchanged. S28-G subtle is accepted enough to stop further \uc9c0\uc544\uc639 tuning. S28-H closes the piano source/performance chain before S27-M ensemble work resumes; no automatic ducking in source baseline.",
+  "note": "GitHub main and Draft PR #5 remain unchanged. S28-G subtle is accepted enough to stop further 지아옹 tuning. S28-H closes the piano source/performance chain before S27-M ensemble work resumes; no automatic ducking in source baseline.",
   "validation": {
     "repository_tests": "629/629 PASS (94 test files; partitioned)",
     "s28a_r2": "user perceptual PASS / CLOSED",
@@ -92,9 +96,9 @@
   "evidence": {
     "s27k_r2_production_noise": "R1 production listening rejected felt/fabric-like contact bed. R2 uses authored_motion_plate_contact_v3: control-derived additive collision gain 0; chick/splash audibility from two-plate/contact response with output gains 2.0/1.25. 15s Cobalt Pulse production gate rendered at 24 kHz / 112 BPM / 7 bars / 15.000 s.",
     "s27br1_hihat_reopen": "Original S27-B normalized broadband collision output identified as felt/fabric-like production texture. New modal_plate_excitation_v2 converts re-contact into finite mechanical force that excites dense inharmonic plate modes; 15s Cobalt Pulse rerender uses identical arrangement/seed/mix.",
-    "s27l_full_song": "Cobalt Meridian full-form dogfood: 24 kHz / 112 BPM / Intro\u2192Verse\u2192Pre\u2192Chorus\u2192Outro / 175 drum events / S27-F clean / clipping 0. Next audible bottleneck must come from user production listening.",
+    "s27l_full_song": "Cobalt Meridian full-form dogfood: 24 kHz / 112 BPM / Intro→Verse→Pre→Chorus→Outro / 175 drum events / S27-F clean / clipping 0. Next audible bottleneck must come from user production listening.",
     "s28a_piano_pedal": "Explicit acoustic sustain-pedal state owns down/up/repedal timing. Key-off while pedal-down is extended only to the next pedal-up crossing, then normal S14 damper release applies; later repedal does not resurrect damped energy.",
     "s28_piano_naturalism": "Integrated flagship compares identical score + identical S28-A R2 pedal timeline against S28-B per-strike identity + S28-C authored chord hand-roll + S28-D authored phrase timing/gate."
   },
-  "current_slice": "S28-F piano phrase-safe music-bus ducking audit / listening gate"
+  "current_slice": "S27-M R2 full-song perceptual gate — Crossing Meridian A/B"
 }
