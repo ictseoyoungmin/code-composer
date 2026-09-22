@@ -1,7 +1,7 @@
 {
   "project": "Code Composer",
   "version": "1.17.0",
-  "source_baseline": "GitHub main@1f820e682420e9e01ee31aadff024561c88f404d (S31 CLOSED / PR #11 / post-merge CI #44 SUCCESS)",
+  "source_baseline": "S31 runtime closure commit 1f820e682420e9e01ee31aadff024561c88f404d (PR #11 / post-merge CI #44 SUCCESS); later documentation-only commits do not alter runtime behavior",
   "engine_state": {
     "S27_B_two_cymbal_hihat": "CLOSED_R1_USER_PASS",
     "S27_C_snare_articulations": "CLOSED",
@@ -104,7 +104,7 @@
     "generated_audio_removed_from_source_candidate": true,
     "historical_root_evidence_moved_under_docs": true
   },
-  "note": "Canonical main is S31 CLOSED at 1f820e682420e9e01ee31aadff024561c88f404d with PR #11 and post-merge CI #44 SUCCESS. Historical S27-L/S28 sub-slice gate labels are retained as historical facts but are not active work items; their accepted behavior is integrated into later closed full-song baselines.",
+  "note": "Runtime behavior remains the S31 CLOSED baseline from commit 1f820e682420e9e01ee31aadff024561c88f404d. PR #12 normalized historical-vs-current documentation status only; S27-L/S28 historical gate labels are not active work items.",
   "validation": {
     "repository_tests": "659/659 PASS (98 test files; S31 local full-repository validation); GitHub PR #11 and post-merge CI #44 SUCCESS",
     "s28a_r2": "user perceptual PASS / CLOSED",
