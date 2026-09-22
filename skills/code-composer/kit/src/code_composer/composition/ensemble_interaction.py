@@ -294,7 +294,7 @@ def _nearest_onset_scale(start_beat: float, onsets: list[float], window_beats: f
 def _leader_intervals(track: dict, sid: str, spans: dict[str, tuple[float, float]]) -> list[tuple[float, float]]:
     out = []
     for event in track.get("events", []):
-        if _section_for_event(event, spans) != sid:
+        if _section_for_event(event, spans) != sid or _is_control_event(event):
             continue
         a, b = _event_interval(event)
         if b > a + EPS:
@@ -399,7 +399,7 @@ def realize_ensemble_interaction(ir: dict) -> dict:
             adjusted = 0
             for track in tracks:
                 for event in track.get("events", []):
-                    if _section_for_event(event, spans) != sid:
+                    if _section_for_event(event, spans) != sid or _is_control_event(event):
                         continue
                     if role == leader:
                         sec_rep["leader_event_count"] += 1
@@ -528,7 +528,7 @@ def realize_ensemble_interaction(ir: dict) -> dict:
             overlap_sum = 0.0
             for track in tracks:
                 for event in track.get("events", []):
-                    if _section_for_event(event, spans) != sid:
+                    if _section_for_event(event, spans) != sid or _is_control_event(event):
                         continue
                     ratio = _overlap_ratio(event, leader_intervals)
                     if ratio <= EPS:

@@ -11,6 +11,7 @@ from ..core.constraints import enforce_forbidden_track_events
 from .profiles import DEFAULT_PROFILES, profile_for
 from .orchestration import effective_section_profile
 from .development import section_development
+from .motif_development import motif_identity_metrics
 
 def _profile(ir, section_id):
     base=profile_for(ir, section_id)
@@ -304,11 +305,34 @@ def arrange_ir(ir: dict) -> dict:
         section_meta=[]
         for section in ir["form"]:
             p=_profile(ir,section["id"])
+            section_motif_id=str(p.get("motif_variant",motif_id))
+            base_motif=ir["materials"]["motifs"][motif_id]
+            section_motif=ir["materials"]["motifs"][section_motif_id]
+            identity=(
+                section_motif.get("identity")
+                if isinstance(section_motif,dict) and isinstance(section_motif.get("identity"),dict)
+                else motif_identity_metrics(
+                    base_motif["intervals"],base_motif["rhythm"],
+                    section_motif["intervals"],section_motif["rhythm"],
+                )
+            )
+            identity_floor=(
+                float(section_motif.get("identity_floor"))
+                if isinstance(section_motif,dict) and section_motif.get("identity_floor") is not None else None
+            )
+            identity_target_met=(
+                bool(identity["score"] + 1e-12 >= identity_floor) if identity_floor is not None else True
+            )
             if not p.get("lead_active", True):
                 section_meta.append({
                     "section_id": section["id"],
                     "event_count": 0,
                     "profile": p,
+                    "motif_id":section_motif_id,
+                    "source_motif_id":motif_id,
+                    "motif_identity":identity,
+                    "motif_identity_floor":identity_floor,
+                    "motif_identity_target_met":identity_target_met,
                     "transform_log": [],
                 })
                 continue
@@ -326,7 +350,7 @@ def arrange_ir(ir: dict) -> dict:
                 max_leap_semitones=int(role.get("max_leap_semitones",7)),
             )
             phrase=compose_phrase(
-                ir["materials"],ir["tonal"],seed,motif_id,cfg,
+                ir["materials"],ir["tonal"],seed,section_motif_id,cfg,
                 namespace=f"arrange:lead:{section['id']}"
             )
             start=section["start_bar"]*beats_per_bar
@@ -339,11 +363,23 @@ def arrange_ir(ir: dict) -> dict:
             for e in part:
                 e["section_id"]=section["id"]
                 e["arrangement_role"]="lead"
+                e["motif_lineage"]={
+                    "source_motif_id":motif_id,
+                    "motif_id":section_motif_id,
+                    "identity_score":identity["score"],
+                    "identity_floor":identity_floor,
+                    "identity_target_met":identity_target_met,
+                }
             events.extend(part)
             section_meta.append({
                 "section_id": section["id"],
                 "event_count": len(part),
                 "profile": p,
+                "motif_id":section_motif_id,
+                "source_motif_id":motif_id,
+                "motif_identity":identity,
+                "motif_identity_floor":identity_floor,
+                "motif_identity_target_met":identity_target_met,
                 "transform_log": phrase["transform_log"],
             })
         resolved_tracks.append({

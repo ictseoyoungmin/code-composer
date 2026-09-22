@@ -28,6 +28,9 @@ def section_development(ir, section_id, profile):
         if override is not None:
             p[field]=bool(override)
 
+    if merged.get("motif_variant") is not None:
+        p["motif_variant"]=str(merged["motif_variant"])
+
     stage=str(merged.get("stage","develop"))
     p["development_stage"]=stage
     return p,{

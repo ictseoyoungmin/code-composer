@@ -8,6 +8,7 @@ from .composition_brief import (
 )
 from ..audio.piano_design import resolve_piano_design
 from ..presets import materialize_preset
+from ..composition.motif_development import motif_identity_metrics
 
 
 @dataclass(frozen=True)
@@ -112,6 +113,22 @@ def apply_composer_plan(seed_ir: dict, plan: ComposerPlan) -> dict:
         'intervals': list(plan.materials['motif']),
         'rhythm': list(plan.materials['motif_rhythm']),
     }
+    for variant_id,spec in plan.materials.get('motif_variants',{}).items():
+        metrics=motif_identity_metrics(
+            plan.materials['motif'],plan.materials['motif_rhythm'],
+            spec['intervals'],spec['rhythm'],
+        )
+        mats['motifs'][variant_id]={
+            'intervals':list(spec['intervals']),
+            'rhythm':[float(x) for x in spec['rhythm']],
+            'source_motif_id':'main',
+            'identity':metrics,
+            'identity_floor':float(spec['identity_floor']),
+            'identity_hard_min':(
+                float(spec['identity_hard_min']) if spec.get('identity_hard_min') is not None else None
+            ),
+            'identity_target_met':bool(metrics['score'] + 1e-12 >= float(spec['identity_floor'])),
+        }
     mats.setdefault('progressions',{})['home']={
         'degrees': list(plan.materials['progression'])
     }

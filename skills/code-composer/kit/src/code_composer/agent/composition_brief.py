@@ -3,6 +3,7 @@ from copy import deepcopy
 
 from ..core.theory import NOTE_TO_PC, SCALES
 from ..composition.harmonic_grammar import COLOR_DEGREE_OFFSETS
+from ..composition.motif_development import motif_identity_metrics
 from ..composition.orchestration import VALID_FOREGROUND_MODES
 from ..audio.engines import validate_authoring_patch, InstrumentEngineValidationError
 from ..presets import materialize_preset, PresetError
@@ -260,6 +261,35 @@ def validate_brief(brief: CompositionBrief, seed_ir: dict) -> None:
     if len(motif_rhythm)!=len(motif) or any(float(x)<=0 for x in motif_rhythm):
         raise BriefValidationError('motif_rhythm must match motif length and be positive')
 
+    motif_variants=brief.materials.get('motif_variants',{})
+    if not isinstance(motif_variants,dict):
+        raise BriefValidationError('materials.motif_variants must be an object')
+    for variant_id,spec in motif_variants.items():
+        if not isinstance(variant_id,str) or not variant_id.strip() or variant_id=='main':
+            raise BriefValidationError('motif variant IDs must be non-empty strings other than main')
+        if not isinstance(spec,dict):
+            raise BriefValidationError(f'motif_variants.{variant_id} must be an object')
+        extra=set(spec)-{'intervals','rhythm','identity_floor','identity_hard_min'}
+        if extra:
+            raise BriefValidationError(f'motif_variants.{variant_id} has unknown field(s): {sorted(extra)}')
+        intervals=list(spec.get('intervals',[]))
+        rhythm=list(spec.get('rhythm',[]))
+        if len(intervals)<3 or any(not isinstance(x,int) for x in intervals):
+            raise BriefValidationError(f'motif_variants.{variant_id}.intervals must contain at least 3 integers')
+        if len(rhythm)!=len(intervals) or any(float(x)<=0 for x in rhythm):
+            raise BriefValidationError(f'motif_variants.{variant_id}.rhythm must match intervals and be positive')
+        floor=_num(spec.get('identity_floor'),f'motif_variants.{variant_id}.identity_floor',0,1)
+        hard=None
+        if spec.get('identity_hard_min') is not None:
+            hard=_num(spec['identity_hard_min'],f'motif_variants.{variant_id}.identity_hard_min',0,1)
+            if hard > floor + 1e-12:
+                raise BriefValidationError(f'motif_variants.{variant_id}.identity_hard_min cannot exceed identity_floor')
+        metrics=motif_identity_metrics(motif,motif_rhythm,intervals,rhythm)
+        if hard is not None and metrics['score'] + 1e-12 < hard:
+            raise BriefValidationError(
+                f'motif_variants.{variant_id} identity {metrics["score"]:.4f} below hard minimum {hard:.4f}'
+            )
+
     groove=brief.rhythm.get('groove',{})
     steps=int(groove.get('steps_per_bar',0))
     if steps<=0:
@@ -307,6 +337,13 @@ def validate_brief(brief: CompositionBrief, seed_ir: dict) -> None:
     dev=brief.development.get('sections',{})
     if set(dev)-section_ids:
         raise BriefValidationError('development references unknown section')
+    known_variants=set(motif_variants)
+    dev_profiles=[('development.default',brief.development.get('default',{}))]
+    dev_profiles += [(f'development.sections.{sid}',profile) for sid,profile in dev.items()]
+    for name,profile in dev_profiles:
+        if isinstance(profile,dict) and profile.get('motif_variant') is not None:
+            if profile['motif_variant'] not in known_variants:
+                raise BriefValidationError(f'{name}.motif_variant references unknown motif variant: {profile["motif_variant"]}')
     trans=brief.transitions
     if set(trans)-section_ids:
         raise BriefValidationError('transition references unknown section')

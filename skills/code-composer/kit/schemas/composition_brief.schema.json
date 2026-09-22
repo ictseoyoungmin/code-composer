@@ -206,6 +206,45 @@
             "type": "number",
             "exclusiveMinimum": 0
           }
+        },
+        "motif_variants": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "intervals",
+              "rhythm",
+              "identity_floor"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "intervals": {
+                "type": "array",
+                "minItems": 3,
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "rhythm": {
+                "type": "array",
+                "minItems": 3,
+                "items": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "identity_floor": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "identity_hard_min": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
         }
       }
     },
@@ -679,6 +718,10 @@
             },
             "arp_active": {
               "type": "boolean"
+            },
+            "motif_variant": {
+              "type": "string",
+              "minLength": 1
             }
           }
         },
@@ -763,6 +806,10 @@
               },
               "arp_active": {
                 "type": "boolean"
+              },
+              "motif_variant": {
+                "type": "string",
+                "minLength": 1
               }
             }
           }

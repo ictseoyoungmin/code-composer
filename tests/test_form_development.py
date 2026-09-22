@@ -67,3 +67,28 @@ def test_family_reports_distinct_development_signatures():
     fam=q["families"]["hook"]
     assert fam["distinct_signatures"]>=2
     assert fam["lead_register_delta"] is not None and fam["lead_register_delta"]>6
+
+
+def test_form_analysis_reports_motif_lineage_when_authored():
+    ir=_fixture()
+    ir["materials"]["motifs"]["final_variant"]={
+        "intervals":[0,2,4,7,4,3,2,1],
+        "rhythm":[.5]*8,
+        "source_motif_id":"main",
+        "identity_floor":.5,
+    }
+    ir["arrangement_development"]={
+        "enabled":True,
+        "families":{"arc":["verse","final"]},
+        "default":{"stage":"develop"},
+        "sections":{
+            "verse":{"stage":"establish"},
+            "final":{"stage":"culminate","motif_variant":"final_variant"},
+        },
+    }
+    q=analyze_form_development(arrange_ir(ir))
+    rows={r["section_id"]:r for r in q["sections"]}
+    assert rows["verse"]["motif_id"]=="main"
+    assert rows["final"]["motif_id"]=="final_variant"
+    assert q["families"]["arc"]["distinct_motifs"]==2
+    assert q["families"]["arc"]["minimum_motif_identity"] is not None

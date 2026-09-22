@@ -1,3 +1,15 @@
+## S29 — Thematic Arc / Cross-Section Motif Lineage — CLOSED
+- Extends Composition Brief with explicit agent-authored `materials.motif_variants`; each variant supplies complete intervals/rhythm plus soft identity floor and optional hard minimum.
+- Adds explicit `development.sections.<id>.motif_variant` routing; the engine never invents or auto-selects thematic material.
+- Reuses the existing E2 structural identity metric and records per-section/per-event motif lineage evidence.
+- Form-development analysis now reports distinct motif count and minimum identity for authored section families.
+- Absent S29 fields preserve the prior single-motif arrangement path.
+- Hardens S15 ensemble interaction so explicit `*_control` events are excluded from leader/timing/overlap interaction and remain byte-preserved.
+- Engineering validation: **96 test files / 644/644 PASS**; focused S15+S27-M R2+S29 **29/29 PASS**; self-check, Skill validation, plugin distribution, compileall and Skill/Codex/Claude builds PASS.
+- User perceptual PASS on 2026-09-22 closes S29; `Threadline at First Light` remains the controlled closure evidence.
+- Full-song `Threadline at First Light`: 16 bars / 24 kHz / 112 BPM / 36.485708 s; support event identity exact; lead timing/duration/velocity identity exact; 27/91 lead pitches differ only through explicit section motif variants; A/B RMS 0.09664456/0.09661606; clipping 0.
+- Status: **ENGINEERING CANDIDATE / PERCEPTUAL GATE OPEN** pending user listening.
+
 
 ## S27-M R2 — Ensemble / Production Integration (reopened on S28-H baseline)
 - Rebuilt the previously partial S27-M slice on the complete S28-H piano-naturalism source tree after the local historical S27-M directory was found incomplete.
