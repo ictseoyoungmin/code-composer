@@ -20,3 +20,13 @@ The purpose is not to hide source artifacts with EQ, reverb, compression or side
 ## Authority
 
 Composer Agent authors pedal timing, chord attack offsets and phrase timing/gate. The engine executes them deterministically. There is no genre keyword inference or blind random humanization.
+
+## Historical vs current status
+
+Historical state at this checkpoint: **ENGINEERING CANDIDATE / PERCEPTUAL GATE OPEN**.
+
+That historical fact is preserved; this document does not retroactively claim a standalone S28-H listening PASS. The accepted S28-H chain was subsequently carried into S27-M R2 ensemble/full-song production integration, which received USER PASS / CLOSED, and then into the S29-S31 full-song closures.
+
+Current role: **integrated canonical piano baseline / standalone active gate superseded by later closed production evidence**.
+
+S28-F is resolved as a policy decision: the canonical source-piano baseline uses **no automatic music-bus ducking**. S28-G was accepted sufficiently to stop further treble-unison tuning and proceed.
