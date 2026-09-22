@@ -1,7 +1,7 @@
 {
   "project": "Code Composer",
   "version": "1.17.0",
-  "source_baseline": "GitHub main@529bccdde58bb5d5c9fb081e076f7f0c8e197e8c (S30 CLOSED / post-merge CI SUCCESS) + S31 Destination-Bound Transition CLOSED / perceptual PASS",
+  "source_baseline": "GitHub main@1f820e682420e9e01ee31aadff024561c88f404d (S31 CLOSED / PR #11 / post-merge CI #44 SUCCESS)",
   "engine_state": {
     "S27_B_two_cymbal_hihat": "CLOSED_R1_USER_PASS",
     "S27_C_snare_articulations": "CLOSED",
@@ -13,22 +13,22 @@
     "S27_I_continuous_hihat_pedal": "CLOSED",
     "S27_J_persistent_hihat_strike_state": "CLOSED",
     "S27_K_hihat_foot_gesture": "CLOSED_R2_USER_PASS",
-    "S27_L_full_song_drum_chain": "ENGINEERING_CANDIDATE_PERCEPTUAL_GATE_OPEN",
+    "S27_L_full_song_drum_chain": "INTEGRATED_HISTORICAL_GATE_SUPERSEDED_BY_S27_M_R2_FULL_SONG_PASS",
     "S28_A_continuous_piano_sustain_pedal": "CLOSED_R2_USER_PASS",
-    "S28_B_per_strike_piano_identity": "USER_SELECTED_WITH_S28_D_BASELINE_REOPENABLE",
-    "S28_C_authored_piano_hand_attack": "USER_SELECTED_WITH_S28_D_BASELINE_REOPENABLE",
-    "S28_D_authored_piano_phrase_timing": "USER_SELECTED_BASELINE_REOPENABLE",
+    "S28_B_per_strike_piano_identity": "INTEGRATED_IN_ACCEPTED_S28_H_CHAIN",
+    "S28_C_authored_piano_hand_attack": "INTEGRATED_IN_ACCEPTED_S28_H_CHAIN",
+    "S28_D_authored_piano_phrase_timing": "INTEGRATED_IN_ACCEPTED_S28_H_CHAIN",
     "S28_E_coupled_unison_sustain": "REJECTED_USER_PREFERS_A_S28_D",
-    "S28_F_piano_phrase_safe_ducking": "ENGINEERING_AUDIT_CANDIDATE",
-    "S28_G_treble_unison_subtle": "ACCEPTED_PRODUCTION_CANDIDATE_USER_PROCEEDED",
-    "S28_H_piano_naturalism_production_closure": "ENGINEERING_CANDIDATE_PERCEPTUAL_GATE_OPEN",
+    "S28_F_piano_phrase_safe_ducking": "POLICY_DECISION_CLOSED_NO_AUTOMATIC_DUCKING",
+    "S28_G_treble_unison_subtle": "INTEGRATED_ACCEPTED_BASELINE_NO_FURTHER_TUNING",
+    "S28_H_piano_naturalism_production_closure": "INTEGRATED_BASELINE_ACTIVE_GATE_SUPERSEDED_BY_S27_M_R2_FULL_SONG_PASS",
     "S29_thematic_arc_cross_section_motif_lineage": "CLOSED_USER_PASS",
     "S27_M_ensemble_production_integration": "CLOSED_R2_USER_PASS",
     "S30_harmonic_narrative_section_progression_lineage": "CLOSED_USER_PASS",
     "S31_destination_bound_transition_arrival_lineage": "CLOSED_USER_PASS"
   },
   "validation_record": {
-    "repository_tests": "659/659 PASS (98 test files; local S31 engineering candidate on canonical S30 behavior)",
+    "repository_tests": "659/659 PASS (98 test files; S31 local full-repository validation); PR #11 and post-merge CI #44 SUCCESS on canonical main",
     "s27g_focused": "7/7 PASS",
     "s27f_focused": "9/9 PASS",
     "s27g_flagship_replay": "269 events; 189 hands / 65 right foot / 15 left foot; playable=true; strained=false; issues=0/0/0",
@@ -64,7 +64,7 @@
     "s28b_identity_evidence": "8 identical C4 attacks: static first-vs-later correlation mean ~0.9999998; opt-in per-strike mean ~0.99219; same score/seed deterministic.",
     "s28c_hand_attack": "explicit piano_attack_offset_ms bounded ±20 ms; representative wide chord 0/4/8/11/13/15 ms.",
     "s28d_phrase_timing": "existing E1 timing_curve_ms + gate_curve; random microtiming and velocity variation disabled in naturalism dogfood.",
-    "repository_current": "98 test files / 659/659 PASS (local S31 engineering candidate)",
+    "repository_current": "98 test files / 659/659 PASS; canonical GitHub main includes S31 and post-merge CI #44 SUCCESS",
     "s28b_to_d_related": "piano/contract/factory related 114/114 PASS",
     "s28d_control_integration": "explicit piano_control survives performance/orchestration realization without note-only orchestration metadata",
     "s28_flagship": "24 kHz / 92 BPM; identical score and S28-A R2 pedal timeline; treatment adds S28-B/C/D only; random microtiming=false",
@@ -94,7 +94,9 @@
     "s31_full_song": "Threadline at First Light: 24 kHz / 112 BPM / 16 bars / 36.485708 s; A RMS 0.1063182952 -> B 0.1062211757; 15 destination-bound pad anticipation notes; lead+bass+drums and pre-existing pad events exact; clipping 0; RMS difference ~0.008 dB",
     "s31_arrival_bindings": "verse_ground[0]=1 / pre_drive[0]=4 / chorus_arrival[0]=6 / return_turn[0]=4 / final_cadence[0]=5",
     "s31_distribution": "self_check / validate_skill / verify_plugin_distribution / compileall / Skill+Codex+Claude builds PASS",
-    "s31_perceptual": "USER PASS / CLOSED 2026-09-23"
+    "s31_perceptual": "USER PASS / CLOSED 2026-09-23",
+    "s27l_status_normalization": "Historical S27-L listening gate remained open at that checkpoint; it is no longer an active gate because the same authenticated drum chain continued into S27-M R2 full-song production listening, which received USER PASS / CLOSED on 2026-09-22.",
+    "s28_chain_status_normalization": "S28-B/C/D/G are integrated components of the accepted piano baseline; S28-F resolved to no automatic music-bus ducking; S28-H's standalone gate was not retroactively relabeled PASS and is no longer active because the integrated piano chain proceeded into S27-M R2 and later S29-S31 full-song closures."
   },
   "repository_hygiene": {
     "canonical_skill": "skills/code-composer/",
@@ -102,9 +104,9 @@
     "generated_audio_removed_from_source_candidate": true,
     "historical_root_evidence_moved_under_docs": true
   },
-  "note": "S30 is canonical on GitHub main@529bccdde58bb5d5c9fb081e076f7f0c8e197e8c with post-merge CI SUCCESS. S31 passed local engineering and perceptual gates on 2026-09-23 and is ready for an S31-only PR/merge.",
+  "note": "Canonical main is S31 CLOSED at 1f820e682420e9e01ee31aadff024561c88f404d with PR #11 and post-merge CI #44 SUCCESS. Historical S27-L/S28 sub-slice gate labels are retained as historical facts but are not active work items; their accepted behavior is integrated into later closed full-song baselines.",
   "validation": {
-    "repository_tests": "659/659 PASS (98 test files; local S31 candidate)",
+    "repository_tests": "659/659 PASS (98 test files; S31 local full-repository validation); GitHub PR #11 and post-merge CI #44 SUCCESS",
     "s28a_r2": "user perceptual PASS / CLOSED",
     "s28b_to_s28d_focused": "114/114 PASS before full-suite closure; S28-A-D core 27/27 PASS at slice integration checkpoint",
     "s28d_orchestration_control_cross_feature": "PASS; explicit *_control events survive E4 budget realization unchanged",
@@ -119,5 +121,5 @@
     "s29_thematic_arc": "Threadline at First Light controlled A/B changes only explicit Composer-authored section motif pitch lineage; support events and lead timing/duration/velocity are identical; user perceptual PASS / CLOSED; merged to GitHub main via PR #9.",
     "s31_destination_bound_transition": "Threadline at First Light controlled A/B adds only five destination-bound pad harmonic-anticipation gestures (15 notes) on the CLOSED S30 form/theme/harmony baseline; explicit progression lineage resolves 1/4/6/4/5; user perceptual PASS / CLOSED."
   },
-  "current_slice": "S31 CLOSED — next slice selection pending"
+  "current_slice": "NONE_RESERVED — S31 CLOSED; next slice must be selected from new full-song production evidence"
 }
