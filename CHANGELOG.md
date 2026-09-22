@@ -1,6 +1,6 @@
 ## Documentation status normalization after S31 — 2026-09-23
 - Documentation-only cleanup; no runtime, schema, synthesis, arrangement, or rendering behavior changes.
-- Canonical state is S31 CLOSED on `main@1f820e682420e9e01ee31aadff024561c88f404d` after PR #11 and post-merge CI #44 SUCCESS.
+- S31 runtime closure commit is `1f820e682420e9e01ee31aadff024561c88f404d` after PR #11 and post-merge CI #44 SUCCESS; subsequent documentation-only commits do not alter runtime behavior.
 - Historical S27-L and S28 sub-slice listening-gate labels are now explicitly distinguished from active repository state.
 - S27-L's historical open gate is superseded by later S27-M R2 full-song USER PASS.
 - S28-B/C/D/G are integrated accepted-baseline components; S28-F is the closed no-automatic-ducking policy decision; S28-H is an integrated historical checkpoint whose standalone gate is no longer active.
