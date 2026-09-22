@@ -10,6 +10,7 @@ from ..core.theory import (
     scale_pitch_classes,
     nearest_inversion,
 )
+from .harmonic_grammar import section_harmonic_profile
 
 
 class MusicalTransitionError(ValueError):
@@ -101,6 +102,47 @@ def _chromatic_approach(target: int, direction: str, steps: int) -> list[int]:
     return list(range(target+steps,target,-1))
 
 
+
+
+def _resolve_harmonic_arrival(ir: dict, transition: dict, cfg: dict) -> tuple[int, dict | None]:
+    if "arrival_binding" not in cfg:
+        return int(cfg["target_degree"]), None
+
+    binding=cfg["arrival_binding"]
+    if binding.get("source") != "destination_progression":
+        raise MusicalTransitionError("harmonic arrival binding source must be destination_progression")
+    to_section=transition["to_section"]
+    profile=section_harmonic_profile(ir,to_section)
+    progression_id=profile.get("progression_variant")
+    if not progression_id:
+        raise MusicalTransitionError(
+            f"transition {transition['from_section']}->{to_section}: destination progression binding requires an explicit S30 progression_variant"
+        )
+    progressions=ir.get("materials",{}).get("progressions",{})
+    progression=progressions.get(progression_id)
+    if not isinstance(progression,dict):
+        raise MusicalTransitionError(
+            f"transition {transition['from_section']}->{to_section}: destination progression {progression_id} is unavailable"
+        )
+    degrees=progression.get("degrees")
+    if not isinstance(degrees,list) or not degrees:
+        raise MusicalTransitionError(
+            f"transition {transition['from_section']}->{to_section}: destination progression {progression_id} has no degrees"
+        )
+    index=int(binding["progression_index"])
+    if not (0 <= index < len(degrees)):
+        raise MusicalTransitionError(
+            f"transition {transition['from_section']}->{to_section}: destination progression index {index} outside {progression_id} length {len(degrees)}"
+        )
+    degree=int(degrees[index])
+    return degree,{
+        "source":"destination_progression",
+        "progression_id":progression_id,
+        "progression_index":index,
+        "target_degree":degree,
+        "to_section":to_section,
+    }
+
 def validate_musical_transition_contract(ir: dict, performance_ir: PerformanceIR | dict) -> None:
     perf=performance_ir if isinstance(performance_ir,PerformanceIR) else performance_ir_from_dict(performance_ir)
     spans=_section_spans(ir)
@@ -118,6 +160,7 @@ def validate_musical_transition_contract(ir: dict, performance_ir: PerformanceIR
             role=ant["role"]
             if role not in perf.register_plans:
                 raise MusicalTransitionError(f"{name}: harmonic anticipation role {role} needs a register plan")
+            _resolve_harmonic_arrival(ir,t,ant)
         bass=t.get("bass_approach",{"type":"none"})
         if bass.get("type")!="none" and "bass" not in set(perf.register_plans) | tracks:
             raise MusicalTransitionError(f"{name}: bass approach requires a bass role")
@@ -218,19 +261,31 @@ def _add_harmonic_anticipation(ir, perf, track_map, transition, boundary, report
     if not track:
         raise MusicalTransitionError(f"harmonic anticipation role {role} has no resolved track")
     root=ir["tonal"]["root"]; scale=ir["tonal"]["scale"]
-    raw=[scale_degree_to_midi(root,scale,int(cfg["target_degree"])+int(off),4) for off in cfg["chord_intervals"]]
+    target_degree,arrival_binding=_resolve_harmonic_arrival(ir,transition,cfg)
+    raw=[scale_degree_to_midi(root,scale,target_degree+int(off),4) for off in cfg["chord_intervals"]]
     center=int(round(float(perf.register_plans[role]["center"])))
     chord=nearest_inversion(raw,center)
     start=boundary-float(cfg["beats"])
     duration=float(cfg["beats"])*float(cfg["gate"])
+    if arrival_binding is not None:
+        report["harmonic_arrival_binding"]=deepcopy(arrival_binding)
     for midi in chord:
+        transition_meta={
+            "type":"harmonic_anticipation",
+            "to_section":transition["to_section"],
+            "target_degree":target_degree,
+        }
+        if arrival_binding is not None:
+            transition_meta["arrival_binding"]=deepcopy(arrival_binding)
         _append_event(track,{
             "start_beat":start,"duration_beats":duration,"midi":int(midi),
             "velocity":float(cfg["velocity"]),"section_id":transition["from_section"],
             "arrangement_role":role,"transition_material":"harmonic_anticipation",
-            "musical_transition":{"type":"harmonic_anticipation","to_section":transition["to_section"],"target_degree":int(cfg["target_degree"])}
+            "musical_transition":transition_meta,
         })
         report["harmonic_anticipation_events"]+=1
+        if arrival_binding is not None:
+            report["harmonic_arrival_binding_events"]+=1
 
 
 def _add_pickup(ir, track_map, transition, boundary, report):
@@ -331,8 +386,8 @@ def realize_musical_transitions(ir: dict) -> dict:
             "index":index,"from_section":t["from_section"],"to_section":t["to_section"],"boundary_beat":boundary,
             "texture_subtraction_removed":0,"texture_subtraction_truncated":0,
             "cadence_extended_events":0,"silence_removed":0,"silence_truncated":0,
-            "register_prepared_events":0,"harmonic_anticipation_events":0,"pickup_events":0,
-            "bass_approach_events":0,"rhythm_fill_events":0,
+            "register_prepared_events":0,"harmonic_anticipation_events":0,"harmonic_arrival_binding_events":0,
+            "harmonic_arrival_binding":None,"pickup_events":0,"bass_approach_events":0,"rhythm_fill_events":0,
         }
         # Structural subtraction and cadence are applied to existing material first.
         _apply_texture_subtraction(track_map,t,boundary,report)
@@ -352,7 +407,8 @@ def realize_musical_transitions(ir: dict) -> dict:
         "transition_count":len(reports),"transitions":reports,
         "semantics":{
             "silence":"removes existing material before explicit transition events are authored",
-            "harmonic_anticipation":"explicit scale-degree chord, role and voicing intervals authored by Agent",
+            "harmonic_anticipation":"explicit scale-degree chord, role and voicing intervals authored by Agent; S31 may bind its degree to an explicit destination progression index",
+            "harmonic_arrival_binding":"Agent selects destination_progression plus explicit index; runtime validates and resolves only that authored pointer",
             "pickup":"explicit scale degrees/rhythm/octave authored by Agent",
             "bass_approach":"deterministic operation into existing destination bass target",
             "register_preparation":"explicit semitone shift in a bounded destination window before E3 allocation",

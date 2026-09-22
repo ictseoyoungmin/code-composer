@@ -20,6 +20,10 @@ Code Composer does not use bundled musical examples to choose style or content. 
 The Composition Brief may carry explicit agent-authored motif variants and assign them to formal sections. The engine does not invent or select variants: it validates complete authored interval/rhythm material, measures structural identity against the canonical motif, enforces only an explicit hard minimum, routes the selected material through the existing deterministic arranger, and exposes section/event lineage evidence for QA. This lets repeated formal material develop recognizably without relying only on density/register changes.
 
 
+## S31 destination-bound transition lineage
+
+Performance IR harmonic anticipation can keep its historical explicit `target_degree` or, alternatively, use an explicit `arrival_binding` that points to `destination_progression` plus a concrete progression index. The runtime requires an S30 destination progression variant, validates the index, resolves the referenced scale degree, and writes lineage evidence to the realized transition event/report. It never chooses a cadence, progression, or index automatically.
+
 | Instrument engines | Registry-routed deterministic pitched-instrument engines; current built-ins: generic, piano, bowed_string, bowed_waveguide, plucked_bass, percussion | `contracts/instrument-engines.md` |
 
 ## Factory preset system

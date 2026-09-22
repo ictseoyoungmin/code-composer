@@ -1305,6 +1305,24 @@
               "type": "number",
               "minimum": 0.05,
               "maximum": 2
+            },
+            "arrival_binding": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "source",
+                "progression_index"
+              ],
+              "properties": {
+                "source": {
+                  "const": "destination_progression"
+                },
+                "progression_index": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 31
+                }
+              }
             }
           },
           "allOf": [
@@ -1323,7 +1341,6 @@
                 "required": [
                   "role",
                   "beats",
-                  "target_degree",
                   "chord_intervals",
                   "velocity",
                   "gate"
@@ -1333,7 +1350,29 @@
                     "exclusiveMinimum": 0,
                     "maximum": 8
                   }
-                }
+                },
+                "oneOf": [
+                  {
+                    "required": [
+                      "target_degree"
+                    ],
+                    "not": {
+                      "required": [
+                        "arrival_binding"
+                      ]
+                    }
+                  },
+                  {
+                    "required": [
+                      "arrival_binding"
+                    ],
+                    "not": {
+                      "required": [
+                        "target_degree"
+                      ]
+                    }
+                  }
+                ]
               }
             }
           ]

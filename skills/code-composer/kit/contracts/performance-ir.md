@@ -26,3 +26,12 @@ The phrase layer does not invent notes, rhythms, harmony, orchestration, fingeri
 ## S15 ensemble interaction
 
 Performance IR may explicitly describe inter-player timing/yielding at the orchestration-section level and role pan offsets at the realization level. See `contracts/ensemble-interaction.md`. These surfaces are authored intent: runtime does not infer leadership or ensemble feel from a genre/style label.
+## S31 destination-bound harmonic arrival
+
+An enabled `transitions[*].harmonic_anticipation` must name exactly one target source:
+
+- legacy `target_degree`, or
+- `arrival_binding = {"source": "destination_progression", "progression_index": N}`.
+
+The binding is explicit Agent-authored intent. At runtime the destination section must already select an S30 `progression_variant`; the referenced index must exist in that progression. The engine resolves only that pointer and records `progression_id`, `progression_index`, `target_degree`, and `to_section` as transition lineage. No section-name heuristic, cadence inference, or automatic progression selection is permitted.
+

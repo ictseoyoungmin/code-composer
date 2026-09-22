@@ -1,3 +1,13 @@
+## S31 — Destination-Bound Transition / Boundary Arrival Lineage — CLOSED
+- Extends E5 `harmonic_anticipation` with explicit `arrival_binding={source: destination_progression, progression_index: N}` while preserving legacy `target_degree`.
+- Exactly one target source is allowed; ambiguous dual targets fail validation.
+- Destination binding requires an explicit S30 section `progression_variant`, validates the authored index, resolves only that progression degree, and records progression/section/index provenance on transition events and reports.
+- The runtime does not invent a transition target or infer a cadence from section names.
+- `Threadline at First Light` dogfood keeps the CLOSED S30 form/theme/harmony/lead/bass/drums intact and adds 15 pad anticipation notes across five authored boundaries.
+- A/B RMS differs by only ~0.008 dB; clipping 0.
+- Engineering validation: **98 test files / 659/659 PASS**; focused S31+E5+S30+S29+S15+S27-M R2 **52/52 PASS**; self-check, Skill validation, plugin distribution, compileall and Skill/Codex/Claude builds PASS.
+- Status: **CLOSED / PERCEPTUAL PASS** on 2026-09-23 after controlled full-song and boundary-focused listening.
+
 ## S30 — Harmonic Narrative / Section Progression Lineage — CLOSED
 - Adds explicit `materials.progression_variants` and `harmony.sections.<id>.progression_variant`.
 - Progression variants are complete Composer Agent-authored scale-degree paths; the runtime never generates or auto-selects them.

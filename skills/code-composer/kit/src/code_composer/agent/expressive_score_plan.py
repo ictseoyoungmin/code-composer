@@ -608,17 +608,33 @@ def validate_expressive_score_plan(
 
         anticipation=t.get("harmonic_anticipation",{})
         _obj(anticipation,f"{name}.harmonic_anticipation")
-        unknown=set(anticipation)-{"enabled","role","beats","target_degree","chord_intervals","velocity","gate"}
+        unknown=set(anticipation)-{"enabled","role","beats","target_degree","arrival_binding","chord_intervals","velocity","gate"}
         if unknown: _fail(f"{name}.harmonic_anticipation unknown field(s): {sorted(unknown)}")
         enabled=anticipation.get("enabled",False)
         if not isinstance(enabled,bool): _fail(f"{name}.harmonic_anticipation.enabled must be boolean")
         if enabled:
-            req={"role","beats","target_degree","chord_intervals","velocity","gate"}
+            req={"role","beats","chord_intervals","velocity","gate"}
             missing=req-set(anticipation)
             if missing: _fail(f"{name}.harmonic_anticipation missing fields: {sorted(missing)}")
+            has_degree="target_degree" in anticipation
+            has_binding="arrival_binding" in anticipation
+            if has_degree == has_binding:
+                _fail(f"{name}.harmonic_anticipation requires exactly one of target_degree or arrival_binding")
             if anticipation["role"] not in roles: _fail(f"{name}.harmonic_anticipation.role references unknown role")
             _num(anticipation["beats"],f"{name}.harmonic_anticipation.beats",1e-9,8)
-            _integer(anticipation["target_degree"],f"{name}.harmonic_anticipation.target_degree",1,7)
+            if has_degree:
+                _integer(anticipation["target_degree"],f"{name}.harmonic_anticipation.target_degree",1,7)
+            else:
+                binding=anticipation["arrival_binding"]
+                _obj(binding,f"{name}.harmonic_anticipation.arrival_binding")
+                unknown_binding=set(binding)-{"source","progression_index"}
+                if unknown_binding:
+                    _fail(f"{name}.harmonic_anticipation.arrival_binding unknown field(s): {sorted(unknown_binding)}")
+                if set(binding)!={"source","progression_index"}:
+                    _fail(f"{name}.harmonic_anticipation.arrival_binding requires source and progression_index")
+                if binding["source"] != "destination_progression":
+                    _fail(f"{name}.harmonic_anticipation.arrival_binding.source must be destination_progression")
+                _integer(binding["progression_index"],f"{name}.harmonic_anticipation.arrival_binding.progression_index",0,31)
             ints=_list(anticipation["chord_intervals"],f"{name}.harmonic_anticipation.chord_intervals")
             if not ints or len(ints)>8: _fail(f"{name}.harmonic_anticipation.chord_intervals must contain 1..8 values")
             if len(ints)!=len(set(ints)): _fail(f"{name}.harmonic_anticipation.chord_intervals must be unique")

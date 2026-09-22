@@ -415,7 +415,7 @@ The engine chooses no role importance itself; all importance classes and budgets
 
 E5 strengthens the transition contract so the engine does not invent missing material.
 
-- harmonic anticipation requires role, target degree, scale-degree chord intervals, velocity and gate
+- harmonic anticipation requires role, scale-degree chord intervals, velocity and gate plus exactly one target source: legacy explicit `target_degree` or S31 `arrival_binding={source: destination_progression, progression_index: N}`
 - pickup requires role, explicit degrees/rhythm/octave/velocity
 - bass approach requires an authored operation type and, when relevant, direction/step count
 - cadence extension names the affected roles and maximum extension
