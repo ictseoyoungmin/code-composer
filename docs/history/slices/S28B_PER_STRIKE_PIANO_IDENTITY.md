@@ -27,3 +27,9 @@ Eight identical C4 strikes with static identity have mean first-vs-later attack 
 ## Validation
 
 S28-B focused tests cover legacy byte identity, same-seed determinism, bounded repeated-strike difference, pitch stability, control-insertion ordinal neutrality, factory control bounds, and seed sensitivity without score mutation.
+
+## Current canonical interpretation
+
+The status above records the state **at the S28-B checkpoint**. S28-B is now an integrated component of the accepted S28-H piano-naturalism chain and of the later S27-M R2 / S29-S31 full-song baselines.
+
+This does not retroactively claim a separate S28-B listening PASS. It means S28-B is **not an active reopenable task** unless new production evidence identifies per-strike identity as the bottleneck.

@@ -95,3 +95,16 @@ Engineering gate: **98 test files / 659/659 PASS**; focused S31+E5+S30+S29+S15+S
 
 Perceptual gate: `Threadline at First Light` S30 baseline vs destination-bound transition A/B — USER PASS / CLOSED 2026-09-23.
 
+## Canonical status normalization after S31
+
+There is **no pre-reserved implementation slice after S31**. The next slice must be selected from fresh full-song production evidence.
+
+Older S27-L/S28 status labels are historical checkpoint facts, not active gates:
+
+- S27-L was an engineering/listening checkpoint. Its active production gate was superseded by S27-M R2, which used the authenticated drum chain in full-song context and received USER PASS / CLOSED.
+- S28-B/C/D are integrated parts of the accepted piano-naturalism chain; they are not active "reopenable" tasks.
+- S28-F resolved to the canonical policy of **no automatic music-bus ducking**. Any later ducking is an explicit arrangement/mix decision.
+- S28-G was accepted sufficiently to stop further treble-unison tuning and proceed.
+- S28-H remains a historical piano-only closure checkpoint; its standalone listening gate is not retroactively relabeled PASS. Its accepted chain was carried into S27-M R2 and later S29-S31 full-song closures, so it is not an active gate.
+
+Canonical repository state after S31: `main@1f820e682420e9e01ee31aadff024561c88f404d`, PR #11 merged, post-merge CI #44 SUCCESS.

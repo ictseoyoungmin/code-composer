@@ -17,3 +17,9 @@ Optional note performance field:
 The field is explicitly authored, bounded to `[-20, +20] ms`, and applied only to render-local piano note copies. Canonical score `start_beat` remains unchanged. Controls are never shifted. A negative offset that would move a note before beat zero is rejected.
 
 A representative six-note wide chord dogfood uses low-to-high offsets `[0, 4, 8, 11, 13, 15] ms`. The engine does not infer arpeggiation and does not add randomness.
+
+## Current canonical interpretation
+
+The status above records the state **at the S28-C checkpoint**. S28-C is now an integrated component of the accepted S28-H piano-naturalism chain and later full-song baselines.
+
+No separate retrospective listening PASS is asserted. S28-C is **not an active reopenable task** unless fresh production evidence specifically identifies authored hand-attack timing as a bottleneck.
