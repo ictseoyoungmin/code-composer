@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: skills/code-composer/kit/src
-      PAYLOAD_SHA256: 125f33a7478f529e3a5f5f51bcc8eeb8b4556cbec9d965137f6b1700542feb90
+      PAYLOAD_SHA256: 869b7fd61692b0be82135ff58cf88c2da2f4cd45383245804648c2a7b6ac76c1
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,7 +35,7 @@ jobs:
           expected=sorted(x['path'] for x in m)
           actual=sorted(str(p.relative_to(root)) for p in root.rglob('*') if p.is_file() and '.sync-meta' not in p.parts)
           assert actual==expected, (actual, expected)
-          assert len(expected)==18
+          assert len(expected)==17
           PY
 
       - name: Apply S31-only files
