@@ -107,4 +107,4 @@ Older S27-L/S28 status labels are historical checkpoint facts, not active gates:
 - S28-G was accepted sufficiently to stop further treble-unison tuning and proceed.
 - S28-H remains a historical piano-only closure checkpoint; its standalone listening gate is not retroactively relabeled PASS. Its accepted chain was carried into S27-M R2 and later S29-S31 full-song closures, so it is not an active gate.
 
-Canonical repository state after S31: `main@1f820e682420e9e01ee31aadff024561c88f404d`, PR #11 merged, post-merge CI #44 SUCCESS.
+Canonical S31 runtime closure commit: `1f820e682420e9e01ee31aadff024561c88f404d`, PR #11 merged, post-merge CI #44 SUCCESS. Later documentation-only commits do not change that runtime baseline.
