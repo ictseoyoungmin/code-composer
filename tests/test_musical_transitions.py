@@ -240,3 +240,77 @@ def test_pickup_requires_explicit_degrees_and_matching_rhythm():
     plan=expressive_score_plan_from_dict(_plan_for_validation(bad))
     with pytest.raises(ExpressivePlanValidationError):
         validate_expressive_score_plan(plan,_validation_context())
+
+
+def _bound_ab_transition(index=0):
+    t=deepcopy(_ab_transition())
+    ant=t["harmonic_anticipation"]
+    ant.pop("target_degree",None)
+    ant["arrival_binding"]={
+        "source":"destination_progression",
+        "progression_index":index,
+    }
+    return t
+
+
+def _ir_with_s30_destination(transitions):
+    ir=_ir(transitions)
+    ir["materials"]["progressions"]={
+        "home":{"degrees":[1,5,6,4]},
+        "b_arrival":{"degrees":[6,7,3,1],"source_progression_id":"home"},
+        "c_arrival":{"degrees":[5,1],"source_progression_id":"home"},
+    }
+    ir["harmonic_grammar"]={
+        "enabled":True,
+        "default":{"colors":["seventh"]},
+        "sections":{
+            "a":{"progression_variant":"b_arrival"},
+            "b":{"progression_variant":"b_arrival"},
+            "c":{"progression_variant":"c_arrival"},
+        },
+    }
+    return ir
+
+
+def test_s31_destination_bound_harmonic_anticipation_resolves_s30_progression_degree():
+    out=realize_musical_transitions(_ir_with_s30_destination([_bound_ab_transition(0)]))
+    pad=next(t for t in out["tracks"] if t["id"]=="pad")
+    ant=[e for e in pad["events"] if e.get("transition_material")=="harmonic_anticipation"]
+    assert len(ant)==3
+    assert {e["musical_transition"]["target_degree"] for e in ant}=={6}
+    binding=ant[0]["musical_transition"]["arrival_binding"]
+    assert binding=={
+        "source":"destination_progression",
+        "progression_id":"b_arrival",
+        "progression_index":0,
+        "target_degree":6,
+        "to_section":"b",
+    }
+    rep=out["musical_transition_report"]["transitions"][0]
+    assert rep["harmonic_arrival_binding_events"]==3
+    assert rep["harmonic_arrival_binding"]==binding
+
+
+def test_s31_destination_binding_requires_explicit_s30_progression_variant():
+    ir=_ir_with_s30_destination([_bound_ab_transition(0)])
+    ir["harmonic_grammar"]["sections"]["b"].pop("progression_variant")
+    with pytest.raises(MusicalTransitionError,match="requires an explicit S30 progression_variant"):
+        realize_musical_transitions(ir)
+
+
+def test_s31_destination_binding_rejects_out_of_range_progression_index():
+    ir=_ir_with_s30_destination([_bound_ab_transition(9)])
+    with pytest.raises(MusicalTransitionError,match="outside b_arrival length 4"):
+        realize_musical_transitions(ir)
+
+
+def test_s31_expressive_contract_accepts_binding_and_rejects_ambiguous_dual_target():
+    good=_bound_ab_transition(1)
+    plan=expressive_score_plan_from_dict(_plan_for_validation(good))
+    validate_expressive_score_plan(plan,_validation_context())
+
+    bad=deepcopy(good)
+    bad["harmonic_anticipation"]["target_degree"]=4
+    plan=expressive_score_plan_from_dict(_plan_for_validation(bad))
+    with pytest.raises(ExpressivePlanValidationError,match="exactly one of target_degree or arrival_binding"):
+        validate_expressive_score_plan(plan,_validation_context())

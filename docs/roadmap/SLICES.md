@@ -86,3 +86,12 @@ Composer Agent-authored section progression variants with deterministic referenc
 Engineering gate: **97 test files / 651/651 PASS**, distribution/build validation PASS.
 
 Perceptual gate: `Threadline at First Light` RMS-matched S29 baseline vs S30 harmonic treatment — USER PASS / CLOSED 2026-09-23.
+
+## CLOSED — v1.17 S31 Destination-Bound Transition / Boundary Arrival Lineage
+
+Performance IR may bind an explicitly authored E5 harmonic anticipation to a specific index of the destination section's explicit S30 progression variant. The runtime validates and resolves only that authored pointer; it does not infer or generate cadential harmony. Legacy explicit `target_degree` remains supported.
+
+Engineering gate: **98 test files / 659/659 PASS**; focused S31+E5+S30+S29+S15+S27-M R2 **52/52 PASS**; distribution/build validation PASS.
+
+Perceptual gate: `Threadline at First Light` S30 baseline vs destination-bound transition A/B — USER PASS / CLOSED 2026-09-23.
+
