@@ -76,4 +76,13 @@ Composer Agent-authored cross-section motif variants with deterministic identity
 
 Engineering gate: **96 test files / 644/644 PASS**, distribution/build validation PASS.
 
-Perceptual gate: `Threadline at First Light` controlled full-song A/B — USER PASS / CLOSED 2026-09-22.
+Perceptual gate: `Threadline at First Light` controlled full-song A/B — USER PASS / CLOSED 2026-09-22. Merged to GitHub `main` via PR #9; post-merge CI #40 SUCCESS.
+
+
+## CLOSED — v1.17 S30 Harmonic Narrative / Section Progression Lineage
+
+Composer Agent-authored section progression variants with deterministic reference validation, shared pad/bass/arp routing, local section indexing, and progression-lineage evidence. The engine does not generate or auto-select progressions.
+
+Engineering gate: **97 test files / 651/651 PASS**, distribution/build validation PASS.
+
+Perceptual gate: `Threadline at First Light` RMS-matched S29 baseline vs S30 harmonic treatment — USER PASS / CLOSED 2026-09-23.

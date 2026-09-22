@@ -24,7 +24,7 @@ The brief contains concrete decisions rather than labels that the engine expands
 - BPM and meter
 - root / scale
 - section energy targets
-- progression degrees
+- progression degrees and, when needed, explicit section progression variants
 - motif intervals and motif rhythm
 - kick/snare/hat groove cells
 - swing / humanization / bass coupling
@@ -50,3 +50,8 @@ Examples:
 ## Agent revision loop
 
 Analyzer findings are evidence for the Agent, not an invitation for an opaque auto-composer to rewrite the piece. The Agent decides whether the correct upstream change is in the brief, arrangement, transition, timbre, or mix.
+
+
+## Section harmonic narrative
+
+When the form needs a goal-directed harmonic arc, progression variants are authored by the Composer Agent as explicit scale-degree sequences. The deterministic engine may route and validate those sequences, but it must not invent a progression because a section is named `chorus`, `bridge`, `final`, or because an analyzer reports low contrast.

@@ -1,11 +1,11 @@
 {
   "status": "ACTIVE_ALLOWLIST_FOR_POST_V116_FEATURE_WORK",
   "purpose": "Preserve the historical v1.16 runtime baseline while requiring every intentional modification of a baseline file in later feature slices to be explicit and hash-pinned.",
-  "slice": "Post-v1.16 through S29 Thematic Arc / Cross-Section Motif Lineage on S27-M R2 closed baseline",
+  "slice": "Post-v1.16 through S30 Harmonic Narrative / Section Progression Lineage on locally closed S29 baseline",
   "files": {
     "src/code_composer/agent/composition_brief.py": {
-      "sha256": "0c9bf88cb16edacb38b5acf3cc380ae3d349f91ea39fd52bb90af98c509ae85b",
-      "reason": "S29 validates explicit motif_variants and section motif_variant references, computes existing E2 identity metrics, and enforces only an explicitly authored identity_hard_min. Existing sound-palette and prior brief contracts remain intact."
+      "sha256": "0b27f685ff9d1bde4c7dcfbc8ce2ba292a657b50af6cfefbe27d2767923011d6",
+      "reason": "S29 motif-variant validation retained. S30 adds explicit progression_variants validation and rejects unknown section progression_variant references; the engine still performs no natural-language or style-driven harmonic inference."
     },
     "src/code_composer/audio/instrument.py": {
       "sha256": "ce4e30a415efa0596817c6bfaea42cb7a820b87f149e737bd6e0d224b217e7d0",
@@ -20,20 +20,20 @@
       "reason": "S18/S19 mixer semantics and S27 stateful drum behavior retained. S28-B attaches deterministic per-strike piano identity on render-local event copies. S28-C applies explicitly authored piano_attack_offset_ms hand/chord attack timing on render-local piano notes without mutating canonical score onsets."
     },
     "src/code_composer/validation_contracts.py": {
-      "sha256": "8e9b0878e2293e17e96085d691d266dfbe58ff8359451e05f75f38188a8e7fdb",
-      "reason": "S29 extends development validation with non-empty motif_variant IDs and rejects runtime references to unknown motifs before arrangement; prior S27/S28 control-event validation remains intact."
+      "sha256": "2d4e0ba3df94eb5cdaa5b84dad22c5f78a8d1d277beb202cd097380f6ca16c46",
+      "reason": "S29 motif reference validation retained. S30 extends harmonic profiles with non-empty progression_variant IDs and rejects runtime references to unknown song-local progressions before arrangement."
     },
     "src/code_composer/agent/composer_planner.py": {
-      "sha256": "a630f7855e36fc243c9a7fc8f5443fa274d74755450cf62d55e85551a1ceb4a4",
-      "reason": "S29 materializes explicit Composer-authored motif variants into the song-local motif library, computes deterministic structural identity against canonical main, and records target/hard-min evidence without generating variants automatically."
+      "sha256": "673b602a8cd32d43b73736b092eb6cfb8437a6d0b818085fd02d578bdeba7d0f",
+      "reason": "S29 motif materialization retained. S30 materializes explicit Composer-authored progression variants with home provenance; no progression is generated or auto-selected."
     },
     "src/code_composer/reference/schemas/composition_brief.schema.json": {
-      "sha256": "362f1f7bc61e5db7394f06c688919ad2586d29218c38874d0923399ed5bf5421",
-      "reason": "S29 mirrors explicit materials.motif_variants and development motif_variant selection in the packaged reference schema."
+      "sha256": "43bf47aa333381d41b45ba0cfc386865b79f73d8a255b0c4af83ef1a8314018e",
+      "reason": "Packaged Composition Brief schema mirrors S29 motif variants plus S30 materials.progression_variants and harmony progression_variant selection."
     },
     "schemas/composition_brief.schema.json": {
-      "sha256": "362f1f7bc61e5db7394f06c688919ad2586d29218c38874d0923399ed5bf5421",
-      "reason": "S29 mirrors explicit materials.motif_variants and development motif_variant selection in the standalone agent-facing schema."
+      "sha256": "43bf47aa333381d41b45ba0cfc386865b79f73d8a255b0c4af83ef1a8314018e",
+      "reason": "Standalone Composition Brief schema mirrors S29 motif variants plus S30 materials.progression_variants and harmony progression_variant selection."
     },
     "src/code_composer/agent/expressive_score_plan.py": {
       "sha256": "59922e8889958d178af8bcbf43f6827957e3393483bb3ce8bceaf3132b937a7e",
@@ -100,12 +100,20 @@
       "reason": "S29 reports per-section motif lineage, identity score/floor/target evidence, plus family-level distinct motif count and minimum identity; analysis remains evidence-only."
     },
     "src/code_composer/composition/arrange.py": {
-      "sha256": "d174b0c085277be2fd02cee331883be27246e26061ea85b3b8b036725d9c1e1a",
-      "reason": "S29 routes an explicitly selected section motif variant through the existing deterministic phrase arranger and records event/section lineage. Absent motif_variant preserves the prior motif path."
+      "sha256": "75de985dfb2ece2be8751abc286d81d774120cddd5ebd18d089252e3f8a92dd2",
+      "reason": "S29 motif routing retained. S30 routes an explicitly selected section progression consistently to pad/bass/arp, uses local section indexing only when selected, and preserves the historical progression path when absent."
     },
     "src/code_composer/composition/development.py": {
       "sha256": "57723eeda0463eec5d212d636101ad8d9ea02534079b84d8629819a9c6fbe460",
       "reason": "S29 passes explicit development.motif_variant selection into the effective section profile; it does not infer or generate thematic variants."
+    },
+    "src/code_composer/composition/harmonic_grammar.py": {
+      "sha256": "0abcd0a8c895d80df7e188c6cf4e3457c79f67f7957313d628f5ccb9f7581b42",
+      "reason": "S30 adds the deterministic progression_for_section selector. It returns historical global progression behavior when no explicit section progression_variant is authored."
+    },
+    "src/code_composer/analysis/harmonic_analysis.py": {
+      "sha256": "946d937fd9e7612140ad65024b5d3bf2128da5e80cdfc768f727a8cc12ae66ba",
+      "reason": "S30 adds evidence-only progression lineage reporting when annotated and hardens harmony analysis to ignore non-note piano_control events."
     }
   }
 }

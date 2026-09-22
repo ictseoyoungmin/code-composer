@@ -256,6 +256,21 @@ def validate_brief(brief: CompositionBrief, seed_ir: dict) -> None:
     motif_rhythm=list(brief.materials.get('motif_rhythm',[]))
     if len(progression)<2 or any(not isinstance(x,int) or x<1 or x>14 for x in progression):
         raise BriefValidationError('progression must contain scale degrees 1..14')
+
+    progression_variants=brief.materials.get('progression_variants',{})
+    if not isinstance(progression_variants,dict):
+        raise BriefValidationError('materials.progression_variants must be an object')
+    for variant_id,spec in progression_variants.items():
+        if not isinstance(variant_id,str) or not variant_id.strip() or variant_id=='home':
+            raise BriefValidationError('progression variant IDs must be non-empty strings other than home')
+        if not isinstance(spec,dict):
+            raise BriefValidationError(f'progression_variants.{variant_id} must be an object')
+        extra=set(spec)-{'degrees'}
+        if extra:
+            raise BriefValidationError(f'progression_variants.{variant_id} has unknown field(s): {sorted(extra)}')
+        degrees=list(spec.get('degrees',[]))
+        if len(degrees)<2 or any(not isinstance(x,int) or x<1 or x>14 for x in degrees):
+            raise BriefValidationError(f'progression_variants.{variant_id}.degrees must contain scale degrees 1..14')
     if len(motif)<3 or any(not isinstance(x,int) for x in motif):
         raise BriefValidationError('motif must contain at least 3 integer scale offsets')
     if len(motif_rhythm)!=len(motif) or any(float(x)<=0 for x in motif_rhythm):
@@ -333,6 +348,16 @@ def validate_brief(brief: CompositionBrief, seed_ir: dict) -> None:
     colors=brief.harmony.get('colors',[])
     if not colors or any(c not in COLOR_DEGREE_OFFSETS for c in colors):
         raise BriefValidationError(f'harmony colors must be one of {sorted(COLOR_DEGREE_OFFSETS)}')
+
+    known_progressions=set(progression_variants)
+    harmony_profiles=[('harmony',brief.harmony)]
+    harmony_profiles += [(f'harmony.sections.{sid}',profile) for sid,profile in brief.harmony.get('sections',{}).items()]
+    for name,profile in harmony_profiles:
+        if isinstance(profile,dict) and profile.get('progression_variant') is not None:
+            if profile['progression_variant'] not in known_progressions:
+                raise BriefValidationError(
+                    f'{name}.progression_variant references unknown progression variant: {profile["progression_variant"]}'
+                )
 
     dev=brief.development.get('sections',{})
     if set(dev)-section_ids:

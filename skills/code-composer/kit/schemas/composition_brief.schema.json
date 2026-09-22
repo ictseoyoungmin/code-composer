@@ -245,6 +245,27 @@
               }
             }
           }
+        },
+        "progression_variants": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "required": [
+              "degrees"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "degrees": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 14
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -617,9 +638,17 @@
                 "type": "number",
                 "minimum": 0,
                 "maximum": 2
+              },
+              "progression_variant": {
+                "type": "string",
+                "minLength": 1
               }
             }
           }
+        },
+        "progression_variant": {
+          "type": "string",
+          "minLength": 1
         }
       }
     },

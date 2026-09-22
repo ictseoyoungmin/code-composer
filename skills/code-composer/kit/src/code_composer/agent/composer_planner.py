@@ -132,6 +132,11 @@ def apply_composer_plan(seed_ir: dict, plan: ComposerPlan) -> dict:
     mats.setdefault('progressions',{})['home']={
         'degrees': list(plan.materials['progression'])
     }
+    for variant_id,spec in plan.materials.get('progression_variants',{}).items():
+        mats['progressions'][variant_id]={
+            'degrees':list(spec['degrees']),
+            'source_progression_id':'home',
+        }
     mats.setdefault('rhythms',{})['composer']=deepcopy(plan.rhythm['groove'])
 
     arrangement=out.setdefault('arrangement',{})
