@@ -1,14 +1,14 @@
 {
   "project": "Code Composer",
   "version": "1.17.0",
-  "source_baseline": "source-first GitHub main@4c11e120d5b259bd2724103ef2b0f2ba2b616a90 + recovered ZIP-first engine lineage through S28-H + S27-M R2 perceptual closure",
+  "source_baseline": "GitHub main@47573d81fdf75c47f7c1522910902c37fdbb8f8b (S27-M R2 CLOSED) + S29 Thematic Arc CLOSED / perceptual PASS",
   "engine_state": {
     "S27_B_two_cymbal_hihat": "CLOSED_R1_USER_PASS",
     "S27_C_snare_articulations": "CLOSED",
     "S27_D_tom_family": "CLOSED",
     "S27_F_drummer_performance_validator": "CLOSED",
     "S27_G_shared_kit_room_final_integration": "CLOSED",
-    "perceptual_gate": "CLOSED_S27_M_R2_USER_PASS_2026_09_22",
+    "perceptual_gate": "CLOSED_S29_THEMATIC_ARC_USER_PASS_2026_09_22",
     "S27_H_stateful_hihat_closure": "CLOSED",
     "S27_I_continuous_hihat_pedal": "CLOSED",
     "S27_J_persistent_hihat_strike_state": "CLOSED",
@@ -22,10 +22,11 @@
     "S28_F_piano_phrase_safe_ducking": "ENGINEERING_AUDIT_CANDIDATE",
     "S28_G_treble_unison_subtle": "ACCEPTED_PRODUCTION_CANDIDATE_USER_PROCEEDED",
     "S28_H_piano_naturalism_production_closure": "ENGINEERING_CANDIDATE_PERCEPTUAL_GATE_OPEN",
+    "S29_thematic_arc_cross_section_motif_lineage": "CLOSED_USER_PASS",
     "S27_M_ensemble_production_integration": "CLOSED_R2_USER_PASS"
   },
   "validation_record": {
-    "repository_tests": "636/636 PASS (95 test files; S27-M R2 source snapshot before GitHub history-preservation merge)",
+    "repository_tests": "589/589 PASS (87 test files; S27-L full-song production candidate)",
     "s27g_focused": "7/7 PASS",
     "s27f_focused": "9/9 PASS",
     "s27g_flagship_replay": "269 events; 189 hands / 65 right foot / 15 left foot; playable=true; strained=false; issues=0/0/0",
@@ -61,7 +62,7 @@
     "s28b_identity_evidence": "8 identical C4 attacks: static first-vs-later correlation mean ~0.9999998; opt-in per-strike mean ~0.99219; same score/seed deterministic.",
     "s28c_hand_attack": "explicit piano_attack_offset_ms bounded ±20 ms; representative wide chord 0/4/8/11/13/15 ms.",
     "s28d_phrase_timing": "existing E1 timing_curve_ms + gate_curve; random microtiming and velocity variation disabled in naturalism dogfood.",
-    "repository_current": "95 test files / 636/636 PASS (S27-M R2 clean source validation; GitHub PR/post-merge CI also PASS)",
+    "repository_current": "96 test files / 644/644 PASS (local S29 engineering candidate)",
     "s28b_to_d_related": "piano/contract/factory related 114/114 PASS",
     "s28d_control_integration": "explicit piano_control survives performance/orchestration realization without note-only orchestration metadata",
     "s28_flagship": "24 kHz / 92 BPM; identical score and S28-A R2 pedal timeline; treatment adds S28-B/C/D only; random microtiming=false",
@@ -75,10 +76,13 @@
     "s28h_control_fix": "E1 phrase realization skips *_control events byte-preserved; no note velocity/gate/timing/performance metadata and no breath deletion",
     "s28h_focused": "S28-A-H+piano focused 84/84 PASS; contract/package related 80/80 PASS",
     "s28h_full_repository": "94 test files / 629/629 PASS (partitioned); failure 0",
-    "s27m_r2_focused": "S15 + S27-M R2 focused 22/22 PASS",
-    "s27m_r2_maintenance": "maintenance/package/contract gate PASS; standalone self-check / Skill validation / plugin distribution / compileall / Skill+Codex+Claude builds PASS",
-    "s27m_r2_full_song": "Crossing Meridian: 24 kHz / 112 BPM / 12 bars / 27.91425 s; piano 121 / bass 46 / violin 42 / drums 175; A RMS 0.1585459155 -> B 0.1581531034; B clipping 0",
-    "s27m_r2_perceptual": "USER PASS / CLOSED 2026-09-22"
+    "s29_focused": "S15 + S27-M R2 + S29 focused 29/29 PASS",
+    "s29_full_repository": "96 test files / 644/644 PASS; failure 0",
+    "s29_distribution": "self_check / validate_skill / verify_plugin_distribution / compileall / Skill+Codex+Claude builds PASS",
+    "s29_flagship": "Threadline at First Light: 24 kHz / 112 BPM / 16 bars / 36.485708 s; 91 lead events; 27 pitch changes vs control; support events exact; lead timing/duration/velocity exact; A RMS 0.09664456 -> B 0.09661606; clipping 0",
+    "s29_identity": "verse 0.816429 / pre 0.673929 / chorus 0.810000 / return 0.905000 / final 0.827857; every authored identity floor met",
+    "s29_control_hardening": "S15 leader/timing/overlap interaction skips explicit *_control events so control surfaces remain byte-preserved",
+    "s29_perceptual": "USER PASS / CLOSED 2026-09-22"
   },
   "repository_hygiene": {
     "canonical_skill": "skills/code-composer/",
@@ -86,9 +90,9 @@
     "generated_audio_removed_from_source_candidate": true,
     "historical_root_evidence_moved_under_docs": true
   },
-  "note": "PR #6 reconciled ZIP-first development through S27-M R2 onto GitHub main. Draft PR #5 was superseded and closed. S27-M R2 received user perceptual PASS on 2026-09-22 and is CLOSED.",
+  "note": "S29 is CLOSED after user perceptual PASS on 2026-09-22 and is ready for GitHub PR/merge.",
   "validation": {
-    "repository_tests": "629/629 PASS (94 test files; partitioned)",
+    "repository_tests": "644/644 PASS (96 test files; local S29 candidate)",
     "s28a_r2": "user perceptual PASS / CLOSED",
     "s28b_to_s28d_focused": "114/114 PASS before full-suite closure; S28-A-D core 27/27 PASS at slice integration checkpoint",
     "s28d_orchestration_control_cross_feature": "PASS; explicit *_control events survive E4 budget realization unchanged",
@@ -99,7 +103,8 @@
     "s27br1_hihat_reopen": "Original S27-B normalized broadband collision output identified as felt/fabric-like production texture. New modal_plate_excitation_v2 converts re-contact into finite mechanical force that excites dense inharmonic plate modes; 15s Cobalt Pulse rerender uses identical arrangement/seed/mix.",
     "s27l_full_song": "Cobalt Meridian full-form dogfood: 24 kHz / 112 BPM / Intro→Verse→Pre→Chorus→Outro / 175 drum events / S27-F clean / clipping 0. Next audible bottleneck must come from user production listening.",
     "s28a_piano_pedal": "Explicit acoustic sustain-pedal state owns down/up/repedal timing. Key-off while pedal-down is extended only to the next pedal-up crossing, then normal S14 damper release applies; later repedal does not resurrect damped energy.",
-    "s28_piano_naturalism": "Integrated flagship compares identical score + identical S28-A R2 pedal timeline against S28-B per-strike identity + S28-C authored chord hand-roll + S28-D authored phrase timing/gate."
+    "s28_piano_naturalism": "Integrated flagship compares identical score + identical S28-A R2 pedal timeline against S28-B per-strike identity + S28-C authored chord hand-roll + S28-D authored phrase timing/gate.",
+    "s29_thematic_arc": "Threadline at First Light controlled A/B changes only explicit Composer-authored section motif pitch lineage; support events and lead timing/duration/velocity are identical; user perceptual gate remains open."
   },
-  "current_slice": "S27-M R2 CLOSED — next slice selection pending"
+  "current_slice": "S29 CLOSED — next slice selection pending"
 }

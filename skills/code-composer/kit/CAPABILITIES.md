@@ -15,6 +15,11 @@
 
 Code Composer does not use bundled musical examples to choose style or content. Musical decisions remain agent/user/context driven.
 
+## S29 thematic arc / cross-section motif lineage
+
+The Composition Brief may carry explicit agent-authored motif variants and assign them to formal sections. The engine does not invent or select variants: it validates complete authored interval/rhythm material, measures structural identity against the canonical motif, enforces only an explicit hard minimum, routes the selected material through the existing deterministic arranger, and exposes section/event lineage evidence for QA. This lets repeated formal material develop recognizably without relying only on density/register changes.
+
+
 | Instrument engines | Registry-routed deterministic pitched-instrument engines; current built-ins: generic, piano, bowed_string, bowed_waveguide, plucked_bass, percussion | `contracts/instrument-engines.md` |
 
 ## Factory preset system

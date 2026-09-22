@@ -68,3 +68,12 @@ Causal sustained bowed-waveguide note rendering and `modeled_open` preset.
 ## CLOSED — v1.17 S6 Continuous Bowed-String State & Bow-Change Transients
 
 Same-string waveguide state persists across realized notes and planned bow direction changes are rendered as finite velocity reversals. Double-stop continuous state and physical string-crossing overlap remain future slices.
+
+
+## CLOSED — v1.17 S29 Thematic Arc / Cross-Section Motif Lineage
+
+Composer Agent-authored cross-section motif variants with deterministic identity measurement, explicit section routing, and lineage evidence. The engine does not generate or auto-select variants.
+
+Engineering gate: **96 test files / 644/644 PASS**, distribution/build validation PASS.
+
+Perceptual gate: `Threadline at First Light` controlled full-song A/B — USER PASS / CLOSED 2026-09-22.

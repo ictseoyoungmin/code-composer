@@ -1,11 +1,11 @@
 {
   "status": "ACTIVE_ALLOWLIST_FOR_POST_V116_FEATURE_WORK",
   "purpose": "Preserve the historical v1.16 runtime baseline while requiring every intentional modification of a baseline file in later feature slices to be explicit and hash-pinned.",
-  "slice": "Post-v1.16 through S27-M R2 ensemble production integration on S28-H baseline",
+  "slice": "Post-v1.16 through S29 Thematic Arc / Cross-Section Motif Lineage on S27-M R2 closed baseline",
   "files": {
     "src/code_composer/agent/composition_brief.py": {
-      "sha256": "aea59e60d0c0b0a7815ae3584c1927980bbc98101cc57f540a42306a11efc171",
-      "reason": "S17 allows the drums sound-palette role to select an explicit versioned percussion factory preset while retaining direct drum_graph authoring and deterministic validation."
+      "sha256": "0c9bf88cb16edacb38b5acf3cc380ae3d349f91ea39fd52bb90af98c509ae85b",
+      "reason": "S29 validates explicit motif_variants and section motif_variant references, computes existing E2 identity metrics, and enforces only an explicitly authored identity_hard_min. Existing sound-palette and prior brief contracts remain intact."
     },
     "src/code_composer/audio/instrument.py": {
       "sha256": "ce4e30a415efa0596817c6bfaea42cb7a820b87f149e737bd6e0d224b217e7d0",
@@ -20,20 +20,20 @@
       "reason": "S18/S19 mixer semantics and S27 stateful drum behavior retained. S28-B attaches deterministic per-strike piano identity on render-local event copies. S28-C applies explicitly authored piano_attack_offset_ms hand/chord attack timing on render-local piano notes without mutating canonical score onsets."
     },
     "src/code_composer/validation_contracts.py": {
-      "sha256": "86d0dd93e6cd9c9117c62a2739c2b9633ce6dffe1713ff6c589cd498142b423b",
-      "reason": "Existing runtime contracts retained. S28-A validates explicit sustain-pedal curves. S28-C additionally validates bounded explicit piano_attack_offset_ms performance timing and rejects offsets that move notes before beat zero."
+      "sha256": "8e9b0878e2293e17e96085d691d266dfbe58ff8359451e05f75f38188a8e7fdb",
+      "reason": "S29 extends development validation with non-empty motif_variant IDs and rejects runtime references to unknown motifs before arrangement; prior S27/S28 control-event validation remains intact."
     },
     "src/code_composer/agent/composer_planner.py": {
-      "sha256": "e2f3923e97f818d64a73e2b415ed0f059bac21aa08ddac89c60b01e3f4d2923e",
-      "reason": "Materialize selected factory presets into explicit song-local instrument patches during plan application."
+      "sha256": "a630f7855e36fc243c9a7fc8f5443fa274d74755450cf62d55e85551a1ceb4a4",
+      "reason": "S29 materializes explicit Composer-authored motif variants into the song-local motif library, computes deterministic structural identity against canonical main, and records target/hard-min evidence without generating variants automatically."
     },
     "src/code_composer/reference/schemas/composition_brief.schema.json": {
-      "sha256": "400ef05f5d04781911c5aa12b3aa3a6a1999f4524153c465e31815bd7d83085e",
-      "reason": "Extend the agent-authored brief contract with preset_id, preset_version, and patch_overrides."
+      "sha256": "362f1f7bc61e5db7394f06c688919ad2586d29218c38874d0923399ed5bf5421",
+      "reason": "S29 mirrors explicit materials.motif_variants and development motif_variant selection in the packaged reference schema."
     },
     "schemas/composition_brief.schema.json": {
-      "sha256": "400ef05f5d04781911c5aa12b3aa3a6a1999f4524153c465e31815bd7d83085e",
-      "reason": "Mirror the S2 composition-brief preset selection contract in the standalone agent-facing schema."
+      "sha256": "362f1f7bc61e5db7394f06c688919ad2586d29218c38874d0923399ed5bf5421",
+      "reason": "S29 mirrors explicit materials.motif_variants and development motif_variant selection in the standalone agent-facing schema."
     },
     "src/code_composer/agent/expressive_score_plan.py": {
       "sha256": "59922e8889958d178af8bcbf43f6827957e3393483bb3ce8bceaf3132b937a7e",
@@ -94,6 +94,18 @@
     "src/code_composer/composition/orchestration_budget.py": {
       "sha256": "2471cf91a7cd36f926c577b012ab26af0655deefea20d2b41929b32eedc66092",
       "reason": "Existing E4 orchestration budgets retained. S28-D integration hardening passes explicit *_control events through budget realization unchanged so piano/drum control surfaces are not decorated or arbitrated as sounding note events."
+    },
+    "src/code_composer/analysis/form_development_analysis.py": {
+      "sha256": "139ccc66d95af25a6f4ae1484ebac73b5867a0ee19ac9b9028c97378d6475181",
+      "reason": "S29 reports per-section motif lineage, identity score/floor/target evidence, plus family-level distinct motif count and minimum identity; analysis remains evidence-only."
+    },
+    "src/code_composer/composition/arrange.py": {
+      "sha256": "d174b0c085277be2fd02cee331883be27246e26061ea85b3b8b036725d9c1e1a",
+      "reason": "S29 routes an explicitly selected section motif variant through the existing deterministic phrase arranger and records event/section lineage. Absent motif_variant preserves the prior motif path."
+    },
+    "src/code_composer/composition/development.py": {
+      "sha256": "57723eeda0463eec5d212d636101ad8d9ea02534079b84d8629819a9c6fbe460",
+      "reason": "S29 passes explicit development.motif_variant selection into the effective section profile; it does not infer or generate thematic variants."
     }
   }
 }
