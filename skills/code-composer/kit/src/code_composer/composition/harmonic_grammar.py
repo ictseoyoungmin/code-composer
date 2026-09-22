@@ -54,3 +54,10 @@ def passing_spec(profile, slot_index, slot_count):
         "color": profile.get("passing_color","sus4"),
         "velocity_scale": float(profile.get("passing_velocity",0.62)),
     }
+
+def progression_for_section(ir, section_id, default_progression_id):
+    profile=section_harmonic_profile(ir,section_id)
+    progression_id=profile.get("progression_variant")
+    if progression_id is None:
+        return ir["materials"]["progressions"][default_progression_id], default_progression_id, False
+    return ir["materials"]["progressions"][progression_id], progression_id, True

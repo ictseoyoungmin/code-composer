@@ -4,7 +4,7 @@ from .phrase import PhraseConfig, compose_phrase
 from .rhythm import GrooveConfig, generate_rhythm_events, coupled_bass_pattern
 from .bass_articulation import articulate_bass
 from .topline import resolve_topline
-from .harmonic_grammar import color_chord, voice_color_chord, section_harmonic_profile, color_for_slot, passing_spec
+from .harmonic_grammar import color_chord, voice_color_chord, section_harmonic_profile, color_for_slot, passing_spec, progression_for_section
 from ..core.theory import scale_degree_to_midi, triad_from_degree, nearest_inversion
 from ..core.constraints import enforce_forbidden_track_events
 
@@ -41,10 +41,10 @@ def _chord_events(ir, section, profile, source):
     beats_per_bar=ir["transport"]["beats_per_bar"]
     start_beat=section["start_bar"]*beats_per_bar
     total_beats=section["bars"]*beats_per_bar
-    prog=ir["materials"]["progressions"][source["progression"]]
+    prog, progression_id, local_progression = progression_for_section(ir,section["id"],source["progression"])
     chord_beats=float(source.get("chord_beats", beats_per_bar))
     cursor=0.0
-    idx=section["start_bar"] % len(prog["degrees"])
+    idx=0 if local_progression else section["start_bar"] % len(prog["degrees"])
     previous=None
     events=[]
 
@@ -90,6 +90,7 @@ def _chord_events(ir, section, profile, source):
                 "harmonic_slot": slot_index,
                 "harmonic_chord_id": chord_id,
                 "harmonic_passing": False,
+                **({"harmonic_progression_id":progression_id,"harmonic_progression_variant":True} if local_progression else {}),
             })
         previous=voiced
 
@@ -123,6 +124,7 @@ def _chord_events(ir, section, profile, source):
                         "harmonic_slot":slot_index,
                         "harmonic_chord_id":pid,
                         "harmonic_passing":True,
+                        **({"harmonic_progression_id":progression_id,"harmonic_progression_variant":True} if local_progression else {}),
                     })
                 previous=pvoiced
 
@@ -137,11 +139,12 @@ def _bass_events(ir, section, profile, source, coupled_offsets=None):
     root=ir["tonal"]["root"]
     scale=ir["tonal"]["scale"]
     beats_per_bar=ir["transport"]["beats_per_bar"]
-    prog=ir["materials"]["progressions"][source["progression"]]
+    prog, progression_id, local_progression = progression_for_section(ir,section["id"],source["progression"])
     events=[]
     for local_bar in range(section["bars"]):
         global_bar=section["start_bar"]+local_bar
-        degree=prog["degrees"][global_bar % len(prog["degrees"])]
+        degree_index=local_bar if local_progression else global_bar
+        degree=prog["degrees"][degree_index % len(prog["degrees"])]
         midi=scale_degree_to_midi(root, scale, degree, int(source.get("octave",2)))
         pattern = None
         if coupled_offsets and global_bar in coupled_offsets:
@@ -157,6 +160,7 @@ def _bass_events(ir, section, profile, source, coupled_offsets=None):
                 "section_id": section["id"],
                 "arrangement_role": "bass",
                 "rhythm_coupled": bool(coupled_offsets and global_bar in coupled_offsets),
+                **({"harmonic_progression_id":progression_id,"harmonic_progression_variant":True} if local_progression else {}),
             })
     return events
 
@@ -166,13 +170,14 @@ def _arp_events(ir, section, profile, source):
     root=ir["tonal"]["root"]
     scale=ir["tonal"]["scale"]
     beats_per_bar=ir["transport"]["beats_per_bar"]
-    prog=ir["materials"]["progressions"][source["progression"]]
+    prog, progression_id, local_progression = progression_for_section(ir,section["id"],source["progression"])
     events=[]
     step=float(source.get("step_beats",0.5))
     pattern=source.get("degree_offsets",[0,2,4,2,6,4,2,0])
     for local_bar in range(section["bars"]):
         global_bar=section["start_bar"]+local_bar
-        degree=prog["degrees"][global_bar % len(prog["degrees"])]
+        degree_index=local_bar if local_progression else global_bar
+        degree=prog["degrees"][degree_index % len(prog["degrees"])]
         local=0.0
         i=0
         while local < beats_per_bar - 1e-9:
@@ -185,6 +190,7 @@ def _arp_events(ir, section, profile, source):
                 "velocity": float(source.get("velocity",0.36))*profile["energy"],
                 "section_id": section["id"],
                 "arrangement_role": "arp",
+                **({"harmonic_progression_id":progression_id,"harmonic_progression_variant":True} if local_progression else {}),
             })
             local += step
             i += 1

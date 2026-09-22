@@ -1,3 +1,14 @@
+## S30 — Harmonic Narrative / Section Progression Lineage — CLOSED
+- Adds explicit `materials.progression_variants` and `harmony.sections.<id>.progression_variant`.
+- Progression variants are complete Composer Agent-authored scale-degree paths; the runtime never generates or auto-selects them.
+- Explicit section variants reset at the section boundary and are routed consistently to pad, bass, and arp while the historical global progression path remains unchanged when S30 fields are absent.
+- Treated harmonic events record progression lineage; harmony analysis reports the explicit degree path when lineage is present.
+- Harmony analysis now ignores non-note `piano_control` events instead of treating sustain-pedal controls as chords.
+- Flagship `Threadline at First Light`: 16 bars / 24 kHz / 112 BPM / 36.485708 s; lead+drums exact A/B identity; piano 38 and bass 33 pitch events differ only from explicit section progression routing; clipping 0.
+- Engineering validation: **97 test files / 651/651 PASS**; focused S30+S29+S15+S27-M R2 **36/36 PASS**; self-check, Skill validation, plugin distribution, compileall and Skill/Codex/Claude builds PASS.
+- Audition includes raw-level and RMS-matched A/B; B requires -0.545 dB matching gain.
+- User perceptual PASS on 2026-09-23 closes S30; RMS-matched `Threadline at First Light` A/B remains the closure evidence.
+
 ## S29 — Thematic Arc / Cross-Section Motif Lineage — CLOSED
 - Extends Composition Brief with explicit agent-authored `materials.motif_variants`; each variant supplies complete intervals/rhythm plus soft identity floor and optional hard minimum.
 - Adds explicit `development.sections.<id>.motif_variant` routing; the engine never invents or auto-selects thematic material.
@@ -8,7 +19,7 @@
 - Engineering validation: **96 test files / 644/644 PASS**; focused S15+S27-M R2+S29 **29/29 PASS**; self-check, Skill validation, plugin distribution, compileall and Skill/Codex/Claude builds PASS.
 - User perceptual PASS on 2026-09-22 closes S29; `Threadline at First Light` remains the controlled closure evidence.
 - Full-song `Threadline at First Light`: 16 bars / 24 kHz / 112 BPM / 36.485708 s; support event identity exact; lead timing/duration/velocity identity exact; 27/91 lead pitches differ only through explicit section motif variants; A/B RMS 0.09664456/0.09661606; clipping 0.
-- Status: **ENGINEERING CANDIDATE / PERCEPTUAL GATE OPEN** pending user listening.
+- Status: **CLOSED / PERCEPTUAL PASS** on 2026-09-22.
 
 
 ## S27-M R2 — Ensemble / Production Integration (reopened on S28-H baseline)

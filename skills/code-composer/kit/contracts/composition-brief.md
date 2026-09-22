@@ -10,3 +10,10 @@ Validate against `kit/schemas/composition_brief.schema.json`. Do not invent fiel
 A Composition Brief may provide optional `materials.motif_variants`. Each variant is complete agent-authored musical material (`intervals` + `rhythm`) plus an `identity_floor` and optional `identity_hard_min`. A section selects one only through explicit `development.sections.<id>.motif_variant`.
 
 The runtime does not generate, infer, or choose variants. It measures lineage against the canonical `main` motif, enforces only the authored hard minimum, and records the resulting identity evidence in resolved arrangement metadata. If no variant is authored/selected, the legacy single-motif arrangement path is preserved.
+
+
+## Explicit harmonic progression variants
+
+A Composition Brief may provide optional `materials.progression_variants`. Each variant is a complete Composer Agent-authored scale-degree path (`degrees`). A section selects one only through explicit `harmony.sections.<id>.progression_variant` (or the harmony default when intentionally shared).
+
+The runtime does not generate, infer, optimize, or auto-select progression variants. It materializes them as song-local progression objects, validates every reference, and routes the same selected section progression to pad, bass, and arp roles so harmonic ownership cannot drift between accompaniment layers. When no progression variant is selected, historical global-progression indexing is preserved.

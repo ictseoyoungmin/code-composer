@@ -118,7 +118,8 @@ def validate_development_config(cfg, section_ids, *, runtime=False):
 
 _HARMONY_PROFILE_KEYS={
     "colors","cadence_color","normalize_density","motion_weight","center_weight",
-    "passing_enabled","passing_degree_offset","passing_beats","passing_color","passing_velocity"
+    "passing_enabled","passing_degree_offset","passing_beats","passing_color","passing_velocity",
+    "progression_variant"
 }
 def _validate_color(c,name):
     if c not in COLOR_DEGREE_OFFSETS:
@@ -143,6 +144,9 @@ def _validate_harmony_profile(profile,name,require_colors=False):
     if "passing_beats" in profile: _num(profile["passing_beats"],f"{name}.passing_beats",0.01,16)
     if "passing_color" in profile: _validate_color(profile["passing_color"],f"{name}.passing_color")
     if "passing_velocity" in profile: _num(profile["passing_velocity"],f"{name}.passing_velocity",0,2)
+    if "progression_variant" in profile:
+        if not isinstance(profile["progression_variant"],str) or not profile["progression_variant"].strip():
+            raise ContractValidationError(f"{name}.progression_variant must be a non-empty string")
 
 def validate_brief_harmony(harmony, section_ids):
     _object(harmony,"harmony")
@@ -421,6 +425,21 @@ def validate_development_motif_refs(ir):
             raise ContractValidationError(f"{name}.motif_variant references unknown motif: {motif_id}")
 
 
+
+def validate_harmony_progression_refs(ir):
+    grammar=ir.get("harmonic_grammar")
+    if not isinstance(grammar,dict):
+        return
+    progressions=ir.get("materials",{}).get("progressions",{})
+    profiles=[("harmonic_grammar.default",grammar.get("default",{}))]
+    profiles += [(f"harmonic_grammar.sections.{sid}",p) for sid,p in grammar.get("sections",{}).items()]
+    for name,profile in profiles:
+        if not isinstance(profile,dict):
+            continue
+        progression_id=profile.get("progression_variant")
+        if progression_id is not None and progression_id not in progressions:
+            raise ContractValidationError(f"{name}.progression_variant references unknown progression: {progression_id}")
+
 def validate_runtime_extensions(ir):
     removed = REMOVED_ANALYZER_MUTATION_FIELDS & set(ir)
     if removed:
@@ -434,6 +453,7 @@ def validate_runtime_extensions(ir):
         validate_instrument_patch(inst_id,patch)
     if "harmonic_grammar" in ir:
         validate_runtime_harmony(ir["harmonic_grammar"],section_ids)
+        validate_harmony_progression_refs(ir)
     if "orchestration_grammar" in ir:
         validate_orchestration_config(ir["orchestration_grammar"],section_ids,runtime=True)
     if "arrangement_development" in ir:
@@ -446,7 +466,7 @@ def validate_runtime_extensions(ir):
 
 __all__=[
     "ContractValidationError","validate_transition_map","validate_development_config","validate_development_motif_refs",
-    "validate_brief_harmony","validate_runtime_harmony","validate_orchestration_config",
+    "validate_brief_harmony","validate_runtime_harmony","validate_harmony_progression_refs","validate_orchestration_config",
     "validate_brief_rhythm","validate_runtime_rhythm","validate_piano_instrument_patch","validate_instrument_patch",
     "validate_arrangement_profiles","validate_drum_control_events","validate_piano_control_events","validate_runtime_extensions","REMOVED_ANALYZER_MUTATION_FIELDS",
 ]
