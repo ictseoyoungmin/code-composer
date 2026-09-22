@@ -1,8 +1,6 @@
 {
   "name": "code-composer",
-  "owner": {
-    "name": "ictseoyoungmin"
-  },
+  "owner": {"name": "ictseoyoungmin"},
   "description": "Claude Code marketplace for Code Composer.",
   "plugins": [
     {

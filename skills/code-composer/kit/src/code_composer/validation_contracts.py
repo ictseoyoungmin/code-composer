@@ -72,10 +72,11 @@ _DEVELOPMENT_NUMERIC={
 }
 _DEVELOPMENT_INTS={"register_shift_add":(-48,48),"lead_octave_add":(-4,4)}
 _DEVELOPMENT_BOOLS={"bass_active","arp_active"}
+_DEVELOPMENT_STRINGS={"motif_variant"}
 
 def _validate_development_profile(profile,name):
     _object(profile,name)
-    allowed={"stage"}|set(_DEVELOPMENT_NUMERIC)|set(_DEVELOPMENT_INTS)|_DEVELOPMENT_BOOLS
+    allowed={"stage"}|set(_DEVELOPMENT_NUMERIC)|set(_DEVELOPMENT_INTS)|_DEVELOPMENT_BOOLS|_DEVELOPMENT_STRINGS
     _unknown(profile,allowed,name)
     if "stage" in profile:
         stage=profile["stage"]
@@ -87,6 +88,9 @@ def _validate_development_profile(profile,name):
         if key in profile: _integer(profile[key],f"{name}.{key}",lo,hi)
     for key in _DEVELOPMENT_BOOLS:
         if key in profile: _boolean(profile[key],f"{name}.{key}")
+    for key in _DEVELOPMENT_STRINGS:
+        if key in profile and (not isinstance(profile[key],str) or not profile[key].strip()):
+            raise ContractValidationError(f"{name}.{key} must be a non-empty string")
 
 def validate_development_config(cfg, section_ids, *, runtime=False):
     _object(cfg,"arrangement_development" if runtime else "development")
@@ -402,6 +406,21 @@ def validate_piano_control_events(ir):
                 raise ContractValidationError(f"{name} overlaps {prev_name}; sustain-pedal curves must be sequential")
 
 
+def validate_development_motif_refs(ir):
+    cfg=ir.get("arrangement_development")
+    if not isinstance(cfg,dict):
+        return
+    motifs=ir.get("materials",{}).get("motifs",{})
+    profiles=[("arrangement_development.default",cfg.get("default",{}))]
+    profiles += [(f"arrangement_development.sections.{sid}",p) for sid,p in cfg.get("sections",{}).items()]
+    for name,profile in profiles:
+        if not isinstance(profile,dict):
+            continue
+        motif_id=profile.get("motif_variant")
+        if motif_id is not None and motif_id not in motifs:
+            raise ContractValidationError(f"{name}.motif_variant references unknown motif: {motif_id}")
+
+
 def validate_runtime_extensions(ir):
     removed = REMOVED_ANALYZER_MUTATION_FIELDS & set(ir)
     if removed:
@@ -419,13 +438,14 @@ def validate_runtime_extensions(ir):
         validate_orchestration_config(ir["orchestration_grammar"],section_ids,runtime=True)
     if "arrangement_development" in ir:
         validate_development_config(ir["arrangement_development"],section_ids,runtime=True)
+        validate_development_motif_refs(ir)
     validate_runtime_rhythm(ir,section_ids)
     validate_arrangement_profiles(ir,section_ids)
     validate_drum_control_events(ir)
     validate_piano_control_events(ir)
 
 __all__=[
-    "ContractValidationError","validate_transition_map","validate_development_config",
+    "ContractValidationError","validate_transition_map","validate_development_config","validate_development_motif_refs",
     "validate_brief_harmony","validate_runtime_harmony","validate_orchestration_config",
     "validate_brief_rhythm","validate_runtime_rhythm","validate_piano_instrument_patch","validate_instrument_patch",
     "validate_arrangement_profiles","validate_drum_control_events","validate_piano_control_events","validate_runtime_extensions","REMOVED_ANALYZER_MUTATION_FIELDS",

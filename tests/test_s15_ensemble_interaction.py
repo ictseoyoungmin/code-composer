@@ -262,3 +262,47 @@ def test_multiple_tracks_sharing_arrangement_role_all_receive_interaction():
     role_report=out["ensemble_interaction_report"]["sections"]["one"]["roles"]["piano"]
     assert role_report["timing_adjusted_events"]==5
     assert role_report["yielded_events"] >= 3
+
+
+def test_s15_ensemble_interaction_keeps_control_events_byte_exact():
+    ir = _ir(_interaction())
+    violin = next(t for t in ir["tracks"] if t["id"] == "violin")
+    piano = next(t for t in ir["tracks"] if t["id"] == "piano")
+    drums = next(t for t in ir["tracks"] if t["id"] == "drums")
+    violin_control = {
+        "event_type": "violin_control",
+        "control": "bow_pressure",
+        "start_beat": 1.25,
+        "duration_beats": 0.5,
+        "points": [[0.0, 0.4], [0.5, 0.6]],
+        "section_id": "one",
+    }
+    piano_control = {
+        "event_type": "piano_control",
+        "control": "sustain_pedal",
+        "start_beat": 1.0,
+        "duration_beats": 0.25,
+        "points": [[0.0, 1.0], [0.25, 0.0]],
+        "section_id": "one",
+    }
+    drum_control = {
+        "event_type": "drum_control",
+        "control": "hi_hat_pedal_openness",
+        "start_beat": 1.0,
+        "duration_beats": 0.5,
+        "points": [[0.0, 1.0], [0.5, 0.2]],
+        "section_id": "one",
+    }
+    violin["events"].append(deepcopy(violin_control))
+    piano["events"].append(deepcopy(piano_control))
+    drums["events"].append(deepcopy(drum_control))
+
+    out = realize_ensemble_interaction(ir)
+    out_violin = next(t for t in out["tracks"] if t["id"] == "violin")
+    out_piano = next(t for t in out["tracks"] if t["id"] == "piano")
+    out_drums = next(t for t in out["tracks"] if t["id"] == "drums")
+
+    assert out_violin["events"][-1] == violin_control
+    assert out_piano["events"][-1] == piano_control
+    assert out_drums["events"][-1] == drum_control
+    assert out["ensemble_interaction_report"]["sections"]["one"]["leader_event_count"] == 2

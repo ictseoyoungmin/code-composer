@@ -9,17 +9,7 @@ The Python package itself is rooted at `skills/code-composer/kit/` and uses `set
 
 ## Version source
 
-`code_composer.__version__` is the single Python package version source. `skills/code-composer/kit/pyproject.toml` declares:
-
-```toml
-[project]
-dynamic = ["version"]
-
-[tool.setuptools.dynamic]
-version = {attr = "code_composer.__version__"}
-```
-
-The skill `VERSION` file must match the package version for the current release line.
+`code_composer.__version__` is the single Python package version source. The skill `VERSION` file must match the package version for the current release line.
 
 ## Runtime wheel
 

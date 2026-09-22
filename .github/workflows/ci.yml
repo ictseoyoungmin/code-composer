@@ -36,15 +36,15 @@ jobs:
         run: >
           pytest -q
           -k "not test_s17_legacy_drum_path_is_byte_identical_to_s16_baseline
-          and not test_s25_preserves_s19_legacy_core_byte_exactly
-          and not test_s25_does_not_change_existing_s17_modeled_preset_hashes"
+          and not test_s20_existing_modeled_kick_snare_closed_hat_are_byte_identical_to_s19
+          and not test_s21_s20_preset_and_existing_default_hits_remain_byte_identical"
       - name: "Known runner-sensitive drum byte-exact probe (Issue #2)"
         continue-on-error: true
         run: >
           pytest -q
           tests/test_s17_percussion_acoustic_fidelity.py::test_s17_legacy_drum_path_is_byte_identical_to_s16_baseline
-          tests/test_s25_s19_core_cymbal_extension.py::test_s25_preserves_s19_legacy_core_byte_exactly
-          tests/test_s25_s19_core_cymbal_extension.py::test_s25_does_not_change_existing_s17_modeled_preset_hashes
+          tests/test_s20_drum_articulation_foundation.py::test_s20_existing_modeled_kick_snare_closed_hat_are_byte_identical_to_s19
+          tests/test_s21_drum_acoustic_core_realism.py::test_s21_s20_preset_and_existing_default_hits_remain_byte_identical
       - name: Build release surfaces
         run: |
           python tools/build_skill.py

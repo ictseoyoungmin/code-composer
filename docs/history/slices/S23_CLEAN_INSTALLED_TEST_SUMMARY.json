@@ -1,9 +1,0 @@
-{
-  "slice": "S23",
-  "tests": 508,
-  "test_files": 76,
-  "status": "PASS",
-  "failures": 0,
-  "source_path_injection": false,
-  "install_root": "/mnt/data/cc_s23_finalize/clean_site"
-}
