@@ -92,7 +92,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          test -z "$(git diff --cached --name-only | grep -E '(^|/)(dist|build|__pycache__|\.pytest_cache|\.sync-s29)(/|$)|\.(wav|mid|midi|mp3|pyc)$' || true)"
+          test -z "$(git diff --cached --diff-filter=ACMRTUXB --name-only | grep -E '(^|/)(dist|build|__pycache__|\.pytest_cache|\.sync-s29)(/|$)|\.(wav|mid|midi|mp3|pyc) || true)"
+          git status --short
+          git commit -m "Integrate S29 thematic arc after perceptual PASS"
+          git push origin HEAD:sync/s29-thematic-arc-closure
+ || true)"
           git status --short
           git commit -m "Integrate S29 thematic arc after perceptual PASS"
           git push origin HEAD:sync/s29-thematic-arc-closure
