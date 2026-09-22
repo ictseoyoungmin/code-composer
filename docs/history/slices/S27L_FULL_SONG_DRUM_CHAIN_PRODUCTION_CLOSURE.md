@@ -71,3 +71,11 @@ Do not mark S27-L CLOSED from metrics alone. User listening must decide whether:
 4. snare, toms, ride/crash and kick retain identity without fighting piano/bass/violin;
 5. section development feels musical rather than a no-op loop;
 6. the next audible bottleneck, if any, is identified from this production rather than guessed in advance.
+
+## Current canonical interpretation
+
+The status above records the state **at the S27-L checkpoint** and is intentionally not rewritten as a retroactive perceptual PASS.
+
+S27-L is no longer an active gate. The authenticated drum chain continued into S27-M R2 full-song production integration, where the user completed production listening and marked the ensemble/full-song gate **PASS / CLOSED** on 2026-09-22. Later S29-S31 full-song closures retain that accepted drum baseline.
+
+Current role: **historical production checkpoint / active gate superseded by later closed full-song evidence**.
