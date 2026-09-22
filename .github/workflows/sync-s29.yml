@@ -84,6 +84,7 @@ jobs:
           find . -type f -name '*.pyc' -delete
           find . -path './.git' -prune -o -type f -printf '%P\n' | sort -u > /tmp/s29-sync/final-clean-files.lst
           diff -u /tmp/s29-sync/manifest.lst /tmp/s29-sync/final-clean-files.lst
+          test -z "$(find . -type f \( -name '*.wav' -o -name '*.mid' -o -name '*.midi' -o -name '*.mp3' -o -name '*.pyc' \) -print -quit)"
 
       - name: Commit source-only S29 sync
         shell: bash
@@ -92,11 +93,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          test -z "$(git diff --cached --diff-filter=ACMRTUXB --name-only | grep -E '(^|/)(dist|build|__pycache__|\.pytest_cache|\.sync-s29)(/|$)|\.(wav|mid|midi|mp3|pyc) || true)"
-          git status --short
-          git commit -m "Integrate S29 thematic arc after perceptual PASS"
-          git push origin HEAD:sync/s29-thematic-arc-closure
- || true)"
           git status --short
           git commit -m "Integrate S29 thematic arc after perceptual PASS"
           git push origin HEAD:sync/s29-thematic-arc-closure
