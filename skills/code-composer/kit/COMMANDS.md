@@ -10,13 +10,21 @@ code-composer INPUT_IR.json OUTPUT.wav [RESOLVED.json] [ANALYSIS.json]
 
 Validates canonical Music IR, resolves it deterministically, renders WAV, and can emit resolved/analysis JSON.
 
-## Compose
+## Song contract (CR01)
+
+```bash
+code-composer-song validate SONG.json
+```
+
+Validates the seedless Composer-first Song contract, explicit cross-references, user locks, and any explicitly locked engine/preset. It returns a deterministic SHA-256 fingerprint of the authored Song state. CR01 does not lower or render Song documents yet.
+
+## Compose (pre-refactor render path)
 
 ```bash
 code-composer-compose SEED_IR.json COMPOSITION_BRIEF.json OUTPUT_IR.json [PLAN.json]
 ```
 
-The brief is explicit structured intent authored by the agent/user boundary. The deterministic compiler does not infer taste from prose.
+This command remains the historical Music IR composition path until Song lowering replaces it. New CR01 authoring design must not depend on its seed/fixed-role contract.
 
 ## MIDI
 
