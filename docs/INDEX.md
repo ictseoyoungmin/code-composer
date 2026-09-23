@@ -2,6 +2,12 @@
 
 Start with the root [`README.md`](../README.md) if you are new to Code Composer.
 
+## Current pre-release rebuild
+
+- [`architecture/CR00_COMPOSER_REBUILD_BOUNDARY.md`](architecture/CR00_COMPOSER_REBUILD_BOUNDARY.md) — authoritative breaking-rebuild boundary.
+- [`maintenance/CR00_PRE_REFACTOR_FREEZE.json`](maintenance/CR00_PRE_REFACTOR_FREEZE.json) — machine-readable KEEP / REBUILD / DELETE / evidence freeze.
+- The existing v1.16/S29–S31 CompositionBrief architecture is historical for CR01+ authoring design; validated runtime/DSP remains reusable.
+
 ## Use Code Composer
 
 - [`../skills/code-composer/kit/COMMANDS.md`](../skills/code-composer/kit/COMMANDS.md) — command-line interfaces.
@@ -43,4 +49,5 @@ Historical files may mention paths or terminology that were current when that ev
 
 ## Current engineering slice
 
-- [`history/slices/S28A_CONTINUOUS_PIANO_PEDAL_STATE.md`](history/slices/S28A_CONTINUOUS_PIANO_PEDAL_STATE.md) — explicit acoustic sustain-pedal down/up/repedal state; perceptual gate open.
+- **CR00 — Composer Rebuild Boundary / Pre-refactor Freeze** — active pre-release architecture reset.
+- Next: **CR01 — Minimal Song Model + Contract Foundation**.
