@@ -13,7 +13,7 @@ import math
 import re
 from typing import Any
 
-from .theory import NOTE_TO_PC, SCALES
+from .theory import NOTE_TO_PC
 
 
 SONG_FORMAT = "code-composer-song/v1"
@@ -153,8 +153,6 @@ def _validate_tonal(song: dict) -> tuple[str | None, str | None]:
     scale = _string(tonal["scale"], "tonal.scale")
     if root not in NOTE_TO_PC:
         _fail("tonal.root", f"unsupported root: {root}")
-    if scale not in SCALES:
-        _fail("tonal.scale", f"unsupported scale: {scale}")
     return root, scale
 
 
