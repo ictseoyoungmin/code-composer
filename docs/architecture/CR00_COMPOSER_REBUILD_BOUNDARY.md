@@ -18,7 +18,7 @@ The mistake being removed is that authoring and execution contracts became the s
 
 - `main`: `d7d832085663eaa68b4ec671df938f27f6fbbee5` — S31 baseline.
 - main CI: Python 3.10 / 3.12 **SUCCESS**, Actions run `35780352743`.
-- S32 evidence: PR #15, HEAD `29d501c0725187eaf56eddb9a8fcf49c0aebb218`, draft/unmerged at CR00 freeze.
+- S32 evidence: PR #15, HEAD `29d501c0725187eaf56eddb9a8fcf49c0aebb218`, draft/unmerged at CR00 freeze; then **closed unmerged as superseded by CR00** after its regression evidence was recorded.
 - historical v1.16 source artifact: `code-composer-v1.16.0(1).zip`, 43,284,407 bytes.
 - historical v1.16 integrated closure: **224/224 PASS**, **88% coverage**, three integrated dogfoods.
 
