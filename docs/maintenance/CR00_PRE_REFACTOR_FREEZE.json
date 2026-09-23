@@ -15,7 +15,9 @@
       "pr": 15,
       "head_sha": "29d501c0725187eaf56eddb9a8fcf49c0aebb218",
       "state_at_freeze": "open_draft_unmerged",
-      "role": "regression evidence; not a migration target"
+      "role": "regression evidence; not a migration target",
+      "post_freeze_disposition": "closed_unmerged_as_superseded_by_CR00",
+      "closed_at": "2026-09-23T15:01:09Z"
     },
     "v116_reference": {
       "artifact": "code-composer-v1.16.0(1).zip",
