@@ -7,6 +7,45 @@ FILTER_TYPES = {"none", "lowpass", "highpass", "bandpass"}
 WAVESHAPERS = {"none", "tanh", "softclip"}
 
 
+
+def _validate_broadband_static_risk(subject, graph):
+    """Reject generic graphs whose explicit gain chain makes breath read as static.
+
+    This is intentionally a structural authoring/runtime guard, not an aesthetic
+    remapper. Small breath layers remain valid, but broadband noise may not be
+    combined with a strong saw layer and an amplifying waveshaper chain.
+    """
+    breath = graph.get("breath", {}) or {}
+    breath_gain = float(breath.get("gain", 0.0))
+    if breath_gain <= 0.0:
+        return
+    oscillators = graph.get("oscillators", []) or []
+    saw_gain = sum(
+        float(osc.get("gain", 1.0))
+        for osc in oscillators
+        if isinstance(osc, dict) and osc.get("waveform", "sine") == "saw"
+    )
+    waveshaper = graph.get("waveshaper", {}) or {}
+    drive = float(waveshaper.get("drive", 1.0))
+    output_gain = float(graph.get("output_gain", 1.0))
+    effective_breath = breath_gain * max(1.0, drive) * max(1.0, output_gain)
+
+    if breath_gain > 0.03:
+        raise InstrumentEngineValidationError(
+            f"{subject}: generic broadband-static risk: breath.gain must be <= 0.03"
+        )
+    if breath_gain > 0.015 and saw_gain > 0.10 and drive > 1.0:
+        raise InstrumentEngineValidationError(
+            f"{subject}: generic broadband-static risk: breath above 0.015 may not "
+            "be combined with saw gain above 0.10 and waveshaper drive above 1.0"
+        )
+    if effective_breath > 0.03:
+        raise InstrumentEngineValidationError(
+            f"{subject}: generic broadband-static risk: amplified breath gain "
+            f"{effective_breath:.4f} exceeds 0.03"
+        )
+
+
 def _num(v, name, lo, hi):
     try:
         x = float(v)
@@ -79,6 +118,7 @@ class GenericSynthEngine(InstrumentEngine):
             raise InstrumentEngineValidationError(
                 f"instrument {subject}: declick.ms must be >= 0"
             )
+        _validate_broadband_static_risk(f"instrument {subject}", graph)
 
     def validate_authoring_patch(self, role, patch):
         if not isinstance(patch, dict):
@@ -168,6 +208,7 @@ class GenericSynthEngine(InstrumentEngine):
         if declick:
             _num(declick.get("ms", 0), f"{role}.declick.ms", 0, 50)
         _num(graph.get("output_gain", 1.0), f"{role}.output_gain", 0, 2)
+        _validate_broadband_static_risk(role, graph)
 
     def capabilities(self):
         return EngineCapabilities(name=self.name, instrument_expression=("pitch_start_cents",))

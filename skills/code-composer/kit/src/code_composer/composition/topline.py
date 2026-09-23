@@ -34,6 +34,7 @@ def resolve_topline(ir, section, role, profile, seed):
         tension=float(profile.get("topline_tension", role.get("tension", 0.52))),
         cadence_strength=float(role.get("cadence_strength", 0.72)),
         max_leap_semitones=int(role.get("max_leap_semitones", 5)),
+        gate=float(role.get("gate", 1.0)),
     )
 
     phrase = compose_phrase(

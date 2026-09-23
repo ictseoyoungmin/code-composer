@@ -62,6 +62,7 @@ def resolve_ir(ir: dict) -> dict:
                 tension=float(source.get("tension", 0.6)),
                 cadence_strength=float(source.get("cadence_strength", 0.85)),
                 max_leap_semitones=int(source.get("max_leap_semitones", 7)),
+                gate=float(source.get("gate", 1.0)),
             )
             phrase = compose_phrase(
                 ir["materials"], ir["tonal"], seed,
