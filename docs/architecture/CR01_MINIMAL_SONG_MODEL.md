@@ -48,6 +48,7 @@ Instrument family is not the render engine. A violin may be authored as a violin
 - A Song is authored without a seed Music IR.
 - `meta.global_seed` is a deterministic realization seed, not a seed document.
 - Tonality is optional; the Song model itself can represent non-tonal material.
+- Scale IDs are Composer-authored identifiers, not the pre-refactor three-scale enum; CR02 lowering must resolve or reject unsupported runtime scales explicitly.
 - Hard locks are redundant by design: they guard user requirements against accidental Composer revision.
 - Canonical JSON serialization is key-order independent and SHA-256 fingerprinted.
 - No analyzer may mark the music aesthetically “good” or rewrite it from this contract.
