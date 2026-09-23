@@ -12,6 +12,11 @@ class PhraseConfig:
     tension: float = 0.6
     cadence_strength: float = 0.85
     max_leap_semitones: int = 7
+    gate: float = 1.0
+
+    def __post_init__(self):
+        if not 0.05 <= float(self.gate) <= 2.0:
+            raise ValueError("PhraseConfig.gate must be in [0.05, 2.0]")
 
 def _stable_rng(seed: int, namespace: str):
     x = seed & 0xFFFFFFFF
@@ -172,7 +177,7 @@ def compose_phrase(materials, tonal, seed, motif_id, config: PhraseConfig, names
 
             event={
                 "start_beat": round(local,6),
-                "duration_beats": round(dur*0.82,6),
+                "duration_beats": round(dur*config.gate,6),
                 "midi": int(midi),
                 "velocity": round(min(1.0,velocity),4),
                 "phrase_phase": phase,
@@ -225,5 +230,6 @@ def compose_phrase(materials, tonal, seed, motif_id, config: PhraseConfig, names
             "tension": config.tension,
             "cadence_strength": config.cadence_strength,
             "max_leap_semitones": config.max_leap_semitones,
+            "gate": config.gate,
         }
     }

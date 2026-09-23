@@ -1,7 +1,7 @@
 {
   "status": "ACTIVE_ALLOWLIST_FOR_POST_V116_FEATURE_WORK",
   "purpose": "Preserve the historical v1.16 runtime baseline while requiring every intentional modification of a baseline file in later feature slices to be explicit and hash-pinned.",
-  "slice": "Post-v1.16 through S31 Destination-Bound Transition / Boundary Arrival Lineage on S30 CLOSED baseline",
+  "slice": "Post-v1.16 through S32 Phrase Continuity / Generic Noise Safety engineering candidate",
   "files": {
     "src/code_composer/agent/composition_brief.py": {
       "sha256": "0b27f685ff9d1bde4c7dcfbc8ce2ba292a657b50af6cfefbe27d2767923011d6",
@@ -101,7 +101,7 @@
     },
     "src/code_composer/composition/arrange.py": {
       "sha256": "75de985dfb2ece2be8751abc286d81d774120cddd5ebd18d089252e3f8a92dd2",
-      "reason": "S29 motif routing retained. S30 routes an explicitly selected section progression consistently to pad/bass/arp, uses local section indexing only when selected, and preserves the historical progression path when absent."
+      "reason": "S29 motif and S30 progression routing retained; no S32 change required because the neutral PhraseConfig gate default is owned by the phrase composer."
     },
     "src/code_composer/composition/development.py": {
       "sha256": "57723eeda0463eec5d212d636101ad8d9ea02534079b84d8629819a9c6fbe460",
@@ -118,6 +118,18 @@
     "src/code_composer/composition/musical_transitions.py": {
       "sha256": "9cd3a7b2a4eeb5884a4eb4618f59244df40ae8e7ac8f5329c61367c583f06c58",
       "reason": "S31 resolves an explicitly authored destination_progression/index pointer against the destination section S30 progression variant, validates existence/range, and records lineage while preserving legacy target_degree semantics."
+    },
+    "src/code_composer/composition/phrase.py": {
+      "sha256": "eb1c5b19087c22d5f019e751fd9e1a78c3c9830333d7a8c26d3a504d900ff909",
+      "reason": "S32 removes the hidden 0.82 note shortening from the neutral phrase path. Explicit PhraseConfig.gate now owns the base gate and defaults to 1.0 so E1 remains the phrase-expression authority."
+    },
+    "src/code_composer/composition/resolve.py": {
+      "sha256": "bda3317c9ec483f9a403d5509c01471e6ddbdc8b1c1ee049651e97e5edf78b95",
+      "reason": "S32 routes an explicitly authored phrase source gate into PhraseConfig; omitted gates use the neutral 1.0 default."
+    },
+    "strc/code_composer/composition/topline.py": {
+      "sha256": "224739ac05c468b4a0b9ba51edff12b9e155a112d85b6188d6acca374b2a5245",
+      "reason": "S32 routes the explicitly authored topline role gate into PhraseConfig; omitted gates use the neutral 1.0 default."
     }
   }
 }
