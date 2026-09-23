@@ -9,6 +9,7 @@ from __future__ import annotations
 from copy import deepcopy
 import hashlib
 import json
+import math
 import re
 from typing import Any
 
@@ -71,6 +72,8 @@ def _number(value: Any, path: str, lo: float | None = None, hi: float | None = N
         out = float(value)
     except Exception as exc:
         raise SongValidationError(f"{path}: must be numeric") from exc
+    if not math.isfinite(out):
+        _fail(path, "must be finite")
     if lo is not None and out < lo:
         _fail(path, f"must be >= {lo}")
     if hi is not None and out > hi:
@@ -79,10 +82,19 @@ def _number(value: Any, path: str, lo: float | None = None, hi: float | None = N
 
 
 def _integer(value: Any, path: str, lo: int | None = None, hi: int | None = None) -> int:
-    out = _number(value, path, lo, hi)
-    if int(out) != out:
+    if isinstance(value, bool):
         _fail(path, "must be an integer")
-    return int(out)
+    if isinstance(value, int):
+        out = value
+    elif isinstance(value, float) and math.isfinite(value) and value.is_integer():
+        out = int(value)
+    else:
+        _fail(path, "must be an integer")
+    if lo is not None and out < lo:
+        _fail(path, f"must be >= {lo}")
+    if hi is not None and out > hi:
+        _fail(path, f"must be <= {hi}")
+    return out
 
 
 def _unique_id_map(items: list, path: str) -> dict[str, dict]:
