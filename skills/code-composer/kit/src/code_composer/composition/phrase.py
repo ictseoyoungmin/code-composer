@@ -172,7 +172,7 @@ def compose_phrase(materials, tonal, seed, motif_id, config: PhraseConfig, names
 
             event={
                 "start_beat": round(local,6),
-                "duration_beats": round(dur*0.82,6),
+                "duration_beats": round(dur,6),
                 "midi": int(midi),
                 "velocity": round(min(1.0,velocity),4),
                 "phrase_phase": phase,
