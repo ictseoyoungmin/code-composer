@@ -27,5 +27,19 @@ if __name__=="__main__":
     run()
 
 
+
+def test_compose_phrase_preserves_authored_rhythm_before_expression_gate():
+    root=Path(__file__).resolve().parents[1]
+    ir=json.loads((root/"tests/fixtures/phrase_ir.json").read_text(encoding="utf-8"))
+    cfg=PhraseConfig(
+        bars=2, beats_per_bar=4, base_degree=1, octave=4,
+        density=1.0, tension=.6, cadence_strength=.85, max_leap_semitones=7
+    )
+    out=compose_phrase(ir["materials"],ir["tonal"],123,"main",cfg,"gate-regression")
+    first=out["events"][0]
+    authored=ir["materials"]["motifs"]["main"]["rhythm"][0]
+    assert first["duration_beats"]==authored
+
+
 def test_regression():
     run()
