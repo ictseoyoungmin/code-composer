@@ -9,6 +9,21 @@ permissions:
   contents: read
 
 jobs:
+  checkout-hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fresh clone remains clean with autocrlf=true
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          git -c core.autocrlf=true clone --local "$GITHUB_WORKSPACE" "$tmp/repo"
+          test -z "$(git -C "$tmp/repo" status --porcelain=v1)"
+          git -C "$tmp/repo" add --renormalize .
+          git -C "$tmp/repo" diff --cached --exit-code
+          test "$(git -C "$tmp/repo" check-attr eol -- README.md | awk '{print $3}')" = "lf"
+
   test:
     runs-on: ubuntu-latest
     strategy:
