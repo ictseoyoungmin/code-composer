@@ -1,6 +1,6 @@
 # CR01 — Minimal Song Model + Contract Foundation
 
-Status: **ENGINEERING CANDIDATE**
+Status: **CLOSED**
 
 Issue: #19
 
@@ -70,3 +70,24 @@ Those are either explicitly rejected by CR00 or belong to later slices.
 ## Next boundary
 
 After CR01 contract closure, CR02 can build the first deterministic **Song → execution plan** lowering path against this model without requiring a legacy seed IR.
+
+
+## Closure
+
+CR01 is **CLOSED**.
+
+Authoritative evidence:
+- Issue #19: closed / completed.
+- PR #20: merged.
+- validated candidate HEAD: `e2ebedaf253b4b41bd7f756dbde19d4159872769`.
+- CR01 merge on main: `b63afb4271ca7521ea0d14b2e4a597fdaaccab7f`.
+- pre-merge Actions #62 / run `35920893492`: checkout-hygiene + Python 3.10 + Python 3.12 SUCCESS.
+- post-merge Actions #63 / run `35921246380`: checkout-hygiene + Python 3.10 + Python 3.12 SUCCESS.
+- Python 3.10 / 3.12 blocking suite: 674 passed / 3 deselected on the validated candidate.
+- skill self-check, canonical skill validation, plugin distribution, and Skill/Codex/Claude build surfaces PASS.
+- source/package Song schemas are byte-identical.
+- no existing synthesis, composition, or render implementation file was modified.
+
+No perceptual music gate was required because CR01 adds authored-state validation only and does not lower or render Song documents.
+
+Next: **CR02 — Song → Execution Plan Lowering**.
