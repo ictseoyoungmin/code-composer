@@ -194,11 +194,7 @@
           ]
         },
         "scale": {
-          "enum": [
-            "major",
-            "natural_minor",
-            "dorian"
-          ]
+          "$ref": "#/$defs/nonempty"
         }
       }
     },
@@ -497,11 +493,7 @@
           ]
         },
         "scale": {
-          "enum": [
-            "major",
-            "natural_minor",
-            "dorian"
-          ]
+          "$ref": "#/$defs/nonempty"
         }
       }
     }
