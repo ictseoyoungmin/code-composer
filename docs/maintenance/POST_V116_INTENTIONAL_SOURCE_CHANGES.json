@@ -1,7 +1,7 @@
 {
   "status": "ACTIVE_ALLOWLIST_FOR_POST_V116_FEATURE_WORK",
   "purpose": "Preserve the historical v1.16 runtime baseline while requiring every intentional modification of a baseline file in later feature slices to be explicit and hash-pinned.",
-  "slice": "Post-v1.16 through S31 Destination-Bound Transition / Boundary Arrival Lineage on S30 CLOSED baseline",
+  "slice": "Post-v1.16 through S32 Phrase Gate / Generic Note Endpoint Continuity engineering candidate",
   "files": {
     "src/code_composer/agent/composition_brief.py": {
       "sha256": "0b27f685ff9d1bde4c7dcfbc8ce2ba292a657b50af6cfefbe27d2767923011d6",
@@ -118,6 +118,10 @@
     "src/code_composer/composition/musical_transitions.py": {
       "sha256": "9cd3a7b2a4eeb5884a4eb4618f59244df40ae8e7ac8f5329c61367c583f06c58",
       "reason": "S31 resolves an explicitly authored destination_progression/index pointer against the destination section S30 progression variant, validates existence/range, and records lineage while preserving legacy target_degree semantics."
+    },
+    "src/code_composer/composition/phrase.py": {
+      "sha256": "548e1f1d8f6dce25cd81fd834e31edd16b88513c0acfa47895b06077db7cec8a",
+      "reason": "S32 removes the historical implicit 0.82 duration multiplier so compose_phrase preserves Composer-authored motif rhythm before the existing E1 phrase-expression gate/articulation layer. This prevents unintended double shortening while retaining explicit E1 gate authority."
     }
   }
 }
