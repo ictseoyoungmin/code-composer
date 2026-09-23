@@ -124,7 +124,8 @@ Analyzers provide evidence; they do not silently rewrite the composition. The ed
 
 ```text
 code-composer                 render Music IR
-code-composer-compose         compile an explicit composition brief
+code-composer-song            validate Composer-first Song contract (CR01)
+code-composer-compose         pre-refactor brief → Music IR path
 code-composer-midi            export MIDI
 code-composer-collab          create a collaboration bundle
 code-composer-exchange        export/import/inspect .ccx projects
