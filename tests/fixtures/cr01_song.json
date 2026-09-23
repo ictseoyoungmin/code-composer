@@ -1,0 +1,137 @@
+{
+  "format": "code-composer-song/v1",
+  "meta": {
+    "title": "Threadline Study",
+    "global_seed": 260924
+  },
+  "intent": {
+    "concept": "lyrical chamber flow with a continuous counterline",
+    "notes": [
+      "keep the bowed voice connected",
+      "leave space between harmonic changes"
+    ]
+  },
+  "transport": {
+    "bpm": 84,
+    "meter": {
+      "beats_per_bar": 4,
+      "beat_unit": 4
+    }
+  },
+  "tonal": {
+    "root": "D",
+    "scale": "natural_minor"
+  },
+  "sections": [
+    {
+      "id": "intro",
+      "bars": 2,
+      "energy": 0.28,
+      "intent": "quiet harmonic opening"
+    },
+    {
+      "id": "theme",
+      "bars": 4,
+      "energy": 0.68,
+      "intent": "connected melodic statement"
+    }
+  ],
+  "instruments": [
+    {
+      "id": "piano-a",
+      "family": "piano",
+      "variant": "acoustic-grand",
+      "render_lock": {
+        "preset": "piano.concert_grand_natural",
+        "preset_version": "1.0.0"
+      }
+    },
+    {
+      "id": "violin-a",
+      "family": "violin",
+      "variant": "solo-arco",
+      "render_lock": {
+        "preset": "bowed.violin.modeled_continuous",
+        "preset_version": "1.0.0"
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "foundation",
+      "function": "harmonic-bed",
+      "instrument": "piano-a"
+    },
+    {
+      "id": "voice-a",
+      "function": "counterline",
+      "instrument": "violin-a"
+    }
+  ],
+  "materials": [
+    {
+      "id": "home",
+      "kind": "progression",
+      "degrees": [
+        1,
+        6,
+        4,
+        5
+      ],
+      "rhythm": [
+        2,
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "id": "thread",
+      "kind": "motif",
+      "intervals": [
+        0,
+        2,
+        3,
+        5,
+        3,
+        2
+      ],
+      "rhythm": [
+        1,
+        0.5,
+        0.5,
+        1,
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "intro-harmony",
+      "section": "intro",
+      "track": "foundation",
+      "material": "home",
+      "repeats": 1
+    },
+    {
+      "id": "theme-harmony",
+      "section": "theme",
+      "track": "foundation",
+      "material": "home",
+      "repeats": 2
+    },
+    {
+      "id": "theme-thread",
+      "section": "theme",
+      "track": "voice-a",
+      "material": "thread",
+      "repeats": 4
+    }
+  ],
+  "locks": {
+    "bpm": 84,
+    "root": "D",
+    "scale": "natural_minor"
+  }
+}

@@ -32,7 +32,7 @@ def test_examples_teach_operation_never_taste_policy_is_enforced():
 def test_surface_maps_all_public_entrypoints():
     surface=json.loads((KIT_ROOT/"surface.json").read_text())
     got={v["entrypoint"] for v in surface["capabilities"].values()}
-    assert got=={"code-composer","code-composer-compose","code-composer-midi","code-composer-collab","code-composer-exchange","code-composer-delivery","code-composer-presets","code-composer-violin","code-composer-admittance-fit"}
+    assert got=={"code-composer","code-composer-song","code-composer-compose","code-composer-midi","code-composer-collab","code-composer-exchange","code-composer-delivery","code-composer-presets","code-composer-violin","code-composer-admittance-fit"}
 
 def test_platform_adapter_manifests_use_standard_manifest_locations():
     codex=REPO_ROOT/".codex-plugin/plugin.json"

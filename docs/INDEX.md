@@ -50,4 +50,4 @@ Historical files may mention paths or terminology that were current when that ev
 ## Current engineering slice
 
 - **CR00 — Composer Rebuild Boundary / Pre-refactor Freeze** — **CLOSED**.
-- **CR01 — Minimal Song Model + Contract Foundation** — next active engineering slice.
+- [**CR01 — Minimal Song Model + Contract Foundation**](architecture/CR01_MINIMAL_SONG_MODEL.md) — **ENGINEERING CANDIDATE**.

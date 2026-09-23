@@ -36,7 +36,8 @@ When source inspection is necessary, read `kit/SOURCE_MAP.md` first and inspect 
 
 ## Workflow routing
 
-- New composition: `kit/workflows/compose.md`
+- Composer-first Song contract validation: `kit/workflows/song-contract.md`
+- Historical Music IR composition/render path: `kit/workflows/compose.md`
 - Factory sound selection: `kit/workflows/select-preset.md`
 - Human-playable violin realization: `kit/workflows/violin-performance.md`
 - Measured violin bridge-admittance fitting: `kit/workflows/fit-bridge-admittance.md`
@@ -48,7 +49,8 @@ When source inspection is necessary, read `kit/SOURCE_MAP.md` first and inspect 
 
 ## Authority rules
 
-- Canonical Music IR is the editable authority inside Code Composer.
+- CR01 Song is the canonical authored-state contract for the Composer-first rebuild. It is validation-only until deterministic Song lowering lands.
+- Canonical Music IR remains the current render/execution authority during that transition.
 - Resolved IR is the exact deterministic realization state.
 - Reference WAV is the timbre/mix authority for external collaborators.
 - MIDI is an interchange representation, not a faithful representation of Code Composer synthesis/DSP.

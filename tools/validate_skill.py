@@ -16,6 +16,6 @@ def main():
         # Syntax-compile the isolated source.
         run(sys.executable, '-m', 'compileall', '-q', str(lone/'kit/src'))
     surface=json.loads((KIT/'surface.json').read_text())
-    assert set(surface['capabilities'])=={'render','compose','midi','collab_bundle','exchange','delivery','presets','violin_performance','bridge_admittance_fit'}
+    assert set(surface['capabilities'])=={'render','song_contract','compose','midi','collab_bundle','exchange','delivery','presets','violin_performance','bridge_admittance_fit'}
     print('PASS: skill validation')
 if __name__=='__main__': main()

@@ -1,0 +1,501 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ymstudio.dev/code-composer/schemas/song.schema.json",
+  "title": "Code Composer Song v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "meta",
+    "transport",
+    "sections",
+    "instruments",
+    "tracks",
+    "materials",
+    "parts"
+  ],
+  "properties": {
+    "format": {
+      "const": "code-composer-song/v1"
+    },
+    "meta": {
+      "$ref": "#/$defs/meta"
+    },
+    "intent": {
+      "$ref": "#/$defs/intent"
+    },
+    "transport": {
+      "$ref": "#/$defs/transport"
+    },
+    "tonal": {
+      "$ref": "#/$defs/tonal"
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/section"
+      }
+    },
+    "instruments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/instrument"
+      }
+    },
+    "tracks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/track"
+      }
+    },
+    "materials": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/motif"
+          },
+          {
+            "$ref": "#/$defs/progression"
+          },
+          {
+            "$ref": "#/$defs/rhythm"
+          }
+        ]
+      }
+    },
+    "parts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/part"
+      }
+    },
+    "locks": {
+      "$ref": "#/$defs/locks"
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "nonempty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "global_seed"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "global_seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9223372036854776000
+        },
+        "revision": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "intent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "concept": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonempty"
+          }
+        }
+      }
+    },
+    "transport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bpm",
+        "meter"
+      ],
+      "properties": {
+        "bpm": {
+          "type": "number",
+          "minimum": 20,
+          "maximum": 400
+        },
+        "meter": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "beats_per_bar",
+            "beat_unit"
+          ],
+          "properties": {
+            "beats_per_bar": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 32
+            },
+            "beat_unit": {
+              "enum": [
+                1,
+                2,
+                4,
+                8,
+                16,
+                32
+              ]
+            }
+          }
+        }
+      }
+    },
+    "tonal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "root",
+        "scale"
+      ],
+      "properties": {
+        "root": {
+          "enum": [
+            "C",
+            "C#",
+            "Db",
+            "D",
+            "D#",
+            "Eb",
+            "E",
+            "F",
+            "F#",
+            "Gb",
+            "G",
+            "G#",
+            "Ab",
+            "A",
+            "A#",
+            "Bb",
+            "B"
+          ]
+        },
+        "scale": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "bars"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "bars": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "name": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "energy": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "intent": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "render_lock": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "engine": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "preset": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "preset_version": {
+          "$ref": "#/$defs/nonempty"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "engine"
+          ]
+        },
+        {
+          "required": [
+            "preset"
+          ]
+        }
+      ]
+    },
+    "instrument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "family"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "family": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "name": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "variant": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "render_lock": {
+          "$ref": "#/$defs/render_lock"
+        }
+      }
+    },
+    "track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "function",
+        "instrument"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "function": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "instrument": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "motif": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "intervals",
+        "rhythm"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "const": "motif"
+        },
+        "intervals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "integer",
+            "minimum": -127,
+            "maximum": 127
+          }
+        },
+        "rhythm": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 100000
+          }
+        }
+      }
+    },
+    "progression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "degrees"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "const": "progression"
+        },
+        "degrees": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 32
+          }
+        },
+        "rhythm": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 100000
+          }
+        }
+      }
+    },
+    "rhythm_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "beat",
+        "weight"
+      ],
+      "properties": {
+        "beat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "duration": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "rhythm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "cycle_beats",
+        "steps"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "const": "rhythm"
+        },
+        "cycle_beats": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 100000
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/rhythm_step"
+          }
+        }
+      }
+    },
+    "part": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "section",
+        "track",
+        "material"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "section": {
+          "$ref": "#/$defs/id"
+        },
+        "track": {
+          "$ref": "#/$defs/id"
+        },
+        "material": {
+          "$ref": "#/$defs/id"
+        },
+        "start_beat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "repeats": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "intent": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "locks": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "bpm": {
+          "type": "number",
+          "minimum": 20,
+          "maximum": 400
+        },
+        "root": {
+          "enum": [
+            "C",
+            "C#",
+            "Db",
+            "D",
+            "D#",
+            "Eb",
+            "E",
+            "F",
+            "F#",
+            "Gb",
+            "G",
+            "G#",
+            "Ab",
+            "A",
+            "A#",
+            "Bb",
+            "B"
+          ]
+        },
+        "scale": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    }
+  }
+}

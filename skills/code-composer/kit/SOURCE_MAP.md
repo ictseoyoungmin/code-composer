@@ -4,7 +4,8 @@ Do not read source to learn normal usage. Use this map only after a source-inspe
 
 | Need | Narrow source area |
 |---|---|
-| Composition brief validation/compiler | `src/code_composer/agent/composition_brief.py`, `agent/composer_planner.py` |
+| Composer-first Song contract | `src/code_composer/core/song.py`, `src/code_composer/song_validation.py`, `app/song_cli.py` |
+| Pre-refactor Composition brief validation/compiler | `src/code_composer/agent/composition_brief.py`, `agent/composer_planner.py` |
 | Expressive score/performance contracts | `src/code_composer/agent/expressive_score_plan.py`, `agent/performance_ir.py` |
 | Deterministic arrange/resolve | `src/code_composer/composition/arrange.py`, `composition/resolve.py` |
 | Performance realization | `src/code_composer/composition/performance.py` |
