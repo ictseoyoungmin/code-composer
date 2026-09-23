@@ -263,7 +263,13 @@ def render_generic_note(midi: int, duration_s: float, sr: int, patch: dict, velo
     left=_waveshape(left,ws)
     right=_waveshape(right,ws)
 
-    guard=_declick_envelope(n,sr,graph.get("declick",{}))
+    # Numerical safety: every independently rendered generic note must enter and
+    # leave the mix at (near) zero even when an authored ADSR is longer than a
+    # very short symbolic note. Without this floor, the note buffer can be cut
+    # while the envelope/filter is still non-zero, producing broadband clicks.
+    declick_cfg=dict(graph.get("declick",{}))
+    declick_cfg["ms"]=max(2.0,float(declick_cfg.get("ms",0.0)))
+    guard=_declick_envelope(n,sr,declick_cfg)
     left*=guard
     right*=guard
 
