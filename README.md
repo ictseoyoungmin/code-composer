@@ -16,6 +16,8 @@ Code Composer turns explicit musical intent into editable structured music, dete
 
 It is designed for workflows where the composition should remain inspectable, revisable, and portable instead of disappearing inside a black-box generation step.
 
+> **Pre-release rebuild (2026-09-23):** the composer-facing authoring architecture is undergoing a breaking Composer-first rebuild. The current explicit CompositionBrief / seed-first / fixed-role path remains a pre-refactor reference, not a compatibility promise. Validated instrument engines, rendering, export, determinism, provenance, and v1.16.x-level contract rigor are being retained. See [CR00](docs/architecture/CR00_COMPOSER_REBUILD_BOUNDARY.md).
+
 ## What you can do
 
 | Capability | What it gives you |
