@@ -1,5 +1,7 @@
 # Composer Agent Contract
 
+> **PRE-REFACTOR AUTHORING CONTRACT.** This document records the v1.16/S29–S31 authoring model. CR00 explicitly replaces the mandatory detailed `CompositionBrief`, seed-IR coupling, and privileged six-role authoring surface. Its useful principles—Agent musical judgment, deterministic execution, explicit constraints, and analyzer non-mutation—remain inputs to CR01. See [CR00 Composer Rebuild Boundary](CR00_COMPOSER_REBUILD_BOUNDARY.md).
+
 ## Canonical boundary
 
 Code Composer does **not** interpret free-form natural language with a vocabulary table.

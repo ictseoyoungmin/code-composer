@@ -1,0 +1,206 @@
+{
+  "schema": "code-composer-cr00-rebuild-boundary/v1",
+  "slice": "CR00",
+  "status": "ENGINEERING_CANDIDATE",
+  "purpose": "Freeze the pre-refactor state and define the breaking Composer-first rebuild boundary.",
+  "principle": "Code Composer exists to make music. Contracts preserve and validate the artist's decisions; they do not dictate the composition.",
+  "pre_refactor": {
+    "main_sha": "d7d832085663eaa68b4ec671df938f27f6fbbee5",
+    "main_ci": {
+      "python_3_10": "success",
+      "python_3_12": "success",
+      "actions_run": 35780352743
+    },
+    "s32_evidence": {
+      "pr": 15,
+      "head_sha": "29d501c0725187eaf56eddb9a8fcf49c0aebb218",
+      "state_at_freeze": "open_draft_unmerged",
+      "role": "regression evidence; not a migration target",
+      "post_freeze_disposition": "closed_unmerged_as_superseded_by_CR00",
+      "closed_at": "2026-09-23T15:01:09Z"
+    },
+    "v116_reference": {
+      "artifact": "code-composer-v1.16.0(1).zip",
+      "size_bytes": 43284407,
+      "closure_report": "V116_FINAL_CLOSURE.md",
+      "closure": {
+        "tests": "224/224 PASS",
+        "coverage_percent": 88,
+        "dogfoods": 3
+      },
+      "note": "Historical reference. Preserve contract rigor, not the authoring surface."
+    }
+  },
+  "contract_depth": {
+    "target": "approximately v1.16.x rigor",
+    "keep": [
+      "canonical editable state",
+      "cross-reference validation",
+      "deterministic realization",
+      "explicit provenance",
+      "hard vs soft invariant separation",
+      "analysis does not silently rewrite music",
+      "listening evidence before musical closure"
+    ],
+    "reject": [
+      "contract-free authoring",
+      "schema-driven creative decisions",
+      "automatic musical self-certification",
+      "compatibility debt for unreleased authoring abstractions"
+    ]
+  },
+  "boundaries": [
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/audio/**",
+      "decision": "KEEP_RUNTIME",
+      "notes": "Preserve validated piano, bowed-string/violin, plucked-bass, percussion, generic engine infrastructure, and DSP unless later evidence requires targeted change."
+    },
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/mix/**",
+      "decision": "KEEP_RUNTIME",
+      "notes": "Preserve mixer, buses, routing, and automation as execution infrastructure."
+    },
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/performance/**",
+      "decision": "KEEP_RUNTIME_REVIEW_INTERFACE",
+      "notes": "Preserve validated performance realizers; CR01 may replace how the Composer requests them."
+    },
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/export/**",
+      "decision": "KEEP_RUNTIME",
+      "notes": "Preserve MIDI and delivery output authority."
+    },
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/exchange/**",
+      "decision": "KEEP_CONCEPT_REVIEW_SCHEMA",
+      "notes": "Preserve lossless handoff/provenance concepts; schema may follow the new canonical model."
+    },
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/pipeline/**",
+      "decision": "KEEP_EXECUTION_REVIEW_BOUNDARY",
+      "notes": "Preserve aggregate validation/render/analyze separation where useful; authoring-specific assumptions may be replaced."
+    },
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/core/theory.py",
+      "decision": "KEEP_RUNTIME",
+      "notes": "Reusable music-theory infrastructure."
+    },
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/core/ir.py",
+      "decision": "REBUILD_CANONICAL_MODEL",
+      "notes": "Keep strict canonical validation as a principle; the pre-refactor Music IR shape is not a compatibility requirement."
+    },
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/agent/composition_brief.py",
+      "decision": "REBUILD",
+      "notes": "Remove detailed CompositionBrief as the mandatory composer-facing contract."
+    },
+    {
+      "pattern": "skills/code-composer/kit/schemas/composition_brief.schema.json",
+      "decision": "DELETE_REPLACED",
+      "notes": "No migration adapter. Replace with the new Song/authoring contract."
+    },
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/agent/composer_planner.py",
+      "decision": "REBUILD",
+      "notes": "Replace seed-mutating Brief→Plan compilation with seedless Composer→Song lowering."
+    },
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/app/composer_cli.py",
+      "decision": "REBUILD",
+      "notes": "Replace the seed_ir + detailed_brief public contract."
+    },
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/composition/**",
+      "decision": "REBUILD_OR_DEMOTE_TO_UTILITY",
+      "notes": "Preserve useful algorithms only when they fit the new Song Model. Fixed-role composition authority is not preserved."
+    },
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/validation_contracts.py",
+      "decision": "REBUILD_CONTRACTS",
+      "notes": "Retain strict validation discipline while removing fixed-role and current development-profile assumptions."
+    },
+    {
+      "pattern": "skills/code-composer/kit/src/code_composer/analysis/**",
+      "decision": "KEEP_EVIDENCE_REVIEW_AUTHORITY",
+      "notes": "Reuse objective measurements where sound; aesthetic thresholds and self-certifying pass/fail semantics must be reviewed."
+    },
+    {
+      "pattern": "examples/v1.16/final_closure/**",
+      "decision": "EVIDENCE_ONLY",
+      "notes": "Historical integrated closure evidence; not a schema compatibility requirement."
+    },
+    {
+      "pattern": "docs/history/**",
+      "decision": "HISTORY_ONLY",
+      "notes": "Preserve historical evidence; it must not define the new public authoring contract."
+    }
+  ],
+  "explicitly_not_preserved": [
+    "mandatory seed IR for new composition",
+    "privileged lead/topline/pad/bass/arp/drums authoring roles",
+    "role name as a proxy for musical function + instrument + priority + render engine",
+    "register_shift semantics that chromatically transpose roles asymmetrically",
+    "detailed CompositionBrief as the required first authoring surface",
+    "automatic aesthetic closure from QA metrics",
+    "legacy authoring compatibility or migration adapters"
+  ],
+  "mandatory_regression_evidence": [
+    {
+      "id": "phrase_hidden_gate_082",
+      "failure": "Neutral phrase generation shortened authored rhythm cells by 0.82.",
+      "new_boundary_requirement": "No hidden note shortening; articulation/gate must be explicit or performance-derived."
+    },
+    {
+      "id": "generic_static_breath_saw_drive",
+      "failure": "A fresh worker produced broadband TV-static via generic breath+saw+drive/gain.",
+      "new_boundary_requirement": "Instrument intent must resolve to appropriate engine capabilities; structural noise hazards remain guarded."
+    },
+    {
+      "id": "generic_note_endpoint",
+      "failure": "Independent note buffers could terminate non-zero.",
+      "new_boundary_requirement": "Render endpoints remain numerically safe."
+    },
+    {
+      "id": "register_shift_role_divergence",
+      "failure": "Shared harmonic material could become lead +12 / pad +6 / bass 0.",
+      "new_boundary_requirement": "Register and chromatic transposition are distinct; shared harmonic authority cannot silently diverge."
+    },
+    {
+      "id": "seed_role_coupling",
+      "failure": "sound_palette roles had to pre-exist in seed arrangement.roles.",
+      "new_boundary_requirement": "New composition is seedless by default and creates its own track/instrument ownership."
+    },
+    {
+      "id": "fixed_six_role_model",
+      "failure": "Upper composition model privileged six pop/EDM roles.",
+      "new_boundary_requirement": "Arbitrary tracks with separated function/instrument/engine semantics."
+    },
+    {
+      "id": "qa_self_certification",
+      "failure": "Fresh worker declared final despite unmet acceptance and a medium transition issue.",
+      "new_boundary_requirement": "Hard integrity gates are separate from musical evidence and perceptual closure."
+    },
+    {
+      "id": "provenance_incomplete",
+      "failure": "Fresh-worker package recorded package version but not exact repository source identity.",
+      "new_boundary_requirement": "Canonical deliverables record exact source/revision provenance."
+    },
+    {
+      "id": "checksum_absolute_paths",
+      "failure": "SHA256SUMS contained worker-local absolute paths.",
+      "new_boundary_requirement": "Portable package manifests use relative paths."
+    },
+    {
+      "id": "checkout_line_endings",
+      "failure": "Fresh Windows clone could report roughly the whole repository as modified.",
+      "new_boundary_requirement": "Repository owns text EOL policy through .gitattributes."
+    }
+  ],
+  "next_slice": {
+    "id": "CR01",
+    "name": "Minimal Song Model + Contract Foundation",
+    "entry_condition": "CR00 manifest/documentation and cross-platform checkout policy are CI-clean.",
+    "non_goal": "Do not implement compatibility or migration for CompositionBrief/six-role authoring."
+  }
+}

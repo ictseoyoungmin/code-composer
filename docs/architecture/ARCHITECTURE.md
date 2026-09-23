@@ -1,5 +1,7 @@
 # Code Composer Architecture v1.16
 
+> **PRE-REFACTOR HISTORICAL ARCHITECTURE.** CR00 starts a breaking Composer-first rebuild with no authoring compatibility/migration requirement. The v1.16.x validation rigor remains a design reference, but `CompositionBrief`, seed-first composition, fixed six-role authoring, and the current Music IR shape are not canonical constraints for CR01+. See [CR00 Composer Rebuild Boundary](CR00_COMPOSER_REBUILD_BOUNDARY.md).
+
 ## Canonical pipeline
 
 ```text
