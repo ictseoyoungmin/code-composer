@@ -1,6 +1,6 @@
 # CR00 — Composer Rebuild Boundary / Pre-refactor Freeze
 
-Status: **ENGINEERING CANDIDATE**
+Status: **CLOSED**
 
 Issue: #16
 
@@ -102,7 +102,18 @@ It may begin only from these rules:
 
 ## CR00 closure
 
-CR00 can close without a perceptual music gate because it intentionally changes no synthesis or composition behavior.
+CR00 is **CLOSED**. It changes no synthesis or composition behavior, so no perceptual music gate was required.
+
+Closure evidence:
+- Issue #16: closed by merged PR #17.
+- PR #17: merged via squash.
+- CR00 merge on main: `213d43a7783a28be8b8e28bbaccf4b0e83680755`.
+- pre-merge validation HEAD: `ecb6e8e900cf07fb0d4b048b420fc4c0d8f2bcbc`.
+- pre-merge Actions run `35878514190`: Python 3.10 / 3.12 SUCCESS.
+- no runtime implementation file changed in the CR00 boundary merge.
+- checkout hygiene is now a blocking CI job: a fresh local clone under `core.autocrlf=true` must remain clean after `git add --renormalize .` and README must resolve to `eol=lf`.
+
+The following requirements are satisfied:
 
 Required:
 

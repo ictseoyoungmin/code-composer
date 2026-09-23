@@ -49,5 +49,5 @@ Historical files may mention paths or terminology that were current when that ev
 
 ## Current engineering slice
 
-- **CR00 — Composer Rebuild Boundary / Pre-refactor Freeze** — active pre-release architecture reset.
-- Next: **CR01 — Minimal Song Model + Contract Foundation**.
+- **CR00 — Composer Rebuild Boundary / Pre-refactor Freeze** — **CLOSED**.
+- **CR01 — Minimal Song Model + Contract Foundation** — next active engineering slice.

@@ -1,7 +1,7 @@
 {
   "schema": "code-composer-cr00-rebuild-boundary/v1",
   "slice": "CR00",
-  "status": "ENGINEERING_CANDIDATE",
+  "status": "CLOSED",
   "purpose": "Freeze the pre-refactor state and define the breaking Composer-first rebuild boundary.",
   "principle": "Code Composer exists to make music. Contracts preserve and validate the artist's decisions; they do not dictate the composition.",
   "pre_refactor": {
@@ -200,7 +200,19 @@
   "next_slice": {
     "id": "CR01",
     "name": "Minimal Song Model + Contract Foundation",
-    "entry_condition": "CR00 manifest/documentation and cross-platform checkout policy are CI-clean.",
+    "entry_condition": "CR00 CLOSED; begin CR01 from merged main without legacy authoring migration.",
     "non_goal": "Do not implement compatibility or migration for CompositionBrief/six-role authoring."
+  },
+  "closure": {
+    "issue": 16,
+    "pull_request": 17,
+    "merge_sha": "213d43a7783a28be8b8e28bbaccf4b0e83680755",
+    "validated_head_sha": "ecb6e8e900cf07fb0d4b048b420fc4c0d8f2bcbc",
+    "pre_merge_actions_run": 35878514190,
+    "python_3_10": "success",
+    "python_3_12": "success",
+    "runtime_implementation_changes": 0,
+    "checkout_hygiene_gate": "blocking_ci",
+    "perceptual_gate": "not_required_no_music_behavior_change"
   }
 }
