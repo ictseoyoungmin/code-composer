@@ -54,6 +54,13 @@ def test_cr01_non_tonal_song_is_legal_when_no_tonal_locks_exist():
     validate_song(song)
 
 
+def test_cr01_scale_id_is_not_limited_to_legacy_scale_vocabulary():
+    song = _song()
+    song["tonal"]["scale"] = "harmonic_minor"
+    song["locks"]["scale"] = "harmonic_minor"
+    validate_song(song)
+
+
 def test_cr01_duplicate_ids_are_rejected():
     song = _song()
     song["tracks"][1]["id"] = song["tracks"][0]["id"]
