@@ -53,6 +53,23 @@ def test_generic_compatibility_facade_is_sample_identical():
     assert np.array_equal(direct, routed)
 
 
+
+def test_generic_short_note_has_endpoint_safety_without_authored_declick():
+    p = {
+        "kind": "synth",
+        "graph": {
+            "oscillators": [{"waveform": "saw", "gain": .8}],
+            "envelope": {"attack": .18, "decay": .28, "sustain": .78, "release": .55},
+            "filter": {"type": "bandpass", "low_cutoff": 320, "high_cutoff": 5800},
+            "output_gain": .8,
+        },
+    }
+    out = render_generic_note(62, .36, 24000, p, velocity=.7)
+    assert np.max(np.abs(out[0])) < 1e-12
+    assert np.max(np.abs(out[-1])) < 1e-12
+    assert np.all(np.isfinite(out))
+
+
 def test_piano_compatibility_facade_is_sample_identical():
     p = _piano_patch()
     direct = render_piano_note(60, .4, 22050, p, velocity=.63)
