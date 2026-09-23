@@ -1,0 +1,52 @@
+{
+  "schema": "code-composer-cr01-closure/v1",
+  "slice": "CR01",
+  "status": "CLOSED",
+  "name": "Minimal Song Model + Contract Foundation",
+  "issue": 19,
+  "pull_request": 20,
+  "validated_candidate_head": "e2ebedaf253b4b41bd7f756dbde19d4159872769",
+  "merge_sha": "b63afb4271ca7521ea0d14b2e4a597fdaaccab7f",
+  "pre_merge_ci": {
+    "run_number": 62,
+    "run_id": 35920893492,
+    "checkout_hygiene": "success",
+    "python_3_10": "success",
+    "python_3_12": "success",
+    "tests": "674 passed, 3 deselected"
+  },
+  "post_merge_ci": {
+    "run_number": 63,
+    "run_id": 35921246380,
+    "checkout_hygiene": "success",
+    "python_3_10": "success",
+    "python_3_12": "success"
+  },
+  "contract": {
+    "format": "code-composer-song/v1",
+    "seed_ir_required": false,
+    "arbitrary_track_functions": true,
+    "render_engine_required": false,
+    "explicit_render_lock_supported": true,
+    "tonality_optional": true,
+    "legacy_scale_enum_required": false,
+    "canonical_fingerprint": "sha256",
+    "migration_from_composition_brief": false
+  },
+  "regressions": {
+    "duplicate_ids": "blocked",
+    "broken_cross_references": "blocked",
+    "conflicting_hard_locks": "blocked",
+    "unknown_fields": "blocked",
+    "unknown_locked_engine": "blocked",
+    "engine_preset_mismatch": "blocked",
+    "fixed_six_role_dependency": "absent",
+    "seed_ir_dependency": "absent"
+  },
+  "runtime_impact": "no existing synthesis/composition/render implementation file modified",
+  "perceptual_gate": "not_required_no_render_behavior_change",
+  "next_slice": {
+    "id": "CR02",
+    "name": "Song to Execution Plan Lowering"
+  }
+}
