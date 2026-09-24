@@ -11,6 +11,26 @@ def _smoothstep01(x):
     return x*x*(3.0-2.0*x)
 
 
+def _release_tail_seconds(release_s, damper):
+    """Render explicit damper release until the envelope is below an authored floor.
+
+    `release_s` is an exponential time constant, not a buffer length.  Stopping a
+    note after exactly one time constant leaves exp(-1) ~= 37% of its release envelope
+    and makes the final declick act like an audible hard cut.
+    """
+    floor_db=float((damper or {}).get('release_floor_db',-72.0))
+    floor_db=max(-120.0,min(-36.0,floor_db))
+    return max(float(release_s),float(release_s)*(-floor_db)*math.log(10.0)/20.0)
+
+
+def _damper_envelope(t,off,sr,release_s,contact_delay_s=0.0):
+    out=np.ones(len(t),dtype=np.float64)
+    contact=max(0,min(len(t),int(off)+int(round(max(0.0,float(contact_delay_s))*float(sr)))))
+    if contact<len(t):
+        out[contact:]=np.exp(-(t[contact:]-t[contact])/max(1e-9,float(release_s)))
+    return out
+
+
 def _one_pole_lowpass(x,sr,cutoff):
     cutoff=max(20.0,min(float(cutoff),sr*0.45))
     alpha=1.0-math.exp(-2.0*math.pi*cutoff/sr)
@@ -454,8 +474,12 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
     else:
         release_s=float(damper.get('pedal_release_s',1.65) if pedal else damper.get('release_s',0.20))
     release_s=max(0.02,min(5.0,release_s*float(perf.get('release_scale',1.0))))
-    total_s=max(0.01,float(duration_s))+release_s
-    n=max(1,int(total_s*sr))
+    # CR03 explicit-pedal path: release_s is a physical time constant.  Render until
+    # a quiet amplitude floor instead of truncating at one tau.  Legacy note-local
+    # pedal projects keep their historical buffer length in this slice.
+    release_tail_s=_release_tail_seconds(release_s,damper) if pedal_controlled else release_s
+    total_s=max(0.01,float(duration_s))+release_tail_s
+    n=max(1,int(math.ceil(total_s*sr)))
     t=np.arange(n,dtype=np.float64)/sr
     base_hz=midi_to_hz(midi)
 
@@ -500,11 +524,8 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
     # Soft piano strings do not have a static sustain plateau: every partial decays.
     attack_s=max(0.0004,float(strings.get('attack_s',0.0018)))
     attack_env=1.0-np.exp(-t/attack_s)
-    noteoff=np.ones(n,dtype=np.float64)
     off=int(max(0.0,float(duration_s))*sr)
-    if off<n:
-        rt=t[off:]-t[off]
-        noteoff[off:]=np.exp(-rt/release_s)
+    noteoff=_damper_envelope(t,off,sr,release_s)
 
     if string_count==1:
         spreads=[0.0]
@@ -552,14 +573,15 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
             component_env=attack_env*np.exp(-t/max(0.02,string_decay))*noteoff if decoh_active else env
             if off<n and string_count>1:
                 if pedal_controlled:
-                    # S28-A R2: a pedal-up damper does not leave a coherent detuned
-                    # unison beating under one shared 200 ms envelope, nor should it
-                    # erase only the side strings.  Model felt contact on every string
-                    # with a few milliseconds of deterministic contact spread and
-                    # slightly different short damping constants.  All strings are
-                    # damped; none is privileged, and pitch is never swept.
-                    spread_s=max(0.0,min(.012,float(strings.get('pedal_damper_contact_spread_s',0.0045))))
-                    base_tau=max(.035,min(.18,float(strings.get('pedal_damper_unison_decay_s',0.105))))
+                    # CR03: the explicit pedal-up damper is the *single* release
+                    # authority.  The old path multiplied the shared release envelope
+                    # by a second ~105 ms exponential, producing an effective decay of
+                    # roughly 70 ms and an audible "clipped" ending.
+                    #
+                    # Keep only small physical felt-contact timing and damping spread
+                    # across the unison strings; do not multiply a second envelope.
+                    spread_s=max(0.0,min(.020,float(damper.get('contact_spread_s',0.0045))))
+                    release_spread=max(0.0,min(.25,float(damper.get('string_release_spread',0.08))))
                     if string_count<=1:
                         order=[0]
                     elif midi % 2:
@@ -567,16 +589,12 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
                     else:
                         order=list(range(string_count))
                     rank=order.index(si)
-                    contact_delay=spread_s*(rank/max(1,string_count-1))
-                    # Keep the variations bounded and symmetric around the nominal
-                    # damping time so the result reads as felt contact, not a filter.
                     center=(string_count-1)/2.0
-                    tau=base_tau*(1.0+0.10*(rank-center)/max(1.0,center))
-                    extra=np.ones(n,dtype=np.float64)
-                    contact=off+int(round(contact_delay*sr))
-                    if contact<n:
-                        extra[contact:]=np.exp(-(t[contact:]-t[contact])/tau)
-                    component_env=env*extra
+                    contact_delay=spread_s*(rank/max(1,string_count-1))
+                    tau=release_s*(1.0+release_spread*(rank-center)/max(1.0,center))
+                    natural_env=attack_env*np.exp(-t/max(0.02,string_decay))
+                    string_noteoff=_damper_envelope(t,off,sr,tau,contact_delay)
+                    component_env=natural_env*string_noteoff
                 else:
                     # Legacy/no-pedal S14 behavior remains byte-stable: collapse
                     # secondary detuned strings quickly after an ordinary key damper
@@ -626,11 +644,24 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
         ml,mr=_equal_power(mechanics,note_pan*.22)
         left+=ml; right+=mr
 
-    # Short fade-in/out prevents numerical edge clicks without erasing hammer attack.
+    # Fade-in prevents numerical attack clicks.  On the explicit-pedal path, the
+    # release has already reached the authored quiet floor before the buffer ends, so
+    # a tiny final fade only removes numerical residue rather than audible energy.
     declick_ms=float(graph.get('declick_ms',0.35))
     m=min(n//2,max(1,int(declick_ms*0.001*sr)))
     ramp=_smoothstep01(np.linspace(0,1,m,endpoint=True))
     left[:m]*=ramp; right[:m]*=ramp
+    if pedal_controlled:
+        peak_before=float(max(np.max(np.abs(left)),np.max(np.abs(right)),1e-12))
+        tail_before=float(max(np.max(np.abs(left[-m:])),np.max(np.abs(right[-m:]))))
+        # At -72 dB the permitted residue is ~0.025% of peak.  Refuse to use the
+        # declick as a hidden hard cutter if the release has not actually settled.
+        floor_linear=10.0**(float(damper.get('release_floor_db',-72.0))/20.0)
+        if tail_before > peak_before*max(floor_linear*4.0,1e-4):
+            raise ValueError(
+                f"piano explicit release endpoint still audible: tail={tail_before:.6g} "
+                f"peak={peak_before:.6g}"
+            )
     left[-m:]*=ramp[::-1]; right[-m:]*=ramp[::-1]
 
     gain=float(graph.get('output_gain',0.62))
@@ -715,13 +746,9 @@ def apply_piano_soundboard(stereo,sr,patch,events=None,beat_s=1.0):
     # the strings undamped.  This prevents fixed soundboard modes from singing after
     # an ordinary no-pedal chord release.
     no_pedal_decay=max(.02,min(1.0,float(cfg.get('no_pedal_modal_decay_scale',0.10))))
-    if explicit_mask is not None:
-        # S28-A R2: after an authored pedal lift, fixed soundboard modes must not
-        # continue as a free-running low-frequency resonator bank after the dampers
-        # have already stopped the strings.  Keep the long pedal-coupled body while
-        # the pedal is down, but use a much shorter structural body state underneath
-        # explicit pedal control so release does not leave a pitched 'wah/meow' tail.
-        no_pedal_decay=max(.02,min(no_pedal_decay,float(cfg.get('explicit_pedal_up_modal_decay_scale',0.035))))
+    # CR03: explicit pedal control no longer forces the structural body to 3.5% of
+    # its normal modal decay.  The pedal mask already controls the long sympathetic
+    # component; the always-on soundboard should be allowed to decay continuously.
     modal=_modal_soundboard(x,sr,cfg,decay_scale_multiplier=no_pedal_decay)
     if np.any(mask):
         pedal_modal=_modal_soundboard(x*mask[:,None],sr,cfg,decay_scale_multiplier=1.0)
