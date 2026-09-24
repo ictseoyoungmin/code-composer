@@ -1,0 +1,306 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ymstudio.dev/code-composer/schemas/performance_score.schema.json",
+  "title": "Code Composer Performance Score v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "source_song",
+    "meta",
+    "tracks",
+    "render"
+  ],
+  "properties": {
+    "format": {
+      "const": "code-composer-performance-score/v1"
+    },
+    "source_song": {
+      "$ref": "#/$defs/source_song"
+    },
+    "meta": {
+      "$ref": "#/$defs/meta"
+    },
+    "tracks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/track"
+      }
+    },
+    "render": {
+      "$ref": "#/$defs/render"
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "nonempty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_song": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "fingerprint"
+      ],
+      "properties": {
+        "format": {
+          "const": "code-composer-song/v1"
+        },
+        "fingerprint": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "revision": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "expression": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      }
+    },
+    "note": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "start_beat",
+        "duration_beats",
+        "midi",
+        "velocity"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "note"
+        },
+        "start_beat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "duration_beats": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "midi": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 127
+        },
+        "velocity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "articulation": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "expression": {
+          "$ref": "#/$defs/expression"
+        },
+        "piano_attack_offset_ms": {
+          "type": "number",
+          "minimum": -20,
+          "maximum": 20
+        }
+      }
+    },
+    "pedal_point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "offset_beats",
+        "position"
+      ],
+      "properties": {
+        "offset_beats": {
+          "type": "number",
+          "minimum": 0
+        },
+        "position": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "sustain_pedal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "start_beat",
+        "duration_beats",
+        "points"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "sustain_pedal"
+        },
+        "start_beat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "duration_beats": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "points": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "$ref": "#/$defs/pedal_point"
+          }
+        }
+      }
+    },
+    "event": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/note"
+        },
+        {
+          "$ref": "#/$defs/sustain_pedal"
+        }
+      ]
+    },
+    "track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "events"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "events": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/event"
+          }
+        }
+      }
+    },
+    "mix_track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "track",
+        "gain",
+        "pan",
+        "reverb_send"
+      ],
+      "properties": {
+        "track": {
+          "$ref": "#/$defs/id"
+        },
+        "gain": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "pan": {
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1
+        },
+        "reverb_send": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "mix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tracks",
+        "music_bus_gain",
+        "room_return_gain",
+        "master_gain"
+      ],
+      "properties": {
+        "tracks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/mix_track"
+          }
+        },
+        "music_bus_gain": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "room_return_gain": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "master_gain": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        }
+      }
+    },
+    "render": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sample_rate",
+        "tail_seconds",
+        "mix"
+      ],
+      "properties": {
+        "sample_rate": {
+          "type": "integer",
+          "minimum": 8000,
+          "maximum": 192000
+        },
+        "tail_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "mix": {
+          "$ref": "#/$defs/mix"
+        }
+      }
+    }
+  }
+}
