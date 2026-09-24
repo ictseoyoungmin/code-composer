@@ -3,7 +3,7 @@
 | Capability | Purpose | Public surface |
 |---|---|---|
 | Render | Validate and render canonical Music IR | `code-composer` |
-| Song contract (CR01) | Validate seedless Composer-first Song state and exact authored fingerprint | `code-composer-song` |
+| Song contract / execution lowering | Validate seedless Composer-first Song state and lower authored runtime facts into a deterministic Execution Plan | `code-composer-song` |
 | Compose (pre-refactor path) | Compile an explicit Composition Brief into Music IR | `code-composer-compose` |
 | MIDI export | Export resolved/canonical note events to deterministic Type 1 MIDI | `code-composer-midi` |
 | Collaboration bundle | MIDI + reference WAV + resolved IR + manifest | `code-composer-collab` |

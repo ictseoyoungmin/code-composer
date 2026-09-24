@@ -1,0 +1,487 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ymstudio.dev/code-composer/schemas/execution_plan.schema.json",
+  "title": "Code Composer Execution Plan v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "source_song",
+    "meta",
+    "transport",
+    "sections",
+    "instruments",
+    "tracks",
+    "materials",
+    "part_instances"
+  ],
+  "properties": {
+    "format": {
+      "const": "code-composer-execution-plan/v1"
+    },
+    "source_song": {
+      "$ref": "#/$defs/source_song"
+    },
+    "meta": {
+      "$ref": "#/$defs/meta"
+    },
+    "transport": {
+      "$ref": "#/$defs/transport"
+    },
+    "tonal": {
+      "$ref": "#/$defs/tonal"
+    },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/section"
+      }
+    },
+    "instruments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/instrument"
+      }
+    },
+    "tracks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/track"
+      }
+    },
+    "materials": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/motif"
+          },
+          {
+            "$ref": "#/$defs/progression"
+          },
+          {
+            "$ref": "#/$defs/rhythm"
+          }
+        ]
+      }
+    },
+    "part_instances": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/part_instance"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "nonempty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_song": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "fingerprint"
+      ],
+      "properties": {
+        "format": {
+          "const": "code-composer-song/v1"
+        },
+        "fingerprint": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "global_seed"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "global_seed": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "transport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "bpm",
+        "meter"
+      ],
+      "properties": {
+        "bpm": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "meter": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "beats_per_bar",
+            "beat_unit"
+          ],
+          "properties": {
+            "beats_per_bar": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "beat_unit": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        }
+      }
+    },
+    "tonal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "root",
+        "scale"
+      ],
+      "properties": {
+        "root": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "scale": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "section": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "start_bar",
+        "bars",
+        "start_beat",
+        "duration_beats"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "start_bar": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "bars": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "start_beat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "duration_beats": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "name": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "energy": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "intent": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "preset_id",
+        "preset_version"
+      ],
+      "properties": {
+        "source": {
+          "enum": [
+            "family_default",
+            "explicit_preset_lock",
+            "engine_lock_family_default"
+          ]
+        },
+        "preset_id": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "preset_version": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "instrument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "family",
+        "engine",
+        "patch",
+        "resolution"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "family": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "engine": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "patch": {
+          "type": "object"
+        },
+        "resolution": {
+          "$ref": "#/$defs/resolution"
+        },
+        "name": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "variant": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "track": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "function",
+        "instrument"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "function": {
+          "$ref": "#/$defs/nonempty"
+        },
+        "instrument": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "motif": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "intervals",
+        "rhythm",
+        "duration_beats"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "const": "motif"
+        },
+        "intervals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "integer"
+          }
+        },
+        "rhythm": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        },
+        "duration_beats": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "progression": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "degrees",
+        "rhythm",
+        "duration_beats"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "const": "progression"
+        },
+        "degrees": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "rhythm": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        },
+        "duration_beats": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "rhythm_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "beat",
+        "weight"
+      ],
+      "properties": {
+        "beat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0
+        },
+        "duration": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "rhythm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "cycle_beats",
+        "steps",
+        "duration_beats"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "const": "rhythm"
+        },
+        "cycle_beats": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/rhythm_step"
+          }
+        },
+        "duration_beats": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "part_instance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "source_part",
+        "repeat_index",
+        "section",
+        "track",
+        "instrument",
+        "material",
+        "material_kind",
+        "start_beat",
+        "duration_beats"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "source_part": {
+          "$ref": "#/$defs/id"
+        },
+        "repeat_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "section": {
+          "$ref": "#/$defs/id"
+        },
+        "track": {
+          "$ref": "#/$defs/id"
+        },
+        "instrument": {
+          "$ref": "#/$defs/id"
+        },
+        "material": {
+          "$ref": "#/$defs/id"
+        },
+        "material_kind": {
+          "enum": [
+            "motif",
+            "progression",
+            "rhythm"
+          ]
+        },
+        "start_beat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "duration_beats": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    }
+  }
+}
