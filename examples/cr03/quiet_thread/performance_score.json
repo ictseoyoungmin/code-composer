@@ -1,0 +1,1032 @@
+{
+  "format": "code-composer-performance-score/v1",
+  "source_song": {
+    "format": "code-composer-song/v1",
+    "fingerprint": "aa50fd9dc01b46a70ed49a5a21328393edc270473e152bdebc04dd6d80ab75c4"
+  },
+  "meta": {
+    "title": "Quiet Thread",
+    "revision": "cr03-dogfood-r0"
+  },
+  "tracks": [
+    {
+      "id": "piano-foundation",
+      "events": [
+        {
+          "id": "p-b1-bass",
+          "type": "note",
+          "start_beat": 0,
+          "duration_beats": 3.65,
+          "midi": 50,
+          "velocity": 0.32
+        },
+        {
+          "id": "pedal-b1",
+          "type": "sustain_pedal",
+          "start_beat": 0,
+          "duration_beats": 4,
+          "points": [
+            {
+              "offset_beats": 0,
+              "position": 0
+            },
+            {
+              "offset_beats": 0.08,
+              "position": 1
+            },
+            {
+              "offset_beats": 3.65,
+              "position": 1
+            },
+            {
+              "offset_beats": 4,
+              "position": 0
+            }
+          ]
+        },
+        {
+          "id": "p-b1-u1",
+          "type": "note",
+          "start_beat": 0.25,
+          "duration_beats": 0.9,
+          "midi": 57,
+          "velocity": 0.34
+        },
+        {
+          "id": "p-b1-u2",
+          "type": "note",
+          "start_beat": 1.25,
+          "duration_beats": 0.9,
+          "midi": 62,
+          "velocity": 0.34
+        },
+        {
+          "id": "p-b1-u3",
+          "type": "note",
+          "start_beat": 2.25,
+          "duration_beats": 0.9,
+          "midi": 65,
+          "velocity": 0.36
+        },
+        {
+          "id": "p-b1-u4",
+          "type": "note",
+          "start_beat": 3.25,
+          "duration_beats": 0.55,
+          "midi": 64,
+          "velocity": 0.32
+        },
+        {
+          "id": "p-b2-bass",
+          "type": "note",
+          "start_beat": 4,
+          "duration_beats": 3.65,
+          "midi": 46,
+          "velocity": 0.33
+        },
+        {
+          "id": "pedal-b2",
+          "type": "sustain_pedal",
+          "start_beat": 4,
+          "duration_beats": 4,
+          "points": [
+            {
+              "offset_beats": 0,
+              "position": 0
+            },
+            {
+              "offset_beats": 0.08,
+              "position": 1
+            },
+            {
+              "offset_beats": 3.65,
+              "position": 1
+            },
+            {
+              "offset_beats": 4,
+              "position": 0
+            }
+          ]
+        },
+        {
+          "id": "p-b2-u1",
+          "type": "note",
+          "start_beat": 4.25,
+          "duration_beats": 0.9,
+          "midi": 53,
+          "velocity": 0.35
+        },
+        {
+          "id": "p-b2-u2",
+          "type": "note",
+          "start_beat": 5.25,
+          "duration_beats": 0.9,
+          "midi": 57,
+          "velocity": 0.35
+        },
+        {
+          "id": "p-b2-u3",
+          "type": "note",
+          "start_beat": 6.25,
+          "duration_beats": 0.9,
+          "midi": 62,
+          "velocity": 0.37
+        },
+        {
+          "id": "p-b2-u4",
+          "type": "note",
+          "start_beat": 7.25,
+          "duration_beats": 0.55,
+          "midi": 65,
+          "velocity": 0.33
+        },
+        {
+          "id": "p-b3-bass",
+          "type": "note",
+          "start_beat": 8,
+          "duration_beats": 3.65,
+          "midi": 43,
+          "velocity": 0.36
+        },
+        {
+          "id": "pedal-b3",
+          "type": "sustain_pedal",
+          "start_beat": 8,
+          "duration_beats": 4,
+          "points": [
+            {
+              "offset_beats": 0,
+              "position": 0
+            },
+            {
+              "offset_beats": 0.08,
+              "position": 1
+            },
+            {
+              "offset_beats": 3.65,
+              "position": 1
+            },
+            {
+              "offset_beats": 4,
+              "position": 0
+            }
+          ]
+        },
+        {
+          "id": "p-b3-u1",
+          "type": "note",
+          "start_beat": 8.25,
+          "duration_beats": 0.9,
+          "midi": 50,
+          "velocity": 0.38
+        },
+        {
+          "id": "p-b3-u2",
+          "type": "note",
+          "start_beat": 9.25,
+          "duration_beats": 0.9,
+          "midi": 53,
+          "velocity": 0.38
+        },
+        {
+          "id": "p-b3-u3",
+          "type": "note",
+          "start_beat": 10.25,
+          "duration_beats": 0.9,
+          "midi": 57,
+          "velocity": 0.4
+        },
+        {
+          "id": "p-b3-u4",
+          "type": "note",
+          "start_beat": 11.25,
+          "duration_beats": 0.55,
+          "midi": 58,
+          "velocity": 0.36
+        },
+        {
+          "id": "p-b4-bass",
+          "type": "note",
+          "start_beat": 12,
+          "duration_beats": 3.65,
+          "midi": 45,
+          "velocity": 0.38
+        },
+        {
+          "id": "pedal-b4",
+          "type": "sustain_pedal",
+          "start_beat": 12,
+          "duration_beats": 4,
+          "points": [
+            {
+              "offset_beats": 0,
+              "position": 0
+            },
+            {
+              "offset_beats": 0.08,
+              "position": 1
+            },
+            {
+              "offset_beats": 3.65,
+              "position": 1
+            },
+            {
+              "offset_beats": 4,
+              "position": 0
+            }
+          ]
+        },
+        {
+          "id": "p-b4-u1",
+          "type": "note",
+          "start_beat": 12.25,
+          "duration_beats": 0.9,
+          "midi": 52,
+          "velocity": 0.4
+        },
+        {
+          "id": "p-b4-u2",
+          "type": "note",
+          "start_beat": 13.25,
+          "duration_beats": 0.9,
+          "midi": 55,
+          "velocity": 0.4
+        },
+        {
+          "id": "p-b4-u3",
+          "type": "note",
+          "start_beat": 14.25,
+          "duration_beats": 0.9,
+          "midi": 61,
+          "velocity": 0.42
+        },
+        {
+          "id": "p-b4-u4",
+          "type": "note",
+          "start_beat": 15.25,
+          "duration_beats": 0.55,
+          "midi": 64,
+          "velocity": 0.38
+        },
+        {
+          "id": "p-b5-bass",
+          "type": "note",
+          "start_beat": 16,
+          "duration_beats": 3.65,
+          "midi": 41,
+          "velocity": 0.4
+        },
+        {
+          "id": "pedal-b5",
+          "type": "sustain_pedal",
+          "start_beat": 16,
+          "duration_beats": 4,
+          "points": [
+            {
+              "offset_beats": 0,
+              "position": 0
+            },
+            {
+              "offset_beats": 0.08,
+              "position": 1
+            },
+            {
+              "offset_beats": 3.65,
+              "position": 1
+            },
+            {
+              "offset_beats": 4,
+              "position": 0
+            }
+          ]
+        },
+        {
+          "id": "p-b5-u1",
+          "type": "note",
+          "start_beat": 16.25,
+          "duration_beats": 0.9,
+          "midi": 57,
+          "velocity": 0.42
+        },
+        {
+          "id": "p-b5-u2",
+          "type": "note",
+          "start_beat": 17.25,
+          "duration_beats": 0.9,
+          "midi": 62,
+          "velocity": 0.42
+        },
+        {
+          "id": "p-b5-u3",
+          "type": "note",
+          "start_beat": 18.25,
+          "duration_beats": 0.9,
+          "midi": 65,
+          "velocity": 0.44
+        },
+        {
+          "id": "p-b5-u4",
+          "type": "note",
+          "start_beat": 19.25,
+          "duration_beats": 0.55,
+          "midi": 69,
+          "velocity": 0.4
+        },
+        {
+          "id": "p-b6-bass",
+          "type": "note",
+          "start_beat": 20,
+          "duration_beats": 3.65,
+          "midi": 48,
+          "velocity": 0.42
+        },
+        {
+          "id": "pedal-b6",
+          "type": "sustain_pedal",
+          "start_beat": 20,
+          "duration_beats": 4,
+          "points": [
+            {
+              "offset_beats": 0,
+              "position": 0
+            },
+            {
+              "offset_beats": 0.08,
+              "position": 1
+            },
+            {
+              "offset_beats": 3.65,
+              "position": 1
+            },
+            {
+              "offset_beats": 4,
+              "position": 0
+            }
+          ]
+        },
+        {
+          "id": "p-b6-u1",
+          "type": "note",
+          "start_beat": 20.25,
+          "duration_beats": 0.9,
+          "midi": 55,
+          "velocity": 0.44
+        },
+        {
+          "id": "p-b6-u2",
+          "type": "note",
+          "start_beat": 21.25,
+          "duration_beats": 0.9,
+          "midi": 60,
+          "velocity": 0.44
+        },
+        {
+          "id": "p-b6-u3",
+          "type": "note",
+          "start_beat": 22.25,
+          "duration_beats": 0.9,
+          "midi": 64,
+          "velocity": 0.46
+        },
+        {
+          "id": "p-b6-u4",
+          "type": "note",
+          "start_beat": 23.25,
+          "duration_beats": 0.55,
+          "midi": 67,
+          "velocity": 0.42
+        },
+        {
+          "id": "p-b7-bass",
+          "type": "note",
+          "start_beat": 24,
+          "duration_beats": 3.65,
+          "midi": 46,
+          "velocity": 0.44
+        },
+        {
+          "id": "pedal-b7",
+          "type": "sustain_pedal",
+          "start_beat": 24,
+          "duration_beats": 4,
+          "points": [
+            {
+              "offset_beats": 0,
+              "position": 0
+            },
+            {
+              "offset_beats": 0.08,
+              "position": 1
+            },
+            {
+              "offset_beats": 3.65,
+              "position": 1
+            },
+            {
+              "offset_beats": 4,
+              "position": 0
+            }
+          ]
+        },
+        {
+          "id": "p-b7-u1",
+          "type": "note",
+          "start_beat": 24.25,
+          "duration_beats": 0.9,
+          "midi": 53,
+          "velocity": 0.46
+        },
+        {
+          "id": "p-b7-u2",
+          "type": "note",
+          "start_beat": 25.25,
+          "duration_beats": 0.9,
+          "midi": 57,
+          "velocity": 0.46
+        },
+        {
+          "id": "p-b7-u3",
+          "type": "note",
+          "start_beat": 26.25,
+          "duration_beats": 0.9,
+          "midi": 62,
+          "velocity": 0.48
+        },
+        {
+          "id": "p-b7-u4",
+          "type": "note",
+          "start_beat": 27.25,
+          "duration_beats": 0.55,
+          "midi": 65,
+          "velocity": 0.44
+        },
+        {
+          "id": "p-b8-bass",
+          "type": "note",
+          "start_beat": 28,
+          "duration_beats": 3.65,
+          "midi": 45,
+          "velocity": 0.46
+        },
+        {
+          "id": "pedal-b8",
+          "type": "sustain_pedal",
+          "start_beat": 28,
+          "duration_beats": 4,
+          "points": [
+            {
+              "offset_beats": 0,
+              "position": 0
+            },
+            {
+              "offset_beats": 0.08,
+              "position": 1
+            },
+            {
+              "offset_beats": 3.65,
+              "position": 1
+            },
+            {
+              "offset_beats": 4,
+              "position": 0
+            }
+          ]
+        },
+        {
+          "id": "p-b8-u1",
+          "type": "note",
+          "start_beat": 28.25,
+          "duration_beats": 0.9,
+          "midi": 52,
+          "velocity": 0.48
+        },
+        {
+          "id": "p-b8-u2",
+          "type": "note",
+          "start_beat": 29.25,
+          "duration_beats": 0.9,
+          "midi": 55,
+          "velocity": 0.48
+        },
+        {
+          "id": "p-b8-u3",
+          "type": "note",
+          "start_beat": 30.25,
+          "duration_beats": 0.9,
+          "midi": 62,
+          "velocity": 0.5
+        },
+        {
+          "id": "p-b8-u4",
+          "type": "note",
+          "start_beat": 31.25,
+          "duration_beats": 0.55,
+          "midi": 61,
+          "velocity": 0.46
+        },
+        {
+          "id": "p-b9-bass",
+          "type": "note",
+          "start_beat": 32,
+          "duration_beats": 3.65,
+          "midi": 43,
+          "velocity": 0.36
+        },
+        {
+          "id": "pedal-b9",
+          "type": "sustain_pedal",
+          "start_beat": 32,
+          "duration_beats": 4,
+          "points": [
+            {
+              "offset_beats": 0,
+              "position": 0
+            },
+            {
+              "offset_beats": 0.08,
+              "position": 1
+            },
+            {
+              "offset_beats": 3.65,
+              "position": 1
+            },
+            {
+              "offset_beats": 4,
+              "position": 0
+            }
+          ]
+        },
+        {
+          "id": "p-b9-u1",
+          "type": "note",
+          "start_beat": 32.25,
+          "duration_beats": 0.9,
+          "midi": 50,
+          "velocity": 0.38
+        },
+        {
+          "id": "p-b9-u2",
+          "type": "note",
+          "start_beat": 33.25,
+          "duration_beats": 0.9,
+          "midi": 52,
+          "velocity": 0.38
+        },
+        {
+          "id": "p-b9-u3",
+          "type": "note",
+          "start_beat": 34.25,
+          "duration_beats": 0.9,
+          "midi": 58,
+          "velocity": 0.4
+        },
+        {
+          "id": "p-b9-u4",
+          "type": "note",
+          "start_beat": 35.25,
+          "duration_beats": 0.55,
+          "midi": 62,
+          "velocity": 0.36
+        },
+        {
+          "id": "p-b10-bass",
+          "type": "note",
+          "start_beat": 36,
+          "duration_beats": 3.65,
+          "midi": 50,
+          "velocity": 0.3
+        },
+        {
+          "id": "pedal-b10",
+          "type": "sustain_pedal",
+          "start_beat": 36,
+          "duration_beats": 4,
+          "points": [
+            {
+              "offset_beats": 0,
+              "position": 0
+            },
+            {
+              "offset_beats": 0.08,
+              "position": 1
+            },
+            {
+              "offset_beats": 3.65,
+              "position": 1
+            },
+            {
+              "offset_beats": 4,
+              "position": 0
+            }
+          ]
+        },
+        {
+          "id": "p-b10-u1",
+          "type": "note",
+          "start_beat": 36.25,
+          "duration_beats": 0.9,
+          "midi": 57,
+          "velocity": 0.32
+        },
+        {
+          "id": "p-b10-u2",
+          "type": "note",
+          "start_beat": 37.25,
+          "duration_beats": 0.9,
+          "midi": 62,
+          "velocity": 0.32
+        },
+        {
+          "id": "p-b10-u3",
+          "type": "note",
+          "start_beat": 38.25,
+          "duration_beats": 0.9,
+          "midi": 64,
+          "velocity": 0.34
+        },
+        {
+          "id": "p-final-d4",
+          "type": "note",
+          "start_beat": 39,
+          "duration_beats": 0.8,
+          "midi": 62,
+          "velocity": 0.28
+        },
+        {
+          "id": "p-b10-u4",
+          "type": "note",
+          "start_beat": 39.25,
+          "duration_beats": 0.55,
+          "midi": 65,
+          "velocity": 0.3
+        }
+      ]
+    },
+    {
+      "id": "violin-line",
+      "events": [
+        {
+          "id": "v01",
+          "type": "note",
+          "start_beat": 8,
+          "duration_beats": 1.5,
+          "midi": 62,
+          "velocity": 0.5,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v02",
+          "type": "note",
+          "start_beat": 9.5,
+          "duration_beats": 1,
+          "midi": 65,
+          "velocity": 0.54,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v03",
+          "type": "note",
+          "start_beat": 10.5,
+          "duration_beats": 1.5,
+          "midi": 69,
+          "velocity": 0.58,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v04",
+          "type": "note",
+          "start_beat": 12,
+          "duration_beats": 1,
+          "midi": 67,
+          "velocity": 0.56,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v05",
+          "type": "note",
+          "start_beat": 13,
+          "duration_beats": 1,
+          "midi": 65,
+          "velocity": 0.54,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v06",
+          "type": "note",
+          "start_beat": 14,
+          "duration_beats": 1,
+          "midi": 64,
+          "velocity": 0.5,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v07",
+          "type": "note",
+          "start_beat": 15,
+          "duration_beats": 1.5,
+          "midi": 65,
+          "velocity": 0.56,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v08",
+          "type": "note",
+          "start_beat": 16.5,
+          "duration_beats": 1,
+          "midi": 69,
+          "velocity": 0.6,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v09",
+          "type": "note",
+          "start_beat": 17.5,
+          "duration_beats": 1,
+          "midi": 72,
+          "velocity": 0.64,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 22,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v10",
+          "type": "note",
+          "start_beat": 18.5,
+          "duration_beats": 1.25,
+          "midi": 70,
+          "velocity": 0.57,
+          "articulation": "neutral",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v11",
+          "type": "note",
+          "start_beat": 20.25,
+          "duration_beats": 1.25,
+          "midi": 69,
+          "velocity": 0.58,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v12",
+          "type": "note",
+          "start_beat": 21.5,
+          "duration_beats": 1,
+          "midi": 72,
+          "velocity": 0.62,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 22,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v13",
+          "type": "note",
+          "start_beat": 22.5,
+          "duration_beats": 1.5,
+          "midi": 74,
+          "velocity": 0.66,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 22,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v14",
+          "type": "note",
+          "start_beat": 24,
+          "duration_beats": 1,
+          "midi": 77,
+          "velocity": 0.72,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 26,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v15",
+          "type": "note",
+          "start_beat": 25,
+          "duration_beats": 1,
+          "midi": 76,
+          "velocity": 0.67,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 26,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v16",
+          "type": "note",
+          "start_beat": 26,
+          "duration_beats": 1.5,
+          "midi": 74,
+          "velocity": 0.64,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 22,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v17",
+          "type": "note",
+          "start_beat": 27.5,
+          "duration_beats": 1,
+          "midi": 72,
+          "velocity": 0.6,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 22,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v18",
+          "type": "note",
+          "start_beat": 28.5,
+          "duration_beats": 1,
+          "midi": 70,
+          "velocity": 0.58,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v19",
+          "type": "note",
+          "start_beat": 29.5,
+          "duration_beats": 1,
+          "midi": 69,
+          "velocity": 0.56,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v20",
+          "type": "note",
+          "start_beat": 30.5,
+          "duration_beats": 1.25,
+          "midi": 67,
+          "velocity": 0.52,
+          "articulation": "neutral",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v21",
+          "type": "note",
+          "start_beat": 32,
+          "duration_beats": 1.5,
+          "midi": 65,
+          "velocity": 0.5,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v22",
+          "type": "note",
+          "start_beat": 33.5,
+          "duration_beats": 1,
+          "midi": 69,
+          "velocity": 0.54,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v23",
+          "type": "note",
+          "start_beat": 34.5,
+          "duration_beats": 1,
+          "midi": 67,
+          "velocity": 0.52,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v24",
+          "type": "note",
+          "start_beat": 35.5,
+          "duration_beats": 1,
+          "midi": 65,
+          "velocity": 0.5,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v25",
+          "type": "note",
+          "start_beat": 36.5,
+          "duration_beats": 1,
+          "midi": 64,
+          "velocity": 0.47,
+          "articulation": "legato",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        },
+        {
+          "id": "v26",
+          "type": "note",
+          "start_beat": 37.5,
+          "duration_beats": 2.25,
+          "midi": 62,
+          "velocity": 0.44,
+          "articulation": "neutral",
+          "expression": {
+            "vibrato_depth_cents": 18,
+            "vibrato_rate_hz": 5.2
+          }
+        }
+      ]
+    }
+  ],
+  "render": {
+    "sample_rate": 24000,
+    "tail_seconds": 2.5,
+    "mix": {
+      "tracks": [
+        {
+          "track": "piano-foundation",
+          "gain": 0.54,
+          "pan": -0.08,
+          "reverb_send": 0.08
+        },
+        {
+          "track": "violin-line",
+          "gain": 0.82,
+          "pan": 0.1,
+          "reverb_send": 0.13
+        }
+      ],
+      "music_bus_gain": 0.92,
+      "room_return_gain": 0.2,
+      "master_gain": 0.86
+    }
+  }
+}
