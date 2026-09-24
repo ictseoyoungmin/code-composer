@@ -1,6 +1,6 @@
 # CR03 — First Artistic Bottleneck: Piano + Violin
 
-Status: **ENGINEERING / PERCEPTUAL CANDIDATE**
+Status: **CLOSED**
 
 Issue: #25
 
@@ -119,3 +119,29 @@ The produced WAV must be listened to. Listening should answer:
 - does the ending breathe?
 
 A test PASS is not a musical PASS.
+
+
+## Closure
+
+CR03 is **CLOSED**.
+
+Authoritative evidence:
+- Issue #25: closed / completed.
+- PR #26: merged after explicit perceptual listening PASS.
+- validated candidate HEAD: `eb291736fbdb2ff0b35fe465cbe4613350c00799`.
+- CR03 merge on main: `c137b7633bf458c1a45a2c8c3b41a913573dd490`.
+- pre-merge CI #88 / run `36000138430`: checkout-hygiene + Python 3.10 + Python 3.12 SUCCESS.
+- Python 3.10 / 3.12 blocking suite: 711 passed / 3 deselected.
+- dogfood #27 / run `36000138595`: SUCCESS.
+- post-merge main CI #89 / run `36002108214`: checkout-hygiene + Python 3.10 + Python 3.12 SUCCESS.
+- skill validation, plugin distribution, and Skill/Codex/Claude release builds PASS.
+- two independent 24 kHz piano+violin dogfoods validated: Quiet Thread and Lantern Current.
+- both final dogfoods clip ratio: 0.0.
+- both violin realizations: comfortable, warnings 0.
+- piano explicit-pedal natural release reopen validated.
+- section-continuity / violin physical-state reopen validated.
+- perceptual listening verdict: PASS.
+
+The CR03 listening gate was authoritative: CI did not close the slice until audible defects were reopened, fixed, re-rendered, and accepted.
+
+Next: **CR04 — Listen / Critique / Revision**.
