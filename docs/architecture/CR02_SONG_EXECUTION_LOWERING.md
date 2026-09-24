@@ -1,6 +1,6 @@
 # CR02 — Song → Execution Plan Lowering
 
-Status: **ENGINEERING CANDIDATE**
+Status: **CLOSED**
 
 Issue: #22
 
@@ -86,3 +86,25 @@ Non-tonal Songs remain lowerable when they contain only non-pitched rhythm mater
 
 CR03 may consume this plan to build the first piano+violin artistic realization and
 render path.
+
+
+## Closure
+
+CR02 is **CLOSED**.
+
+Authoritative evidence:
+- Issue #22: closed / completed.
+- PR #23: merged.
+- validated candidate HEAD: `460ac57bcac0c75b3172b049121bd78cae105024`.
+- CR02 merge on main: `34a35f17f5f5de237e67e5f172da8a8875668126`.
+- pre-merge Actions #66 / run `35980019164`: checkout-hygiene + Python 3.10 + Python 3.12 SUCCESS.
+- Python 3.10 / 3.12 blocking suite: 689 passed / 3 deselected on the validated candidate.
+- post-merge Actions #67 / run `35980410984`: SUCCESS.
+- skill self-check, canonical skill validation, plugin distribution, and Skill/Codex/Claude build surfaces PASS.
+- source/package Execution Plan schemas are byte-identical.
+- 15 CR02 focused regressions cover exact temporal preservation, no generic fallback, explicit scale failures, section overflow, deterministic fingerprinting, and legacy-vocabulary absence.
+- no existing synthesis, mixer, renderer, legacy arranger, or Music IR implementation file was modified.
+
+No perceptual music gate was required because CR02 resolves runtime planning only and does not yet realize or render note-level musical content.
+
+Next: **CR03 — First Artistic Bottleneck: Piano + Violin**.
