@@ -1,0 +1,270 @@
+{
+  "format": "code-composer-song/v1",
+  "meta": {
+    "title": "Lantern Current",
+    "global_seed": 26092431,
+    "revision": "cr03-dogfood-r0"
+  },
+  "intent": {
+    "concept": "lyrical piano and solo violin waltz-like miniature; drifting opening, asymmetric rising phrase, warm coda",
+    "notes": [
+      "do not reuse Quiet Thread melodic contour or rhythm",
+      "piano should move in a lilting three-beat broken-voicing pattern",
+      "violin should use one arching phrase and one descending answer rather than repeated stepwise cells"
+    ]
+  },
+  "transport": {
+    "bpm": 72,
+    "meter": {
+      "beats_per_bar": 3,
+      "beat_unit": 4
+    }
+  },
+  "tonal": {
+    "root": "A",
+    "scale": "natural_minor"
+  },
+  "sections": [
+    {
+      "id": "drift",
+      "name": "Drift",
+      "bars": 2,
+      "energy": 0.2,
+      "intent": "piano alone, open waltz-like motion"
+    },
+    {
+      "id": "first-arc",
+      "name": "First Arc",
+      "bars": 4,
+      "energy": 0.46,
+      "intent": "violin enters with wide arching contour"
+    },
+    {
+      "id": "turn",
+      "name": "Turn",
+      "bars": 4,
+      "energy": 0.68,
+      "intent": "broader ascent with one short E5 apex and falling answer"
+    },
+    {
+      "id": "harbor",
+      "name": "Harbor",
+      "bars": 2,
+      "energy": 0.3,
+      "intent": "compact return and suspended final A"
+    }
+  ],
+  "instruments": [
+    {
+      "id": "piano",
+      "name": "Acoustic Piano",
+      "family": "piano",
+      "variant": "acoustic-grand",
+      "render_lock": {
+        "preset": "piano.concert_grand_natural",
+        "preset_version": "1.0.0"
+      }
+    },
+    {
+      "id": "violin",
+      "name": "Solo Violin",
+      "family": "violin",
+      "variant": "solo-arco",
+      "render_lock": {
+        "preset": "bowed.violin.modeled_admittance",
+        "preset_version": "1.0.0"
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "piano-foundation",
+      "name": "Piano",
+      "function": "lilting-harmonic-current",
+      "instrument": "piano"
+    },
+    {
+      "id": "violin-line",
+      "name": "Violin",
+      "function": "arching-melody",
+      "instrument": "violin"
+    }
+  ],
+  "materials": [
+    {
+      "id": "drift-harmony",
+      "kind": "progression",
+      "degrees": [
+        1,
+        6
+      ],
+      "rhythm": [
+        3,
+        3
+      ]
+    },
+    {
+      "id": "arc-harmony",
+      "kind": "progression",
+      "degrees": [
+        3,
+        7,
+        4,
+        1
+      ],
+      "rhythm": [
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "id": "turn-harmony",
+      "kind": "progression",
+      "degrees": [
+        4,
+        5,
+        6,
+        5
+      ],
+      "rhythm": [
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "id": "harbor-harmony",
+      "kind": "progression",
+      "degrees": [
+        4,
+        1
+      ],
+      "rhythm": [
+        3,
+        3
+      ]
+    },
+    {
+      "id": "arc-motif",
+      "kind": "motif",
+      "intervals": [
+        0,
+        5,
+        3,
+        8,
+        7,
+        5,
+        2,
+        4,
+        7
+      ],
+      "rhythm": [
+        1,
+        1.5,
+        0.5,
+        1.25,
+        0.75,
+        1,
+        1.5,
+        1,
+        1.5
+      ]
+    },
+    {
+      "id": "turn-motif",
+      "kind": "motif",
+      "intervals": [
+        4,
+        7,
+        9,
+        12,
+        10,
+        7,
+        5,
+        8,
+        6
+      ],
+      "rhythm": [
+        1.25,
+        1,
+        1.25,
+        1,
+        0.75,
+        1.5,
+        1,
+        1.25,
+        1.5
+      ]
+    },
+    {
+      "id": "harbor-motif",
+      "kind": "motif",
+      "intervals": [
+        5,
+        2,
+        0,
+        4,
+        0
+      ],
+      "rhythm": [
+        1,
+        1.25,
+        1,
+        1.25,
+        1.5
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "drift-piano",
+      "section": "drift",
+      "track": "piano-foundation",
+      "material": "drift-harmony"
+    },
+    {
+      "id": "arc-piano",
+      "section": "first-arc",
+      "track": "piano-foundation",
+      "material": "arc-harmony"
+    },
+    {
+      "id": "turn-piano",
+      "section": "turn",
+      "track": "piano-foundation",
+      "material": "turn-harmony"
+    },
+    {
+      "id": "harbor-piano",
+      "section": "harbor",
+      "track": "piano-foundation",
+      "material": "harbor-harmony"
+    },
+    {
+      "id": "arc-violin",
+      "section": "first-arc",
+      "track": "violin-line",
+      "material": "arc-motif"
+    },
+    {
+      "id": "turn-violin",
+      "section": "turn",
+      "track": "violin-line",
+      "material": "turn-motif"
+    },
+    {
+      "id": "harbor-violin",
+      "section": "harbor",
+      "track": "violin-line",
+      "material": "harbor-motif"
+    }
+  ],
+  "locks": {
+    "bpm": 72,
+    "root": "A",
+    "scale": "natural_minor"
+  }
+}

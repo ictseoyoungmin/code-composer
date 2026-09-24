@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 
 from code_composer.audio.engines import engine_for_patch
+import code_composer.audio.engines.bowed_waveguide as bowed_waveguide_module
 from code_composer.performance.violin import realize_violin_performance
 from code_composer.presets import list_presets, materialize_preset
 
@@ -104,3 +105,53 @@ def test_residual_bridge_mix_is_an_audible_causal_control():
     boundary = int(1.0 * beat_s * sr)
     region = wet[boundary:boundary+int(.12*sr), 0] - dry[boundary:boundary+int(.12*sr), 0]
     assert float(np.sqrt(np.mean(region*region))) > 1e-7
+
+
+
+def test_same_string_state_is_not_reconstructed_around_residual_decay_threshold(monkeypatch):
+    ir = _ir("bowed.violin.modeled_admittance")
+    ir["tracks"][0]["events"] = [
+        {
+            "start_beat": 0.0,
+            "duration_beats": 0.5,
+            "midi": 69,
+            "velocity": .62,
+            "performance": {"articulation": "neutral"},
+        },
+        {
+            # At 72 BPM this is about a 190 ms gap after the first note: just beyond
+            # the historical 180 ms residual threshold that used to recreate state.
+            "start_beat": 0.728,
+            "duration_beats": 0.5,
+            "midi": 70,
+            "velocity": .62,
+            "performance": {"articulation": "neutral"},
+        },
+    ]
+    realized = realize_violin_performance(ir, "lead", config={"strict_comfort": False})
+    strings = [
+        e["performance"]["violin_realization"]["left_hand"]["string"]
+        for e in realized["tracks"][0]["events"]
+    ]
+    assert strings == ["A", "A"]
+
+    original = bowed_waveguide_module._WaveguideStringState
+    constructed = []
+
+    class CountingState(original):
+        def __init__(self, *args, **kwargs):
+            constructed.append(1)
+            super().__init__(*args, **kwargs)
+
+    monkeypatch.setattr(bowed_waveguide_module, "_WaveguideStringState", CountingState)
+    sr = 22050
+    beat_s = 60.0 / 72.0
+    n = int(1.6 * sr)
+    patch = realized["instruments"]["lead"]
+    audio = engine_for_patch(patch).render_track(
+        realized["tracks"][0]["events"], n, sr, patch, beat_s, gain=.18, pan=0.0
+    )
+    assert audio is not None
+    # Same physical A string should be constructed once and naturally advanced
+    # through the gap, not destroyed/recreated at residual_decay_s.
+    assert len(constructed) == 1

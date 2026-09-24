@@ -7,7 +7,8 @@ dependencies = ["numpy>=1.24", "scipy>=1.10"]
 
 [project.scripts]
 code-composer = "code_composer.app.cli:main"
-code-composer-compose = "code_composer.app.composer_cli:main"\ncode-composer-song = "code_composer.app.song_cli:main"
+code-composer-compose = "code_composer.app.composer_cli:main"
+code-composer-song = "code_composer.app.song_cli:main"
 code-composer-midi = "code_composer.app.midi_cli:main"
 code-composer-collab = "code_composer.app.collab_cli:main"
 code-composer-exchange = "code_composer.app.exchange_cli:main"

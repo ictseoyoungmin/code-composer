@@ -1,0 +1,273 @@
+{
+  "format": "code-composer-song/v1",
+  "meta": {
+    "title": "Quiet Thread",
+    "global_seed": 26092403,
+    "revision": "cr03-dogfood-r0"
+  },
+  "intent": {
+    "concept": "lyrical chamber miniature for acoustic piano and solo violin; intimate opening, one brief luminous apex, quiet return",
+    "notes": [
+      "violin phrases should breathe and remain connected",
+      "piano supports rather than competes",
+      "high register is an apex, not a permanent register"
+    ]
+  },
+  "transport": {
+    "bpm": 84,
+    "meter": {
+      "beats_per_bar": 4,
+      "beat_unit": 4
+    }
+  },
+  "tonal": {
+    "root": "D",
+    "scale": "natural_minor"
+  },
+  "sections": [
+    {
+      "id": "opening",
+      "name": "Opening",
+      "bars": 2,
+      "energy": 0.22,
+      "intent": "piano establishes space and tonal gravity"
+    },
+    {
+      "id": "theme",
+      "name": "Theme",
+      "bars": 3,
+      "energy": 0.48,
+      "intent": "violin enters in a warm middle register"
+    },
+    {
+      "id": "rise",
+      "name": "Rise",
+      "bars": 3,
+      "energy": 0.72,
+      "intent": "one brief high-register apex then immediate descent"
+    },
+    {
+      "id": "release",
+      "name": "Release",
+      "bars": 2,
+      "energy": 0.32,
+      "intent": "return to middle register and leave a final breath"
+    }
+  ],
+  "instruments": [
+    {
+      "id": "piano",
+      "name": "Acoustic Piano",
+      "family": "piano",
+      "variant": "acoustic-grand",
+      "render_lock": {
+        "preset": "piano.concert_grand_natural",
+        "preset_version": "1.0.0"
+      }
+    },
+    {
+      "id": "violin",
+      "name": "Solo Violin",
+      "family": "violin",
+      "variant": "solo-arco",
+      "render_lock": {
+        "preset": "bowed.violin.modeled_admittance",
+        "preset_version": "1.0.0"
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "piano-foundation",
+      "name": "Piano",
+      "function": "harmonic-foundation",
+      "instrument": "piano"
+    },
+    {
+      "id": "violin-line",
+      "name": "Violin",
+      "function": "lyrical-melody",
+      "instrument": "violin"
+    }
+  ],
+  "materials": [
+    {
+      "id": "opening-harmony",
+      "kind": "progression",
+      "degrees": [
+        1,
+        6
+      ],
+      "rhythm": [
+        4,
+        4
+      ]
+    },
+    {
+      "id": "theme-harmony",
+      "kind": "progression",
+      "degrees": [
+        4,
+        5,
+        1
+      ],
+      "rhythm": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "rise-harmony",
+      "kind": "progression",
+      "degrees": [
+        7,
+        6,
+        5
+      ],
+      "rhythm": [
+        4,
+        4,
+        4
+      ]
+    },
+    {
+      "id": "release-harmony",
+      "kind": "progression",
+      "degrees": [
+        4,
+        1
+      ],
+      "rhythm": [
+        4,
+        4
+      ]
+    },
+    {
+      "id": "theme-thread",
+      "kind": "motif",
+      "intervals": [
+        0,
+        2,
+        4,
+        3,
+        2,
+        1,
+        2,
+        4,
+        6,
+        5
+      ],
+      "rhythm": [
+        1.5,
+        1,
+        1.5,
+        1,
+        1,
+        1,
+        1.5,
+        1,
+        1,
+        1.25
+      ]
+    },
+    {
+      "id": "rise-thread",
+      "kind": "motif",
+      "intervals": [
+        4,
+        6,
+        7,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4,
+        3
+      ],
+      "rhythm": [
+        1.25,
+        1,
+        1.5,
+        1,
+        1,
+        1.5,
+        1,
+        1,
+        1,
+        1.25
+      ]
+    },
+    {
+      "id": "release-thread",
+      "kind": "motif",
+      "intervals": [
+        2,
+        4,
+        3,
+        2,
+        1,
+        0
+      ],
+      "rhythm": [
+        1.5,
+        1,
+        1,
+        1,
+        1,
+        2.25
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "opening-piano",
+      "section": "opening",
+      "track": "piano-foundation",
+      "material": "opening-harmony"
+    },
+    {
+      "id": "theme-piano",
+      "section": "theme",
+      "track": "piano-foundation",
+      "material": "theme-harmony"
+    },
+    {
+      "id": "rise-piano",
+      "section": "rise",
+      "track": "piano-foundation",
+      "material": "rise-harmony"
+    },
+    {
+      "id": "release-piano",
+      "section": "release",
+      "track": "piano-foundation",
+      "material": "release-harmony"
+    },
+    {
+      "id": "theme-violin",
+      "section": "theme",
+      "track": "violin-line",
+      "material": "theme-thread"
+    },
+    {
+      "id": "rise-violin",
+      "section": "rise",
+      "track": "violin-line",
+      "material": "rise-thread",
+      "start_beat": 0.25
+    },
+    {
+      "id": "release-violin",
+      "section": "release",
+      "track": "violin-line",
+      "material": "release-thread"
+    }
+  ],
+  "locks": {
+    "bpm": 84,
+    "root": "D",
+    "scale": "natural_minor"
+  }
+}

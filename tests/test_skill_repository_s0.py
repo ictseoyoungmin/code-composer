@@ -91,3 +91,15 @@ def test_built_plugins_use_root_manifest_layout_and_canonical_icon():
         assert f"code-composer/.{platform}-plugin/plugin.json" in names
         assert "code-composer/skills/code-composer/assets/icon.svg" in names
         assert "code-composer/skills/code-composer/agents/openai.yaml" in names
+
+
+def test_pyproject_is_valid_toml_and_exposes_song_cli():
+    try:
+        import tomllib
+    except ModuleNotFoundError:
+        import tomli as tomllib
+    pyproject = tomllib.loads(
+        (KIT_ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    )
+    scripts = pyproject["project"]["scripts"]
+    assert scripts["code-composer-song"] == "code_composer.app.song_cli:main"

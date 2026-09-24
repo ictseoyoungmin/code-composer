@@ -504,7 +504,13 @@ def _render_bowed_waveguide_track_coupled(
         if prev_end is not None and start > prev_end:
             tick_gap(prev_end, start)
 
-        if string_name not in states or gap_s > residual_s:
+        if string_name not in states:
+            # CR03 section-continuity reopen: physical string memory must not be
+            # destroyed by a binary gap threshold. tick_gap() advances every known
+            # string with bow contact disabled, so long gaps naturally decay toward
+            # rest. residual_decay_s controls only how much released bridge motion is
+            # audible during the gap; it no longer decides whether the string object
+            # is recreated at the next note.
             states[string_name] = _WaveguideStringState(
                 sr, graph, seed=state_seed + ev_index * 1009 + int(ev["midi"]) * 31 + ord(string_name[0])
             )
@@ -759,7 +765,6 @@ def render_bowed_waveguide_track(
     bow_change_s = max(0.002, min(0.12, float(cont.get("bow_change_s", 0.026))))
     control_slew_s = max(0.0005, min(0.08, float(cont.get("control_slew_s", 0.005))))
     pitch_slew_s = max(0.0001, min(0.05, float(cont.get("pitch_transition_s", 0.0035))))
-    gap_limit_s = max(0.0, min(0.25, float(cont.get("state_gap_limit_s", 0.045))))
     state_seed = int(bow_cfg.get("seed", 211)) + 9173
     state = None
     current_string = None
@@ -789,7 +794,7 @@ def render_bowed_waveguide_track(
         group_id = bow_plan["group_id"]
         gap_s = 0.0 if prev_end is None else max(0.0, (start - prev_end) / float(sr))
         same_string_continuation = (
-            state is not None and current_string == string_name and gap_s <= gap_limit_s
+            state is not None and current_string == string_name
         )
         if not same_string_continuation:
             state = _WaveguideStringState(sr, graph, seed=state_seed + ev_index * 1009 + int(ev["midi"]) * 31)

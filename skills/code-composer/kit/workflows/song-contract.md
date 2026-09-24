@@ -18,4 +18,12 @@ CR01 establishes the Composer-first Song model. CR02 adds deterministic executio
    ```
 9. Treat lowering failures as explicit missing/unsupported execution information. Do not repair them by inventing a seed IR, generic instrument fallback, hidden voicing, or register shift.
 
-The Execution Plan is still symbolic with respect to actual notes/voicings. CR02 does not render audio. Do not build a compatibility adapter from the old CompositionBrief into Song.
+The Execution Plan remains symbolic with respect to exact notes/voicings.
+
+For artistic rendering, author a Performance Score that owns exact notes, voicings, register, explicit rests, dynamics, articulation, controls, and mix intent, then run:
+
+```bash
+code-composer-song render SONG.json PERFORMANCE_SCORE.json OUTPUT.wav [RESOLVED.json] [ANALYSIS.json]
+```
+
+The runtime may validate and physically realize mechanics, but it must not rewrite the authored note decisions. Do not build a compatibility adapter from the old CompositionBrief into Song.

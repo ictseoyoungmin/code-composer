@@ -124,7 +124,7 @@ Analyzers provide evidence; they do not silently rewrite the composition. The ed
 
 ```text
 code-composer                 render Music IR
-code-composer-song            validate/lower Composer-first Song → Execution Plan
+code-composer-song            validate/lower/render Composer-first Song + Performance Score
 code-composer-compose         pre-refactor brief → Music IR path
 code-composer-midi            export MIDI
 code-composer-collab          create a collaboration bundle

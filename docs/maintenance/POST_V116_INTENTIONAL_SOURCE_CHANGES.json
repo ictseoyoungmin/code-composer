@@ -1,7 +1,7 @@
 {
   "status": "ACTIVE_ALLOWLIST_FOR_POST_V116_FEATURE_WORK",
   "purpose": "Preserve the historical v1.16 runtime baseline while requiring every intentional modification of a baseline file in later feature slices to be explicit and hash-pinned.",
-  "slice": "Post-v1.16 through S31 Destination-Bound Transition / Boundary Arrival Lineage on S30 CLOSED baseline",
+  "slice": "Post-v1.16 through CR03 First Artistic Bottleneck / piano natural release + section continuity reopen",
   "files": {
     "src/code_composer/agent/composition_brief.py": {
       "sha256": "0b27f685ff9d1bde4c7dcfbc8ce2ba292a657b50af6cfefbe27d2767923011d6",
@@ -60,12 +60,12 @@
       "reason": "Standalone Performance IR schema mirrors S31 destination-bound harmonic anticipation arrival_binding and exactly-one target semantics."
     },
     "src/code_composer/audio/piano.py": {
-      "sha256": "05ba9188a54c6f6cfa5500bf24c44f2b8db5483708562324979d6466aaa66ac5",
-      "reason": "S14 release hardening retained. S28-A adds explicit continuous sustain-pedal state; S28-A R2 damps detuned unison strings with short staggered damper contacts and shortens fixed soundboard modal state after authored pedal-up so the release does not produce synthetic wah/meow tails. S28-B adds opt-in deterministic per-strike phase/hammer excitation identity while historical presets remain byte-stable. S28-G adds an opt-in high-register 3-string unison decoherence path with tiny deterministic per-partial/string asymmetry; the canonical natural preset remains unchanged."
+      "sha256": "68f2d7a5baf558a2ec291f497bf114c50d739252743d6babca4829352d918b8e",
+      "reason": "S14/S28 piano realism work retained. CR03 reopens only the canonical explicit sustain-pedal release path after perceptual listening found note endings audibly hard-cut: release_s is treated as an exponential time constant and rendered to an authored quiet floor; the old second ~105 ms unison damping envelope is removed from explicit pedal-up; the special 0.035x explicit-pedal soundboard modal shrink is removed; final declick is permitted only after the release has already settled below the configured floor. Legacy note-local pedal projects keep their historical buffer-length path in this slice."
     },
     "src/code_composer/audio/piano_design.py": {
-      "sha256": "996a21392f7cbe1f1021453816bc7b79e58f0962ea7f22a70161ea1d0fbf400f",
-      "reason": "S14 acoustic defaults retained. S28-A R2 adds bounded pedal-up unison/soundboard damping controls. S28-B adds disabled-by-default strike_identity controls resolved only by the new opt-in natural concert-grand preset. S28-G adds disabled-by-default bounded unison-decoherence controls for an opt-in listening preset."
+      "sha256": "71ebf3b58ddf89cf2135fea993472dccf3d94963f31e601d1db9e107c4251fc5",
+      "reason": "CR03 adds explicit-pedal damper controls for floor-based release settling, bounded felt-contact spread, and bounded per-string release spread; removes the obsolete explicit-pedal 0.035x soundboard modal shortcut and no longer relies on pedal_damper_unison_decay_s as a second release authority."
     },
     "src/code_composer/agent/performance_ir.py": {
       "sha256": "e1f27f8f7ad2bbcb64353ce78c2ea4fdeb3cf0de099b5db9b14471689b65c280",

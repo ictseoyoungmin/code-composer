@@ -76,18 +76,23 @@ def test_pedal_position_persists_between_authored_curves_and_repeds():
     assert resolve_sustain_pedal_position(events,5.0) == pytest.approx(1.0)
 
 
-def test_explicit_pedal_up_clears_old_note_instead_of_attaching_legacy_long_tail():
+def test_explicit_pedal_up_uses_natural_release_instead_of_one_tau_hard_cut():
     patch=_patch()
+    patch['piano_graph']['damper']['release_floor_db']=-72.0
     events=[
         _note(dur=.5,pedal=True),
         _ctl(0,2,[(0,1),(1.9,1),(2,0)]),
     ]
     n=int(3.0*SR)
     explicit=render_piano_track_with_controls(events,n,SR,patch,BEAT_S)
-    legacy=render_piano_note(60,.5*BEAT_S,SR,patch,velocity=.72,performance={'pedal':True})
-    # Pedal-up occurs at 1.0 s. Explicit state should use the ordinary 180 ms damper
-    # release there, while the historical note-local pedal still has a 1.65 s tail.
-    assert _rms(explicit,1.32,1.55) < _rms(legacy,1.32,1.55)*0.08
+    # Pedal-up occurs at 1.0 s and ordinary release tau is 180 ms.  The historical
+    # path effectively disappeared around one tau.  A natural release must still
+    # carry energy after one tau, then continue decaying smoothly.
+    one_tau=_rms(explicit,1.16,1.24)
+    three_tau=_rms(explicit,1.50,1.62)
+    late=_rms(explicit,2.05,2.20)
+    assert one_tau > 1e-5
+    assert one_tau > three_tau > late
 
 
 def test_repedal_does_not_resurrect_a_note_already_damped_at_pedal_up():
@@ -104,12 +109,18 @@ def test_repedal_does_not_resurrect_a_note_already_damped_at_pedal_up():
     assert np.array_equal(a,b)
 
 
-def test_explicit_control_overrides_legacy_note_pedal_boolean():
+def test_explicit_control_overrides_legacy_note_pedal_boolean_without_hard_cut():
     patch=_patch(); n=int(2.5*SR)
+    patch['piano_graph']['damper']['release_floor_db']=-72.0
     down_then_up=[_note(dur=.5,pedal=True),_ctl(0,1,[(0,1),(.9,1),(1,0)])]
     a=render_piano_track_with_controls(down_then_up,n,SR,patch,BEAT_S)
     # Despite performance.pedal=True, the explicit pedal-up at .5 s owns the release.
-    assert _rms(a,.85,1.05) < 1e-6
+    # It must decay naturally instead of becoming numerically silent almost at once.
+    early=_rms(a,.55,.68)
+    mid=_rms(a,.82,.95)
+    late=_rms(a,1.35,1.50)
+    assert early > mid > late
+    assert mid > 1e-6
 
 
 def test_legacy_track_without_piano_control_stays_on_legacy_note_renderer():
@@ -171,3 +182,35 @@ def test_explicit_pedal_release_damps_complete_unison_without_s14_side_string_co
     legacy_a=render_piano_note(72,.5*BEAT_S,SR,a,velocity=.72,performance={'pedal':False})
     legacy_b=render_piano_note(72,.5*BEAT_S,SR,b,velocity=.72,performance={'pedal':False})
     assert not np.array_equal(legacy_a,legacy_b)
+
+
+
+def test_explicit_release_note_buffer_reaches_quiet_floor_before_final_declick():
+    patch=_patch()
+    patch['piano_graph']['damper']['release_s']=.20
+    patch['piano_graph']['damper']['release_floor_db']=-72.0
+    note=render_piano_note(
+        64,.5,SR,patch,velocity=.72,
+        performance={'pedal':True,'pedal_controlled':True},
+    )
+    # 72 dB exponential settling requires ~8.29 tau, not one tau.
+    assert len(note)/SR > .5 + 1.5
+    peak=float(np.max(np.abs(note)))
+    tail=float(np.max(np.abs(note[-max(8,int(.002*SR)):])) )
+    assert tail < peak*0.001
+
+
+def test_explicit_pedal_release_does_not_use_second_105ms_unison_envelope():
+    patch=_patch()
+    # Historical string-level knobs must not become a second release authority.
+    patch['piano_graph']['strings']['pedal_damper_unison_decay_s']=.035
+    a=render_piano_note(
+        72,.5,SR,patch,velocity=.72,
+        performance={'pedal':True,'pedal_controlled':True},
+    )
+    patch['piano_graph']['strings']['pedal_damper_unison_decay_s']=.18
+    b=render_piano_note(
+        72,.5,SR,patch,velocity=.72,
+        performance={'pedal':True,'pedal_controlled':True},
+    )
+    assert np.array_equal(a,b)

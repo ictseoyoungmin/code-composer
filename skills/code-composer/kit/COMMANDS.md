@@ -15,11 +15,14 @@ Validates canonical Music IR, resolves it deterministically, renders WAV, and ca
 ```bash
 code-composer-song validate SONG.json
 code-composer-song lower SONG.json EXECUTION_PLAN.json
+code-composer-song render SONG.json PERFORMANCE_SCORE.json OUTPUT.wav [RESOLVED.json] [ANALYSIS.json]
 ```
 
 `validate` checks the seedless Composer-first Song contract, cross-references, user locks, and explicitly locked runtime resources.
 
 `lower` deterministically resolves the section timeline, material durations, repeated part instances, current-runtime scale compatibility, and instrument engine/preset patches into `code-composer-execution-plan/v1`. It does **not** invent notes, voicings, register shifts, dynamics, or fixed arrangement roles.
+
+`render` consumes an authored `code-composer-performance-score/v1`, validates its exact-note authority against the Song/Execution Plan, attaches instrument mechanics such as violin fingering/bow realization without changing note pitch/timing, and renders through the existing validated engine path.
 
 ## Compose (pre-refactor render path)
 
