@@ -49,8 +49,9 @@ When source inspection is necessary, read `kit/SOURCE_MAP.md` first and inspect 
 
 ## Authority rules
 
-- CR01 Song is the canonical authored-state contract for the Composer-first rebuild. It is validation-only until deterministic Song lowering lands.
-- Canonical Music IR remains the current render/execution authority during that transition.
+- CR01 Song is the canonical authored-state contract for the Composer-first rebuild.
+- CR02 Execution Plan is the deterministic runtime-planning authority for Song timeline/material/instrument resolution. It does not invent note/voicing content.
+- Canonical Music IR remains the historical render authority until the new execution path reaches audio rendering.
 - Resolved IR is the exact deterministic realization state.
 - Reference WAV is the timbre/mix authority for external collaborators.
 - MIDI is an interchange representation, not a faithful representation of Code Composer synthesis/DSP.
