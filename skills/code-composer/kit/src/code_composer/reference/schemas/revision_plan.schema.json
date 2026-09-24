@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ymstudio.dev/code-composer/schemas/revision_plan.schema.json",
+  "title": "Code Composer Revision Plan v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "source_score",
+    "meta",
+    "critique",
+    "ops"
+  ],
+  "properties": {
+    "format": {
+      "const": "code-composer-revision-plan/v1"
+    },
+    "source_score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "fingerprint"
+      ],
+      "properties": {
+        "format": {
+          "const": "code-composer-performance-score/v1"
+        },
+        "fingerprint": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "summary"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "summary": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "critique": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "observations",
+        "preserve",
+        "acceptance"
+      ],
+      "properties": {
+        "observations": {
+          "$ref": "#/$defs/string_array"
+        },
+        "preserve": {
+          "$ref": "#/$defs/string_array"
+        },
+        "acceptance": {
+          "$ref": "#/$defs/string_array"
+        }
+      }
+    },
+    "ops": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/op"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "nonempty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "string_array": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/nonempty"
+      }
+    },
+    "range_base": {
+      "type": "object",
+      "properties": {
+        "track": {
+          "$ref": "#/$defs/id"
+        },
+        "start_beat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "end_beat": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "scale_velocity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "op",
+        "track",
+        "start_beat",
+        "end_beat",
+        "factor"
+      ],
+      "properties": {
+        "op": {
+          "const": "scale_velocity"
+        },
+        "track": {
+          "$ref": "#/$defs/id"
+        },
+        "start_beat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "end_beat": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "factor": {
+          "type": "number",
+          "minimum": 0.1,
+          "maximum": 2
+        }
+      }
+    },
+    "thin_accompaniment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "op",
+        "track",
+        "event_ids",
+        "reason"
+      ],
+      "properties": {
+        "op": {
+          "const": "thin_accompaniment"
+        },
+        "track": {
+          "$ref": "#/$defs/id"
+        },
+        "event_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "reason": {
+          "$ref": "#/$defs/nonempty"
+        }
+      }
+    },
+    "set_track_mix_gain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "op",
+        "track",
+        "gain"
+      ],
+      "properties": {
+        "op": {
+          "const": "set_track_mix_gain"
+        },
+        "track": {
+          "$ref": "#/$defs/id"
+        },
+        "gain": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        }
+      }
+    },
+    "shift_register": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "op",
+        "track",
+        "start_beat",
+        "end_beat",
+        "octaves"
+      ],
+      "properties": {
+        "op": {
+          "const": "shift_register"
+        },
+        "track": {
+          "$ref": "#/$defs/id"
+        },
+        "start_beat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "end_beat": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "octaves": {
+          "type": "integer",
+          "minimum": -2,
+          "maximum": 2,
+          "not": {
+            "const": 0
+          }
+        }
+      }
+    },
+    "op": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/scale_velocity"
+        },
+        {
+          "$ref": "#/$defs/thin_accompaniment"
+        },
+        {
+          "$ref": "#/$defs/set_track_mix_gain"
+        },
+        {
+          "$ref": "#/$defs/shift_register"
+        }
+      ]
+    }
+  }
+}
