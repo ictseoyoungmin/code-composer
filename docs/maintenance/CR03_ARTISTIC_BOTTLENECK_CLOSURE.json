@@ -1,0 +1,57 @@
+{
+  "schema": "code-composer-cr03-closure/v1",
+  "slice": "CR03",
+  "status": "CLOSED",
+  "name": "First Artistic Bottleneck: Piano + Violin",
+  "issue": 25,
+  "pull_request": 26,
+  "validated_candidate_head": "eb291736fbdb2ff0b35fe465cbe4613350c00799",
+  "merge_sha": "c137b7633bf458c1a45a2c8c3b41a913573dd490",
+  "pre_merge_ci": {
+    "run_number": 88,
+    "run_id": 36000138430,
+    "checkout_hygiene": "success",
+    "python_3_10": "success",
+    "python_3_12": "success",
+    "tests": "711 passed, 3 deselected"
+  },
+  "dogfood": {
+    "run_number": 27,
+    "run_id": 36000138595,
+    "status": "success",
+    "quiet_thread_artifact_id": 10808156540,
+    "lantern_current_artifact_id": 10807782904,
+    "quiet_thread_clipping": 0,
+    "lantern_current_clipping": 0,
+    "quiet_thread_perceptual_reopen": [
+      "piano explicit-pedal hard cut",
+      "section continuity / re-entry"
+    ],
+    "second_independent_melody": true
+  },
+  "post_merge_ci": {
+    "run_number": 89,
+    "run_id": 36002108214,
+    "checkout_hygiene": "success",
+    "python_3_10": "success",
+    "python_3_12": "success"
+  },
+  "perceptual_gate": {
+    "required": true,
+    "verdict": "PASS",
+    "authority": "user listening",
+    "metrics_are_evidence_not_aesthetic_scores": true
+  },
+  "contract": {
+    "performance_score_format": "code-composer-performance-score/v1",
+    "exact_note_authority": true,
+    "physical_realization_preserves_pitch_timing": true,
+    "fixed_six_role_dependency": "absent",
+    "register_shift_dependency": "absent",
+    "seed_ir_dependency": "absent"
+  },
+  "next_slice": {
+    "id": "CR04",
+    "name": "Listen / Critique / Revision"
+  }
+}
