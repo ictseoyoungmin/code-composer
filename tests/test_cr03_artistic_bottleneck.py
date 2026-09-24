@@ -139,6 +139,54 @@ def test_cr03_high_register_is_brief_apex_not_persistent_state():
     assert high / total < 0.10
 
 
+def test_cr03_section_boundaries_keep_musical_motion_without_full_reset():
+    score = _score()
+    violin = next(t for t in score["tracks"] if t["id"] == "violin-line")
+    by_id = {e["id"]: e for e in violin["events"]}
+
+    gap_a = float(by_id["v11"]["start_beat"]) - (
+        float(by_id["v10"]["start_beat"]) + float(by_id["v10"]["duration_beats"])
+    )
+    gap_b = float(by_id["v21"]["start_beat"]) - (
+        float(by_id["v20"]["start_beat"]) + float(by_id["v20"]["duration_beats"])
+    )
+    assert gap_a == pytest.approx(0.08)
+    assert gap_b == pytest.approx(0.08)
+    assert by_id["v10"]["articulation"] == by_id["v11"]["articulation"] == "legato"
+    assert by_id["v20"]["articulation"] == by_id["v21"]["articulation"] == "legato"
+
+    plan = lower_song_to_execution_plan(_song())
+    realized = realize_instrument_mechanics(
+        compile_performance_score_to_render_ir(plan, score),
+        plan,
+    )
+    notes = {
+        e["performance"]["violin_realization"]["midi"]: e
+        for e in []
+    }
+    track = next(t for t in realized["tracks"] if t["id"] == "violin-line")
+    events = {f"v{i+1:02d}": e for i, e in enumerate([x for x in track["events"] if "midi" in x])}
+    assert events["v10"]["performance"]["violin_realization"]["bow"]["group_id"] == events["v11"]["performance"]["violin_realization"]["bow"]["group_id"]
+    assert events["v20"]["performance"]["violin_realization"]["bow"]["group_id"] == events["v21"]["performance"]["violin_realization"]["bow"]["group_id"]
+
+
+def test_cr03_section_boundary_pedals_repedal_instead_of_full_reset():
+    score = _score()
+    piano = next(t for t in score["tracks"] if t["id"] == "piano-foundation")
+    controls = {e["id"]: e for e in piano["events"] if e["type"] == "sustain_pedal"}
+
+    assert controls["pedal-b5"]["points"][-1]["position"] == pytest.approx(0.35)
+    assert controls["pedal-b6"]["start_beat"] == pytest.approx(20.04)
+    assert controls["pedal-b6"]["points"][0]["position"] == pytest.approx(0.35)
+    assert controls["pedal-b8"]["points"][-1]["position"] == pytest.approx(0.35)
+    assert controls["pedal-b9"]["start_beat"] == pytest.approx(32.04)
+    assert controls["pedal-b9"]["points"][0]["position"] == pytest.approx(0.35)
+
+    notes = {e["id"]: e for e in piano["events"] if e["type"] == "note"}
+    assert notes["p-b5-u4"]["start_beat"] + notes["p-b5-u4"]["duration_beats"] > 20.0
+    assert notes["p-b8-u4"]["start_beat"] + notes["p-b8-u4"]["duration_beats"] > 32.0
+
+
 def test_cr03_source_fingerprint_mismatch_is_hard_error():
     score = _score()
     score["source_song"]["fingerprint"] = "0" * 64
