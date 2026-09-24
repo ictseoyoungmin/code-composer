@@ -1,0 +1,49 @@
+{
+  "schema": "code-composer-cr02-closure/v1",
+  "slice": "CR02",
+  "status": "CLOSED",
+  "name": "Song to Execution Plan Lowering",
+  "issue": 22,
+  "pull_request": 23,
+  "validated_candidate_head": "460ac57bcac0c75b3172b049121bd78cae105024",
+  "merge_sha": "34a35f17f5f5de237e67e5f172da8a8875668126",
+  "pre_merge_ci": {
+    "run_number": 66,
+    "run_id": 35980019164,
+    "checkout_hygiene": "success",
+    "python_3_10": "success",
+    "python_3_12": "success",
+    "tests": "689 passed, 3 deselected"
+  },
+  "post_merge_ci": {
+    "run_number": 67,
+    "run_id": 35980410984,
+    "status": "success"
+  },
+  "contract": {
+    "format": "code-composer-execution-plan/v1",
+    "legacy_seed_ir_required": false,
+    "arbitrary_track_functions_preserved": true,
+    "instrument_resolution": "capability-first documented defaults or explicit preset lock",
+    "generic_fallback": false,
+    "hidden_note_shortening": false,
+    "runtime_scale_remap": false,
+    "source_song_fingerprint": true,
+    "deterministic_plan_fingerprint": true
+  },
+  "regressions": {
+    "hidden_082_duration": "blocked",
+    "unknown_family_generic_fallback": "blocked",
+    "runtime_unsupported_scale_silent_remap": "blocked",
+    "part_section_overflow": "blocked",
+    "fixed_role_dependency": "absent",
+    "seed_ir_dependency": "absent",
+    "register_shift_dependency": "absent"
+  },
+  "runtime_impact": "no existing synthesis/mixer/renderer/legacy arranger/Music IR implementation file modified",
+  "perceptual_gate": "not_required_no_note_realization_or_audio_render_change",
+  "next_slice": {
+    "id": "CR03",
+    "name": "First Artistic Bottleneck: Piano + Violin"
+  }
+}
