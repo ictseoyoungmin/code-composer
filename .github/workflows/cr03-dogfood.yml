@@ -18,6 +18,7 @@ on:
     paths:
       - "examples/cr03/**"
       - "tools/render_cr03_dogfood.py"
+      - "tools/render_cr03_lantern_current.py"
       - "skills/code-composer/kit/src/code_composer/execution/**"
       - "skills/code-composer/kit/src/code_composer/app/song_cli.py"
       - "skills/code-composer/kit/schemas/performance_score.schema.json"
