@@ -20,6 +20,7 @@ from .render_bridge import (
     compile_performance_score_to_render_ir,
     realize_instrument_mechanics,
 )
+from .artistic_render import render_song_score_to_files
 
 __all__ = [
     "EXECUTION_PLAN_FORMAT",
@@ -37,4 +38,5 @@ __all__ = [
     "PerformanceBridgeError",
     "compile_performance_score_to_render_ir",
     "realize_instrument_mechanics",
+    "render_song_score_to_files",
 ]
