@@ -1,0 +1,58 @@
+{
+  "format": "code-composer-revision-plan/v1",
+  "source_score": {
+    "format": "code-composer-performance-score/v1",
+    "fingerprint": "fa8bba9f5bf0ec1b1447a77bf017a09cd8512da5fce155ade2745d18de4a0ddd"
+  },
+  "meta": {
+    "id": "lantern-coda-breath-r1",
+    "summary": "Thin and soften the final two-bar piano coda while preserving violin melody, harmony, form, bass motion, pedal gestures, and Song identity."
+  },
+  "critique": {
+    "observations": [
+      "The final two bars still carry three upper-piano attacks per bar while the violin remains active.",
+      "The coda would breathe more naturally if the piano upper layer receded without rewriting the melody or harmony."
+    ],
+    "preserve": [
+      "all violin events including pitch, timing, duration, velocity, articulation, and expression",
+      "piano bass-note pitch, timing, duration, and velocity",
+      "all sustain-pedal controls",
+      "Song identity, key, meter, tempo, form, instrument presets, sample rate, tail length"
+    ],
+    "acceptance": [
+      "remove only the selected middle upper-piano attacks in bars 11 and 12",
+      "taper only the remaining selected upper-piano coda notes",
+      "reduce only the piano track mix gain",
+      "matched before/after render must remain clipping-free and preserve violin playability"
+    ]
+  },
+  "ops": [
+    {
+      "op": "thin_accompaniment",
+      "track": "piano-foundation",
+      "event_ids": [
+        "p-b11-u2",
+        "p-b12-u2"
+      ],
+      "reason": "Open a pocket around the active violin line by removing the middle upper-piano attack in each coda bar."
+    },
+    {
+      "op": "scale_velocity",
+      "track": "piano-foundation",
+      "start_beat": 30,
+      "end_beat": 36,
+      "event_ids": [
+        "p-b11-u1",
+        "p-b11-u3",
+        "p-b12-u1",
+        "p-b12-u3"
+      ],
+      "factor": 0.78
+    },
+    {
+      "op": "set_track_mix_gain",
+      "track": "piano-foundation",
+      "gain": 0.46
+    }
+  ]
+}
