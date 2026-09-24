@@ -118,10 +118,6 @@
     "src/code_composer/composition/musical_transitions.py": {
       "sha256": "9cd3a7b2a4eeb5884a4eb4618f59244df40ae8e7ac8f5329c61367c583f06c58",
       "reason": "S31 resolves an explicitly authored destination_progression/index pointer against the destination section S30 progression variant, validates existence/range, and records lineage while preserving legacy target_degree semantics."
-    },
-    "src/code_composer/audio/engines/bowed_waveguide.py": {
-      "sha256": "ca013858ba69b287efce78b44931b905881130c9e71e06384d87bd6c08b14645",
-      "reason": "CR03 section-continuity reopen removes binary physical-string state reconstruction based on phrase-gap length. Coupled bowed-waveguide strings now persist for the track and are advanced through gaps with bow contact disabled, so state decays naturally; residual_decay_s controls only audible released-bridge contribution, not object lifetime. The non-coupled same-string path likewise keeps state across gaps instead of resetting at state_gap_limit_s."
     }
   }
 }
