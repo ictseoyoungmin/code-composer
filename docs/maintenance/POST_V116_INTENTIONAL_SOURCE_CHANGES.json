@@ -1,7 +1,7 @@
 {
   "status": "ACTIVE_ALLOWLIST_FOR_POST_V116_FEATURE_WORK",
   "purpose": "Preserve the historical v1.16 runtime baseline while requiring every intentional modification of a baseline file in later feature slices to be explicit and hash-pinned.",
-  "slice": "Post-v1.16 through CR03 First Artistic Bottleneck / explicit-pedal piano natural release reopen",
+  "slice": "Post-v1.16 through CR03 First Artistic Bottleneck / piano natural release + section continuity reopen",
   "files": {
     "src/code_composer/agent/composition_brief.py": {
       "sha256": "0b27f685ff9d1bde4c7dcfbc8ce2ba292a657b50af6cfefbe27d2767923011d6",
@@ -118,6 +118,10 @@
     "src/code_composer/composition/musical_transitions.py": {
       "sha256": "9cd3a7b2a4eeb5884a4eb4618f59244df40ae8e7ac8f5329c61367c583f06c58",
       "reason": "S31 resolves an explicitly authored destination_progression/index pointer against the destination section S30 progression variant, validates existence/range, and records lineage while preserving legacy target_degree semantics."
+    },
+    "src/code_composer/audio/engines/bowed_waveguide.py": {
+      "sha256": "ca013858ba69b287efce78b44931b905881130c9e71e06384d87bd6c08b14645",
+      "reason": "CR03 section-continuity reopen removes binary physical-string state reconstruction based on phrase-gap length. Coupled bowed-waveguide strings now persist for the track and are advanced through gaps with bow contact disabled, so state decays naturally; residual_decay_s controls only audible released-bridge contribution, not object lifetime. The non-coupled same-string path likewise keeps state across gaps instead of resetting at state_gap_limit_s."
     }
   }
 }
