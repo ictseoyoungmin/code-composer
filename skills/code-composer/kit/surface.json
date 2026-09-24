@@ -82,6 +82,8 @@
     "schema": "schemas/song.schema.json",
     "model": "src/code_composer/core/song.py",
     "runtime_lock_validation": "src/code_composer/song_validation.py",
-    "policy": "seedless Composer-first authored state; arbitrary track functions; renderer absent unless explicitly locked"
+    "policy": "seedless authored Song → deterministic runtime plan; arbitrary track functions; no hidden musical-content inference",
+    "execution_plan_schema": "schemas/execution_plan.schema.json",
+    "lowering": "src/code_composer/execution/lowering.py"
   }
 }
