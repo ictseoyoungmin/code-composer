@@ -6,7 +6,7 @@
   },
   "meta": {
     "title": "Quiet Thread",
-    "revision": "cr03-dogfood-r0"
+    "revision": "cr03-dogfood-r2-section-continuity"
   },
   "tracks": [
     {
@@ -280,7 +280,7 @@
           "id": "pedal-b5",
           "type": "sustain_pedal",
           "start_beat": 16,
-          "duration_beats": 4,
+          "duration_beats": 4.04,
           "points": [
             {
               "offset_beats": 0,
@@ -291,12 +291,12 @@
               "position": 1
             },
             {
-              "offset_beats": 3.65,
+              "offset_beats": 3.96,
               "position": 1
             },
             {
-              "offset_beats": 4,
-              "position": 0
+              "offset_beats": 4.04,
+              "position": 0.35
             }
           ]
         },
@@ -328,7 +328,7 @@
           "id": "p-b5-u4",
           "type": "note",
           "start_beat": 19.25,
-          "duration_beats": 0.55,
+          "duration_beats": 0.9,
           "midi": 69,
           "velocity": 0.4
         },
@@ -343,23 +343,23 @@
         {
           "id": "pedal-b6",
           "type": "sustain_pedal",
-          "start_beat": 20,
-          "duration_beats": 4,
+          "start_beat": 20.04,
+          "duration_beats": 3.96,
           "points": [
             {
               "offset_beats": 0,
-              "position": 0
+              "position": 0.35
             },
             {
               "offset_beats": 0.08,
               "position": 1
             },
             {
-              "offset_beats": 3.65,
+              "offset_beats": 3.61,
               "position": 1
             },
             {
-              "offset_beats": 4,
+              "offset_beats": 3.96,
               "position": 0
             }
           ]
@@ -472,7 +472,7 @@
           "id": "pedal-b8",
           "type": "sustain_pedal",
           "start_beat": 28,
-          "duration_beats": 4,
+          "duration_beats": 4.04,
           "points": [
             {
               "offset_beats": 0,
@@ -483,12 +483,12 @@
               "position": 1
             },
             {
-              "offset_beats": 3.65,
+              "offset_beats": 3.96,
               "position": 1
             },
             {
-              "offset_beats": 4,
-              "position": 0
+              "offset_beats": 4.04,
+              "position": 0.35
             }
           ]
         },
@@ -520,7 +520,7 @@
           "id": "p-b8-u4",
           "type": "note",
           "start_beat": 31.25,
-          "duration_beats": 0.55,
+          "duration_beats": 0.9,
           "midi": 61,
           "velocity": 0.46
         },
@@ -535,23 +535,23 @@
         {
           "id": "pedal-b9",
           "type": "sustain_pedal",
-          "start_beat": 32,
-          "duration_beats": 4,
+          "start_beat": 32.04,
+          "duration_beats": 3.96,
           "points": [
             {
               "offset_beats": 0,
-              "position": 0
+              "position": 0.35
             },
             {
               "offset_beats": 0.08,
               "position": 1
             },
             {
-              "offset_beats": 3.65,
+              "offset_beats": 3.61,
               "position": 1
             },
             {
-              "offset_beats": 4,
+              "offset_beats": 3.96,
               "position": 0
             }
           ]
@@ -786,10 +786,10 @@
           "id": "v10",
           "type": "note",
           "start_beat": 18.5,
-          "duration_beats": 1.25,
+          "duration_beats": 1.46,
           "midi": 70,
           "velocity": 0.57,
-          "articulation": "neutral",
+          "articulation": "legato",
           "expression": {
             "vibrato_depth_cents": 18,
             "vibrato_rate_hz": 5.2
@@ -798,8 +798,8 @@
         {
           "id": "v11",
           "type": "note",
-          "start_beat": 20.25,
-          "duration_beats": 1.25,
+          "start_beat": 20.04,
+          "duration_beats": 1.46,
           "midi": 69,
           "velocity": 0.58,
           "articulation": "legato",
@@ -916,10 +916,10 @@
           "id": "v20",
           "type": "note",
           "start_beat": 30.5,
-          "duration_beats": 1.25,
+          "duration_beats": 1.46,
           "midi": 67,
           "velocity": 0.52,
-          "articulation": "neutral",
+          "articulation": "legato",
           "expression": {
             "vibrato_depth_cents": 18,
             "vibrato_rate_hz": 5.2
@@ -928,8 +928,8 @@
         {
           "id": "v21",
           "type": "note",
-          "start_beat": 32,
-          "duration_beats": 1.5,
+          "start_beat": 32.04,
+          "duration_beats": 1.46,
           "midi": 65,
           "velocity": 0.5,
           "articulation": "legato",
