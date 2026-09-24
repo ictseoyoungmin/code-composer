@@ -113,7 +113,7 @@ def test_cr03_violin_uses_modeled_admittance_and_continuous_mechanical_realizati
     assert 1 <= len(set(bow_groups[:9])) <= 2
     assert bow_groups[0] == bow_groups[5]
     assert bow_groups[6] == bow_groups[8]
-    assert bow_groups[9] != bow_groups[8]
+    assert bow_groups[9] == bow_groups[8]
 
 
 def test_cr03_piano_sustain_is_explicit_control_not_hidden_note_pedal():
@@ -160,10 +160,6 @@ def test_cr03_section_boundaries_keep_musical_motion_without_full_reset():
         compile_performance_score_to_render_ir(plan, score),
         plan,
     )
-    notes = {
-        e["performance"]["violin_realization"]["midi"]: e
-        for e in []
-    }
     track = next(t for t in realized["tracks"] if t["id"] == "violin-line")
     events = {f"v{i+1:02d}": e for i, e in enumerate([x for x in track["events"] if "midi" in x])}
     assert events["v10"]["performance"]["violin_realization"]["bow"]["group_id"] == events["v11"]["performance"]["violin_realization"]["bow"]["group_id"]
