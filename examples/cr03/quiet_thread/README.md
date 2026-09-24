@@ -18,3 +18,21 @@ This dogfood is intentionally authored as music, not as a metric target.
 The Performance Score is the artistic authority for exact notes, voicing, register,
 rhythm, dynamics, articulation, controls, and mix intent. The runtime may validate and
 realize physical mechanics but must not change those authored note decisions.
+
+
+## Section continuity reopen
+
+Perceptual listening found that the Theme→Rise and Rise→Release boundaries could
+read like a new piece starting because violin rest, bow reset, piano harmony change,
+and pedal reset all happened together.
+
+The revised score keeps the breath but preserves motion:
+
+- violin boundary gaps: **0.08 beat** each;
+- the preceding and following violin notes remain in the same legato bow group;
+- the piano upper voice crosses each boundary briefly as a suspension;
+- sustain uses a short half-lift/repedal gesture instead of a full stop/restart.
+
+The modeled bowed renderer also keeps each physical string state alive across gaps.
+Gap duration can attenuate the residual contribution, but no threshold destroys and
+recreates a string state.
