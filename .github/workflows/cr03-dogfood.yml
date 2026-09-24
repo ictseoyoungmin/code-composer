@@ -7,6 +7,7 @@ on:
     paths:
       - "examples/cr03/**"
       - "tools/render_cr03_dogfood.py"
+      - "tools/render_cr03_lantern_current.py"
       - "skills/code-composer/kit/src/code_composer/execution/**"
       - "skills/code-composer/kit/src/code_composer/app/song_cli.py"
       - "skills/code-composer/kit/schemas/performance_score.schema.json"
@@ -36,10 +37,19 @@ jobs:
         run: python -m pip install -e skills/code-composer/kit
       - name: Render Quiet Thread at 24 kHz
         run: python tools/render_cr03_dogfood.py --output dist/cr03-quiet-thread
-      - name: Upload dogfood evidence
+      - name: Render Lantern Current at 24 kHz
+        run: python tools/render_cr03_lantern_current.py --output dist/cr03-lantern-current
+      - name: Upload Quiet Thread evidence
         uses: actions/upload-artifact@v4
         with:
           name: cr03-quiet-thread
           path: dist/cr03-quiet-thread
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload Lantern Current evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cr03-lantern-current
+          path: dist/cr03-lantern-current
           if-no-files-found: error
           retention-days: 30
