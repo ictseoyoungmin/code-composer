@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ymstudio.dev/code-composer/schemas/revision_record.schema.json",
+  "title": "Code Composer Revision Record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "revision_id",
+    "summary",
+    "source_score_fingerprint",
+    "revision_plan_fingerprint",
+    "after_score_fingerprint",
+    "source_song_fingerprint",
+    "critique",
+    "operations",
+    "changed_event_ids",
+    "changed_mix_tracks"
+  ],
+  "properties": {
+    "format": {
+      "const": "code-composer-revision-record/v1"
+    },
+    "revision_id": {
+      "$ref": "#/$defs/id"
+    },
+    "summary": {
+      "$ref": "#/$defs/nonempty"
+    },
+    "source_score_fingerprint": {
+      "$ref": "#/$defs/sha256"
+    },
+    "revision_plan_fingerprint": {
+      "$ref": "#/$defs/sha256"
+    },
+    "after_score_fingerprint": {
+      "$ref": "#/$defs/sha256"
+    },
+    "source_song_fingerprint": {
+      "$ref": "#/$defs/sha256"
+    },
+    "critique": {
+      "type": "object"
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object"
+      }
+    },
+    "changed_event_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "changed_mix_tracks": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "nonempty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}
