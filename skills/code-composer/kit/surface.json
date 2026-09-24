@@ -82,11 +82,15 @@
     "schema": "schemas/song.schema.json",
     "model": "src/code_composer/core/song.py",
     "runtime_lock_validation": "src/code_composer/song_validation.py",
-    "policy": "artist-first Song → deterministic plan → authored exact Performance Score → mechanics-preserving render bridge",
+    "policy": "artist-first Song → deterministic plan → authored Performance Score → Composer-authored targeted revision → mechanics-preserving render",
     "execution_plan_schema": "schemas/execution_plan.schema.json",
     "lowering": "src/code_composer/execution/lowering.py",
     "performance_score_schema": "schemas/performance_score.schema.json",
     "performance_score": "src/code_composer/execution/performance_score.py",
-    "artistic_render": "src/code_composer/execution/artistic_render.py"
+    "artistic_render": "src/code_composer/execution/artistic_render.py",
+    "revision_plan_schema": "schemas/revision_plan.schema.json",
+    "revision_record_schema": "schemas/revision_record.schema.json",
+    "revision": "src/code_composer/execution/performance_revision.py",
+    "revision_compare": "src/code_composer/execution/revision_compare.py"
   }
 }
