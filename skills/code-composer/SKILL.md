@@ -53,6 +53,8 @@ When source inspection is necessary, read `kit/SOURCE_MAP.md` first and inspect 
 - CR02 Execution Plan is the deterministic runtime-planning authority for Song timeline/material/instrument resolution. It does not invent note/voicing content.
 - CR03 Performance Score is the Composer-authored authority for exact notes, voicings, register, phrase timing, articulation, controls, and mix intent.
 - The CR03 render bridge may add physical instrument mechanics but must preserve authored note pitch/timing exactly.
+- CR04 Revision Plan is Composer-authored intent bound to one exact Performance Score fingerprint; analyzers may provide evidence but may not author revision ops.
+- Revision Record is the authoritative before/plan/after provenance for a targeted score change.
 - Legacy Music IR is now an internal renderer bridge for this path, not the Composer-facing artistic authority.
 - Resolved IR is the exact deterministic realization state.
 - Reference WAV is the timbre/mix authority for external collaborators.
