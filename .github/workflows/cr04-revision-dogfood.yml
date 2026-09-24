@@ -1,0 +1,50 @@
+name: CR04 Revision Dogfood
+
+on:
+  push:
+    branches:
+      - cr04-listen-critique-revision
+    paths:
+      - "examples/cr04/**"
+      - "tools/render_cr04_revision_dogfood.py"
+      - "skills/code-composer/kit/src/code_composer/execution/performance_revision.py"
+      - "skills/code-composer/kit/src/code_composer/execution/revision_compare.py"
+      - "skills/code-composer/kit/src/code_composer/app/song_cli.py"
+      - "skills/code-composer/kit/schemas/revision_*.schema.json"
+      - ".github/workflows/cr04-revision-dogfood.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "examples/cr04/**"
+      - "tools/render_cr04_revision_dogfood.py"
+      - "skills/code-composer/kit/src/code_composer/execution/performance_revision.py"
+      - "skills/code-composer/kit/src/code_composer/execution/revision_compare.py"
+      - "skills/code-composer/kit/src/code_composer/app/song_cli.py"
+      - "skills/code-composer/kit/schemas/revision_*.schema.json"
+      - ".github/workflows/cr04-revision-dogfood.yml"
+  workflow_dispatch:
+
+jobs:
+  matched-ab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Code Composer
+        run: python -m pip install -e skills/code-composer/kit
+      - name: Render matched CR04 before/after
+        run: python tools/render_cr04_revision_dogfood.py --output dist/cr04-lantern-coda-ab
+      - name: Verify portable hashes
+        working-directory: dist/cr04-lantern-coda-ab
+        run: sha256sum -c SHA256SUMS.txt
+      - name: Upload matched A/B evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cr04-lantern-coda-ab
+          path: dist/cr04-lantern-coda-ab
+          if-no-files-found: error
+          retention-days: 30
