@@ -94,7 +94,10 @@ def test_built_plugins_use_root_manifest_layout_and_canonical_icon():
 
 
 def test_pyproject_is_valid_toml_and_exposes_song_cli():
-    import tomllib
+    try:
+        import tomllib
+    except ModuleNotFoundError:
+        import tomli as tomllib
     pyproject = tomllib.loads(
         (KIT_ROOT / "pyproject.toml").read_text(encoding="utf-8")
     )
