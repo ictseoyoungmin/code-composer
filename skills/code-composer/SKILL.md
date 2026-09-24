@@ -51,7 +51,9 @@ When source inspection is necessary, read `kit/SOURCE_MAP.md` first and inspect 
 
 - CR01 Song is the canonical authored-state contract for the Composer-first rebuild.
 - CR02 Execution Plan is the deterministic runtime-planning authority for Song timeline/material/instrument resolution. It does not invent note/voicing content.
-- Canonical Music IR remains the historical render authority until the new execution path reaches audio rendering.
+- CR03 Performance Score is the Composer-authored authority for exact notes, voicings, register, phrase timing, articulation, controls, and mix intent.
+- The CR03 render bridge may add physical instrument mechanics but must preserve authored note pitch/timing exactly.
+- Legacy Music IR is now an internal renderer bridge for this path, not the Composer-facing artistic authority.
 - Resolved IR is the exact deterministic realization state.
 - Reference WAV is the timbre/mix authority for external collaborators.
 - MIDI is an interchange representation, not a faithful representation of Code Composer synthesis/DSP.
