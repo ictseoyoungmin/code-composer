@@ -136,6 +136,7 @@ def validate_revision_plan(plan: dict[str, Any]) -> None:
             _strict(
                 op, path,
                 required={"op", "track", "start_beat", "end_beat", "factor"},
+                optional={"event_ids"},
             )
             _identifier(op["track"], f"{path}.track")
             start = _number(op["start_beat"], f"{path}.start_beat", 0)
@@ -143,6 +144,10 @@ def validate_revision_plan(plan: dict[str, Any]) -> None:
             if end <= start:
                 _fail(path, "end_beat must be greater than start_beat")
             _number(op["factor"], f"{path}.factor", 0.1, 2.0)
+            if "event_ids" in op:
+                ids = _string_array(op["event_ids"], f"{path}.event_ids", nonempty=True)
+                if len(set(ids)) != len(ids):
+                    _fail(f"{path}.event_ids", "must be unique")
         elif kind == "thin_accompaniment":
             _strict(op, path, required={"op", "track", "event_ids", "reason"})
             _identifier(op["track"], f"{path}.track")
@@ -219,11 +224,15 @@ def apply_revision_plan(score: dict, plan: dict) -> tuple[dict, dict]:
             start = float(op["start_beat"])
             end = float(op["end_beat"])
             factor = float(op["factor"])
+            selected_ids = set(op.get("event_ids", []))
+            seen_selected = set()
             for event in track["events"]:
                 if event["type"] != "note":
                     continue
                 beat = float(event["start_beat"])
-                if start <= beat < end:
+                id_match = not selected_ids or event["id"] in selected_ids
+                if start <= beat < end and id_match:
+                    seen_selected.add(event["id"])
                     before = float(event["velocity"])
                     after = max(0.0, min(1.0, before * factor))
                     event["velocity"] = round(after, 9)
@@ -234,6 +243,12 @@ def apply_revision_plan(score: dict, plan: dict) -> tuple[dict, dict]:
                         "after": event["velocity"],
                     })
                     changed_event_ids.add(event["id"])
+            if selected_ids:
+                missing = sorted(selected_ids - seen_selected)
+                if missing:
+                    raise PerformanceRevisionError(
+                        f"ops[{i}]: scale_velocity unknown/out-of-range event id(s): {missing}"
+                    )
             if not detail["changes"]:
                 raise PerformanceRevisionError(
                     f"ops[{i}]: scale_velocity matched no note events"
