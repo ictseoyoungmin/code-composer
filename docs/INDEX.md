@@ -51,4 +51,4 @@ Historical files may mention paths or terminology that were current when that ev
 
 - **CR00 — Composer Rebuild Boundary / Pre-refactor Freeze** — **CLOSED**.
 - [**CR01 — Minimal Song Model + Contract Foundation**](architecture/CR01_MINIMAL_SONG_MODEL.md) — **CLOSED**.
-- **CR02 — Song → Execution Plan Lowering** — next active engineering slice.
+- [**CR02 — Song → Execution Plan Lowering**](architecture/CR02_SONG_EXECUTION_LOWERING.md) — **ENGINEERING CANDIDATE**.
