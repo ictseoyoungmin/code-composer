@@ -21,6 +21,7 @@ from code_composer.execution.artistic_render import render_song_score_to_files
 
 ROOT = Path(__file__).resolve().parents[1]
 DOGFOOD = ROOT / "examples/cr03/quiet_thread"
+DOGFOOD_2 = ROOT / "examples/cr03/lantern_current"
 
 
 def _song():
@@ -29,6 +30,14 @@ def _song():
 
 def _score():
     return json.loads((DOGFOOD / "performance_score.json").read_text(encoding="utf-8"))
+
+
+def _song2():
+    return json.loads((DOGFOOD_2 / "song.json").read_text(encoding="utf-8"))
+
+
+def _score2():
+    return json.loads((DOGFOOD_2 / "performance_score.json").read_text(encoding="utf-8"))
 
 
 def _note_signature(ir):
@@ -277,3 +286,79 @@ def test_cr03_tiny_end_to_end_render_path_writes_finite_audio(tmp_path):
     assert result["sr"] == 8000
     assert np.isfinite(result["audio"]).all()
     assert float(np.max(np.abs(result["audio"]))) < 1.0
+
+
+
+def test_cr03_second_dogfood_is_bound_and_independent():
+    song = _song2()
+    score = _score2()
+    validate_performance_score(score)
+    assert score["source_song"]["fingerprint"] == song_fingerprint(song)
+
+    first_song = _song()
+    assert song["meta"]["title"] != first_song["meta"]["title"]
+    assert song["tonal"]["root"] != first_song["tonal"]["root"]
+    assert song["transport"]["bpm"] != first_song["transport"]["bpm"]
+    assert song["transport"]["meter"] != first_song["transport"]["meter"]
+
+
+def test_cr03_second_melody_is_not_a_transposition_or_rhythm_copy_of_quiet_thread():
+    first = next(t for t in _score()["tracks"] if t["id"] == "violin-line")
+    second = next(t for t in _score2()["tracks"] if t["id"] == "violin-line")
+    a = [e for e in first["events"] if e["type"] == "note"]
+    b = [e for e in second["events"] if e["type"] == "note"]
+
+    pitches_a = [int(e["midi"]) for e in a]
+    pitches_b = [int(e["midi"]) for e in b]
+    rhythms_a = [round(float(e["duration_beats"]), 6) for e in a]
+    rhythms_b = [round(float(e["duration_beats"]), 6) for e in b]
+
+    assert len(pitches_a) != len(pitches_b)
+    assert rhythms_a != rhythms_b
+
+    # A transposed copy has an identical interval sequence even if absolute pitch
+    # changes. Lantern Current must have a genuinely different contour.
+    intervals_a = [y - x for x, y in zip(pitches_a, pitches_a[1:])]
+    intervals_b = [y - x for x, y in zip(pitches_b, pitches_b[1:])]
+    assert intervals_a != intervals_b
+
+    contour_a = [0 if d == 0 else (1 if d > 0 else -1) for d in intervals_a]
+    contour_b = [0 if d == 0 else (1 if d > 0 else -1) for d in intervals_b]
+    assert contour_a != contour_b
+
+
+def test_cr03_second_dogfood_preserves_section_continuity():
+    score = _score2()
+    violin = next(t for t in score["tracks"] if t["id"] == "violin-line")
+    notes = [e for e in violin["events"] if e["type"] == "note"]
+    gaps = [
+        round(float(b["start_beat"]) - (float(a["start_beat"]) + float(a["duration_beats"])), 6)
+        for a, b in zip(notes, notes[1:])
+        if float(b["start_beat"]) - (float(a["start_beat"]) + float(a["duration_beats"])) > 1e-9
+    ]
+    assert gaps == [0.08, 0.08]
+
+    plan = lower_song_to_execution_plan(_song2())
+    realized = realize_instrument_mechanics(
+        compile_performance_score_to_render_ir(plan, score),
+        plan,
+    )
+    report = realized["violin_performance_report"]
+    assert report["playability"]["classification"] == "comfortable"
+
+
+def test_cr03_second_dogfood_bridge_preserves_exact_note_authority():
+    plan = lower_song_to_execution_plan(_song2())
+    score = _score2()
+    ir = compile_performance_score_to_render_ir(plan, score)
+    realized = realize_instrument_mechanics(ir, plan)
+
+    expected = {
+        track["id"]: [
+            (float(e["start_beat"]), float(e["duration_beats"]), int(e["midi"]))
+            for e in track["events"] if e["type"] == "note"
+        ]
+        for track in score["tracks"]
+    }
+    assert _note_signature(ir) == expected
+    assert _note_signature(realized) == expected
