@@ -16,6 +16,8 @@ Validates canonical Music IR, resolves it deterministically, renders WAV, and ca
 code-composer-song validate SONG.json
 code-composer-song lower SONG.json EXECUTION_PLAN.json
 code-composer-song render SONG.json PERFORMANCE_SCORE.json OUTPUT.wav [RESOLVED.json] [ANALYSIS.json]
+code-composer-song revise PERFORMANCE_SCORE.json REVISION_PLAN.json REVISED_SCORE.json REVISION_RECORD.json
+code-composer-song compare-revision SONG.json PERFORMANCE_SCORE.json REVISION_PLAN.json OUTPUT_DIR/
 ```
 
 `validate` checks the seedless Composer-first Song contract, cross-references, user locks, and explicitly locked runtime resources.
@@ -23,6 +25,10 @@ code-composer-song render SONG.json PERFORMANCE_SCORE.json OUTPUT.wav [RESOLVED.
 `lower` deterministically resolves the section timeline, material durations, repeated part instances, current-runtime scale compatibility, and instrument engine/preset patches into `code-composer-execution-plan/v1`. It does **not** invent notes, voicings, register shifts, dynamics, or fixed arrangement roles.
 
 `render` consumes an authored `code-composer-performance-score/v1`, validates its exact-note authority against the Song/Execution Plan, attaches instrument mechanics such as violin fingering/bow realization without changing note pitch/timing, and renders through the existing validated engine path.
+
+`revise` applies an explicit Composer-authored `code-composer-revision-plan/v1` to one exact Performance Score fingerprint and writes the revised score plus a complete before/plan/after provenance record.
+
+`compare-revision` renders matched before/after WAVs under the same Song/runtime path and emits a comparison document. Analysis deltas are evidence only; they do not choose the revision or decide musical acceptance.
 
 ## Compose (pre-refactor render path)
 
