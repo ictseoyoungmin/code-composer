@@ -1,6 +1,6 @@
 # CR04 — Listen / Critique / Revision
 
-Status: **ENGINEERING / PERCEPTUAL CANDIDATE**
+Status: **CLOSED**
 
 Issue: #28
 
@@ -109,3 +109,30 @@ Perceptual gate:
 - confirm the coda becomes less crowded without harming violin line, harmonic identity, piano bass/pedal continuity, or ending flow.
 
 CR04 cannot close from metric deltas alone.
+
+
+## Closure
+
+CR04 is **CLOSED**.
+
+Authoritative evidence:
+- Issue #28: closed / completed.
+- PR #29: merged after explicit matched A/B perceptual listening PASS.
+- validated candidate HEAD: `0674ed5611fa20b660891ed3249ed986cdfc54e0`.
+- implementation merge on main: `06e344bfe87c87b57c8a6f174d223b04b0fc3f55`.
+- pre-merge CI #92 / run `36005868417`: checkout-hygiene + Python 3.10 + Python 3.12 SUCCESS.
+- blocking suite: 721 passed / 3 deselected on Python 3.10 and 3.12.
+- CR04 Revision Dogfood #2 / run `36005868352`: SUCCESS.
+- matched A/B artifact ID: `10809229987`.
+- source score fingerprint: `fa8bba9f5bf0ec1b1447a77bf017a09cd8512da5fce155ade2745d18de4a0ddd`.
+- revision plan fingerprint: `af5896aef1008653efed6c8f8ebdc51fa4c28b31addeb54333d1a06b16ca875f`.
+- after score fingerprint: `b8352a010cf099cc2052865b9f0f1b387d3d156e5223cf5c5a6d78990118f7f9`.
+- post-merge main CI #93 / run `36135363088`: checkout-hygiene + Python 3.10 + Python 3.12 SUCCESS.
+- preserved scopes: violin exact, piano bass exact, sustain controls exact.
+- targeted changes: six coda upper-piano events + piano-foundation mix gain only.
+- before/after clipping: 0.0.
+- perceptual listening verdict: PASS.
+
+The CR04 revision authority remains Composer-authored intent. Analysis and metric deltas are evidence only and do not author changes or decide acceptance.
+
+Next: **CR05 — Fast Preview / Incremental Render**.
