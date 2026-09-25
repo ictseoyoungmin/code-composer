@@ -21,6 +21,19 @@ from .render_bridge import (
     realize_instrument_mechanics,
 )
 from .artistic_render import render_song_score_to_files
+from .performance_revision import (
+    REVISION_PLAN_FORMAT,
+    REVISION_RECORD_FORMAT,
+    PerformanceRevisionError,
+    apply_revision_plan,
+    canonical_revision_plan_json,
+    revision_plan_fingerprint,
+    validate_revision_plan,
+)
+from .revision_compare import (
+    REVISION_COMPARISON_FORMAT,
+    render_revision_comparison_to_dir,
+)
 
 __all__ = [
     "EXECUTION_PLAN_FORMAT",
@@ -39,4 +52,13 @@ __all__ = [
     "compile_performance_score_to_render_ir",
     "realize_instrument_mechanics",
     "render_song_score_to_files",
+    "REVISION_PLAN_FORMAT",
+    "REVISION_RECORD_FORMAT",
+    "PerformanceRevisionError",
+    "validate_revision_plan",
+    "canonical_revision_plan_json",
+    "revision_plan_fingerprint",
+    "apply_revision_plan",
+    "REVISION_COMPARISON_FORMAT",
+    "render_revision_comparison_to_dir",
 ]

@@ -7,6 +7,7 @@ Do not read source to learn normal usage. Use this map only after a source-inspe
 | Composer-first Song contract | `src/code_composer/core/song.py`, `src/code_composer/song_validation.py`, `app/song_cli.py` |
 | Song → Execution Plan lowering | `src/code_composer/execution/plan.py`, `src/code_composer/execution/lowering.py` |
 | Authored Performance Score / render bridge | `src/code_composer/execution/performance_score.py`, `execution/render_bridge.py`, `execution/artistic_render.py` |
+| Composer-authored revision / matched A-B | `src/code_composer/execution/performance_revision.py`, `execution/revision_compare.py` |
 | Pre-refactor Composition brief validation/compiler | `src/code_composer/agent/composition_brief.py`, `agent/composer_planner.py` |
 | Expressive score/performance contracts | `src/code_composer/agent/expressive_score_plan.py`, `agent/performance_ir.py` |
 | Deterministic arrange/resolve | `src/code_composer/composition/arrange.py`, `composition/resolve.py` |

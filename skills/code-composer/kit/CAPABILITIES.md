@@ -4,6 +4,7 @@
 |---|---|---|
 | Render | Validate and render canonical Music IR | `code-composer` |
 | Song / artistic performance path | Validate Song, lower deterministic Execution Plan, and render an authored exact Performance Score | `code-composer-song` |
+| Listen / critique / revision | Apply Composer-authored targeted Performance Score revisions with exact provenance and matched A/B rendering | `code-composer-song revise` / `compare-revision` |
 | Compose (pre-refactor path) | Compile an explicit Composition Brief into Music IR | `code-composer-compose` |
 | MIDI export | Export resolved/canonical note events to deterministic Type 1 MIDI | `code-composer-midi` |
 | Collaboration bundle | MIDI + reference WAV + resolved IR + manifest | `code-composer-collab` |
