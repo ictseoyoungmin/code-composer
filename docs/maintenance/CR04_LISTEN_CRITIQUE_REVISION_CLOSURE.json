@@ -1,0 +1,56 @@
+{
+  "schema": "code-composer-cr04-closure/v1",
+  "slice": "CR04",
+  "status": "CLOSED",
+  "name": "Listen / Critique / Revision",
+  "issue": 28,
+  "pull_request": 29,
+  "validated_candidate_head": "0674ed5611fa20b660891ed3249ed986cdfc54e0",
+  "merge_sha": "06e344bfe87c87b57c8a6f174d223b04b0fc3f55",
+  "pre_merge_ci": {
+    "run_number": 92,
+    "run_id": 36005868417,
+    "checkout_hygiene": "success",
+    "python_3_10": "success",
+    "python_3_12": "success",
+    "tests": "721 passed, 3 deselected"
+  },
+  "dogfood": {
+    "run_number": 2,
+    "run_id": 36005868352,
+    "status": "success",
+    "artifact_id": 10809229987,
+    "source_score_fingerprint": "fa8bba9f5bf0ec1b1447a77bf017a09cd8512da5fce155ade2745d18de4a0ddd",
+    "revision_plan_fingerprint": "af5896aef1008653efed6c8f8ebdc51fa4c28b31addeb54333d1a06b16ca875f",
+    "after_score_fingerprint": "b8352a010cf099cc2052865b9f0f1b387d3d156e5223cf5c5a6d78990118f7f9",
+    "preserved": [
+      "violin track exact",
+      "piano bass exact",
+      "sustain controls exact"
+    ],
+    "changed_event_count": 6,
+    "changed_mix_tracks": [
+      "piano-foundation"
+    ],
+    "before_clipping": 0,
+    "after_clipping": 0
+  },
+  "post_merge_ci": {
+    "run_number": 93,
+    "run_id": 36135363088,
+    "checkout_hygiene": "success",
+    "python_3_10": "success",
+    "python_3_12": "success",
+    "tests": "721 passed, 3 deselected"
+  },
+  "perceptual_gate": {
+    "required": true,
+    "verdict": "PASS",
+    "authority": "user listening",
+    "metrics_are_evidence_not_aesthetic_scores": true
+  },
+  "next_slice": {
+    "id": "CR05",
+    "name": "Fast Preview / Incremental Render"
+  }
+}
