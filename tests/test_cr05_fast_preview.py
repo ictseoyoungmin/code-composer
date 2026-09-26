@@ -217,3 +217,41 @@ def test_cr05_preview_is_explicitly_not_final_render_authority(tmp_path, monkeyp
     assert result["report"]["final_render_authority"] is False
     assert result["report"]["range"]["start_beat"] == pytest.approx(24.0)
     assert result["report"]["range"]["end_beat"] == pytest.approx(36.0)
+
+
+
+def test_cr05_corrupt_cached_stem_is_a_miss_not_a_hit(tmp_path, monkeypatch):
+    calls = []
+
+    def fake_render(ir, track, n, sr, beat_s, graph_mode=False):
+        calls.append(track["id"])
+        return np.full((n, 2), 0.0125 * len(calls), dtype=np.float64)
+
+    monkeypatch.setattr(preview_module, "_render_dry_track", fake_render)
+
+    ir = {
+        "meta": {"global_seed": 5},
+        "transport": {"bpm": 72.0, "beats_per_bar": 3},
+        "instruments": {"piano": {"engine": "piano", "preset": "fake"}},
+    }
+    track = {
+        "id": "piano-foundation",
+        "instrument": "piano",
+        "events": [{"start_beat": 0.0, "duration_beats": 1.0, "midi": 60, "velocity": .5}],
+    }
+
+    _, first = preview_module._load_or_render_stem(
+        ir, track, n=64, sr=24000, beat_s=60/72, graph_mode=True, cache_dir=tmp_path
+    )
+    assert first["cache_hit"] is False
+    assert calls == ["piano-foundation"]
+
+    stem_path = tmp_path / first["cache_file"]
+    np.save(stem_path, np.full((64, 2), 0.99, dtype=np.float64), allow_pickle=False)
+
+    audio, second = preview_module._load_or_render_stem(
+        ir, track, n=64, sr=24000, beat_s=60/72, graph_mode=True, cache_dir=tmp_path
+    )
+    assert second["cache_hit"] is False
+    assert calls == ["piano-foundation", "piano-foundation"]
+    assert np.allclose(audio, 0.025)
