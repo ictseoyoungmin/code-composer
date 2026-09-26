@@ -18,6 +18,7 @@ code-composer-song lower SONG.json EXECUTION_PLAN.json
 code-composer-song render SONG.json PERFORMANCE_SCORE.json OUTPUT.wav [RESOLVED.json] [ANALYSIS.json]
 code-composer-song revise PERFORMANCE_SCORE.json REVISION_PLAN.json REVISED_SCORE.json REVISION_RECORD.json
 code-composer-song compare-revision SONG.json PERFORMANCE_SCORE.json REVISION_PLAN.json OUTPUT_DIR/
+code-composer-song preview SONG.json PERFORMANCE_SCORE.json PREVIEW_REQUEST.json OUTPUT.wav CACHE_DIR [REPORT.json]
 ```
 
 `validate` checks the seedless Composer-first Song contract, cross-references, user locks, and explicitly locked runtime resources.
@@ -29,6 +30,8 @@ code-composer-song compare-revision SONG.json PERFORMANCE_SCORE.json REVISION_PL
 `revise` applies an explicit Composer-authored `code-composer-revision-plan/v1` to one exact Performance Score fingerprint and writes the revised score plus a complete before/plan/after provenance record.
 
 `compare-revision` renders matched before/after WAVs under the same Song/runtime path and emits a comparison document. Analysis deltas are evidence only; they do not choose the revision or decide musical acceptance.
+
+`preview` renders a draft bar/beat range from selected tracks using deterministic full-timeline dry-stem caching. Stateful instruments always develop from piece start; slicing happens after mixing. Preview is explicitly not final/master authority.
 
 ## Compose (pre-refactor render path)
 
