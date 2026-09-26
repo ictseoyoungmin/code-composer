@@ -7,6 +7,7 @@ from ..execution import execution_plan_fingerprint, lower_song_to_execution_plan
 from ..execution.artistic_render import render_song_score_to_files
 from ..execution.performance_revision import apply_revision_plan
 from ..execution.revision_compare import render_revision_comparison_to_dir
+from ..execution.preview import render_song_score_preview
 from ..song_validation import validate_song_for_runtime
 
 
@@ -106,6 +107,42 @@ def _compare_revision(song_path: Path, score_path: Path, plan_path: Path, output
     }
 
 
+def _preview(
+    song_path: Path,
+    score_path: Path,
+    request_path: Path,
+    wav_path: Path,
+    cache_dir: Path,
+    report_path=None,
+) -> dict:
+    song = json.loads(song_path.read_text(encoding="utf-8"))
+    score = json.loads(score_path.read_text(encoding="utf-8"))
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    result = render_song_score_preview(
+        song,
+        score,
+        request,
+        wav_path,
+        cache_dir,
+        report_path=report_path,
+    )
+    report = result["report"]
+    return {
+        "source_song": str(song_path),
+        "performance_score": str(score_path),
+        "preview_request": str(request_path),
+        "wav": str(wav_path),
+        "sample_rate": int(result["sr"]),
+        "source_score_fingerprint": report["source_score_fingerprint"],
+        "preview_request_fingerprint": report["preview_request_fingerprint"],
+        "cache_hits": report["cache"]["hits"],
+        "cache_misses": report["cache"]["misses"],
+        "selected_tracks": report["selected_tracks"],
+        "range": report["range"],
+        "final_render_authority": report["final_render_authority"],
+    }
+
+
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     if len(argv) == 2 and argv[0] == "validate":
@@ -120,13 +157,20 @@ def main(argv=None):
         out = _revise(Path(argv[1]), Path(argv[2]), Path(argv[3]), Path(argv[4]))
     elif len(argv) == 5 and argv[0] == "compare-revision":
         out = _compare_revision(Path(argv[1]), Path(argv[2]), Path(argv[3]), Path(argv[4]))
+    elif 6 <= len(argv) <= 7 and argv[0] == "preview":
+        report = Path(argv[6]) if len(argv) == 7 else None
+        out = _preview(
+            Path(argv[1]), Path(argv[2]), Path(argv[3]),
+            Path(argv[4]), Path(argv[5]), report,
+        )
     else:
         raise SystemExit(
             "usage: code-composer-song validate <song.json>\n"
             "   or: code-composer-song lower <song.json> <execution-plan.json>\n"
             "   or: code-composer-song render <song.json> <performance-score.json> <out.wav> [resolved.json] [analysis.json]\n"
             "   or: code-composer-song revise <performance-score.json> <revision-plan.json> <revised-score.json> <revision-record.json>\n"
-            "   or: code-composer-song compare-revision <song.json> <performance-score.json> <revision-plan.json> <output-dir>"
+            "   or: code-composer-song compare-revision <song.json> <performance-score.json> <revision-plan.json> <output-dir>\n"
+            "   or: code-composer-song preview <song.json> <performance-score.json> <preview-request.json> <out.wav> <cache-dir> [report.json]"
         )
 
     print(json.dumps(out, ensure_ascii=False, sort_keys=True))
