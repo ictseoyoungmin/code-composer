@@ -7,6 +7,7 @@ on:
     paths:
       - "examples/cr05/**"
       - "tools/render_cr05_preview_dogfood.py"
+      - "tests/test_cr05_fast_preview.py"
       - "skills/code-composer/kit/src/code_composer/execution/preview.py"
       - "skills/code-composer/kit/src/code_composer/app/song_cli.py"
       - "skills/code-composer/kit/schemas/preview_*.schema.json"
@@ -17,6 +18,7 @@ on:
     paths:
       - "examples/cr05/**"
       - "tools/render_cr05_preview_dogfood.py"
+      - "tests/test_cr05_fast_preview.py"
       - "skills/code-composer/kit/src/code_composer/execution/preview.py"
       - "skills/code-composer/kit/src/code_composer/app/song_cli.py"
       - "skills/code-composer/kit/schemas/preview_*.schema.json"
