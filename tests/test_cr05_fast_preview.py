@@ -177,10 +177,7 @@ def test_cr05_preview_is_explicitly_not_final_render_authority(tmp_path, monkeyp
     score = _score()
     req = _request()
 
-    plan = {
-        "source_song": {"fingerprint": score["source_song"]["fingerprint"]},
-        "sections": [{"start_beat": 0.0, "duration_beats": 36.0}],
-    }
+    plan = preview_module.lower_song_to_execution_plan(_song())
     ir = {
         "meta": {"sample_rate": 24000, "global_seed": 1},
         "transport": {"bpm": 72.0, "beats_per_bar": 3},
