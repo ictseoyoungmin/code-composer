@@ -54,4 +54,4 @@ Historical files may mention paths or terminology that were current when that ev
 - [**CR02 — Song → Execution Plan Lowering**](architecture/CR02_SONG_EXECUTION_LOWERING.md) — **CLOSED**.
 - [**CR03 — First Artistic Bottleneck: Piano + Violin**](architecture/CR03_PIANO_VIOLIN_BOTTLENECK.md) — **CLOSED**.
 - [**CR04 — Listen / Critique / Revision**](architecture/CR04_LISTEN_CRITIQUE_REVISION.md) — **CLOSED**.
-- **CR05 — Fast Preview / Incremental Render** — next active engineering slice.
+- [**CR05 — Fast Preview / Incremental Render**](architecture/CR05_FAST_PREVIEW_INCREMENTAL_RENDER.md) — **ENGINEERING / PERCEPTUAL CANDIDATE**.
