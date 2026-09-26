@@ -223,12 +223,24 @@ def _load_or_render_stem(
 
     hit = False
     buf = None
-    if stem_path.exists():
+    if stem_path.exists() and meta_path.exists():
         try:
-            candidate = np.load(stem_path, allow_pickle=False)
-            if candidate.dtype == np.float64 and candidate.shape == (n, 2):
-                buf = candidate
-                hit = True
+            meta = json.loads(meta_path.read_text(encoding="utf-8"))
+            valid_meta = (
+                meta.get("format") == STEM_CACHE_FORMAT
+                and meta.get("renderer_epoch") == STEM_CACHE_RENDERER_EPOCH
+                and meta.get("cache_key") == key
+                and meta.get("identity_fingerprint") == _canonical_hash(identity)
+                and meta.get("track") == track["id"]
+                and int(meta.get("samples", -1)) == int(n)
+                and int(meta.get("sample_rate", -1)) == int(sr)
+                and meta.get("stem_sha256") == _file_sha256(stem_path)
+            )
+            if valid_meta:
+                candidate = np.load(stem_path, allow_pickle=False)
+                if candidate.dtype == np.float64 and candidate.shape == (n, 2):
+                    buf = candidate
+                    hit = True
         except Exception:
             buf = None
 
@@ -242,7 +254,9 @@ def _load_or_render_stem(
         tmp_path = cache_dir / f".{key}.tmp.npy"
         np.save(tmp_path, buf, allow_pickle=False)
         tmp_path.replace(stem_path)
-        meta_path.write_text(
+        stem_sha256 = _file_sha256(stem_path)
+        tmp_meta_path = cache_dir / f".{key}.tmp.json"
+        tmp_meta_path.write_text(
             json.dumps(
                 {
                     "format": STEM_CACHE_FORMAT,
@@ -252,6 +266,7 @@ def _load_or_render_stem(
                     "identity_fingerprint": _canonical_hash(identity),
                     "samples": int(n),
                     "sample_rate": int(sr),
+                    "stem_sha256": stem_sha256,
                 },
                 ensure_ascii=False,
                 indent=2,
@@ -259,6 +274,7 @@ def _load_or_render_stem(
             + "\n",
             encoding="utf-8",
         )
+        tmp_meta_path.replace(meta_path)
 
     return buf, {
         "track": track["id"],
@@ -421,7 +437,7 @@ def render_song_score_preview(
             "rms": rms,
             "clipped_sample_ratio": clipped,
         },
-        "wav": str(wav_path),
+        "wav": wav_path.name,
         "wav_sha256": _file_sha256(wav_path),
         "final_render_authority": False,
     }
