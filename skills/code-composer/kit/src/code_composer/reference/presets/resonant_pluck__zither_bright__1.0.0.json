@@ -1,0 +1,77 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "resonant_pluck.zither_bright",
+  "version": "1.0.0",
+  "name": "Bright Resonant Zither",
+  "engine": "resonant_pluck",
+  "family": "plucked_zither",
+  "character": [
+    "bright",
+    "resonant",
+    "plucked-string",
+    "zither-like",
+    "deterministic"
+  ],
+  "strengths": [
+    "authored note duration acts as excitation/gate duration while string/body resonance can continue afterward",
+    "upper partials decay faster than the fundamental for a natural plucked spectral falloff",
+    "supports deterministic pitch approach, vibrato and post-gate damping expression without song-specific tail tables"
+  ],
+  "limitations": [
+    "general zither-like model rather than a claim of sampled or measured gayageum replication",
+    "continuous finger pressure and inter-string sympathetic coupling are outside this initial CR08 preset"
+  ],
+  "recommended_roles": [
+    "melody",
+    "hook",
+    "countermelody"
+  ],
+  "expression_capabilities": [
+    "velocity",
+    "pitch_start_cents",
+    "pitch_end_cents",
+    "pitch_time_s",
+    "vibrato_depth_cents",
+    "vibrato_rate_hz",
+    "release_damping"
+  ],
+  "musical_content": false,
+  "patch": {
+    "kind": "resonant_pluck",
+    "engine": "resonant_pluck",
+    "family": "plucked_zither",
+    "resonant_pluck_graph": {
+      "max_partials": 13,
+      "pluck_position": 0.16,
+      "partial_rolloff": 0.96,
+      "inharmonicity": 0.00014,
+      "base_decay_s": 1.08,
+      "frequency_damping": 0.3,
+      "natural_tail_s": 0.72,
+      "post_gate_decay_s": 0.29,
+      "end_fade_s": 0.038,
+      "attack_s": 0.003,
+      "pluck_noise_gain": 0.072,
+      "pluck_noise_lowpass_hz": 6900,
+      "pluck_noise_decay_s": 0.021,
+      "body_resonances_hz": [
+        410,
+        720
+      ],
+      "body_gains": [
+        0.075,
+        0.05
+      ],
+      "body_decay_s": [
+        0.17,
+        0.12
+      ],
+      "body_mix": 0.16,
+      "lowpass_hz": 7600,
+      "drive": 1.28,
+      "output_gain": 0.88,
+      "stereo_width": 0.13,
+      "seed": 8128
+    }
+  }
+}
