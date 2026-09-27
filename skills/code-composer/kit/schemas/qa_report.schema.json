@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ymstudio.dev/code-composer/schemas/qa_report.schema.json",
+  "title": "Code Composer QA Report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "source",
+    "request",
+    "integrity",
+    "musical_evidence",
+    "musical_evidence_fingerprint",
+    "semantics"
+  ],
+  "properties": {
+    "format": {
+      "const": "code-composer-qa-report/v1"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "song_fingerprint",
+        "performance_score_fingerprint",
+        "execution_plan_fingerprint",
+        "wav_sha256"
+      ],
+      "properties": {
+        "song_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "performance_score_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "execution_plan_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "wav_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fingerprint",
+        "target_fingerprint",
+        "hard_policy",
+        "evidence"
+      ],
+      "properties": {
+        "fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "target_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "hard_policy": {
+          "type": "object"
+        },
+        "evidence": {
+          "type": "object"
+        }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "failure_count",
+        "failed_checks",
+        "checks"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "PASS",
+            "FAIL"
+          ]
+        },
+        "failure_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed_checks": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "musical_evidence": {
+      "type": "object"
+    },
+    "musical_evidence_fingerprint": {
+      "$ref": "#/$defs/sha256"
+    },
+    "semantics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hard_gate_authority",
+        "musical_evidence_authority",
+        "aesthetic_score",
+        "automatic_musical_acceptance",
+        "automatic_revision"
+      ],
+      "properties": {
+        "hard_gate_authority": {
+          "type": "string"
+        },
+        "musical_evidence_authority": {
+          "type": "string"
+        },
+        "aesthetic_score": {
+          "const": false
+        },
+        "automatic_musical_acceptance": {
+          "const": false
+        },
+        "automatic_revision": {
+          "const": false
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}
