@@ -15,6 +15,29 @@ from typing import Any
 
 
 PERFORMANCE_SCORE_FORMAT = "code-composer-performance-score/v1"
+DRUM_HIT_KINDS = frozenset([
+    "kick",
+    "snare",
+    "snare_center",
+    "snare_ghost",
+    "snare_rimshot",
+    "snare_cross_stick",
+    "hat",
+    "hat_tight_closed",
+    "hat_closed",
+    "hat_half_open",
+    "hat_open",
+    "hat_pedal",
+    "hat_foot_splash",
+    "tom_high",
+    "tom_high_edge",
+    "tom_mid",
+    "tom_mid_edge",
+    "tom_floor",
+    "tom_floor_edge",
+    "ride",
+    "crash"
+])
 _ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 
 
@@ -126,6 +149,24 @@ def _validate_event(event: dict, path: str) -> None:
             _number(event["piano_attack_offset_ms"], f"{path}.piano_attack_offset_ms", -20, 20)
         return
 
+    if event_type == "drum":
+        _strict(
+            event,
+            path,
+            required={"id", "type", "start_beat", "duration_beats", "drum", "velocity"},
+            optional={"pan"},
+        )
+        _identifier(event["id"], f"{path}.id")
+        _number(event["start_beat"], f"{path}.start_beat", 0)
+        _number(event["duration_beats"], f"{path}.duration_beats", 1e-9)
+        drum = _string(event["drum"], f"{path}.drum")
+        if drum not in DRUM_HIT_KINDS:
+            _fail(f"{path}.drum", f"unsupported drum hit {drum!r}")
+        _number(event["velocity"], f"{path}.velocity", 0, 1)
+        if "pan" in event:
+            _number(event["pan"], f"{path}.pan", -1, 1)
+        return
+
     if event_type == "sustain_pedal":
         _strict(
             event,
@@ -155,7 +196,7 @@ def _validate_event(event: dict, path: str) -> None:
             _fail(f"{path}.points", "must end at duration_beats")
         return
 
-    _fail(f"{path}.type", "must be note or sustain_pedal")
+    _fail(f"{path}.type", "must be note, drum, or sustain_pedal")
 
 
 def validate_performance_score(score: dict[str, Any]) -> None:
@@ -247,6 +288,7 @@ def performance_score_fingerprint(score: dict[str, Any]) -> str:
 
 __all__ = [
     "PERFORMANCE_SCORE_FORMAT",
+    "DRUM_HIT_KINDS",
     "PerformanceScoreValidationError",
     "validate_performance_score",
     "canonical_performance_score_json",

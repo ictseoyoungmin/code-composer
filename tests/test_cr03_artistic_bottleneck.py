@@ -362,3 +362,40 @@ def test_cr03_second_dogfood_bridge_preserves_exact_note_authority():
     }
     assert _note_signature(ir) == expected
     assert _note_signature(realized) == expected
+
+
+def test_performance_score_v1_schema_accepts_explicit_drum_hit():
+    schema = json.loads(
+        (ROOT / "skills/code-composer/kit/schemas/performance_score.schema.json").read_text(encoding="utf-8")
+    )
+    score = _score()
+    drum = {
+        "id": "drum-contract",
+        "type": "drum",
+        "start_beat": 0.0,
+        "duration_beats": 0.1,
+        "drum": "kick",
+        "velocity": 0.8,
+        "pan": 0.0,
+    }
+    candidate = deepcopy(score)
+    candidate["tracks"] = [{"id": "drum-track", "events": [drum]}]
+    candidate["render"]["mix"]["tracks"] = [
+        {"track": "drum-track", "gain": 1.0, "pan": 0.0, "reverb_send": 0.0}
+    ]
+    validate_performance_score(candidate)
+    Draft202012Validator(schema).validate(candidate)
+
+
+def test_performance_score_v1_rejects_unknown_drum_hit_name():
+    score = _score()
+    score["tracks"][0]["events"] = [{
+        "id": "bad-drum",
+        "type": "drum",
+        "start_beat": 0.0,
+        "duration_beats": 0.1,
+        "drum": "not-a-real-kit-piece",
+        "velocity": 0.8,
+    }]
+    with pytest.raises(Exception, match="unsupported drum hit"):
+        validate_performance_score(score)

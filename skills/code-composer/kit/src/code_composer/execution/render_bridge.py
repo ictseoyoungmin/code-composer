@@ -50,7 +50,9 @@ def _validate_score_against_plan(plan: dict, score: dict) -> None:
 
     for track_id, score_track in score_tracks.items():
         plan_track = plan_tracks[track_id]
-        family = instruments[plan_track["instrument"]]["family"]
+        instrument = instruments[plan_track["instrument"]]
+        family = instrument["family"]
+        engine = instrument["engine"]
         pitched_onsets = {}
         control_ranges = []
         for event in score_track["events"]:
@@ -67,6 +69,18 @@ def _validate_score_against_plan(plan: dict, score: dict) -> None:
                     )
                 control_ranges.append((start, start + duration, event["id"]))
                 continue
+
+            if event["type"] == "drum":
+                if engine != "percussion":
+                    raise PerformanceBridgeError(
+                        f"track {track_id} drum event {event['id']} requires percussion engine"
+                    )
+                continue
+
+            if engine == "percussion":
+                raise PerformanceBridgeError(
+                    f"track {track_id} percussion engine requires explicit drum events, not pitched notes"
+                )
 
             if family == "violin":
                 key = round(start, 9)
@@ -99,6 +113,19 @@ def _legacy_event(event: dict, section_id: str) -> dict:
             "points": deepcopy(event["points"]),
             "section_id": section_id,
         }
+
+    if event["type"] == "drum":
+        out = {
+            "event_type": "drum",
+            "drum": event["drum"],
+            "start_beat": float(event["start_beat"]),
+            "duration_beats": float(event["duration_beats"]),
+            "velocity": float(event["velocity"]),
+            "section_id": section_id,
+        }
+        if "pan" in event:
+            out["pan"] = float(event["pan"])
+        return out
 
     perf = {}
     if "articulation" in event:

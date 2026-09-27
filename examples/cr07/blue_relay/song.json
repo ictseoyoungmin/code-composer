@@ -1,0 +1,238 @@
+{
+  "format": "code-composer-song/v1",
+  "meta": {
+    "title": "Blue Relay",
+    "global_seed": 260927073,
+    "revision": "cr07-dogfood-r0"
+  },
+  "intent": {
+    "concept": "compact electronic pulse with sub pattern, broad air-bed, glassy hook, and syncopated kit",
+    "notes": [
+      "explicit generic-engine preset locks demonstrate unknown-family support without fallback",
+      "track functions remain authored and unconstrained"
+    ]
+  },
+  "transport": {
+    "bpm": 120,
+    "meter": {
+      "beats_per_bar": 4,
+      "beat_unit": 4
+    }
+  },
+  "tonal": {
+    "root": "F",
+    "scale": "natural_minor"
+  },
+  "sections": [
+    {
+      "id": "signal",
+      "name": "Signal",
+      "bars": 4,
+      "energy": 0.48,
+      "intent": "dry pulse and small hook"
+    },
+    {
+      "id": "relay",
+      "name": "Relay",
+      "bars": 4,
+      "energy": 0.7,
+      "intent": "wider pad voicing and more active hook"
+    }
+  ],
+  "instruments": [
+    {
+      "id": "sub",
+      "name": "Sub Pulse",
+      "family": "bass",
+      "variant": "electric-finger",
+      "render_lock": {
+        "preset": "bass.electric_finger_modeled",
+        "preset_version": "1.0.0"
+      }
+    },
+    {
+      "id": "air",
+      "name": "Air Bed",
+      "family": "synth_pad",
+      "render_lock": {
+        "preset": "generic.soft_pad",
+        "preset_version": "1.0.0"
+      }
+    },
+    {
+      "id": "glass",
+      "name": "Glass Hook",
+      "family": "synth_lead",
+      "render_lock": {
+        "preset": "generic.clean_lead",
+        "preset_version": "1.0.0"
+      }
+    },
+    {
+      "id": "sync-kit",
+      "name": "Sync Kit",
+      "family": "drums",
+      "variant": "acoustic-kit",
+      "render_lock": {
+        "preset": "drums.acoustic_kit_modeled",
+        "preset_version": "1.0.0"
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "sub-pulse",
+      "name": "Sub Pulse",
+      "function": "sub-pulse",
+      "instrument": "sub"
+    },
+    {
+      "id": "air-bed",
+      "name": "Air Bed",
+      "function": "air-bed",
+      "instrument": "air"
+    },
+    {
+      "id": "glass-hook",
+      "name": "Glass Hook",
+      "function": "glass-hook",
+      "instrument": "glass"
+    },
+    {
+      "id": "sync-grid",
+      "name": "Sync Grid",
+      "function": "sync-grid",
+      "instrument": "sync-kit"
+    }
+  ],
+  "materials": [
+    {
+      "id": "sub-cell",
+      "kind": "motif",
+      "intervals": [
+        0,
+        0,
+        3,
+        0
+      ],
+      "rhythm": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "air-cell",
+      "kind": "progression",
+      "degrees": [
+        1
+      ],
+      "rhythm": [
+        4
+      ]
+    },
+    {
+      "id": "glass-cell",
+      "kind": "motif",
+      "intervals": [
+        7,
+        10,
+        12,
+        7
+      ],
+      "rhythm": [
+        0.5,
+        0.5,
+        1,
+        2
+      ]
+    },
+    {
+      "id": "sync-cell",
+      "kind": "rhythm",
+      "cycle_beats": 4,
+      "steps": [
+        {
+          "beat": 0,
+          "weight": 1
+        },
+        {
+          "beat": 1.5,
+          "weight": 0.8
+        },
+        {
+          "beat": 2,
+          "weight": 0.9
+        },
+        {
+          "beat": 3.5,
+          "weight": 0.75
+        }
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "signal-sub-pulse",
+      "section": "signal",
+      "track": "sub-pulse",
+      "material": "sub-cell",
+      "repeats": 4
+    },
+    {
+      "id": "signal-air-bed",
+      "section": "signal",
+      "track": "air-bed",
+      "material": "air-cell",
+      "repeats": 4
+    },
+    {
+      "id": "signal-glass-hook",
+      "section": "signal",
+      "track": "glass-hook",
+      "material": "glass-cell",
+      "repeats": 4
+    },
+    {
+      "id": "signal-sync-grid",
+      "section": "signal",
+      "track": "sync-grid",
+      "material": "sync-cell",
+      "repeats": 4
+    },
+    {
+      "id": "relay-sub-pulse",
+      "section": "relay",
+      "track": "sub-pulse",
+      "material": "sub-cell",
+      "repeats": 4
+    },
+    {
+      "id": "relay-air-bed",
+      "section": "relay",
+      "track": "air-bed",
+      "material": "air-cell",
+      "repeats": 4
+    },
+    {
+      "id": "relay-glass-hook",
+      "section": "relay",
+      "track": "glass-hook",
+      "material": "glass-cell",
+      "repeats": 4
+    },
+    {
+      "id": "relay-sync-grid",
+      "section": "relay",
+      "track": "sync-grid",
+      "material": "sync-cell",
+      "repeats": 4
+    }
+  ],
+  "locks": {
+    "bpm": 120,
+    "root": "F",
+    "scale": "natural_minor"
+  }
+}

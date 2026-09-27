@@ -1,0 +1,80 @@
+{
+  "schema": "code-composer-cr07-closure/v1",
+  "slice": "CR07",
+  "status": "CLOSED",
+  "name": "Broader Orchestration Dogfood",
+  "issue": 37,
+  "pull_request": 38,
+  "validated_candidate_head": "5ebf7f0888eb69ffb8c94b9eff96f5be1b2eba40",
+  "engineering_gate": {
+    "status": "PASS",
+    "cr07_dogfood": {
+      "run_number": 13,
+      "run_id": 36313943714,
+      "status": "success"
+    },
+    "full_ci": {
+      "run_number": 119,
+      "run_id": 36313943715,
+      "status": "success",
+      "python_3_10": "success",
+      "python_3_12": "success",
+      "blocking_tests": "758 passed, 3 deselected",
+      "known_runner_sensitive_probe": {
+        "issue": 2,
+        "blocking": false
+      }
+    },
+    "cr03_regression": {
+      "run_number": 43,
+      "run_id": 36313943700,
+      "status": "success"
+    }
+  },
+  "artifact": {
+    "id": 10929852459,
+    "digest": "sha256:0002ec2b9f0d0d8f798f7373435be11f7c5fc25d070fbc823baba07ec391e1e3",
+    "portable_hashes": "all pass",
+    "cases": [
+      {
+        "slug": "copper_lines",
+        "title": "Copper Lines",
+        "sample_rate": 24000,
+        "clipped_sample_ratio": 0
+      },
+      {
+        "slug": "glass_courtyard",
+        "title": "Glass Courtyard",
+        "sample_rate": 24000,
+        "clipped_sample_ratio": 0
+      },
+      {
+        "slug": "blue_relay",
+        "title": "Blue Relay",
+        "sample_rate": 24000,
+        "clipped_sample_ratio": 0
+      }
+    ]
+  },
+  "contracts": {
+    "arbitrary_track_functions_preserved": true,
+    "exact_track_identity_preserved": true,
+    "unknown_family_requires_explicit_preset_lock": true,
+    "generic_fallback_added": false,
+    "explicit_drum_hit_authority": true,
+    "pitched_note_percussion_surrogate_rejected": true
+  },
+  "perceptual_gate": {
+    "required": true,
+    "status": "PASS",
+    "authority": "explicit user instruction to proceed with listening closure after delivery of the three-piece listening pack",
+    "date": "2026-09-27",
+    "aesthetic_score": false,
+    "automatic_acceptance": false
+  },
+  "next_slice": {
+    "id": "CR08",
+    "name": "Resonant Release Semantics / Plucked Instrument Tail Authority",
+    "status": "candidate"
+  }
+}

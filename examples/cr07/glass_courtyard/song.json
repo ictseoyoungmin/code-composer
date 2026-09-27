@@ -1,0 +1,178 @@
+{
+  "format": "code-composer-song/v1",
+  "meta": {
+    "title": "Glass Courtyard",
+    "global_seed": 260927072,
+    "revision": "cr07-dogfood-r0"
+  },
+  "intent": {
+    "concept": "small chamber miniature with violin cantus, broken piano floor, and a soft sustained lower voice",
+    "notes": [
+      "distinct meter/tempo/texture from Copper Lines",
+      "no fixed lead/harmony/pad role vocabulary in track functions"
+    ]
+  },
+  "transport": {
+    "bpm": 78,
+    "meter": {
+      "beats_per_bar": 3,
+      "beat_unit": 4
+    }
+  },
+  "tonal": {
+    "root": "D",
+    "scale": "natural_minor"
+  },
+  "sections": [
+    {
+      "id": "walk",
+      "name": "Walk",
+      "bars": 4,
+      "energy": 0.34,
+      "intent": "restrained first statement"
+    },
+    {
+      "id": "court",
+      "name": "Court",
+      "bars": 4,
+      "energy": 0.58,
+      "intent": "slightly broader second statement and release"
+    }
+  ],
+  "instruments": [
+    {
+      "id": "violin",
+      "name": "Solo Violin",
+      "family": "violin",
+      "variant": "solo-arco",
+      "render_lock": {
+        "preset": "bowed.violin.modeled_admittance",
+        "preset_version": "1.0.0"
+      }
+    },
+    {
+      "id": "piano",
+      "name": "Grand Piano",
+      "family": "piano",
+      "variant": "acoustic-grand",
+      "render_lock": {
+        "preset": "piano.concert_grand_natural",
+        "preset_version": "1.0.0"
+      }
+    },
+    {
+      "id": "low-bow",
+      "name": "Lower Bowed Voice",
+      "family": "cello",
+      "render_lock": {
+        "preset": "generic.soft_pad",
+        "preset_version": "1.0.0"
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "cantus",
+      "name": "Cantus",
+      "function": "bowed-cantus",
+      "instrument": "violin"
+    },
+    {
+      "id": "stone-floor",
+      "name": "Piano Floor",
+      "function": "resonant-floor",
+      "instrument": "piano"
+    },
+    {
+      "id": "inner-breath",
+      "name": "Inner Breath",
+      "function": "inner-breath",
+      "instrument": "low-bow"
+    }
+  ],
+  "materials": [
+    {
+      "id": "cantus-cell",
+      "kind": "motif",
+      "intervals": [
+        0,
+        3,
+        5
+      ],
+      "rhythm": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "piano-cell",
+      "kind": "progression",
+      "degrees": [
+        1
+      ],
+      "rhythm": [
+        3
+      ]
+    },
+    {
+      "id": "breath-cell",
+      "kind": "motif",
+      "intervals": [
+        0
+      ],
+      "rhythm": [
+        3
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "walk-cantus",
+      "section": "walk",
+      "track": "cantus",
+      "material": "cantus-cell",
+      "repeats": 4
+    },
+    {
+      "id": "walk-stone-floor",
+      "section": "walk",
+      "track": "stone-floor",
+      "material": "piano-cell",
+      "repeats": 4
+    },
+    {
+      "id": "walk-inner-breath",
+      "section": "walk",
+      "track": "inner-breath",
+      "material": "breath-cell",
+      "repeats": 4
+    },
+    {
+      "id": "court-cantus",
+      "section": "court",
+      "track": "cantus",
+      "material": "cantus-cell",
+      "repeats": 4
+    },
+    {
+      "id": "court-stone-floor",
+      "section": "court",
+      "track": "stone-floor",
+      "material": "piano-cell",
+      "repeats": 4
+    },
+    {
+      "id": "court-inner-breath",
+      "section": "court",
+      "track": "inner-breath",
+      "material": "breath-cell",
+      "repeats": 4
+    }
+  ],
+  "locks": {
+    "bpm": 78,
+    "root": "D",
+    "scale": "natural_minor"
+  }
+}

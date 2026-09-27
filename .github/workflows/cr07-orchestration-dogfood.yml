@@ -1,0 +1,50 @@
+name: CR07 Broader Orchestration Dogfood
+
+on:
+  push:
+    branches:
+      - cr07-broader-orchestration
+    paths:
+      - "examples/cr07/**"
+      - "tools/render_cr07_orchestration_dogfood.py"
+      - "tests/test_cr07_broader_orchestration.py"
+      - "docs/architecture/CR07_BROADER_ORCHESTRATION.md"
+      - ".github/workflows/cr07-orchestration-dogfood.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "examples/cr07/**"
+      - "tools/render_cr07_orchestration_dogfood.py"
+      - "tests/test_cr07_broader_orchestration.py"
+      - "docs/architecture/CR07_BROADER_ORCHESTRATION.md"
+      - ".github/workflows/cr07-orchestration-dogfood.yml"
+  workflow_dispatch:
+
+jobs:
+  broader-orchestration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Code Composer
+        run: |
+          python -m pip install -e skills/code-composer/kit
+          python -m pip install pytest
+      - name: Render three independent ensembles
+        run: python tools/render_cr07_orchestration_dogfood.py --output dist/cr07-orchestration
+      - name: Validate focused CR07 regressions
+        run: python -m pytest -q tests/test_cr07_broader_orchestration.py
+      - name: Verify portable hashes
+        working-directory: dist/cr07-orchestration
+        run: sha256sum -c SHA256SUMS.txt
+      - name: Upload orchestration evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cr07-broader-orchestration
+          path: dist/cr07-orchestration
+          if-no-files-found: error
+          retention-days: 30

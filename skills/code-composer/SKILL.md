@@ -51,7 +51,7 @@ When source inspection is necessary, read `kit/SOURCE_MAP.md` first and inspect 
 
 - CR01 Song is the canonical authored-state contract for the Composer-first rebuild.
 - CR02 Execution Plan is the deterministic runtime-planning authority for Song timeline/material/instrument resolution. It does not invent note/voicing content.
-- CR03 Performance Score is the Composer-authored authority for exact notes, voicings, register, phrase timing, articulation, controls, and mix intent.
+- CR03+ Performance Score is the Composer-authored authority for exact pitched notes, explicit drum hits, voicings, register, phrase timing, articulation, supported controls, and mix intent.
 - The CR03 render bridge may add physical instrument mechanics but must preserve authored note pitch/timing exactly.
 - CR04 Revision Plan is Composer-authored intent bound to one exact Performance Score fingerprint; analyzers may provide evidence but may not author revision ops.
 - Revision Record is the authoritative before/plan/after provenance for a targeted score change.
