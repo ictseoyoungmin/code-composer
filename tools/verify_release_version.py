@@ -14,7 +14,7 @@ import code_composer  # noqa: E402
 
 def main() -> int:
     version = (SKILL / "VERSION").read_text(encoding="utf-8").strip()
-    assert version == "1.18.0", f"unexpected release version: {version}"
+    assert version == "1.18.1", f"unexpected release version: {version}"
     assert code_composer.__version__ == version, "package / Skill VERSION mismatch"
 
     for relative in (".codex-plugin/plugin.json", ".claude-plugin/plugin.json"):

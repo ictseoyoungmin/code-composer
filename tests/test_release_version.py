@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def test_release_version_surfaces_are_synchronized():
     version=(ROOT/"skills/code-composer/VERSION").read_text(encoding="utf-8").strip()
-    assert version=="1.18.0"
+    assert version=="1.18.1"
     assert code_composer.__version__==version
     for relative in (".codex-plugin/plugin.json",".claude-plugin/plugin.json"):
         manifest=json.loads((ROOT/relative).read_text(encoding="utf-8"))

@@ -1,3 +1,12 @@
+## v1.18.1 — Drum byte reproducibility closure — 2026-09-28
+
+- Closes Issue #2 after isolating historical hosted-runner drum SHA drift to CPU/NumPy FMA dispatch rather than Python version, RNG, or a musical/DSP semantic change.
+- Canonicalizes final post-pan percussion-event float64 output to an exact Q40 grid (`2^-40` step).
+- Maximum representation move is `2^-41 ≈ 4.55e-13` full scale, about `-246.8 dBFS`; synthesis and musical parameters run unchanged before the representation boundary.
+- Post-fix diagnostic run `36327235285` proves raw SHA identity across Python 3.10/3.12, AMD EPYC 7763/9V45, and native/FMA-disabled/AVX-disabled NumPy dispatch combinations.
+- Removes the historical `continue-on-error` / deselection exception. All active regressions are blocking again.
+- PR #45 merge: `042d0d5d2de2a7499c8e2bfdf9903a5b25b062a2`; closure main: `d580becd763c0dbbcc712dff20ef6ecdd733cee8`; final main CI #138: Python 3.10 / 3.12 each 769/769 PASS.
+
 ## Issue #2 — Drum byte reproducibility hardening — CLOSED
 
 - Isolated historical hosted-runner drum SHA drift to CPU/NumPy FMA dispatch, not Python version or RNG.
