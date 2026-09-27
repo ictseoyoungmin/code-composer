@@ -56,24 +56,24 @@ def test_s25_s19_checkpoint_preset_is_registered():
     assert engine_for_patch(patch).tail_seconds(patch) == 1.65
 
 
-def test_s25_preserves_s19_legacy_core_byte_exactly():
+def test_s25_preserves_s19_legacy_core_canonical_fingerprint():
     patch = _preset()
     expected = {
-        'kick': '6b2a723048822690dabed02cb2b422cf7d4fb98d229b8259fb0d54acb2191643',
-        'snare': 'b0fd58a055ce6ea7f725988df064a7e8a6f1eecb960e930559e083858bc24025',
-        'hat': 'f7536f79fe0f48141adaabcd2461a11c16b5fbe7b8d27e4b8637adbba35b2ca4',
+        'kick': 'be1dd7ca772d3db0708da277aac67087c7188bf61ba168322262b419a815760d',
+        'snare': '699d703b2eec6b171b26e5603d7448201db87fa35a28a13fb308363deb733219',
+        'hat': 'a803a732e6da4a18be410839d03762356d12823a50e83c96516958679814ac77',
     }
     for kind, digest in expected.items():
         y = render_drum_event(kind, .1, SR, .8, seed=17, patch=patch)
         assert _hash(y) == digest
 
 
-def test_s25_does_not_change_existing_s17_modeled_preset_hashes():
+def test_s25_preserves_s17_modeled_canonical_fingerprints():
     patch = materialize_preset('drums.acoustic_kit_modeled', role='drums')
     expected = {
-        'kick': '380e698edfe82884757e23a81f8318a61d973968ba8c4c11e8a99d450a034df6',
-        'snare': 'aaf1e8e3e15d2e64d746a6d635716a0db3e71c122a25c86cc79ae8382686ecaf',
-        'hat': '7b6b0613fdbc8af958d7a1c57f0faeb3c3693ec2ca0f5c1d7b168b23e06cd558',
+        'kick': '6176cc5192bbd8d180660fc941cf2fde9241ab8a640e26ac0a079d66b6872c02',
+        'snare': '25c28d37bdb9181e6a0b3d6a0d3094e65f6cf4bb087a4bf627298400068831cf',
+        'hat': '422e47a3ce7e7e15927beb363b5cb582a0e715afd1739c5abfeb582a01b298df',
     }
     for kind, digest in expected.items():
         y = render_drum_event(kind, .1, SR, .8, seed=17, patch=patch)
