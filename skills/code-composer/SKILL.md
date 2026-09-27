@@ -81,3 +81,10 @@ Do not derive them from bundled examples or tests. Factory presets are allowed s
 ## Completion discipline
 
 Before reporting completion, use the relevant workflow's validation gates. Preserve existing closed baselines unless the user explicitly opens them. For exchange/delivery tasks, verify hashes/manifests and inspect the produced package rather than assuming export success.
+
+
+### CR08 resonant-release rule
+For opt-in resonant instruments such as `resonant_pluck.zither_bright`, do not equate
+authored note duration with sample-buffer lifetime. Let the instrument engine own
+natural post-gate resonance and report its maximum tail to the renderer. Do not
+reintroduce piece-specific ornament-name tail tables.
