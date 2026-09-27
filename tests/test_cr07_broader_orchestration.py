@@ -75,7 +75,23 @@ def test_cr07_unknown_instrument_families_are_explicitly_locked_not_fallbacks():
     }
 
 
-def test_cr07_realized_ir_preserves_exact_track_identity_and_authored_notes():
+def _authored_event_signature(events):
+    out = []
+    for event in events:
+        if event.get("type") == "note" or "midi" in event:
+            out.append((
+                "note", float(event["start_beat"]), float(event["duration_beats"]),
+                int(event["midi"]), float(event["velocity"]),
+            ))
+        elif event.get("type") == "drum" or event.get("event_type") == "drum":
+            out.append((
+                "drum", float(event["start_beat"]), float(event["duration_beats"]),
+                event["drum"], float(event["velocity"]), float(event.get("pan", 0.0)),
+            ))
+    return out
+
+
+def test_cr07_realized_ir_preserves_exact_track_identity_and_authored_events():
     for slug in CASES:
         song, score = _case(slug)
         plan = lower_song_to_execution_plan(song)
@@ -84,20 +100,8 @@ def test_cr07_realized_ir_preserves_exact_track_identity_and_authored_notes():
         expected_ids = [t["id"] for t in song["tracks"]]
         assert [t["id"] for t in realized["tracks"]] == expected_ids
 
-        before = {
-            t["id"]: [
-                (float(e["start_beat"]), float(e["duration_beats"]), int(e["midi"]))
-                for e in t["events"] if e["type"] == "note"
-            ]
-            for t in score["tracks"]
-        }
-        after = {
-            t["id"]: [
-                (float(e["start_beat"]), float(e["duration_beats"]), int(e["midi"]))
-                for e in t["events"] if "midi" in e
-            ]
-            for t in realized["tracks"]
-        }
+        before = {t["id"]: _authored_event_signature(t["events"]) for t in score["tracks"]}
+        after = {t["id"]: _authored_event_signature(t["events"]) for t in realized["tracks"]}
         assert after == before
 
 
@@ -122,3 +126,50 @@ def test_cr07_fixtures_are_materially_distinct():
             sum(len(t["events"]) for t in score["tracks"]),
         ))
     assert len(set(rows)) == len(CASES)
+
+
+def test_cr07_percussion_tracks_use_explicit_drum_hits_not_midi_surrogates():
+    for slug in ("copper_lines", "blue_relay"):
+        song, score = _case(slug)
+        plan = lower_song_to_execution_plan(song)
+        instruments = {x["id"]: x for x in plan["instruments"]}
+        plan_tracks = {x["id"]: x for x in plan["tracks"]}
+        for track in score["tracks"]:
+            engine = instruments[plan_tracks[track["id"]]["instrument"]]["engine"]
+            if engine != "percussion":
+                continue
+            assert all(e["type"] == "drum" for e in track["events"])
+            assert all("drum" in e and "midi" not in e for e in track["events"])
+        ir = compile_performance_score_to_render_ir(plan, score)
+        for track in ir["tracks"]:
+            engine = instruments[plan_tracks[track["id"]]["instrument"]]["engine"]
+            if engine == "percussion":
+                assert all(e.get("event_type") == "drum" for e in track["events"])
+
+
+def test_cr07_bridge_rejects_pitched_note_on_percussion_engine():
+    import pytest
+    from code_composer.execution import PerformanceBridgeError
+    song, score = _case("copper_lines")
+    plan = lower_song_to_execution_plan(song)
+    drums = next(t for t in score["tracks"] if t["id"] == "kit-grid")
+    event = drums["events"][0]
+    event["type"] = "note"
+    event["midi"] = 36
+    event.pop("drum")
+    with pytest.raises(PerformanceBridgeError, match="requires explicit drum events"):
+        compile_performance_score_to_render_ir(plan, score)
+
+
+def test_cr07_bridge_rejects_drum_hit_on_non_percussion_engine():
+    import pytest
+    from code_composer.execution import PerformanceBridgeError
+    song, score = _case("glass_courtyard")
+    plan = lower_song_to_execution_plan(song)
+    track = next(t for t in score["tracks"] if t["id"] == "inner-breath")
+    event = track["events"][0]
+    event["type"] = "drum"
+    event["drum"] = "kick"
+    event.pop("midi")
+    with pytest.raises(PerformanceBridgeError, match="requires percussion engine"):
+        compile_performance_score_to_render_ir(plan, score)
