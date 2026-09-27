@@ -391,10 +391,10 @@ def _window_rms(audio: np.ndarray, sr: int, window_ms: float, *, bpm: float) -> 
             start_seconds = float(start / sr)
             end_seconds = float(end / sr)
             windows.append({
-                "start_seconds": start_seconds,
-                "end_seconds": end_seconds,
-                "start_beat": float(start_seconds * beat_per_second),
-                "end_beat": float(end_seconds * beat_per_second),
+                "start_seconds": round(start_seconds, 6),
+                "end_seconds": round(end_seconds, 6),
+                "start_beat": round(float(start_seconds * beat_per_second), 6),
+                "end_beat": round(float(end_seconds * beat_per_second), 6),
                 "rms_db": float(rms_db),
             })
     a = np.asarray(values, dtype=np.float64)
@@ -474,9 +474,9 @@ def _event_location(event: dict) -> dict:
     duration = float(event["duration_beats"])
     return {
         "event_id": event["id"],
-        "start_beat": start,
-        "end_beat": start + duration,
-        "duration_beats": duration,
+        "start_beat": round(start, 6),
+        "end_beat": round(start + duration, 6),
+        "duration_beats": round(duration, 6),
         "midi": int(event["midi"]),
     }
 
@@ -533,9 +533,9 @@ def _phrase_continuity(score: dict) -> dict:
                 gap_locations.append({
                     "previous_event_id": a["id"],
                     "next_event_id": b["id"],
-                    "start_beat": a_end,
-                    "end_beat": b_start,
-                    "gap_beats": float(gap),
+                    "start_beat": round(a_end, 6),
+                    "end_beat": round(b_start, 6),
+                    "gap_beats": round(float(gap), 6),
                 })
             elif gap < -1e-9:
                 overlap = -gap
@@ -543,9 +543,9 @@ def _phrase_continuity(score: dict) -> dict:
                 overlap_locations.append({
                     "previous_event_id": a["id"],
                     "next_event_id": b["id"],
-                    "start_beat": b_start,
-                    "end_beat": min(a_end, b_end),
-                    "overlap_beats": float(overlap),
+                    "start_beat": round(b_start, 6),
+                    "end_beat": round(min(a_end, b_end), 6),
+                    "overlap_beats": round(float(overlap), 6),
                 })
         out[track_id] = {
             "positive_gap_count": len(gaps),
@@ -573,8 +573,8 @@ def _repetition(score: dict) -> dict:
             span = ordered[i:i+4]
             occurrence_map.setdefault(trigram, []).append({
                 "event_ids": [event["id"] for event in span],
-                "start_beat": float(span[0]["start_beat"]),
-                "end_beat": float(span[-1]["start_beat"]) + float(span[-1]["duration_beats"]),
+                "start_beat": round(float(span[0]["start_beat"]), 6),
+                "end_beat": round(float(span[-1]["start_beat"]) + float(span[-1]["duration_beats"]), 6),
             })
         repeated = sum(n for n in counts.values() if n > 1)
         out[track_id] = {
@@ -603,8 +603,8 @@ def _voice_leading(score: dict) -> dict:
             {
                 "from_event_id": a["id"],
                 "to_event_id": b["id"],
-                "start_beat": float(a["start_beat"]),
-                "end_beat": float(b["start_beat"]),
+                "start_beat": round(float(a["start_beat"]), 6),
+                "end_beat": round(float(b["start_beat"]), 6),
                 "semitones": int(b["midi"]) - int(a["midi"]),
             }
             for a, b in zip(ordered, ordered[1:])
@@ -691,9 +691,9 @@ def _masking(score: dict, close_semitones: int) -> list[dict]:
                             "track_b": b_id,
                             "event_b": b["id"],
                             "midi_b": int(b["midi"]),
-                            "start_beat": float(shared_start),
-                            "end_beat": float(shared_end),
-                            "overlap_beats": float(shared),
+                            "start_beat": round(float(shared_start), 6),
+                            "end_beat": round(float(shared_end), 6),
+                            "overlap_beats": round(float(shared), 6),
                             "pitch_distance_semitones": int(distance),
                         })
             regions.sort(
