@@ -65,7 +65,8 @@ def test_canonical_skill_contains_no_persistent_build_outputs():
 
 def test_built_skill_contains_no_build_or_cache_artifacts():
     subprocess.run([sys.executable, str(REPO_ROOT/"tools/build_skill.py")], cwd=REPO_ROOT, check=True, capture_output=True, text=True)
-    artifact=REPO_ROOT/"dist/code-composer-skill-v1.17.0.zip"
+    version=(SKILL_ROOT/"VERSION").read_text(encoding="utf-8").strip()
+    artifact=REPO_ROOT/f"dist/code-composer-skill-v{version}.zip"
     assert artifact.exists()
     with zipfile.ZipFile(artifact) as z:
         names=z.namelist()
@@ -83,8 +84,9 @@ def test_plugin_distribution_verifier_passes():
 
 def test_built_plugins_use_root_manifest_layout_and_canonical_icon():
     subprocess.run([sys.executable, str(REPO_ROOT/"tools/build_plugins.py")], cwd=REPO_ROOT, check=True, capture_output=True, text=True)
+    version=(SKILL_ROOT/"VERSION").read_text(encoding="utf-8").strip()
     for platform in ("codex", "claude"):
-        artifact=REPO_ROOT/f"dist/code-composer-{platform}-plugin-v1.17.0.zip"
+        artifact=REPO_ROOT/f"dist/code-composer-{platform}-plugin-v{version}.zip"
         assert artifact.exists()
         with zipfile.ZipFile(artifact) as z:
             names=set(z.namelist())
