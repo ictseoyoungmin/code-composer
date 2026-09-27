@@ -190,6 +190,9 @@
           "$ref": "#/$defs/note"
         },
         {
+          "$ref": "#/$defs/drum_hit"
+        },
+        {
           "$ref": "#/$defs/sustain_pedal"
         }
       ]
@@ -299,6 +302,69 @@
         },
         "mix": {
           "$ref": "#/$defs/mix"
+        }
+      }
+    },
+    "drum_hit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "start_beat",
+        "duration_beats",
+        "drum",
+        "velocity"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "drum"
+        },
+        "start_beat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "duration_beats": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "drum": {
+          "enum": [
+            "kick",
+            "snare",
+            "snare_center",
+            "snare_ghost",
+            "snare_rimshot",
+            "snare_cross_stick",
+            "hat",
+            "hat_tight_closed",
+            "hat_closed",
+            "hat_half_open",
+            "hat_open",
+            "hat_pedal",
+            "hat_foot_splash",
+            "tom_high",
+            "tom_high_edge",
+            "tom_mid",
+            "tom_mid_edge",
+            "tom_floor",
+            "tom_floor_edge",
+            "ride",
+            "crash"
+          ]
+        },
+        "velocity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "pan": {
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1
         }
       }
     }
