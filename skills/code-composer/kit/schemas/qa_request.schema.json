@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ymstudio.dev/code-composer/schemas/qa_request.schema.json",
+  "title": "Code Composer QA Request v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "source_score",
+    "hard_policy",
+    "evidence"
+  ],
+  "properties": {
+    "format": {
+      "const": "code-composer-qa-request/v1"
+    },
+    "source_score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "format",
+        "fingerprint"
+      ],
+      "properties": {
+        "format": {
+          "const": "code-composer-performance-score/v1"
+        },
+        "fingerprint": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "hard_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_clipped_sample_ratio",
+        "require_exact_note_authority",
+        "require_provenance",
+        "require_mechanical_realization"
+      ],
+      "properties": {
+        "max_clipped_sample_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "require_exact_note_authority": {
+          "type": "boolean"
+        },
+        "require_provenance": {
+          "type": "boolean"
+        },
+        "require_mechanical_realization": {
+          "type": "boolean"
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "focus",
+        "parameters"
+      ],
+      "properties": {
+        "focus": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "dynamics",
+              "spectrum",
+              "register",
+              "phrase_continuity",
+              "repetition",
+              "voice_leading",
+              "tension_release",
+              "masking"
+            ]
+          }
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "rms_window_ms",
+            "spectrum_fft_size",
+            "high_register_midi",
+            "close_register_semitones"
+          ],
+          "properties": {
+            "rms_window_ms": {
+              "type": "number",
+              "minimum": 10,
+              "maximum": 5000
+            },
+            "spectrum_fft_size": {
+              "type": "integer",
+              "minimum": 256,
+              "maximum": 65536
+            },
+            "high_register_midi": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 127
+            },
+            "close_register_semitones": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 24
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}
