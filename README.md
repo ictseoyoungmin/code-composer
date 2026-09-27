@@ -2,7 +2,7 @@
   <img src="skills/code-composer/assets/icon.svg" width="180" alt="Code Composer icon">
   <h1>Code Composer</h1>
   <p>
-    <img src="https://img.shields.io/badge/version-v1.18.0-59636e" alt="Version v1.18.0">
+    <img src="https://img.shields.io/badge/version-v1.18.1-59636e" alt="Version v1.18.1">
     <a href="https://github.com/ictseoyoungmin/code-composer/actions/workflows/ci.yml"><img src="https://github.com/ictseoyoungmin/code-composer/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
     <img src="https://img.shields.io/badge/Python-3.10%2B-blue" alt="Python 3.10+">
     <img src="https://img.shields.io/badge/Agent%20Skill-Deterministic%20Music-8b6f47" alt="Agent Skill: Deterministic Music">
@@ -16,7 +16,7 @@ Code Composer turns explicit musical intent into editable structured music, dete
 
 It is designed for workflows where the composition should remain inspectable, revisable, and portable instead of disappearing inside a black-box generation step.
 
-> **v1.18.0 Composer-first release (2026-09-27):** CR00–CR08 close the breaking Composer-first rebuild. Song → Execution Plan → Performance Score is now the canonical authoring/runtime path; the old CompositionBrief / seed-first / fixed-role path remains historical rather than a compatibility promise. Validated instrument engines, rendering, export, determinism, provenance, and v1.16.x-level contract rigor are retained.
+> **v1.18.1 reproducibility patch (2026-09-28):** keeps the v1.18.0 Composer-first architecture and closes Issue #2 by canonicalizing final percussion-event float64 output to an exact Q40 boundary. The previous runner-sensitive non-blocking drum hash exception is removed; all active regressions are blocking again.
 
 ## What you can do
 
@@ -183,7 +183,7 @@ python tools/validate_skill.py
 python tools/verify_plugin_distribution.py
 ```
 
-CI runs blocking regression and release builds on Python 3.10 and 3.12. Three historical drum byte-hash tests known to vary across hosted runners remain visible non-blocking probes under Issue #2; their golden hashes are not silently rebased.
+CI runs the complete blocking regression and release builds on Python 3.10 and 3.12. Percussion byte reproducibility is canonicalized at the documented Q40 public boundary; Issue #2 is closed and there is no runner-sensitive non-blocking drum-hash exception.
 
 ## License and generated music
 
