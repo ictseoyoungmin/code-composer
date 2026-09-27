@@ -19,6 +19,7 @@ code-composer-song render SONG.json PERFORMANCE_SCORE.json OUTPUT.wav [RESOLVED.
 code-composer-song revise PERFORMANCE_SCORE.json REVISION_PLAN.json REVISED_SCORE.json REVISION_RECORD.json
 code-composer-song compare-revision SONG.json PERFORMANCE_SCORE.json REVISION_PLAN.json OUTPUT_DIR/
 code-composer-song preview SONG.json PERFORMANCE_SCORE.json PREVIEW_REQUEST.json OUTPUT.wav CACHE_DIR [REPORT.json]
+code-composer-song qa SONG.json PERFORMANCE_SCORE.json QA_REQUEST.json OUTPUT_DIR/
 ```
 
 `validate` checks the seedless Composer-first Song contract, cross-references, user locks, and explicitly locked runtime resources.
@@ -98,3 +99,9 @@ code-composer-admittance-fit BRIDGE_ADMITTANCE_IR.wav OUTPUT_PROFILE.json --orde
 The input is expected to be an already prepared **force-to-bridge-velocity impulse response**, not ordinary recorded violin audio. Measurement preprocessing belongs upstream and should remain explicit in provenance: repeated impact measurements may be averaged; bridge velocity should be normalized by applied force; noisy tails may be cropped; and minimum-phase conversion may be used when that is part of the measurement methodology. The fitter does not silently perform these measurement-specific steps.
 
 The emitted `code-composer-bridge-admittance-era/v1` profile contains stable poles/residues plus fit metadata. Embed it under `bowed_waveguide_graph.body.bridge_feedback.fitted_response` when a measured mechanical response is intentionally being used. This affects mechanical bridge feedback only; radiation/microphone response remains a separate modeling problem.
+
+
+`qa` renders the exact bound Performance Score, applies objective hard-integrity
+checks, and emits descriptive musical evidence. It has no aesthetic score, automatic
+musical acceptance, or automatic revision authority. QA-target changes are provenance
+and must not be presented as improvement.
