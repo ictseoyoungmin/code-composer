@@ -191,9 +191,13 @@ def qa_request_fingerprint(request: dict[str, Any]) -> str:
 
 def qa_target_fingerprint(request: dict[str, Any]) -> str:
     validate_qa_request(request)
+    # Evidence focus is semantically a set. Reordering the same focus dimensions must
+    # not create a fake target mutation.
+    evidence = deepcopy(request["evidence"])
+    evidence["focus"] = sorted(evidence["focus"])
     target = {
-        "hard_policy": request["hard_policy"],
-        "evidence": request["evidence"],
+        "hard_policy": deepcopy(request["hard_policy"]),
+        "evidence": evidence,
     }
     payload = json.dumps(target, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
@@ -711,7 +715,7 @@ def _changed_target_fields(before: dict, after: dict) -> list[str]:
     for key in sorted(set(before["hard_policy"]) | set(after["hard_policy"])):
         if before["hard_policy"].get(key) != after["hard_policy"].get(key):
             fields.append(f"hard_policy.{key}")
-    if before["evidence"].get("focus") != after["evidence"].get("focus"):
+    if sorted(before["evidence"].get("focus", [])) != sorted(after["evidence"].get("focus", [])):
         fields.append("evidence.focus")
     bp = before["evidence"].get("parameters", {})
     ap = after["evidence"].get("parameters", {})
