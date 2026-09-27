@@ -1,0 +1,241 @@
+{
+  "format": "code-composer-song/v1",
+  "meta": {
+    "title": "Copper Lines",
+    "global_seed": 260927071,
+    "revision": "cr07-dogfood-r0"
+  },
+  "intent": {
+    "concept": "tight clean-guitar band miniature with grounded bass, acoustic backbeat, and sparse electric-key answers",
+    "notes": [
+      "track functions are authored descriptive labels, never normalized arrangement roles",
+      "clean/transient ensemble for orchestration-path dogfood rather than genre emulation"
+    ]
+  },
+  "transport": {
+    "bpm": 108,
+    "meter": {
+      "beats_per_bar": 4,
+      "beat_unit": 4
+    }
+  },
+  "tonal": {
+    "root": "E",
+    "scale": "natural_minor"
+  },
+  "sections": [
+    {
+      "id": "drive",
+      "name": "Drive",
+      "bars": 4,
+      "energy": 0.52,
+      "intent": "compact groove with dry chord punches"
+    },
+    {
+      "id": "open",
+      "name": "Open",
+      "bars": 4,
+      "energy": 0.72,
+      "intent": "wider register and brighter answering figure"
+    }
+  ],
+  "instruments": [
+    {
+      "id": "guitar",
+      "name": "Clean Electric Guitar",
+      "family": "electric_guitar",
+      "render_lock": {
+        "preset": "generic.clean_lead",
+        "preset_version": "1.0.0"
+      }
+    },
+    {
+      "id": "finger-bass",
+      "name": "Finger Bass",
+      "family": "bass",
+      "variant": "electric-finger",
+      "render_lock": {
+        "preset": "bass.electric_finger_modeled",
+        "preset_version": "1.0.0"
+      }
+    },
+    {
+      "id": "kit",
+      "name": "Acoustic Kit",
+      "family": "drums",
+      "variant": "acoustic-kit",
+      "render_lock": {
+        "preset": "drums.acoustic_kit_modeled",
+        "preset_version": "1.0.0"
+      }
+    },
+    {
+      "id": "keys",
+      "name": "Electric Keys",
+      "family": "electric_keys",
+      "render_lock": {
+        "preset": "piano.electric_tine_warm",
+        "preset_version": "1.0.0"
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "guitar-chop",
+      "name": "Guitar Chop",
+      "function": "offbeat-chop",
+      "instrument": "guitar"
+    },
+    {
+      "id": "bass-run",
+      "name": "Bass Motion",
+      "function": "root-motion",
+      "instrument": "finger-bass"
+    },
+    {
+      "id": "kit-grid",
+      "name": "Kit Grid",
+      "function": "backbeat-grid",
+      "instrument": "kit"
+    },
+    {
+      "id": "keys-answer",
+      "name": "Keys Answer",
+      "function": "upper-answer",
+      "instrument": "keys"
+    }
+  ],
+  "materials": [
+    {
+      "id": "guitar-cell",
+      "kind": "rhythm",
+      "cycle_beats": 4,
+      "steps": [
+        {
+          "beat": 0,
+          "weight": 0.8,
+          "duration": 1.25
+        },
+        {
+          "beat": 2,
+          "weight": 0.85,
+          "duration": 1.25
+        }
+      ]
+    },
+    {
+      "id": "bass-cell",
+      "kind": "motif",
+      "intervals": [
+        0,
+        0,
+        3,
+        5
+      ],
+      "rhythm": [
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "kit-cell",
+      "kind": "rhythm",
+      "cycle_beats": 4,
+      "steps": [
+        {
+          "beat": 0,
+          "weight": 1
+        },
+        {
+          "beat": 1,
+          "weight": 0.8
+        },
+        {
+          "beat": 2,
+          "weight": 1
+        },
+        {
+          "beat": 3,
+          "weight": 0.85
+        }
+      ]
+    },
+    {
+      "id": "keys-cell",
+      "kind": "motif",
+      "intervals": [
+        7,
+        10
+      ],
+      "rhythm": [
+        2,
+        2
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "drive-guitar-chop",
+      "section": "drive",
+      "track": "guitar-chop",
+      "material": "guitar-cell",
+      "repeats": 4
+    },
+    {
+      "id": "drive-bass-run",
+      "section": "drive",
+      "track": "bass-run",
+      "material": "bass-cell",
+      "repeats": 4
+    },
+    {
+      "id": "drive-kit-grid",
+      "section": "drive",
+      "track": "kit-grid",
+      "material": "kit-cell",
+      "repeats": 4
+    },
+    {
+      "id": "drive-keys-answer",
+      "section": "drive",
+      "track": "keys-answer",
+      "material": "keys-cell",
+      "repeats": 4
+    },
+    {
+      "id": "open-guitar-chop",
+      "section": "open",
+      "track": "guitar-chop",
+      "material": "guitar-cell",
+      "repeats": 4
+    },
+    {
+      "id": "open-bass-run",
+      "section": "open",
+      "track": "bass-run",
+      "material": "bass-cell",
+      "repeats": 4
+    },
+    {
+      "id": "open-kit-grid",
+      "section": "open",
+      "track": "kit-grid",
+      "material": "kit-cell",
+      "repeats": 4
+    },
+    {
+      "id": "open-keys-answer",
+      "section": "open",
+      "track": "keys-answer",
+      "material": "keys-cell",
+      "repeats": 4
+    }
+  ],
+  "locks": {
+    "bpm": 108,
+    "root": "E",
+    "scale": "natural_minor"
+  }
+}

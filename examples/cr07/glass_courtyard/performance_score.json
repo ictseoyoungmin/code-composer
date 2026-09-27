@@ -1,0 +1,457 @@
+{
+  "format": "code-composer-performance-score/v1",
+  "source_song": {
+    "format": "code-composer-song/v1",
+    "fingerprint": "77da7a1cae831028b91bb03bd21b2b50c3fae3b753b7ac3175bc56cd070c05d1"
+  },
+  "meta": {
+    "title": "Glass Courtyard",
+    "revision": "cr07-dogfood-r0"
+  },
+  "tracks": [
+    {
+      "id": "cantus",
+      "events": [
+        {
+          "id": "v-1-a",
+          "type": "note",
+          "start_beat": 0.18,
+          "duration_beats": 1.08,
+          "midi": 62,
+          "velocity": 0.34,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-1-b",
+          "type": "note",
+          "start_beat": 1.42,
+          "duration_beats": 1.28,
+          "midi": 65,
+          "velocity": 0.38,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-2-a",
+          "type": "note",
+          "start_beat": 3.18,
+          "duration_beats": 1.08,
+          "midi": 67,
+          "velocity": 0.34,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-2-b",
+          "type": "note",
+          "start_beat": 4.42,
+          "duration_beats": 1.28,
+          "midi": 69,
+          "velocity": 0.38,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-3-a",
+          "type": "note",
+          "start_beat": 6.18,
+          "duration_beats": 1.08,
+          "midi": 65,
+          "velocity": 0.34,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-3-b",
+          "type": "note",
+          "start_beat": 7.42,
+          "duration_beats": 1.28,
+          "midi": 62,
+          "velocity": 0.38,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-4-a",
+          "type": "note",
+          "start_beat": 9.18,
+          "duration_beats": 1.08,
+          "midi": 64,
+          "velocity": 0.34,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-4-b",
+          "type": "note",
+          "start_beat": 10.42,
+          "duration_beats": 1.28,
+          "midi": 67,
+          "velocity": 0.38,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-5-a",
+          "type": "note",
+          "start_beat": 12.18,
+          "duration_beats": 1.08,
+          "midi": 69,
+          "velocity": 0.34,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-5-b",
+          "type": "note",
+          "start_beat": 13.42,
+          "duration_beats": 1.28,
+          "midi": 72,
+          "velocity": 0.41000000000000003,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-6-a",
+          "type": "note",
+          "start_beat": 15.18,
+          "duration_beats": 1.08,
+          "midi": 70,
+          "velocity": 0.34,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-6-b",
+          "type": "note",
+          "start_beat": 16.42,
+          "duration_beats": 1.28,
+          "midi": 74,
+          "velocity": 0.41000000000000003,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-7-a",
+          "type": "note",
+          "start_beat": 18.18,
+          "duration_beats": 1.08,
+          "midi": 72,
+          "velocity": 0.34,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-7-b",
+          "type": "note",
+          "start_beat": 19.42,
+          "duration_beats": 1.28,
+          "midi": 69,
+          "velocity": 0.41000000000000003,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-8-a",
+          "type": "note",
+          "start_beat": 21.18,
+          "duration_beats": 1.08,
+          "midi": 65,
+          "velocity": 0.34,
+          "articulation": "legato"
+        },
+        {
+          "id": "v-8-b",
+          "type": "note",
+          "start_beat": 22.42,
+          "duration_beats": 1.28,
+          "midi": 62,
+          "velocity": 0.41000000000000003,
+          "articulation": "legato"
+        }
+      ]
+    },
+    {
+      "id": "stone-floor",
+      "events": [
+        {
+          "id": "p-1-l",
+          "type": "note",
+          "start_beat": 0,
+          "duration_beats": 2.65,
+          "midi": 38,
+          "velocity": 0.24
+        },
+        {
+          "id": "p-1-m",
+          "type": "note",
+          "start_beat": 0.7,
+          "duration_beats": 0.75,
+          "midi": 53,
+          "velocity": 0.28
+        },
+        {
+          "id": "p-1-u",
+          "type": "note",
+          "start_beat": 1.7,
+          "duration_beats": 0.78,
+          "midi": 57,
+          "velocity": 0.3
+        },
+        {
+          "id": "p-2-l",
+          "type": "note",
+          "start_beat": 3,
+          "duration_beats": 2.65,
+          "midi": 34,
+          "velocity": 0.24
+        },
+        {
+          "id": "p-2-m",
+          "type": "note",
+          "start_beat": 3.7,
+          "duration_beats": 0.75,
+          "midi": 49,
+          "velocity": 0.28
+        },
+        {
+          "id": "p-2-u",
+          "type": "note",
+          "start_beat": 4.7,
+          "duration_beats": 0.78,
+          "midi": 53,
+          "velocity": 0.3
+        },
+        {
+          "id": "p-3-l",
+          "type": "note",
+          "start_beat": 6,
+          "duration_beats": 2.65,
+          "midi": 41,
+          "velocity": 0.24
+        },
+        {
+          "id": "p-3-m",
+          "type": "note",
+          "start_beat": 6.7,
+          "duration_beats": 0.75,
+          "midi": 56,
+          "velocity": 0.28
+        },
+        {
+          "id": "p-3-u",
+          "type": "note",
+          "start_beat": 7.7,
+          "duration_beats": 0.78,
+          "midi": 60,
+          "velocity": 0.3
+        },
+        {
+          "id": "p-4-l",
+          "type": "note",
+          "start_beat": 9,
+          "duration_beats": 2.65,
+          "midi": 36,
+          "velocity": 0.24
+        },
+        {
+          "id": "p-4-m",
+          "type": "note",
+          "start_beat": 9.7,
+          "duration_beats": 0.75,
+          "midi": 51,
+          "velocity": 0.28
+        },
+        {
+          "id": "p-4-u",
+          "type": "note",
+          "start_beat": 10.7,
+          "duration_beats": 0.78,
+          "midi": 55,
+          "velocity": 0.3
+        },
+        {
+          "id": "p-5-l",
+          "type": "note",
+          "start_beat": 12,
+          "duration_beats": 2.65,
+          "midi": 38,
+          "velocity": 0.24
+        },
+        {
+          "id": "p-5-m",
+          "type": "note",
+          "start_beat": 12.7,
+          "duration_beats": 0.75,
+          "midi": 53,
+          "velocity": 0.28
+        },
+        {
+          "id": "p-5-u",
+          "type": "note",
+          "start_beat": 13.7,
+          "duration_beats": 0.78,
+          "midi": 57,
+          "velocity": 0.3
+        },
+        {
+          "id": "p-6-l",
+          "type": "note",
+          "start_beat": 15,
+          "duration_beats": 2.65,
+          "midi": 43,
+          "velocity": 0.24
+        },
+        {
+          "id": "p-6-m",
+          "type": "note",
+          "start_beat": 15.7,
+          "duration_beats": 0.75,
+          "midi": 58,
+          "velocity": 0.28
+        },
+        {
+          "id": "p-6-u",
+          "type": "note",
+          "start_beat": 16.7,
+          "duration_beats": 0.78,
+          "midi": 62,
+          "velocity": 0.3
+        },
+        {
+          "id": "p-7-l",
+          "type": "note",
+          "start_beat": 18,
+          "duration_beats": 2.65,
+          "midi": 41,
+          "velocity": 0.24
+        },
+        {
+          "id": "p-7-m",
+          "type": "note",
+          "start_beat": 18.7,
+          "duration_beats": 0.75,
+          "midi": 56,
+          "velocity": 0.28
+        },
+        {
+          "id": "p-7-u",
+          "type": "note",
+          "start_beat": 19.7,
+          "duration_beats": 0.78,
+          "midi": 60,
+          "velocity": 0.3
+        },
+        {
+          "id": "p-8-l",
+          "type": "note",
+          "start_beat": 21,
+          "duration_beats": 2.65,
+          "midi": 38,
+          "velocity": 0.24
+        },
+        {
+          "id": "p-8-m",
+          "type": "note",
+          "start_beat": 21.7,
+          "duration_beats": 0.75,
+          "midi": 53,
+          "velocity": 0.28
+        },
+        {
+          "id": "p-8-u",
+          "type": "note",
+          "start_beat": 22.7,
+          "duration_beats": 0.78,
+          "midi": 57,
+          "velocity": 0.3
+        }
+      ]
+    },
+    {
+      "id": "inner-breath",
+      "events": [
+        {
+          "id": "c-1",
+          "type": "note",
+          "start_beat": 0,
+          "duration_beats": 2.72,
+          "midi": 45,
+          "velocity": 0.2
+        },
+        {
+          "id": "c-2",
+          "type": "note",
+          "start_beat": 3,
+          "duration_beats": 2.72,
+          "midi": 41,
+          "velocity": 0.2
+        },
+        {
+          "id": "c-3",
+          "type": "note",
+          "start_beat": 6,
+          "duration_beats": 2.72,
+          "midi": 48,
+          "velocity": 0.2
+        },
+        {
+          "id": "c-4",
+          "type": "note",
+          "start_beat": 9,
+          "duration_beats": 2.72,
+          "midi": 43,
+          "velocity": 0.2
+        },
+        {
+          "id": "c-5",
+          "type": "note",
+          "start_beat": 12,
+          "duration_beats": 2.72,
+          "midi": 45,
+          "velocity": 0.2
+        },
+        {
+          "id": "c-6",
+          "type": "note",
+          "start_beat": 15,
+          "duration_beats": 2.72,
+          "midi": 50,
+          "velocity": 0.2
+        },
+        {
+          "id": "c-7",
+          "type": "note",
+          "start_beat": 18,
+          "duration_beats": 2.72,
+          "midi": 48,
+          "velocity": 0.2
+        },
+        {
+          "id": "c-8",
+          "type": "note",
+          "start_beat": 21,
+          "duration_beats": 2.72,
+          "midi": 45,
+          "velocity": 0.2
+        }
+      ]
+    }
+  ],
+  "render": {
+    "sample_rate": 24000,
+    "tail_seconds": 2,
+    "mix": {
+      "tracks": [
+        {
+          "track": "cantus",
+          "gain": 0.38,
+          "pan": 0.12,
+          "reverb_send": 0.2
+        },
+        {
+          "track": "stone-floor",
+          "gain": 0.33,
+          "pan": -0.15,
+          "reverb_send": 0.18
+        },
+        {
+          "track": "inner-breath",
+          "gain": 0.2,
+          "pan": 0,
+          "reverb_send": 0.24
+        }
+      ],
+      "music_bus_gain": 0.82,
+      "room_return_gain": 0.18,
+      "master_gain": 0.82
+    }
+  }
+}
