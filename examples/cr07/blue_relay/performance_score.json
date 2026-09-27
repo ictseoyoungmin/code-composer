@@ -274,14 +274,6 @@
       "id": "air-bed",
       "events": [
         {
-          "id": "a-1-r",
-          "type": "note",
-          "start_beat": 0,
-          "duration_beats": 3.72,
-          "midi": 53,
-          "velocity": 0.16
-        },
-        {
           "id": "a-1-3",
           "type": "note",
           "start_beat": 0,
@@ -298,11 +290,11 @@
           "velocity": 0.16
         },
         {
-          "id": "a-2-r",
+          "id": "a-1-r",
           "type": "note",
-          "start_beat": 4,
+          "start_beat": 0,
           "duration_beats": 3.72,
-          "midi": 56,
+          "midi": 53,
           "velocity": 0.16
         },
         {
@@ -322,11 +314,11 @@
           "velocity": 0.16
         },
         {
-          "id": "a-3-r",
+          "id": "a-2-r",
           "type": "note",
-          "start_beat": 8,
+          "start_beat": 4,
           "duration_beats": 3.72,
-          "midi": 51,
+          "midi": 56,
           "velocity": 0.16
         },
         {
@@ -346,11 +338,11 @@
           "velocity": 0.16
         },
         {
-          "id": "a-4-r",
+          "id": "a-3-r",
           "type": "note",
-          "start_beat": 12,
+          "start_beat": 8,
           "duration_beats": 3.72,
-          "midi": 53,
+          "midi": 51,
           "velocity": 0.16
         },
         {
@@ -370,12 +362,12 @@
           "velocity": 0.16
         },
         {
-          "id": "a-5-r",
+          "id": "a-4-r",
           "type": "note",
-          "start_beat": 16,
+          "start_beat": 12,
           "duration_beats": 3.72,
           "midi": 53,
-          "velocity": 0.18
+          "velocity": 0.16
         },
         {
           "id": "a-5-3",
@@ -394,11 +386,11 @@
           "velocity": 0.18
         },
         {
-          "id": "a-6-r",
+          "id": "a-5-r",
           "type": "note",
-          "start_beat": 20,
+          "start_beat": 16,
           "duration_beats": 3.72,
-          "midi": 58,
+          "midi": 53,
           "velocity": 0.18
         },
         {
@@ -418,11 +410,11 @@
           "velocity": 0.18
         },
         {
-          "id": "a-7-r",
+          "id": "a-6-r",
           "type": "note",
-          "start_beat": 24,
+          "start_beat": 20,
           "duration_beats": 3.72,
-          "midi": 56,
+          "midi": 58,
           "velocity": 0.18
         },
         {
@@ -442,11 +434,11 @@
           "velocity": 0.18
         },
         {
-          "id": "a-8-r",
+          "id": "a-7-r",
           "type": "note",
-          "start_beat": 28,
+          "start_beat": 24,
           "duration_beats": 3.72,
-          "midi": 53,
+          "midi": 56,
           "velocity": 0.18
         },
         {
@@ -463,6 +455,14 @@
           "start_beat": 28,
           "duration_beats": 3.72,
           "midi": 60,
+          "velocity": 0.18
+        },
+        {
+          "id": "a-8-r",
+          "type": "note",
+          "start_beat": 28,
+          "duration_beats": 3.72,
+          "midi": 53,
           "velocity": 0.18
         }
       ]
@@ -676,6 +676,14 @@
           "velocity": 0.18
         },
         {
+          "id": "ed-1-k1",
+          "type": "note",
+          "start_beat": 0,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.48
+        },
+        {
           "id": "ed-1-h2",
           "type": "note",
           "start_beat": 0.5,
@@ -700,12 +708,28 @@
           "velocity": 0.19999999999999998
         },
         {
+          "id": "ed-1-s1",
+          "type": "note",
+          "start_beat": 1.5,
+          "duration_beats": 0.16,
+          "midi": 38,
+          "velocity": 0.4
+        },
+        {
           "id": "ed-1-h5",
           "type": "note",
           "start_beat": 2,
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-1-k2",
+          "type": "note",
+          "start_beat": 2,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.44
         },
         {
           "id": "ed-1-h6",
@@ -732,30 +756,6 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "ed-1-k1",
-          "type": "note",
-          "start_beat": 0,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
-          "id": "ed-1-s1",
-          "type": "note",
-          "start_beat": 1.5,
-          "duration_beats": 0.16,
-          "midi": 38,
-          "velocity": 0.4
-        },
-        {
-          "id": "ed-1-k2",
-          "type": "note",
-          "start_beat": 2,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.44
-        },
-        {
           "id": "ed-1-s2",
           "type": "note",
           "start_beat": 3.5,
@@ -770,6 +770,14 @@
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-2-k1",
+          "type": "note",
+          "start_beat": 4,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "ed-2-h2",
@@ -796,12 +804,28 @@
           "velocity": 0.19999999999999998
         },
         {
+          "id": "ed-2-s1",
+          "type": "note",
+          "start_beat": 5.5,
+          "duration_beats": 0.16,
+          "midi": 38,
+          "velocity": 0.4
+        },
+        {
           "id": "ed-2-h5",
           "type": "note",
           "start_beat": 6,
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-2-k2",
+          "type": "note",
+          "start_beat": 6,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.44
         },
         {
           "id": "ed-2-h6",
@@ -828,30 +852,6 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "ed-2-k1",
-          "type": "note",
-          "start_beat": 4,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
-          "id": "ed-2-s1",
-          "type": "note",
-          "start_beat": 5.5,
-          "duration_beats": 0.16,
-          "midi": 38,
-          "velocity": 0.4
-        },
-        {
-          "id": "ed-2-k2",
-          "type": "note",
-          "start_beat": 6,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.44
-        },
-        {
           "id": "ed-2-s2",
           "type": "note",
           "start_beat": 7.5,
@@ -866,6 +866,14 @@
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-3-k1",
+          "type": "note",
+          "start_beat": 8,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "ed-3-h2",
@@ -892,12 +900,28 @@
           "velocity": 0.19999999999999998
         },
         {
+          "id": "ed-3-s1",
+          "type": "note",
+          "start_beat": 9.5,
+          "duration_beats": 0.16,
+          "midi": 38,
+          "velocity": 0.4
+        },
+        {
           "id": "ed-3-h5",
           "type": "note",
           "start_beat": 10,
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-3-k2",
+          "type": "note",
+          "start_beat": 10,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.44
         },
         {
           "id": "ed-3-h6",
@@ -924,30 +948,6 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "ed-3-k1",
-          "type": "note",
-          "start_beat": 8,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
-          "id": "ed-3-s1",
-          "type": "note",
-          "start_beat": 9.5,
-          "duration_beats": 0.16,
-          "midi": 38,
-          "velocity": 0.4
-        },
-        {
-          "id": "ed-3-k2",
-          "type": "note",
-          "start_beat": 10,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.44
-        },
-        {
           "id": "ed-3-s2",
           "type": "note",
           "start_beat": 11.5,
@@ -962,6 +962,14 @@
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-4-k1",
+          "type": "note",
+          "start_beat": 12,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "ed-4-h2",
@@ -988,12 +996,28 @@
           "velocity": 0.19999999999999998
         },
         {
+          "id": "ed-4-s1",
+          "type": "note",
+          "start_beat": 13.5,
+          "duration_beats": 0.16,
+          "midi": 38,
+          "velocity": 0.4
+        },
+        {
           "id": "ed-4-h5",
           "type": "note",
           "start_beat": 14,
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-4-k2",
+          "type": "note",
+          "start_beat": 14,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.44
         },
         {
           "id": "ed-4-h6",
@@ -1020,30 +1044,6 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "ed-4-k1",
-          "type": "note",
-          "start_beat": 12,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
-          "id": "ed-4-s1",
-          "type": "note",
-          "start_beat": 13.5,
-          "duration_beats": 0.16,
-          "midi": 38,
-          "velocity": 0.4
-        },
-        {
-          "id": "ed-4-k2",
-          "type": "note",
-          "start_beat": 14,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.44
-        },
-        {
           "id": "ed-4-s2",
           "type": "note",
           "start_beat": 15.5,
@@ -1058,6 +1058,14 @@
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-5-k1",
+          "type": "note",
+          "start_beat": 16,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "ed-5-h2",
@@ -1084,12 +1092,28 @@
           "velocity": 0.19999999999999998
         },
         {
+          "id": "ed-5-s1",
+          "type": "note",
+          "start_beat": 17.5,
+          "duration_beats": 0.16,
+          "midi": 38,
+          "velocity": 0.4
+        },
+        {
           "id": "ed-5-h5",
           "type": "note",
           "start_beat": 18,
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-5-k2",
+          "type": "note",
+          "start_beat": 18,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.44
         },
         {
           "id": "ed-5-h6",
@@ -1116,30 +1140,6 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "ed-5-k1",
-          "type": "note",
-          "start_beat": 16,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
-          "id": "ed-5-s1",
-          "type": "note",
-          "start_beat": 17.5,
-          "duration_beats": 0.16,
-          "midi": 38,
-          "velocity": 0.4
-        },
-        {
-          "id": "ed-5-k2",
-          "type": "note",
-          "start_beat": 18,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.44
-        },
-        {
           "id": "ed-5-s2",
           "type": "note",
           "start_beat": 19.5,
@@ -1154,6 +1154,14 @@
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-6-k1",
+          "type": "note",
+          "start_beat": 20,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "ed-6-h2",
@@ -1180,12 +1188,28 @@
           "velocity": 0.19999999999999998
         },
         {
+          "id": "ed-6-s1",
+          "type": "note",
+          "start_beat": 21.5,
+          "duration_beats": 0.16,
+          "midi": 38,
+          "velocity": 0.4
+        },
+        {
           "id": "ed-6-h5",
           "type": "note",
           "start_beat": 22,
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-6-k2",
+          "type": "note",
+          "start_beat": 22,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.44
         },
         {
           "id": "ed-6-h6",
@@ -1212,30 +1236,6 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "ed-6-k1",
-          "type": "note",
-          "start_beat": 20,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
-          "id": "ed-6-s1",
-          "type": "note",
-          "start_beat": 21.5,
-          "duration_beats": 0.16,
-          "midi": 38,
-          "velocity": 0.4
-        },
-        {
-          "id": "ed-6-k2",
-          "type": "note",
-          "start_beat": 22,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.44
-        },
-        {
           "id": "ed-6-s2",
           "type": "note",
           "start_beat": 23.5,
@@ -1250,6 +1250,14 @@
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-7-k1",
+          "type": "note",
+          "start_beat": 24,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "ed-7-h2",
@@ -1276,12 +1284,28 @@
           "velocity": 0.19999999999999998
         },
         {
+          "id": "ed-7-s1",
+          "type": "note",
+          "start_beat": 25.5,
+          "duration_beats": 0.16,
+          "midi": 38,
+          "velocity": 0.4
+        },
+        {
           "id": "ed-7-h5",
           "type": "note",
           "start_beat": 26,
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-7-k2",
+          "type": "note",
+          "start_beat": 26,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.44
         },
         {
           "id": "ed-7-h6",
@@ -1308,30 +1332,6 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "ed-7-k1",
-          "type": "note",
-          "start_beat": 24,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
-          "id": "ed-7-s1",
-          "type": "note",
-          "start_beat": 25.5,
-          "duration_beats": 0.16,
-          "midi": 38,
-          "velocity": 0.4
-        },
-        {
-          "id": "ed-7-k2",
-          "type": "note",
-          "start_beat": 26,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.44
-        },
-        {
           "id": "ed-7-s2",
           "type": "note",
           "start_beat": 27.5,
@@ -1346,6 +1346,14 @@
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-8-k1",
+          "type": "note",
+          "start_beat": 28,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "ed-8-h2",
@@ -1372,12 +1380,28 @@
           "velocity": 0.19999999999999998
         },
         {
+          "id": "ed-8-s1",
+          "type": "note",
+          "start_beat": 29.5,
+          "duration_beats": 0.16,
+          "midi": 38,
+          "velocity": 0.4
+        },
+        {
           "id": "ed-8-h5",
           "type": "note",
           "start_beat": 30,
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.18
+        },
+        {
+          "id": "ed-8-k2",
+          "type": "note",
+          "start_beat": 30,
+          "duration_beats": 0.16,
+          "midi": 36,
+          "velocity": 0.44
         },
         {
           "id": "ed-8-h6",
@@ -1402,30 +1426,6 @@
           "duration_beats": 0.1,
           "midi": 42,
           "velocity": 0.19999999999999998
-        },
-        {
-          "id": "ed-8-k1",
-          "type": "note",
-          "start_beat": 28,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
-          "id": "ed-8-s1",
-          "type": "note",
-          "start_beat": 29.5,
-          "duration_beats": 0.16,
-          "midi": 38,
-          "velocity": 0.4
-        },
-        {
-          "id": "ed-8-k2",
-          "type": "note",
-          "start_beat": 30,
-          "duration_beats": 0.16,
-          "midi": 36,
-          "velocity": 0.44
         },
         {
           "id": "ed-8-s2",
