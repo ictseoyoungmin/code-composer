@@ -1,8 +1,10 @@
 # CR06 — Evidence-first QA
 
-Status: **ENGINEERING / EVIDENCE-USABILITY CANDIDATE**
+Status: **CLOSED**
 
 Issue: #33
+
+Implementation PR: #35 — merged
 
 ## Purpose
 
@@ -130,3 +132,23 @@ Evidence-usability gate:
   decision.
 
 Metrics are evidence, not musical authority.
+
+
+## Canonical closure
+
+- validated candidate HEAD: `c21b185306c541d4d48492b6119c17c2bcf8d6af`;
+- implementation merge: `8051ccb1f487d1cb399d46ceec8282f42184d51e`;
+- pre-merge CI **#109 / run 36312259836 — SUCCESS**;
+- Python 3.10 / 3.12 blocking suite: **747 passed / 3 deselected** each;
+- CR06 dogfood **#12 / run 36312259864 — SUCCESS**;
+- artifact `cr06-lantern-qa` ID **10929044584**;
+- artifact digest `sha256:f655fab5ad4bc8d30fb306c381199f6c76511955e95f008f8461231fb8fa609c`;
+- portable SHA256SUMS: **all files PASS**;
+- accepted Lantern Current hard gate: **PASS / 0 failures**;
+- location-bound evidence contract: dynamics/register/phrase/repetition/voice-motion/masking **all PASS**;
+- target mutation remains descriptive-only with `improvement_verdict=false` and `aesthetic_ranking=false`;
+- CR03 #39 / CR04 #13 / CR05 #15 regression dogfoods: **SUCCESS**;
+- post-merge main CI **#110 / run 36312447527 — SUCCESS**;
+- evidence-usability gate: **PASS** — aggregate observations can be traced to concrete listening time / authored events without introducing aesthetic authority.
+
+**CR06 canonical CLOSED. Next: CR07 — Broader Orchestration Dogfood.**
