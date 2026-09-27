@@ -72,6 +72,31 @@ def main():
     if report["semantics"]["automatic_revision"] is not False:
         raise SystemExit("QA unexpectedly exposed automatic revision")
 
+    musical = report["musical_evidence"]
+    location_contract = {
+        "dynamics_windows": bool(musical["dynamics"]["windowed"]["loudest_windows"]),
+        "register_event_locations": all(
+            "high_register_events" in row for row in musical["register"].values()
+        ),
+        "phrase_gap_locations": all(
+            "positive_gap_locations" in row and "overlap_locations" in row
+            for row in musical["phrase_continuity"].values()
+        ),
+        "repetition_occurrences": all(
+            "occurrences" in trigram
+            for row in musical["repetition"].values()
+            for trigram in row["most_common_interval_trigrams"]
+        ),
+        "voice_motion_locations": all(
+            "motion_events" in row for row in musical["voice_leading"].values()
+        ),
+        "masking_overlap_regions": all(
+            "close_overlap_regions" in row for row in musical["masking"]
+        ),
+    }
+    if not all(location_contract.values()):
+        raise SystemExit(f"location-bound evidence contract failed: {location_contract}")
+
     # Hard-gate probes: same valid subject, controlled objective corruption.
     clipped = _probe_report(
         score, request, render_result, wav,
@@ -157,6 +182,10 @@ def main():
             "evidence_keys": sorted(report["musical_evidence"]),
         },
         "hard_gate_probes": probe_summary,
+        "evidence_usability": {
+            "location_bound_contract": location_contract,
+            "all_passed": all(location_contract.values()),
+        },
         "target_mutation": comparison["target_mutation"],
         "comparison_semantics": comparison["semantics"],
         "authority": {

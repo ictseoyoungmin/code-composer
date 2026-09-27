@@ -28,3 +28,11 @@ The dogfood also performs controlled probes:
 2. inject clipped sample → hard gate must FAIL;
 3. change only `high_register_midi` from 76 to 72 on the same music/render →
    QA comparison must record `target_mutation=true` and must not claim improvement.
+
+
+Evidence usability:
+- aggregate evidence that can be localized also carries beat/time or authored-event locators;
+- phrase gaps identify the adjacent event IDs;
+- repetition identifies concrete occurrence spans;
+- masking identifies the exact close-register event pair and beat overlap;
+- these locators are descriptive only and do not mark a passage as musically bad.

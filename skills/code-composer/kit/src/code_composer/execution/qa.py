@@ -361,7 +361,8 @@ def _integrity(score: dict, request: dict, render_result: dict) -> dict:
     }
 
 
-def _window_rms(audio: np.ndarray, sr: int, window_ms: float) -> dict:
+
+def _window_rms(audio: np.ndarray, sr: int, window_ms: float, *, bpm: float) -> dict:
     if len(audio) == 0:
         return {
             "window_ms": float(window_ms),
@@ -372,16 +373,39 @@ def _window_rms(audio: np.ndarray, sr: int, window_ms: float) -> dict:
             "rms_db_p90": -240.0,
             "rms_db_max": -240.0,
             "p90_minus_p10_db": 0.0,
+            "loudest_windows": [],
+            "quietest_windows": [],
         }
     mono = np.mean(audio, axis=1)
     size = max(1, int(round(float(window_ms) * sr / 1000.0)))
+    beat_per_second = float(bpm) / 60.0
     values = []
+    windows = []
     for start in range(0, len(mono), size):
-        x = mono[start:start + size]
+        end = min(len(mono), start + size)
+        x = mono[start:end]
         if len(x):
             rms = float(np.sqrt(np.mean(x * x)))
-            values.append(20.0 * math.log10(max(rms, 1e-12)))
+            rms_db = 20.0 * math.log10(max(rms, 1e-12))
+            values.append(rms_db)
+            start_seconds = float(start / sr)
+            end_seconds = float(end / sr)
+            windows.append({
+                "start_seconds": start_seconds,
+                "end_seconds": end_seconds,
+                "start_beat": float(start_seconds * beat_per_second),
+                "end_beat": float(end_seconds * beat_per_second),
+                "rms_db": float(rms_db),
+            })
     a = np.asarray(values, dtype=np.float64)
+    loudest = sorted(
+        windows,
+        key=lambda row: (-row["rms_db"], row["start_seconds"]),
+    )[:5]
+    quietest = sorted(
+        windows,
+        key=lambda row: (row["rms_db"], row["start_seconds"]),
+    )[:5]
     return {
         "window_ms": float(window_ms),
         "window_count": int(len(a)),
@@ -391,8 +415,9 @@ def _window_rms(audio: np.ndarray, sr: int, window_ms: float) -> dict:
         "rms_db_p90": float(np.percentile(a, 90)),
         "rms_db_max": float(np.max(a)),
         "p90_minus_p10_db": float(np.percentile(a, 90) - np.percentile(a, 10)),
+        "loudest_windows": loudest,
+        "quietest_windows": quietest,
     }
-
 
 def _spectrum(audio: np.ndarray, sr: int, fft_size: int) -> dict:
     if len(audio) == 0:
@@ -436,6 +461,7 @@ def _spectrum(audio: np.ndarray, sr: int, fft_size: int) -> dict:
     }
 
 
+
 def _note_tracks(score: dict) -> dict[str, list[dict]]:
     return {
         track["id"]: [e for e in track["events"] if e["type"] == "note"]
@@ -443,16 +469,38 @@ def _note_tracks(score: dict) -> dict[str, list[dict]]:
     }
 
 
+def _event_location(event: dict) -> dict:
+    start = float(event["start_beat"])
+    duration = float(event["duration_beats"])
+    return {
+        "event_id": event["id"],
+        "start_beat": start,
+        "end_beat": start + duration,
+        "duration_beats": duration,
+        "midi": int(event["midi"]),
+    }
+
+
 def _register_evidence(score: dict, high_midi: int) -> dict:
     out = {}
     for track_id, events in _note_tracks(score).items():
         if not events:
-            out[track_id] = {"note_count": 0}
+            out[track_id] = {
+                "note_count": 0,
+                "high_register_midi": int(high_midi),
+                "high_register_event_count": 0,
+                "high_register_events": [],
+            }
             continue
         durations = np.asarray([float(e["duration_beats"]) for e in events], dtype=np.float64)
         midis = np.asarray([int(e["midi"]) for e in events], dtype=np.float64)
         total = float(np.sum(durations))
-        high = float(np.sum(durations[midis >= high_midi])) if total > 0 else 0.0
+        high_events = [
+            _event_location(e)
+            for e in events
+            if int(e["midi"]) >= high_midi
+        ]
+        high = float(sum(row["duration_beats"] for row in high_events))
         out[track_id] = {
             "note_count": len(events),
             "midi_min": int(np.min(midis)),
@@ -461,6 +509,8 @@ def _register_evidence(score: dict, high_midi: int) -> dict:
             "duration_weighted_mean_midi": float(np.sum(midis * durations) / total) if total > 0 else 0.0,
             "high_register_midi": int(high_midi),
             "high_register_duration_fraction": float(high / total) if total > 0 else 0.0,
+            "high_register_event_count": len(high_events),
+            "high_register_events": high_events,
         }
     return out
 
@@ -471,20 +521,40 @@ def _phrase_continuity(score: dict) -> dict:
         ordered = sorted(events, key=lambda e: (float(e["start_beat"]), int(e["midi"])))
         gaps = []
         overlaps = []
+        gap_locations = []
+        overlap_locations = []
         for a, b in zip(ordered, ordered[1:]):
-            gap = float(b["start_beat"]) - (
-                float(a["start_beat"]) + float(a["duration_beats"])
-            )
+            a_end = float(a["start_beat"]) + float(a["duration_beats"])
+            b_start = float(b["start_beat"])
+            b_end = b_start + float(b["duration_beats"])
+            gap = b_start - a_end
             if gap > 1e-9:
                 gaps.append(gap)
+                gap_locations.append({
+                    "previous_event_id": a["id"],
+                    "next_event_id": b["id"],
+                    "start_beat": a_end,
+                    "end_beat": b_start,
+                    "gap_beats": float(gap),
+                })
             elif gap < -1e-9:
-                overlaps.append(-gap)
+                overlap = -gap
+                overlaps.append(overlap)
+                overlap_locations.append({
+                    "previous_event_id": a["id"],
+                    "next_event_id": b["id"],
+                    "start_beat": b_start,
+                    "end_beat": min(a_end, b_end),
+                    "overlap_beats": float(overlap),
+                })
         out[track_id] = {
             "positive_gap_count": len(gaps),
             "positive_gaps_beats": [round(x, 6) for x in gaps],
+            "positive_gap_locations": gap_locations,
             "max_gap_beats": float(max(gaps)) if gaps else 0.0,
             "mean_gap_beats": float(np.mean(gaps)) if gaps else 0.0,
             "overlap_count": len(overlaps),
+            "overlap_locations": overlap_locations,
             "max_overlap_beats": float(max(overlaps)) if overlaps else 0.0,
         }
     return out
@@ -498,6 +568,14 @@ def _repetition(score: dict) -> dict:
         intervals = [b-a for a, b in zip(pitches, pitches[1:])]
         trigrams = [tuple(intervals[i:i+3]) for i in range(max(0, len(intervals)-2))]
         counts = Counter(trigrams)
+        occurrence_map = {}
+        for i, trigram in enumerate(trigrams):
+            span = ordered[i:i+4]
+            occurrence_map.setdefault(trigram, []).append({
+                "event_ids": [event["id"] for event in span],
+                "start_beat": float(span[0]["start_beat"]),
+                "end_beat": float(span[-1]["start_beat"]) + float(span[-1]["duration_beats"]),
+            })
         repeated = sum(n for n in counts.values() if n > 1)
         out[track_id] = {
             "interval_count": len(intervals),
@@ -505,7 +583,11 @@ def _repetition(score: dict) -> dict:
             "interval_trigram_count": len(trigrams),
             "repeated_interval_trigram_occurrences": int(repeated),
             "most_common_interval_trigrams": [
-                {"intervals": list(k), "count": int(v)}
+                {
+                    "intervals": list(k),
+                    "count": int(v),
+                    "occurrences": occurrence_map.get(k, []),
+                }
                 for k, v in counts.most_common(5)
             ],
         }
@@ -517,6 +599,16 @@ def _voice_leading(score: dict) -> dict:
     for track_id, events in _note_tracks(score).items():
         ordered = sorted(events, key=lambda e: float(e["start_beat"]))
         motions = [int(b["midi"]) - int(a["midi"]) for a, b in zip(ordered, ordered[1:])]
+        motion_events = [
+            {
+                "from_event_id": a["id"],
+                "to_event_id": b["id"],
+                "start_beat": float(a["start_beat"]),
+                "end_beat": float(b["start_beat"]),
+                "semitones": int(b["midi"]) - int(a["midi"]),
+            }
+            for a, b in zip(ordered, ordered[1:])
+        ]
         abs_motion = [abs(x) for x in motions]
         direction_changes = 0
         signs = [1 if x > 0 else -1 if x < 0 else 0 for x in motions]
@@ -529,9 +621,9 @@ def _voice_leading(score: dict) -> dict:
             "max_abs_semitone_motion": int(max(abs_motion)) if abs_motion else 0,
             "direction_change_count": int(direction_changes),
             "motion_sequence": motions,
+            "motion_events": motion_events,
         }
     return out
-
 
 def _section_evidence(score: dict, plan: dict, audio: np.ndarray, sr: int) -> list[dict]:
     tracks = _note_tracks(score)
@@ -565,6 +657,7 @@ def _section_evidence(score: dict, plan: dict, audio: np.ndarray, sr: int) -> li
     return rows
 
 
+
 def _masking(score: dict, close_semitones: int) -> list[dict]:
     tracks = _note_tracks(score)
     ids = list(tracks)
@@ -574,13 +667,16 @@ def _masking(score: dict, close_semitones: int) -> list[dict]:
             pairs = 0
             close_overlap = 0.0
             closest = 128
+            regions = []
             for a in tracks[a_id]:
                 a0 = float(a["start_beat"])
                 a1 = a0 + float(a["duration_beats"])
                 for b in tracks[b_id]:
                     b0 = float(b["start_beat"])
                     b1 = b0 + float(b["duration_beats"])
-                    shared = max(0.0, min(a1, b1) - max(a0, b0))
+                    shared_start = max(a0, b0)
+                    shared_end = min(a1, b1)
+                    shared = max(0.0, shared_end - shared_start)
                     if shared <= 1e-12:
                         continue
                     distance = abs(int(a["midi"]) - int(b["midi"]))
@@ -588,15 +684,38 @@ def _masking(score: dict, close_semitones: int) -> list[dict]:
                     if distance <= close_semitones:
                         pairs += 1
                         close_overlap += shared
+                        regions.append({
+                            "track_a": a_id,
+                            "event_a": a["id"],
+                            "midi_a": int(a["midi"]),
+                            "track_b": b_id,
+                            "event_b": b["id"],
+                            "midi_b": int(b["midi"]),
+                            "start_beat": float(shared_start),
+                            "end_beat": float(shared_end),
+                            "overlap_beats": float(shared),
+                            "pitch_distance_semitones": int(distance),
+                        })
+            regions.sort(
+                key=lambda row: (
+                    row["start_beat"],
+                    row["end_beat"],
+                    row["event_a"],
+                    row["event_b"],
+                )
+            )
+            shown_regions = regions[:64]
             rows.append({
                 "tracks": [a_id, b_id],
                 "close_register_semitones": int(close_semitones),
                 "close_overlap_event_pairs": int(pairs),
                 "close_register_overlap_beats": float(close_overlap),
                 "closest_pitch_distance": None if closest == 128 else int(closest),
+                "close_overlap_region_count": len(regions),
+                "close_overlap_regions": shown_regions,
+                "close_overlap_regions_truncated": max(0, len(regions) - len(shown_regions)),
             })
     return rows
-
 
 def _musical_evidence(score: dict, request: dict, render_result: dict) -> dict:
     audio = np.asarray(render_result["audio"], dtype=np.float64)
@@ -607,7 +726,12 @@ def _musical_evidence(score: dict, request: dict, render_result: dict) -> dict:
     if "dynamics" in focus:
         out["dynamics"] = {
             "global": analyze_audio(audio, sr),
-            "windowed": _window_rms(audio, sr, float(p["rms_window_ms"])),
+            "windowed": _window_rms(
+                audio,
+                sr,
+                float(p["rms_window_ms"]),
+                bpm=float(render_result["plan"]["transport"]["bpm"]),
+            ),
         }
     if "spectrum" in focus:
         out["spectrum"] = _spectrum(audio, sr, int(p["spectrum_fft_size"]))

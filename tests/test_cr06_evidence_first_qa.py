@@ -233,3 +233,46 @@ def test_cr06_reordering_same_evidence_focus_is_not_target_mutation(tmp_path):
     assert cmp["target_mutation"]["detected"] is False
     assert cmp["target_mutation"]["changed_fields"] == []
     assert before["request"]["target_fingerprint"] == after["request"]["target_fingerprint"]
+
+
+def test_cr06_evidence_locations_bind_observations_to_score_events(tmp_path):
+    report = _report(tmp_path)
+    evidence = report["musical_evidence"]
+
+    windows = evidence["dynamics"]["windowed"]["loudest_windows"]
+    assert windows
+    assert {"start_seconds", "end_seconds", "start_beat", "end_beat", "rms_db"} <= set(windows[0])
+
+    for track in evidence["register"].values():
+        assert "high_register_events" in track
+        assert track["high_register_event_count"] == len(track["high_register_events"])
+        for event in track["high_register_events"]:
+            assert {"event_id", "start_beat", "end_beat", "duration_beats", "midi"} <= set(event)
+
+    for track in evidence["phrase_continuity"].values():
+        assert track["positive_gap_count"] == len(track["positive_gap_locations"])
+        assert track["overlap_count"] == len(track["overlap_locations"])
+
+    for track in evidence["repetition"].values():
+        for trigram in track["most_common_interval_trigrams"]:
+            assert trigram["count"] == len(trigram["occurrences"])
+            for occurrence in trigram["occurrences"]:
+                assert {"event_ids", "start_beat", "end_beat"} <= set(occurrence)
+
+    for track in evidence["voice_leading"].values():
+        assert track["transition_count"] == len(track["motion_events"])
+        for motion in track["motion_events"]:
+            assert {"from_event_id", "to_event_id", "start_beat", "end_beat", "semitones"} <= set(motion)
+
+    for pair in evidence["masking"]:
+        assert pair["close_overlap_event_pairs"] == pair["close_overlap_region_count"]
+        assert pair["close_overlap_regions_truncated"] >= 0
+        for region in pair["close_overlap_regions"]:
+            assert {
+                "track_a", "event_a", "midi_a", "track_b", "event_b", "midi_b",
+                "start_beat", "end_beat", "overlap_beats", "pitch_distance_semitones",
+            } <= set(region)
+
+    assert report["semantics"]["aesthetic_score"] is False
+    assert report["semantics"]["automatic_musical_acceptance"] is False
+    assert report["semantics"]["automatic_revision"] is False

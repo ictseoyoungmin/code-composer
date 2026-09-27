@@ -52,6 +52,19 @@ Evidence is descriptive and keyed by requested focus:
 There is deliberately no weighted aggregate, no "good music" score, no quality score,
 and no automatic musical PASS/FAIL.
 
+Where an observation can be tied back to authored time, the report also carries
+**location-bound evidence** rather than only aggregate numbers:
+
+- dynamics windows include seconds and beat ranges;
+- high-register exposure identifies authored note event IDs and beat ranges;
+- phrase gaps/overlaps identify the adjacent authored events and exact beat span;
+- repeated interval trigrams include their concrete event spans;
+- voice motion carries from/to event IDs and beat positions;
+- close-register masking carries the exact overlapping event pair and overlap region.
+
+These locators are descriptive provenance for listening and critique. They are not
+automatic problem labels and do not authorize a revision.
+
 ## Anti-self-certification
 
 `code-composer-qa-request/v1` fingerprints both the exact source score and the QA
@@ -106,6 +119,7 @@ Engineering gate:
 - accepted subject hard integrity PASS;
 - controlled objective corruptions fail the expected hard checks;
 - target mutation is explicit;
+- location-bound evidence lets a Composer trace aggregate observations back to score time/events;
 - no aesthetic score / automatic acceptance / automatic revision authority;
 - Python 3.10/3.12, checkout, Skill/plugin/build PASS;
 - dogfood artifact hashes PASS.
