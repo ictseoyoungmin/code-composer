@@ -1,0 +1,31 @@
+{
+  "format": "code-composer-qa-request/v1",
+  "source_score": {
+    "format": "code-composer-performance-score/v1",
+    "fingerprint": "b8352a010cf099cc2052865b9f0f1b387d3d156e5223cf5c5a6d78990118f7f9"
+  },
+  "hard_policy": {
+    "max_clipped_sample_ratio": 0,
+    "require_exact_note_authority": true,
+    "require_provenance": true,
+    "require_mechanical_realization": true
+  },
+  "evidence": {
+    "focus": [
+      "dynamics",
+      "spectrum",
+      "register",
+      "phrase_continuity",
+      "repetition",
+      "voice_leading",
+      "tension_release",
+      "masking"
+    ],
+    "parameters": {
+      "rms_window_ms": 250,
+      "spectrum_fft_size": 4096,
+      "high_register_midi": 76,
+      "close_register_semitones": 12
+    }
+  }
+}
