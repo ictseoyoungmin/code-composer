@@ -1,6 +1,6 @@
 # CR08 — Resonant Release Semantics / Plucked Instrument Tail Authority
 
-Status: **IMPLEMENTATION / LISTENING CANDIDATE**
+Status: **CLOSED / PRE-MERGE CLOSURE CANDIDATE**
 
 Issue: #40
 
@@ -87,3 +87,29 @@ Perceptual gate:
 - reject excessive smear or uncontrolled resonance buildup.
 
 Tests do not certify the musical result and no aesthetic score is introduced.
+
+
+## Listening closure — 2026-09-27
+
+The matched CR08 A/B listening pack was delivered after the engineering gate.
+The user explicitly approved proceeding on 2026-09-27, so the required human
+perceptual gate is recorded as **PASS**.
+
+This is human closure evidence, not an analyzer-derived aesthetic score.
+
+Validated pre-merge evidence:
+- candidate HEAD: `43c6453546174072bc1c6093e593f2ffc91cae0f`
+- CR08 dogfood #4 / run `36317982806`: SUCCESS
+- full CI #126 / run `36317982805`: SUCCESS
+- blocking regression: Python 3.10 / 3.12 each `763 passed / 3 deselected`
+- artifact #10931267884
+- artifact digest: `sha256:d11825650a86ac0887c489c70b64cd3e6b5f63818cd6cd7192bc60c9de7e55fb`
+- portable SHA256 manifest: PASS
+- phrase A/B: 24 kHz / clipping 0
+- isolated probe authored gate: 0.18 s
+- gate-cut buffer: 4320 samples
+- resonant buffer: 21599 samples
+- post-gate RMS gate-cut → resonant: 0 → 0.0657406
+- late-tail RMS: 0.00868024
+
+Canonical CLOSED status is finalized only after merge and post-merge main CI.
