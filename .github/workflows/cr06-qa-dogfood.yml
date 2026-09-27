@@ -35,7 +35,9 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install Code Composer
-        run: python -m pip install -e skills/code-composer/kit
+        run: |
+          python -m pip install -e skills/code-composer/kit
+          python -m pip install pytest jsonschema
       - name: Render accepted Lantern Current and build QA evidence
         run: python tools/render_cr06_qa_dogfood.py --output dist/cr06-qa
       - name: Validate focused CR06 regressions
