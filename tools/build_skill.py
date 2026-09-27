@@ -1,8 +1,10 @@
 from pathlib import Path
 import shutil, zipfile
+
 ROOT=Path(__file__).resolve().parents[1]
 SKILL=ROOT/'skills'/'code-composer'
 DIST=ROOT/'dist'; DIST.mkdir(exist_ok=True)
+VERSION=(SKILL/'VERSION').read_text(encoding='utf-8').strip()
 
 EXCLUDED_PARTS={"__pycache__",".pytest_cache",".mypy_cache",".ruff_cache","build","dist"}
 def include_file(p: Path) -> bool:
@@ -12,7 +14,7 @@ def include_file(p: Path) -> bool:
     if p.name==".coverage" or p.suffix==".pyc":
         return False
     return p.is_file()
-out=DIST/'code-composer-skill-v1.17.0.zip'
+out=DIST/f'code-composer-skill-v{VERSION}.zip'
 if out.exists(): out.unlink()
 with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED) as z:
     for p in sorted(SKILL.rglob('*')):

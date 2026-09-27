@@ -19,7 +19,7 @@ dynamic = ["version"]
 version = {attr = "code_composer.__version__"}
 ```
 
-The skill `VERSION` file must match the package version for the current release line.
+The skill `VERSION` file must match the package version for the current release line. Codex and Claude plugin manifests must match it as well; `tools/verify_release_version.py` enforces the release-facing version surfaces.
 
 ## Runtime wheel
 
@@ -83,3 +83,18 @@ code-composer-admittance-fit
 ```
 
 The package deliberately does not ship the repository's completed musical examples. Wheel package data contains current schemas, not a musical reference corpus.
+
+## GitHub Release automation
+
+`.github/workflows/release.yml` listens only to successful **push-triggered main CI** runs.
+
+For a version that does not already have a GitHub Release it:
+
+1. checks out the exact CI-validated main SHA;
+2. verifies package / Skill / plugin / README version parity;
+3. validates the standalone Skill and plugin distribution;
+4. builds the runtime wheel, standalone Skill ZIP and Codex/Claude plugin ZIPs;
+5. writes a release provenance manifest and portable SHA-256 manifest;
+6. creates tag `v<VERSION>` at that exact validated SHA and publishes the GitHub Release using `docs/releases/v<VERSION>.md`.
+
+If the release already exists, the workflow exits without mutating it.
