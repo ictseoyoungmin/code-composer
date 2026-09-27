@@ -8,6 +8,7 @@ from ..execution.artistic_render import render_song_score_to_files
 from ..execution.performance_revision import apply_revision_plan
 from ..execution.revision_compare import render_revision_comparison_to_dir
 from ..execution.preview import render_song_score_preview
+from ..execution.qa import run_song_score_qa_to_dir
 from ..song_validation import validate_song_for_runtime
 
 
@@ -143,6 +144,26 @@ def _preview(
     }
 
 
+def _qa(song_path: Path, score_path: Path, request_path: Path, output_dir: Path) -> dict:
+    song = json.loads(song_path.read_text(encoding="utf-8"))
+    score = json.loads(score_path.read_text(encoding="utf-8"))
+    request = json.loads(request_path.read_text(encoding="utf-8"))
+    result = run_song_score_qa_to_dir(song, score, request, output_dir)
+    report = result["report"]
+    return {
+        "output_dir": str(output_dir),
+        "source_score_fingerprint": report["source"]["performance_score_fingerprint"],
+        "execution_plan_fingerprint": report["source"]["execution_plan_fingerprint"],
+        "qa_request_fingerprint": report["request"]["fingerprint"],
+        "qa_target_fingerprint": report["request"]["target_fingerprint"],
+        "hard_gate_status": report["integrity"]["status"],
+        "hard_gate_failures": report["integrity"]["failed_checks"],
+        "musical_evidence_fingerprint": report["musical_evidence_fingerprint"],
+        "aesthetic_score": False,
+        "automatic_musical_acceptance": False,
+    }
+
+
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     if len(argv) == 2 and argv[0] == "validate":
@@ -163,6 +184,8 @@ def main(argv=None):
             Path(argv[1]), Path(argv[2]), Path(argv[3]),
             Path(argv[4]), Path(argv[5]), report,
         )
+    elif len(argv) == 5 and argv[0] == "qa":
+        out = _qa(Path(argv[1]), Path(argv[2]), Path(argv[3]), Path(argv[4]))
     else:
         raise SystemExit(
             "usage: code-composer-song validate <song.json>\n"
@@ -170,7 +193,8 @@ def main(argv=None):
             "   or: code-composer-song render <song.json> <performance-score.json> <out.wav> [resolved.json] [analysis.json]\n"
             "   or: code-composer-song revise <performance-score.json> <revision-plan.json> <revised-score.json> <revision-record.json>\n"
             "   or: code-composer-song compare-revision <song.json> <performance-score.json> <revision-plan.json> <output-dir>\n"
-            "   or: code-composer-song preview <song.json> <performance-score.json> <preview-request.json> <out.wav> <cache-dir> [report.json]"
+            "   or: code-composer-song preview <song.json> <performance-score.json> <preview-request.json> <out.wav> <cache-dir> [report.json]\n"
+            "   or: code-composer-song qa <song.json> <performance-score.json> <qa-request.json> <output-dir>"
         )
 
     print(json.dumps(out, ensure_ascii=False, sort_keys=True))
