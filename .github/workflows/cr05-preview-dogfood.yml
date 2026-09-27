@@ -1,0 +1,50 @@
+name: CR05 Preview Dogfood
+
+on:
+  push:
+    branches:
+      - cr05-fast-preview-incremental-render
+    paths:
+      - "examples/cr05/**"
+      - "tools/render_cr05_preview_dogfood.py"
+      - "tests/test_cr05_fast_preview.py"
+      - "skills/code-composer/kit/src/code_composer/execution/preview.py"
+      - "skills/code-composer/kit/src/code_composer/app/song_cli.py"
+      - "skills/code-composer/kit/schemas/preview_*.schema.json"
+      - ".github/workflows/cr05-preview-dogfood.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "examples/cr05/**"
+      - "tools/render_cr05_preview_dogfood.py"
+      - "tests/test_cr05_fast_preview.py"
+      - "skills/code-composer/kit/src/code_composer/execution/preview.py"
+      - "skills/code-composer/kit/src/code_composer/app/song_cli.py"
+      - "skills/code-composer/kit/schemas/preview_*.schema.json"
+      - ".github/workflows/cr05-preview-dogfood.yml"
+  workflow_dispatch:
+
+jobs:
+  incremental-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Code Composer
+        run: python -m pip install -e skills/code-composer/kit
+      - name: Render cold warm and piano-revision previews
+        run: python tools/render_cr05_preview_dogfood.py --output dist/cr05-preview
+      - name: Verify portable hashes
+        working-directory: dist/cr05-preview
+        run: sha256sum -c SHA256SUMS.txt
+      - name: Upload preview evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cr05-lantern-preview
+          path: dist/cr05-preview
+          if-no-files-found: error
+          retention-days: 30

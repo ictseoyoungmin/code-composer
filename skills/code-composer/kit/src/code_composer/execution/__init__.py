@@ -34,6 +34,17 @@ from .revision_compare import (
     REVISION_COMPARISON_FORMAT,
     render_revision_comparison_to_dir,
 )
+from .preview import (
+    PREVIEW_REQUEST_FORMAT,
+    PREVIEW_REPORT_FORMAT,
+    STEM_CACHE_FORMAT,
+    STEM_CACHE_RENDERER_EPOCH,
+    PreviewValidationError,
+    validate_preview_request,
+    canonical_preview_request_json,
+    preview_request_fingerprint,
+    render_song_score_preview,
+)
 
 __all__ = [
     "EXECUTION_PLAN_FORMAT",
@@ -61,4 +72,13 @@ __all__ = [
     "apply_revision_plan",
     "REVISION_COMPARISON_FORMAT",
     "render_revision_comparison_to_dir",
+    "PREVIEW_REQUEST_FORMAT",
+    "PREVIEW_REPORT_FORMAT",
+    "STEM_CACHE_FORMAT",
+    "STEM_CACHE_RENDERER_EPOCH",
+    "PreviewValidationError",
+    "validate_preview_request",
+    "canonical_preview_request_json",
+    "preview_request_fingerprint",
+    "render_song_score_preview",
 ]

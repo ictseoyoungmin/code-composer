@@ -1,0 +1,16 @@
+{
+  "format": "code-composer-preview-request/v1",
+  "source_score": {
+    "format": "code-composer-performance-score/v1",
+    "fingerprint": "fa8bba9f5bf0ec1b1447a77bf017a09cd8512da5fce155ade2745d18de4a0ddd"
+  },
+  "range": {
+    "start_bar": 9,
+    "end_bar": 12
+  },
+  "tracks": [
+    "piano-foundation",
+    "violin-line"
+  ],
+  "sample_rate": 24000
+}

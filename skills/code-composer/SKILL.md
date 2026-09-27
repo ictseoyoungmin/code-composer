@@ -55,6 +55,8 @@ When source inspection is necessary, read `kit/SOURCE_MAP.md` first and inspect 
 - The CR03 render bridge may add physical instrument mechanics but must preserve authored note pitch/timing exactly.
 - CR04 Revision Plan is Composer-authored intent bound to one exact Performance Score fingerprint; analyzers may provide evidence but may not author revision ops.
 - Revision Record is the authoritative before/plan/after provenance for a targeted score change.
+- CR05 preview is a draft iteration surface only: stateful instruments render full-timeline dry stems from piece start, unchanged stems may be cached, and bar/beat slicing occurs only after deterministic mixing.
+- Preview cache reuse must be proven by explicit track-local cache keys/hit-miss provenance; preview output is never final/master authority.
 - Legacy Music IR is now an internal renderer bridge for this path, not the Composer-facing artistic authority.
 - Resolved IR is the exact deterministic realization state.
 - Reference WAV is the timbre/mix authority for external collaborators.
