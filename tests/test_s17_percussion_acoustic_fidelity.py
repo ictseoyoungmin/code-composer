@@ -39,12 +39,12 @@ def test_s17_registers_percussion_engine_and_factory_preset():
     assert patch['drum_graph']['realism_hardening']['enabled'] is True
 
 
-def test_s17_legacy_drum_path_is_byte_identical_to_s16_baseline():
+def test_s17_legacy_drum_path_has_canonical_byte_fingerprint():
     patch = {'kind': 'percussion'}
     expected = {
-        'kick': '6b2a723048822690dabed02cb2b422cf7d4fb98d229b8259fb0d54acb2191643',
-        'snare': 'b0fd58a055ce6ea7f725988df064a7e8a6f1eecb960e930559e083858bc24025',
-        'hat': 'f7536f79fe0f48141adaabcd2461a11c16b5fbe7b8d27e4b8637adbba35b2ca4',
+        'kick': 'be1dd7ca772d3db0708da277aac67087c7188bf61ba168322262b419a815760d',
+        'snare': '699d703b2eec6b171b26e5603d7448201db87fa35a28a13fb308363deb733219',
+        'hat': 'a803a732e6da4a18be410839d03762356d12823a50e83c96516958679814ac77',
     }
     for kind in ('kick', 'snare', 'hat'):
         y = render_drum_event(kind, .1, SR, .8, seed=17, patch=patch)
@@ -149,3 +149,14 @@ def test_s17_invalid_realism_parameters_are_rejected():
             'drums.acoustic_kit_modeled', role='drums',
             patch_overrides={'drum_graph': {'realism_hardening': {'kick_tail_s': 5.0}}},
         )
+
+
+def test_percussion_event_output_is_q40_canonical():
+    patch = materialize_preset('drums.acoustic_kit_modeled', role='drums')
+    half_step = 2.0 ** -41
+    for kind in ('kick', 'snare', 'hat'):
+        y = render_drum_event(kind, .1, SR, .8, seed=17, patch=patch)
+        scaled = np.ldexp(y, 40)
+        assert np.array_equal(scaled, np.rint(scaled))
+        # The representation grid itself is much finer than any audio tolerance.
+        assert half_step < 5e-13

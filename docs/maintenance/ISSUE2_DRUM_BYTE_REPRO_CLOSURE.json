@@ -1,0 +1,58 @@
+{
+  "schema": "code-composer-issue2-drum-byte-repro-closure/v1",
+  "issue": 2,
+  "status": "ENGINEERING_CANDIDATE",
+  "branch": "issue-2-drum-byte-repro",
+  "candidate_head": "a96980c22193867aac20ca58fa7d57706b3d2ae0",
+  "root_cause": {
+    "class": "CPU/NumPy floating-point dispatch at float64 last-bit scale",
+    "rng": false,
+    "python_version": false,
+    "pre_fix_run": 36326929690,
+    "pre_fix_artifacts": [
+      10934033682,
+      10934242266
+    ],
+    "max_abs_sample_delta": 2.7755575615628914e-16,
+    "relative_rms_delta_approx": 1.5e-16,
+    "trigger": "FMA3 dispatch change"
+  },
+  "fix": {
+    "boundary": "render_drum_event final post-pan stereo output",
+    "representation": "Q40 fixed-point canonicalized float64",
+    "grid_step": 9.094947017729282e-13,
+    "max_sample_move": 4.547473508864641e-13,
+    "synthesis_parameters_changed": false
+  },
+  "proof": {
+    "post_fix_run": 36327235285,
+    "artifact_python_3_10": 10934541550,
+    "artifact_python_3_12": 10934671124,
+    "python_versions": [
+      "3.10",
+      "3.12"
+    ],
+    "cpu_models": [
+      "AMD EPYC 7763 64-Core Processor",
+      "AMD EPYC 9V45 96-Core Processor"
+    ],
+    "dispatch_modes": [
+      "native",
+      "FMA3 disabled",
+      "AVX2,FMA3 disabled",
+      "AVX,AVX2,F16C,FMA3 disabled"
+    ],
+    "captured_arrays": 9,
+    "environment_dispatch_combinations": 8,
+    "raw_sha_identity_across_all_combinations": true
+  },
+  "ci_policy": {
+    "historical_non_blocking_exception_removed": true,
+    "canonical_hashes_blocking": true
+  },
+  "closure_requires": [
+    "full PR CI success",
+    "merge to main",
+    "post-merge main CI success"
+  ]
+}

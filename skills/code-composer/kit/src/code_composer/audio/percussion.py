@@ -3,6 +3,21 @@ import numpy as np
 from scipy.signal import lfilter
 from .synth import equal_power_pan
 
+# Q40 fixed-point output grid. The maximum canonicalization move is 2^-41
+# (~4.55e-13 full scale, about -246.8 dBFS). This is far below any audible or
+# meaningful numerical threshold while removing CPU/FMA last-bit drift from the
+# public percussion-event boundary.
+_CANONICAL_FRACTIONAL_BITS = 40
+
+
+def _canonicalize_percussion_output(stereo):
+    x=np.asarray(stereo,dtype=np.float64)
+    if not np.all(np.isfinite(x)):
+        raise ValueError("percussion renderer produced non-finite output")
+    q=np.rint(np.ldexp(x,_CANONICAL_FRACTIONAL_BITS)).astype(np.int64)
+    return np.ldexp(q.astype(np.float64),-_CANONICAL_FRACTIONAL_BITS)
+
+
 
 def _rng(seed):
     return np.random.default_rng(seed & 0xFFFFFFFF)
@@ -1606,4 +1621,4 @@ def render_drum_event(kind, duration_s, sr, velocity, seed=0, pan=0.0, patch=Non
             pan=-0.24 if pan==0 else pan
     else:
         sig=np.zeros(max(1,int(duration_s*sr)))
-    return equal_power_pan(sig,pan)
+    return _canonicalize_percussion_output(equal_power_pan(sig,pan))

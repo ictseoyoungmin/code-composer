@@ -1,0 +1,58 @@
+name: Issue 2 Drum Byte Repro
+
+on:
+  push:
+    branches: [issue-2-drum-byte-repro]
+    paths:
+      - 'tools/diagnose_drum_byte_repro.py'
+      - '.github/workflows/issue2-drum-byte-repro.yml'
+      - 'skills/code-composer/kit/src/code_composer/audio/percussion.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  repro:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.10', '3.12']
+    env:
+      PYTHONPATH: skills/code-composer/kit/src
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install pinned numerical stack
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install 'numpy==2.2.6' 'scipy==1.15.3'
+      - name: Capture native byte-repro artifact
+        env:
+          DRUM_REPRO_OUT: dist/native
+        run: python tools/diagnose_drum_byte_repro.py
+      - name: Capture FMA-disabled artifact
+        env:
+          DRUM_REPRO_OUT: dist/no-fma
+          NPY_DISABLE_CPU_FEATURES: FMA3
+        run: python tools/diagnose_drum_byte_repro.py
+      - name: Capture AVX2/FMA-disabled artifact
+        env:
+          DRUM_REPRO_OUT: dist/no-avx2-fma
+          NPY_DISABLE_CPU_FEATURES: AVX2,FMA3
+        run: python tools/diagnose_drum_byte_repro.py
+      - name: Capture AVX-family-disabled artifact
+        env:
+          DRUM_REPRO_OUT: dist/no-avx-family
+          NPY_DISABLE_CPU_FEATURES: AVX,AVX2,F16C,FMA3
+        run: python tools/diagnose_drum_byte_repro.py
+      - name: Upload exact float64 arrays and environment
+        uses: actions/upload-artifact@v4
+        with:
+          name: drum-byte-feature-sweep-py${{ matrix.python-version }}
+          path: dist
+          if-no-files-found: error
+          retention-days: 14
