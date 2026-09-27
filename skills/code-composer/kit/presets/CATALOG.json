@@ -1338,45 +1338,7 @@
         "vibrato_rate_hz",
         "release_damping"
       ],
-      "musical_content": false,
-      "patch": {
-        "kind": "resonant_pluck",
-        "engine": "resonant_pluck",
-        "family": "plucked_zither",
-        "resonant_pluck_graph": {
-          "max_partials": 13,
-          "pluck_position": 0.16,
-          "partial_rolloff": 0.96,
-          "inharmonicity": 0.00014,
-          "base_decay_s": 1.08,
-          "frequency_damping": 0.3,
-          "natural_tail_s": 0.72,
-          "post_gate_decay_s": 0.29,
-          "end_fade_s": 0.038,
-          "attack_s": 0.003,
-          "pluck_noise_gain": 0.072,
-          "pluck_noise_lowpass_hz": 6900,
-          "pluck_noise_decay_s": 0.021,
-          "body_resonances_hz": [
-            410,
-            720
-          ],
-          "body_gains": [
-            0.075,
-            0.05
-          ],
-          "body_decay_s": [
-            0.17,
-            0.12
-          ],
-          "body_mix": 0.16,
-          "lowpass_hz": 7600,
-          "drive": 1.28,
-          "output_gain": 0.88,
-          "stereo_width": 0.13,
-          "seed": 8128
-        }
-      }
+      "musical_content": false
     }
   ]
 }
