@@ -221,3 +221,15 @@ def test_cr06_qa_source_contains_no_automatic_revision_authority():
         "quality_score",
     )
     assert all(token not in source for token in forbidden)
+
+
+
+def test_cr06_reordering_same_evidence_focus_is_not_target_mutation(tmp_path):
+    before = _report(tmp_path)
+    req = _request()
+    req["evidence"]["focus"] = list(reversed(req["evidence"]["focus"]))
+    after = _report(tmp_path, request=req)
+    cmp = compare_qa_reports(before, after)
+    assert cmp["target_mutation"]["detected"] is False
+    assert cmp["target_mutation"]["changed_fields"] == []
+    assert before["request"]["target_fingerprint"] == after["request"]["target_fingerprint"]
