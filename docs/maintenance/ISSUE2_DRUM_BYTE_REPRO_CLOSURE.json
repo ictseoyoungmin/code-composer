@@ -1,7 +1,7 @@
 {
   "schema": "code-composer-issue2-drum-byte-repro-closure/v1",
   "issue": 2,
-  "status": "ENGINEERING_CANDIDATE",
+  "status": "CLOSED",
   "branch": "issue-2-drum-byte-repro",
   "candidate_head": "a96980c22193867aac20ca58fa7d57706b3d2ae0",
   "root_cause": {
@@ -50,9 +50,22 @@
     "historical_non_blocking_exception_removed": true,
     "canonical_hashes_blocking": true
   },
-  "closure_requires": [
-    "full PR CI success",
-    "merge to main",
-    "post-merge main CI success"
-  ]
+  "closure_requires": [],
+  "implementation_pr": 45,
+  "implementation_merge_sha": "042d0d5d2de2a7499c8e2bfdf9903a5b25b062a2",
+  "pre_merge_ci": {
+    "run_number": 135,
+    "run_id": 36327618192,
+    "status": "success",
+    "python_3_10": "769 passed",
+    "python_3_12": "769 passed"
+  },
+  "post_merge_ci": {
+    "run_number": 136,
+    "run_id": 36327866422,
+    "status": "success",
+    "python_3_10": "769 passed",
+    "python_3_12": "769 passed"
+  },
+  "closed_date": "2026-09-27"
 }

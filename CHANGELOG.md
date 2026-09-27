@@ -1,10 +1,11 @@
-## Issue #2 — Drum byte reproducibility hardening — CLOSURE CANDIDATE
+## Issue #2 — Drum byte reproducibility hardening — CLOSED
 
 - Isolated historical hosted-runner drum SHA drift to CPU/NumPy FMA dispatch, not Python version or RNG.
 - Measured native/FMA-disabled differences at float64 last-bit scale only: max sample delta 2.78e-16 FS, relative RMS about 1.5e-16.
 - Canonicalizes final post-pan percussion-event output to Q40; max representation move is 2^-41 (~4.55e-13 FS).
 - Post-fix diagnostic run 36327235285 proves raw SHA identity across Python 3.10/3.12, AMD EPYC 7763/9V45, and four NumPy CPU-dispatch modes.
 - Removes the historical non-blocking CI exception; canonical drum byte fingerprints return to the normal blocking suite.
+- PR #45 merged at `042d0d5d2de2a7499c8e2bfdf9903a5b25b062a2`; post-merge main CI #136 passed Python 3.10/3.12 at 769/769 each.
 
 ## v1.18.0 — Composer-first CR00–CR08 — 2026-09-27
 
