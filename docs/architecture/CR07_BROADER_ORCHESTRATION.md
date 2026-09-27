@@ -1,6 +1,6 @@
 # CR07 — Broader Orchestration Dogfood
 
-Status: **IMPLEMENTATION / LISTENING CANDIDATE**
+Status: **CLOSED**
 
 Issue: #37
 
@@ -80,3 +80,28 @@ lowers it one-to-one to the existing runtime `event_type: "drum"` surface. A
 percussion engine rejects pitched-note surrogates; a non-percussion engine rejects a
 drum hit. Continuous hi-hat pedal control remains outside CR07 rather than being
 implicitly invented.
+
+
+## Closure — 2026-09-27
+
+CR07 is **CLOSED**.
+
+Engineering evidence:
+- validated candidate: `5ebf7f0888eb69ffb8c94b9eff96f5be1b2eba40`
+- CR07 dogfood #13 / run `36313943714`: SUCCESS
+- full CI #119 / run `36313943715`: SUCCESS
+- blocking regression on Python 3.10 / 3.12: `758 passed / 3 deselected` each
+- CR03 piano/violin dogfood #43 / run `36313943700`: SUCCESS
+- artifact `10929852459`, digest `sha256:0002ec2b9f0d0d8f798f7373435be11f7c5fc25d070fbc823baba07ec391e1e3`
+- all three CR07 renders: 24 kHz, finite audio, clipped sample ratio 0
+- authored track IDs/functions preserved through Song → Execution Plan → Performance Score → realized IR
+- explicit unknown-family preset locks preserved; no generic family fallback added
+- Composer-first explicit `drum` hit authority added and validated
+
+Perceptual authority:
+- the three-piece listening pack was delivered after the engineering gate.
+- the user explicitly instructed the agent to proceed with **listening closure** on 2026-09-27.
+- this closes the required human/perceptual gate; it is not an automatic aesthetic score, genre ranking, or analyzer-derived quality verdict.
+
+The known runner-sensitive legacy drum byte-exact probe tracked by Issue #2 remains
+non-blocking and does not override the successful blocking regression suite.
