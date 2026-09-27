@@ -30,14 +30,29 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install 'numpy==2.2.6' 'scipy==1.15.3'
-      - name: Capture byte-repro artifact
+      - name: Capture native byte-repro artifact
         env:
-          DRUM_REPRO_OUT: dist/drum-byte-repro
+          DRUM_REPRO_OUT: dist/native
+        run: python tools/diagnose_drum_byte_repro.py
+      - name: Capture FMA-disabled artifact
+        env:
+          DRUM_REPRO_OUT: dist/no-fma
+          NPY_DISABLE_CPU_FEATURES: FMA3
+        run: python tools/diagnose_drum_byte_repro.py
+      - name: Capture AVX2/FMA-disabled artifact
+        env:
+          DRUM_REPRO_OUT: dist/no-avx2-fma
+          NPY_DISABLE_CPU_FEATURES: AVX2,FMA3
+        run: python tools/diagnose_drum_byte_repro.py
+      - name: Capture AVX-family-disabled artifact
+        env:
+          DRUM_REPRO_OUT: dist/no-avx-family
+          NPY_DISABLE_CPU_FEATURES: AVX,AVX2,F16C,FMA3
         run: python tools/diagnose_drum_byte_repro.py
       - name: Upload exact float64 arrays and environment
         uses: actions/upload-artifact@v4
         with:
-          name: drum-byte-repro-py${{ matrix.python-version }}
-          path: dist/drum-byte-repro
+          name: drum-byte-feature-sweep-py${{ matrix.python-version }}
+          path: dist
           if-no-files-found: error
           retention-days: 14
