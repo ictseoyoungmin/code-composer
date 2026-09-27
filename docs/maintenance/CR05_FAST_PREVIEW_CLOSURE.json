@@ -1,0 +1,54 @@
+{
+  "schema": "code-composer-cr05-closure/v1",
+  "slice": "CR05",
+  "status": "CLOSED",
+  "name": "Fast Preview / Incremental Render",
+  "issue": 30,
+  "pull_request": 32,
+  "validated_candidate_head": "a9fc8a950a794ca6ab545b14a724248c135903c5",
+  "merge_sha": "8536aa42cd6e6dffbeaafa31232fc9b2807111da",
+  "pre_merge_ci": {
+    "run_number": 100,
+    "run_id": 36233292733,
+    "checkout_hygiene": "success",
+    "python_3_10": "success",
+    "python_3_12": "success",
+    "tests": "730 passed, 3 deselected"
+  },
+  "dogfood": {
+    "run_number": 9,
+    "run_id": 36233292766,
+    "status": "success",
+    "artifact_id": 10903092615,
+    "artifact_digest": "sha256:0e5acc9d1020a538a0338973941b8b7aa60c30374774555da8ea5dc5f5c53c01",
+    "cold_hits": 0,
+    "cold_misses": 2,
+    "warm_hits": 2,
+    "warm_misses": 0,
+    "warm_byte_identical": true,
+    "piano_only_revision": {
+      "violin_cache_hit": true,
+      "piano_cache_hit": false
+    },
+    "clipping_original": 0,
+    "clipping_revised": 0
+  },
+  "post_merge_ci": {
+    "run_number": 101,
+    "run_id": 36307541776,
+    "checkout_hygiene": "success",
+    "python_3_10": "success",
+    "python_3_12": "success",
+    "tests": "730 passed, 3 deselected"
+  },
+  "perceptual_gate": {
+    "required": true,
+    "verdict": "PASS",
+    "authority": "user listening",
+    "preview_usefulness": true
+  },
+  "next_slice": {
+    "id": "CR06",
+    "name": "Evidence-first QA"
+  }
+}
