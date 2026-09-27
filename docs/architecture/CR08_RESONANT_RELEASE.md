@@ -1,6 +1,6 @@
 # CR08 — Resonant Release Semantics / Plucked Instrument Tail Authority
 
-Status: **CLOSED / PRE-MERGE CLOSURE CANDIDATE**
+Status: **CLOSED**
 
 Issue: #40
 
@@ -113,3 +113,12 @@ Validated pre-merge evidence:
 - late-tail RMS: 0.00868024
 
 Canonical CLOSED status is finalized only after merge and post-merge main CI.
+
+
+## Canonical merge evidence
+
+- listening closure HEAD: `de87e6f167a9fc6a2a10de41f0b7b387ad313054`
+- PR #41 squash merge: `ada1703792919451abd32fad382e1f3ae5fee219`
+- post-merge main CI #128 / run `36320753259`: SUCCESS
+- Python 3.10 / 3.12: SUCCESS
+- Issue #40 may be closed after this evidence-only closure patch reaches main.

@@ -1,7 +1,7 @@
 {
   "schema": "code-composer-cr08-closure/v1",
   "slice": "CR08",
-  "status": "LISTENING_PASS_PRE_MERGE",
+  "status": "CLOSED",
   "name": "Resonant Release Semantics / Plucked Instrument Tail Authority",
   "issue": 40,
   "pull_request": 41,
@@ -62,8 +62,15 @@
     "date": "2026-09-27",
     "automatic_aesthetic_score": false
   },
-  "canonical_close_requires": [
-    "PR #41 merge",
-    "post-merge main CI success"
-  ]
+  "canonical_close_requires": [],
+  "closure_head": "de87e6f167a9fc6a2a10de41f0b7b387ad313054",
+  "merge_sha": "ada1703792919451abd32fad382e1f3ae5fee219",
+  "post_merge_ci": {
+    "run_number": 128,
+    "run_id": 36320753259,
+    "checkout_hygiene": "success",
+    "python_3_10": "success",
+    "python_3_12": "success",
+    "status": "success"
+  }
 }
