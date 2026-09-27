@@ -13,14 +13,6 @@
       "id": "guitar-chop",
       "events": [
         {
-          "id": "g-b1-1-r",
-          "type": "note",
-          "start_beat": 0,
-          "duration_beats": 1.35,
-          "midi": 52,
-          "velocity": 0.28
-        },
-        {
           "id": "g-b1-1-5",
           "type": "note",
           "start_beat": 0,
@@ -37,9 +29,9 @@
           "velocity": 0.18
         },
         {
-          "id": "g-b1-2-r",
+          "id": "g-b1-1-r",
           "type": "note",
-          "start_beat": 2,
+          "start_beat": 0,
           "duration_beats": 1.35,
           "midi": 52,
           "velocity": 0.28
@@ -61,11 +53,11 @@
           "velocity": 0.18
         },
         {
-          "id": "g-b2-1-r",
+          "id": "g-b1-2-r",
           "type": "note",
-          "start_beat": 4,
+          "start_beat": 2,
           "duration_beats": 1.35,
-          "midi": 55,
+          "midi": 52,
           "velocity": 0.28
         },
         {
@@ -85,9 +77,9 @@
           "velocity": 0.18
         },
         {
-          "id": "g-b2-2-r",
+          "id": "g-b2-1-r",
           "type": "note",
-          "start_beat": 6,
+          "start_beat": 4,
           "duration_beats": 1.35,
           "midi": 55,
           "velocity": 0.28
@@ -109,11 +101,11 @@
           "velocity": 0.18
         },
         {
-          "id": "g-b3-1-r",
+          "id": "g-b2-2-r",
           "type": "note",
-          "start_beat": 8,
+          "start_beat": 6,
           "duration_beats": 1.35,
-          "midi": 48,
+          "midi": 55,
           "velocity": 0.28
         },
         {
@@ -133,9 +125,9 @@
           "velocity": 0.18
         },
         {
-          "id": "g-b3-2-r",
+          "id": "g-b3-1-r",
           "type": "note",
-          "start_beat": 10,
+          "start_beat": 8,
           "duration_beats": 1.35,
           "midi": 48,
           "velocity": 0.28
@@ -157,11 +149,11 @@
           "velocity": 0.18
         },
         {
-          "id": "g-b4-1-r",
+          "id": "g-b3-2-r",
           "type": "note",
-          "start_beat": 12,
+          "start_beat": 10,
           "duration_beats": 1.35,
-          "midi": 50,
+          "midi": 48,
           "velocity": 0.28
         },
         {
@@ -181,9 +173,9 @@
           "velocity": 0.18
         },
         {
-          "id": "g-b4-2-r",
+          "id": "g-b4-1-r",
           "type": "note",
-          "start_beat": 14,
+          "start_beat": 12,
           "duration_beats": 1.35,
           "midi": 50,
           "velocity": 0.28
@@ -205,12 +197,12 @@
           "velocity": 0.18
         },
         {
-          "id": "g-b5-1-r",
+          "id": "g-b4-2-r",
           "type": "note",
-          "start_beat": 16,
+          "start_beat": 14,
           "duration_beats": 1.35,
-          "midi": 52,
-          "velocity": 0.31000000000000005
+          "midi": 50,
+          "velocity": 0.28
         },
         {
           "id": "g-b5-1-5",
@@ -229,9 +221,9 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "g-b5-2-r",
+          "id": "g-b5-1-r",
           "type": "note",
-          "start_beat": 18,
+          "start_beat": 16,
           "duration_beats": 1.35,
           "midi": 52,
           "velocity": 0.31000000000000005
@@ -253,11 +245,11 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "g-b6-1-r",
+          "id": "g-b5-2-r",
           "type": "note",
-          "start_beat": 20,
+          "start_beat": 18,
           "duration_beats": 1.35,
-          "midi": 55,
+          "midi": 52,
           "velocity": 0.31000000000000005
         },
         {
@@ -277,9 +269,9 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "g-b6-2-r",
+          "id": "g-b6-1-r",
           "type": "note",
-          "start_beat": 22,
+          "start_beat": 20,
           "duration_beats": 1.35,
           "midi": 55,
           "velocity": 0.31000000000000005
@@ -301,11 +293,11 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "g-b7-1-r",
+          "id": "g-b6-2-r",
           "type": "note",
-          "start_beat": 24,
+          "start_beat": 22,
           "duration_beats": 1.35,
-          "midi": 57,
+          "midi": 55,
           "velocity": 0.31000000000000005
         },
         {
@@ -325,9 +317,9 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "g-b7-2-r",
+          "id": "g-b7-1-r",
           "type": "note",
-          "start_beat": 26,
+          "start_beat": 24,
           "duration_beats": 1.35,
           "midi": 57,
           "velocity": 0.31000000000000005
@@ -349,11 +341,11 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "g-b8-1-r",
+          "id": "g-b7-2-r",
           "type": "note",
-          "start_beat": 28,
+          "start_beat": 26,
           "duration_beats": 1.35,
-          "midi": 50,
+          "midi": 57,
           "velocity": 0.31000000000000005
         },
         {
@@ -373,9 +365,9 @@
           "velocity": 0.19999999999999998
         },
         {
-          "id": "g-b8-2-r",
+          "id": "g-b8-1-r",
           "type": "note",
-          "start_beat": 30,
+          "start_beat": 28,
           "duration_beats": 1.35,
           "midi": 50,
           "velocity": 0.31000000000000005
@@ -395,6 +387,14 @@
           "duration_beats": 1.35,
           "midi": 62,
           "velocity": 0.19999999999999998
+        },
+        {
+          "id": "g-b8-2-r",
+          "type": "note",
+          "start_beat": 30,
+          "duration_beats": 1.35,
+          "midi": 50,
+          "velocity": 0.31000000000000005
         }
       ]
     },
@@ -543,6 +543,14 @@
           "velocity": 0.22
         },
         {
+          "id": "d-1-k1",
+          "type": "note",
+          "start_beat": 0,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.52
+        },
+        {
           "id": "d-1-h2",
           "type": "note",
           "start_beat": 0.5,
@@ -557,6 +565,14 @@
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-1-s1",
+          "type": "note",
+          "start_beat": 1,
+          "duration_beats": 0.18,
+          "midi": 38,
+          "velocity": 0.46
         },
         {
           "id": "d-1-h4",
@@ -575,6 +591,14 @@
           "velocity": 0.22
         },
         {
+          "id": "d-1-k2",
+          "type": "note",
+          "start_beat": 2,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.48
+        },
+        {
           "id": "d-1-h6",
           "type": "note",
           "start_beat": 2.5,
@@ -591,38 +615,6 @@
           "velocity": 0.22
         },
         {
-          "id": "d-1-h8",
-          "type": "note",
-          "start_beat": 3.5,
-          "duration_beats": 0.12,
-          "midi": 42,
-          "velocity": 0.25
-        },
-        {
-          "id": "d-1-k1",
-          "type": "note",
-          "start_beat": 0,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.52
-        },
-        {
-          "id": "d-1-s1",
-          "type": "note",
-          "start_beat": 1,
-          "duration_beats": 0.18,
-          "midi": 38,
-          "velocity": 0.46
-        },
-        {
-          "id": "d-1-k2",
-          "type": "note",
-          "start_beat": 2,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
           "id": "d-1-s2",
           "type": "note",
           "start_beat": 3,
@@ -631,12 +623,28 @@
           "velocity": 0.5
         },
         {
+          "id": "d-1-h8",
+          "type": "note",
+          "start_beat": 3.5,
+          "duration_beats": 0.12,
+          "midi": 42,
+          "velocity": 0.25
+        },
+        {
           "id": "d-2-h1",
           "type": "note",
           "start_beat": 4,
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-2-k1",
+          "type": "note",
+          "start_beat": 4,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.52
         },
         {
           "id": "d-2-h2",
@@ -655,6 +663,14 @@
           "velocity": 0.22
         },
         {
+          "id": "d-2-s1",
+          "type": "note",
+          "start_beat": 5,
+          "duration_beats": 0.18,
+          "midi": 38,
+          "velocity": 0.46
+        },
+        {
           "id": "d-2-h4",
           "type": "note",
           "start_beat": 5.5,
@@ -669,6 +685,14 @@
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-2-k2",
+          "type": "note",
+          "start_beat": 6,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "d-2-h6",
@@ -687,38 +711,6 @@
           "velocity": 0.22
         },
         {
-          "id": "d-2-h8",
-          "type": "note",
-          "start_beat": 7.5,
-          "duration_beats": 0.12,
-          "midi": 42,
-          "velocity": 0.25
-        },
-        {
-          "id": "d-2-k1",
-          "type": "note",
-          "start_beat": 4,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.52
-        },
-        {
-          "id": "d-2-s1",
-          "type": "note",
-          "start_beat": 5,
-          "duration_beats": 0.18,
-          "midi": 38,
-          "velocity": 0.46
-        },
-        {
-          "id": "d-2-k2",
-          "type": "note",
-          "start_beat": 6,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
           "id": "d-2-s2",
           "type": "note",
           "start_beat": 7,
@@ -727,12 +719,28 @@
           "velocity": 0.5
         },
         {
+          "id": "d-2-h8",
+          "type": "note",
+          "start_beat": 7.5,
+          "duration_beats": 0.12,
+          "midi": 42,
+          "velocity": 0.25
+        },
+        {
           "id": "d-3-h1",
           "type": "note",
           "start_beat": 8,
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-3-k1",
+          "type": "note",
+          "start_beat": 8,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.52
         },
         {
           "id": "d-3-h2",
@@ -751,6 +759,14 @@
           "velocity": 0.22
         },
         {
+          "id": "d-3-s1",
+          "type": "note",
+          "start_beat": 9,
+          "duration_beats": 0.18,
+          "midi": 38,
+          "velocity": 0.46
+        },
+        {
           "id": "d-3-h4",
           "type": "note",
           "start_beat": 9.5,
@@ -765,6 +781,14 @@
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-3-k2",
+          "type": "note",
+          "start_beat": 10,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "d-3-h6",
@@ -783,38 +807,6 @@
           "velocity": 0.22
         },
         {
-          "id": "d-3-h8",
-          "type": "note",
-          "start_beat": 11.5,
-          "duration_beats": 0.12,
-          "midi": 42,
-          "velocity": 0.25
-        },
-        {
-          "id": "d-3-k1",
-          "type": "note",
-          "start_beat": 8,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.52
-        },
-        {
-          "id": "d-3-s1",
-          "type": "note",
-          "start_beat": 9,
-          "duration_beats": 0.18,
-          "midi": 38,
-          "velocity": 0.46
-        },
-        {
-          "id": "d-3-k2",
-          "type": "note",
-          "start_beat": 10,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
           "id": "d-3-s2",
           "type": "note",
           "start_beat": 11,
@@ -823,12 +815,28 @@
           "velocity": 0.5
         },
         {
+          "id": "d-3-h8",
+          "type": "note",
+          "start_beat": 11.5,
+          "duration_beats": 0.12,
+          "midi": 42,
+          "velocity": 0.25
+        },
+        {
           "id": "d-4-h1",
           "type": "note",
           "start_beat": 12,
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-4-k1",
+          "type": "note",
+          "start_beat": 12,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.52
         },
         {
           "id": "d-4-h2",
@@ -847,6 +855,14 @@
           "velocity": 0.22
         },
         {
+          "id": "d-4-s1",
+          "type": "note",
+          "start_beat": 13,
+          "duration_beats": 0.18,
+          "midi": 38,
+          "velocity": 0.46
+        },
+        {
           "id": "d-4-h4",
           "type": "note",
           "start_beat": 13.5,
@@ -861,6 +877,14 @@
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-4-k2",
+          "type": "note",
+          "start_beat": 14,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "d-4-h6",
@@ -879,38 +903,6 @@
           "velocity": 0.22
         },
         {
-          "id": "d-4-h8",
-          "type": "note",
-          "start_beat": 15.5,
-          "duration_beats": 0.12,
-          "midi": 42,
-          "velocity": 0.25
-        },
-        {
-          "id": "d-4-k1",
-          "type": "note",
-          "start_beat": 12,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.52
-        },
-        {
-          "id": "d-4-s1",
-          "type": "note",
-          "start_beat": 13,
-          "duration_beats": 0.18,
-          "midi": 38,
-          "velocity": 0.46
-        },
-        {
-          "id": "d-4-k2",
-          "type": "note",
-          "start_beat": 14,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
           "id": "d-4-s2",
           "type": "note",
           "start_beat": 15,
@@ -919,12 +911,28 @@
           "velocity": 0.5
         },
         {
+          "id": "d-4-h8",
+          "type": "note",
+          "start_beat": 15.5,
+          "duration_beats": 0.12,
+          "midi": 42,
+          "velocity": 0.25
+        },
+        {
           "id": "d-5-h1",
           "type": "note",
           "start_beat": 16,
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-5-k1",
+          "type": "note",
+          "start_beat": 16,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.52
         },
         {
           "id": "d-5-h2",
@@ -943,6 +951,14 @@
           "velocity": 0.22
         },
         {
+          "id": "d-5-s1",
+          "type": "note",
+          "start_beat": 17,
+          "duration_beats": 0.18,
+          "midi": 38,
+          "velocity": 0.46
+        },
+        {
           "id": "d-5-h4",
           "type": "note",
           "start_beat": 17.5,
@@ -957,6 +973,14 @@
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-5-k2",
+          "type": "note",
+          "start_beat": 18,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "d-5-h6",
@@ -975,38 +999,6 @@
           "velocity": 0.22
         },
         {
-          "id": "d-5-h8",
-          "type": "note",
-          "start_beat": 19.5,
-          "duration_beats": 0.12,
-          "midi": 42,
-          "velocity": 0.25
-        },
-        {
-          "id": "d-5-k1",
-          "type": "note",
-          "start_beat": 16,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.52
-        },
-        {
-          "id": "d-5-s1",
-          "type": "note",
-          "start_beat": 17,
-          "duration_beats": 0.18,
-          "midi": 38,
-          "velocity": 0.46
-        },
-        {
-          "id": "d-5-k2",
-          "type": "note",
-          "start_beat": 18,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
           "id": "d-5-s2",
           "type": "note",
           "start_beat": 19,
@@ -1015,12 +1007,28 @@
           "velocity": 0.5
         },
         {
+          "id": "d-5-h8",
+          "type": "note",
+          "start_beat": 19.5,
+          "duration_beats": 0.12,
+          "midi": 42,
+          "velocity": 0.25
+        },
+        {
           "id": "d-6-h1",
           "type": "note",
           "start_beat": 20,
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-6-k1",
+          "type": "note",
+          "start_beat": 20,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.52
         },
         {
           "id": "d-6-h2",
@@ -1039,6 +1047,14 @@
           "velocity": 0.22
         },
         {
+          "id": "d-6-s1",
+          "type": "note",
+          "start_beat": 21,
+          "duration_beats": 0.18,
+          "midi": 38,
+          "velocity": 0.46
+        },
+        {
           "id": "d-6-h4",
           "type": "note",
           "start_beat": 21.5,
@@ -1053,6 +1069,14 @@
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-6-k2",
+          "type": "note",
+          "start_beat": 22,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "d-6-h6",
@@ -1071,38 +1095,6 @@
           "velocity": 0.22
         },
         {
-          "id": "d-6-h8",
-          "type": "note",
-          "start_beat": 23.5,
-          "duration_beats": 0.12,
-          "midi": 42,
-          "velocity": 0.25
-        },
-        {
-          "id": "d-6-k1",
-          "type": "note",
-          "start_beat": 20,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.52
-        },
-        {
-          "id": "d-6-s1",
-          "type": "note",
-          "start_beat": 21,
-          "duration_beats": 0.18,
-          "midi": 38,
-          "velocity": 0.46
-        },
-        {
-          "id": "d-6-k2",
-          "type": "note",
-          "start_beat": 22,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
           "id": "d-6-s2",
           "type": "note",
           "start_beat": 23,
@@ -1111,12 +1103,28 @@
           "velocity": 0.5
         },
         {
+          "id": "d-6-h8",
+          "type": "note",
+          "start_beat": 23.5,
+          "duration_beats": 0.12,
+          "midi": 42,
+          "velocity": 0.25
+        },
+        {
           "id": "d-7-h1",
           "type": "note",
           "start_beat": 24,
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-7-k1",
+          "type": "note",
+          "start_beat": 24,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.52
         },
         {
           "id": "d-7-h2",
@@ -1135,6 +1143,14 @@
           "velocity": 0.22
         },
         {
+          "id": "d-7-s1",
+          "type": "note",
+          "start_beat": 25,
+          "duration_beats": 0.18,
+          "midi": 38,
+          "velocity": 0.46
+        },
+        {
           "id": "d-7-h4",
           "type": "note",
           "start_beat": 25.5,
@@ -1149,6 +1165,14 @@
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-7-k2",
+          "type": "note",
+          "start_beat": 26,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "d-7-h6",
@@ -1167,38 +1191,6 @@
           "velocity": 0.22
         },
         {
-          "id": "d-7-h8",
-          "type": "note",
-          "start_beat": 27.5,
-          "duration_beats": 0.12,
-          "midi": 42,
-          "velocity": 0.25
-        },
-        {
-          "id": "d-7-k1",
-          "type": "note",
-          "start_beat": 24,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.52
-        },
-        {
-          "id": "d-7-s1",
-          "type": "note",
-          "start_beat": 25,
-          "duration_beats": 0.18,
-          "midi": 38,
-          "velocity": 0.46
-        },
-        {
-          "id": "d-7-k2",
-          "type": "note",
-          "start_beat": 26,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
           "id": "d-7-s2",
           "type": "note",
           "start_beat": 27,
@@ -1207,12 +1199,28 @@
           "velocity": 0.5
         },
         {
+          "id": "d-7-h8",
+          "type": "note",
+          "start_beat": 27.5,
+          "duration_beats": 0.12,
+          "midi": 42,
+          "velocity": 0.25
+        },
+        {
           "id": "d-8-h1",
           "type": "note",
           "start_beat": 28,
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-8-k1",
+          "type": "note",
+          "start_beat": 28,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.52
         },
         {
           "id": "d-8-h2",
@@ -1231,6 +1239,14 @@
           "velocity": 0.22
         },
         {
+          "id": "d-8-s1",
+          "type": "note",
+          "start_beat": 29,
+          "duration_beats": 0.18,
+          "midi": 38,
+          "velocity": 0.46
+        },
+        {
           "id": "d-8-h4",
           "type": "note",
           "start_beat": 29.5,
@@ -1245,6 +1261,14 @@
           "duration_beats": 0.12,
           "midi": 42,
           "velocity": 0.22
+        },
+        {
+          "id": "d-8-k2",
+          "type": "note",
+          "start_beat": 30,
+          "duration_beats": 0.18,
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "d-8-h6",
@@ -1263,44 +1287,20 @@
           "velocity": 0.22
         },
         {
-          "id": "d-8-h8",
-          "type": "note",
-          "start_beat": 31.5,
-          "duration_beats": 0.12,
-          "midi": 42,
-          "velocity": 0.25
-        },
-        {
-          "id": "d-8-k1",
-          "type": "note",
-          "start_beat": 28,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.52
-        },
-        {
-          "id": "d-8-s1",
-          "type": "note",
-          "start_beat": 29,
-          "duration_beats": 0.18,
-          "midi": 38,
-          "velocity": 0.46
-        },
-        {
-          "id": "d-8-k2",
-          "type": "note",
-          "start_beat": 30,
-          "duration_beats": 0.18,
-          "midi": 36,
-          "velocity": 0.48
-        },
-        {
           "id": "d-8-s2",
           "type": "note",
           "start_beat": 31,
           "duration_beats": 0.18,
           "midi": 38,
           "velocity": 0.5
+        },
+        {
+          "id": "d-8-h8",
+          "type": "note",
+          "start_beat": 31.5,
+          "duration_beats": 0.12,
+          "midi": 42,
+          "velocity": 0.25
         }
       ]
     },
