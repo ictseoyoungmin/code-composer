@@ -40,7 +40,7 @@ def _piano_patch():
 
 
 def test_builtin_registry_has_family_boundaries():
-    assert registered_engines() == ("bowed_string", "bowed_waveguide", "generic", "percussion", "piano", "plucked_bass")
+    assert registered_engines() == ("bowed_string", "bowed_waveguide", "generic", "percussion", "piano", "plucked_bass", "resonant_pluck")
     assert engine_name_for_patch(_generic_patch()) == "generic"
     assert engine_name_for_patch(_piano_patch()) == "piano"
     assert engine_name_for_patch({"kind": "bowed_string", "engine": "bowed_string", "bowed_string_graph": {}}) == "bowed_string"

@@ -34,6 +34,14 @@ class InstrumentEngine:
         velocity: float = 1.0,
         performance: dict | None = None,
     ):
+        """Render one authored note event.
+
+        duration_s is the authored gate/excitation duration, not a mandatory
+        sample-buffer length. Resonant engines may return samples beyond note-off
+        and must report their maximum extra lifetime via tail_seconds(patch) so
+        the track timeline is allocated safely. Engines that do not opt in retain
+        the historical duration-bounded behavior.
+        """
         raise NotImplementedError
 
     def render_track(

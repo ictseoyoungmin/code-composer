@@ -1,0 +1,56 @@
+name: CR08 Resonant Release Dogfood
+
+on:
+  push:
+    branches:
+      - cr08-resonant-release
+    paths:
+      - "examples/cr08/**"
+      - "tools/render_cr08_resonant_release_dogfood.py"
+      - "tests/test_cr08_resonant_release.py"
+      - "skills/code-composer/kit/src/code_composer/audio/resonant_pluck.py"
+      - "skills/code-composer/kit/src/code_composer/audio/engines/resonant_pluck.py"
+      - "skills/code-composer/kit/src/code_composer/reference/presets/resonant_pluck__zither_bright__1.0.0.json"
+      - "docs/architecture/CR08_RESONANT_RELEASE.md"
+      - ".github/workflows/cr08-resonant-release.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "examples/cr08/**"
+      - "tools/render_cr08_resonant_release_dogfood.py"
+      - "tests/test_cr08_resonant_release.py"
+      - "skills/code-composer/kit/src/code_composer/audio/resonant_pluck.py"
+      - "skills/code-composer/kit/src/code_composer/audio/engines/resonant_pluck.py"
+      - "skills/code-composer/kit/src/code_composer/reference/presets/resonant_pluck__zither_bright__1.0.0.json"
+      - "docs/architecture/CR08_RESONANT_RELEASE.md"
+      - ".github/workflows/cr08-resonant-release.yml"
+  workflow_dispatch:
+
+jobs:
+  resonant-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Code Composer
+        run: |
+          python -m pip install -e skills/code-composer/kit
+          python -m pip install pytest
+      - name: Run focused CR08 tests
+        run: python -m pytest -q tests/test_cr08_resonant_release.py tests/test_instrument_engine_registry.py
+      - name: Render matched gate-cut vs resonant dogfood
+        run: python tools/render_cr08_resonant_release_dogfood.py --output dist/cr08-resonant-release
+      - name: Verify portable hashes
+        working-directory: dist/cr08-resonant-release
+        run: sha256sum -c SHA256SUMS.txt
+      - name: Upload listening evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cr08-resonant-release
+          path: dist/cr08-resonant-release
+          if-no-files-found: error
+          retention-days: 30

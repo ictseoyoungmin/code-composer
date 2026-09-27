@@ -6,7 +6,7 @@
       "format": "code-composer-factory-preset/v1",
       "preset_id": "bass.electric_finger_modeled",
       "version": "1.0.0",
-      "name": "Electric Finger Bass \u2014 Modeled",
+      "name": "Electric Finger Bass — Modeled",
       "engine": "plucked_bass",
       "family": "electric_bass",
       "character": [
@@ -102,7 +102,7 @@
       ],
       "limitations": [
         "physically inspired deterministic model, not a sampled concert violin or fitted named performer",
-        "harmonic MIDI denotes sounding pitch; ricochet, sautill\u00e9, col legno, sul ponticello/tasto notation, and continuous double-stop special articulations remain outside this preset"
+        "harmonic MIDI denotes sounding pitch; ricochet, sautillé, col legno, sul ponticello/tasto notation, and continuous double-stop special articulations remain outside this preset"
       ],
       "recommended_roles": [
         "lead",
@@ -374,7 +374,7 @@
       "format": "code-composer-factory-preset/v1",
       "preset_id": "drums.acoustic_kit_modeled",
       "version": "1.0.0",
-      "name": "Acoustic Kit \u2014 Modeled",
+      "name": "Acoustic Kit — Modeled",
       "engine": "percussion",
       "family": "acoustic_drum_kit",
       "character": [
@@ -1210,7 +1210,7 @@
       "format": "code-composer-factory-preset/v1",
       "preset_id": "piano.concert_grand_natural_unison_subtle",
       "version": "1.0.0",
-      "name": "Concert Grand Natural \u2014 Subtle Treble Unison",
+      "name": "Concert Grand Natural — Subtle Treble Unison",
       "engine": "piano",
       "family": "acoustic",
       "character": [
@@ -1299,6 +1299,45 @@
       "expression_capabilities": {
         "pedal": true
       },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "resonant_pluck.zither_bright",
+      "version": "1.0.0",
+      "name": "Bright Resonant Zither",
+      "engine": "resonant_pluck",
+      "family": "plucked_zither",
+      "character": [
+        "bright",
+        "resonant",
+        "plucked-string",
+        "zither-like",
+        "deterministic"
+      ],
+      "strengths": [
+        "authored note duration acts as excitation/gate duration while string/body resonance can continue afterward",
+        "upper partials decay faster than the fundamental for a natural plucked spectral falloff",
+        "supports deterministic pitch approach, vibrato and post-gate damping expression without song-specific tail tables"
+      ],
+      "limitations": [
+        "general zither-like model rather than a claim of sampled or measured gayageum replication",
+        "continuous finger pressure and inter-string sympathetic coupling are outside this initial CR08 preset"
+      ],
+      "recommended_roles": [
+        "melody",
+        "hook",
+        "countermelody"
+      ],
+      "expression_capabilities": [
+        "velocity",
+        "pitch_start_cents",
+        "pitch_end_cents",
+        "pitch_time_s",
+        "vibrato_depth_cents",
+        "vibrato_rate_hz",
+        "release_damping"
+      ],
       "musical_content": false
     }
   ]

@@ -86,3 +86,11 @@ S15 adds an explicit deterministic ensemble-performance layer after phrase/orche
 ## S27-I continuous hi-hat pedal openness
 
 `drums.s19_core_powerful_room_authentic_strike_v2_hihat_snare_toms_integrated_continuous_hihat` preserves the accepted S27-H hit sources, discrete closure behavior, and S27-G shared room, then accepts explicit `drum_control` / `hi_hat_pedal_openness` curves. The curve is a left-foot authored performance surface, not an inferred groove rule. It continuously changes the loss rate of an already-ringing open/half-open plate with separate body/wash damping and never gates the rest of the kit.
+
+
+### Resonant plucked-string release
+- Opt-in engine: `resonant_pluck`
+- Factory preset: `resonant_pluck.zither_bright`
+- Authored note duration is the excitation/gate duration; the engine may render deterministic string/body resonance beyond note-off.
+- Maximum extra lifetime is reported through the engine `tail_seconds(patch)` contract so the renderer allocates the full tail.
+- Numeric pitch/vibrato/release-damping expression is supported; no song-specific ornament-to-tail table is inferred.
