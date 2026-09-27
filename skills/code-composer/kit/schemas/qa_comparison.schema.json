@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ymstudio.dev/code-composer/schemas/qa_comparison.schema.json",
+  "title": "Code Composer QA Comparison v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "before",
+    "after",
+    "target_mutation",
+    "integrity_transition",
+    "evidence_changed",
+    "semantics"
+  ],
+  "properties": {
+    "format": {
+      "const": "code-composer-qa-comparison/v1"
+    },
+    "before": {
+      "type": "object"
+    },
+    "after": {
+      "type": "object"
+    },
+    "target_mutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "detected",
+        "changed_fields",
+        "same_target_comparison"
+      ],
+      "properties": {
+        "detected": {
+          "type": "boolean"
+        },
+        "changed_fields": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "same_target_comparison": {
+          "type": "boolean"
+        }
+      }
+    },
+    "integrity_transition": {
+      "type": "object"
+    },
+    "evidence_changed": {
+      "type": "boolean"
+    },
+    "semantics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "improvement_verdict",
+        "aesthetic_ranking",
+        "target_mutation_cannot_be_presented_as_improvement"
+      ],
+      "properties": {
+        "improvement_verdict": {
+          "const": false
+        },
+        "aesthetic_ranking": {
+          "const": false
+        },
+        "target_mutation_cannot_be_presented_as_improvement": {
+          "const": true
+        }
+      }
+    }
+  }
+}

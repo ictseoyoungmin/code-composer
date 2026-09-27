@@ -6,6 +6,7 @@
 | Song / artistic performance path | Validate Song, lower deterministic Execution Plan, and render an authored exact Performance Score | `code-composer-song` |
 | Listen / critique / revision | Apply Composer-authored targeted Performance Score revisions with exact provenance and matched A/B rendering | `code-composer-song revise` / `compare-revision` |
 | Fast incremental preview | Cache deterministic full-timeline dry stems and preview selected bars/tracks without re-synthesizing unchanged tracks | `code-composer-song preview` |
+| Evidence-first QA | Separate objective integrity blocking from descriptive musical evidence; target changes are recorded, never self-certified as improvement | `code-composer-song qa` |
 | Compose (pre-refactor path) | Compile an explicit Composition Brief into Music IR | `code-composer-compose` |
 | MIDI export | Export resolved/canonical note events to deterministic Type 1 MIDI | `code-composer-midi` |
 | Collaboration bundle | MIDI + reference WAV + resolved IR + manifest | `code-composer-collab` |

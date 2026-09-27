@@ -57,6 +57,8 @@ When source inspection is necessary, read `kit/SOURCE_MAP.md` first and inspect 
 - Revision Record is the authoritative before/plan/after provenance for a targeted score change.
 - CR05 preview is a draft iteration surface only: stateful instruments render full-timeline dry stems from piece start, unchanged stems may be cached, and bar/beat slicing occurs only after deterministic mixing.
 - Preview cache reuse must be proven by explicit track-local cache keys/hit-miss provenance; preview output is never final/master authority.
+- CR06 QA has two distinct authorities: hard integrity may block objective correctness failures; musical evidence is descriptive only and cannot produce a quality score, aesthetic rank, automatic acceptance, or automatic revision.
+- Changing QA policy/evidence targets between reports is target mutation provenance, never evidence of musical improvement.
 - Legacy Music IR is now an internal renderer bridge for this path, not the Composer-facing artistic authority.
 - Resolved IR is the exact deterministic realization state.
 - Reference WAV is the timbre/mix authority for external collaborators.

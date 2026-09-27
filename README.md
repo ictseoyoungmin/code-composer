@@ -29,6 +29,7 @@ It is designed for workflows where the composition should remain inspectable, re
 | Shape performance | Violin realization, articulation, dynamics, factory sound presets, mix automation |
 | Revise with matched A/B | Composer-authored targeted Performance Score revision with exact before/after provenance |
 | Iterate with cached preview | Draft selected bars/tracks at 24 kHz using deterministic full-timeline dry-stem reuse |
+| Inspect evidence without aesthetic self-certification | Objective integrity gate + descriptive dynamics/spectrum/register/phrase/repetition/voice-leading/masking evidence |
 | Exchange projects | Lossless `.ccx` handoff between Code Composer users |
 | Deliver externally | Reference mix, full/per-track MIDI, aligned stems, resolved IR, manifest, notes |
 | Work as an agent skill | Self-contained `skills/code-composer/` package with progressive-disclosure workflows |
@@ -126,7 +127,7 @@ Analyzers provide evidence; they do not silently rewrite the composition. The ed
 
 ```text
 code-composer                 render Music IR
-code-composer-song            validate/lower/render/revise/compare/preview Composer-first Song + Performance Score
+code-composer-song            validate/lower/render/revise/compare/preview/qa Composer-first Song + Performance Score
 code-composer-compose         pre-refactor brief → Music IR path
 code-composer-midi            export MIDI
 code-composer-collab          create a collaboration bundle

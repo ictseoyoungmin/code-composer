@@ -1,0 +1,54 @@
+name: CR06 Evidence-first QA Dogfood
+
+on:
+  push:
+    branches:
+      - cr06-evidence-first-qa
+    paths:
+      - "examples/cr06/**"
+      - "tools/render_cr06_qa_dogfood.py"
+      - "tests/test_cr06_evidence_first_qa.py"
+      - "skills/code-composer/kit/src/code_composer/execution/qa.py"
+      - "skills/code-composer/kit/src/code_composer/app/song_cli.py"
+      - "skills/code-composer/kit/schemas/qa_*.schema.json"
+      - ".github/workflows/cr06-qa-dogfood.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "examples/cr06/**"
+      - "tools/render_cr06_qa_dogfood.py"
+      - "tests/test_cr06_evidence_first_qa.py"
+      - "skills/code-composer/kit/src/code_composer/execution/qa.py"
+      - "skills/code-composer/kit/src/code_composer/app/song_cli.py"
+      - "skills/code-composer/kit/schemas/qa_*.schema.json"
+      - ".github/workflows/cr06-qa-dogfood.yml"
+  workflow_dispatch:
+
+jobs:
+  evidence-first-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Code Composer
+        run: |
+          python -m pip install -e skills/code-composer/kit
+          python -m pip install pytest jsonschema
+      - name: Render accepted Lantern Current and build QA evidence
+        run: python tools/render_cr06_qa_dogfood.py --output dist/cr06-qa
+      - name: Validate focused CR06 regressions
+        run: python -m pytest -q tests/test_cr06_evidence_first_qa.py
+      - name: Verify portable hashes
+        working-directory: dist/cr06-qa
+        run: sha256sum -c SHA256SUMS.txt
+      - name: Upload QA evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cr06-lantern-qa
+          path: dist/cr06-qa
+          if-no-files-found: error
+          retention-days: 30
