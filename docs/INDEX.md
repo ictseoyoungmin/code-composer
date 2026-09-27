@@ -57,4 +57,4 @@ Historical files may mention paths or terminology that were current when that ev
 - [**CR05 — Fast Preview / Incremental Render**](architecture/CR05_FAST_PREVIEW_INCREMENTAL_RENDER.md) — **CLOSED**.
 - [**CR06 — Evidence-first QA**](architecture/CR06_EVIDENCE_FIRST_QA.md) — **CLOSED**.
 - [**CR07 — Broader Orchestration Dogfood**](architecture/CR07_BROADER_ORCHESTRATION.md) — **CLOSED**.
-- [**CR08 — Resonant Release Semantics / Plucked Instrument Tail Authority**](architecture/CR08_RESONANT_RELEASE.md) — **LISTENING PASS / PRE-MERGE CLOSURE**.
+- [**CR08 — Resonant Release Semantics / Plucked Instrument Tail Authority**](architecture/CR08_RESONANT_RELEASE.md) — **CLOSED**.
