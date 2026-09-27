@@ -1,0 +1,74 @@
+{
+  "schema": "code-composer-cr06-closure/v1",
+  "slice": "CR06",
+  "status": "CLOSED",
+  "name": "Evidence-first QA",
+  "issue": 33,
+  "pull_request": 35,
+  "validated_candidate_head": "c21b185306c541d4d48492b6119c17c2bcf8d6af",
+  "merge_sha": "8051ccb1f487d1cb399d46ceec8282f42184d51e",
+  "pre_merge_ci": {
+    "run_number": 109,
+    "run_id": 36312259836,
+    "checkout_hygiene": "success",
+    "python_3_10": "success",
+    "python_3_12": "success",
+    "tests": "747 passed, 3 deselected"
+  },
+  "dogfood": {
+    "run_number": 12,
+    "run_id": 36312259864,
+    "status": "success",
+    "artifact_id": 10929044584,
+    "artifact_digest": "sha256:f655fab5ad4bc8d30fb306c381199f6c76511955e95f008f8461231fb8fa609c",
+    "portable_hashes": "all pass",
+    "hard_gate_status": "PASS",
+    "hard_gate_failure_count": 0,
+    "location_bound_contract": {
+      "dynamics_windows": true,
+      "register_event_locations": true,
+      "phrase_gap_locations": true,
+      "repetition_occurrences": true,
+      "voice_motion_locations": true,
+      "masking_overlap_regions": true
+    },
+    "target_mutation": {
+      "detected": true,
+      "improvement_verdict": false,
+      "aesthetic_ranking": false
+    }
+  },
+  "regression_dogfoods": {
+    "cr03": {
+      "run_number": 39,
+      "status": "success"
+    },
+    "cr04": {
+      "run_number": 13,
+      "status": "success"
+    },
+    "cr05": {
+      "run_number": 15,
+      "status": "success"
+    }
+  },
+  "post_merge_ci": {
+    "run_number": 110,
+    "run_id": 36312447527,
+    "checkout_hygiene": "success",
+    "python_3_10": "success",
+    "python_3_12": "success",
+    "tests": "747 passed, 3 deselected"
+  },
+  "evidence_usability_gate": {
+    "required": true,
+    "verdict": "PASS",
+    "authority": "artifact inspection against CR06 closure contract",
+    "aesthetic_authority": false,
+    "automatic_revision_authority": false
+  },
+  "next_slice": {
+    "id": "CR07",
+    "name": "Broader Orchestration Dogfood"
+  }
+}
