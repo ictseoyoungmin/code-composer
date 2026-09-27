@@ -1,0 +1,142 @@
+{
+  "format": "code-composer-song/v1",
+  "meta": {
+    "title": "Silk Afterimage",
+    "global_seed": 260927081,
+    "revision": "cr08-dogfood-r0"
+  },
+  "intent": {
+    "concept": "short resonant zither miniature for note-off tail authority",
+    "notes": [
+      "authored note gate remains short while physical string/body resonance may overlap later beats",
+      "pitch approaches and vibrato are explicit numeric performance expression, not ornament-name tail rules"
+    ]
+  },
+  "transport": {
+    "bpm": 112,
+    "meter": {
+      "beats_per_bar": 4,
+      "beat_unit": 4
+    }
+  },
+  "tonal": {
+    "root": "F#",
+    "scale": "natural_minor"
+  },
+  "sections": [
+    {
+      "id": "thread",
+      "name": "Thread",
+      "bars": 4,
+      "energy": 0.38,
+      "intent": "sparse short-gate plucks"
+    },
+    {
+      "id": "afterimage",
+      "name": "Afterimage",
+      "bars": 4,
+      "energy": 0.56,
+      "intent": "wider phrase with slides and longer resonance"
+    }
+  ],
+  "instruments": [
+    {
+      "id": "zither",
+      "name": "Resonant Zither",
+      "family": "gayageum",
+      "render_lock": {
+        "preset": "resonant_pluck.zither_bright",
+        "preset_version": "1.0.0"
+      }
+    },
+    {
+      "id": "keys",
+      "name": "Electric Keys",
+      "family": "piano",
+      "variant": "acoustic-grand",
+      "render_lock": {
+        "preset": "piano.electric_tine_warm",
+        "preset_version": "1.0.0"
+      }
+    }
+  ],
+  "tracks": [
+    {
+      "id": "zither-hook",
+      "name": "Zither Hook",
+      "function": "resonant-hook",
+      "instrument": "zither"
+    },
+    {
+      "id": "keys-floor",
+      "name": "Keys Floor",
+      "function": "soft-floor",
+      "instrument": "keys"
+    }
+  ],
+  "materials": [
+    {
+      "id": "zither-cell",
+      "kind": "motif",
+      "intervals": [
+        0,
+        3,
+        7,
+        5,
+        3
+      ],
+      "rhythm": [
+        0.5,
+        0.5,
+        1,
+        0.5,
+        1.5
+      ]
+    },
+    {
+      "id": "keys-cell",
+      "kind": "progression",
+      "degrees": [
+        1
+      ],
+      "rhythm": [
+        4
+      ]
+    }
+  ],
+  "parts": [
+    {
+      "id": "thread-z",
+      "section": "thread",
+      "track": "zither-hook",
+      "material": "zither-cell",
+      "repeats": 4
+    },
+    {
+      "id": "thread-k",
+      "section": "thread",
+      "track": "keys-floor",
+      "material": "keys-cell",
+      "repeats": 4
+    },
+    {
+      "id": "after-z",
+      "section": "afterimage",
+      "track": "zither-hook",
+      "material": "zither-cell",
+      "repeats": 4
+    },
+    {
+      "id": "after-k",
+      "section": "afterimage",
+      "track": "keys-floor",
+      "material": "keys-cell",
+      "repeats": 4
+    }
+  ],
+  "locks": {
+    "bpm": 112,
+    "root": "F#",
+    "scale": "natural_minor"
+  }
+}
