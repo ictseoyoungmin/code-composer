@@ -1,3 +1,28 @@
+## v1.18.0 — Composer-first CR00–CR08 — 2026-09-27
+
+- Replaces the pre-refactor seed-first / fixed-role composition authority with the Composer-first **Song → Execution Plan → Performance Score → resolved IR** pipeline.
+- Adds the minimal `code-composer-song/v1` authored contract with arbitrary track identity/function instead of privileged `lead/topline/pad/bass/arp/drums` authoring roles.
+- Adds deterministic lowering and explicit instrument resolution with provenance; unknown families require explicit preset locks rather than silent generic fallback.
+- Adds exact Composer-authored Performance Score authority for pitched notes, drum hits, voicings, timing, articulation, controls and mix intent.
+- Adds targeted revision plans/records with before/plan/after fingerprints and matched A/B provenance.
+- Adds deterministic preview/range rendering with stateful full-timeline dry-stem reuse and cache provenance.
+- Separates hard integrity QA from descriptive musical evidence; no aggregate aesthetic score, automatic aesthetic acceptance or analyzer-authored revision.
+- Dogfoods broader orchestration across band, chamber and electronic ensembles while preserving arbitrary authored track functions end-to-end.
+- Adds explicit drum-hit Performance Score semantics instead of pitched-note percussion surrogates.
+- Adds opt-in `resonant_pluck` / `resonant_pluck.zither_bright`, separating authored note gate duration from physical resonator lifetime through engine-owned `tail_seconds(patch)`.
+- CR08 closure baseline: final main before release prep `16887e73979b7b8a34b613179c05b29b84d5430a`; final CI #130 SUCCESS.
+- Release line remains deterministic/model-free: the agent/user makes musical decisions; contracts preserve and validate those decisions rather than choosing the music.
+
+### Breaking authoring change
+
+The historical CompositionBrief / seed-first / six-role path is retained only as a pre-refactor reference. v1.18.0 does not add a compatibility/migration layer for that authoring architecture.
+
+### Validation
+
+- CR00–CR08 canonical CLOSED with human/perceptual gates where required.
+- CR08 engineering blocking suite: Python 3.10 and 3.12 each **763 passed / 3 deselected**.
+- Known hosted-runner-sensitive legacy drum byte-exact probes remain visible non-blocking evidence under Issue #2; golden hashes were not silently rebased.
+
 ## Documentation status normalization after S31 — 2026-09-23
 - Documentation-only cleanup; no runtime, schema, synthesis, arrangement, or rendering behavior changes.
 - S31 runtime closure commit is `1f820e682420e9e01ee31aadff024561c88f404d` after PR #11 and post-merge CI #44 SUCCESS; subsequent documentation-only commits do not alter runtime behavior.

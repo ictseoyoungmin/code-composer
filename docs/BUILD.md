@@ -19,7 +19,7 @@ dynamic = ["version"]
 version = {attr = "code_composer.__version__"}
 ```
 
-The skill `VERSION` file must match the package version for the current release line.
+The skill `VERSION` file must match the package version for the current release line. Codex and Claude plugin manifests must match it as well; `tools/verify_release_version.py` enforces the release-facing version surfaces.
 
 ## Runtime wheel
 
