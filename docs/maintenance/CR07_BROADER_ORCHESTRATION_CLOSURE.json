@@ -76,5 +76,16 @@
     "id": "CR08",
     "name": "Resonant Release Semantics / Plucked Instrument Tail Authority",
     "status": "candidate"
+  },
+  "closure_head": "d9be0b6dbd8294972590e66b29d95efb26864cf4",
+  "merge_sha": "b87601966ca4d6196f0c0d4e1a46b86785d5fb95",
+  "post_merge_ci": {
+    "run_number": 121,
+    "run_id": 36316604716,
+    "checkout_hygiene": "success",
+    "python_3_10": "success",
+    "python_3_12": "success",
+    "blocking_tests": "758 passed, 3 deselected",
+    "status": "success"
   }
 }
