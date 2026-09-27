@@ -32,12 +32,14 @@ def _ensure_builtins() -> None:
     from .bowed_string import BowedStringEngine
     from .bowed_waveguide import BowedWaveguideEngine
     from .plucked_bass import PluckedBassEngine
+    from .resonant_pluck import ResonantPluckEngine
     from .percussion import PercussionEngine
     register_engine(GenericSynthEngine())
     register_engine(PianoEngine())
     register_engine(BowedStringEngine())
     register_engine(BowedWaveguideEngine())
     register_engine(PluckedBassEngine())
+    register_engine(ResonantPluckEngine())
     register_engine(PercussionEngine())
     _BUILTINS_READY = True
 
