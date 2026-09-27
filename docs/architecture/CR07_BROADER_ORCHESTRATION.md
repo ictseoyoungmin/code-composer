@@ -105,3 +105,11 @@ Perceptual authority:
 
 The known runner-sensitive legacy drum byte-exact probe tracked by Issue #2 remains
 non-blocking and does not override the successful blocking regression suite.
+
+
+### Canonical merge evidence
+
+- closure HEAD before merge: `d9be0b6dbd8294972590e66b29d95efb26864cf4`
+- PR #38 squash merge: `b87601966ca4d6196f0c0d4e1a46b86785d5fb95`
+- post-merge main CI #121 / run `36316604716`: SUCCESS
+- Python 3.10 / 3.12 blocking regression: `758 passed / 3 deselected` each
