@@ -55,4 +55,4 @@ Historical files may mention paths or terminology that were current when that ev
 - [**CR03 — First Artistic Bottleneck: Piano + Violin**](architecture/CR03_PIANO_VIOLIN_BOTTLENECK.md) — **CLOSED**.
 - [**CR04 — Listen / Critique / Revision**](architecture/CR04_LISTEN_CRITIQUE_REVISION.md) — **CLOSED**.
 - [**CR05 — Fast Preview / Incremental Render**](architecture/CR05_FAST_PREVIEW_INCREMENTAL_RENDER.md) — **CLOSED**.
-- [**CR06 — Evidence-first QA**](architecture/CR06_EVIDENCE_FIRST_QA.md) — **ENGINEERING / EVIDENCE-USABILITY CANDIDATE**.
+- [**CR06 — Evidence-first QA**](architecture/CR06_EVIDENCE_FIRST_QA.md) — **CLOSED**.\n- **CR07 — Broader Orchestration Dogfood** — next active engineering slice.
