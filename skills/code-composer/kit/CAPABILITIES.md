@@ -3,7 +3,7 @@
 | Capability | Purpose | Public surface |
 |---|---|---|
 | Render | Validate and render canonical Music IR | `code-composer` |
-| Song / artistic performance path | Validate Song, lower deterministic Execution Plan, and render an authored exact Performance Score | `code-composer-song` |
+| Song / artistic performance path | Validate Song, lower deterministic Execution Plan, and render an authored exact Performance Score, including explicit pitched-note, drum-hit, and supported control events | `code-composer-song` |
 | Listen / critique / revision | Apply Composer-authored targeted Performance Score revisions with exact provenance and matched A/B rendering | `code-composer-song revise` / `compare-revision` |
 | Fast incremental preview | Cache deterministic full-timeline dry stems and preview selected bars/tracks without re-synthesizing unchanged tracks | `code-composer-song preview` |
 | Evidence-first QA | Separate objective integrity blocking from descriptive musical evidence; target changes are recorded, never self-certified as improvement | `code-composer-song qa` |

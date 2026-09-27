@@ -20,6 +20,7 @@ realization, and rendering.
 - unknown instrument families are allowed only when the Composer supplies an explicit
   compatible `render_lock.preset`; CR07 does **not** add a generic fallback.
 - Performance Score and realized IR must cover the exact authored track set.
+- Performance Score v1 carries explicit `drum` hit events for percussion engines; pitched-note drum surrogates are rejected before render.
 - rendering remains deterministic and provenance-bound.
 
 ## Dogfood set
@@ -53,3 +54,29 @@ requires listening to the three rendered miniatures and confirming they sound li
 coherent excerpts rather than broken orchestration-path fixtures.
 
 No automatic genre score, aesthetic score, or preferred ensemble is introduced.
+
+
+## CR07 blocker resolved — explicit drum-hit authority
+
+The first real band/electronic render exposed a missing Composer-first contract:
+Performance Score v1 could author pitched notes and piano sustain controls, while the
+percussion engine intentionally accepts explicit drum events only.
+
+CR07 therefore adds one narrow public event type:
+
+```json
+{
+  "id": "d-b1-k1",
+  "type": "drum",
+  "start_beat": 0.0,
+  "duration_beats": 0.16,
+  "drum": "kick",
+  "velocity": 0.48
+}
+```
+
+This is authored musical/performance state, not inferred orchestration. The bridge
+lowers it one-to-one to the existing runtime `event_type: "drum"` surface. A
+percussion engine rejects pitched-note surrogates; a non-percussion engine rejects a
+drum hit. Continuous hi-hat pedal control remains outside CR07 rather than being
+implicitly invented.
