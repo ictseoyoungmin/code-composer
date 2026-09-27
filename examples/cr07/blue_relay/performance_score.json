@@ -86,11 +86,11 @@
         },
         {
           "id": "s-3-b",
-          "type": "drum",
+          "type": "note",
           "start_beat": 9.5,
           "duration_beats": 0.45,
-          "velocity": 0.36,
-          "drum": "hat"
+          "midi": 42,
+          "velocity": 0.36
         },
         {
           "id": "s-3-c",

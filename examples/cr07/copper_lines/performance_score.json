@@ -435,27 +435,27 @@
         },
         {
           "id": "b-3-1",
-          "type": "drum",
+          "type": "note",
           "start_beat": 8,
           "duration_beats": 1.75,
-          "velocity": 0.48,
-          "drum": "kick"
+          "midi": 36,
+          "velocity": 0.48
         },
         {
           "id": "b-3-2",
-          "type": "drum",
+          "type": "note",
           "start_beat": 10,
           "duration_beats": 1.6,
-          "velocity": 0.42,
-          "drum": "kick"
+          "midi": 36,
+          "velocity": 0.42
         },
         {
           "id": "b-4-1",
-          "type": "drum",
+          "type": "note",
           "start_beat": 12,
           "duration_beats": 1.75,
-          "velocity": 0.48,
-          "drum": "snare"
+          "midi": 38,
+          "velocity": 0.48
         },
         {
           "id": "b-4-2",
@@ -515,11 +515,11 @@
         },
         {
           "id": "b-8-1",
-          "type": "drum",
+          "type": "note",
           "start_beat": 28,
           "duration_beats": 1.75,
-          "velocity": 0.48,
-          "drum": "snare"
+          "midi": 38,
+          "velocity": 0.48
         },
         {
           "id": "b-8-2",
