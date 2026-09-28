@@ -101,6 +101,7 @@ def _render_ag01_modal_bridge_body(
     graph: dict,
     *,
     velocity: float,
+    mechanics: dict | None = None,
 ):
     gate_s = max(1e-5, float(gate_duration_s))
     tail_s = max(0.0, float(graph.get("natural_tail_s", 2.20)))
@@ -108,7 +109,12 @@ def _render_ag01_modal_bridge_body(
     active_n = min(n, max(1, int(gate_s * sr)))
 
     bridge = render_steel_string_bridge_drive(
-        int(midi), n, int(sr), graph, velocity=float(velocity)
+        int(midi),
+        n,
+        int(sr),
+        graph,
+        velocity=float(velocity),
+        mechanics=mechanics,
     )
 
     # Note-off damps string energy, but authored gate duration is not the same as
@@ -148,12 +154,24 @@ def render_acoustic_guitar_note(
     velocity: float = 1.0,
     performance: dict | None = None,
 ):
-    del performance
     graph = patch.get("acoustic_guitar_graph", {})
     model = graph.get("physical_model")
+    mechanics = None
+    if (
+        model == "ag01_modal_bridge_body_v2"
+        and isinstance(performance, dict)
+        and isinstance(performance.get("guitar_realization"), dict)
+    ):
+        mechanics = performance["guitar_realization"]
+
     if model in {"ag01_modal_bridge_body_v1", "ag01_modal_bridge_body_v2"}:
         return _render_ag01_modal_bridge_body(
-            midi, gate_duration_s, sr, graph, velocity=velocity
+            midi,
+            gate_duration_s,
+            sr,
+            graph,
+            velocity=velocity,
+            mechanics=mechanics,
         )
     return _render_foundation_baseline(
         midi, gate_duration_s, sr, graph, velocity=velocity
