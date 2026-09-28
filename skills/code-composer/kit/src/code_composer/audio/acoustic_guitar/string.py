@@ -128,6 +128,7 @@ def _render_triangular_pluck_bridge_force(
     graph: dict,
     *,
     velocity: float,
+    mechanics: dict | None = None,
 ):
     """R3 bridge-force model from a released triangular string displacement."""
     n = max(1, int(n))
@@ -146,6 +147,29 @@ def _render_triangular_pluck_bridge_force(
     decay_keytrack = float(graph.get("decay_keytrack", 0.014))
     fret_contact = max(0.0, min(1.0, float(graph.get("fret_contact", 0.26))))
     decay_key_scale = 2.0 ** (-decay_keytrack * (int(midi) - 52))
+
+    # AG02 is a bounded position layer over the CLOSED AG01 R3 source.
+    # No mechanics and the canonical reference position are deliberately inert.
+    if isinstance(mechanics, dict) and not bool(mechanics.get("position_is_reference", False)):
+        distance = max(0.0, min(1.0, float(mechanics.get("position_distance", 0.0))))
+        string_delta = (
+            int(mechanics.get("string", 3))
+            - int(mechanics.get("reference_string", 3))
+        ) / 5.0
+        fret_delta = (
+            int(mechanics.get("fret", 0))
+            - int(mechanics.get("reference_fret", 0))
+        ) / 20.0
+
+        # Keep the AG01 attack identity intact: do not alter noise seed, phase,
+        # contact-burst envelope, body coupling or pluck position here.
+        force_rolloff = max(
+            0.80, force_rolloff + 0.014 * string_delta + 0.008 * fret_delta
+        )
+        inharmonicity *= 1.0 + 0.025 * distance
+        base_decay *= 1.0 - 0.025 * distance
+        damping *= 1.0 + 0.035 * distance
+        fret_contact = min(1.0, fret_contact + 0.040 * distance)
 
     sig = np.zeros(n, dtype=np.float64)
     norm = 0.0
@@ -222,11 +246,12 @@ def render_steel_string_bridge_drive(
     graph: dict,
     *,
     velocity: float = 1.0,
+    mechanics: dict | None = None,
 ):
     model = str(graph.get("string_source_model", "ag01_legacy_modal_v1"))
     if model == "triangular_pluck_bridge_force_v2":
         return _render_triangular_pluck_bridge_force(
-            midi, n, sr, graph, velocity=velocity
+            midi, n, sr, graph, velocity=velocity, mechanics=mechanics
         )
     return _render_legacy_bridge_drive(midi, n, sr, graph, velocity=velocity)
 

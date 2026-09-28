@@ -1,3 +1,15 @@
+## v1.19.0 development — AG02 String / Fret / Position Authority — CLOSED — 2026-09-29
+
+- Rebuilds AG02 from the canonical AG01 R3 baseline rather than carrying forward the rejected pre-R3 tone assumptions.
+- Adds explicit standard-tuning string/fret authority with string 1 = high E and string 6 = low E, plus deterministic lowest-valid-fret resolution only when mechanics are unspecified.
+- Preserves authored valid string/fret choices exactly, fills only missing mechanics under partial authority, and hard-fails contradictory or unplayable positions.
+- Records resolved mechanics in `performance.guitar_realization` and `guitar_performance_report` without changing authored MIDI, onset, duration, or velocity.
+- Preserves AG01 R3 sample-exactly for both no-mechanics and canonical-reference positions across E2/E3/E4.
+- Limits alternate-position changes to bounded bridge-force rolloff, stiffness/inharmonicity, decay, damping, and fret-contact loss; noise seed, coherent phase, contact burst, pluck position, body modes, and bridge/body coupling remain unchanged.
+- Actual-branch evidence passes with A==B sample-exact and alternate-position delta/RMS of 0.009599 (E4), 0.011550 (E3), and 0.013169 (C4).
+- Engineering closure: CI #176 SUCCESS; Python 3.10 / 3.12 each 798 passed; AG02 R3 Evidence #1, AG01 R3 Evidence #7, and CR03 Piano/Violin Dogfood #59 all SUCCESS.
+- Human A/B/C listening PASS on 2026-09-29 closes AG02. Pre-R3 PR #58 remains closed and unmerged.
+
 ## v1.19.0 development — AG01 R3 High-Register Fidelity — CLOSED — 2026-09-29
 
 - Reopens and re-closes AG01 after isolated E4 listening exposed a guitar-identity gap that montage-level listening had masked.

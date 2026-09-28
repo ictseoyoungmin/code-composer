@@ -90,7 +90,7 @@ def validate_authoring_patch(role: str, patch: dict) -> None:
 
 
 def engine_capabilities(patch: dict) -> dict:
-    return engine_for_patch(patch).describe()
+    return engine_for_patch(patch).describe(patch)
 
 
 __all__ = [

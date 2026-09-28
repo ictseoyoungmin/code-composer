@@ -52,6 +52,7 @@ def render_song_score_to_files(
         "execution_plan_fingerprint": execution_plan_fingerprint(plan),
         "performance_score_fingerprint": performance_score_fingerprint(score),
         "violin_performance_report": realized_ir.get("violin_performance_report"),
+        "guitar_performance_report": realized_ir.get("guitar_performance_report"),
     }
 
 

@@ -87,6 +87,12 @@ class InstrumentEngine:
                 f"{subject}: engine {self.name!r} does not support instrument_performance"
             )
 
+    def validate_note_performance_for_patch(
+        self, subject: str, payload: dict | None, patch: dict
+    ) -> None:
+        """Patch-aware note-mechanics validation with backward-compatible default."""
+        self.validate_note_performance(subject, payload)
+
     def validate_action_event(self, subject: str, event: dict) -> None:
         """Validate an authored non-note instrument action.
 
@@ -109,8 +115,11 @@ class InstrumentEngine:
     def capabilities(self) -> EngineCapabilities:
         return EngineCapabilities(name=self.name)
 
-    def describe(self) -> dict[str, Any]:
-        c = self.capabilities()
+    def capabilities_for_patch(self, patch: dict) -> EngineCapabilities:
+        return self.capabilities()
+
+    def describe(self, patch: dict | None = None) -> dict[str, Any]:
+        c = self.capabilities_for_patch(patch) if patch is not None else self.capabilities()
         return {
             "name": c.name,
             "aliases": list(self.aliases),
