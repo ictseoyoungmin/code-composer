@@ -37,7 +37,7 @@
       "format": "code-composer-factory-preset/v1",
       "preset_id": "acoustic_guitar.steel_single_string",
       "version": "1.0.0",
-      "name": "Steel Acoustic Guitar — AG01 Single-String Baseline",
+      "name": "Steel Acoustic Guitar — AG01 R3 Accepted Baseline",
       "engine": "acoustic_guitar",
       "family": "acoustic_guitar",
       "character": [
@@ -45,15 +45,15 @@
         "single-string",
         "physical-parametric",
         "bridge-body-coupled",
-        "ag01-accepted-baseline"
+        "ag01-r3-accepted-baseline"
       ],
       "strengths": [
+        "uses a triangular-pluck bridge-force spectrum with coherent release phase instead of an arbitrary harmonic phase cloud",
         "separates steel-string source, bridge transfer and guitar-body/air radiation into a causal rendering path",
-        "bounded stiffness, pluck-position spectral nulls and frequency-dependent damping avoid a static harmonic oscillator bank",
-        "retains authored gate separately from residual string/body decay for matched single-note listening"
+        "uses a short colored pick/string contact burst without a separate pitched click oscillator"
       ],
       "limitations": [
-        "AG01 accepted single-string steel-string baseline; full six-string/fret authority remains AG02 work",
+        "AG01 closes only the single-string steel-string acoustic core; full six-string/fret authority remains AG02 work",
         "finger/nail/pick mechanics, articulation, strum, percussion and persistent six-string coupling remain AG03-AG08 work",
         "generic project-authored modal body values are not a measured or named-instrument response"
       ],

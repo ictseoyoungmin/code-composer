@@ -47,7 +47,7 @@ class AcousticGuitarEngine(InstrumentEngine):
             )
 
         model = graph.get("physical_model")
-        if model not in {None, "ag01_modal_bridge_body_v1"}:
+        if model not in {None, "ag01_modal_bridge_body_v1", "ag01_modal_bridge_body_v2"}:
             raise InstrumentEngineValidationError(
                 f"{subject}.acoustic_guitar.physical_model unsupported: {model!r}"
             )
@@ -56,6 +56,7 @@ class AcousticGuitarEngine(InstrumentEngine):
             ("max_partials", 1, 48),
             ("pluck_position", 0.03, 0.49),
             ("partial_rolloff", 0.45, 3.0),
+            ("bridge_force_rolloff", 0.80, 2.0),
             ("string_inharmonicity", 0.0, 0.003),
             ("base_decay_s", 0.05, 8.0),
             ("frequency_damping", 0.0, 2.0),
@@ -98,6 +99,12 @@ class AcousticGuitarEngine(InstrumentEngine):
                     raise InstrumentEngineValidationError(
                         f"{subject}.acoustic_guitar.max_partials must be integer"
                     )
+
+        source_model = graph.get("string_source_model")
+        if source_model not in {None, "ag01_legacy_modal_v1", "triangular_pluck_bridge_force_v2"}:
+            raise InstrumentEngineValidationError(
+                f"{subject}.acoustic_guitar.string_source_model unsupported: {source_model!r}"
+            )
 
         if "seed" in graph and not isinstance(graph["seed"], int):
             raise InstrumentEngineValidationError(

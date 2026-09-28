@@ -1,6 +1,6 @@
 # AG01 — Single-String Steel Acoustic Core Closure
 
-Status: **CANONICAL CLOSED · HUMAN LISTENING PASS**
+Status: **CANONICAL CLOSED · R3 HUMAN LISTENING PASS**
 
 Target release: **v1.19.0**
 
@@ -55,3 +55,54 @@ AG01 closes only the single-string audible core. It does **not** close:
 ## Provenance
 
 The model remains independently implemented and uses generic project-authored modal body values. It bundles no third-party guitar code, recordings, IRs, measured modal tables, FEM meshes, or named-instrument fitted responses.
+
+
+## 2026-09-29 reopen audit
+
+The prior closure is revoked. Individual E4 listening failed the original closure
+criterion: a single authored note must independently read as generic steel-string
+acoustic guitar.
+
+This is not downstream AG02 drift. The previously passed R2 E4 listening WAV and
+the current canonical R2 E4 render were directly compared after RMS matching:
+
+- waveform correlation: 0.999999379
+- relative waveform error: 0.113762%
+
+The underlying E4 timbre was therefore already present at the previous closure.
+The defect was the closure protocol: montage-level listening allowed E2/E3 context
+to mask weak E4 instrument identity.
+
+## R3 bottleneck
+
+R3 replaces the arbitrary harmonic phase cloud and separate 2.8 kHz pitched click
+with a physically constrained source:
+
+- triangular released-pluck modal spectrum;
+- bridge-force-like approximately 1/n modal falloff with pluck-position nulls;
+- coherent zero-initial-velocity release phase;
+- bounded stiffness and frequency-dependent damping;
+- short colored contact burst instead of a pitched click oscillator;
+- the existing causal bridge -> body/air radiation stage remains explicit.
+
+The triangular-pluck spectral structure follows the standard ideal-string
+initial-condition model; R3 remains an independent implementation and does not
+bundle third-party audio, IRs, code, or fitted named-instrument data.
+
+## Revised human closure gate — PASSED
+
+AG01 re-closes only because **E2, E3 and E4 each passed independent listening**.
+A montage remains supplemental evidence and cannot substitute for per-note closure.
+
+R3 accepted evidence:
+- PR #59 engineering HEAD before closure metadata: `50712147510bfb1ab794baf87ec517976bbb1639`;
+- CI #170 — SUCCESS;
+- Python 3.10: 785 passed;
+- Python 3.12: 785 passed;
+- AG01 R3 Evidence #2 — SUCCESS;
+- 24 kHz per-note soft/mid/hard actual-branch renders;
+- explicit user verdict on 2026-09-29: **PASS**.
+
+The accepted R3 source is `triangular_pluck_bridge_force_v2` under
+`physical_model=ag01_modal_bridge_body_v2`. AG02 may resume only from this
+canonical baseline.

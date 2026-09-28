@@ -151,7 +151,7 @@ def render_acoustic_guitar_note(
     del performance
     graph = patch.get("acoustic_guitar_graph", {})
     model = graph.get("physical_model")
-    if model == "ag01_modal_bridge_body_v1":
+    if model in {"ag01_modal_bridge_body_v1", "ag01_modal_bridge_body_v2"}:
         return _render_ag01_modal_bridge_body(
             midi, gate_duration_s, sr, graph, velocity=velocity
         )
