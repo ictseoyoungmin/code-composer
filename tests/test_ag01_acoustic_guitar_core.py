@@ -21,7 +21,8 @@ def test_ag01_baseline_and_foundation_remain_distinct_available_paths():
     foundation = materialize_preset("acoustic_guitar.steel_foundation", version="1.0.0")
     baseline = _baseline()
     assert foundation["acoustic_guitar_graph"].get("physical_model") is None
-    assert baseline["acoustic_guitar_graph"]["physical_model"] == "ag01_modal_bridge_body_v1"
+    assert baseline["acoustic_guitar_graph"]["physical_model"] == "ag01_modal_bridge_body_v2"
+    assert baseline["acoustic_guitar_graph"]["string_source_model"] == "triangular_pluck_bridge_force_v2"
     assert engine_for_patch(baseline).name == "acoustic_guitar"
 
 
@@ -95,3 +96,45 @@ def test_ag01_e2_e4_level_does_not_collapse_with_pitch():
         audio = render_acoustic_guitar_note(52 if midi == 52 else midi, 0.45, 24000, patch, velocity=0.65)
         rms.append(float(np.sqrt(np.mean(audio * audio))))
     assert max(rms) / min(rms) < 1.35
+
+
+def test_ag01_r3_removes_separate_pitched_click_oscillator():
+    patch = _baseline()
+    graph = patch["acoustic_guitar_graph"]
+    assert graph["release_click_gain"] == 0.0
+    assert graph["excitation_noise_gain"] > 0.0
+    assert graph["excitation_decay_s"] < 0.012
+
+
+def test_ag01_r3_high_register_is_not_the_rejected_r2_signal():
+    r3 = _baseline()
+    r2 = _baseline(
+        physical_model="ag01_modal_bridge_body_v1",
+        string_source_model="ag01_legacy_modal_v1",
+        pluck_position=0.16,
+        partial_rolloff=0.86,
+        string_inharmonicity=0.000045,
+        base_decay_s=2.35,
+        frequency_damping=0.11,
+        damping_power=1.35,
+        decay_keytrack=0.012,
+        fret_contact=0.30,
+        string_release_ramp_s=0.00045,
+        excitation_noise_gain=0.040,
+        excitation_highpass_hz=850,
+        excitation_lowpass_hz=7200,
+        excitation_decay_s=0.018,
+        release_click_gain=0.018,
+        bridge_lowpass_hz=9200,
+        body_modal_mix=1.0,
+        body_mode_damping=1.0,
+        direct_bridge_mix=0.34,
+        air_mode_mix=0.11,
+        radiation_lowpass_hz=8800,
+        stereo_width=0.065,
+        body_drive=0.92,
+    )
+    a = render_acoustic_guitar_note(64, 0.45, 24000, r2, velocity=0.65)
+    b = render_acoustic_guitar_note(64, 0.45, 24000, r3, velocity=0.65)
+    assert a.shape == b.shape
+    assert float(np.sqrt(np.mean((a - b) ** 2))) > 1e-4
