@@ -1,10 +1,12 @@
 """Deterministic acoustic-guitar rendering.
 
-AG00's foundation path is retained byte-for-byte as the A baseline. AG01 adds an
-opt-in causal single-string candidate:
+AG00's foundation path remains the historical A baseline. AG01 established the
+accepted causal single-string core:
 steel string -> bridge drive -> guitar body / air radiation.
 
-The candidate remains a listening candidate until explicit human closure.
+AG02 may attach a resolved `performance.guitar_realization` containing physical
+string/fret identity. The renderer consumes that realization but never chooses or
+rewrites the fingering itself.
 """
 from __future__ import annotations
 
@@ -23,6 +25,7 @@ def _render_foundation_baseline(
     graph: dict,
     *,
     velocity: float,
+    mechanics: dict | None = None,
 ):
     """Exact AG00 provisional renderer retained for matched A/B."""
     gate_s = max(1e-5, float(gate_duration_s))
@@ -108,7 +111,12 @@ def _render_ag01_modal_bridge_body(
     active_n = min(n, max(1, int(gate_s * sr)))
 
     bridge = render_steel_string_bridge_drive(
-        int(midi), n, int(sr), graph, velocity=float(velocity)
+        int(midi),
+        n,
+        int(sr),
+        graph,
+        velocity=float(velocity),
+        mechanics=mechanics,
     )
 
     # Note-off damps string energy, but authored gate duration is not the same as
@@ -148,12 +156,21 @@ def render_acoustic_guitar_note(
     velocity: float = 1.0,
     performance: dict | None = None,
 ):
-    del performance
     graph = patch.get("acoustic_guitar_graph", {})
     model = graph.get("physical_model")
+    mechanics = None
+    if isinstance(performance, dict) and isinstance(
+        performance.get("guitar_realization"), dict
+    ):
+        mechanics = performance["guitar_realization"]
     if model == "ag01_modal_bridge_body_v1":
         return _render_ag01_modal_bridge_body(
-            midi, gate_duration_s, sr, graph, velocity=velocity
+            midi,
+            gate_duration_s,
+            sr,
+            graph,
+            velocity=velocity,
+            mechanics=mechanics,
         )
     return _render_foundation_baseline(
         midi, gate_duration_s, sr, graph, velocity=velocity
