@@ -122,6 +122,7 @@ def test_unspecified_fingering_is_deterministic():
     assert a == b
     assert (a["string"], a["fret"]) == (2, 1)
     assert a["authority"] == "deterministic_resolver"
+    assert a["position_is_reference"] is True
 
 
 def test_impossible_authored_position_is_hard_error():
@@ -154,20 +155,49 @@ def test_unplayable_pitch_is_hard_error():
         realize_instrument_mechanics(ir, plan)
 
 
-def test_same_midi_different_valid_positions_have_distinct_timbre():
+def test_ag01_reference_position_is_sample_exact_with_no_mechanics():
     patch = materialize_preset("acoustic_guitar.steel_single_string")
-    open_e = resolve_fingering(64, {"string": 1, "fret": 0})
-    b_string = resolve_fingering(64, {"string": 2, "fret": 5})
+    reference = resolve_fingering(64, {"string": 1, "fret": 0})
+    assert reference["position_is_reference"] is True
+    ag01 = render_acoustic_guitar_note(64, 0.45, 24000, patch, velocity=0.65)
+    ag02_reference = render_acoustic_guitar_note(
+        64, 0.45, 24000, patch, velocity=0.65,
+        performance={"guitar_realization": reference},
+    )
+    assert np.array_equal(ag01, ag02_reference)
+
+
+def test_unspecified_realization_preserves_ag01_sample_exact_output():
+    patch = materialize_preset("acoustic_guitar.steel_single_string")
+    out = _realized(64, None)
+    perf = out["tracks"][0]["events"][0]["performance"]
+    assert perf["guitar_realization"]["position_is_reference"] is True
+    ag01 = render_acoustic_guitar_note(64, 0.45, 24000, patch, velocity=0.65)
+    realized = render_acoustic_guitar_note(
+        64, 0.45, 24000, patch, velocity=0.65, performance=perf
+    )
+    assert np.array_equal(ag01, realized)
+
+
+def test_same_midi_alternate_position_is_distinct_but_bounded():
+    patch = materialize_preset("acoustic_guitar.steel_single_string")
+    reference = resolve_fingering(64, {"string": 1, "fret": 0})
+    alternate = resolve_fingering(64, {"string": 2, "fret": 5})
+    assert reference["position_is_reference"] is True
+    assert alternate["position_is_reference"] is False
     a = render_acoustic_guitar_note(
         64, 0.45, 24000, patch, velocity=0.65,
-        performance={"guitar_realization": open_e},
+        performance={"guitar_realization": reference},
     )
     b = render_acoustic_guitar_note(
         64, 0.45, 24000, patch, velocity=0.65,
-        performance={"guitar_realization": b_string},
+        performance={"guitar_realization": alternate},
     )
     assert a.shape == b.shape
-    assert float(np.sqrt(np.mean((a - b) ** 2))) > 1e-4
+    delta = float(np.sqrt(np.mean((a - b) ** 2)))
+    reference_rms = float(np.sqrt(np.mean(a * a)))
+    assert delta > 1e-6
+    assert delta / reference_rms < 0.20
     assert not np.array_equal(a, b)
 
 
