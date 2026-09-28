@@ -1,6 +1,6 @@
 # AG01 — Single-String Steel Acoustic Core Closure
 
-Status: **REOPEN · R3 HIGH-REGISTER FIDELITY**
+Status: **CANONICAL CLOSED · R3 HUMAN LISTENING PASS**
 
 Target release: **v1.19.0**
 
@@ -89,9 +89,20 @@ The triangular-pluck spectral structure follows the standard ideal-string
 initial-condition model; R3 remains an independent implementation and does not
 bundle third-party audio, IRs, code, or fitted named-instrument data.
 
-## Revised human closure gate
+## Revised human closure gate — PASSED
 
-AG01 may close again only when **E2, E3 and E4 each pass independent listening**.
-A montage may be supplemental evidence but cannot be the closure authority.
-Soft/mid/hard renders remain regression evidence. AG02 remains blocked until this
-per-note gate passes.
+AG01 re-closes only because **E2, E3 and E4 each passed independent listening**.
+A montage remains supplemental evidence and cannot substitute for per-note closure.
+
+R3 accepted evidence:
+- PR #59 engineering HEAD before closure metadata: `50712147510bfb1ab794baf87ec517976bbb1639`;
+- CI #170 — SUCCESS;
+- Python 3.10: 785 passed;
+- Python 3.12: 785 passed;
+- AG01 R3 Evidence #2 — SUCCESS;
+- 24 kHz per-note soft/mid/hard actual-branch renders;
+- explicit user verdict on 2026-09-29: **PASS**.
+
+The accepted R3 source is `triangular_pluck_bridge_force_v2` under
+`physical_model=ag01_modal_bridge_body_v2`. AG02 may resume only from this
+canonical baseline.
