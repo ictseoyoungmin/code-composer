@@ -1,3 +1,13 @@
+## v1.19.0 development — AG01 R3 High-Register Fidelity — CLOSED — 2026-09-29
+
+- Reopens and re-closes AG01 after isolated E4 listening exposed a guitar-identity gap that montage-level listening had masked.
+- Confirms the old passed R2 E4 and canonical R2 E4 were effectively the same timbre after gain match (waveform correlation 0.999999379), proving this was an AG01 closure-protocol defect rather than AG02 drift.
+- Replaces the arbitrary harmonic phase cloud and separate fixed 2.8 kHz pitched click with a triangular released-pluck / bridge-force source, coherent release phase, bounded stiffness/damping, and a short colored contact burst.
+- Promotes `acoustic_guitar.steel_single_string@1.0.0` to the R3 accepted baseline using `physical_model=ag01_modal_bridge_body_v2` and `string_source_model=triangular_pluck_bridge_force_v2`.
+- Keeps E2–E4 mid-velocity RMS max/min at 1.247396 (<1.35 gate) and passes the full blocking suite on Python 3.10/3.12.
+- Human closure is now per-note: E4, E3 and E2 were each listened to independently and explicitly passed on 2026-09-29.
+- Future acoustic-guitar slices must preserve this canonical baseline or explicitly REOPEN AG01.
+
 ## v1.19.0 development — AG01 Single-String Steel Acoustic Core — CLOSED — 2026-09-28
 
 - Establishes the accepted `acoustic_guitar.steel_single_string@1.0.0` single-string steel acoustic baseline.
