@@ -63,15 +63,60 @@ class AcousticGuitarEngine(InstrumentEngine):
             raise InstrumentEngineValidationError(
                 f"{subject}: acoustic-guitar instrument_performance must contain string and/or fret"
             )
-        unknown = set(payload) - {"string", "fret"}
+        unknown = set(payload) - {"string", "fret", "right_hand"}
         if unknown:
             raise InstrumentEngineValidationError(
-                f"{subject}: unsupported AG02 instrument_performance field(s): {sorted(unknown)}"
+                f"{subject}: unsupported acoustic-guitar instrument_performance field(s): {sorted(unknown)}"
             )
         if "string" in payload:
             _integer(payload["string"], f"{subject}.instrument_performance.string", 1, 6)
         if "fret" in payload:
             _integer(payload["fret"], f"{subject}.instrument_performance.fret", 0, 20)
+
+        if "right_hand" in payload:
+            right_hand = payload["right_hand"]
+            if not isinstance(right_hand, dict) or not right_hand:
+                raise InstrumentEngineValidationError(
+                    f"{subject}.instrument_performance.right_hand must be a non-empty object"
+                )
+            unknown_right = set(right_hand) - {
+                "method",
+                "pluck_position",
+                "attack_angle_deg",
+                "strength",
+            }
+            if unknown_right:
+                raise InstrumentEngineValidationError(
+                    f"{subject}: unsupported AG03 right_hand field(s): {sorted(unknown_right)}"
+                )
+            if "method" in right_hand and right_hand["method"] not in {
+                "finger", "thumb", "nail", "pick"
+            }:
+                raise InstrumentEngineValidationError(
+                    f"{subject}.instrument_performance.right_hand.method "
+                    "must be one of ['finger', 'thumb', 'nail', 'pick']"
+                )
+            if "pluck_position" in right_hand:
+                _num(
+                    right_hand["pluck_position"],
+                    f"{subject}.instrument_performance.right_hand.pluck_position",
+                    0.03,
+                    0.49,
+                )
+            if "attack_angle_deg" in right_hand:
+                _num(
+                    right_hand["attack_angle_deg"],
+                    f"{subject}.instrument_performance.right_hand.attack_angle_deg",
+                    0.0,
+                    90.0,
+                )
+            if "strength" in right_hand:
+                _num(
+                    right_hand["strength"],
+                    f"{subject}.instrument_performance.right_hand.strength",
+                    0.0,
+                    1.0,
+                )
 
     def _validate(self, subject, patch):
         if not isinstance(patch, dict):
