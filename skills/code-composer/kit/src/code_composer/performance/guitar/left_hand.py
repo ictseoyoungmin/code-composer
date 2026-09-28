@@ -107,8 +107,8 @@ def resolve_left_hand(
     if technique == "natural_harmonic":
         out.update({
             "harmonic_order": harmonic_order,
-            "tonal_scale": 0.88,
-            "excitation_scale": 0.72,
+            "tonal_scale": 0.68,
+            "excitation_scale": 0.62,
             "decay_scale": 0.86,
             "damping_scale": 0.82,
         })
