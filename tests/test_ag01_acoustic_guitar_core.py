@@ -11,7 +11,7 @@ VELOCITIES = (0.35, 0.65, 0.92)
 
 def _baseline(**overrides):
     return materialize_preset(
-        "acoustic_guitar.steel_single_string_baseline",
+        "acoustic_guitar.steel_single_string",
         version="1.0.0",
         patch_overrides={"acoustic_guitar_graph": overrides} if overrides else None,
     )
