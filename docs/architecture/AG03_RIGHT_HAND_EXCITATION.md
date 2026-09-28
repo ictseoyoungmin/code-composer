@@ -1,6 +1,6 @@
 # AG03 — Right-Hand Excitation
 
-Status: **IMPLEMENTATION CANDIDATE**
+Status: **CANONICAL CLOSED · HUMAN LISTENING PASS**
 
 Target release: **v1.19.0**
 
@@ -83,3 +83,27 @@ reported under `guitar_performance_report.tracks[*].right_hand_events`.
 8. blocking CI and upstream AG01/AG02 preservation evidence pass;
 9. actual-branch 24 kHz listening evidence compares the same pitch/string/fret/velocity;
 10. explicit human listening PASS is required before merge.
+
+
+## Closure evidence — 2026-09-29
+
+AG03 closes after the R2 method-separability correction and explicit human listening PASS.
+
+Authoritative evidence before closure metadata:
+- PR #62 implementation HEAD: `3a2e5640cab2dcc7f0eca3f8be43a873707539dc`;
+- CI #181 — SUCCESS;
+- Python 3.10 / 3.12: 809 passed each;
+- AG01 R3 Evidence #11 — SUCCESS;
+- AG02 R3 Evidence #5 — SUCCESS;
+- AG03 Right-Hand Evidence #3 — SUCCESS.
+
+R2 same-state method separation:
+- E4 pairwise delta/RMS: 1.56%–5.51%;
+- E3 pairwise delta/RMS: 1.37%–4.73%;
+- each method remains within roughly 0.8%–2.9% of the accepted AG02 baseline after RMS matching.
+
+Human verdict:
+- finger / thumb / nail / pick listening set: **PASS** on 2026-09-29.
+
+The accepted downstream frozen invariant for AG04+ is:
+no left-hand articulation / reference left-hand state must preserve the AG03 canonical right-hand-capable render path without changing AG01 tone, AG02 string/fret authority, or AG03 excitation semantics.
