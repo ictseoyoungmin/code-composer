@@ -69,7 +69,8 @@
       "body_drive": 0.92,
       "end_fade_s": 0.035,
       "output_gain": 0.82,
-      "seed": 11901
+      "seed": 11901,
+      "radiation_keytrack": 1.1
     }
   }
 }
