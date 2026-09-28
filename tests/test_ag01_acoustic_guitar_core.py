@@ -86,3 +86,12 @@ def test_ag01_velocity_increases_rms_for_same_note():
         audio = render_acoustic_guitar_note(52, 0.45, 24000, patch, velocity=velocity)
         rms.append(float(np.sqrt(np.mean(audio * audio))))
     assert rms[0] < rms[1] < rms[2]
+
+
+def test_ag01_e2_e4_level_does_not_collapse_with_pitch():
+    patch = _candidate()
+    rms = []
+    for midi in PITCHES:
+        audio = render_acoustic_guitar_note(52 if midi == 52 else midi, 0.45, 24000, patch, velocity=0.65)
+        rms.append(float(np.sqrt(np.mean(audio * audio))))
+    assert max(rms) / min(rms) < 1.35
