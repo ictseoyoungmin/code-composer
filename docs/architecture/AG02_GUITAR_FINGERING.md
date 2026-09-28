@@ -1,6 +1,6 @@
 # AG02 — String / Fret / Position Authority
 
-Status: **R3-BASELINED IMPLEMENTATION CANDIDATE**
+Status: **CANONICAL CLOSED · HUMAN A/B/C LISTENING PASS**
 
 Target release: **v1.19.0**
 
@@ -68,5 +68,21 @@ body percussion, or persistent six-string/body coupling. Those remain AG03–AG0
    B=AG02 reference, C=alternate position;
 10. explicit human listening PASS is required before canonical close.
 
-The old pre-R3 AG02 PR #58 and its listening evidence are superseded and cannot
-serve as closure evidence.
+## Closure evidence
+
+- authoritative PR: #60;
+- accepted implementation HEAD before closure metadata: `e6162aa69751f68a6aedec5e1b7a56eda628a307`;
+- CI #176 — SUCCESS;
+- Python 3.10 / 3.12: 798 passed each;
+- AG02 R3 Evidence #1 — SUCCESS;
+- AG01 R3 Evidence #7 — SUCCESS on the AG02 branch;
+- CR03 Piano/Violin Dogfood #59 — SUCCESS;
+- A/B reference preservation: sample-exact for every evidence case;
+- alternate-position delta/RMS:
+  - E4: 0.009599;
+  - E3: 0.011550;
+  - C4: 0.013169;
+- explicit user human listening verdict on 2026-09-29: **PASS**.
+
+The old pre-R3 AG02 PR #58 is CLOSED / NOT MERGED and its listening evidence is
+superseded. AG03 must preserve the AG01 R3 + AG02 string/fret authority invariants.
