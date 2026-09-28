@@ -13,6 +13,20 @@ def _num(value, name, lo, hi):
     return x
 
 
+def _integer(value, name, lo, hi):
+    if isinstance(value, bool):
+        raise InstrumentEngineValidationError(f"{name} must be integer")
+    if isinstance(value, int):
+        out = value
+    elif isinstance(value, float) and value.is_integer():
+        out = int(value)
+    else:
+        raise InstrumentEngineValidationError(f"{name} must be integer")
+    if not lo <= out <= hi:
+        raise InstrumentEngineValidationError(f"{name} outside [{lo},{hi}]")
+    return out
+
+
 class AcousticGuitarEngine(InstrumentEngine):
     """Acoustic-guitar engine boundary.
 
@@ -22,6 +36,15 @@ class AcousticGuitarEngine(InstrumentEngine):
 
     name = "acoustic_guitar"
     aliases = ("steel_string_guitar", "acoustic-guitar")
+    mechanics_realizer = "acoustic_guitar"
+
+    @staticmethod
+    def _supports_fingering(patch):
+        graph = patch.get("acoustic_guitar_graph", {}) if isinstance(patch, dict) else {}
+        return (
+            graph.get("physical_model") == "ag01_modal_bridge_body_v2"
+            and graph.get("string_source_model") == "triangular_pluck_bridge_force_v2"
+        )
 
     def render_note(self, midi, duration_s, sr, patch, *, velocity=1.0, performance=None):
         from ..acoustic_guitar import render_acoustic_guitar_note
@@ -32,6 +55,23 @@ class AcousticGuitarEngine(InstrumentEngine):
     def tail_seconds(self, patch):
         graph = patch.get("acoustic_guitar_graph", {}) if isinstance(patch, dict) else {}
         return max(0.0, float(graph.get("natural_tail_s", 0.45)))
+
+    def validate_note_performance_for_patch(self, subject, payload, patch):
+        if not self._supports_fingering(patch):
+            return super().validate_note_performance_for_patch(subject, payload, patch)
+        if not isinstance(payload, dict) or not payload:
+            raise InstrumentEngineValidationError(
+                f"{subject}: acoustic-guitar instrument_performance must contain string and/or fret"
+            )
+        unknown = set(payload) - {"string", "fret"}
+        if unknown:
+            raise InstrumentEngineValidationError(
+                f"{subject}: unsupported AG02 instrument_performance field(s): {sorted(unknown)}"
+            )
+        if "string" in payload:
+            _integer(payload["string"], f"{subject}.instrument_performance.string", 1, 6)
+        if "fret" in payload:
+            _integer(payload["fret"], f"{subject}.instrument_performance.fret", 0, 20)
 
     def _validate(self, subject, patch):
         if not isinstance(patch, dict):
@@ -140,6 +180,15 @@ class AcousticGuitarEngine(InstrumentEngine):
 
     def capabilities(self):
         return EngineCapabilities(name=self.name, extended_tail=True)
+
+    def capabilities_for_patch(self, patch):
+        enabled = self._supports_fingering(patch)
+        return EngineCapabilities(
+            name=self.name,
+            extended_tail=True,
+            instrument_performance=enabled,
+            mechanics_realization=enabled,
+        )
 
 
 __all__ = ["AcousticGuitarEngine"]
