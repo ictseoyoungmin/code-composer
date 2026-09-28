@@ -1,0 +1,42 @@
+name: AG02 R3 Evidence
+
+on:
+  pull_request:
+    paths:
+      - "skills/code-composer/kit/src/code_composer/audio/acoustic_guitar/**"
+      - "skills/code-composer/kit/src/code_composer/audio/engines/**"
+      - "skills/code-composer/kit/src/code_composer/performance/guitar/**"
+      - "skills/code-composer/kit/src/code_composer/performance/mechanics.py"
+      - "skills/code-composer/kit/src/code_composer/execution/**"
+      - "tests/test_ag02_guitar_fingering.py"
+      - "tools/render_ag02_r3_evidence.py"
+      - ".github/workflows/ag02-r3-evidence.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render-evidence:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: skills/code-composer/kit/src
+      AG02_R3_EVIDENCE_DIR: artifacts/ag02-r3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install render dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "numpy==2.2.6" "scipy==1.15.3"
+      - name: Render AG02-on-R3 A/B/C evidence
+        run: python tools/render_ag02_r3_evidence.py
+      - name: Upload AG02 R3 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ag02-r3-canonical-abc-24k
+          path: artifacts/ag02-r3
+          if-no-files-found: error
