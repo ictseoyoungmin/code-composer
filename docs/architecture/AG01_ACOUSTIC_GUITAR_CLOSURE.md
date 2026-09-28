@@ -55,3 +55,15 @@ AG01 closes only the single-string audible core. It does **not** close:
 ## Provenance
 
 The model remains independently implemented and uses generic project-authored modal body values. It bundles no third-party guitar code, recordings, IRs, measured modal tables, FEM meshes, or named-instrument fitted responses.
+
+## Downstream preservation contract
+
+AG01's human-listening-approved acoustic identity is a **frozen invariant** for AG02–AG09.
+
+- downstream mechanics must be implemented as bounded deltas over this baseline, not as a retune or replacement;
+- with no authored downstream mechanics, the AG01 canonical render must remain sample-exact;
+- a downstream reference position/state must also be acoustically inert relative to AG01 when its purpose is only to establish mechanics identity;
+- downstream listening evidence must begin with the immediately preceding canonical CLOSED result, not only two variants of the new slice;
+- if a downstream requirement cannot be met without materially changing the accepted AG01 identity, AG01 must be explicitly REOPENED and human listening closure rerun before merge.
+
+These invariants are enforced by regression tests; documentation alone is not sufficient closure authority.
