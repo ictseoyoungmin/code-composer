@@ -25,7 +25,6 @@ def _render_foundation_baseline(
     graph: dict,
     *,
     velocity: float,
-    mechanics: dict | None = None,
 ):
     """Exact AG00 provisional renderer retained for matched A/B."""
     gate_s = max(1e-5, float(gate_duration_s))
@@ -104,6 +103,7 @@ def _render_ag01_modal_bridge_body(
     graph: dict,
     *,
     velocity: float,
+    mechanics: dict | None = None,
 ):
     gate_s = max(1e-5, float(gate_duration_s))
     tail_s = max(0.0, float(graph.get("natural_tail_s", 2.20)))
