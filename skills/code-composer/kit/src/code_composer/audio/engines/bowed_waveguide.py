@@ -1267,6 +1267,7 @@ def render_bowed_waveguide_note(
 class BowedWaveguideEngine(InstrumentEngine):
     name = "bowed_waveguide"
     aliases = ("bowed-waveguide", "modeled_bowed_string")
+    mechanics_realizer = "violin"
 
     def render_note(self, midi, duration_s, sr, patch, *, velocity=1.0, performance=None):
         return render_bowed_waveguide_note(
@@ -1469,6 +1470,7 @@ class BowedWaveguideEngine(InstrumentEngine):
             name=self.name,
             track_rendering=True,
             extended_tail=True,
+            mechanics_realization=True,
             instrument_expression=(
                 "bow_pressure", "bow_speed", "bow_position", "bow_noise_gain",
                 "vibrato_rate_hz", "vibrato_depth_cents", "vibrato_onset_s",

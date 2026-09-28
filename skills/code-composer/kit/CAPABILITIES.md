@@ -28,7 +28,7 @@ The Composition Brief may carry explicit agent-authored motif variants and assig
 
 Performance IR harmonic anticipation can keep its historical explicit `target_degree` or, alternatively, use an explicit `arrival_binding` that points to `destination_progression` plus a concrete progression index. The runtime requires an S30 destination progression variant, validates the index, resolves the referenced scale degree, and writes lineage evidence to the realized transition event/report. It never chooses a cadence, progression, or index automatically.
 
-| Instrument engines | Registry-routed deterministic pitched-instrument engines; current built-ins: generic, piano, bowed_string, bowed_waveguide, plucked_bass, percussion | `contracts/instrument-engines.md` |
+| Instrument engines | Registry-routed deterministic pitched-instrument engines; current built-ins: generic, piano, bowed_string, bowed_waveguide, plucked_bass, resonant_pluck, percussion, acoustic_guitar | `contracts/instrument-engines.md` |
 
 ## Factory preset system
 
@@ -94,3 +94,9 @@ S15 adds an explicit deterministic ensemble-performance layer after phrase/orche
 - Authored note duration is the excitation/gate duration; the engine may render deterministic string/body resonance beyond note-off.
 - Maximum extra lifetime is reported through the engine `tail_seconds(patch)` contract so the renderer allocates the full tail.
 - Numeric pitch/vibrato/release-damping expression is supported; no song-specific ornament-to-tail table is inferred.
+
+## v1.19 AG00 acoustic-guitar foundation
+
+AG00 adds the `acoustic_guitar` engine boundary and a deliberately provisional `acoustic_guitar.steel_foundation` preset used only to prove end-to-end routing. Acoustic-guitar fidelity is **not** closed at AG00; AG01 owns the first listening bottleneck.
+
+The canonical Performance Score now has engine-scoped `instrument_performance` note payloads and `instrument_action` events. Core validation preserves deterministic structure while the resolved engine owns their semantics. Instrument mechanics realization is also engine-routed; the existing violin realization moved behind the bowed-waveguide engine hook without changing authored note authority.

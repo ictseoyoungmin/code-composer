@@ -28,6 +28,8 @@ _CANONICAL_DEFAULT_PRESETS = {
     ("bass", "electric-finger"): "bass.electric_finger_modeled",
     ("drums", None): "drums.acoustic_kit_modeled",
     ("drums", "acoustic-kit"): "drums.acoustic_kit_modeled",
+    ("acoustic_guitar", None): "acoustic_guitar.steel_foundation",
+    ("acoustic_guitar", "steel-string"): "acoustic_guitar.steel_foundation",
 }
 
 _CANONICAL_FAMILY_ENGINES = {
@@ -35,6 +37,7 @@ _CANONICAL_FAMILY_ENGINES = {
     "violin": "bowed_waveguide",
     "bass": "plucked_bass",
     "drums": "percussion",
+    "acoustic_guitar": "acoustic_guitar",
 }
 
 
