@@ -3,7 +3,7 @@ from __future__ import annotations
 from .composition.harmonic_grammar import COLOR_DEGREE_OFFSETS
 from .composition.orchestration import VALID_FOREGROUND_MODES
 from .audio.engines import (
-    engine_name_for_patch, validate_runtime_patch, InstrumentEngineValidationError,
+    engine_name_for_patch, engine_for_patch, validate_runtime_patch, InstrumentEngineValidationError,
 )
 
 DRUM_ROLES={"kick","snare","hat"}
@@ -440,6 +440,29 @@ def validate_harmony_progression_refs(ir):
         if progression_id is not None and progression_id not in progressions:
             raise ContractValidationError(f"{name}.progression_variant references unknown progression: {progression_id}")
 
+def validate_instrument_event_extensions(ir):
+    instruments = ir.get("instruments", {})
+    for track in ir.get("tracks", []):
+        patch = instruments.get(track.get("instrument"), {})
+        try:
+            engine = engine_for_patch(patch)
+        except InstrumentEngineValidationError as exc:
+            raise ContractValidationError(str(exc)) from exc
+        for i, event in enumerate(track.get("events", [])):
+            name = f"track {track.get('id','<unknown>')} event[{i}]"
+            perf = event.get("performance")
+            if isinstance(perf, dict) and "instrument" in perf:
+                try:
+                    engine.validate_note_performance(name, perf["instrument"])
+                except InstrumentEngineValidationError as exc:
+                    raise ContractValidationError(str(exc)) from exc
+            if event.get("event_type") == "instrument_action":
+                try:
+                    engine.validate_action_event(name, event)
+                except InstrumentEngineValidationError as exc:
+                    raise ContractValidationError(str(exc)) from exc
+
+
 def validate_runtime_extensions(ir):
     removed = REMOVED_ANALYZER_MUTATION_FIELDS & set(ir)
     if removed:
@@ -463,10 +486,11 @@ def validate_runtime_extensions(ir):
     validate_arrangement_profiles(ir,section_ids)
     validate_drum_control_events(ir)
     validate_piano_control_events(ir)
+    validate_instrument_event_extensions(ir)
 
 __all__=[
     "ContractValidationError","validate_transition_map","validate_development_config","validate_development_motif_refs",
     "validate_brief_harmony","validate_runtime_harmony","validate_harmony_progression_refs","validate_orchestration_config",
     "validate_brief_rhythm","validate_runtime_rhythm","validate_piano_instrument_patch","validate_instrument_patch",
-    "validate_arrangement_profiles","validate_drum_control_events","validate_piano_control_events","validate_runtime_extensions","REMOVED_ANALYZER_MUTATION_FIELDS",
+    "validate_arrangement_profiles","validate_drum_control_events","validate_piano_control_events","validate_instrument_event_extensions","validate_runtime_extensions","REMOVED_ANALYZER_MUTATION_FIELDS",
 ]

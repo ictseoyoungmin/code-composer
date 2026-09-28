@@ -1460,6 +1460,15 @@ class BowedWaveguideEngine(InstrumentEngine):
         _num(g.get("stereo_width", .09), f"{subject}.waveguide.stereo_width", 0, 1)
         _num(g.get("output_gain", .70), f"{subject}.waveguide.output_gain", 0, 3)
 
+    def realize_track_mechanics(self, ir, track_id, *, plan_instrument=None):
+        if not isinstance(plan_instrument, dict) or plan_instrument.get("family") != "violin":
+            return ir
+        from ...performance.violin import ViolinPerformanceError, realize_violin_performance
+        try:
+            return realize_violin_performance(ir, track_id, config={"strict_comfort": True})
+        except ViolinPerformanceError as exc:
+            raise InstrumentEngineValidationError(str(exc)) from exc
+
     def validate_ir_patch(self, subject, patch): self._validate(subject, patch)
     def validate_runtime_patch(self, subject, patch): self._validate(subject, patch)
     def validate_authoring_patch(self, role, patch): self._validate(role, patch)
@@ -1469,6 +1478,7 @@ class BowedWaveguideEngine(InstrumentEngine):
             name=self.name,
             track_rendering=True,
             extended_tail=True,
+            mechanics_realization=True,
             instrument_expression=(
                 "bow_pressure", "bow_speed", "bow_position", "bow_noise_gain",
                 "vibrato_rate_hz", "vibrato_depth_cents", "vibrato_onset_s",

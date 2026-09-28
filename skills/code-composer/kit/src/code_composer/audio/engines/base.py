@@ -16,6 +16,9 @@ class EngineCapabilities:
     track_post_process: bool = False
     extended_tail: bool = False
     instrument_expression: tuple[str, ...] = ()
+    instrument_performance: bool = False
+    instrument_actions: bool = False
+    mechanics_realization: bool = False
 
 
 class InstrumentEngine:
@@ -71,6 +74,38 @@ class InstrumentEngine:
     ):
         return stereo
 
+    def validate_note_performance(self, subject: str, payload: dict | None) -> None:
+        """Validate engine-scoped authored note mechanics.
+
+        The canonical Performance Score owns the payload, but only the resolved
+        instrument engine may assign meaning to its keys. Engines that do not opt
+        in reject the payload instead of silently ignoring musical intent.
+        """
+        if payload is not None:
+            raise InstrumentEngineValidationError(
+                f"{subject}: engine {self.name!r} does not support instrument_performance"
+            )
+
+    def validate_action_event(self, subject: str, event: dict) -> None:
+        """Validate an authored non-note instrument action.
+
+        Stateful engines may opt in for actions such as future guitar-body taps.
+        Unsupported actions are hard errors so the renderer never drops intent.
+        """
+        raise InstrumentEngineValidationError(
+            f"{subject}: engine {self.name!r} does not support instrument_action events"
+        )
+
+    def realize_track_mechanics(
+        self,
+        ir: dict,
+        track_id: str,
+        *,
+        plan_instrument: dict | None = None,
+    ) -> dict:
+        """Attach engine-owned physical realization without changing authored notes."""
+        return ir
+
     def validate_ir_patch(self, subject: str, patch: dict) -> None:
         return None
 
@@ -93,4 +128,7 @@ class InstrumentEngine:
             "track_post_process": c.track_post_process,
             "extended_tail": c.extended_tail,
             "instrument_expression": list(c.instrument_expression),
+            "instrument_performance": c.instrument_performance,
+            "instrument_actions": c.instrument_actions,
+            "mechanics_realization": c.mechanics_realization,
         }

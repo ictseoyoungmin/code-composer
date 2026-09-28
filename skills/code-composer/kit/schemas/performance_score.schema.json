@@ -128,6 +128,12 @@
           "type": "number",
           "minimum": -20,
           "maximum": 20
+        },
+        "instrument_performance": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/instrument_payload_value"
+          }
         }
       }
     },
@@ -191,6 +197,9 @@
         },
         {
           "$ref": "#/$defs/drum_hit"
+        },
+        {
+          "$ref": "#/$defs/instrument_action"
         },
         {
           "$ref": "#/$defs/sustain_pedal"
@@ -365,6 +374,71 @@
           "type": "number",
           "minimum": -1,
           "maximum": 1
+        }
+      }
+    },
+    "instrument_payload_value": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "number"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/instrument_payload_value"
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/instrument_payload_value"
+          }
+        }
+      ]
+    },
+    "instrument_action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "start_beat",
+        "duration_beats",
+        "action",
+        "parameters"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "instrument_action"
+        },
+        "start_beat": {
+          "type": "number",
+          "minimum": 0
+        },
+        "duration_beats": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "action": {
+          "$ref": "#/$defs/id"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/instrument_payload_value"
+          }
         }
       }
     }

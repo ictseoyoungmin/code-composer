@@ -5,7 +5,7 @@ from copy import deepcopy
 
 from ..core.ir import validate_ir
 from ..execution.plan import execution_plan_fingerprint, validate_execution_plan
-from ..performance.violin import ViolinPerformanceError, realize_violin_performance
+from ..audio.engines import engine_for_patch, InstrumentEngineValidationError
 from ..validation_contracts import ContractValidationError, validate_runtime_extensions
 from .performance_score import performance_score_fingerprint, validate_performance_score
 
@@ -53,6 +53,7 @@ def _validate_score_against_plan(plan: dict, score: dict) -> None:
         instrument = instruments[plan_track["instrument"]]
         family = instrument["family"]
         engine = instrument["engine"]
+        resolved_engine = engine_for_patch(instrument["patch"])
         pitched_onsets = {}
         control_ranges = []
         for event in score_track["events"]:
@@ -70,7 +71,26 @@ def _validate_score_against_plan(plan: dict, score: dict) -> None:
                 control_ranges.append((start, start + duration, event["id"]))
                 continue
 
-            if event["type"] == "drum":
+            if event["type"] == "instrument_action":
+                try:
+                    resolved_engine.validate_action_event(
+                        f"track {track_id} event {event['id']}", event
+                    )
+                except InstrumentEngineValidationError as exc:
+                    raise PerformanceBridgeError(str(exc)) from exc
+                continue
+
+            if event["type"] == "instrument_action":
+        return {
+            "event_type": "instrument_action",
+            "action": event["action"],
+            "parameters": deepcopy(event["parameters"]),
+            "start_beat": float(event["start_beat"]),
+            "duration_beats": float(event["duration_beats"]),
+            "section_id": section_id,
+        }
+
+    if event["type"] == "drum":
                 if engine != "percussion":
                     raise PerformanceBridgeError(
                         f"track {track_id} drum event {event['id']} requires percussion engine"
@@ -81,6 +101,14 @@ def _validate_score_against_plan(plan: dict, score: dict) -> None:
                 raise PerformanceBridgeError(
                     f"track {track_id} percussion engine requires explicit drum events, not pitched notes"
                 )
+
+            if "instrument_performance" in event:
+                try:
+                    resolved_engine.validate_note_performance(
+                        f"track {track_id} event {event['id']}", event["instrument_performance"]
+                    )
+                except InstrumentEngineValidationError as exc:
+                    raise PerformanceBridgeError(str(exc)) from exc
 
             if family == "violin":
                 key = round(start, 9)
@@ -134,6 +162,8 @@ def _legacy_event(event: dict, section_id: str) -> dict:
         perf["instrument_expression"] = deepcopy(event["expression"])
     if "piano_attack_offset_ms" in event:
         perf["piano_attack_offset_ms"] = float(event["piano_attack_offset_ms"])
+    if "instrument_performance" in event:
+        perf["instrument"] = deepcopy(event["instrument_performance"])
 
     out = {
         "start_beat": float(event["start_beat"]),
@@ -269,16 +299,16 @@ def realize_instrument_mechanics(ir: dict, plan: dict) -> dict:
     }
 
     for track_id, track in track_map.items():
-        family = instruments[track["instrument"]]["family"]
-        if family == "violin":
-            try:
-                out = realize_violin_performance(
-                    out,
-                    track_id,
-                    config={"strict_comfort": True},
-                )
-            except ViolinPerformanceError as exc:
-                raise PerformanceBridgeError(str(exc)) from exc
+        instrument = instruments[track["instrument"]]
+        engine = engine_for_patch(instrument["patch"])
+        try:
+            out = engine.realize_track_mechanics(
+                out,
+                track_id,
+                plan_instrument=instrument,
+            )
+        except InstrumentEngineValidationError as exc:
+            raise PerformanceBridgeError(str(exc)) from exc
 
     after = {
         t["id"]: [

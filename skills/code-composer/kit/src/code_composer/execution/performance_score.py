@@ -117,6 +117,26 @@ def _integer(value: Any, path: str, lo: int | None = None, hi: int | None = None
     return out
 
 
+def _validate_payload(value: Any, path: str, depth: int = 0) -> None:
+    if depth > 8:
+        _fail(path, "payload nesting exceeds 8 levels")
+    if value is None or isinstance(value, (str, bool)):
+        return
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        _number(value, path)
+        return
+    if isinstance(value, list):
+        for i, item in enumerate(value):
+            _validate_payload(item, f"{path}[{i}]", depth + 1)
+        return
+    if isinstance(value, dict):
+        for key, item in value.items():
+            _string(key, f"{path} key")
+            _validate_payload(item, f"{path}.{key}", depth + 1)
+        return
+    _fail(path, "must contain only JSON-compatible finite values")
+
+
 def _validate_sha256(value: Any, path: str) -> str:
     value = _string(value, path)
     if len(value) != 64 or any(c not in "0123456789abcdef" for c in value):
@@ -131,7 +151,7 @@ def _validate_event(event: dict, path: str) -> None:
             event,
             path,
             required={"id", "type", "start_beat", "duration_beats", "midi", "velocity"},
-            optional={"articulation", "expression", "piano_attack_offset_ms"},
+            optional={"articulation", "expression", "piano_attack_offset_ms", "instrument_performance"},
         )
         _identifier(event["id"], f"{path}.id")
         _number(event["start_beat"], f"{path}.start_beat", 0)
@@ -147,6 +167,9 @@ def _validate_event(event: dict, path: str) -> None:
                 _number(value, f"{path}.expression.{key}")
         if "piano_attack_offset_ms" in event:
             _number(event["piano_attack_offset_ms"], f"{path}.piano_attack_offset_ms", -20, 20)
+        if "instrument_performance" in event:
+            payload = _object(event["instrument_performance"], f"{path}.instrument_performance")
+            _validate_payload(payload, f"{path}.instrument_performance")
         return
 
     if event_type == "drum":
@@ -165,6 +188,20 @@ def _validate_event(event: dict, path: str) -> None:
         _number(event["velocity"], f"{path}.velocity", 0, 1)
         if "pan" in event:
             _number(event["pan"], f"{path}.pan", -1, 1)
+        return
+
+    if event_type == "instrument_action":
+        _strict(
+            event,
+            path,
+            required={"id", "type", "start_beat", "duration_beats", "action", "parameters"},
+        )
+        _identifier(event["id"], f"{path}.id")
+        _number(event["start_beat"], f"{path}.start_beat", 0)
+        _number(event["duration_beats"], f"{path}.duration_beats", 1e-9)
+        _identifier(event["action"], f"{path}.action")
+        parameters = _object(event["parameters"], f"{path}.parameters")
+        _validate_payload(parameters, f"{path}.parameters")
         return
 
     if event_type == "sustain_pedal":
@@ -196,7 +233,7 @@ def _validate_event(event: dict, path: str) -> None:
             _fail(f"{path}.points", "must end at duration_beats")
         return
 
-    _fail(f"{path}.type", "must be note, drum, or sustain_pedal")
+    _fail(f"{path}.type", "must be note, drum, instrument_action, or sustain_pedal")
 
 
 def validate_performance_score(score: dict[str, Any]) -> None:

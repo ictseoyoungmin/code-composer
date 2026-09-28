@@ -34,6 +34,7 @@ def _ensure_builtins() -> None:
     from .plucked_bass import PluckedBassEngine
     from .resonant_pluck import ResonantPluckEngine
     from .percussion import PercussionEngine
+    from .acoustic_guitar import AcousticGuitarEngine
     register_engine(GenericSynthEngine())
     register_engine(PianoEngine())
     register_engine(BowedStringEngine())
@@ -41,6 +42,7 @@ def _ensure_builtins() -> None:
     register_engine(PluckedBassEngine())
     register_engine(ResonantPluckEngine())
     register_engine(PercussionEngine())
+    register_engine(AcousticGuitarEngine())
     _BUILTINS_READY = True
 
 

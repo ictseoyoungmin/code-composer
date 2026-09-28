@@ -1,0 +1,51 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "acoustic_guitar.steel_foundation",
+  "version": "1.0.0",
+  "name": "Steel Acoustic Guitar — AG00 Foundation",
+  "engine": "acoustic_guitar",
+  "family": "acoustic_guitar",
+  "character": [
+    "steel-string",
+    "plucked",
+    "deterministic",
+    "ag00-foundation"
+  ],
+  "strengths": [
+    "proves the dedicated acoustic-guitar engine, preset, tail, Song lowering and render path end to end",
+    "keeps authored note gate separate from deterministic post-note string decay"
+  ],
+  "limitations": [
+    "AG00 routing baseline only; steel-string acoustic fidelity is explicitly not closed by this preset",
+    "string/fret authority, right-hand excitation models, articulations, strum, percussion and shared six-string/body state belong to AG02-AG08"
+  ],
+  "recommended_roles": [
+    "guitar",
+    "accompaniment",
+    "fingerstyle"
+  ],
+  "expression_capabilities": [
+    "velocity"
+  ],
+  "musical_content": false,
+  "patch": {
+    "kind": "acoustic_guitar",
+    "engine": "acoustic_guitar",
+    "family": "acoustic_guitar",
+    "acoustic_guitar_graph": {
+      "max_partials": 14,
+      "pluck_position": 0.18,
+      "partial_rolloff": 1.15,
+      "base_decay_s": 0.75,
+      "frequency_damping": 0.28,
+      "natural_tail_s": 0.45,
+      "post_gate_decay_s": 0.18,
+      "attack_s": 0.0025,
+      "pluck_noise_gain": 0.035,
+      "pluck_noise_decay_s": 0.012,
+      "end_fade_s": 0.025,
+      "output_gain": 0.72,
+      "seed": 11900
+    }
+  }
+}
