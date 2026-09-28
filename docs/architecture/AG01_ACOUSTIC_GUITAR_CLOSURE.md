@@ -1,6 +1,6 @@
 # AG01 — Single-String Steel Acoustic Core Closure
 
-Status: **CANONICAL CLOSED · HUMAN LISTENING PASS**
+Status: **REOPEN · R3 HIGH-REGISTER FIDELITY**
 
 Target release: **v1.19.0**
 
@@ -55,3 +55,43 @@ AG01 closes only the single-string audible core. It does **not** close:
 ## Provenance
 
 The model remains independently implemented and uses generic project-authored modal body values. It bundles no third-party guitar code, recordings, IRs, measured modal tables, FEM meshes, or named-instrument fitted responses.
+
+
+## 2026-09-29 reopen audit
+
+The prior closure is revoked. Individual E4 listening failed the original closure
+criterion: a single authored note must independently read as generic steel-string
+acoustic guitar.
+
+This is not downstream AG02 drift. The previously passed R2 E4 listening WAV and
+the current canonical R2 E4 render were directly compared after RMS matching:
+
+- waveform correlation: 0.999999379
+- relative waveform error: 0.113762%
+
+The underlying E4 timbre was therefore already present at the previous closure.
+The defect was the closure protocol: montage-level listening allowed E2/E3 context
+to mask weak E4 instrument identity.
+
+## R3 bottleneck
+
+R3 replaces the arbitrary harmonic phase cloud and separate 2.8 kHz pitched click
+with a physically constrained source:
+
+- triangular released-pluck modal spectrum;
+- bridge-force-like approximately 1/n modal falloff with pluck-position nulls;
+- coherent zero-initial-velocity release phase;
+- bounded stiffness and frequency-dependent damping;
+- short colored contact burst instead of a pitched click oscillator;
+- the existing causal bridge -> body/air radiation stage remains explicit.
+
+The triangular-pluck spectral structure follows the standard ideal-string
+initial-condition model; R3 remains an independent implementation and does not
+bundle third-party audio, IRs, code, or fitted named-instrument data.
+
+## Revised human closure gate
+
+AG01 may close again only when **E2, E3 and E4 each pass independent listening**.
+A montage may be supplemental evidence but cannot be the closure authority.
+Soft/mid/hard renders remain regression evidence. AG02 remains blocked until this
+per-note gate passes.
