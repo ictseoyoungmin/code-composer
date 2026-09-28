@@ -96,9 +96,10 @@ def _validate_score_against_plan(plan: dict, score: dict) -> None:
 
             if "instrument_performance" in event:
                 try:
-                    resolved_engine.validate_note_performance(
+                    resolved_engine.validate_note_performance_for_patch(
                         f"track {track_id} event {event['id']}",
                         event["instrument_performance"],
+                        instrument["patch"],
                     )
                 except InstrumentEngineValidationError as exc:
                     raise PerformanceBridgeError(str(exc)) from exc
