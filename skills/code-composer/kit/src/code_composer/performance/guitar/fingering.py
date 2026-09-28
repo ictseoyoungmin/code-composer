@@ -64,6 +64,29 @@ def _realization(string_number: int, fret: int, authority: str) -> dict:
     }
 
 
+def _with_reference(midi: int, realization: dict) -> dict:
+    """Annotate the lowest-fret canonical position used as the AG01-preserving reference."""
+    candidates = fingering_candidates(int(midi))
+    if not candidates:
+        raise GuitarFingeringError(
+            f"MIDI {midi} has no standard-tuning acoustic-guitar fingering "
+            f"within frets 0..{MAX_FRET}"
+        )
+    ref = candidates[0]
+    out = deepcopy(realization)
+    out["reference_string"] = int(ref["string"])
+    out["reference_fret"] = int(ref["fret"])
+    out["position_is_reference"] = bool(
+        int(out["string"]) == int(ref["string"]) and int(out["fret"]) == int(ref["fret"])
+    )
+    distance = (
+        abs(int(out["string"]) - int(ref["string"])) / 5.0
+        + abs(int(out["fret"]) - int(ref["fret"])) / float(MAX_FRET)
+    ) / 2.0
+    out["position_distance"] = round(min(1.0, float(distance)), 6)
+    return out
+
+
 def resolve_fingering(midi: int, authored: dict | None = None) -> dict:
     """Resolve one note while preserving any explicit mechanics authority."""
     midi = int(midi)
@@ -87,7 +110,9 @@ def resolve_fingering(midi: int, authored: dict | None = None) -> dict:
                 f"MIDI {midi} conflicts with authored string {string_number} / fret {fret}; "
                 f"that position sounds MIDI {expected}"
             )
-        return _realization(string_number, fret, "authored_string_fret")
+        return _with_reference(
+            midi, _realization(string_number, fret, "authored_string_fret")
+        )
 
     if has_string:
         fret = midi - int(STANDARD_TUNING[string_number]["open_midi"])
@@ -96,7 +121,9 @@ def resolve_fingering(midi: int, authored: dict | None = None) -> dict:
                 f"MIDI {midi} is not playable on authored string {string_number} "
                 f"within frets 0..{MAX_FRET}"
             )
-        return _realization(string_number, fret, "authored_string")
+        return _with_reference(
+            midi, _realization(string_number, fret, "authored_string")
+        )
 
     if has_fret:
         matches = [
@@ -108,7 +135,9 @@ def resolve_fingering(midi: int, authored: dict | None = None) -> dict:
             raise GuitarFingeringError(
                 f"MIDI {midi} has no standard-tuning string at authored fret {fret}"
             )
-        return _realization(matches[0], fret, "authored_fret")
+        return _with_reference(
+            midi, _realization(matches[0], fret, "authored_fret")
+        )
 
     candidates = fingering_candidates(midi)
     if not candidates:
@@ -118,7 +147,7 @@ def resolve_fingering(midi: int, authored: dict | None = None) -> dict:
         )
     chosen = deepcopy(candidates[0])
     chosen["authority"] = "deterministic_resolver"
-    return chosen
+    return _with_reference(midi, chosen)
 
 
 def realize_guitar_fingering(ir: dict, track_id: str, plan_instrument: dict) -> dict:
