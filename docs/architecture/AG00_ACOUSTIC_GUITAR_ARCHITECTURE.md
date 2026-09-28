@@ -1,6 +1,6 @@
 # AG00 — Acoustic Guitar Contract / Architecture
 
-Status: **IMPLEMENTATION CANDIDATE**
+Status: **CLOSED**
 
 Target release: **v1.19.0**
 
@@ -43,3 +43,17 @@ This keeps future semantics behind the engine boundary instead of baking them in
 4. unsupported payload/action semantics fail loudly at the resolved engine;
 5. violin mechanics remain behaviorally covered while the central bridge contains no violin-family realization branch;
 6. all existing blocking regressions pass.
+
+## Closure record
+
+- implementation Issue: **#51 — closed / completed**
+- implementation PR: **#52 — merged**
+- implementation merge SHA: `c244bca8820722295cd18edcb52c9c8eb37330af`
+- PR CI: **#146 — SUCCESS**
+- PR CR03 Piano/Violin dogfood: **#48 — SUCCESS**
+- post-merge main CI: **#147 — SUCCESS**
+- Python 3.10 blocking regression: **775 passed**
+- Python 3.12 blocking regression: **775 passed**
+- next slice: **AG01 — Single-String Steel Acoustic Core**
+
+AG00 closes architecture/routing only. The provisional `acoustic_guitar.steel_foundation` tone remains explicitly non-final; no steel-string fidelity claim is made until AG01 passes human listening.
