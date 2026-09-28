@@ -1,3 +1,14 @@
+## v1.19.0 development — AG03 Right-Hand Excitation — CLOSED — 2026-09-29
+
+- Adds isolated `instrument_performance.right_hand` authority for finger, thumb, nail and pick, with optional pluck position, attack angle and strength.
+- Keeps AG01 R3 tone identity and AG02 string/fret authority frozen; no AG03 payload and the neutral reference state remain sample-exact with the accepted upstream render.
+- Implements right-hand differences only in excitation/contact mechanics: bridge-force partial rolloff, release/contact ramp, contact-burst gain/band/decay, authored pluck position, and bounded angle/strength/velocity spectral deltas.
+- Does not retune body modes, global EQ, AG02 string/fret identity, authored pitch/timing, deterministic seed or coherent phase identity.
+- R1 was technically green but adjacent method pairs were too subtle for a strong listening barrier; R2 widened only method-specific contact profiles.
+- R2 actual-branch pairwise method separation is 1.56%–5.51% delta/RMS at E4 and 1.37%–4.73% at E3, while each method stays roughly 0.8%–2.9% from the AG02 baseline after RMS matching.
+- Engineering closure: CI #181 SUCCESS; Python 3.10 / 3.12 each 809 passed; AG01 R3 Evidence #11, AG02 R3 Evidence #5 and AG03 Right-Hand Evidence #3 all SUCCESS.
+- Human listening PASS on 2026-09-29 closes AG03.
+
 ## v1.19.0 development — AG02 String / Fret / Position Authority — CLOSED — 2026-09-29
 
 - Rebuilds AG02 from the canonical AG01 R3 baseline rather than carrying forward the rejected pre-R3 tone assumptions.
