@@ -1,8 +1,8 @@
 {
   "format": "code-composer-factory-preset/v1",
-  "preset_id": "acoustic_guitar.steel_single_string_candidate",
+  "preset_id": "acoustic_guitar.steel_single_string",
   "version": "1.0.0",
-  "name": "Steel Acoustic Guitar — AG01 Single-String Candidate",
+  "name": "Steel Acoustic Guitar — AG01 Single-String Baseline",
   "engine": "acoustic_guitar",
   "family": "acoustic_guitar",
   "character": [
@@ -10,7 +10,7 @@
     "single-string",
     "physical-parametric",
     "bridge-body-coupled",
-    "ag01-listening-candidate"
+    "ag01-accepted-baseline"
   ],
   "strengths": [
     "separates steel-string source, bridge transfer and guitar-body/air radiation into a causal rendering path",
@@ -18,8 +18,8 @@
     "retains authored gate separately from residual string/body decay for matched single-note listening"
   ],
   "limitations": [
-    "AG01 listening candidate only; it is not canonical steel-string fidelity until explicit human listening PASS",
-    "per-note string/fret authority, finger/nail/pick mechanics, articulation, strum, percussion and persistent six-string coupling remain AG02-AG08 work",
+    "AG01 accepted single-string steel-string baseline; full six-string/fret authority remains AG02 work",
+    "finger/nail/pick mechanics, articulation, strum, percussion and persistent six-string coupling remain AG03-AG08 work",
     "generic project-authored modal body values are not a measured or named-instrument response"
   ],
   "recommended_roles": [

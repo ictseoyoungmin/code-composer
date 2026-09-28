@@ -1,3 +1,15 @@
+## v1.19.0 development — AG01 Single-String Steel Acoustic Core — CLOSED — 2026-09-28
+
+- Establishes the accepted `acoustic_guitar.steel_single_string@1.0.0` single-string steel acoustic baseline.
+- Separates steel-string source, bridge transfer, and low-Q body/air radiation into a causal rendering path.
+- Adds bounded stiffness, pluck-position spectral nulls, frequency-dependent damping, deterministic excitation texture, and residual post-gate string/body decay.
+- Preserves the AG00 `acoustic_guitar.steel_foundation@1.0.0` path as the historical A baseline.
+- R2 adds bounded `radiation_keytrack=1.10` around E3 after objective audit exposed excessive E2→E4 loudness collapse; blocking regression keeps E2/E3/E4 mid-velocity RMS max/min below 1.35.
+- Matched listening set: E2/E3/E4 × soft/mid/hard, 24 kHz, one global B-side RMS match.
+- Human listening PASS closes the first audible bottleneck.
+- Issue #54 closed; PR #55 merged at `921253594224d44b331dc394f31cf9c199616368`; accepted PR HEAD CI #154 SUCCESS on Python 3.10 / 3.12.
+- AG02 now owns six-string identity plus explicit string/fret/position authority.
+
 ## v1.18.1 — Drum byte reproducibility closure — 2026-09-28
 
 - Closes Issue #2 after isolating historical hosted-runner drum SHA drift to CPU/NumPy FMA dispatch rather than Python version, RNG, or a musical/DSP semantic change.
