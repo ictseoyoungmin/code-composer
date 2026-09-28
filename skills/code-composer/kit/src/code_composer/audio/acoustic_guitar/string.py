@@ -317,7 +317,9 @@ def _render_triangular_pluck_bridge_force(
     )
     sig *= 1.0 - np.exp(-t / ramp_s)
     sig *= max(0.03, vel) ** 0.74
-    sig *= left_tonal_scale * left_excitation_scale
+    # tonal_scale may represent carried same-string energy for AG04 legato
+    # transitions. excitation_scale applies only to newly injected contact energy.
+    sig *= left_tonal_scale
 
     # Pick/string release is modeled as a short colored contact burst. R3 removes
     # the fixed 2.8 kHz sinusoidal click because it reads as a separate pitched event.
