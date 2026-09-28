@@ -83,6 +83,7 @@ class AcousticGuitarEngine(InstrumentEngine):
             ("air_mode_q", 0.5, 5.0),
             ("air_mode_mix", 0.0, 1.0),
             ("radiation_lowpass_hz", 500.0, 18000.0),
+            ("radiation_keytrack", 0.0, 2.0),
             ("stereo_width", 0.0, 0.20),
             ("side_highpass_hz", 100.0, 8000.0),
             ("body_drive", 0.05, 5.0),
