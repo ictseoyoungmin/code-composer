@@ -134,11 +134,12 @@ def resolve_left_hand(
 
     if technique == "dead_note":
         out.update({
-            "decay_scale": 0.12,
-            "damping_scale": 5.5,
-            "tonal_scale": 0.12,
-            "excitation_scale": 0.48,
-            "contact_noise_scale": 2.4,
+            "decay_scale": 0.10,
+            "damping_scale": 5.8,
+            "tonal_scale": 0.10,
+            "excitation_scale": 0.90,
+            "contact_noise_scale": 4.0,
+            "fret_contact_gain": 0.34,
         })
         return out
 
@@ -185,10 +186,18 @@ def resolve_left_hand(
             f"{technique} destination must not author a new right_hand strike"
         )
 
+    # Contact excitation stays low (no fresh pick), while tonal_scale represents
+    # energy already present on the same string being transferred into the new
+    # fret state.
     excitation_scale = {
-        "slide": 0.10,
-        "hammer_on": 0.035,
-        "pull_off": 0.055,
+        "slide": 0.08,
+        "hammer_on": 0.025,
+        "pull_off": 0.040,
+    }[technique]
+    tonal_scale = {
+        "slide": 0.46,
+        "hammer_on": 0.56,
+        "pull_off": 0.50,
     }[technique]
     contact_gain = {
         "slide": 0.08,
@@ -208,7 +217,7 @@ def resolve_left_hand(
         "fret_contact_gain": contact_gain,
         "decay_scale": 0.98,
         "damping_scale": 1.02,
-        "tonal_scale": 1.0,
+        "tonal_scale": tonal_scale,
     })
     return out
 
