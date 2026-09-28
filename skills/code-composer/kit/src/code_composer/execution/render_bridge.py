@@ -4,6 +4,7 @@ from __future__ import annotations
 from copy import deepcopy
 
 from ..audio.engines import engine_for_patch, InstrumentEngineValidationError
+from ..performance.mechanics import InstrumentMechanicsError, realize_registered_mechanics
 from ..core.ir import validate_ir
 from ..execution.plan import execution_plan_fingerprint, validate_execution_plan
 from ..validation_contracts import ContractValidationError, validate_runtime_extensions
@@ -304,12 +305,8 @@ def realize_instrument_mechanics(ir: dict, plan: dict) -> dict:
         instrument = instruments[track["instrument"]]
         engine = engine_for_patch(instrument["patch"])
         try:
-            out = engine.realize_track_mechanics(
-                out,
-                track_id,
-                plan_instrument=instrument,
-            )
-        except InstrumentEngineValidationError as exc:
+            out = realize_registered_mechanics(engine, out, track_id, instrument)
+        except InstrumentMechanicsError as exc:
             raise PerformanceBridgeError(str(exc)) from exc
 
     after = {

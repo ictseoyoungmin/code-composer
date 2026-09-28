@@ -36,7 +36,7 @@ Performance Score note events may carry an optional `instrument_performance` obj
 
 Performance Score may also carry `instrument_action` events with an authored action identifier plus structured parameters. The resolved engine must explicitly opt in through `validate_action_event`; unsupported actions are hard errors. Engines that eventually render actions should normally use stateful whole-track rendering so actions and notes share one physical state.
 
-Physical realization belongs behind `realize_track_mechanics()`. The central performance bridge must not add new family-specific mechanics branches.
+Physical realization is selected declaratively by the engine's `mechanics_realizer` identifier and executed through the performance-domain mechanics registry. Audio-engine modules must not import performance realizers, and the central performance bridge must not add new family-specific mechanics branches.
 
 ## Performance expression
 

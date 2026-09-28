@@ -1267,6 +1267,7 @@ def render_bowed_waveguide_note(
 class BowedWaveguideEngine(InstrumentEngine):
     name = "bowed_waveguide"
     aliases = ("bowed-waveguide", "modeled_bowed_string")
+    mechanics_realizer = "violin"
 
     def render_note(self, midi, duration_s, sr, patch, *, velocity=1.0, performance=None):
         return render_bowed_waveguide_note(
@@ -1459,15 +1460,6 @@ class BowedWaveguideEngine(InstrumentEngine):
 
         _num(g.get("stereo_width", .09), f"{subject}.waveguide.stereo_width", 0, 1)
         _num(g.get("output_gain", .70), f"{subject}.waveguide.output_gain", 0, 3)
-
-    def realize_track_mechanics(self, ir, track_id, *, plan_instrument=None):
-        if not isinstance(plan_instrument, dict) or plan_instrument.get("family") != "violin":
-            return ir
-        from ...performance.violin import ViolinPerformanceError, realize_violin_performance
-        try:
-            return realize_violin_performance(ir, track_id, config={"strict_comfort": True})
-        except ViolinPerformanceError as exc:
-            raise InstrumentEngineValidationError(str(exc)) from exc
 
     def validate_ir_patch(self, subject, patch): self._validate(subject, patch)
     def validate_runtime_patch(self, subject, patch): self._validate(subject, patch)

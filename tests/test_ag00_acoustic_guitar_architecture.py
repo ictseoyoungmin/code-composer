@@ -140,6 +140,7 @@ def test_ag00_mechanics_realization_is_engine_routed_not_family_branched():
     bridge = (ROOT / "skills/code-composer/kit/src/code_composer/execution/render_bridge.py").read_text()
     assert "realize_violin_performance" not in bridge
     assert "ViolinPerformanceError" not in bridge
-    assert "realize_track_mechanics" in bridge
+    assert "realize_registered_mechanics" in bridge
     bowed = (ROOT / "skills/code-composer/kit/src/code_composer/audio/engines/bowed_waveguide.py").read_text()
-    assert "def realize_track_mechanics" in bowed
+    assert 'mechanics_realizer = "violin"' in bowed
+    assert "performance.violin" not in bowed

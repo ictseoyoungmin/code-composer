@@ -11,7 +11,7 @@ AG00 creates extensible instrument boundaries before acoustic-guitar fidelity wo
 - Performance Score notes may carry `instrument_performance`: structurally deterministic JSON whose semantics are owned by the resolved engine.
 - Performance Score supports `instrument_action`: an authored non-note action identifier plus structured parameters.
 - Unsupported engine-scoped note payloads/actions are hard errors; the system never silently discards performance intent.
-- `InstrumentEngine.realize_track_mechanics()` is the generic mechanics hook. Existing violin realization is routed through `BowedWaveguideEngine`, removing the family-specific realization branch from the performance bridge.
+- `InstrumentEngine.mechanics_realizer` is a declarative mechanics hook resolved by the performance-domain registry. Existing violin realization is selected by `BowedWaveguideEngine.mechanics_realizer = "violin"`, removing the family-specific realization branch without creating an audio→performance import cycle.
 - `acoustic_guitar` is a registered engine with its own package boundary and tail contract.
 
 ## AG00 acoustic-guitar baseline

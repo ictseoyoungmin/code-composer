@@ -26,6 +26,7 @@ class InstrumentEngine:
 
     name = "base"
     aliases: tuple[str, ...] = ()
+    mechanics_realizer: str | None = None
 
     def render_note(
         self,
@@ -96,16 +97,6 @@ class InstrumentEngine:
             f"{subject}: engine {self.name!r} does not support instrument_action events"
         )
 
-    def realize_track_mechanics(
-        self,
-        ir: dict,
-        track_id: str,
-        *,
-        plan_instrument: dict | None = None,
-    ) -> dict:
-        """Attach engine-owned physical realization without changing authored notes."""
-        return ir
-
     def validate_ir_patch(self, subject: str, patch: dict) -> None:
         return None
 
@@ -131,4 +122,5 @@ class InstrumentEngine:
             "instrument_performance": c.instrument_performance,
             "instrument_actions": c.instrument_actions,
             "mechanics_realization": c.mechanics_realization,
+            "mechanics_realizer": self.mechanics_realizer,
         }
