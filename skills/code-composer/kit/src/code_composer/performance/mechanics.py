@@ -33,7 +33,11 @@ def _ensure_builtins() -> None:
         return
 
     from .violin import ViolinPerformanceError, realize_violin_performance
-    from .guitar import GuitarFingeringError, realize_guitar_fingering
+    from .guitar import (
+        GuitarFingeringError,
+        GuitarRightHandError,
+        realize_guitar_performance,
+    )
 
     def _violin(ir: dict, track_id: str, plan_instrument: dict) -> dict:
         if plan_instrument.get("family") != "violin":
@@ -47,8 +51,8 @@ def _ensure_builtins() -> None:
         if plan_instrument.get("family") != "acoustic_guitar":
             return ir
         try:
-            return realize_guitar_fingering(ir, track_id, plan_instrument)
-        except GuitarFingeringError as exc:
+            return realize_guitar_performance(ir, track_id, plan_instrument)
+        except (GuitarFingeringError, GuitarRightHandError) as exc:
             raise InstrumentMechanicsError(str(exc)) from exc
 
     register_mechanics_realizer("violin", _violin)
