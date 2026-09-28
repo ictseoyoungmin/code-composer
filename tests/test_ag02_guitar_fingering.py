@@ -145,12 +145,12 @@ def test_impossible_authored_position_is_hard_error():
         realize_instrument_mechanics(ir, plan)
 
 
-def test_engine_rejects_invalid_or_future_ag03_payload_fields():
+def test_engine_rejects_invalid_or_flat_future_payload_fields():
     song = _song()
     plan = lower_song_to_execution_plan(song)
     with pytest.raises(PerformanceBridgeError, match="string.*outside"):
         compile_performance_score_to_render_ir(plan, _score(song, 64, {"string": 7}))
-    with pytest.raises(PerformanceBridgeError, match="unsupported AG02"):
+    with pytest.raises(PerformanceBridgeError, match="unsupported acoustic-guitar"):
         compile_performance_score_to_render_ir(plan, _score(song, 64, {"pick": "medium"}))
 
 
