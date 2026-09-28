@@ -47,6 +47,10 @@ Older slice reports and machine evidence are intentionally kept away from the re
 
 Historical files may mention paths or terminology that were current when that evidence was produced. They are records, not current user navigation authority.
 
+## v1.19.0 Acoustic Guitar
+
+- [`architecture/AG00_ACOUSTIC_GUITAR_RESEARCH.md`](architecture/AG00_ACOUSTIC_GUITAR_RESEARCH.md) — research/provenance map and architecture constraints for AG00–AG09.
+
 ## Current engineering slice
 
 - **CR00 — Composer Rebuild Boundary / Pre-refactor Freeze** — **CLOSED**.
@@ -58,3 +62,5 @@ Historical files may mention paths or terminology that were current when that ev
 - [**CR06 — Evidence-first QA**](architecture/CR06_EVIDENCE_FIRST_QA.md) — **CLOSED**.
 - [**CR07 — Broader Orchestration Dogfood**](architecture/CR07_BROADER_ORCHESTRATION.md) — **CLOSED**.
 - [**CR08 — Resonant Release Semantics / Plucked Instrument Tail Authority**](architecture/CR08_RESONANT_RELEASE.md) — **CLOSED**.
+
+- [**AG00 — Acoustic Guitar Contract / Architecture research pass**](architecture/AG00_ACOUSTIC_GUITAR_RESEARCH.md) — **RESEARCH COMPLETE / IMPLEMENTATION NEXT**.
