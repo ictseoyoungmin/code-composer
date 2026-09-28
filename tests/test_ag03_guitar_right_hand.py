@@ -180,7 +180,7 @@ def test_four_methods_are_distinct_but_remain_bounded_on_same_position():
     for i, a in enumerate(METHODS):
         for b in METHODS[i + 1:]:
             assert not np.array_equal(rendered[a], rendered[b])
-            assert _rms(rendered[a] - rendered[b]) / _rms(baseline) > 1e-4
+            assert _rms(rendered[a] - rendered[b]) / _rms(baseline) > 0.01
 
 
 def test_pluck_position_angle_strength_and_velocity_affect_explicit_excitation():
