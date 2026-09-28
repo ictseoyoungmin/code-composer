@@ -119,6 +119,13 @@ def _render_ag01_modal_bridge_body(
         bridge[active_n:] *= np.exp(-rr / post_gate_decay)
 
     stereo = radiate_acoustic_guitar_body(bridge, int(sr), graph)
+    # Acoustic-guitar radiation efficiency rises through this register; compensate
+    # the compact low-frequency body modes so E2-E4 listening is not dominated by
+    # a pitch-dependent loudness collapse. One bounded slope applies to the whole
+    # note and does not alter authored velocity relationships.
+    radiation_keytrack = float(graph.get("radiation_keytrack", 1.10))
+    radiation_gain = 2.0 ** (radiation_keytrack * (int(midi) - 52) / 12.0)
+    stereo *= radiation_gain
     stereo *= max(0.0, float(graph.get("output_gain", 0.82)))
 
     fade_n = min(
