@@ -129,6 +129,7 @@ def _render_triangular_pluck_bridge_force(
     *,
     velocity: float,
     mechanics: dict | None = None,
+    right_hand: dict | None = None,
 ):
     """R3 bridge-force model from a released triangular string displacement."""
     n = max(1, int(n))
@@ -171,6 +172,60 @@ def _render_triangular_pluck_bridge_force(
         damping *= 1.0 + 0.035 * distance
         fret_contact = min(1.0, fret_contact + 0.040 * distance)
 
+    # AG03 owns right-hand excitation only. Defaults are exact no-ops so an
+    # absent/reference right-hand state preserves the CLOSED AG02 render.
+    contact_ramp_scale = 1.0
+    contact_noise_gain_scale = 1.0
+    contact_noise_hp_scale = 1.0
+    contact_noise_lp_scale = 1.0
+    contact_noise_decay_scale = 1.0
+
+    if isinstance(right_hand, dict):
+        method = str(right_hand.get("method", "neutral"))
+        profiles = {
+            "neutral": (0.0, 1.0, 1.0, 1.0, 1.0, 1.0),
+            "finger": (0.035, 1.12, 0.78, 0.85, 0.90, 1.12),
+            "thumb": (0.060, 1.22, 0.68, 0.75, 0.82, 1.18),
+            "nail": (-0.025, 0.92, 1.12, 1.08, 1.08, 0.90),
+            "pick": (-0.045, 0.82, 1.28, 1.18, 1.18, 0.78),
+        }
+        (
+            method_rolloff,
+            contact_ramp_scale,
+            contact_noise_gain_scale,
+            contact_noise_hp_scale,
+            contact_noise_lp_scale,
+            contact_noise_decay_scale,
+        ) = profiles.get(method, profiles["neutral"])
+
+        pluck_position = max(
+            0.03, min(0.49, float(right_hand.get("pluck_position", pluck_position)))
+        )
+        angle_delta = (
+            max(0.0, min(90.0, float(right_hand.get("attack_angle_deg", 45.0))))
+            - 45.0
+        ) / 45.0
+        strength_delta = (
+            max(0.0, min(1.0, float(right_hand.get("strength", 0.5)))) - 0.5
+        )
+        velocity_delta = vel - 0.65
+
+        force_rolloff = max(
+            0.80,
+            force_rolloff
+            + method_rolloff
+            - 0.015 * angle_delta
+            - 0.025 * strength_delta
+            - 0.020 * velocity_delta,
+        )
+        contact_ramp_scale *= max(0.75, 1.0 - 0.10 * strength_delta)
+        contact_noise_gain_scale *= max(
+            0.70,
+            1.0 + 0.10 * angle_delta + 0.20 * strength_delta + 0.15 * velocity_delta,
+        )
+        contact_noise_hp_scale *= max(0.80, 1.0 + 0.08 * angle_delta)
+        contact_noise_lp_scale *= max(0.80, 1.0 + 0.10 * angle_delta)
+
     sig = np.zeros(n, dtype=np.float64)
     norm = 0.0
     for harmonic in range(1, max_partials + 1):
@@ -203,13 +258,19 @@ def _render_triangular_pluck_bridge_force(
 
     # A very short release ramp regularizes the discrete-time start while keeping
     # the coherent pluck front intact.
-    ramp_s = max(0.0001, float(graph.get("string_release_ramp_s", 0.00028)))
+    ramp_s = max(
+        0.0001,
+        float(graph.get("string_release_ramp_s", 0.00028)) * contact_ramp_scale,
+    )
     sig *= 1.0 - np.exp(-t / ramp_s)
     sig *= max(0.03, vel) ** 0.74
 
     # Pick/string release is modeled as a short colored contact burst. R3 removes
     # the fixed 2.8 kHz sinusoidal click because it reads as a separate pitched event.
-    noise_gain = max(0.0, float(graph.get("excitation_noise_gain", 0.024)))
+    noise_gain = (
+        max(0.0, float(graph.get("excitation_noise_gain", 0.024)))
+        * contact_noise_gain_scale
+    )
     if noise_gain > 0.0:
         seed = (
             int(graph.get("seed", 11901))
@@ -219,15 +280,23 @@ def _render_triangular_pluck_bridge_force(
         rng = np.random.default_rng(seed)
         noise = rng.standard_normal(n).astype(np.float64)
         noise = _one_pole_highpass(
-            noise, sr, float(graph.get("excitation_highpass_hz", 650.0))
+            noise,
+            sr,
+            float(graph.get("excitation_highpass_hz", 650.0))
+            * contact_noise_hp_scale,
         )
         noise = _one_pole_lowpass(
-            noise, sr, float(graph.get("excitation_lowpass_hz", 6200.0))
+            noise,
+            sr,
+            float(graph.get("excitation_lowpass_hz", 6200.0))
+            * contact_noise_lp_scale,
         )
         rms = float(np.sqrt(np.mean(noise * noise)) + 1e-12)
         noise /= rms
         excitation_decay = max(
-            0.002, float(graph.get("excitation_decay_s", 0.0085))
+            0.002,
+            float(graph.get("excitation_decay_s", 0.0085))
+            * contact_noise_decay_scale,
         )
         sig += (
             noise
@@ -247,11 +316,18 @@ def render_steel_string_bridge_drive(
     *,
     velocity: float = 1.0,
     mechanics: dict | None = None,
+    right_hand: dict | None = None,
 ):
     model = str(graph.get("string_source_model", "ag01_legacy_modal_v1"))
     if model == "triangular_pluck_bridge_force_v2":
         return _render_triangular_pluck_bridge_force(
-            midi, n, sr, graph, velocity=velocity, mechanics=mechanics
+            midi,
+            n,
+            sr,
+            graph,
+            velocity=velocity,
+            mechanics=mechanics,
+            right_hand=right_hand,
         )
     return _render_legacy_bridge_drive(midi, n, sr, graph, velocity=velocity)
 
