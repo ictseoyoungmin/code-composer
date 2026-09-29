@@ -141,6 +141,42 @@
     },
     {
       "format": "code-composer-factory-preset/v1",
+      "preset_id": "acoustic_guitar.steel_stateful_body",
+      "version": "1.0.0",
+      "name": "Steel Acoustic Guitar — AG08 S3 Shared Body Memory",
+      "engine": "acoustic_guitar",
+      "family": "acoustic_guitar",
+      "character": [
+        "steel-string",
+        "physical-parametric",
+        "bridge-body-coupled",
+        "ag01-r3-accepted-baseline",
+        "six-string-stateful-candidate",
+        "ag08-s3-shared-body-memory"
+      ],
+      "strengths": [
+        "retains the accepted AG01 R3 note renderer and AG07 same-guitar action renderer",
+        "preserves AG08-S2 same-string continuity",
+        "uses the actual already-rendered guitar residual as one persistent shared bridge/body state for later notes and AG07 actions",
+        "applies only bounded continuous body loading at new excitation/contact boundaries and introduces no new body mode, oscillator or hidden pitch"
+      ],
+      "limitations": [
+        "AG08-S3 models shared body memory as a reduced-order residual-waveform state rather than a measured continuous FEM/body solver",
+        "cross-string sympathetic energy transfer remains disabled until AG08-S4",
+        "technique-transition closure across arpeggio, strum, mute, slap and fingerstyle remains AG08-S5 work"
+      ],
+      "recommended_roles": [
+        "guitar",
+        "accompaniment",
+        "fingerstyle"
+      ],
+      "expression_capabilities": [
+        "velocity"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
       "preset_id": "bass.electric_finger_modeled",
       "version": "1.0.0",
       "name": "Electric Finger Bass — Modeled",
