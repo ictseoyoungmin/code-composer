@@ -118,12 +118,26 @@ def _string_contact(action, strength, n, sr, rng, parameters):
         x=ordinal/denom
         offset_s=(traversal_ms/1000.0)*x
         start=min(n-1,int(offset_s*sr))
-        local=_contact_noise(n-start,sr,rng,700.0,8200.0,0.0065 if action=="dead_strum" else 0.009)
-        # One coherent gesture: entry/exit lighter, middle contacts stronger.
+
+        # Contact character follows physical string position. Low-string-side
+        # contacts are heavier/darker; high-string-side contacts are lighter
+        # and brighter. Reversing traversal therefore changes the audible
+        # contact sequence instead of merely relabeling identical impulses.
+        string_pos=string_index/denom
+        hp=520.0 + 520.0*string_pos
+        lp=6500.0 + 2100.0*string_pos
+        contact_decay=(0.0075 + 0.0025*(1.0-string_pos))
+        if action=="dead_strum":
+            contact_decay*=0.72
+        local=_contact_noise(n-start,sr,rng,hp,lp,contact_decay)
+
+        # One coherent gesture: entry/exit lighter, middle contacts stronger,
+        # with bounded low-to-high string-energy taper.
         gesture=0.78+0.22*math.sin(math.pi*x)
+        string_weight=1.08-0.18*string_pos
         if action=="dead_strum":
             gesture*=0.88
-        out[start:]+=local*gesture
+        out[start:]+=local*gesture*string_weight
     out=_one_pole_highpass(out,sr,380.0)
     out=_one_pole_lowpass(out,sr,7200.0)
     return out*strength*0.34
