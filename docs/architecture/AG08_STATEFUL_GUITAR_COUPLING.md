@@ -1,6 +1,6 @@
 # AG08 — Stateful Guitar Coupling / Continuous Performance
 
-Status: **S1-S3 PASS · S4 IMPLEMENTED / VALIDATION PENDING**
+Status: **S1-S4 ENGINEERING PASS · S3 PERCEPTUAL PASS · S5 NEXT**
 
 Target release: **v1.19.0**
 
@@ -212,12 +212,43 @@ response is imported.
    introduced.
 10. Full CI and AG01-AG08 preservation/evidence workflows pass.
 
+### S4 engineering result — PASS
+
+Authoritative S4 code checkpoint:
+
+- `51b76943e63cd79e887553266c6240db8e436be7`
+- CI **#255 — SUCCESS**
+- Python 3.12: **894 passed**
+- Python 3.10: **894 passed**
+- checkout hygiene: **SUCCESS**
+- AG01–AG07 and AG08 S1–S4 evidence workflows: **SUCCESS**
+
+24 kHz S4 evidence:
+
+- compatible E4: bridge-domain transfer fraction `0.036`
+- compatible E4: S3→S4 delta RMS ratio `0.07659911267282411`
+- compatible E4: target strings `[2, 3, 5, 6]`
+- compatible E4: `source_keep^2 + transferred_energy = 1.0`
+- compatible E4: deterministic / Render-IR event exact / one authored event
+- compatible E4 peak: `0.16589707391533215`
+- incompatible F4: **sample exact with S3**
+- fully authored six-string same-onset chord: **sample exact with S3**
+
+The first S4 preset draft used `cross_string_coupling = 0.22`, which correctly
+failed the pre-existing engine contract `[0.0, 0.20]`. The candidate was
+corrected to `0.20`; the engine bound was not widened. The authoritative S4
+maximum configured bridge-domain transfer budget is therefore
+`0.20 × 0.18 = 0.036`.
+
+S4 is **ENGINEERING PASS**. Formal long-horizon no-input decay / passive
+stability remains the dedicated S6 barrier, and final human listening remains S7.
+
 ## Planned downstream slices
 
 - **S2 Same-string continuity:** implementation candidate in this branch; close after the S2 engineering gate above.
 - **S3 Shared bridge/body memory:** engineering PASS on `43c03e8a131ad1de6b0c5f2530f1e6b42d35ebca`; CI #245 and S3 evidence #8 SUCCESS.
-- **S4 Sympathetic cross-string coupling:** implementation candidate in this branch; engineering validation pending.
-- **S5 Technique-transition continuity:** arpeggio→strum→mute→slap→fingerstyle etc.
+- **S4 Sympathetic cross-string coupling:** ENGINEERING PASS on `51b76943e63cd79e887553266c6240db8e436be7`; CI #255 SUCCESS.
+- **S5 Technique-transition continuity:** NEXT — arpeggio→strum→mute→slap→fingerstyle etc. through one persistent string/bridge/body state.
 - **S6 Passive energy/stability barrier:** no-input decay, finite impulse energy, no runaway feedback or body drone.
 - **S7 Listening closure:** A/B against AG07 isolated-event canonical.
 
