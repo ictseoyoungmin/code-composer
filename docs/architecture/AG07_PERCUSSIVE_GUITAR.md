@@ -135,3 +135,24 @@ action seed from global seed + track identity + action ordinal.
 10. muted/dead/string slap read as guitar string/body contact, not generic drums;
 11. AG01–AG06 preservation evidence + full CI pass;
 12. explicit human listening PASS before merge.
+
+
+## Research / provenance boundary
+
+AG07's physical interpretation is informed by external guitar interaction,
+coupling, and physical-model literature recorded in `CREDITS.md`.
+
+In particular:
+- player/string touch and collision are treated as causal excitation/contact
+  processes rather than post-render labels;
+- body and string actions are conceptually compared against established
+  physical-model decompositions;
+- fuller finite-difference / finite-element / digital-waveguide frameworks such
+  as NESS are architecture references, not runtime dependencies.
+
+Code Composer's AG07 implementation remains independent. It does not copy or
+redistribute external source code, measured responses, meshes, recordings,
+modal tables, fitted constants, or solver implementations.
+
+Any future AG08 use of an external algorithm beyond conceptual comparison must
+be recorded in `CREDITS.md` before canonical closure.
