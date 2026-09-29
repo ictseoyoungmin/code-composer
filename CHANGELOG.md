@@ -1,3 +1,15 @@
+## v1.19.0 development — AG06 Chord / Strum Mechanics — CLOSED — 2026-09-29
+
+- Adds one continuous deterministic shared strum gesture rather than independent per-string triggers or random velocity humanization.
+- Preserves Composer-authored chord MIDI/string/fret/nominal onset/duration/velocity while deriving render-local traversal micro-onsets and correlated per-string excitation.
+- Models down/up traversal order, speed-dependent force contour, acceleration, pick/finger depth, attack angle, follow-through and local accent envelope.
+- Skipped strings remain in the traversal path without pitched excitation; muted strings require explicit AG04 mute/dead mechanics.
+- Uses real C/F/G/Am voicings and validates that per-string force is deterministic, correlated and non-uniform.
+- Adds repeated F D-U-D-U-D-U-D-U evidence: a neutral matched-condition diagnostic plus a musical version with fuller downstrokes, lighter partial upstrokes and local downbeat accents.
+- Human listening confirms the down/up direction reversal is perceptible in repeated rhythm context.
+- Engineering closure before metadata: CI #202 SUCCESS; Python 3.10 / 3.12 each 847 passed; AG01–AG06 evidence all SUCCESS.
+- Human listening PASS on 2026-09-29 closes AG06.
+
 ## v1.19.0 development — AG05 Arpeggio / Fingerstyle Performance — CLOSED — 2026-09-29
 
 - Adds explicit per-note arpeggio coordination metadata for gesture ID, player role, voice role and sequence index without inventing chord voicing, pattern, note order, pitch, onset, duration or velocity.

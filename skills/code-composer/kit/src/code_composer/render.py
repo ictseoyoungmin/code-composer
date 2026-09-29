@@ -43,6 +43,27 @@ def _piano_events_with_authored_attack(events, beat_s):
     return out
 
 
+def _guitar_events_with_strum_gesture(events, beat_s):
+    """Apply AG06 render-local string contact timing and excitation.
+
+    Canonical event start_beat/velocity remain untouched in IR. AG06 realization
+    supplies deterministic offsets and effective velocity derived from one shared
+    stroke gesture; this transform operates only on render-local copies.
+    """
+    out=[]
+    for event in events or []:
+        x=dict(event)
+        if "midi" in event and event.get("event_type") not in {"drum","drum_control","piano_control"}:
+            perf=event.get("performance") or {}
+            strum=perf.get("strum_realization") if isinstance(perf,dict) else None
+            if isinstance(strum,dict):
+                offset_ms=float(strum.get("offset_ms",0.0))
+                x["start_beat"]=float(event.get("start_beat",0.0)) + (offset_ms/1000.0)/float(beat_s)
+                x["velocity"]=float(strum.get("render_velocity",event.get("velocity",0.8)))
+        out.append(x)
+    return out
+
+
 def _piano_events_with_strike_identity(events, global_seed, track_id):
     """Attach deterministic per-strike identity without mutating canonical IR.
 
@@ -108,6 +129,8 @@ def _render_dry_track(ir, track, n, sr, beat_s, graph_mode=False):
         render_events = _piano_events_with_strike_identity(
             render_events, ir.get("meta",{}).get("global_seed",0), track.get("id","")
         )
+    elif engine.name == "acoustic_guitar":
+        render_events = _guitar_events_with_strum_gesture(render_events, beat_s)
     stateful = engine.render_track(
         render_events, n, sr, patch, beat_s, gain=render_gain, pan=0.0
     )

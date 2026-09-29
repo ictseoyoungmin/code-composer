@@ -29,6 +29,11 @@ __all__ = [
     "VOICE_ROLES",
     "resolve_arpeggio",
     "realize_guitar_arpeggio",
+    "GuitarStrumError",
+    "STRUM_DIRECTIONS",
+    "STRUM_STATES",
+    "resolve_strum",
+    "realize_guitar_strum",
 ]
 
 from .right_hand import (
@@ -40,11 +45,12 @@ from .right_hand import (
 
 
 def realize_guitar_performance(ir, track_id, plan_instrument):
-    """Compose AG02–AG05 guitar performance realization in ownership order."""
+    """Compose AG02–AG06 guitar performance realization in ownership order."""
     out = realize_guitar_fingering(ir, track_id, plan_instrument)
     out = realize_guitar_right_hand(out, track_id, plan_instrument)
     out = realize_guitar_left_hand(out, track_id, plan_instrument)
-    return realize_guitar_arpeggio(out, track_id, plan_instrument)
+    out = realize_guitar_arpeggio(out, track_id, plan_instrument)
+    return realize_guitar_strum(out, track_id, plan_instrument)
 
 from .left_hand import (
     GuitarLeftHandError,
@@ -59,4 +65,12 @@ from .arpeggio import (
     VOICE_ROLES,
     realize_guitar_arpeggio,
     resolve_arpeggio,
+)
+
+from .strum import (
+    GuitarStrumError,
+    STRUM_DIRECTIONS,
+    STRUM_STATES,
+    realize_guitar_strum,
+    resolve_strum,
 )
