@@ -52,6 +52,75 @@ class AcousticGuitarEngine(InstrumentEngine):
             midi, duration_s, sr, patch, velocity=velocity, performance=performance
         )
 
+    def render_action(
+        self, action, duration_s, sr, patch, *, parameters, seed=0
+    ):
+        from ..acoustic_guitar import render_acoustic_guitar_action
+        return render_acoustic_guitar_action(
+            action,
+            duration_s,
+            sr,
+            patch,
+            parameters=parameters,
+            seed=seed,
+        )
+
+    def validate_action_event(self, subject, event):
+        from ..acoustic_guitar.percussion import ACTIONS, LOCATIONS
+
+        action = event.get("action")
+        if action not in set(ACTIONS):
+            raise InstrumentEngineValidationError(
+                f"{subject}: unsupported AG07 acoustic-guitar action {action!r}"
+            )
+        parameters = event.get("parameters")
+        if not isinstance(parameters, dict):
+            raise InstrumentEngineValidationError(
+                f"{subject}.parameters must be object"
+            )
+
+        allowed = {
+            "strength", "location", "tail_s",
+            "direction", "traversal_ms", "string_count",
+        }
+        unknown = set(parameters) - allowed
+        if unknown:
+            raise InstrumentEngineValidationError(
+                f"{subject}: unsupported AG07 action parameter(s): {sorted(unknown)}"
+            )
+        if "strength" in parameters:
+            _num(parameters["strength"], f"{subject}.parameters.strength", 0.0, 1.0)
+        if "tail_s" in parameters:
+            _num(parameters["tail_s"], f"{subject}.parameters.tail_s", 0.18, 0.65)
+        if "location" in parameters and parameters["location"] not in set(LOCATIONS):
+            raise InstrumentEngineValidationError(
+                f"{subject}.parameters.location unsupported"
+            )
+
+        if action in {"muted_strum", "dead_strum"}:
+            if parameters.get("direction", "down") not in {"down", "up"}:
+                raise InstrumentEngineValidationError(
+                    f"{subject}.parameters.direction must be down or up"
+                )
+            _num(
+                parameters.get("traversal_ms", 32.0),
+                f"{subject}.parameters.traversal_ms",
+                6.0,
+                180.0,
+            )
+            _integer(
+                parameters.get("string_count", 6),
+                f"{subject}.parameters.string_count",
+                2,
+                6,
+            )
+        else:
+            forbidden = {"direction", "traversal_ms", "string_count"} & set(parameters)
+            if forbidden:
+                raise InstrumentEngineValidationError(
+                    f"{subject}: action {action!r} does not accept {sorted(forbidden)}"
+                )
+
     def tail_seconds(self, patch):
         graph = patch.get("acoustic_guitar_graph", {}) if isinstance(patch, dict) else {}
         return max(0.0, float(graph.get("natural_tail_s", 0.45)))
@@ -390,6 +459,7 @@ class AcousticGuitarEngine(InstrumentEngine):
             name=self.name,
             extended_tail=True,
             instrument_performance=enabled,
+            instrument_actions=enabled,
             mechanics_realization=enabled,
         )
 
