@@ -1,6 +1,6 @@
 # AG08 — Stateful Guitar Coupling / Continuous Performance
 
-Status: **S3 IMPLEMENTATION CANDIDATE · S1-S2 ENGINEERING PASS**
+Status: **S1-S3 ENGINEERING PASS · S4 NEXT**
 
 Target release: **v1.19.0**
 
@@ -149,7 +149,7 @@ added.
 ## Planned downstream slices
 
 - **S2 Same-string continuity:** implementation candidate in this branch; close after the S2 engineering gate above.
-- **S3 Shared bridge/body memory:** implementation candidate in this branch; close after the S3 engineering gate above.
+- **S3 Shared bridge/body memory:** engineering PASS on `43c03e8a131ad1de6b0c5f2530f1e6b42d35ebca`; CI #245 and S3 evidence #8 SUCCESS.
 - **S4 Sympathetic cross-string coupling:** bounded bridge-mediated energy transfer.
 - **S5 Technique-transition continuity:** arpeggio→strum→mute→slap→fingerstyle etc.
 - **S6 Passive energy/stability barrier:** no-input decay, finite impulse energy, no runaway feedback or body drone.
