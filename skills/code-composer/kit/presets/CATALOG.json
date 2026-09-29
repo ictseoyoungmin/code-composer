@@ -69,6 +69,42 @@
     },
     {
       "format": "code-composer-factory-preset/v1",
+      "preset_id": "acoustic_guitar.steel_stateful",
+      "version": "1.0.0",
+      "name": "Steel Acoustic Guitar — AG08 Stateful Candidate",
+      "engine": "acoustic_guitar",
+      "family": "acoustic_guitar",
+      "character": [
+        "steel-string",
+        "physical-parametric",
+        "bridge-body-coupled",
+        "ag01-r3-accepted-baseline",
+        "six-string-stateful-candidate",
+        "ag08-s1-zero-coupling"
+      ],
+      "strengths": [
+        "uses a triangular-pluck bridge-force spectrum with coherent release phase instead of an arbitrary harmonic phase cloud",
+        "separates steel-string source, bridge transfer and guitar-body/air radiation into a causal rendering path",
+        "uses a short colored pick/string contact burst without a separate pitched click oscillator",
+        "adds a persistent six-string/bridge/body state contract while preserving the AG07 audio path exactly when coupling is zero"
+      ],
+      "limitations": [
+        "AG08-S1 is a state-skeleton candidate: all coupling/memory gains are zero and therefore intentionally inaudible",
+        "same-string continuity, shared body memory, sympathetic coupling and technique-state transitions are activated only in later AG08 slices after preservation gates",
+        "generic project-authored state dimensions are not a measured or named-instrument response"
+      ],
+      "recommended_roles": [
+        "guitar",
+        "accompaniment",
+        "fingerstyle"
+      ],
+      "expression_capabilities": [
+        "velocity"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
       "preset_id": "bass.electric_finger_modeled",
       "version": "1.0.0",
       "name": "Electric Finger Bass — Modeled",
