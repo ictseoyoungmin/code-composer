@@ -1,6 +1,6 @@
 # AG04 — Left-Hand Articulation / Damping
 
-Status: **IMPLEMENTATION CANDIDATE**
+Status: **CANONICAL CLOSED · R2 HUMAN LISTENING PASS**
 
 Target release: **v1.19.0**
 
@@ -99,3 +99,32 @@ reported under `guitar_performance_report.tracks[*].left_hand_events`.
 8. invalid/future AG04 fields fail loudly;
 9. AG01/AG02/AG03 preservation evidence and full CI pass;
 10. actual-branch 24 kHz single-note and transition-phrase evidence passes human listening.
+
+
+## Closure evidence — 2026-09-29
+
+AG04 closes after the R2 continuity correction and explicit human listening PASS.
+
+Authoritative engineering evidence before closure metadata:
+- PR #64 HEAD: `17a41b6efd6f201003cc6ed36d3c874976223830`;
+- CI #189 — SUCCESS;
+- Python 3.10 / 3.12: 823 passed each;
+- AG01 R3 Evidence #18 — SUCCESS;
+- AG02 R3 Evidence #12 — SUCCESS;
+- AG03 Right-Hand Evidence #10 — SUCCESS;
+- AG04 Left-Hand Evidence #5 — SUCCESS.
+
+R2 corrections accepted by closure:
+- carried same-string tonal energy is separated from newly injected contact excitation;
+- slide / hammer-on / pull-off remain audible without creating a fresh right-hand pick;
+- dead-note contact remains audible while decay is strongly damped;
+- natural harmonic mode response is level-aligned with the canonical E4 reference;
+- no-fake-pick regression evaluates high-frequency contact energy rather than total attack RMS.
+
+Human verdict on 2026-09-29:
+- mute / dead / natural harmonic set: **PASS**;
+- slide / hammer-on / pull-off transition phrases: **PASS**.
+
+AG05+ must preserve AG01–AG04 closed invariants. Multi-string execution may coordinate
+multiple independent string states, but must not rewrite accepted single-string,
+fingering, right-hand, or left-hand mechanics.
