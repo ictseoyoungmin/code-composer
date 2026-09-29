@@ -1,3 +1,14 @@
+## v1.19.0 development — AG07 Percussive Guitar Performance — CLOSED — 2026-09-29
+
+- Adds engine-owned acoustic-guitar `instrument_action` rendering for body tap, top slap, bridge hit, string slap, muted strum, dead strum and nail click.
+- All actions excite the same accepted acoustic-guitar body/air radiation stage; no percussion-engine substitution, drum sample, impulse response, external audio or measured body response is bundled.
+- Supports same-onset pitched note + body action without rewriting authored note pitch, string/fret, onset, duration or AG03–AG06 mechanics.
+- R2 fixes a real muted-strum direction defect by preserving low-to-high string contact identity; accepted down/up waveform delta is about 30.4%.
+- R3 bounds body-contact location level spread so contact position is not represented mostly by output-level change.
+- External guitar-interaction/coupling research and the NESS open-source physical-model framework are recorded in `CREDITS.md` as conceptual/reference sources only; no external code or fitted parameter set is copied.
+- Engineering closure before metadata: CI #214 SUCCESS; AG01–AG07 preservation/evidence SUCCESS on HEAD `0524dbc575143454d821ed4bc31deb000af92097`.
+- Human approval to proceed on 2026-09-29 closes AG07 and activates AG08 Stateful Guitar Coupling.
+
 ## v1.19.0 development — AG06 Chord / Strum Mechanics — CLOSED — 2026-09-29
 
 - Adds one continuous deterministic shared strum gesture rather than independent per-string triggers or random velocity humanization.
