@@ -1,0 +1,41 @@
+name: AG07 Percussive Guitar Evidence
+
+on:
+  pull_request:
+    paths:
+      - "skills/code-composer/kit/src/code_composer/audio/acoustic_guitar/**"
+      - "skills/code-composer/kit/src/code_composer/audio/engines/**"
+      - "skills/code-composer/kit/src/code_composer/execution/render_bridge.py"
+      - "skills/code-composer/kit/src/code_composer/render.py"
+      - "tests/test_ag07_guitar_percussion.py"
+      - "tools/render_ag07_percussive_evidence.py"
+      - ".github/workflows/ag07-percussive-evidence.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render-evidence:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: skills/code-composer/kit/src
+      AG07_EVIDENCE_DIR: artifacts/ag07-percussive-guitar
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install render dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "numpy==2.2.6" "scipy==1.15.3"
+      - name: Render AG07 evidence
+        run: python tools/render_ag07_percussive_evidence.py
+      - name: Upload AG07 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ag07-percussive-guitar-24k
+          path: artifacts/ag07-percussive-guitar
+          if-no-files-found: error
