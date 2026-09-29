@@ -82,7 +82,7 @@
         "bridge_state_order": 2,
         "same_string_memory": 0.32,
         "bridge_memory": 0.46,
-        "cross_string_coupling": 0.22,
+        "cross_string_coupling": 0.2,
         "sympathetic_gain": 0.18,
         "action_body_memory": 0.52
       }
