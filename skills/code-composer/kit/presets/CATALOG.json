@@ -105,6 +105,42 @@
     },
     {
       "format": "code-composer-factory-preset/v1",
+      "preset_id": "acoustic_guitar.steel_stateful_continuity",
+      "version": "1.0.0",
+      "name": "Steel Acoustic Guitar — AG08 S2 Same-String Continuity",
+      "engine": "acoustic_guitar",
+      "family": "acoustic_guitar",
+      "character": [
+        "steel-string",
+        "physical-parametric",
+        "bridge-body-coupled",
+        "ag01-r3-accepted-baseline",
+        "six-string-stateful-candidate",
+        "ag08-s2-same-string-continuity"
+      ],
+      "strengths": [
+        "uses the accepted AG01 R3 steel-string, bridge and body rendering path",
+        "keeps one persistent rendered buffer per resolved physical string",
+        "carries the actual residual same-string waveform continuously across a re-attack boundary and damps that prior state instead of allowing independent same-string tails to overlap indefinitely",
+        "leaves shared bridge/body memory, sympathetic cross-string coupling and AG07 action-state coupling for later AG08 slices"
+      ],
+      "limitations": [
+        "AG08-S2 activates same-string note continuity only; tracks containing instrument actions still delegate to the canonical AG07 event path",
+        "shared bridge/body memory, sympathetic cross-string coupling and multi-technique transition state are not active yet",
+        "generic project-authored state dimensions are not a measured or named-instrument response"
+      ],
+      "recommended_roles": [
+        "guitar",
+        "accompaniment",
+        "fingerstyle"
+      ],
+      "expression_capabilities": [
+        "velocity"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
       "preset_id": "bass.electric_finger_modeled",
       "version": "1.0.0",
       "name": "Electric Finger Bass — Modeled",
