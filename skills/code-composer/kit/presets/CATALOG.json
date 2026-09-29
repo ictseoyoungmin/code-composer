@@ -177,6 +177,42 @@
     },
     {
       "format": "code-composer-factory-preset/v1",
+      "preset_id": "acoustic_guitar.steel_stateful_sympathetic",
+      "version": "1.0.0",
+      "name": "Steel Acoustic Guitar — AG08 S4 Sympathetic Coupling",
+      "engine": "acoustic_guitar",
+      "family": "acoustic_guitar",
+      "character": [
+        "steel-string",
+        "physical-parametric",
+        "bridge-body-coupled",
+        "ag01-r3-accepted-baseline",
+        "six-string-stateful-candidate",
+        "ag08-s4-passive-sympathetic-coupling"
+      ],
+      "strengths": [
+        "retains the accepted AG01 R3 note renderer, AG07 action renderer, AG08-S2 same-string continuity and AG08-S3 shared body memory",
+        "routes already-authored source-string bridge force into spectrally compatible target-string modal state without creating MIDI or Render-IR note events",
+        "allocates a bounded quadratic bridge-domain energy fraction across target strings and attenuates the source by the complementary energy factor",
+        "radiates sympathetic target-string state through the same accepted acoustic-guitar body model rather than a separate reverb, chorus or sample layer"
+      ],
+      "limitations": [
+        "AG08-S4 is a compact reduced-order coupling model, not a geometry/material-derived FEM or BEM guitar simulation",
+        "sympathetic compatibility uses generic standard-tuning string coordinates and near-coincident modal partials rather than measured bridge admittance",
+        "formal long-horizon passive stability closure remains AG08-S6 and multi-technique transition closure remains AG08-S5"
+      ],
+      "recommended_roles": [
+        "guitar",
+        "accompaniment",
+        "fingerstyle"
+      ],
+      "expression_capabilities": [
+        "velocity"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
       "preset_id": "bass.electric_finger_modeled",
       "version": "1.0.0",
       "name": "Electric Finger Bass — Modeled",
