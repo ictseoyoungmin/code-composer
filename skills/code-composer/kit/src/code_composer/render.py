@@ -64,6 +64,30 @@ def _guitar_events_with_strum_gesture(events, beat_s):
     return out
 
 
+def _guitar_events_with_action_identity(events, global_seed, track_id):
+    """Attach AG07 action seeds to render-local guitar events.
+
+    The formula is exactly the legacy action-seed contract. Canonical IR is not
+    mutated; S3's whole-track renderer can therefore render AG07 actions with the
+    same deterministic identity as the event renderer.
+    """
+    out=[]
+    action_ordinal=0
+    base=(
+        int(global_seed)
+        + _stable_text_seed(track_id) * 31
+    ) & 0xFFFFFFFF
+    for event in events or []:
+        x=dict(event)
+        if event.get("event_type")=="instrument_action":
+            x["_ag_action_seed"]=int(
+                (base + action_ordinal * 104729) & 0xFFFFFFFF
+            )
+            action_ordinal += 1
+        out.append(x)
+    return out
+
+
 def _piano_events_with_strike_identity(events, global_seed, track_id):
     """Attach deterministic per-strike identity without mutating canonical IR.
 
@@ -131,6 +155,9 @@ def _render_dry_track(ir, track, n, sr, beat_s, graph_mode=False):
         )
     elif engine.name == "acoustic_guitar":
         render_events = _guitar_events_with_strum_gesture(render_events, beat_s)
+        render_events = _guitar_events_with_action_identity(
+            render_events, ir.get("meta",{}).get("global_seed",0), track.get("id","")
+        )
     stateful = engine.render_track(
         render_events, n, sr, patch, beat_s, gain=render_gain, pan=0.0
     )
@@ -160,11 +187,14 @@ def _render_dry_track(ir, track, n, sr, beat_s, graph_mode=False):
                     for prev in render_events[:event_index]
                     if prev.get("event_type")=="instrument_action"
                 )
-                action_seed=(
-                    int(ir["meta"].get("global_seed",0))
-                    + _stable_text_seed(track.get("id","")) * 31
-                    + action_ordinal * 104729
-                ) & 0xFFFFFFFF
+                action_seed=int(ev.get(
+                    "_ag_action_seed",
+                    (
+                        int(ir["meta"].get("global_seed",0))
+                        + _stable_text_seed(track.get("id","")) * 31
+                        + action_ordinal * 104729
+                    ) & 0xFFFFFFFF,
+                ))
                 stereo=engine.render_action(
                     ev["action"],
                     duration_s,
