@@ -117,7 +117,12 @@ def build_events():
                 raise ValueError("inner voice must stay on string 3")
             if voice == "treble" and string not in (1,2):
                 raise ValueError("treble voice must stay on strings 1-2")
-            duration = 2.8 if (bar_index == 11 and seq == 6) else dur
+            if bar_index == 11 and seq == 6:
+                duration = 0.95
+            elif bar_index == 11 and seq == 7:
+                duration = 0.45
+            else:
+                duration = dur
             events.append(_event(
                 f"b{bar_index+1:02d}e{seq}",
                 base + offset,
