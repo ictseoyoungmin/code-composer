@@ -77,7 +77,7 @@ def pattern(chord, mode):
             (48,5,3,"thumb","bass",1.25),
             (53,4,3,"thumb","bass",1.00),
             (57,3,2,"index","inner",0.50),
-            (60,2,1,"middle","treble",0.80),
+            (60,2,1,"middle","treble",0.50),
             (65,1,1,"ring","treble",0.70),
             (60,2,1,"middle","treble",0.80),
             (57,3,2,"index","inner",0.80),
