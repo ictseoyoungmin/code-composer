@@ -1,6 +1,6 @@
 # AG08 — Stateful Guitar Coupling / Continuous Performance
 
-Status: **S1-S5 ENGINEERING PASS · S3/S5 PERCEPTUAL PASS · S6 NEXT**
+Status: **S1-S5 ENGINEERING PASS · S3/S5 PERCEPTUAL PASS · S6 IMPLEMENTED / VALIDATION PENDING**
 
 Target release: **v1.19.0**
 
@@ -357,13 +357,55 @@ Human listening on 2026-09-30 accepted the curated 24 kHz S4↔S5 A/B set:
 
 S5 is therefore closed at both engineering and perceptual checkpoint level.
 
+## S6 — Passive energy / stability barrier
+
+S6 does not change the audible S5 render path. It adds a non-rendering
+certificate/evidence layer over the existing equations.
+
+The barrier covers:
+
+- strict stability of every body/air modal pole used by the accepted body model;
+- exact zero output for a non-empty stateful renderer timeline with no authored input;
+- finite-energy decay of a 12 s body impulse response;
+- finite-energy 12 s free decay of the steel-string bridge-force model;
+- pointwise non-amplifying S3 shared-body loading curves;
+- pointwise non-amplifying S5 string-contact loading curves;
+- positive same-string decay-time scales for all S5/AG04 transition classes;
+- exact S4 bridge-domain quadratic energy accounting
+  `source_keep² + Σeta = 1`;
+- repeated mixed-performance stress with no non-finite samples, runaway peak,
+  hidden Render-IR events, or persistent late body drone.
+
+The internal passivity certificate is explicitly scoped to state transforms.
+The body/radiation stage is feed-forward and is therefore validated by pole and
+finite-impulse/no-input-decay evidence rather than by claiming loudspeaker-domain
+L2 gain <= 1.
+
+S6 introduces no new synthesis parameter, oscillator, measured response, external
+solver, dataset, recording, IR, or borrowed implementation.
+
+### S6 engineering gate
+
+1. S1-S5 focused tests remain green.
+2. all body/air resonator poles lie strictly inside the unit circle.
+3. no-input S5 stateful rendering is exact digital silence.
+4. 12 s body impulse response has finite energy and negligible late residual.
+5. 12 s E2 string free-decay energy decreases across early/mid/late windows.
+6. S3/S5 residual-loading multipliers never exceed 1 and are nonincreasing.
+7. S4 configured target-energy budget remains 0.036 and exact quadratic
+   source/target accounting remains 1.0.
+8. four repeated mixed-performance cycles remain deterministic, bounded, and
+   event-exact without runaway cycle-to-cycle growth.
+9. post-performance long tail decays below the fixed late/early ratio gate.
+10. full CI plus AG01-AG08 evidence workflows pass.
+
 ## Planned downstream slices
 
 - **S2 Same-string continuity:** implementation candidate in this branch; close after the S2 engineering gate above.
 - **S3 Shared bridge/body memory:** engineering PASS on `43c03e8a131ad1de6b0c5f2530f1e6b42d35ebca`; CI #245 and S3 evidence #8 SUCCESS.
 - **S4 Sympathetic cross-string coupling:** ENGINEERING PASS on `51b76943e63cd79e887553266c6240db8e436be7`; CI #255 SUCCESS.
 - **S5 Technique-transition continuity:** ENGINEERING PASS on `c517ab274ec76e57010529cdc1d7f0853ccd2471`; CI #265 SUCCESS.
-- **S6 Passive energy/stability barrier:** NEXT — no-input decay, finite impulse energy, no runaway feedback or body drone.
+- **S6 Passive energy/stability barrier:** implementation/evidence candidate in this branch; validation pending.
 - **S7 Listening closure:** A/B against AG07 isolated-event canonical.
 
 ## Provenance
