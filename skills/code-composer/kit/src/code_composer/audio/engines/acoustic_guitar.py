@@ -453,6 +453,7 @@ class AcousticGuitarEngine(InstrumentEngine):
                 "cross_string_coupling",
                 "sympathetic_gain",
                 "action_body_memory",
+                "technique_transition_memory",
             }
             if unknown_stateful:
                 raise InstrumentEngineValidationError(
@@ -485,6 +486,7 @@ class AcousticGuitarEngine(InstrumentEngine):
                 ("cross_string_coupling", 0.20),
                 ("sympathetic_gain", 0.20),
                 ("action_body_memory", 0.98),
+                ("technique_transition_memory", 0.98),
             ):
                 _num(
                     stateful.get(key, 0.0),
