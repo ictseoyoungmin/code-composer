@@ -23,7 +23,7 @@ def song():
         "format": "code-composer-song/v1",
         "meta": {"title": "AG07 Percussive Guitar Evidence", "global_seed": 83},
         "transport": {"bpm": BPM, "meter": {"beats_per_bar": 4, "beat_unit": 4}},
-        "tonal": {"root": "E", "scale": "minor"},
+        "tonal": {"root": "E", "scale": "major"},
         "sections": [{"id": "a", "bars": 1}],
         "instruments": [{
             "id": "guitar",
