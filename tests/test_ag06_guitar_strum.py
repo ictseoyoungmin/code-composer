@@ -263,7 +263,8 @@ def test_shared_stroke_state_and_nominal_onset_must_match():
         _realized(events)
 
     events = _chord("F", stroke_id="bad2")
-    events[1]["start_beat"] = 0.01
+    for event in events[1:]:
+        event["start_beat"] = 0.01
     with pytest.raises(PerformanceBridgeError, match="one nominal authored onset"):
         _realized(events)
 
