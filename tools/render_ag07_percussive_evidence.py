@@ -248,10 +248,16 @@ def main():
         raise AssertionError(
             f"muted-strum direction diagnostic too weak: {muted_direction_delta:.6f}"
         )
-    reports["muted_strum_direction_delta_ratio"] = muted_direction_delta
+    diagnostics = {
+        "muted_strum_direction_delta_ratio": muted_direction_delta,
+    }
 
     (OUT / "REPORT.json").write_text(
-        json.dumps(reports, indent=2) + "\n", encoding="utf-8"
+        json.dumps(
+            {"cases": reports, "diagnostics": diagnostics},
+            indent=2,
+        ) + "\n",
+        encoding="utf-8",
     )
 
     lines = [
@@ -267,6 +273,10 @@ def main():
             f"{name}: peak={report['peak_abs']:.6f} rms={report['rms']:.6f} "
             f"notes={report['note_count']} actions={report['action_count']}"
         )
+    lines.append(
+        "muted_strum_direction_delta_ratio="
+        f"{muted_direction_delta:.6f}"
+    )
     lines += [
         "",
         "Human gate:",
