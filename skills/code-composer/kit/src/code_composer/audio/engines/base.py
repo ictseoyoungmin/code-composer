@@ -115,12 +115,18 @@ class InstrumentEngine:
     def validate_action_event(self, subject: str, event: dict) -> None:
         """Validate an authored non-note instrument action.
 
-        Stateful engines may opt in for actions such as future guitar-body taps.
+        Stateful engines may opt in for actions such as guitar-body taps.
         Unsupported actions are hard errors so the renderer never drops intent.
         """
         raise InstrumentEngineValidationError(
             f"{subject}: engine {self.name!r} does not support instrument_action events"
         )
+
+    def validate_action_event_for_patch(
+        self, subject: str, event: dict, patch: dict
+    ) -> None:
+        """Patch-aware action validation with backward-compatible default."""
+        self.validate_action_event(subject, event)
 
     def validate_ir_patch(self, subject: str, patch: dict) -> None:
         return None
