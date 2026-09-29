@@ -1,6 +1,6 @@
 # AG08 — Stateful Guitar Coupling / Continuous Performance
 
-Status: **S1-S3 ENGINEERING PASS · S4 NEXT**
+Status: **S1-S3 ENGINEERING PASS · S3 PERCEPTUAL PASS · S4 NEXT**
 
 Target release: **v1.19.0**
 
@@ -145,6 +145,17 @@ added.
 7. authored/resolved events remain exact;
 8. S1-S2 evidence and AG01-AG07 preservation remain green;
 9. cross-string sympathetic coupling remains blocked until S4.
+
+### S3 perceptual checkpoint — PASS
+
+Human listening on 2026-09-30 accepted the curated 24 kHz A/B set:
+- note → slap
+- slap → note
+- different-string note → note
+
+No objection was raised for pumping, tail choking, new pitched resonance, or
+artificial reverb-like swell. S3 is closed at both engineering and perceptual
+checkpoint level.
 
 ## Planned downstream slices
 
