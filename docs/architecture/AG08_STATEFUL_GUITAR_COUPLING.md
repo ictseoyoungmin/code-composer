@@ -1,6 +1,6 @@
 # AG08 — Stateful Guitar Coupling / Continuous Performance
 
-Status: **S1-S5 ENGINEERING PASS · S3 PERCEPTUAL PASS · S6 NEXT**
+Status: **S1-S5 ENGINEERING PASS · S3/S5 PERCEPTUAL PASS · S6 NEXT**
 
 Target release: **v1.19.0**
 
@@ -346,6 +346,16 @@ unchanged.
 
 S5 is **ENGINEERING PASS**. The next barrier is S6: passive energy / no-input
 decay / long-horizon stability for the combined S1-S5 state.
+
+### S5 perceptual checkpoint — PASS
+
+Human listening on 2026-09-30 accepted the curated 24 kHz S4↔S5 A/B set:
+
+- full `arpeggio → strum → muted_strum → top_slap → fingerstyle` transition;
+- focused muted-strum transition;
+- isolated no-transition E4 control.
+
+S5 is therefore closed at both engineering and perceptual checkpoint level.
 
 ## Planned downstream slices
 
