@@ -52,6 +52,20 @@ class AcousticGuitarEngine(InstrumentEngine):
             midi, duration_s, sr, patch, velocity=velocity, performance=performance
         )
 
+    def render_track(
+        self, events, n, sr, patch, beat_s, *, gain=1.0, pan=0.0
+    ):
+        from ..acoustic_guitar.stateful import render_stateful_acoustic_guitar_track
+        return render_stateful_acoustic_guitar_track(
+            events,
+            n,
+            sr,
+            patch,
+            beat_s,
+            gain=gain,
+            pan=pan,
+        )
+
     def render_action(
         self, action, duration_s, sr, patch, *, parameters, seed=0
     ):
@@ -423,6 +437,62 @@ class AcousticGuitarEngine(InstrumentEngine):
                 f"{subject}.acoustic_guitar.string_source_model unsupported: {source_model!r}"
             )
 
+        stateful = graph.get("stateful_coupling")
+        if stateful is not None:
+            if not isinstance(stateful, dict):
+                raise InstrumentEngineValidationError(
+                    f"{subject}.acoustic_guitar.stateful_coupling must be object"
+                )
+            unknown_stateful = set(stateful) - {
+                "enabled",
+                "model",
+                "body_state_order",
+                "bridge_state_order",
+                "same_string_memory",
+                "bridge_memory",
+                "cross_string_coupling",
+                "sympathetic_gain",
+                "action_body_memory",
+            }
+            if unknown_stateful:
+                raise InstrumentEngineValidationError(
+                    f"{subject}.acoustic_guitar.stateful_coupling unsupported field(s): "
+                    f"{sorted(unknown_stateful)}"
+                )
+            if not isinstance(stateful.get("enabled", False), bool):
+                raise InstrumentEngineValidationError(
+                    f"{subject}.acoustic_guitar.stateful_coupling.enabled must be boolean"
+                )
+            if stateful.get("model", "ag08_reduced_order_state_v1") != "ag08_reduced_order_state_v1":
+                raise InstrumentEngineValidationError(
+                    f"{subject}.acoustic_guitar.stateful_coupling.model unsupported"
+                )
+            _integer(
+                stateful.get("body_state_order", 10),
+                f"{subject}.acoustic_guitar.stateful_coupling.body_state_order",
+                2,
+                32,
+            )
+            _integer(
+                stateful.get("bridge_state_order", 2),
+                f"{subject}.acoustic_guitar.stateful_coupling.bridge_state_order",
+                1,
+                8,
+            )
+            for key, hi in (
+                ("same_string_memory", 0.98),
+                ("bridge_memory", 0.98),
+                ("cross_string_coupling", 0.20),
+                ("sympathetic_gain", 0.20),
+                ("action_body_memory", 0.98),
+            ):
+                _num(
+                    stateful.get(key, 0.0),
+                    f"{subject}.acoustic_guitar.stateful_coupling.{key}",
+                    0.0,
+                    hi,
+                )
+
         if "seed" in graph and not isinstance(graph["seed"], int):
             raise InstrumentEngineValidationError(
                 f"{subject}.acoustic_guitar.seed must be integer"
@@ -460,9 +530,15 @@ class AcousticGuitarEngine(InstrumentEngine):
 
     def capabilities_for_patch(self, patch):
         enabled = self._supports_fingering(patch)
+        graph = patch.get("acoustic_guitar_graph", {}) if isinstance(patch, dict) else {}
+        stateful = graph.get("stateful_coupling") if isinstance(graph, dict) else None
+        track_rendering = bool(
+            enabled and isinstance(stateful, dict) and stateful.get("enabled", False)
+        )
         return EngineCapabilities(
             name=self.name,
             extended_tail=True,
+            track_rendering=track_rendering,
             instrument_performance=enabled,
             instrument_actions=enabled,
             mechanics_realization=enabled,
