@@ -177,6 +177,42 @@
     },
     {
       "format": "code-composer-factory-preset/v1",
+      "preset_id": "acoustic_guitar.steel_stateful_performance",
+      "version": "1.0.0",
+      "name": "Steel Acoustic Guitar — AG08 S5 Continuous Performance",
+      "engine": "acoustic_guitar",
+      "family": "acoustic_guitar",
+      "character": [
+        "steel-string",
+        "physical-parametric",
+        "bridge-body-coupled",
+        "ag01-r3-accepted-baseline",
+        "six-string-stateful-candidate",
+        "ag08-s5-technique-transition-continuity"
+      ],
+      "strengths": [
+        "retains AG08-S4 passive sympathetic coupling and all accepted AG01-AG07 note/action renderers",
+        "keeps arpeggio, render-local strum contacts, string muting/percussion and later fingerstyle inside one persistent six-string/bridge/body state",
+        "lets muted_strum, dead_strum and string_slap damp already-ringing physical strings at deterministic per-string contact times instead of acting only as added percussion audio",
+        "extends same-string residual carry for slide/hammer-on/pull-off while shortening residual carry for palm/fretting/dead-note contact, without creating hidden musical events"
+      ],
+      "limitations": [
+        "AG08-S5 remains a compact reduced-order performance-state model rather than geometry/material-derived FEM/BEM simulation",
+        "string-contact damping coefficients are bounded project-authored generic values, not measured hand/string impedance data",
+        "formal long-horizon passive energy/stability closure remains AG08-S6 and final human listening closure remains AG08-S7"
+      ],
+      "recommended_roles": [
+        "guitar",
+        "accompaniment",
+        "fingerstyle"
+      ],
+      "expression_capabilities": [
+        "velocity"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
       "preset_id": "acoustic_guitar.steel_stateful_sympathetic",
       "version": "1.0.0",
       "name": "Steel Acoustic Guitar — AG08 S4 Sympathetic Coupling",
