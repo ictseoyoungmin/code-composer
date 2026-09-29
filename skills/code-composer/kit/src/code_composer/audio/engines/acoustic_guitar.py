@@ -63,7 +63,7 @@ class AcousticGuitarEngine(InstrumentEngine):
             raise InstrumentEngineValidationError(
                 f"{subject}: acoustic-guitar instrument_performance must contain string and/or fret"
             )
-        unknown = set(payload) - {"string", "fret", "right_hand", "left_hand"}
+        unknown = set(payload) - {"string", "fret", "right_hand", "left_hand", "arpeggio"}
         if unknown:
             raise InstrumentEngineValidationError(
                 f"{subject}: unsupported acoustic-guitar instrument_performance field(s): {sorted(unknown)}"
@@ -156,6 +156,41 @@ class AcousticGuitarEngine(InstrumentEngine):
                     f"{subject}.instrument_performance.left_hand.harmonic_order",
                     2, 5,
                 )
+
+        if "arpeggio" in payload:
+            arpeggio = payload["arpeggio"]
+            if not isinstance(arpeggio, dict) or not arpeggio:
+                raise InstrumentEngineValidationError(
+                    f"{subject}.instrument_performance.arpeggio must be a non-empty object"
+                )
+            unknown_arp = set(arpeggio) - {
+                "gesture_id", "player", "voice", "sequence_index"
+            }
+            if unknown_arp:
+                raise InstrumentEngineValidationError(
+                    f"{subject}: unsupported AG05 arpeggio field(s): {sorted(unknown_arp)}"
+                )
+            gesture_id = arpeggio.get("gesture_id")
+            if not isinstance(gesture_id, str) or not gesture_id.strip():
+                raise InstrumentEngineValidationError(
+                    f"{subject}.instrument_performance.arpeggio.gesture_id must be non-empty string"
+                )
+            if arpeggio.get("player") not in {
+                "thumb", "index", "middle", "ring", "pick"
+            }:
+                raise InstrumentEngineValidationError(
+                    f"{subject}.instrument_performance.arpeggio.player unsupported"
+                )
+            if arpeggio.get("voice") not in {"bass", "inner", "treble"}:
+                raise InstrumentEngineValidationError(
+                    f"{subject}.instrument_performance.arpeggio.voice unsupported"
+                )
+            _integer(
+                arpeggio.get("sequence_index"),
+                f"{subject}.instrument_performance.arpeggio.sequence_index",
+                0,
+                127,
+            )
 
     def _validate(self, subject, patch):
         if not isinstance(patch, dict):
