@@ -75,6 +75,9 @@ def chord_events(
     method="pick",
     gesture_overrides=None,
     muted_low_e=False,
+    start_beat=0.0,
+    duration_beats=1.35,
+    include_strings=None,
 ):
     cfg = gesture(
         stroke_id,
@@ -85,6 +88,9 @@ def chord_events(
     data = list(VOICINGS[name])
     if name == "C" and muted_low_e:
         data = [(40,6,0)] + data
+    if include_strings is not None:
+        allowed = set(int(x) for x in include_strings)
+        data = [row for row in data if int(row[1]) in allowed]
 
     events = []
     for i, (midi, string, fret) in enumerate(data):
@@ -102,8 +108,8 @@ def chord_events(
         events.append({
             "id": f"{stroke_id}_{i}",
             "type": "note",
-            "start_beat": 0.0,
-            "duration_beats": 1.35,
+            "start_beat": float(start_beat),
+            "duration_beats": float(duration_beats),
             "midi": int(midi),
             "velocity": 0.65,
             "instrument_performance": perf,
@@ -164,6 +170,142 @@ def render_case(name, events):
     if len(forces) >= 3 and max(forces) - min(forces) <= 0.01:
         raise AssertionError(f"{name}: per-string force profile too uniform")
     return report
+
+
+def render_pattern(name, events, expected_directions):
+    s, sc = score(events)
+    wav_path = OUT / f"{name}.wav"
+    result = render_song_score_to_files(
+        s,
+        sc,
+        wav_path,
+        render_ir_path=OUT / f"{name}_render_ir.json",
+    )
+    peak = peak_abs(wav_path)
+    if peak >= 0.98:
+        raise AssertionError(f"{name}: evidence peak {peak:.6f} >= 0.98")
+
+    strokes = result["guitar_performance_report"]["tracks"]["g"]["strum_strokes"]
+    if len(strokes) != len(expected_directions):
+        raise AssertionError(
+            f"{name}: expected {len(expected_directions)} strokes; got {len(strokes)}"
+        )
+
+    ordered = sorted(
+        strokes.items(),
+        key=lambda item: min(row["event_index"] for row in item[1]["profile"]),
+    )
+    directions = [report["direction"] for _, report in ordered]
+    if directions != list(expected_directions):
+        raise AssertionError(
+            f"{name}: direction sequence {directions} != {list(expected_directions)}"
+        )
+
+    stroke_rows = []
+    for stroke_id, report in ordered:
+        forces = [row["force"] for row in report["profile"]]
+        if len(forces) >= 3 and max(forces) - min(forces) <= 0.01:
+            raise AssertionError(f"{name}/{stroke_id}: force profile too uniform")
+        stroke_rows.append({
+            "stroke_id": stroke_id,
+            "direction": report["direction"],
+            "traversal_ms": report["traversal_ms"],
+            "represented_strings": report["represented_strings"],
+            "skipped_strings": report["skipped_strings"],
+            "force_span": report["force_span"],
+            "force_profile": [
+                {
+                    "string": row["string"],
+                    "offset_ms": row["offset_ms"],
+                    "force": row["force"],
+                    "render_velocity": row["render_velocity"],
+                }
+                for row in report["profile"]
+            ],
+        })
+
+    return {
+        "audio_peak_abs": peak,
+        "stroke_count": len(stroke_rows),
+        "directions": directions,
+        "strokes": stroke_rows,
+    }
+
+
+def alternating_f_rhythm(*, musical):
+    events = []
+    directions = []
+    for i in range(8):
+        direction = "down" if i % 2 == 0 else "up"
+        directions.append(direction)
+        start = i * 0.5
+        stroke_id = f"F_DU_{'musical' if musical else 'neutral'}_{i}"
+
+        if not musical:
+            events.extend(chord_events(
+                "F",
+                stroke_id=stroke_id,
+                direction=direction,
+                traversal_ms=28.0,
+                method="pick",
+                start_beat=start,
+                duration_beats=0.48,
+                gesture_overrides={
+                    "entry_strength": 0.62,
+                    "acceleration": 0.10,
+                    "pick_depth": 0.58,
+                    "attack_angle_deg": 42.0,
+                    "follow_through": 0.72,
+                    "accent_amount": 0.0,
+                },
+            ))
+            continue
+
+        if direction == "down":
+            # Downbeats carry more body, but accent remains local within the stroke.
+            strong_beat = i in {0, 4}
+            events.extend(chord_events(
+                "F",
+                stroke_id=stroke_id,
+                direction=direction,
+                traversal_ms=30.0,
+                method="pick",
+                start_beat=start,
+                duration_beats=0.48,
+                gesture_overrides={
+                    "entry_strength": 0.65 if strong_beat else 0.60,
+                    "acceleration": 0.12,
+                    "pick_depth": 0.60,
+                    "attack_angle_deg": 40.0,
+                    "follow_through": 0.76,
+                    "accent_position": 0.56,
+                    "accent_amount": 0.24 if strong_beat else 0.08,
+                },
+            ))
+        else:
+            # Realistic upstrokes commonly catch fewer high strings and are lighter.
+            events.extend(chord_events(
+                "F",
+                stroke_id=stroke_id,
+                direction=direction,
+                traversal_ms=24.0,
+                method="pick",
+                start_beat=start,
+                duration_beats=0.48,
+                include_strings=(1, 2, 3, 4),
+                gesture_overrides={
+                    "from_string": 1,
+                    "to_string": 4,
+                    "entry_strength": 0.50,
+                    "acceleration": -0.04,
+                    "pick_depth": 0.44,
+                    "attack_angle_deg": 48.0,
+                    "follow_through": 0.52,
+                    "accent_amount": 0.0,
+                },
+            ))
+
+    return events, directions
 
 
 def main():
@@ -238,8 +380,40 @@ def main():
     if reports["C_down_muted_lowE"]["muted_strings"] != [6]:
         raise AssertionError("muted-low-E diagnostic did not preserve muted contact")
 
+    neutral_events, neutral_dirs = alternating_f_rhythm(musical=False)
+    musical_events, musical_dirs = alternating_f_rhythm(musical=True)
+    rhythm_reports = {
+        "F_DU_neutral_8ths": render_pattern(
+            "F_DU_neutral_8ths", neutral_events, neutral_dirs
+        ),
+        "F_DU_musical_8ths": render_pattern(
+            "F_DU_musical_8ths", musical_events, musical_dirs
+        ),
+    }
+
+    # Neutral sequence isolates the direction flip under matched shared settings.
+    if rhythm_reports["F_DU_neutral_8ths"]["directions"] != [
+        "down","up","down","up","down","up","down","up"
+    ]:
+        raise AssertionError("neutral D/U rhythm direction sequence drifted")
+
+    # Musical sequence must keep lighter/partial upstrokes rather than rendering
+    # every stroke as the same six-string gesture.
+    musical_strokes = rhythm_reports["F_DU_musical_8ths"]["strokes"]
+    up_string_sets = [
+        row["represented_strings"]
+        for row in musical_strokes
+        if row["direction"] == "up"
+    ]
+    if any(strings != [1,2,3,4] for strings in up_string_sets):
+        raise AssertionError("musical upstroke must remain a four-string partial sweep")
+
+    full_report = {
+        "single_strokes": reports,
+        "rhythm_patterns": rhythm_reports,
+    }
     (OUT / "REPORT.json").write_text(
-        json.dumps(reports, indent=2) + "\n", encoding="utf-8"
+        json.dumps(full_report, indent=2) + "\n", encoding="utf-8"
     )
     lines += [
         "",
@@ -250,6 +424,8 @@ def main():
         "4. G accent must emphasize a local portion of the stroke rather than all strings uniformly.",
         "5. Am finger stroke should differ from pick while preserving the same chord mechanics.",
         "6. C skip/muted-low-E cases must sound mechanically distinct.",
+        "7. F_DU_neutral_8ths must reveal D/U alternation without extra musical exaggeration.",
+        "8. F_DU_musical_8ths should feel like one guitarist: fuller downstrokes, lighter partial upstrokes, local downbeat accents.",
         "AG06 remains OPEN until explicit human listening PASS.",
     ]
     (OUT / "MANIFEST.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
