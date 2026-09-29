@@ -1,6 +1,6 @@
 # AG06 — Chord / Strum Mechanics
 
-Status: **IMPLEMENTATION CANDIDATE**
+Status: **CANONICAL CLOSED · HUMAN LISTENING PASS**
 
 Target release: **v1.19.0**
 
@@ -133,3 +133,34 @@ Consequences:
 13. AG01–AG05 evidence + full CI pass;
 14. actual-pipeline 24 kHz listening confirms realistic chord stroke direction and force distribution;
 15. explicit human listening PASS is required before merge.
+
+
+## Closure evidence — 2026-09-29
+
+AG06 closes after the repeated down/up rhythm listening barrier passed.
+
+Authoritative engineering evidence before closure metadata:
+- PR #68 implementation HEAD: `e5677031611b4ca380c30d5f96497a0a6b6a30b7`;
+- CI #202 — SUCCESS;
+- Python 3.10 / 3.12: 847 passed each;
+- AG01 R3 Evidence #29 — SUCCESS;
+- AG02 R3 Evidence #23 — SUCCESS;
+- AG03 Right-Hand Evidence #21 — SUCCESS;
+- AG04 Left-Hand Evidence #16 — SUCCESS;
+- AG05 Arpeggio Evidence #9 — SUCCESS;
+- AG06 Strum Evidence #4 — SUCCESS.
+
+Accepted repeated-pattern evidence:
+- `F_DU_neutral_8ths.wav`: D-U-D-U-D-U-D-U with matched shared gesture settings except direction;
+- `F_DU_musical_8ths.wav`: fuller six-string downstrokes plus lighter four-string partial upstrokes and local downbeat accents;
+- neutral down/up direction reversal is perceptible in repeated musical context;
+- per-string force remains deterministic/correlated rather than uniform or independently randomized;
+- no clipping; evidence peaks remain below 0.98.
+
+Human verdict on 2026-09-29:
+- repeated down/up direction change: **PASS**;
+- AG06 chord/strum listening barrier: **PASS**.
+
+AG07+ must preserve AG01–AG06 closed invariants. Percussive actions may coexist with
+pitched guitar events, but may not bypass the acoustic-guitar resonator or replace
+accepted strum/string mechanics with an independent drum track.
