@@ -212,8 +212,16 @@ def main():
         raise SystemExit(f"unsafe output peak={peak} clipped={clipped}")
     if len(realized) != len(authored):
         raise SystemExit(f"event authority changed {len(authored)} -> {len(realized)}")
-    if [e["id"] for e in realized] != [e["id"] for e in authored]:
-        raise SystemExit("authored event identity/order changed")
+    authored_core = [
+        (int(e["midi"]), float(e["start_beat"]), float(e["duration_beats"]))
+        for e in authored
+    ]
+    realized_core = [
+        (int(e["midi"]), float(e["start_beat"]), float(e["duration_beats"]))
+        for e in realized
+    ]
+    if realized_core != authored_core:
+        raise SystemExit("authored pitch/start/duration authority changed")
 
     report = result_a["render_ir"].get("guitar_performance_report", {})
     track_report = (report.get("tracks") or {}).get("guitar", {})
