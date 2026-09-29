@@ -61,7 +61,7 @@ def build_song():
         "format": "code-composer-song/v1",
         "meta": {"title": "Ash Between Pines", "global_seed": 1919001, "revision": "AG09-D1-R0"},
         "transport": {"bpm": BPM, "meter": {"beats_per_bar": 4, "beat_unit": 4}},
-        "tonal": {"root": "E", "scale": "minor"},
+        "tonal": {"root": "E", "scale": "natural_minor"},
         "sections": [{"id": "solo", "bars": 12, "name": "Fingerstyle Solo"}],
         "instruments": [{
             "id": "guitar",
