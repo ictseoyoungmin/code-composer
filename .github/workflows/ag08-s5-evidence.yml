@@ -1,0 +1,43 @@
+name: AG08 S5 Continuous Performance Evidence
+
+on:
+  pull_request:
+    paths:
+      - "skills/code-composer/kit/src/code_composer/audio/acoustic_guitar/**"
+      - "skills/code-composer/kit/src/code_composer/audio/engines/acoustic_guitar.py"
+      - "skills/code-composer/kit/src/code_composer/reference/presets/acoustic_guitar__steel_stateful_performance__1.0.0.json"
+      - "skills/code-composer/kit/presets/CATALOG.json"
+      - "tests/test_ag08_stateful_s5.py"
+      - "tools/render_ag08_s5_evidence.py"
+      - ".github/workflows/ag08-s5-evidence.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render-evidence:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: skills/code-composer/kit/src
+      AG08_S5_EVIDENCE_DIR: artifacts/ag08-s5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install render dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "numpy==2.2.6" "scipy==1.15.3" pytest
+      - name: Run AG08-S1-S5 focused tests
+        run: python -m pytest -q tests/test_ag08_stateful_s1.py tests/test_ag08_stateful_s2.py tests/test_ag08_stateful_s3.py tests/test_ag08_stateful_s4.py tests/test_ag08_stateful_s5.py
+      - name: Render AG08-S5 evidence
+        run: python tools/render_ag08_s5_evidence.py
+      - name: Upload AG08-S5 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ag08-s5-continuous-performance-24k
+          path: artifacts/ag08-s5
+          if-no-files-found: error
