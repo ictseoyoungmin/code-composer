@@ -165,7 +165,7 @@ S4 adds a separate opt-in development preset:
 - `same_string_memory = 0.32`
 - `bridge_memory = 0.46`
 - `action_body_memory = 0.52`
-- `cross_string_coupling = 0.22`
+- `cross_string_coupling = 0.20`
 - `sympathetic_gain = 0.18`
 
 S4 does not author, lower, or insert a MIDI / Render-IR note for sympathetic
