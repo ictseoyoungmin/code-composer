@@ -1,6 +1,6 @@
 # AG08 — Stateful Guitar Coupling / Continuous Performance
 
-Status: **S1-S4 ENGINEERING PASS · S3 PERCEPTUAL PASS · S5 NEXT**
+Status: **S1-S4 ENGINEERING PASS · S3 PERCEPTUAL PASS · S5 IMPLEMENTED / VALIDATION PENDING**
 
 Target release: **v1.19.0**
 
@@ -243,12 +243,84 @@ maximum configured bridge-domain transfer budget is therefore
 S4 is **ENGINEERING PASS**. Formal long-horizon no-input decay / passive
 stability remains the dedicated S6 barrier, and final human listening remains S7.
 
+## S5 — Technique-transition continuity
+
+S5 adds the opt-in development preset:
+
+- `acoustic_guitar.steel_stateful_performance@1.0.0`
+- all S4 coupling values are retained;
+- `technique_transition_memory = 0.82`.
+
+S5 does not introduce a new note generator, hidden gesture, or separate
+performance-effects bus. It extends the existing persistent six-string state in
+two places.
+
+### String-contact actions alter already-ringing string state
+
+`muted_strum`, `dead_strum`, and `string_slap` now have a state consequence
+in the S5 preset in addition to their already-accepted AG07 contact sound.
+
+For muted/dead strums, physical-string contacts are scheduled deterministically
+in traversal order. A down stroke contacts strings 6→1; an up stroke contacts
+1→6. The requested traversal time is divided across those physical contacts.
+At each contact, the already-existing string buffer remains continuous at the
+contact sample and then undergoes a bounded decay toward a technique-dependent
+retained-energy state.
+
+A dead strum removes more residual string energy than a muted strum at otherwise
+equal settings. `string_slap` applies simultaneous string-contact damping. Body
+actions such as `top_slap` and `body_tap` do not arbitrarily reset individual
+strings; they continue to interact through the S3 shared-body state.
+
+### Same-string left-hand transitions preserve technique semantics
+
+When a new authored event reuses the same physical string, S5 modifies only the
+decay time of the already-existing residual waveform:
+
+- slide / hammer-on / pull-off: longer residual carry;
+- palm mute / fretting mute / dead note: shorter residual carry;
+- ordinary re-attack: unchanged S4/S2 behavior.
+
+The authored destination note, fret, AG04 realization, and injected excitation
+remain unchanged. The transition layer therefore changes state continuity, not
+musical authority.
+
+### S5 preservation contract
+
+- `technique_transition_memory = 0` is inert;
+- S1-S4 presets remain unchanged;
+- an isolated note with no technique transition must remain sample-exact with S4;
+- no hidden MIDI, Render-IR note, or inferred hand gesture may be created;
+- the reference performance chain is
+  `arpeggio → strum → muted_strum → top_slap → fingerstyle`;
+- candidate output must be deterministic, event-exact, bounded, and identical to
+  S4 before the first technique-state transition;
+- formal long-horizon passivity remains the dedicated S6 gate.
+
+No new external algorithm, measured impedance, contact dataset, recording, IR,
+solver, or code was introduced for S5. The already-recorded AG07/AG08
+player-contact and coupled-string references remain the provenance basis.
+
+### S5 engineering gate
+
+1. S1-S4 preservation/evidence remains green.
+2. S5 preset is separately opt-in.
+3. isolated no-transition note is sample-exact with S4.
+4. muted/dead traversal contact order is deterministic and physical-string ordered.
+5. dead contact removes more existing residual state than muted contact.
+6. legato left-hand transitions lengthen residual carry while mute/dead contact shortens it.
+7. mixed arpeggio→strum→mute→slap→fingerstyle output is exact with S4 before the
+   mute boundary and differs only after state-changing contact begins.
+8. mixed performance remains deterministic and Render-IR event exact.
+9. no hidden event is added and peak remains bounded.
+10. full CI and AG01-AG08 evidence workflows pass.
+
 ## Planned downstream slices
 
 - **S2 Same-string continuity:** implementation candidate in this branch; close after the S2 engineering gate above.
 - **S3 Shared bridge/body memory:** engineering PASS on `43c03e8a131ad1de6b0c5f2530f1e6b42d35ebca`; CI #245 and S3 evidence #8 SUCCESS.
 - **S4 Sympathetic cross-string coupling:** ENGINEERING PASS on `51b76943e63cd79e887553266c6240db8e436be7`; CI #255 SUCCESS.
-- **S5 Technique-transition continuity:** NEXT — arpeggio→strum→mute→slap→fingerstyle etc. through one persistent string/bridge/body state.
+- **S5 Technique-transition continuity:** implementation candidate in this branch; engineering validation pending.
 - **S6 Passive energy/stability barrier:** no-input decay, finite impulse energy, no runaway feedback or body drone.
 - **S7 Listening closure:** A/B against AG07 isolated-event canonical.
 
