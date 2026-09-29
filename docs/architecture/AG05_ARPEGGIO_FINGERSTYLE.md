@@ -1,6 +1,6 @@
 # AG05 — Arpeggio / Fingerstyle Performance
 
-Status: **IMPLEMENTATION CANDIDATE**
+Status: **CANONICAL CLOSED · HUMAN LISTENING PASS**
 
 Target release: **v1.19.0**
 
@@ -103,3 +103,33 @@ single stroke must not apply identical force to every traversed string.
 8. AG01–AG04 evidence and full CI pass;
 9. actual-pipeline 24 kHz C/F listening shows multi-string independent resonance;
 10. explicit human listening PASS is required before merge.
+
+
+## Closure evidence — 2026-09-29
+
+AG05 closes after explicit human listening PASS on the C/F fingerstyle vs picked-arpeggio evidence.
+
+Authoritative engineering evidence before closure metadata:
+- PR #66 HEAD: `86b13ed119677be123173605394f437fcca09175`;
+- CI #195 — SUCCESS;
+- Python 3.10 / 3.12: 836 passed each;
+- AG01 R3 Evidence #23 — SUCCESS;
+- AG02 R3 Evidence #17 — SUCCESS;
+- AG03 Right-Hand Evidence #15 — SUCCESS;
+- AG04 Left-Hand Evidence #10 — SUCCESS;
+- AG05 Arpeggio Evidence #3 — SUCCESS.
+
+Accepted evidence:
+- C: 5 independently overlapping strings, bass-under-upper overlap 8;
+- F: 5 independently overlapping strings, bass-under-upper overlap 9;
+- picked/fingerstyle pairs preserve identical MIDI/onset/duration/velocity/string/fret identity;
+- evidence peak gate < 0.98 passes for all files;
+- an invalid F same-string overlap was rejected and fixed in authored score rather than weakening validation.
+
+Human verdict:
+- C fingerstyle vs picked arpeggio: PASS;
+- F fingerstyle vs picked arpeggio: PASS.
+
+AG06+ must preserve AG01–AG05 closed invariants. Strum mechanics may derive micro-onsets
+and per-string excitation from an authored stroke gesture, but may not silently rewrite
+the chord voicing or bypass AG02–AG05 authority.
