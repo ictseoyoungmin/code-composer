@@ -1,6 +1,6 @@
 # AG08 — Stateful Guitar Coupling / Continuous Performance
 
-Status: **S1-S3 ENGINEERING PASS · S3 PERCEPTUAL PASS · S4 NEXT**
+Status: **S1-S3 PASS · S4 IMPLEMENTED / VALIDATION PENDING**
 
 Target release: **v1.19.0**
 
@@ -157,11 +157,66 @@ No objection was raised for pumping, tail choking, new pitched resonance, or
 artificial reverb-like swell. S3 is closed at both engineering and perceptual
 checkpoint level.
 
+## S4 — Passive sympathetic cross-string coupling
+
+S4 adds a separate opt-in development preset:
+
+- `acoustic_guitar.steel_stateful_sympathetic@1.0.0`
+- `same_string_memory = 0.32`
+- `bridge_memory = 0.46`
+- `action_body_memory = 0.52`
+- `cross_string_coupling = 0.22`
+- `sympathetic_gain = 0.18`
+
+S4 does not author, lower, or insert a MIDI / Render-IR note for sympathetic
+response. An authored source note's accepted AG01-AG04 bridge-force signal drives
+a compact target-string modal projection only when another physical string has
+near-coincident partial frequencies.
+
+The target-string resonant fundamental is the current compact fret state, or the
+open-string tuning for an untouched string. Simultaneously authored strings at
+one onset are excluded from sympathetic targets so a six-string chord is not
+double-excited.
+
+The transfer uses a bounded quadratic bridge-domain energy budget. If `eta_j`
+is the energy fraction assigned to target string `j`, then:
+
+```
+sum(eta_j) <= min(0.12, cross_string_coupling * sympathetic_gain)
+source_keep = sqrt(1 - sum(eta_j))
+```
+
+Thus the internal source/target allocation is non-amplifying before body
+radiation. Compatible target state is radiated through the same accepted guitar
+body path; no separate reverb, chorus, sample, impulse response, or foreground
+sympathetic-note oscillator is introduced.
+
+The S4 preset is intentionally generic. Standard steel-string tuning and
+project-authored modal compatibility are used; no measured bridge admittance,
+guitar geometry, material constants, fitted modal table, or named-instrument
+response is imported.
+
+### S4 engineering gate
+
+1. S1-S3 preservation tests remain green.
+2. The S4 preset is separately opt-in and leaves S3 unchanged.
+3. A spectrally incompatible source/target case is sample-exact with S3.
+4. A fully authored six-string same-onset chord is sample-exact with S3 and is
+   not double-excited by hidden sympathetic state.
+5. A compatible single-string source produces deterministic target-string state.
+6. Authored Render-IR event identity and event count remain unchanged.
+7. The summed target bridge-energy fraction never exceeds the configured passive
+   budget or the absolute 0.12 S4 ceiling.
+8. Output remains bounded at the 24 kHz evidence gate.
+9. No new external implementation dependency or uncredited measured asset is
+   introduced.
+10. Full CI and AG01-AG08 preservation/evidence workflows pass.
+
 ## Planned downstream slices
 
 - **S2 Same-string continuity:** implementation candidate in this branch; close after the S2 engineering gate above.
 - **S3 Shared bridge/body memory:** engineering PASS on `43c03e8a131ad1de6b0c5f2530f1e6b42d35ebca`; CI #245 and S3 evidence #8 SUCCESS.
-- **S4 Sympathetic cross-string coupling:** bounded bridge-mediated energy transfer.
+- **S4 Sympathetic cross-string coupling:** implementation candidate in this branch; engineering validation pending.
 - **S5 Technique-transition continuity:** arpeggio→strum→mute→slap→fingerstyle etc.
 - **S6 Passive energy/stability barrier:** no-input decay, finite impulse energy, no runaway feedback or body drone.
 - **S7 Listening closure:** A/B against AG07 isolated-event canonical.
