@@ -48,6 +48,25 @@ class InstrumentEngine:
         """
         raise NotImplementedError
 
+    def render_action(
+        self,
+        action: str,
+        duration_s: float,
+        sr: int,
+        patch: dict,
+        *,
+        parameters: dict,
+        seed: int = 0,
+    ):
+        """Render one authored non-note instrument action.
+
+        Engines opt in together with validate_action_event(). Unsupported action
+        rendering is a hard error so authored intent is never silently dropped.
+        """
+        raise InstrumentEngineValidationError(
+            f"engine {self.name!r} does not render instrument_action events"
+        )
+
     def render_track(
         self,
         events,
