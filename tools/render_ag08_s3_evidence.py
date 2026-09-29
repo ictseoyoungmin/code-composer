@@ -177,7 +177,7 @@ def main():
     ]
     slap_then_note = [
         action("tap", 0.0, "body_tap", strength=0.48, location="lower_bout"),
-        note("e4", 0.50, 0.70, 64, 1, 0, "finger"),
+        note("e4", 0.20, 0.70, 64, 1, 0, "finger"),
     ]
     different_string = [
         note("e4_s1", 0.0, 0.55, 64, 1, 0),
@@ -200,7 +200,7 @@ def main():
         "note_then_slap", note_then_slap, 0.55
     )
     report["cases"]["slap_then_note"] = compare_transition(
-        "slap_then_note", slap_then_note, 0.50
+        "slap_then_note", slap_then_note, 0.20
     )
     report["cases"]["different_string_body"] = compare_transition(
         "different_string_body", different_string, 0.50
