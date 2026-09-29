@@ -1,6 +1,6 @@
 # AG08 — Stateful Guitar Coupling / Continuous Performance
 
-Status: **S1-S5 ENGINEERING PASS · S3/S5 PERCEPTUAL PASS · S6 IMPLEMENTED / VALIDATION PENDING**
+Status: **S1-S6 ENGINEERING PASS · S3/S5 PERCEPTUAL PASS · S7 LISTENING NEXT**
 
 Target release: **v1.19.0**
 
@@ -399,13 +399,50 @@ solver, dataset, recording, IR, or borrowed implementation.
 9. post-performance long tail decays below the fixed late/early ratio gate.
 10. full CI plus AG01-AG08 evidence workflows pass.
 
+### S6 engineering result — PASS
+
+Authoritative S6 checkpoint:
+
+- `d9343727ab3546a8ae1478fb3d0196bd317ff63d`
+- CI **#271 — SUCCESS**
+- Python 3.12: **929 passed**
+- Python 3.10: **929 passed**
+- checkout hygiene: **SUCCESS**
+- AG01–AG07 and AG08 S1–S6 evidence workflows: **SUCCESS**
+
+S6 stability evidence:
+
+- body/air maximum pole radius: `0.9916458753361179 < 1`
+- internal passive-state certificate: **true**
+- S3 shared-body loading multiplier: `[0.8270798810554976, 1.0]`,
+  nonincreasing
+- S5 string-contact loading multiplier: `[0.060000000000000074, 1.0]`,
+  nonincreasing
+- S4 configured bridge-domain transfer budget: `0.036`
+- `source_keep² + transfer_budget = 1.0`
+- 12 s no-input stateful render: **exact silence**
+- 12 s body impulse late/early RMS ratio: `0.0`
+- 12 s E2 string free-decay late/first RMS ratio:
+  `0.013618109240199733`
+- four-cycle mixed-performance stress cycle RMS:
+  `[0.0926784693703029, 0.09391069725280506, 0.09368914789284015, 0.09366785950811395]`
+- max/min cycle RMS ratio: `1.0132957297511862`
+- long-horizon peak: `0.5584872256495564`
+- authored / Render-IR event count: `48 / 48`
+- deterministic repeat hash: **exact**
+- late-tail / early-tail RMS ratio: `0.0`
+
+S6 is **ENGINEERING PASS**. Because S6 is a non-rendering certificate/evidence
+layer, it does not require a separate perceptual gate. Final human listening
+closure is S7.
+
 ## Planned downstream slices
 
 - **S2 Same-string continuity:** implementation candidate in this branch; close after the S2 engineering gate above.
 - **S3 Shared bridge/body memory:** engineering PASS on `43c03e8a131ad1de6b0c5f2530f1e6b42d35ebca`; CI #245 and S3 evidence #8 SUCCESS.
 - **S4 Sympathetic cross-string coupling:** ENGINEERING PASS on `51b76943e63cd79e887553266c6240db8e436be7`; CI #255 SUCCESS.
 - **S5 Technique-transition continuity:** ENGINEERING PASS on `c517ab274ec76e57010529cdc1d7f0853ccd2471`; CI #265 SUCCESS.
-- **S6 Passive energy/stability barrier:** implementation/evidence candidate in this branch; validation pending.
+- **S6 Passive energy/stability barrier:** ENGINEERING PASS on `d9343727ab3546a8ae1478fb3d0196bd317ff63d`; CI #271 SUCCESS.
 - **S7 Listening closure:** A/B against AG07 isolated-event canonical.
 
 ## Provenance
