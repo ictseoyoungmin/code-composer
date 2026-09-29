@@ -340,6 +340,35 @@ Several earlier Code Composer references remain directly relevant and are intent
    - Further informs AG07's requirement that percussive gestures remain spatially/body-coupled guitar actions instead of hidden sample-trigger substitutions in the canonical acoustic engine.
    - The augmented-guitar hardware, sensor recordings, classifiers, and samples are not used by Code Composer.
 
+
+### AG07 / AG08 continuation — guitar interaction, coupling, and open-source physical-model references
+
+The following sources were additionally consulted on 2026-09-29 while auditing AG07's physical interpretation and scoping AG08 stateful coupling. They are used as **conceptual / validation references only**. No source code, meshes, measurements, recordings, modal tables, impulse responses, fitted constants, or datasets from these resources are copied into Code Composer.
+
+61. Federico Avanzini, François Germain, and Davide Rocchesso, **"Player–Instrument Interaction Models for Digital Waveguide Synthesis of Guitar: Touch and Collisions,"** *IEEE Transactions on Audio, Speech, and Language Processing*, 18(4), 822-832, 2010. DOI: `10.1109/TASL.2009.2038822`.
+   - Informs AG07/AG08's distinction between player contact/collision excitation and the subsequent resonating string/body state.
+   - Reinforces modeling finger/pick/string/fret interactions as causal mechanical interactions rather than post-render labels or generic noise overlays.
+
+62. Tero Tolonen, Vesa Välimäki, and Matti Karjalainen, **"A new sound synthesis structure for modeling the coupling of guitar strings,"** *NORSIG 1998*.
+   - Informs AG08's requirement that multiple strings may exchange energy through a shared coupling structure instead of being permanently independent note generators.
+   - Code Composer does not copy the original Commuted Waveguide / Single Delay Loop implementation or its fitted parameters.
+
+63. Nelson Lee, Julius O. Smith, and Vesa Välimäki, **"Analysis and Synthesis of Coupled Vibrating Strings Using a Hybrid Modal-Waveguide Synthesis Model,"** *IEEE Transactions on Audio, Speech, and Language Processing*, 18(4), 833-842, 2010.
+   - Informs AG08's reduced-order target for persistent multi-string energy transfer and multi-stage decay without requiring a full finite-element simulation in the real-time runtime.
+   - No publication code, experimental data, fitted decay tables, or measured instrument response is imported.
+
+### NESS physical-model framework — University of Edinburgh
+
+The open-source **NESS Code Framework** from the University of Edinburgh's Next Generation Sound Synthesis project was inspected as an implementation-architecture reference while reviewing the boundary between Code Composer's compact real-time approximation and fuller numerical physical simulation.
+
+- Project: NESS Code Framework / Next Generation Sound Synthesis
+- Repository: https://github.com/Edinburgh-Acoustics-and-Audio-Group/ness
+- Copyright: 2012-2024 The University of Edinburgh
+- Upstream license: MIT
+- Relevant capabilities inspected: separate instrument and score descriptions; strings, plates, membranes, guitar and modal-plate models; explicit excitation of physical components; energy-conservation diagnostics.
+- Code Composer usage: **architecture/reference comparison only**. No NESS source code, CUDA/C++ implementation, solver, mesh, example instrument, score, output audio, material table, or parameter set is copied, vendored, compiled, or redistributed by Code Composer.
+- Because no NESS software is redistributed, its MIT license is recorded here for provenance; if NESS code is ever integrated in the future, the upstream copyright and permission notice must accompany the redistributed portion.
+
 #### v1.19 research-to-slice boundary
 
 - **AG00 Contract / Architecture:** Laurson et al.; Cuzzucoli & Lombardo; existing engine/performance architecture.
@@ -349,8 +378,8 @@ Several earlier Code Composer references remain directly relevant and are intent
 - **AG04 Left-Hand Articulation / Damping:** existing Karjalainen/Vodka groundwork plus instrument-specific dogfood evidence; no paper constant is a mandatory implementation target.
 - **AG05 Arpeggio / Fingerstyle:** Laurson et al.; Perez-Carrillo.
 - **AG06 Chord / Strum Mechanics:** performance timing/traversal remains an authored Code Composer contract; research evidence may refine mechanics, but no automatic strum pattern generation is introduced.
-- **AG07 Percussive Guitar:** Martelloni et al. 2020/2021 plus guitar-body modal references.
-- **AG08 Stateful Coupling:** Laurson et al.; Elejabarrieta et al.; Torres & Boullosa; Ma & Xiong.
+- **AG07 Percussive Guitar:** Martelloni et al. 2020/2021; Avanzini/Germain/Rocchesso player-contact/collision modeling; guitar-body modal references.
+- **AG08 Stateful Coupling:** Laurson et al.; Elejabarrieta et al.; Torres & Boullosa; Ma & Xiong; Tolonen/Välimäki/Karjalainen; Lee/Smith/Välimäki; NESS as architecture comparison only.
 - **AG09 Production Closure:** Wühle et al. reinforces perceptual/listening validation alongside objective integrity checks.
 
 The v1.19 research pass introduces **no third-party runtime dependency and no bundled third-party code, audio, measurement, impulse response, model, body-mode table, guitar recording, or dataset**. Any future measured guitar response must satisfy the project's measured-asset attribution policy before inclusion.
@@ -394,6 +423,6 @@ S28-G introduces no new third-party source code, sample, recording, impulse resp
 
 ---
 
-Last updated: 2026-09-28 (v1.19.0 AG00 acoustic-guitar research/provenance pass).
+Last updated: 2026-09-29 (v1.19.0 AG07/AG08 guitar physical-model provenance update).
 
 - S27-M R2 ensemble production-integration extensions are independently implemented from project-authored contracts; no third-party audio, source code, IR, or measured-data bundle was added.
