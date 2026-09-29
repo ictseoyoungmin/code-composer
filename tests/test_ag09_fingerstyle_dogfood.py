@@ -70,3 +70,10 @@ def test_ag09_d1_uses_final_ag08_preset_and_fast_render_rate():
     assert score["render"]["sample_rate"] == 24000
     assert score["render"]["mix"]["room_return_gain"] == 0.0
     assert song["meta"]["revision"] == "AG09-D1-R0"
+
+
+def test_ag09_d1_authored_gates_stay_inside_piece_timeline():
+    timeline_beats = 12 * 4.0
+    for event in MOD.build_events():
+        assert float(event["start_beat"]) >= 0.0
+        assert float(event["start_beat"]) + float(event["duration_beats"]) <= timeline_beats + 1e-12
