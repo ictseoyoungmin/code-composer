@@ -1,6 +1,6 @@
 # AG07 — Percussive Guitar Performance
 
-Status: **IMPLEMENTATION CANDIDATE**
+Status: **CANONICAL CLOSED · R3 HUMAN LISTENING PASS**
 
 Target release: **v1.19.0**
 
@@ -156,3 +156,33 @@ modal tables, fitted constants, or solver implementations.
 
 Any future AG08 use of an external algorithm beyond conceptual comparison must
 be recorded in `CREDITS.md` before canonical closure.
+
+
+## Closure evidence — 2026-09-29
+
+AG07 closes after R3 engineering hardening, provenance completion, and explicit human approval to proceed.
+
+Authoritative engineering evidence before closure metadata:
+- PR #70 HEAD: `0524dbc575143454d821ed4bc31deb000af92097`;
+- CI #214 — SUCCESS;
+- Python 3.10 / 3.12 blocking regression and release-surface build — SUCCESS;
+- AG01–AG07 preservation/evidence on the same HEAD — SUCCESS.
+
+Hardening history:
+- R1 corrected an evidence-only unsupported tonal fixture.
+- R2 fixed a real muted-strum direction defect by preserving low-string/high-string contact identity; accepted down/up waveform delta ratio is about 0.304.
+- R3 bounded body-contact location level spread so location differences read primarily as contact/resonance character instead of excessive loudness.
+- Note + action simultaneity preserves authored note authority.
+- All AG07 actions remain acoustic-guitar engine actions through the same guitar body/radiation stage; no drum engine, sample, or IR substitution is used.
+
+Research/provenance:
+- v1.19 AG07/AG08 external research and OSS references are recorded in `CREDITS.md`.
+- No external implementation code, solver, measured response, mesh, dataset, fitted parameter table, audio, or IR is copied or redistributed.
+
+Human verdict on 2026-09-29:
+- AG07 physical-model/percussive-guitar direction accepted;
+- proceed to AG08 stateful coupling: **PASS**.
+
+AG08+ must preserve AG01–AG07 closed invariants. Any new external algorithm,
+solver, measured parameter source, dataset, or OSS implementation used beyond
+conceptual comparison must be added to `CREDITS.md` before canonical closure.
