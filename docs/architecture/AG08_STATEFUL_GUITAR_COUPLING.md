@@ -1,6 +1,6 @@
 # AG08 — Stateful Guitar Coupling / Continuous Performance
 
-Status: **S2 IMPLEMENTATION CANDIDATE · S1 ENGINEERING PASS**
+Status: **S3 IMPLEMENTATION CANDIDATE · S1-S2 ENGINEERING PASS**
 
 Target release: **v1.19.0**
 
@@ -111,10 +111,45 @@ same physical string. Those interactions belong to S3-S5.
 8. bridge/body, cross-string, sympathetic and action-memory gains remain blocked;
 9. AG01-AG07 preservation workflows and full CI pass.
 
+## S3 — Shared bridge/body memory
+
+S3 adds the opt-in development preset:
+- `acoustic_guitar.steel_stateful_body@1.0.0`
+- `same_string_memory = 0.32`
+- `bridge_memory = 0.46`
+- `action_body_memory = 0.52`
+- cross-string coupling and sympathetic gain remain zero.
+
+S3 does **not** add another body resonator. The actual accepted AG01/AG07
+already-rendered residual waveform is the shared body state. New authored notes
+and AG07 actions enter that same state. At a later excitation/contact boundary,
+the prior residual is kept sample-continuous and receives only a bounded weak
+loading curve; no new modal frequency, oscillator, sample, IR, or hidden pitch is
+created.
+
+AG07 action seeds are attached only to render-local event copies using the exact
+legacy deterministic formula. Canonical Render IR remains unchanged.
+
+S3 groups simultaneous events at one onset so a chord or note+slap does not
+artificially load the body multiple times before its same-onset excitations are
+added.
+
+### S3 engineering gate
+
+1. isolated note remains sample-exact with AG07;
+2. isolated AG07 action remains sample-exact, including deterministic action identity;
+3. simultaneous note + action with no prior body state remains sample-exact;
+4. sequential note→action and action→note differ only after the second excitation;
+5. a different-string second note may change the existing body residual but must not create a hidden string/note event;
+6. repeated S3 render is deterministic and peak remains bounded;
+7. authored/resolved events remain exact;
+8. S1-S2 evidence and AG01-AG07 preservation remain green;
+9. cross-string sympathetic coupling remains blocked until S4.
+
 ## Planned downstream slices
 
 - **S2 Same-string continuity:** implementation candidate in this branch; close after the S2 engineering gate above.
-- **S3 Shared bridge/body memory:** notes and AG07 actions excite one persistent body state.
+- **S3 Shared bridge/body memory:** implementation candidate in this branch; close after the S3 engineering gate above.
 - **S4 Sympathetic cross-string coupling:** bounded bridge-mediated energy transfer.
 - **S5 Technique-transition continuity:** arpeggio→strum→mute→slap→fingerstyle etc.
 - **S6 Passive energy/stability barrier:** no-input decay, finite impulse energy, no runaway feedback or body drone.
