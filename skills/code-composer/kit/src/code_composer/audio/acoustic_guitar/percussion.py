@@ -63,14 +63,14 @@ def _body_contact(action, location, strength, n, sr, rng):
     # Contact location changes coupling/excitation spectrum, not the body's
     # modal frequencies. The body resonator itself remains the accepted AG01 body.
     location_profile={
-        "lower_bout": (45.0, 2600.0, 0.011, 1.18, 0.95),
-        "upper_bout": (85.0, 4200.0, 0.008, 0.92, 1.05),
-        "soundboard": (60.0, 5200.0, 0.007, 1.00, 1.00),
-        "bridge": (420.0, 7600.0, 0.0045, 0.72, 1.22),
-        "strings": (650.0, 8800.0, 0.0055, 0.62, 1.30),
-        "rim": (180.0, 6200.0, 0.0048, 0.78, 1.16),
+        "lower_bout": (45.0, 2600.0, 0.011, 1.18, 0.95, 0.84),
+        "upper_bout": (85.0, 4200.0, 0.008, 0.92, 1.05, 0.96),
+        "soundboard": (60.0, 5200.0, 0.007, 1.00, 1.00, 1.00),
+        "bridge": (420.0, 7600.0, 0.0045, 0.72, 1.22, 1.18),
+        "strings": (650.0, 8800.0, 0.0055, 0.62, 1.30, 1.10),
+        "rim": (180.0, 6200.0, 0.0048, 0.78, 1.16, 1.06),
     }
-    hp,lp,decay,low_scale,high_scale=location_profile[location]
+    hp,lp,decay,low_scale,high_scale,coupling_gain=location_profile[location]
     noise=_contact_noise(n,sr,rng,hp,lp,decay)
 
     # A short broad mechanical impulse. It is deliberately non-pitched.
@@ -92,7 +92,7 @@ def _body_contact(action, location, strength, n, sr, rng):
     }
     low_mix,high_mix,impulse_mix=profiles[action]
     drive=low*low_mix + high*high_mix + impulse*impulse_mix
-    return drive*max(0.0,min(1.0,strength))
+    return drive*coupling_gain*max(0.0,min(1.0,strength))
 
 
 def _string_contact(action, strength, n, sr, rng, parameters):
