@@ -65,6 +65,11 @@ class AcousticGuitarEngine(InstrumentEngine):
             seed=seed,
         )
 
+    def validate_action_event_for_patch(self, subject, event, patch):
+        if not self._supports_fingering(patch):
+            return super().validate_action_event(subject, event)
+        return self.validate_action_event(subject, event)
+
     def validate_action_event(self, subject, event):
         from ..acoustic_guitar.percussion import ACTIONS, LOCATIONS
 
