@@ -1,6 +1,6 @@
 # AG08 — Stateful Guitar Coupling / Continuous Performance
 
-Status: **S1-S6 ENGINEERING PASS · S3/S5 PERCEPTUAL PASS · S7 LISTENING NEXT**
+Status: **AG08 CLOSED · S1-S6 ENGINEERING PASS · S3/S5/S7 PERCEPTUAL PASS**
 
 Target release: **v1.19.0**
 
@@ -435,6 +435,52 @@ S6 stability evidence:
 S6 is **ENGINEERING PASS**. Because S6 is a non-rendering certificate/evidence
 layer, it does not require a separate perceptual gate. Final human listening
 closure is S7.
+
+### S7 human listening closure — PASS
+
+Human listening on 2026-09-30 accepted the final 24 kHz AG08 closure pack:
+
+- S3↔S4 sympathetic E4 A/B/A/B;
+- final S5 continuous-performance phrase:
+  `arpeggio → strum → muted_strum → top_slap → fingerstyle`;
+- S6 four-cycle long-horizon stress render.
+
+The final listening gate reported no blocking objection for:
+
+- hidden-note / chorus-like sympathetic response;
+- fixed-pitch body hum or metallic ringing;
+- artificial reverb-like swell;
+- transition discontinuity or instrument-identity reset;
+- progressive cycle-to-cycle loudness growth;
+- persistent body drone after excitation stops.
+
+S7 is **PERCEPTUAL PASS**.
+
+## AG08 closure
+
+AG08 — Stateful Guitar Coupling / Continuous Performance is **CLOSED**.
+
+Authoritative engineering code checkpoint:
+
+- `d9343727ab3546a8ae1478fb3d0196bd317ff63d`
+- CI **#271 SUCCESS**
+- Python 3.12 / 3.10: **929 / 929 passed**
+- AG01–AG07 + AG08 S1–S6 evidence: **SUCCESS**
+
+Human gates:
+
+- S3 shared body: **PERCEPTUAL PASS**
+- S5 technique-transition continuity: **PERCEPTUAL PASS**
+- S7 final integrated listening: **PERCEPTUAL PASS**
+
+The accepted result is a deterministic, stateful, reduced-order physically
+informed guitar model with same-string continuity, shared bridge/body memory,
+bounded bridge-mediated sympathetic coupling, technique-aware string-state
+transitions, and an explicit passive-energy/stability barrier.
+
+This remains intentionally below geometry/material-derived FEM/BEM simulation.
+No claim is made that the model derives its body modes or bridge impedance from a
+specific guitar geometry/material measurement.
 
 ## Planned downstream slices
 
