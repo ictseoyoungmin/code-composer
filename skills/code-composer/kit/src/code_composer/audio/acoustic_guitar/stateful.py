@@ -15,9 +15,15 @@ from __future__ import annotations
 from dataclasses import dataclass
 import math
 import numpy as np
+from scipy.signal import lfilter
 
 
 STATE_MODEL = "ag08_reduced_order_state_v1"
+
+# Conventional steel-string tuning, numbered in guitarist order: string 1 is
+# high E and string 6 is low E. These are generic project-authored instrument
+# coordinates, not measurements from a named guitar.
+_OPEN_STRING_MIDI = np.asarray([64, 59, 55, 50, 45, 40], dtype=np.int16)
 
 
 @dataclass
@@ -273,6 +279,285 @@ def _shared_residual_rms(buffers, start: int, sr: int) -> tuple[float, float]:
     return rms, first
 
 
+
+def _string_resonance_midi(state: AcousticGuitarState, idx: int) -> int:
+    """Current resonant fundamental for a physical string.
+
+    Untouched strings are open. Once an authored/sympathetic state establishes a
+    fret, that fret remains the compact resonant-length proxy until a later
+    authored event changes it.
+    """
+    fret = int(state.active_fret[int(idx)])
+    return int(_OPEN_STRING_MIDI[int(idx)] + max(0, fret))
+
+
+def _sympathetic_mode_candidates(
+    source_midi: int,
+    target_midi: int,
+    sr: int,
+    graph: dict,
+):
+    """Return target modes that are spectrally compatible with the source string.
+
+    Compatibility is computed from near-coincident partial frequencies. It does
+    not create a pitch event: the result only parameterizes a passive resonant
+    projection driven by the already-existing source bridge force.
+    """
+    from ...core.theory import midi_to_hz
+
+    source_f0 = float(midi_to_hz(int(source_midi)))
+    target_f0 = float(midi_to_hz(int(target_midi)))
+    inharmonicity = max(0.0, float(graph.get("string_inharmonicity", 0.000035)))
+    nyquist = 0.47 * float(sr)
+    sigma_cents = 18.0
+    modes = []
+
+    for target_h in range(1, 7):
+        target_freq = target_f0 * target_h * math.sqrt(
+            1.0 + inharmonicity * target_h * target_h
+        )
+        if target_freq >= nyquist:
+            break
+
+        best_weight = 0.0
+        for source_h in range(1, 9):
+            source_freq = source_f0 * source_h * math.sqrt(
+                1.0 + inharmonicity * source_h * source_h
+            )
+            if source_freq >= nyquist:
+                break
+            cents = 1200.0 * math.log2(target_freq / source_freq)
+            closeness = math.exp(-0.5 * (cents / sigma_cents) ** 2)
+            weight = closeness / math.sqrt(float(source_h * target_h))
+            best_weight = max(best_weight, weight)
+
+        if best_weight >= 0.035:
+            modes.append((target_h, target_freq, best_weight))
+
+    return modes
+
+
+def _sympathetic_transfer_plan(
+    source_midi: int,
+    source_idx: int,
+    state: AcousticGuitarState,
+    sr: int,
+    graph: dict,
+    cross_string_coupling: float,
+    sympathetic_gain: float,
+    *,
+    blocked_target_indices=(),
+):
+    """Allocate a passive bridge-domain energy budget to compatible strings.
+
+    eta is an energy fraction, not an amplitude gain. The sum of all returned
+    eta values is bounded by cross_string_coupling * sympathetic_gain and by 0.12.
+    """
+    source_idx = int(source_idx)
+    blocked = {int(x) for x in blocked_target_indices}
+    base_budget = min(
+        0.12,
+        max(0.0, min(0.98, float(cross_string_coupling)))
+        * max(0.0, min(0.98, float(sympathetic_gain))),
+    )
+    if base_budget <= 1e-15:
+        return []
+
+    candidates = []
+    for target_idx in range(6):
+        if target_idx == source_idx or target_idx in blocked:
+            continue
+        target_midi = _string_resonance_midi(state, target_idx)
+        modes = _sympathetic_mode_candidates(
+            int(source_midi), target_midi, int(sr), graph
+        )
+        if not modes:
+            continue
+        score = math.sqrt(sum(float(w) * float(w) for _, _, w in modes))
+        if score >= 0.05:
+            candidates.append((target_idx, target_midi, score, modes))
+
+    if not candidates:
+        return []
+
+    max_score = max(item[2] for item in candidates)
+    compatibility_gate = max(0.0, min(1.0, max_score / 0.55))
+    budget = base_budget * compatibility_gate
+    score_sum = sum(item[2] for item in candidates)
+    if budget <= 1e-15 or score_sum <= 1e-15:
+        return []
+
+    return [
+        {
+            "target_idx": int(target_idx),
+            "target_midi": int(target_midi),
+            "compatibility": float(score),
+            "eta": float(budget * score / score_sum),
+            "modes": tuple(modes),
+        }
+        for target_idx, target_midi, score, modes in candidates
+    ]
+
+
+def _note_bridge_drive(event: dict, duration_s: float, sr: int, patch: dict):
+    """Reconstruct the accepted AG01-AG04 bridge-force source for S4 coupling."""
+    from .string import render_steel_string_bridge_drive
+
+    graph = patch.get("acoustic_guitar_graph", {})
+    gate_s = max(1e-5, float(duration_s))
+    tail_s = max(0.0, float(graph.get("natural_tail_s", 2.20)))
+    n = max(1, int((gate_s + tail_s) * int(sr)))
+    active_n = min(n, max(1, int(gate_s * int(sr))))
+
+    perf = event.get("performance")
+    mechanics = None
+    right_hand = None
+    left_hand = None
+    if isinstance(perf, dict):
+        if isinstance(perf.get("guitar_realization"), dict):
+            mechanics = perf["guitar_realization"]
+        if isinstance(perf.get("right_hand_realization"), dict):
+            right_hand = perf["right_hand_realization"]
+        if isinstance(perf.get("left_hand_realization"), dict):
+            left_hand = perf["left_hand_realization"]
+
+    bridge = render_steel_string_bridge_drive(
+        int(event["midi"]),
+        n,
+        int(sr),
+        graph,
+        velocity=float(event.get("velocity", 0.8)),
+        mechanics=mechanics,
+        right_hand=right_hand,
+        left_hand=left_hand,
+    )
+
+    post_gate_decay = max(0.015, float(graph.get("post_gate_decay_s", 0.72)))
+    if isinstance(left_hand, dict):
+        post_gate_decay *= max(
+            0.05, min(1.5, float(left_hand.get("decay_scale", 1.0)))
+        )
+    if active_n < n:
+        rr = np.arange(n - active_n, dtype=np.float64) / float(sr)
+        bridge[active_n:] *= np.exp(-rr / post_gate_decay)
+    return bridge
+
+
+def _sympathetic_bridge_projection(
+    source_bridge,
+    modes,
+    sr: int,
+    graph: dict,
+):
+    """Project source bridge force into compatible target-string modal state."""
+    x = np.asarray(source_bridge, dtype=np.float64)
+    if x.size == 0 or not modes:
+        return np.zeros_like(x)
+
+    base_decay = max(0.05, float(graph.get("base_decay_s", 2.25)))
+    damping = max(0.0, float(graph.get("frequency_damping", 0.14)))
+    damping_power = max(0.2, float(graph.get("damping_power", 1.30)))
+    out = np.zeros_like(x)
+
+    for harmonic, freq_hz, weight in modes:
+        tau_s = (
+            0.62
+            * base_decay
+            / (1.0 + damping * ((int(harmonic) - 1) ** damping_power))
+        )
+        tau_s = max(0.08, min(2.5, tau_s))
+        radius = math.exp(-1.0 / max(1.0, tau_s * float(sr)))
+        theta = 2.0 * math.pi * float(freq_hz) / float(sr)
+        response = lfilter(
+            [1.0 - radius],
+            [1.0, -2.0 * radius * math.cos(theta), radius * radius],
+            x,
+        )
+        out += response * float(weight)
+
+    return out
+
+
+def _radiate_sympathetic_bridge(bridge, target_midi: int, sr: int, patch: dict):
+    """Radiate target-string bridge state through the same accepted guitar body."""
+    from .body import radiate_acoustic_guitar_body
+
+    graph = patch.get("acoustic_guitar_graph", {})
+    stereo = radiate_acoustic_guitar_body(bridge, int(sr), graph)
+    radiation_keytrack = float(graph.get("radiation_keytrack", 1.10))
+    radiation_gain = 2.0 ** (
+        radiation_keytrack * (int(target_midi) - 52) / 12.0
+    )
+    stereo *= radiation_gain
+    stereo *= max(0.0, float(graph.get("output_gain", 0.82)))
+
+    fade_n = min(
+        len(stereo),
+        max(1, int(float(graph.get("end_fade_s", 0.035)) * int(sr))),
+    )
+    if fade_n > 0:
+        stereo[-fade_n:] *= np.linspace(1.0, 0.0, fade_n, endpoint=True)[:, None]
+    return stereo
+
+
+def _cross_string_sympathetic_transfer(
+    event: dict,
+    source_stereo,
+    source_idx: int,
+    state: AcousticGuitarState,
+    sr: int,
+    patch: dict,
+    duration_s: float,
+    cross_string_coupling: float,
+    sympathetic_gain: float,
+    *,
+    blocked_target_indices=(),
+):
+    """Energy-bounded S4 source-string -> bridge -> target-string transfer."""
+    graph = patch.get("acoustic_guitar_graph", {})
+    plan = _sympathetic_transfer_plan(
+        int(event["midi"]),
+        int(source_idx),
+        state,
+        int(sr),
+        graph,
+        cross_string_coupling,
+        sympathetic_gain,
+        blocked_target_indices=blocked_target_indices,
+    )
+    if not plan:
+        return source_stereo, [], 0.0
+
+    source_bridge = _note_bridge_drive(event, duration_s, int(sr), patch)
+    source_norm = float(np.linalg.norm(source_bridge))
+    if source_norm <= 1e-15:
+        return source_stereo, [], 0.0
+
+    transfers = []
+    realized_eta = 0.0
+    for item in plan:
+        projected = _sympathetic_bridge_projection(
+            source_bridge, item["modes"], int(sr), graph
+        )
+        projected_norm = float(np.linalg.norm(projected))
+        if projected_norm <= 1e-15:
+            continue
+
+        eta = max(0.0, min(0.12, float(item["eta"])))
+        # Normalize the resonant projection in the bridge domain, then allocate
+        # sqrt(eta) amplitude so its quadratic energy is eta of the source.
+        projected *= (source_norm / projected_norm) * math.sqrt(eta)
+        sympathetic = _radiate_sympathetic_bridge(
+            projected, int(item["target_midi"]), int(sr), patch
+        )
+        transfers.append((int(item["target_idx"]), sympathetic, eta))
+        realized_eta += eta
+
+    realized_eta = min(0.12, max(0.0, realized_eta))
+    source_keep = math.sqrt(max(0.0, 1.0 - realized_eta))
+    return np.asarray(source_stereo) * source_keep, transfers, realized_eta
+
+
 def _render_shared_body_memory(
     events,
     n: int,
@@ -284,6 +569,8 @@ def _render_shared_body_memory(
     same_string_memory: float,
     bridge_memory: float,
     action_body_memory: float,
+    cross_string_coupling: float,
+    sympathetic_gain: float,
 ):
     """S3 mixed note/action track renderer using actual residual audio as state.
 
@@ -339,6 +626,7 @@ def _render_shared_body_memory(
                 group_strings.append(resolved[0])
         if len(set(group_strings)) != len(group_strings):
             return None
+        group_string_indices = {int(x) - 1 for x in group_strings}
 
         has_note = any(_event_type(ev) == "note" for ev in group)
         has_action = any(_event_type(ev) == "instrument_action" for ev in group)
@@ -402,6 +690,54 @@ def _render_shared_body_memory(
                     velocity=float(ev.get("velocity", 0.8)),
                     performance=ev.get("performance"),
                 )
+
+                if (
+                    cross_string_coupling > 1e-15
+                    and sympathetic_gain > 1e-15
+                ):
+                    stereo, transfers, transfer_fraction = (
+                        _cross_string_sympathetic_transfer(
+                            ev,
+                            stereo,
+                            idx,
+                            state,
+                            int(sr),
+                            patch,
+                            duration_s,
+                            cross_string_coupling,
+                            sympathetic_gain,
+                            blocked_target_indices=group_string_indices,
+                        )
+                    )
+                    for target_idx, sympathetic, eta in transfers:
+                        target_end = min(int(n), start + len(sympathetic))
+                        if target_end <= start:
+                            continue
+                        buffers[target_idx][start:target_end] += sympathetic[
+                            : target_end - start
+                        ]
+                        probe_n = min(
+                            target_end - start, max(8, int(0.012 * int(sr)))
+                        )
+                        mono_sym = 0.5 * (
+                            sympathetic[:probe_n, 0]
+                            + sympathetic[:probe_n, 1]
+                        )
+                        sym_rms = float(
+                            math.sqrt(float(np.mean(mono_sym * mono_sym)) + 1e-18)
+                        )
+                        state.string_energy[target_idx] = max(
+                            float(state.string_energy[target_idx]), sym_rms
+                        )
+                        if len(mono_sym):
+                            state.string_phase_proxy[target_idx] = float(
+                                mono_sym[-1]
+                            )
+                        if int(state.active_fret[target_idx]) < 0:
+                            state.active_fret[target_idx] = 0
+                    if len(state.bridge_state) > 1:
+                        state.bridge_state[1] = float(transfer_fraction)
+
                 state.active_fret[idx] = int(fret)
                 last_start[idx] = int(start)
             else:
@@ -458,7 +794,7 @@ def render_stateful_acoustic_guitar_track(
     S1: all gains zero -> exact AG07 event renderer.
     S2: only same_string_memory -> note-only physical-string continuity.
     S3: bridge_memory/action_body_memory -> mixed note/action shared body state.
-    S4+ cross-string/sympathetic coupling remains hard-blocked.
+    S4: bounded bridge-mediated sympathetic transfer between physical strings.
     """
     graph = patch.get("acoustic_guitar_graph", {}) if isinstance(patch, dict) else {}
     if not stateful_enabled(graph):
@@ -476,16 +812,12 @@ def render_stateful_acoustic_guitar_track(
     bridge_memory = float(cfg.get("bridge_memory", 0.0))
     action_body_memory = float(cfg.get("action_body_memory", 0.0))
 
-    unsupported = {
-        key: float(cfg.get(key, 0.0))
-        for key in ("cross_string_coupling", "sympathetic_gain")
-        if abs(float(cfg.get(key, 0.0))) > 1e-15
-    }
-    if unsupported:
-        raise NotImplementedError(
-            "AG08 coupling beyond S3 shared body memory is not active: "
-            + ", ".join(sorted(unsupported))
-        )
+    cross_string_coupling = max(
+        0.0, min(0.98, float(cfg.get("cross_string_coupling", 0.0)))
+    )
+    sympathetic_gain = max(
+        0.0, min(0.98, float(cfg.get("sympathetic_gain", 0.0)))
+    )
 
     if bridge_memory > 1e-15 or action_body_memory > 1e-15:
         return _render_shared_body_memory(
@@ -498,6 +830,8 @@ def render_stateful_acoustic_guitar_track(
             same_string_memory=same_string_memory,
             bridge_memory=bridge_memory,
             action_body_memory=action_body_memory,
+            cross_string_coupling=cross_string_coupling,
+            sympathetic_gain=sympathetic_gain,
         )
 
     if same_string_memory <= 1e-15:
