@@ -63,7 +63,7 @@ class AcousticGuitarEngine(InstrumentEngine):
             raise InstrumentEngineValidationError(
                 f"{subject}: acoustic-guitar instrument_performance must contain string and/or fret"
             )
-        unknown = set(payload) - {"string", "fret", "right_hand", "left_hand", "arpeggio"}
+        unknown = set(payload) - {"string", "fret", "right_hand", "left_hand", "arpeggio", "strum"}
         if unknown:
             raise InstrumentEngineValidationError(
                 f"{subject}: unsupported acoustic-guitar instrument_performance field(s): {sorted(unknown)}"
@@ -191,6 +191,90 @@ class AcousticGuitarEngine(InstrumentEngine):
                 0,
                 127,
             )
+
+        if "strum" in payload:
+            if "arpeggio" in payload:
+                raise InstrumentEngineValidationError(
+                    f"{subject}: AG05 arpeggio and AG06 strum cannot coexist on one note"
+                )
+            strum = payload["strum"]
+            if not isinstance(strum, dict) or not strum:
+                raise InstrumentEngineValidationError(
+                    f"{subject}.instrument_performance.strum must be a non-empty object"
+                )
+            unknown_strum = set(strum) - {
+                "stroke_id", "direction", "traversal_ms", "entry_strength",
+                "acceleration", "pick_depth", "attack_angle_deg",
+                "follow_through", "accent_position", "accent_amount",
+                "from_string", "to_string", "state",
+            }
+            if unknown_strum:
+                raise InstrumentEngineValidationError(
+                    f"{subject}: unsupported AG06 strum field(s): {sorted(unknown_strum)}"
+                )
+            stroke_id = strum.get("stroke_id")
+            if not isinstance(stroke_id, str) or not stroke_id.strip():
+                raise InstrumentEngineValidationError(
+                    f"{subject}.instrument_performance.strum.stroke_id must be non-empty string"
+                )
+            if strum.get("direction") not in {"down", "up"}:
+                raise InstrumentEngineValidationError(
+                    f"{subject}.instrument_performance.strum.direction unsupported"
+                )
+            _num(
+                strum.get("traversal_ms", 34.0),
+                f"{subject}.instrument_performance.strum.traversal_ms",
+                6.0, 180.0,
+            )
+            _num(
+                strum.get("entry_strength", 0.62),
+                f"{subject}.instrument_performance.strum.entry_strength",
+                0.15, 1.0,
+            )
+            _num(
+                strum.get("acceleration", 0.0),
+                f"{subject}.instrument_performance.strum.acceleration",
+                -1.0, 1.0,
+            )
+            _num(
+                strum.get("pick_depth", 0.55),
+                f"{subject}.instrument_performance.strum.pick_depth",
+                0.0, 1.0,
+            )
+            _num(
+                strum.get("attack_angle_deg", 45.0),
+                f"{subject}.instrument_performance.strum.attack_angle_deg",
+                0.0, 90.0,
+            )
+            _num(
+                strum.get("follow_through", 0.70),
+                f"{subject}.instrument_performance.strum.follow_through",
+                0.0, 1.0,
+            )
+            _num(
+                strum.get("accent_position", 0.50),
+                f"{subject}.instrument_performance.strum.accent_position",
+                0.0, 1.0,
+            )
+            _num(
+                strum.get("accent_amount", 0.0),
+                f"{subject}.instrument_performance.strum.accent_amount",
+                0.0, 0.75,
+            )
+            _integer(
+                strum.get("from_string"),
+                f"{subject}.instrument_performance.strum.from_string",
+                1, 6,
+            )
+            _integer(
+                strum.get("to_string"),
+                f"{subject}.instrument_performance.strum.to_string",
+                1, 6,
+            )
+            if strum.get("state", "sounding") not in {"sounding", "muted"}:
+                raise InstrumentEngineValidationError(
+                    f"{subject}.instrument_performance.strum.state unsupported"
+                )
 
     def _validate(self, subject, patch):
         if not isinstance(patch, dict):
