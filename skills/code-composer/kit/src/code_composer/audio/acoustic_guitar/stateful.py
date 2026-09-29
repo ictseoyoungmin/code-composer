@@ -94,7 +94,15 @@ def state_energy(state: AcousticGuitarState) -> float:
 
 
 def _event_type(event: dict) -> str:
-    return str(event.get("event_type", event.get("type", "")))
+    if "event_type" in event:
+        return str(event["event_type"])
+    if "type" in event:
+        return str(event["type"])
+    # Canonical pitched render-IR events intentionally omit an event_type tag;
+    # presence of MIDI identifies the normal note path in render.py.
+    if "midi" in event:
+        return "note"
+    return ""
 
 
 def _resolved_string_fret(event: dict):
