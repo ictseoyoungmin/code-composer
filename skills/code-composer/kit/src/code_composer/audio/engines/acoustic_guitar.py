@@ -63,7 +63,7 @@ class AcousticGuitarEngine(InstrumentEngine):
             raise InstrumentEngineValidationError(
                 f"{subject}: acoustic-guitar instrument_performance must contain string and/or fret"
             )
-        unknown = set(payload) - {"string", "fret", "right_hand"}
+        unknown = set(payload) - {"string", "fret", "right_hand", "left_hand"}
         if unknown:
             raise InstrumentEngineValidationError(
                 f"{subject}: unsupported acoustic-guitar instrument_performance field(s): {sorted(unknown)}"
@@ -116,6 +116,45 @@ class AcousticGuitarEngine(InstrumentEngine):
                     f"{subject}.instrument_performance.right_hand.strength",
                     0.0,
                     1.0,
+                )
+
+        if "left_hand" in payload:
+            left_hand = payload["left_hand"]
+            if not isinstance(left_hand, dict) or not left_hand:
+                raise InstrumentEngineValidationError(
+                    f"{subject}.instrument_performance.left_hand must be a non-empty object"
+                )
+            unknown_left = set(left_hand) - {
+                "technique", "amount", "transition_ms", "harmonic_order"
+            }
+            if unknown_left:
+                raise InstrumentEngineValidationError(
+                    f"{subject}: unsupported AG04 left_hand field(s): {sorted(unknown_left)}"
+                )
+            if left_hand.get("technique") not in {
+                "palm_mute", "fretting_mute", "dead_note",
+                "slide", "hammer_on", "pull_off", "natural_harmonic"
+            }:
+                raise InstrumentEngineValidationError(
+                    f"{subject}.instrument_performance.left_hand.technique unsupported"
+                )
+            if "amount" in left_hand:
+                _num(
+                    left_hand["amount"],
+                    f"{subject}.instrument_performance.left_hand.amount",
+                    0.0, 1.0,
+                )
+            if "transition_ms" in left_hand:
+                _num(
+                    left_hand["transition_ms"],
+                    f"{subject}.instrument_performance.left_hand.transition_ms",
+                    4.0, 240.0,
+                )
+            if "harmonic_order" in left_hand:
+                _integer(
+                    left_hand["harmonic_order"],
+                    f"{subject}.instrument_performance.left_hand.harmonic_order",
+                    2, 5,
                 )
 
     def _validate(self, subject, patch):
