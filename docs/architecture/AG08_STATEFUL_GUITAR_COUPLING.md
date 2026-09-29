@@ -1,6 +1,6 @@
 # AG08 — Stateful Guitar Coupling / Continuous Performance
 
-Status: **S1-S4 ENGINEERING PASS · S3 PERCEPTUAL PASS · S5 IMPLEMENTED / VALIDATION PENDING**
+Status: **S1-S5 ENGINEERING PASS · S3 PERCEPTUAL PASS · S6 NEXT**
 
 Target release: **v1.19.0**
 
@@ -315,13 +315,45 @@ player-contact and coupled-string references remain the provenance basis.
 9. no hidden event is added and peak remains bounded.
 10. full CI and AG01-AG08 evidence workflows pass.
 
+### S5 engineering result — PASS
+
+Authoritative S5 code checkpoint:
+
+- `c517ab274ec76e57010529cdc1d7f0853ccd2471`
+- CI **#265 — SUCCESS**
+- Python 3.12: **901 passed**
+- Python 3.10: **901 passed**
+- checkout hygiene: **SUCCESS**
+- AG01–AG07 and AG08 S1–S5 evidence workflows: **SUCCESS**
+
+24 kHz S5 mixed-transition evidence:
+
+- chain: `arpeggio → strum → muted_strum → top_slap → fingerstyle`
+- S4/S5 prefix before mute boundary: **sample exact**
+- post-mute S4→S5 delta RMS ratio: `0.2699174850911716`
+- deterministic: **true**
+- Render-IR events: **exact**
+- Render-IR event count: **12**, unchanged
+- peak: `0.5538963645245608`
+- muted-strum long-term residual retain: `0.5155180837078245`
+- dead-strum long-term residual retain: `0.2512547200029794`
+- hammer-on same-string carry-time scale: `2.3120000000000003`
+- dead-note same-string carry-time scale: `0.22100000000000009`
+
+These values are state-transition controls, not newly authored notes or hidden
+performance events. The S5 preset remains independently opt-in and S4 remains
+unchanged.
+
+S5 is **ENGINEERING PASS**. The next barrier is S6: passive energy / no-input
+decay / long-horizon stability for the combined S1-S5 state.
+
 ## Planned downstream slices
 
 - **S2 Same-string continuity:** implementation candidate in this branch; close after the S2 engineering gate above.
 - **S3 Shared bridge/body memory:** engineering PASS on `43c03e8a131ad1de6b0c5f2530f1e6b42d35ebca`; CI #245 and S3 evidence #8 SUCCESS.
 - **S4 Sympathetic cross-string coupling:** ENGINEERING PASS on `51b76943e63cd79e887553266c6240db8e436be7`; CI #255 SUCCESS.
-- **S5 Technique-transition continuity:** implementation candidate in this branch; engineering validation pending.
-- **S6 Passive energy/stability barrier:** no-input decay, finite impulse energy, no runaway feedback or body drone.
+- **S5 Technique-transition continuity:** ENGINEERING PASS on `c517ab274ec76e57010529cdc1d7f0853ccd2471`; CI #265 SUCCESS.
+- **S6 Passive energy/stability barrier:** NEXT — no-input decay, finite impulse energy, no runaway feedback or body drone.
 - **S7 Listening closure:** A/B against AG07 isolated-event canonical.
 
 ## Provenance
