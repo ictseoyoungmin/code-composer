@@ -106,6 +106,18 @@ def metrics(path):
     return {"peak_abs": peak, "rms": rms}
 
 
+def relative_waveform_delta(path_a, path_b):
+    a = read_wav(path_a)
+    b = read_wav(path_b)
+    n = min(len(a), len(b))
+    if n == 0:
+        return 0.0
+    a = a[:n]
+    b = b[:n]
+    denom = float(np.sqrt(np.mean(a * a)) + 1e-12)
+    return float(np.sqrt(np.mean((a - b) ** 2)) / denom)
+
+
 def render_case(name, events):
     s, sc = score(events)
     path = OUT / f"{name}.wav"
@@ -228,11 +240,15 @@ def main():
     if abs(lower["rms"] - upper["rms"]) < 1e-6:
         raise AssertionError("body tap locations collapsed to identical RMS")
 
-    if abs(
-        reports["F_muted_strum_down"]["rms"]
-        - reports["G_muted_strum_up"]["rms"]
-    ) < 1e-7:
-        raise AssertionError("muted-strum direction diagnostic collapsed")
+    muted_direction_delta = relative_waveform_delta(
+        OUT / "F_muted_strum_down.wav",
+        OUT / "G_muted_strum_up.wav",
+    )
+    if muted_direction_delta <= 0.05:
+        raise AssertionError(
+            f"muted-strum direction diagnostic too weak: {muted_direction_delta:.6f}"
+        )
+    reports["muted_strum_direction_delta_ratio"] = muted_direction_delta
 
     (OUT / "REPORT.json").write_text(
         json.dumps(reports, indent=2) + "\n", encoding="utf-8"
