@@ -1,0 +1,44 @@
+name: AG08 S3 Shared Body Evidence
+
+on:
+  pull_request:
+    paths:
+      - "skills/code-composer/kit/src/code_composer/audio/acoustic_guitar/**"
+      - "skills/code-composer/kit/src/code_composer/audio/engines/**"
+      - "skills/code-composer/kit/src/code_composer/reference/presets/acoustic_guitar__steel_stateful_body__1.0.0.json"
+      - "skills/code-composer/kit/presets/CATALOG.json"
+      - "skills/code-composer/kit/src/code_composer/render.py"
+      - "tests/test_ag08_stateful_s3.py"
+      - "tools/render_ag08_s3_evidence.py"
+      - ".github/workflows/ag08-s3-evidence.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render-evidence:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: skills/code-composer/kit/src
+      AG08_S3_EVIDENCE_DIR: artifacts/ag08-s3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install render dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "numpy==2.2.6" "scipy==1.15.3" pytest
+      - name: Run AG08-S1-S3 focused tests
+        run: python -m pytest -q tests/test_ag08_stateful_s1.py tests/test_ag08_stateful_s2.py tests/test_ag08_stateful_s3.py
+      - name: Render AG08-S3 evidence
+        run: python tools/render_ag08_s3_evidence.py
+      - name: Upload AG08-S3 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ag08-s3-shared-body-24k
+          path: artifacts/ag08-s3
+          if-no-files-found: error
