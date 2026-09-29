@@ -5,6 +5,9 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
+import wave
+
+import numpy as np
 
 from code_composer.core.song import song_fingerprint
 from code_composer.execution import render_song_score_to_files
@@ -118,7 +121,7 @@ def score(events):
             "sample_rate": SR,
             "tail_seconds": 0.1,
             "mix": {
-                "tracks": [{"track": "g", "gain": 0.62, "pan": 0.0, "reverb_send": 0.0}],
+                "tracks": [{"track": "g", "gain": 0.42, "pan": 0.0, "reverb_send": 0.0}],
                 "music_bus_gain": 1.0,
                 "room_return_gain": 0.0,
                 "master_gain": 0.82,
@@ -141,15 +144,27 @@ def event_identity(events):
     ]
 
 
+def _peak_abs(path):
+    with wave.open(str(path), "rb") as wf:
+        data = np.frombuffer(wf.readframes(wf.getnframes()), dtype="<i2")
+    if data.size == 0:
+        return 0.0
+    return float(np.max(np.abs(data.astype(np.float64) / 32767.0)))
+
+
 def render_case(chord, mode):
     events = pattern(chord, mode)
     s, sc = score(events)
+    wav_path = OUT / f"{chord}_{mode}_arpeggio.wav"
     result = render_song_score_to_files(
         s,
         sc,
-        OUT / f"{chord}_{mode}_arpeggio.wav",
+        wav_path,
         render_ir_path=OUT / f"{chord}_{mode}_render_ir.json",
     )
+    peak = _peak_abs(wav_path)
+    if peak >= 0.98:
+        raise AssertionError(f"{chord}/{mode}: evidence peak {peak:.6f} >= 0.98")
     report = result["guitar_performance_report"]["tracks"]["g"]
     gesture_id = next(iter(report["arpeggio_gestures"]))
     gesture = report["arpeggio_gestures"][gesture_id]
@@ -157,6 +172,8 @@ def render_case(chord, mode):
         raise AssertionError(f"{chord}/{mode}: insufficient independent string overlap")
     if gesture["bass_upper_overlap_count"] < 1:
         raise AssertionError(f"{chord}/{mode}: bass does not sustain under upper voice")
+    gesture = dict(gesture)
+    gesture["audio_peak_abs"] = peak
     return events, gesture
 
 
@@ -187,9 +204,11 @@ def main():
             f"{chord}: authored_note_identity_equal=true",
             f"  fingerstyle overlap={finger_report['max_distinct_string_overlap']} "
             f"bass_upper={finger_report['bass_upper_overlap_count']} "
+            f"peak={finger_report['audio_peak_abs']:.6f} "
             f"players={finger_report['players']}",
             f"  pick overlap={pick_report['max_distinct_string_overlap']} "
-            f"bass_upper={pick_report['bass_upper_overlap_count']}",
+            f"bass_upper={pick_report['bass_upper_overlap_count']} "
+            f"peak={pick_report['audio_peak_abs']:.6f}",
         ]
 
     (OUT / "REPORT.json").write_text(
