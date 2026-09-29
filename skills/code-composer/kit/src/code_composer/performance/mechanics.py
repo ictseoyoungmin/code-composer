@@ -38,6 +38,7 @@ def _ensure_builtins() -> None:
         GuitarRightHandError,
         GuitarLeftHandError,
         GuitarArpeggioError,
+        GuitarStrumError,
         realize_guitar_performance,
     )
 
@@ -59,6 +60,7 @@ def _ensure_builtins() -> None:
             GuitarRightHandError,
             GuitarLeftHandError,
             GuitarArpeggioError,
+            GuitarStrumError,
         ) as exc:
             raise InstrumentMechanicsError(str(exc)) from exc
 
