@@ -208,11 +208,11 @@ def test_nonzero_coupling_is_blocked_until_later_ag08_slice():
         STATEFUL,
         patch_overrides={
             "acoustic_guitar_graph": {
-                "stateful_coupling": {"same_string_memory": 0.1}
+                "stateful_coupling": {"bridge_memory": 0.1}
             }
         },
     )
-    with pytest.raises(NotImplementedError, match="not active beyond"):
+    with pytest.raises(NotImplementedError, match="beyond S2"):
         render_stateful_acoustic_guitar_track(
             [], 1024, 24000, patch, 60.0/96.0
         )
