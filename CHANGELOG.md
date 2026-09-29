@@ -1,3 +1,15 @@
+## v1.19.0 development — AG04 Left-Hand Articulation / Damping — CLOSED — 2026-09-29
+
+- Adds isolated `instrument_performance.left_hand` authority for palm mute, fretting mute, dead note, slide, hammer-on, pull-off and natural harmonic.
+- Preserves AG01 R3 acoustic identity, AG02 string/fret authority and AG03 right-hand excitation semantics; no AG04 payload remains sample-exact with the accepted AG03 path.
+- Implements mute/dead behavior through string decay, damping, tonal/contact balance and post-gate residual decay rather than body retuning or global EQ.
+- Implements natural harmonic by changing surviving string-mode participation while preserving authored sounding MIDI.
+- Implements slide/hammer/pull as same-string source→destination fret-state transitions with continuous pitch phase, strongly reduced destination contact excitation and deterministic fret-contact transient.
+- R1 evidence was rejected before listening because dead note was too close to silence, legato destination energy was too weak, and natural harmonic was over-level.
+- R2 separates carried same-string tonal energy from new contact excitation, restores audible legato continuity without a fresh pick, strengthens dead-note contact while retaining rapid damping, and level-aligns natural harmonic.
+- Engineering closure: CI #189 SUCCESS; Python 3.10 / 3.12 each 823 passed; AG01 R3 Evidence #18, AG02 R3 Evidence #12, AG03 Right-Hand Evidence #10 and AG04 Left-Hand Evidence #5 all SUCCESS.
+- Human listening PASS on 2026-09-29 closes AG04.
+
 ## v1.19.0 development — AG03 Right-Hand Excitation — CLOSED — 2026-09-29
 
 - Adds isolated `instrument_performance.right_hand` authority for finger, thumb, nail and pick, with optional pluck position, attack angle and strength.
