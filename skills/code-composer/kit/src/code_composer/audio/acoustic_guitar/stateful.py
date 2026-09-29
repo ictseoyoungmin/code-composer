@@ -70,6 +70,7 @@ def coupling_is_zero(graph: dict) -> bool:
             "cross_string_coupling",
             "sympathetic_gain",
             "action_body_memory",
+            "technique_transition_memory",
         )
     )
 
@@ -558,6 +559,165 @@ def _cross_string_sympathetic_transfer(
     return np.asarray(source_stereo) * source_keep, transfers, realized_eta
 
 
+
+def _technique_carry_tau_scale(event: dict, memory: float) -> float:
+    """Technique-aware reuse of already-existing same-string residual state.
+
+    The factor modifies only the decay time of the pre-existing waveform after a
+    new authored onset. It never changes authored pitch, creates an excitation, or
+    inserts an event.
+    """
+    memory = max(0.0, min(0.98, float(memory)))
+    if memory <= 1e-15:
+        return 1.0
+
+    perf = event.get("performance")
+    left = perf.get("left_hand_realization") if isinstance(perf, dict) else None
+    technique = str(left.get("technique", "")) if isinstance(left, dict) else ""
+
+    if technique == "slide":
+        return 1.0 + 2.00 * memory
+    if technique in {"hammer_on", "pull_off"}:
+        return 1.0 + 1.60 * memory
+    if technique == "natural_harmonic":
+        return 1.0 + 0.30 * memory
+    if technique == "palm_mute":
+        return max(0.20, 1.0 - 0.72 * memory)
+    if technique == "fretting_mute":
+        return max(0.16, 1.0 - 0.82 * memory)
+    if technique == "dead_note":
+        return max(0.10, 1.0 - 0.95 * memory)
+    return 1.0
+
+
+def _action_string_contact_schedule(action: str, parameters: dict, sr: int):
+    """Physical-string contact order for AG07 actions that touch the strings."""
+    action = str(action)
+    parameters = parameters or {}
+    if action == "string_slap":
+        return [(idx, 0) for idx in range(6)]
+    if action not in {"muted_strum", "dead_strum"}:
+        return []
+
+    count = max(1, min(6, int(parameters.get("string_count", 6))))
+    direction = str(parameters.get("direction", "down"))
+    traversal_ms = max(
+        6.0, min(180.0, float(parameters.get("traversal_ms", 32.0)))
+    )
+    physical_order = list(range(5, -1, -1)) if direction == "down" else list(range(6))
+    selected = physical_order[:count]
+    if len(selected) == 1:
+        return [(selected[0], 0)]
+
+    return [
+        (
+            idx,
+            int(
+                round(
+                    (traversal_ms / 1000.0)
+                    * (ordinal / float(len(selected) - 1))
+                    * int(sr)
+                )
+            ),
+        )
+        for ordinal, idx in enumerate(selected)
+    ]
+
+
+def _string_contact_loading_curve(
+    memory: float,
+    action: str,
+    strength: float,
+    residual_rms: float,
+    sr: int,
+    remain: int,
+):
+    """Continuous energy loss when a hand/finger contact reaches a ringing string."""
+    memory = max(0.0, min(0.98, float(memory)))
+    strength = max(0.0, min(1.0, float(strength)))
+    residual_weight = max(0.0, min(1.0, float(residual_rms) / 0.08))
+    severity = {
+        "muted_strum": 0.88,
+        "dead_strum": 1.36,
+        "string_slap": 0.74,
+    }.get(str(action), 0.0)
+    loss = memory * strength * severity * (0.82 + 0.18 * residual_weight)
+    loss = max(0.0, min(0.94, loss))
+    retain = 1.0 - loss
+    tau_s = {
+        "muted_strum": 0.012,
+        "dead_strum": 0.0065,
+        "string_slap": 0.009,
+    }.get(str(action), 0.012)
+    t = np.arange(int(remain), dtype=np.float64) / float(sr)
+    return retain + (1.0 - retain) * np.exp(
+        -t / max(1.0 / float(sr), tau_s)
+    )
+
+
+def _apply_action_string_state_transition(
+    buffers,
+    state: AcousticGuitarState,
+    start: int,
+    sr: int,
+    action: str,
+    parameters: dict,
+    memory: float,
+):
+    """Apply AG07 string-contact actions to already-ringing physical-string state."""
+    if float(memory) <= 1e-15:
+        return []
+
+    applied = []
+    strength = float((parameters or {}).get("strength", 0.68))
+    for idx, offset in _action_string_contact_schedule(action, parameters or {}, sr):
+        contact = int(start) + int(offset)
+        if contact < 0 or contact >= len(buffers[idx]):
+            continue
+        probe_n = min(
+            len(buffers[idx]) - contact,
+            max(8, int(0.012 * int(sr))),
+        )
+        if probe_n <= 0:
+            continue
+        residual = buffers[idx][contact:contact + probe_n]
+        mono = 0.5 * (residual[:, 0] + residual[:, 1])
+        residual_rms = float(
+            math.sqrt(float(np.mean(mono * mono)) + 1e-18)
+        )
+        if residual_rms <= 1e-12:
+            continue
+        remain = len(buffers[idx]) - contact
+        loading = _string_contact_loading_curve(
+            memory,
+            action,
+            strength,
+            residual_rms,
+            int(sr),
+            remain,
+        )
+        buffers[idx][contact:] *= loading[:, None]
+
+        post_probe = buffers[idx][contact:contact + probe_n]
+        post_mono = 0.5 * (post_probe[:, 0] + post_probe[:, 1])
+        post_rms = float(
+            math.sqrt(float(np.mean(post_mono * post_mono)) + 1e-18)
+        )
+        state.string_energy[idx] = post_rms
+        state.string_phase_proxy[idx] = (
+            float(post_mono[0]) if len(post_mono) else 0.0
+        )
+        applied.append(
+            {
+                "string": int(idx) + 1,
+                "offset_samples": int(offset),
+                "pre_rms": residual_rms,
+                "post_rms": post_rms,
+            }
+        )
+    return applied
+
+
 def _render_shared_body_memory(
     events,
     n: int,
@@ -571,6 +731,7 @@ def _render_shared_body_memory(
     action_body_memory: float,
     cross_string_coupling: float,
     sympathetic_gain: float,
+    technique_transition_memory: float,
 ):
     """S3 mixed note/action track renderer using actual residual audio as state.
 
@@ -675,6 +836,9 @@ def _render_shared_body_memory(
                             tau_s = _same_string_carry_tau_s(
                                 same_string_memory, residual_rms
                             )
+                            tau_s *= _technique_carry_tau_scale(
+                                ev, technique_transition_memory
+                            )
                             remain = int(n) - start
                             t = np.arange(remain, dtype=np.float64) / float(sr)
                             carry = np.exp(
@@ -742,12 +906,24 @@ def _render_shared_body_memory(
                 last_start[idx] = int(start)
             else:
                 target = buffers[6]
+                action = str(ev["action"])
+                parameters = ev.get("parameters") or {}
+                if technique_transition_memory > 1e-15:
+                    _apply_action_string_state_transition(
+                        buffers,
+                        state,
+                        start,
+                        int(sr),
+                        action,
+                        parameters,
+                        technique_transition_memory,
+                    )
                 stereo = render_acoustic_guitar_action(
-                    str(ev["action"]),
+                    action,
                     duration_s,
                     int(sr),
                     patch,
-                    parameters=ev.get("parameters") or {},
+                    parameters=parameters,
                     seed=int(ev["_ag_action_seed"]),
                 )
 
@@ -795,6 +971,7 @@ def render_stateful_acoustic_guitar_track(
     S2: only same_string_memory -> note-only physical-string continuity.
     S3: bridge_memory/action_body_memory -> mixed note/action shared body state.
     S4: bounded bridge-mediated sympathetic transfer between physical strings.
+    S5: technique-aware string-contact damping and legato residual continuity.
     """
     graph = patch.get("acoustic_guitar_graph", {}) if isinstance(patch, dict) else {}
     if not stateful_enabled(graph):
@@ -811,6 +988,9 @@ def render_stateful_acoustic_guitar_track(
     same_string_memory = float(cfg.get("same_string_memory", 0.0))
     bridge_memory = float(cfg.get("bridge_memory", 0.0))
     action_body_memory = float(cfg.get("action_body_memory", 0.0))
+    technique_transition_memory = max(
+        0.0, min(0.98, float(cfg.get("technique_transition_memory", 0.0)))
+    )
 
     cross_string_coupling = max(
         0.0, min(0.98, float(cfg.get("cross_string_coupling", 0.0)))
@@ -819,7 +999,11 @@ def render_stateful_acoustic_guitar_track(
         0.0, min(0.98, float(cfg.get("sympathetic_gain", 0.0)))
     )
 
-    if bridge_memory > 1e-15 or action_body_memory > 1e-15:
+    if (
+        bridge_memory > 1e-15
+        or action_body_memory > 1e-15
+        or technique_transition_memory > 1e-15
+    ):
         return _render_shared_body_memory(
             events,
             n,
@@ -832,6 +1016,7 @@ def render_stateful_acoustic_guitar_track(
             action_body_memory=action_body_memory,
             cross_string_coupling=cross_string_coupling,
             sympathetic_gain=sympathetic_gain,
+            technique_transition_memory=technique_transition_memory,
         )
 
     if same_string_memory <= 1e-15:
