@@ -203,7 +203,7 @@ def test_zero_coupling_candidate_is_sample_exact_with_ag07(tmp_path, case):
     assert ea == eb
 
 
-def test_nonzero_coupling_is_blocked_until_later_ag08_slice():
+def test_unpaired_cross_string_control_is_inert_without_sympathetic_gain():
     patch = materialize_preset(
         STATEFUL,
         patch_overrides={
@@ -212,10 +212,11 @@ def test_nonzero_coupling_is_blocked_until_later_ag08_slice():
             }
         },
     )
-    with pytest.raises(NotImplementedError, match="beyond S3"):
-        render_stateful_acoustic_guitar_track(
-            [], 1024, 24000, patch, 60.0/96.0
-        )
+    # S4 requires both cross_string_coupling and sympathetic_gain. A lone
+    # transport coefficient must not synthesize state or audio by itself.
+    assert render_stateful_acoustic_guitar_track(
+        [], 1024, 24000, patch, 60.0/96.0
+    ) is None
 
 
 def test_stateful_config_validation_is_bounded():
