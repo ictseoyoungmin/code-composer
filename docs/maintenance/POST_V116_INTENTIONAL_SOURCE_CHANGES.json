@@ -16,7 +16,7 @@
       "reason": "Delegate pitched-instrument IR validation to engine-owned validators."
     },
     "src/code_composer/render.py": {
-      "sha256": "a93e3c5d4088a837a0e2b190f1b7527a92b31e14e00c5829454ce4ce5bb23dfd",
+      "sha256": "f527ecfea21cf8a3d86185506c8cfd8b417cf0cecf565741c8d8b092edd01c4b",
       "reason": "S18/S19 mixer semantics and S27 stateful drum behavior retained. S28-B/S28-C piano render-local strike identity/timing retained. AG06 acoustic-guitar strum render-local micro-onset/excitation retained. AG07 engine-owned instrument_action rendering retained. AG08-S3 now attaches the existing AG07 deterministic action seed only to render-local guitar event copies so the whole-track shared-body renderer can preserve action identity exactly; canonical IR and non-guitar paths are unchanged."
     },
     "src/code_composer/validation_contracts.py": {
