@@ -69,6 +69,186 @@
     },
     {
       "format": "code-composer-factory-preset/v1",
+      "preset_id": "acoustic_guitar.steel_stateful",
+      "version": "1.0.0",
+      "name": "Steel Acoustic Guitar — AG08 Stateful Candidate",
+      "engine": "acoustic_guitar",
+      "family": "acoustic_guitar",
+      "character": [
+        "steel-string",
+        "physical-parametric",
+        "bridge-body-coupled",
+        "ag01-r3-accepted-baseline",
+        "six-string-stateful-candidate",
+        "ag08-s1-zero-coupling"
+      ],
+      "strengths": [
+        "uses a triangular-pluck bridge-force spectrum with coherent release phase instead of an arbitrary harmonic phase cloud",
+        "separates steel-string source, bridge transfer and guitar-body/air radiation into a causal rendering path",
+        "uses a short colored pick/string contact burst without a separate pitched click oscillator",
+        "adds a persistent six-string/bridge/body state contract while preserving the AG07 audio path exactly when coupling is zero"
+      ],
+      "limitations": [
+        "AG08-S1 is a state-skeleton candidate: all coupling/memory gains are zero and therefore intentionally inaudible",
+        "same-string continuity, shared body memory, sympathetic coupling and technique-state transitions are activated only in later AG08 slices after preservation gates",
+        "generic project-authored state dimensions are not a measured or named-instrument response"
+      ],
+      "recommended_roles": [
+        "guitar",
+        "accompaniment",
+        "fingerstyle"
+      ],
+      "expression_capabilities": [
+        "velocity"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "acoustic_guitar.steel_stateful_body",
+      "version": "1.0.0",
+      "name": "Steel Acoustic Guitar — AG08 S3 Shared Body Memory",
+      "engine": "acoustic_guitar",
+      "family": "acoustic_guitar",
+      "character": [
+        "steel-string",
+        "physical-parametric",
+        "bridge-body-coupled",
+        "ag01-r3-accepted-baseline",
+        "six-string-stateful-candidate",
+        "ag08-s3-shared-body-memory"
+      ],
+      "strengths": [
+        "retains the accepted AG01 R3 note renderer and AG07 same-guitar action renderer",
+        "preserves AG08-S2 same-string continuity",
+        "uses the actual already-rendered guitar residual as one persistent shared bridge/body state for later notes and AG07 actions",
+        "applies only bounded continuous body loading at new excitation/contact boundaries and introduces no new body mode, oscillator or hidden pitch"
+      ],
+      "limitations": [
+        "AG08-S3 models shared body memory as a reduced-order residual-waveform state rather than a measured continuous FEM/body solver",
+        "cross-string sympathetic energy transfer remains disabled until AG08-S4",
+        "technique-transition closure across arpeggio, strum, mute, slap and fingerstyle remains AG08-S5 work"
+      ],
+      "recommended_roles": [
+        "guitar",
+        "accompaniment",
+        "fingerstyle"
+      ],
+      "expression_capabilities": [
+        "velocity"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "acoustic_guitar.steel_stateful_continuity",
+      "version": "1.0.0",
+      "name": "Steel Acoustic Guitar — AG08 S2 Same-String Continuity",
+      "engine": "acoustic_guitar",
+      "family": "acoustic_guitar",
+      "character": [
+        "steel-string",
+        "physical-parametric",
+        "bridge-body-coupled",
+        "ag01-r3-accepted-baseline",
+        "six-string-stateful-candidate",
+        "ag08-s2-same-string-continuity"
+      ],
+      "strengths": [
+        "uses the accepted AG01 R3 steel-string, bridge and body rendering path",
+        "keeps one persistent rendered buffer per resolved physical string",
+        "carries the actual residual same-string waveform continuously across a re-attack boundary and damps that prior state instead of allowing independent same-string tails to overlap indefinitely",
+        "leaves shared bridge/body memory, sympathetic cross-string coupling and AG07 action-state coupling for later AG08 slices"
+      ],
+      "limitations": [
+        "AG08-S2 activates same-string note continuity only; tracks containing instrument actions still delegate to the canonical AG07 event path",
+        "shared bridge/body memory, sympathetic cross-string coupling and multi-technique transition state are not active yet",
+        "generic project-authored state dimensions are not a measured or named-instrument response"
+      ],
+      "recommended_roles": [
+        "guitar",
+        "accompaniment",
+        "fingerstyle"
+      ],
+      "expression_capabilities": [
+        "velocity"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "acoustic_guitar.steel_stateful_performance",
+      "version": "1.0.0",
+      "name": "Steel Acoustic Guitar — AG08 S5 Continuous Performance",
+      "engine": "acoustic_guitar",
+      "family": "acoustic_guitar",
+      "character": [
+        "steel-string",
+        "physical-parametric",
+        "bridge-body-coupled",
+        "ag01-r3-accepted-baseline",
+        "six-string-stateful-candidate",
+        "ag08-s5-technique-transition-continuity"
+      ],
+      "strengths": [
+        "retains AG08-S4 passive sympathetic coupling and all accepted AG01-AG07 note/action renderers",
+        "keeps arpeggio, render-local strum contacts, string muting/percussion and later fingerstyle inside one persistent six-string/bridge/body state",
+        "lets muted_strum, dead_strum and string_slap damp already-ringing physical strings at deterministic per-string contact times instead of acting only as added percussion audio",
+        "extends same-string residual carry for slide/hammer-on/pull-off while shortening residual carry for palm/fretting/dead-note contact, without creating hidden musical events"
+      ],
+      "limitations": [
+        "AG08-S5 remains a compact reduced-order performance-state model rather than geometry/material-derived FEM/BEM simulation",
+        "string-contact damping coefficients are bounded project-authored generic values, not measured hand/string impedance data",
+        "formal long-horizon passive energy/stability closure remains AG08-S6 and final human listening closure remains AG08-S7"
+      ],
+      "recommended_roles": [
+        "guitar",
+        "accompaniment",
+        "fingerstyle"
+      ],
+      "expression_capabilities": [
+        "velocity"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
+      "preset_id": "acoustic_guitar.steel_stateful_sympathetic",
+      "version": "1.0.0",
+      "name": "Steel Acoustic Guitar — AG08 S4 Sympathetic Coupling",
+      "engine": "acoustic_guitar",
+      "family": "acoustic_guitar",
+      "character": [
+        "steel-string",
+        "physical-parametric",
+        "bridge-body-coupled",
+        "ag01-r3-accepted-baseline",
+        "six-string-stateful-candidate",
+        "ag08-s4-passive-sympathetic-coupling"
+      ],
+      "strengths": [
+        "retains the accepted AG01 R3 note renderer, AG07 action renderer, AG08-S2 same-string continuity and AG08-S3 shared body memory",
+        "routes already-authored source-string bridge force into spectrally compatible target-string modal state without creating MIDI or Render-IR note events",
+        "allocates a bounded quadratic bridge-domain energy fraction across target strings and attenuates the source by the complementary energy factor",
+        "radiates sympathetic target-string state through the same accepted acoustic-guitar body model rather than a separate reverb, chorus or sample layer"
+      ],
+      "limitations": [
+        "AG08-S4 is a compact reduced-order coupling model, not a geometry/material-derived FEM or BEM guitar simulation",
+        "sympathetic compatibility uses generic standard-tuning string coordinates and near-coincident modal partials rather than measured bridge admittance",
+        "formal long-horizon passive stability closure remains AG08-S6 and multi-technique transition closure remains AG08-S5"
+      ],
+      "recommended_roles": [
+        "guitar",
+        "accompaniment",
+        "fingerstyle"
+      ],
+      "expression_capabilities": [
+        "velocity"
+      ],
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
       "preset_id": "bass.electric_finger_modeled",
       "version": "1.0.0",
       "name": "Electric Finger Bass — Modeled",

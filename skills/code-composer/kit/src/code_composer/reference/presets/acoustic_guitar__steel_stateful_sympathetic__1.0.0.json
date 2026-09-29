@@ -1,0 +1,91 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "acoustic_guitar.steel_stateful_sympathetic",
+  "version": "1.0.0",
+  "name": "Steel Acoustic Guitar — AG08 S4 Sympathetic Coupling",
+  "engine": "acoustic_guitar",
+  "family": "acoustic_guitar",
+  "character": [
+    "steel-string",
+    "physical-parametric",
+    "bridge-body-coupled",
+    "ag01-r3-accepted-baseline",
+    "six-string-stateful-candidate",
+    "ag08-s4-passive-sympathetic-coupling"
+  ],
+  "strengths": [
+    "retains the accepted AG01 R3 note renderer, AG07 action renderer, AG08-S2 same-string continuity and AG08-S3 shared body memory",
+    "routes already-authored source-string bridge force into spectrally compatible target-string modal state without creating MIDI or Render-IR note events",
+    "allocates a bounded quadratic bridge-domain energy fraction across target strings and attenuates the source by the complementary energy factor",
+    "radiates sympathetic target-string state through the same accepted acoustic-guitar body model rather than a separate reverb, chorus or sample layer"
+  ],
+  "limitations": [
+    "AG08-S4 is a compact reduced-order coupling model, not a geometry/material-derived FEM or BEM guitar simulation",
+    "sympathetic compatibility uses generic standard-tuning string coordinates and near-coincident modal partials rather than measured bridge admittance",
+    "formal long-horizon passive stability closure remains AG08-S6 and multi-technique transition closure remains AG08-S5"
+  ],
+  "recommended_roles": [
+    "guitar",
+    "accompaniment",
+    "fingerstyle"
+  ],
+  "expression_capabilities": [
+    "velocity"
+  ],
+  "musical_content": false,
+  "patch": {
+    "kind": "acoustic_guitar",
+    "engine": "acoustic_guitar",
+    "family": "acoustic_guitar",
+    "acoustic_guitar_graph": {
+      "physical_model": "ag01_modal_bridge_body_v2",
+      "max_partials": 30,
+      "pluck_position": 0.14,
+      "partial_rolloff": 0.86,
+      "string_inharmonicity": 0.000035,
+      "base_decay_s": 2.25,
+      "frequency_damping": 0.14,
+      "damping_power": 1.3,
+      "decay_keytrack": 0.014,
+      "fret_contact": 0.26,
+      "natural_tail_s": 2.2,
+      "post_gate_decay_s": 0.72,
+      "string_release_ramp_s": 0.00028,
+      "excitation_noise_gain": 0.024,
+      "excitation_highpass_hz": 650,
+      "excitation_lowpass_hz": 6200,
+      "excitation_decay_s": 0.0085,
+      "release_click_gain": 0,
+      "bridge_highpass_hz": 58,
+      "bridge_lowpass_hz": 9000,
+      "body_modal_mix": 0.9,
+      "body_mode_shift": 1,
+      "body_mode_damping": 1.12,
+      "direct_bridge_mix": 0.38,
+      "air_mode_hz": 108,
+      "air_mode_q": 1.35,
+      "air_mode_mix": 0.1,
+      "radiation_lowpass_hz": 8200,
+      "stereo_width": 0.06,
+      "side_highpass_hz": 320,
+      "body_drive": 0.88,
+      "end_fade_s": 0.035,
+      "output_gain": 0.82,
+      "seed": 11901,
+      "radiation_keytrack": 1.1,
+      "string_source_model": "triangular_pluck_bridge_force_v2",
+      "bridge_force_rolloff": 1.06,
+      "stateful_coupling": {
+        "enabled": true,
+        "model": "ag08_reduced_order_state_v1",
+        "body_state_order": 10,
+        "bridge_state_order": 2,
+        "same_string_memory": 0.32,
+        "bridge_memory": 0.46,
+        "cross_string_coupling": 0.2,
+        "sympathetic_gain": 0.18,
+        "action_body_memory": 0.52
+      }
+    }
+  }
+}

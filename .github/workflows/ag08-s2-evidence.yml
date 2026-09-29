@@ -1,0 +1,43 @@
+name: AG08 S2 Same-String Continuity Evidence
+
+on:
+  pull_request:
+    paths:
+      - "skills/code-composer/kit/src/code_composer/audio/acoustic_guitar/**"
+      - "skills/code-composer/kit/src/code_composer/audio/engines/**"
+      - "skills/code-composer/kit/src/code_composer/reference/presets/acoustic_guitar__steel_stateful_continuity__1.0.0.json"
+      - "skills/code-composer/kit/presets/CATALOG.json"
+      - "tests/test_ag08_stateful_s2.py"
+      - "tools/render_ag08_s2_evidence.py"
+      - ".github/workflows/ag08-s2-evidence.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render-evidence:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: skills/code-composer/kit/src
+      AG08_S2_EVIDENCE_DIR: artifacts/ag08-s2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install render dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "numpy==2.2.6" "scipy==1.15.3" pytest
+      - name: Run AG08-S2 focused tests
+        run: python -m pytest -q tests/test_ag08_stateful_s1.py tests/test_ag08_stateful_s2.py
+      - name: Render AG08-S2 evidence
+        run: python tools/render_ag08_s2_evidence.py
+      - name: Upload AG08-S2 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ag08-s2-same-string-continuity-24k
+          path: artifacts/ag08-s2
+          if-no-files-found: error
