@@ -154,6 +154,25 @@ def _render_dry_track(ir, track, n, sr, beat_s, graph_mode=False):
                 control_ordinal=sum(1 for prev in track.get("events",[])[:event_index] if prev.get("event_type")=="drum_control")
                 control_seed=int(ir["meta"].get("global_seed",0))+700001+control_ordinal*104729
                 stereo=render_hi_hat_pedal_control(ev,sr,beat_s,control_seed,patch)
+            elif ev.get("event_type") == "instrument_action":
+                action_ordinal=sum(
+                    1
+                    for prev in render_events[:event_index]
+                    if prev.get("event_type")=="instrument_action"
+                )
+                action_seed=(
+                    int(ir["meta"].get("global_seed",0))
+                    + _stable_text_seed(track.get("id","")) * 31
+                    + action_ordinal * 104729
+                ) & 0xFFFFFFFF
+                stereo=engine.render_action(
+                    ev["action"],
+                    duration_s,
+                    sr,
+                    patch,
+                    parameters=ev.get("parameters") or {},
+                    seed=action_seed,
+                )
             elif ev.get("event_type") == "drum":
                 graph=patch.get("drum_graph",{}) if isinstance(patch,dict) else {}
                 hh_state=graph.get("hi_hat_state",{}) if isinstance(graph,dict) else {}
