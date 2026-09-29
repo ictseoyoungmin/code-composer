@@ -128,15 +128,22 @@ def compare_exact(case, events):
     }
 
 
-def compare_transition(case, events, boundary_beat):
+def compare_transition(case, events, boundary_beat, prior_events):
     pa, a, ira = render_case(case, BASE, events)
     pb, b, irb = render_case(case, S3, events)
     pb2, b2, _ = render_case(case, S3, events, suffix="repeat")
+    _, prior, _ = render_case(case + "_prior", BASE, prior_events)
     boundary = int(float(boundary_beat) * BEAT_S * SR)
     prefix_exact = bool(np.array_equal(a[:boundary], b[:boundary]))
     deterministic = bool(np.array_equal(b, b2))
     event_exact = ira["tracks"][0]["events"] == irb["tracks"][0]["events"]
-    delta_ratio = rms(b[boundary:] - a[boundary:]) / (rms(a[boundary:]) + 1e-12)
+    delta = b[boundary:] - a[boundary:]
+    prior_tail = prior[boundary:]
+    m = min(len(delta), len(prior_tail))
+    prior_residual_rms = rms(prior_tail[:m])
+    delta_rms = rms(delta[:m])
+    residual_change_ratio = delta_rms / (prior_residual_rms + 1e-12)
+    total_delta_ratio = rms(delta) / (rms(a[boundary:]) + 1e-12)
     peak = float(np.max(np.abs(b))) if b.size else 0.0
     if not prefix_exact:
         raise AssertionError(f"{case}: changed before shared-body re-excitation")
@@ -144,15 +151,21 @@ def compare_transition(case, events, boundary_beat):
         raise AssertionError(f"{case}: S3 render is not deterministic")
     if not event_exact:
         raise AssertionError(f"{case}: event authority changed")
-    if not 0.001 < delta_ratio < 0.40:
-        raise AssertionError(f"{case}: body-memory delta ratio out of bound: {delta_ratio}")
+    if prior_residual_rms <= 1e-8:
+        raise AssertionError(f"{case}: prior residual too small for a memory gate: {prior_residual_rms}")
+    if not 0.001 < residual_change_ratio < 0.40:
+        raise AssertionError(
+            f"{case}: prior-residual change ratio out of bound: {residual_change_ratio}"
+        )
     if peak >= 0.98:
         raise AssertionError(f"{case}: peak too high: {peak}")
     return {
         "prefix_exact": prefix_exact,
         "deterministic": deterministic,
         "event_exact": event_exact,
-        "delta_rms_ratio": delta_ratio,
+        "prior_residual_rms": prior_residual_rms,
+        "residual_change_ratio": residual_change_ratio,
+        "total_delta_rms_ratio": total_delta_ratio,
         "peak": peak,
         "sha256_a": sha256(pa),
         "sha256_b": sha256(pb),
@@ -177,7 +190,7 @@ def main():
     ]
     slap_then_note = [
         action("tap", 0.0, "body_tap", strength=0.48, location="lower_bout"),
-        note("e4", 0.20, 0.70, 64, 1, 0, "finger"),
+        note("e4", 0.08, 0.70, 64, 1, 0, "finger"),
     ]
     different_string = [
         note("e4_s1", 0.0, 0.55, 64, 1, 0),
@@ -197,13 +210,13 @@ def main():
         "simultaneous_note_action", simultaneous
     )
     report["cases"]["note_then_slap"] = compare_transition(
-        "note_then_slap", note_then_slap, 0.55
+        "note_then_slap", note_then_slap, 0.55, [note_then_slap[0]]
     )
     report["cases"]["slap_then_note"] = compare_transition(
-        "slap_then_note", slap_then_note, 0.20
+        "slap_then_note", slap_then_note, 0.08, [slap_then_note[0]]
     )
     report["cases"]["different_string_body"] = compare_transition(
-        "different_string_body", different_string, 0.50
+        "different_string_body", different_string, 0.50, [different_string[0]]
     )
 
     lines = [
