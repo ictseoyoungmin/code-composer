@@ -1,0 +1,41 @@
+name: AG06 Strum Evidence
+
+on:
+  pull_request:
+    paths:
+      - "skills/code-composer/kit/src/code_composer/audio/engines/acoustic_guitar.py"
+      - "skills/code-composer/kit/src/code_composer/performance/guitar/**"
+      - "skills/code-composer/kit/src/code_composer/performance/mechanics.py"
+      - "skills/code-composer/kit/src/code_composer/render.py"
+      - "tests/test_ag06_guitar_strum.py"
+      - "tools/render_ag06_strum_evidence.py"
+      - ".github/workflows/ag06-strum-evidence.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render-evidence:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: skills/code-composer/kit/src
+      AG06_EVIDENCE_DIR: artifacts/ag06-strum
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install render dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "numpy==2.2.6" "scipy==1.15.3"
+      - name: Render AG06 evidence
+        run: python tools/render_ag06_strum_evidence.py
+      - name: Upload AG06 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ag06-strum-24k
+          path: artifacts/ag06-strum
+          if-no-files-found: error
