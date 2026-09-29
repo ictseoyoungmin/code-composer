@@ -159,17 +159,26 @@ def test_s3_note_then_action_uses_shared_existing_body_state(tmp_path):
 def test_s3_action_then_note_uses_same_shared_body_without_hidden_event(tmp_path):
     events = [
         _action("tap", 0.0, "body_tap", strength=0.48, location="lower_bout"),
-        _note("e4", 0.20, 0.70, 64, 1, 0, method="finger"),
+        _note("e4", 0.08, 0.70, 64, 1, 0, method="finger"),
     ]
     a, ir_a = _render(tmp_path, BASE, "tap_note_a", events)
     b1, ir_b1 = _render(tmp_path, S3, "tap_note_b1", events)
     b2, ir_b2 = _render(tmp_path, S3, "tap_note_b2", events)
-    boundary = int(0.20 * BEAT_S * SR)
+    boundary = int(0.08 * BEAT_S * SR)
 
     assert np.array_equal(a[:boundary], b1[:boundary])
     assert not np.array_equal(a[boundary:], b1[boundary:])
-    ratio = _rms(b1[boundary:] - a[boundary:]) / (_rms(a[boundary:]) + 1e-12)
-    assert 0.001 < ratio < 0.40
+    prior, _ = _render(
+        tmp_path, BASE, "tap_only_ref",
+        [_action("tap", 0.0, "body_tap", strength=0.48, location="lower_bout")],
+    )
+    delta = b1[boundary:] - a[boundary:]
+    prior_tail = prior[boundary:boundary + len(delta)]
+    m = min(len(delta), len(prior_tail))
+    prior_rms = _rms(prior_tail[:m])
+    change_ratio = _rms(delta[:m]) / (prior_rms + 1e-12)
+    assert prior_rms > 1e-8
+    assert 0.001 < change_ratio < 0.40
     assert np.array_equal(b1, b2)
     assert _events(ir_a) == _events(ir_b1) == _events(ir_b2)
     assert len(_events(ir_b1)) == 2
