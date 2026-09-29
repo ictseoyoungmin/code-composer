@@ -37,6 +37,7 @@ def _ensure_builtins() -> None:
         GuitarFingeringError,
         GuitarRightHandError,
         GuitarLeftHandError,
+        GuitarArpeggioError,
         realize_guitar_performance,
     )
 
@@ -53,7 +54,12 @@ def _ensure_builtins() -> None:
             return ir
         try:
             return realize_guitar_performance(ir, track_id, plan_instrument)
-        except (GuitarFingeringError, GuitarRightHandError, GuitarLeftHandError) as exc:
+        except (
+            GuitarFingeringError,
+            GuitarRightHandError,
+            GuitarLeftHandError,
+            GuitarArpeggioError,
+        ) as exc:
             raise InstrumentMechanicsError(str(exc)) from exc
 
     register_mechanics_realizer("violin", _violin)
