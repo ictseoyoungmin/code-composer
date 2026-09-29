@@ -68,5 +68,5 @@ def test_ag09_d1_uses_final_ag08_preset_and_fast_render_rate():
     assert lock["preset"] == "acoustic_guitar.steel_stateful_performance"
     assert lock["preset_version"] == "1.0.0"
     assert score["render"]["sample_rate"] == 24000
-    assert score["render"]["room_return_gain"] == 0.0
+    assert score["render"]["mix"]["room_return_gain"] == 0.0
     assert song["meta"]["revision"] == "AG09-D1-R0"
