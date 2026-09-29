@@ -1,0 +1,40 @@
+name: AG05 Arpeggio Evidence
+
+on:
+  pull_request:
+    paths:
+      - "skills/code-composer/kit/src/code_composer/audio/engines/acoustic_guitar.py"
+      - "skills/code-composer/kit/src/code_composer/performance/guitar/**"
+      - "skills/code-composer/kit/src/code_composer/performance/mechanics.py"
+      - "tests/test_ag05_guitar_arpeggio.py"
+      - "tools/render_ag05_arpeggio_evidence.py"
+      - ".github/workflows/ag05-arpeggio-evidence.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render-evidence:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: skills/code-composer/kit/src
+      AG05_EVIDENCE_DIR: artifacts/ag05-arpeggio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install render dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install "numpy==2.2.6" "scipy==1.15.3"
+      - name: Render AG05 evidence
+        run: python tools/render_ag05_arpeggio_evidence.py
+      - name: Upload AG05 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ag05-arpeggio-24k
+          path: artifacts/ag05-arpeggio
+          if-no-files-found: error

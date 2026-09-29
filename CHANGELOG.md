@@ -1,3 +1,15 @@
+## v1.19.0 development — AG05 Arpeggio / Fingerstyle Performance — CLOSED — 2026-09-29
+
+- Adds explicit per-note arpeggio coordination metadata for gesture ID, player role, voice role and sequence index without inventing chord voicing, pattern, note order, pitch, onset, duration or velocity.
+- Requires explicit AG03 right-hand authoring for every coordinated note and validates thumb/finger/pick role compatibility.
+- Preserves AG01–AG04 mechanics; AG05 metadata itself is acoustically inert for an otherwise identical note.
+- Validates multi-string gesture structure, same-string state collisions, sequence/onset order, bass-under-upper sustain and independent string overlap.
+- C/F listening evidence uses identical MIDI/onset/duration/velocity/string/fret content between fingerstyle and picked arpeggio.
+- The first F evidence correctly failed on an authored same-string duration collision; the score was fixed rather than weakening the validator.
+- A later listening audit added a hard evidence peak < 0.98 gate after detecting clipping in the first mix-level choice.
+- Engineering closure: CI #195 SUCCESS; Python 3.10 / 3.12 each 836 passed; AG01 R3 #23, AG02 R3 #17, AG03 #15, AG04 #10 and AG05 #3 evidence all SUCCESS.
+- Human listening PASS on 2026-09-29 closes AG05.
+
 ## v1.19.0 development — AG04 Left-Hand Articulation / Damping — CLOSED — 2026-09-29
 
 - Adds isolated `instrument_performance.left_hand` authority for palm mute, fretting mute, dead note, slide, hammer-on, pull-off and natural harmonic.

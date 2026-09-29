@@ -24,6 +24,11 @@ __all__ = [
     "LEFT_HAND_TECHNIQUES",
     "resolve_left_hand",
     "realize_guitar_left_hand",
+    "GuitarArpeggioError",
+    "PLAYERS",
+    "VOICE_ROLES",
+    "resolve_arpeggio",
+    "realize_guitar_arpeggio",
 ]
 
 from .right_hand import (
@@ -35,14 +40,23 @@ from .right_hand import (
 
 
 def realize_guitar_performance(ir, track_id, plan_instrument):
-    """Compose AG02 fingering, AG03 right hand, and AG04 left hand."""
+    """Compose AG02–AG05 guitar performance realization in ownership order."""
     out = realize_guitar_fingering(ir, track_id, plan_instrument)
     out = realize_guitar_right_hand(out, track_id, plan_instrument)
-    return realize_guitar_left_hand(out, track_id, plan_instrument)
+    out = realize_guitar_left_hand(out, track_id, plan_instrument)
+    return realize_guitar_arpeggio(out, track_id, plan_instrument)
 
 from .left_hand import (
     GuitarLeftHandError,
     LEFT_HAND_TECHNIQUES,
     realize_guitar_left_hand,
     resolve_left_hand,
+)
+
+from .arpeggio import (
+    GuitarArpeggioError,
+    PLAYERS,
+    VOICE_ROLES,
+    realize_guitar_arpeggio,
+    resolve_arpeggio,
 )
