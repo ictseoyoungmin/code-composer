@@ -47,7 +47,7 @@ jobs:
       - name: Upload listening evidence
         uses: actions/upload-artifact@v4
         with:
-          name: ag09-d2-picked-arpeggio-r0-24k
+          name: ag09-d2-picked-arpeggio-r1-24k
           path: dist/ag09-picked-arpeggio
           if-no-files-found: error
           retention-days: 30
