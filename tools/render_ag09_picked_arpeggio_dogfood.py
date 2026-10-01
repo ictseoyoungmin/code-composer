@@ -281,7 +281,8 @@ def main():
     metrics = {
         "schema": "code-composer-ag09-picked-arpeggio-dogfood/v1",
         "title": song["meta"]["title"],
-        "revision": song["meta"]["revision"],\n        "harmonic_path": ["Em(add9)","Cmaj7","G6","D/F#","Em7","Cmaj9","Am7","B7","Em/G","Cmaj7","B7sus4->B7","Em(add9)"],
+        "revision": song["meta"]["revision"],
+        "harmonic_path": ["Em(add9)","Cmaj7","G6","D/F#","Em7","Cmaj9","Am7","B7","Em/G","Cmaj7","B7sus4->B7","Em(add9)"],
         "sample_rate": SR,
         "bpm": BPM,
         "bars": 12,
