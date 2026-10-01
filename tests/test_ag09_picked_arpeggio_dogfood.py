@@ -65,4 +65,19 @@ def test_ag09_d2_uses_final_ag08_preset_and_24k():
     assert lock["preset_version"] == "1.0.0"
     assert score["render"]["sample_rate"] == 24000
     assert score["render"]["mix"]["room_return_gain"] == 0.0
-    assert song["meta"]["revision"] == "AG09-D2-R0"
+    assert song["meta"]["revision"] == "AG09-D2-R1"
+
+
+def test_ag09_d2_has_real_harmonic_movement():
+    # R1 must not collapse into one repeated chord shape.
+    events = MOD.build_events()
+    bars = []
+    for bar in range(12):
+        bar_events = [e for e in events if bar * 4.0 <= float(e["start_beat"]) < (bar + 1) * 4.0]
+        pitch_classes = tuple(sorted({int(e["midi"]) % 12 for e in bar_events}))
+        bass = min(int(e["midi"]) for e in bar_events)
+        bars.append((pitch_classes, bass))
+    assert len(set(bars)) >= 8
+
+    song = MOD.build_song()
+    assert song["meta"]["revision"] == "AG09-D2-R1"
