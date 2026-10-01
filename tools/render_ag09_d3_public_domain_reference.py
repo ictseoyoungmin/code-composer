@@ -102,7 +102,6 @@ def build_song():
             "title":"Oh! Susanna — public-domain acoustic reference",
             "global_seed":1919004,
             "revision":"AG09-D3-PD-R0",
-            "source_provenance":PUBLIC_DOMAIN_PROVENANCE,
         },
         "transport":{"bpm":BPM,"meter":{"beats_per_bar":2,"beat_unit":4}},
         "tonal":{"root":"C","scale":"major"},
