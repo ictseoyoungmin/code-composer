@@ -65,7 +65,7 @@ def test_ag09_d2_uses_final_ag08_preset_and_24k():
     assert lock["preset_version"] == "1.0.0"
     assert score["render"]["sample_rate"] == 24000
     assert score["render"]["mix"]["room_return_gain"] == 0.0
-    assert song["meta"]["revision"] == "AG09-D2-R1"
+    assert song["meta"]["revision"] == "AG09-D2-R2"
 
 
 def test_ag09_d2_has_real_harmonic_movement():
@@ -80,4 +80,34 @@ def test_ag09_d2_has_real_harmonic_movement():
     assert len(set(bars)) >= 8
 
     song = MOD.build_song()
-    assert song["meta"]["revision"] == "AG09-D2-R1"
+    assert song["meta"]["revision"] == "AG09-D2-R2"
+
+
+def test_ag09_d2_harmonic_plan_matches_every_authored_pitch():
+    cert = MOD.harmonic_plan_certificate(MOD.build_events())
+    assert cert["valid"] is True
+    assert cert["undeclared_non_chord_tone_count"] == 0
+    assert len(cert["bars"]) == 12
+    assert [b["label"] for b in cert["bars"]] == [
+        "Em(add9)", "Cmaj7", "G6", "D/F#", "Em7", "Cmaj9",
+        "Am7", "B7", "Em/G", "Cmaj7", "B7sus4->B7", "Em(add9)",
+    ]
+    assert all(b["required_pitch_classes_present"] for b in cert["bars"])
+
+
+def test_ag09_d2_am7_actually_contains_g_seventh():
+    bar7 = [
+        e for e in MOD.build_events()
+        if 24.0 <= float(e["start_beat"]) < 28.0
+    ]
+    pcs = {int(e["midi"]) % 12 for e in bar7}
+    assert pcs == {0, 4, 7, 9}
+
+
+def test_ag09_d2_b7_leading_tone_resolves_to_tonic_e():
+    cert = MOD.harmonic_plan_certificate(MOD.build_events())
+    res = cert["leading_tone_resolution"]
+    assert res["source_midi"] % 12 == 3
+    assert res["target_midi"] % 12 == 4
+    assert res["direction_semitones"] == 1
+    assert res["resolution_beats"] <= 0.5
