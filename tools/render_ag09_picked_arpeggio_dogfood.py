@@ -33,31 +33,34 @@ PLUCK = (0.125, 0.145, 0.155, 0.135, 0.115, 0.140, 0.150, 0.145)
 STRENGTH = (0.68, 0.52, 0.50, 0.56, 0.72, 0.54, 0.49, 0.46)
 
 # (midi, string, fret, voice, base_velocity)
+# Harmonic path:
+# Em(add9) -> Cmaj7 -> G6 -> D/F# -> Em7 -> Cmaj9 ->
+# Am7 -> B7 -> Em/G -> Cmaj7 -> B7sus4->B7 -> Em(add9)
 BARS = [
     [(40,6,0,"bass",.68),(52,4,2,"inner",.54),(55,3,0,"inner",.50),(59,2,0,"treble",.56),
-     (64,1,0,"treble",.72),(59,2,0,"treble",.53),(55,3,0,"inner",.48),(52,4,2,"inner",.44)],
-    [(48,5,3,"bass",.66),(52,4,2,"inner",.53),(59,3,4,"inner",.51),(64,2,5,"treble",.59),
-     (67,1,3,"treble",.73),(60,2,1,"treble",.52),(55,3,0,"inner",.47),(52,4,2,"inner",.43)],
-    [(43,6,3,"bass",.69),(50,4,0,"inner",.51),(55,3,0,"inner",.49),(59,2,0,"treble",.56),
-     (67,1,3,"treble",.75),(62,2,3,"treble",.55),(59,3,4,"inner",.50),(50,4,0,"inner",.43)],
-    [(45,5,0,"bass",.64),(50,4,0,"inner",.52),(57,3,2,"inner",.50),(62,2,3,"treble",.58),
-     (66,1,2,"treble",.72),(64,2,5,"treble",.56),(57,3,2,"inner",.48),(50,4,0,"inner",.43)],
-    [(40,6,0,"bass",.70),(52,4,2,"inner",.55),(59,3,4,"inner",.52),(64,2,5,"treble",.60),
-     (67,1,3,"treble",.76),(59,2,0,"treble",.53),(55,3,0,"inner",.49),(52,4,2,"inner",.45)],
-    [(48,5,3,"bass",.66),(52,4,2,"inner",.53),(55,3,0,"inner",.49),(60,2,1,"treble",.56),
-     (64,1,0,"treble",.70),(64,2,5,"treble",.58),(55,3,0,"inner",.47),(52,4,2,"inner",.43)],
-    [(45,5,0,"bass",.67),(52,4,2,"inner",.54),(55,3,0,"inner",.50),(60,2,1,"treble",.57),
-     (64,1,0,"treble",.71),(60,2,1,"treble",.53),(55,3,0,"inner",.48),(52,4,2,"inner",.44)],
-    [(47,5,2,"bass",.70),(51,4,1,"inner",.56),(56,3,1,"inner",.52),(59,2,0,"treble",.55),
-     (66,1,2,"treble",.74),(63,2,4,"treble",.58),(56,3,1,"inner",.50),(51,4,1,"inner",.45)],
-    [(48,5,3,"bass",.68),(55,4,5,"inner",.54),(59,3,4,"inner",.52),(64,2,5,"treble",.59),
-     (67,1,3,"treble",.75),(60,2,1,"treble",.52),(55,3,0,"inner",.48),(52,4,2,"inner",.44)],
-    [(47,5,2,"bass",.66),(50,4,0,"inner",.52),(55,3,0,"inner",.49),(59,2,0,"treble",.55),
-     (67,1,3,"treble",.72),(62,2,3,"treble",.54),(59,3,4,"inner",.49),(50,4,0,"inner",.42)],
-    [(45,5,0,"bass",.65),(50,4,0,"inner",.52),(57,3,2,"inner",.50),(62,2,3,"treble",.57),
-     (66,1,2,"treble",.72),(64,2,5,"treble",.54),(57,3,2,"inner",.47),(50,4,0,"inner",.42)],
-    [(40,6,0,"bass",.64),(52,4,2,"inner",.50),(55,3,0,"inner",.46),(59,2,0,"treble",.52),
-     (64,1,0,"treble",.68),(59,2,0,"treble",.47),(55,3,0,"inner",.43),(52,4,2,"inner",.39)],
+     (66,1,2,"treble",.72),(55,3,0,"inner",.50),(52,4,2,"inner",.47),(59,2,0,"treble",.45)],
+    [(48,5,3,"bass",.66),(52,4,2,"inner",.53),(55,3,0,"inner",.50),(59,2,0,"treble",.58),
+     (64,1,0,"treble",.72),(55,3,0,"inner",.49),(52,4,2,"inner",.46),(59,2,0,"treble",.44)],
+    [(43,6,3,"bass",.69),(50,4,0,"inner",.52),(55,3,0,"inner",.50),(59,2,0,"treble",.58),
+     (64,1,0,"treble",.74),(55,3,0,"inner",.50),(50,4,0,"inner",.46),(59,2,0,"treble",.45)],
+    [(42,6,2,"bass",.68),(50,4,0,"inner",.53),(57,3,2,"inner",.51),(62,2,3,"treble",.59),
+     (66,1,2,"treble",.75),(57,3,2,"inner",.50),(50,4,0,"inner",.46),(62,2,3,"treble",.45)],
+    [(40,6,0,"bass",.70),(52,4,2,"inner",.55),(55,3,0,"inner",.52),(62,2,3,"treble",.60),
+     (67,1,3,"treble",.76),(55,3,0,"inner",.51),(52,4,2,"inner",.47),(59,2,0,"treble",.46)],
+    [(48,5,3,"bass",.67),(55,4,5,"inner",.55),(59,3,4,"inner",.52),(62,2,3,"treble",.60),
+     (64,1,0,"treble",.74),(55,3,0,"inner",.50),(52,4,2,"inner",.47),(64,2,5,"treble",.48)],
+    [(45,5,0,"bass",.68),(52,4,2,"inner",.54),(57,3,2,"inner",.51),(60,2,1,"treble",.59),
+     (64,1,0,"treble",.73),(57,3,2,"inner",.50),(52,4,2,"inner",.46),(60,2,1,"treble",.45)],
+    [(47,5,2,"bass",.72),(54,4,4,"inner",.56),(57,3,2,"inner",.53),(63,2,4,"treble",.61),
+     (66,1,2,"treble",.77),(57,3,2,"inner",.51),(54,4,4,"inner",.47),(63,2,4,"treble",.46)],
+    [(43,6,3,"bass",.69),(52,4,2,"inner",.55),(55,3,0,"inner",.52),(59,2,0,"treble",.59),
+     (64,1,0,"treble",.75),(55,3,0,"inner",.50),(52,4,2,"inner",.47),(59,2,0,"treble",.45)],
+    [(48,5,3,"bass",.67),(52,4,2,"inner",.53),(55,3,0,"inner",.50),(59,2,0,"treble",.57),
+     (64,1,0,"treble",.72),(55,3,0,"inner",.48),(52,4,2,"inner",.45),(59,2,0,"treble",.43)],
+    [(47,5,2,"bass",.70),(54,4,4,"inner",.55),(57,3,2,"inner",.52),(64,2,5,"treble",.60),
+     (66,1,2,"treble",.76),(57,3,2,"inner",.50),(54,4,4,"inner",.46),(63,2,4,"treble",.47)],
+    [(40,6,0,"bass",.66),(52,4,2,"inner",.51),(55,3,0,"inner",.48),(59,2,0,"treble",.54),
+     (66,1,2,"treble",.70),(55,3,0,"inner",.46),(52,4,2,"inner",.43),(64,2,5,"treble",.48)],
 ]
 BAR_SCALE = (.93,.96,.99,.94,1.03,.98,.96,1.04,1.00,.95,.98,.86)
 
@@ -68,7 +71,7 @@ def build_song():
         "meta": {
             "title": "Wirelight Current",
             "global_seed": 1919002,
-            "revision": "AG09-D2-R0",
+            "revision": "AG09-D2-R1",
         },
         "transport": {"bpm": BPM, "meter": {"beats_per_bar": 4, "beat_unit": 4}},
         "tonal": {"root": "E", "scale": "natural_minor"},
@@ -158,7 +161,7 @@ def build_score(song):
             "format": "code-composer-song/v1",
             "fingerprint": song_fingerprint(song),
         },
-        "meta": {"title": "Wirelight Current — AG09 D2 R0"},
+        "meta": {"title": "Wirelight Current — AG09 D2 R1"},
         "tracks": [{"id": "guitar", "events": deepcopy(build_events())}],
         "render": {
             "sample_rate": SR,
@@ -208,8 +211,8 @@ def main():
     song = build_song()
     score = build_score(song)
     authored = build_events()
-    wav_a = out / "01_wirelight_current_R0.wav"
-    wav_b = out / "02_wirelight_current_R0_repeat.wav"
+    wav_a = out / "01_wirelight_current_R1.wav"
+    wav_b = out / "02_wirelight_current_R1_repeat.wav"
 
     result_a = render_song_score_to_files(
         song, score, wav_a,
@@ -278,7 +281,7 @@ def main():
     metrics = {
         "schema": "code-composer-ag09-picked-arpeggio-dogfood/v1",
         "title": song["meta"]["title"],
-        "revision": song["meta"]["revision"],
+        "revision": song["meta"]["revision"],\n        "harmonic_path": ["Em(add9)","Cmaj7","G6","D/F#","Em7","Cmaj9","Am7","B7","Em/G","Cmaj7","B7sus4->B7","Em(add9)"],
         "sample_rate": SR,
         "bpm": BPM,
         "bars": 12,
@@ -304,11 +307,11 @@ def main():
     (out/"metrics.json").write_text(json.dumps(metrics, indent=2)+"\n", encoding="utf-8")
     (out/"README.md").write_text(
         "# AG09 Dogfood 2 — Wirelight Current\n\n"
-        "12-bar / 92 BPM / 24 kHz steel-string picked-arpeggio candidate. "
+        "12-bar / 92 BPM / 24 kHz steel-string picked-arpeggio candidate with an explicit harmonic path. "
         "Every authored note carries explicit string/fret and AG03 pick mechanics. "
         "MIDI 55, 59, and 64 intentionally recur on alternate physical strings so "
         "the human gate can judge string/fret color separation inside a musical phrase.\n\n"
-        "Listen to 01_wirelight_current_R0.wav. The repeat file exists only for deterministic QA. "
+        "Harmonic path: Em(add9) -> Cmaj7 -> G6 -> D/F# -> Em7 -> Cmaj9 -> Am7 -> B7 -> Em/G -> Cmaj7 -> B7sus4->B7 -> Em(add9).\\n\\n"\n        "Listen to 01_wirelight_current_R1.wav. The repeat file exists only for deterministic QA. "
         "No automatic aesthetic score is used.\n",
         encoding="utf-8",
     )
