@@ -32,6 +32,26 @@ ANGLE = (34.0, 48.0, 36.0, 50.0, 32.0, 47.0, 37.0, 46.0)
 PLUCK = (0.125, 0.145, 0.155, 0.135, 0.115, 0.140, 0.150, 0.145)
 STRENGTH = (0.68, 0.52, 0.50, 0.56, 0.72, 0.54, 0.49, 0.46)
 
+
+# Pitch classes use C=0 ... B=11. Every authored pitch must either belong to
+# the active harmony or be declared as a non-chord tone with explicit
+# provenance/resolution. R2 intentionally uses no undeclared non-chord tones.
+HARMONIC_PLAN = [
+    {"label": "Em(add9)", "allowed": {4, 6, 7, 11}, "required": {4, 6, 7, 11}, "bass_pc": 4},
+    {"label": "Cmaj7",   "allowed": {0, 4, 7, 11}, "required": {0, 4, 7, 11}, "bass_pc": 0},
+    {"label": "G6",      "allowed": {2, 4, 7, 11}, "required": {2, 4, 7, 11}, "bass_pc": 7},
+    {"label": "D/F#",    "allowed": {2, 6, 9},     "required": {2, 6, 9},     "bass_pc": 6},
+    {"label": "Em7",     "allowed": {2, 4, 7, 11}, "required": {2, 4, 7, 11}, "bass_pc": 4},
+    {"label": "Cmaj9",   "allowed": {0, 2, 4, 7, 11}, "required": {0, 2, 4, 7, 11}, "bass_pc": 0},
+    {"label": "Am7",     "allowed": {0, 4, 7, 9},  "required": {0, 4, 7, 9},  "bass_pc": 9},
+    {"label": "B7",      "allowed": {3, 6, 9, 11}, "required": {3, 6, 9, 11}, "bass_pc": 11},
+    {"label": "Em/G",    "allowed": {4, 7, 11},    "required": {4, 7, 11},    "bass_pc": 7},
+    {"label": "Cmaj7",   "allowed": {0, 4, 7, 11}, "required": {0, 4, 7, 11}, "bass_pc": 0},
+    {"label": "B7sus4->B7", "allowed": {3, 4, 6, 9, 11}, "required": {3, 4, 6, 9, 11}, "bass_pc": 11},
+    {"label": "Em(add9)", "allowed": {4, 6, 7, 11}, "required": {4, 6, 7, 11}, "bass_pc": 4},
+]
+NON_CHORD_TONES = []
+
 # (midi, string, fret, voice, base_velocity)
 # Harmonic path:
 # Em(add9) -> Cmaj7 -> G6 -> D/F# -> Em7 -> Cmaj9 ->
@@ -49,7 +69,7 @@ BARS = [
      (67,1,3,"treble",.76),(55,3,0,"inner",.51),(52,4,2,"inner",.47),(59,2,0,"treble",.46)],
     [(48,5,3,"bass",.67),(55,4,5,"inner",.55),(59,3,4,"inner",.52),(62,2,3,"treble",.60),
      (64,1,0,"treble",.74),(55,3,0,"inner",.50),(52,4,2,"inner",.47),(64,2,5,"treble",.48)],
-    [(45,5,0,"bass",.68),(52,4,2,"inner",.54),(57,3,2,"inner",.51),(60,2,1,"treble",.59),
+    [(45,5,0,"bass",.68),(52,4,2,"inner",.54),(55,3,0,"inner",.51),(60,2,1,"treble",.59),
      (64,1,0,"treble",.73),(57,3,2,"inner",.50),(52,4,2,"inner",.46),(60,2,1,"treble",.45)],
     [(47,5,2,"bass",.72),(54,4,4,"inner",.56),(57,3,2,"inner",.53),(63,2,4,"treble",.61),
      (66,1,2,"treble",.77),(57,3,2,"inner",.51),(54,4,4,"inner",.47),(63,2,4,"treble",.46)],
@@ -71,7 +91,7 @@ def build_song():
         "meta": {
             "title": "Wirelight Current",
             "global_seed": 1919002,
-            "revision": "AG09-D2-R1",
+            "revision": "AG09-D2-R2",
         },
         "transport": {"bpm": BPM, "meter": {"beats_per_bar": 4, "beat_unit": 4}},
         "tonal": {"root": "E", "scale": "natural_minor"},
@@ -161,7 +181,7 @@ def build_score(song):
             "format": "code-composer-song/v1",
             "fingerprint": song_fingerprint(song),
         },
-        "meta": {"title": "Wirelight Current — AG09 D2 R1"},
+        "meta": {"title": "Wirelight Current — AG09 D2 R2"},
         "tracks": [{"id": "guitar", "events": deepcopy(build_events())}],
         "render": {
             "sample_rate": SR,
@@ -201,6 +221,114 @@ def _position_pairs(events):
     }
 
 
+def harmonic_plan_certificate(events):
+    if len(HARMONIC_PLAN) != 12:
+        raise ValueError("harmonic plan must contain 12 bars")
+
+    declared_nct = {
+        (int(item["bar"]), int(item["event_index"])): item
+        for item in NON_CHORD_TONES
+    }
+    bars = []
+    for bar_index, harmony in enumerate(HARMONIC_PLAN):
+        bar_events = [
+            e for e in events
+            if bar_index * 4.0 <= float(e["start_beat"]) < (bar_index + 1) * 4.0
+        ]
+        if not bar_events:
+            raise ValueError(f"bar {bar_index+1}: no authored notes")
+
+        pcs = {int(e["midi"]) % 12 for e in bar_events}
+        chord_events = []
+        undeclared = []
+        declared = []
+        for event_index, event in enumerate(bar_events):
+            pc = int(event["midi"]) % 12
+            if pc in harmony["allowed"]:
+                chord_events.append(event)
+                continue
+            key = (bar_index + 1, event_index)
+            info = declared_nct.get(key)
+            if info is None:
+                undeclared.append({
+                    "event_id": event["id"],
+                    "midi": int(event["midi"]),
+                    "pitch_class": pc,
+                })
+            else:
+                declared.append({
+                    "event_id": event["id"],
+                    "midi": int(event["midi"]),
+                    "kind": str(info["kind"]),
+                    "resolves_to_midi": int(info["resolves_to_midi"]),
+                })
+
+        missing = sorted(int(pc) for pc in harmony["required"] - pcs)
+        bass_pc = int(bar_events[0]["midi"]) % 12
+        if bass_pc != int(harmony["bass_pc"]):
+            raise ValueError(
+                f"bar {bar_index+1} {harmony['label']}: bass pitch class "
+                f"{bass_pc} != planned {harmony['bass_pc']}"
+            )
+        if undeclared:
+            raise ValueError(
+                f"bar {bar_index+1} {harmony['label']}: undeclared non-chord tones {undeclared}"
+            )
+        if missing:
+            raise ValueError(
+                f"bar {bar_index+1} {harmony['label']}: missing required pitch classes {missing}"
+            )
+
+        bars.append({
+            "bar": bar_index + 1,
+            "label": harmony["label"],
+            "pitch_classes": sorted(pcs),
+            "bass_pitch_class": bass_pc,
+            "undeclared_non_chord_tones": undeclared,
+            "declared_non_chord_tones": declared,
+            "required_pitch_classes_present": True,
+        })
+
+    # The harmonic-minor leading tone D# in B7 must resolve upward to E at
+    # the following tonic arrival. Use authored onset order, not audio analysis.
+    bar11 = [
+        e for e in events
+        if 40.0 <= float(e["start_beat"]) < 44.0 and int(e["midi"]) % 12 == 3
+    ]
+    bar12_e = [
+        e for e in events
+        if 44.0 <= float(e["start_beat"]) < 48.0 and int(e["midi"]) % 12 == 4
+    ]
+    if not bar11 or not bar12_e:
+        raise ValueError("B7 leading-tone resolution evidence is incomplete")
+    source = max(bar11, key=lambda e: float(e["start_beat"]))
+    target = min(
+        (e for e in bar12_e if float(e["start_beat"]) > float(source["start_beat"])),
+        key=lambda e: float(e["start_beat"]),
+        default=None,
+    )
+    if target is None or int(target["midi"]) - int(source["midi"]) != 1:
+        raise ValueError("B7 D# leading tone does not resolve by semitone to E")
+    resolution_beats = float(target["start_beat"]) - float(source["start_beat"])
+    if resolution_beats > 0.5 + 1e-12:
+        raise ValueError(f"B7 D# -> E resolution too late: {resolution_beats} beats")
+
+    return {
+        "valid": True,
+        "bars": bars,
+        "non_chord_tone_count": len(NON_CHORD_TONES),
+        "undeclared_non_chord_tone_count": 0,
+        "leading_tone_resolution": {
+            "source_event_id": source["id"],
+            "source_midi": int(source["midi"]),
+            "target_event_id": target["id"],
+            "target_midi": int(target["midi"]),
+            "resolution_beats": resolution_beats,
+            "direction_semitones": int(target["midi"]) - int(source["midi"]),
+        },
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--output", required=True)
@@ -211,8 +339,9 @@ def main():
     song = build_song()
     score = build_score(song)
     authored = build_events()
-    wav_a = out / "01_wirelight_current_R1.wav"
-    wav_b = out / "02_wirelight_current_R1_repeat.wav"
+    harmonic_certificate = harmonic_plan_certificate(authored)
+    wav_a = out / "01_wirelight_current_R2.wav"
+    wav_b = out / "02_wirelight_current_R2_repeat.wav"
 
     result_a = render_song_score_to_files(
         song, score, wav_a,
@@ -282,7 +411,8 @@ def main():
         "schema": "code-composer-ag09-picked-arpeggio-dogfood/v1",
         "title": song["meta"]["title"],
         "revision": song["meta"]["revision"],
-        "harmonic_path": ["Em(add9)","Cmaj7","G6","D/F#","Em7","Cmaj9","Am7","B7","Em/G","Cmaj7","B7sus4->B7","Em(add9)"],
+        "harmonic_path": [item["label"] for item in HARMONIC_PLAN],
+        "harmonic_plan_certificate": harmonic_certificate,
         "sample_rate": SR,
         "bpm": BPM,
         "bars": 12,
@@ -313,7 +443,8 @@ def main():
         "MIDI 55, 59, and 64 intentionally recur on alternate physical strings so "
         "the human gate can judge string/fret color separation inside a musical phrase.\n\n"
         "Harmonic path: Em(add9) -> Cmaj7 -> G6 -> D/F# -> Em7 -> Cmaj9 -> Am7 -> B7 -> Em/G -> Cmaj7 -> B7sus4->B7 -> Em(add9).\\n\\n"
-        "Listen to 01_wirelight_current_R1.wav. The repeat file exists only for deterministic QA. "
+        "R2 hard-validates chord-tone membership, required chord tones, bass authority, and B7 D# -> E resolution.\\n\\n"
+        "Listen to 01_wirelight_current_R2.wav. The repeat file exists only for deterministic QA. "
         "No automatic aesthetic score is used.\n",
         encoding="utf-8",
     )
