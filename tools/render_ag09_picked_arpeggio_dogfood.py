@@ -79,8 +79,8 @@ BARS = [
      (64,1,0,"treble",.72),(55,3,0,"inner",.48),(52,4,2,"inner",.45),(59,2,0,"treble",.43)],
     [(47,5,2,"bass",.70),(54,4,4,"inner",.55),(57,3,2,"inner",.52),(64,2,5,"treble",.60),
      (66,1,2,"treble",.76),(57,3,2,"inner",.50),(54,4,4,"inner",.46),(63,2,4,"treble",.47)],
-    [(40,6,0,"bass",.66),(52,4,2,"inner",.51),(55,3,0,"inner",.48),(59,2,0,"treble",.54),
-     (66,1,2,"treble",.70),(55,3,0,"inner",.46),(52,4,2,"inner",.43),(64,2,5,"treble",.48)],
+    [(64,1,0,"treble",.66),(40,6,0,"bass",.58),(52,4,2,"inner",.48),(55,3,0,"inner",.52),
+     (66,1,2,"treble",.70),(59,2,0,"treble",.46),(52,4,2,"inner",.43),(64,2,5,"treble",.48)],
 ]
 BAR_SCALE = (.93,.96,.99,.94,1.03,.98,.96,1.04,1.00,.95,.98,.86)
 
@@ -264,7 +264,7 @@ def harmonic_plan_certificate(events):
                 })
 
         missing = sorted(int(pc) for pc in harmony["required"] - pcs)
-        bass_pc = int(bar_events[0]["midi"]) % 12
+        bass_pc = min(int(e["midi"]) for e in bar_events) % 12
         if bass_pc != int(harmony["bass_pc"]):
             raise ValueError(
                 f"bar {bar_index+1} {harmony['label']}: bass pitch class "
