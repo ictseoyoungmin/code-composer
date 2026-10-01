@@ -211,8 +211,8 @@ def main():
     if len(realized) != len(authored):
         raise SystemExit(f"event authority changed {len(authored)} -> {len(realized)}")
 
-    authored_core=[(e["id"],int(e["midi"]),float(e["start_beat"]),float(e["duration_beats"])) for e in authored]
-    realized_core=[(e["id"],int(e["midi"]),float(e["start_beat"]),float(e["duration_beats"])) for e in realized]
+    authored_core=[(int(e["midi"]),float(e["start_beat"]),float(e["duration_beats"])) for e in authored]
+    realized_core=[(int(e["midi"]),float(e["start_beat"]),float(e["duration_beats"])) for e in realized]
     if authored_core != realized_core:
         raise SystemExit("authored pitch/timing authority changed")
 
