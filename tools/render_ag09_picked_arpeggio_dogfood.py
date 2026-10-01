@@ -312,7 +312,8 @@ def main():
         "Every authored note carries explicit string/fret and AG03 pick mechanics. "
         "MIDI 55, 59, and 64 intentionally recur on alternate physical strings so "
         "the human gate can judge string/fret color separation inside a musical phrase.\n\n"
-        "Harmonic path: Em(add9) -> Cmaj7 -> G6 -> D/F# -> Em7 -> Cmaj9 -> Am7 -> B7 -> Em/G -> Cmaj7 -> B7sus4->B7 -> Em(add9).\\n\\n"\n        "Listen to 01_wirelight_current_R1.wav. The repeat file exists only for deterministic QA. "
+        "Harmonic path: Em(add9) -> Cmaj7 -> G6 -> D/F# -> Em7 -> Cmaj9 -> Am7 -> B7 -> Em/G -> Cmaj7 -> B7sus4->B7 -> Em(add9).\\n\\n"
+        "Listen to 01_wirelight_current_R1.wav. The repeat file exists only for deterministic QA. "
         "No automatic aesthetic score is used.\n",
         encoding="utf-8",
     )
