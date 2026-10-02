@@ -1,0 +1,55 @@
+name: AG09 Fingerstyle Production Dogfood
+
+on:
+  push:
+    branches:
+      - ag09/production-closure
+    paths:
+      - "tools/render_ag09_fingerstyle_dogfood.py"
+      - "tests/test_ag09_fingerstyle_dogfood.py"
+      - "docs/architecture/AG09_PRODUCTION_CLOSURE.md"
+      - ".github/workflows/ag09-fingerstyle-dogfood.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "tools/render_ag09_fingerstyle_dogfood.py"
+      - "tests/test_ag09_fingerstyle_dogfood.py"
+      - "docs/architecture/AG09_PRODUCTION_CLOSURE.md"
+      - ".github/workflows/ag09-fingerstyle-dogfood.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fingerstyle-dogfood:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      PYTHONPATH: skills/code-composer/kit/src
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e skills/code-composer/kit
+          python -m pip install pytest
+      - name: Validate dogfood contract
+        run: python -m pytest -q tests/test_ag09_fingerstyle_dogfood.py
+      - name: Render 24 kHz production candidate
+        run: python tools/render_ag09_fingerstyle_dogfood.py --output dist/ag09-fingerstyle
+      - name: Verify portable hashes
+        working-directory: dist/ag09-fingerstyle
+        run: sha256sum -c SHA256SUMS.txt
+      - name: Upload listening evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: ag09-d1-fingerstyle-r0-24k
+          path: dist/ag09-fingerstyle
+          if-no-files-found: error
+          retention-days: 30

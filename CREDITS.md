@@ -423,6 +423,20 @@ S28-G introduces no new third-party source code, sample, recording, impulse resp
 
 ---
 
-Last updated: 2026-09-29 (v1.19.0 AG07/AG08 guitar physical-model provenance update).
+Last updated: 2026-10-01 (AG09 public-domain musical-reference dogfood update).
 
 - S27-M R2 ensemble production-integration extensions are independently implemented from project-authored contracts; no third-party audio, source code, IR, or measured-data bundle was added.
+
+
+### AG09 public-domain musical reference — *Oh! Susanna*
+
+AG09 Dogfood 3 uses Stephen Collins Foster's **"Oh! Susanna" (1848)** as a recognizable public-domain musical reference so the acoustic-guitar renderer can be judged on an existing song rather than only project-authored exercises.
+
+- Composer: Stephen Collins Foster
+- Work: *Oh! Susanna*
+- Original publication: 1848
+- Library of Congress historical sheet-music reference: https://www.loc.gov/item/2023800745/
+- Public-domain original-sheet scan reference: https://commons.wikimedia.org/wiki/File:Oh_Susanna_Original_1848_Sheet_Music_(IA_OhSusannaOriginal1848SheetMusic).pdf
+- Project usage: public-domain melody and basic harmonic identity only.
+- Arrangement: independently authored by Code Composer for two modeled steel-string acoustic-guitar parts (rhythmic strumming + picked melody).
+- No modern recording, modern copyrighted arrangement, performance audio, tablature, sample, impulse response, or third-party source code is copied or redistributed.
