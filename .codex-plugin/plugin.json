@@ -1,6 +1,6 @@
 {
   "name": "code-composer",
-  "version": "1.18.1",
+  "version": "1.19.0",
   "description": "Deterministic, model-free music composition and rendering for AI agents and programmable workflows.",
   "author": {
     "name": "ictseoyoungmin",
