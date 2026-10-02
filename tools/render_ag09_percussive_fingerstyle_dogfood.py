@@ -60,6 +60,7 @@ def build_song():
 
 
 def _note(eid, start, duration, midi, string, fret, player, velocity, gesture, seq):
+    voice = "bass" if player == "thumb" else ("inner" if int(string) == 3 else "treble")
     return {
         "id":eid,
         "type":"note",
@@ -74,7 +75,7 @@ def _note(eid, start, duration, midi, string, fret, player, velocity, gesture, s
             "arpeggio":{
                 "gesture_id":gesture,
                 "player":player,
-                "voice":"bass" if player=="thumb" else "treble",
+                "voice":voice,
                 "sequence_index":int(seq),
             },
         },
@@ -99,8 +100,9 @@ def build_events():
     events=[]
     for bar_index,chord in enumerate(BAR_CHORDS):
         v=VOICINGS[chord]
-        # physical fingerstyle pattern: bass, high, inner, upper-middle, second bass, high, inner, upper-middle
-        picks=(v[0],v[-1],v[2],v[-2],v[1],v[-1],v[2],v[-2])
+        # physical fingerstyle pattern: bass, high, inner(string 3), upper-middle,
+        # second bass, high, inner(string 3), upper-middle.
+        picks=(v[0],v[-1],v[-3],v[-2],v[1],v[-1],v[-3],v[-2])
         players=("thumb","ring","index","middle","thumb","ring","index","middle")
         velocities=(.66,.60,.48,.56,.60,.62,.47,.54)
         base=bar_index*4.0
