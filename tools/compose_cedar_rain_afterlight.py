@@ -54,8 +54,6 @@ HARMONY=(
  ["Cmaj7","B7sus4","B7","Em9"])
 assert len(HARMONY)==TOTAL_BARS
 
-# Motif-development cells. Later sections rotate/invert/re-register these rather
-# than repeating a fixed arpeggio loop.
 PITCH_CELLS=[
  [64,67,66,64],[62,64,67,71],[69,67,64,62],[66,67,69,66],
  [64,71,69,67],[72,71,67,64],[66,69,67,66],[63,66,69,71],
@@ -109,7 +107,6 @@ def melody(bar0,local,section):
  base=PITCH_CELLS[local%12][:]
  rhythm=RHYTHM_CELLS[(local+(1 if section=="development" else 0))%12][:]
  if section=="development":
-  # Phrase development: selective octave displacement + contour reversal.
   if local%3==1: base=list(reversed(base))
   if local in {2,3,8}: base=[min(78,x+12 if x<66 else x) for x in base]
   if local%4==2: rhythm=[max(.10,min(3.55,x-.15 if i%2==0 else x+.10)) for i,x in enumerate(rhythm)]
@@ -118,7 +115,6 @@ def melody(bar0,local,section):
   if local%4==0: base=base[1:]+base[:1]
  elif section=="recap":
   if local in {1,2,4}: base=[min(76,x+12 if x<=64 else x) for x in base]
- # Cadential bars explicitly lean into D# over B7 instead of generic diatonic looping.
  if HARMONY[bar0] in {"B7","B7sus4"}: base=[66,63,59,63]
  durs=[.52,.48,.50,.70]
  return [(rhythm[i],base[i],durs[i]) for i in range(4)]
@@ -165,7 +161,7 @@ def harmonic_bar(bar0,local,final=False):
  for i,(off,idx) in enumerate(((0.,0),(1.35,2),(2.45,1))):
   p=low[idx%len(low)]; out.append(note(f"b{bar0+1:02d}-l{i}",bar0*4+off,.85 if i else 1.30,p,e-.03,"thumb" if p[1]>=5 else "finger"))
  hs=[(76,1,12),(71,2,12)]
- for j,p in enumerate(hs[:1 if final else 2]): out.append(note(f"b{bar0+1:02d}-h{j}",bar0*4+.65+1.55*j,.72,p,e+.04,"finger",left={"technique":"natural_harmonic"},pluck=.19))
+ for j,p in enumerate(hs[:1 if final else 2]): out.append(note(f"b{bar0+1:02d}-h{j}",bar0*4+.65+1.55*j,.72,p,e+.04,"finger",left={"technique":"natural_harmonic","harmonic_order":2},pluck=.19))
  return out
 
 def build_events():
@@ -184,8 +180,7 @@ def build_events():
  for l in range(3):
   b=START["coda"]+l; ev+=harmonic_bar(b,l,final=l==2)
  b=START["coda"]+3
- ev.append(note("final-bass",b*4,2.35,(40,6,0),.46,"thumb"))
- # One final slow rake, deliberately not a repeated full bridge pattern.
+ ev.append(note("final-bass",b*4,1.85,(40,6,0),.46,"thumb"))
  sid="final-rake"; cfg=strum_cfg(sid,"down",0,.54,False,True)
  for n,(m,s,f) in enumerate(VOICINGS["Em9"]):
   perf={"string":s,"fret":f,"right_hand":{"method":"pick","pluck_position":.12,"attack_angle_deg":cfg["attack_angle_deg"],"strength":cfg["entry_strength"]},"strum":deepcopy(cfg)}
@@ -193,7 +188,7 @@ def build_events():
  return sorted(ev,key=lambda x:(float(x["start_beat"]),0 if x["type"]=="note" else 1,x["id"]))
 
 def build_song():
- return {"format":"code-composer-song/v1","meta":{"title":"Cedar Rain, Afterlight","global_seed":1919060,"revision":"SOLO-ACOUSTIC-PROD-R0","provenance":INSPIRATION},"transport":{"bpm":BPM,"meter":{"beats_per_bar":4,"beat_unit":4}},"tonal":{"root":"E","scale":"natural_minor"},"sections":[{"id":s,"bars":n,"name":s.replace('_',' ').title()} for s,n in SECTIONS],"instruments":[{"id":"guitar","family":"acoustic_guitar","variant":"steel-string","render_lock":{"preset":PRESET,"preset_version":"1.0.0"}}],"tracks":[{"id":"guitar","function":"solo-acoustic-guitar","instrument":"guitar"}],"materials":[{"id":"through-composed","kind":"motif","intervals":[0],"rhythm":[1]}],"parts":[{"id":f"{s}-part","section":s,"track":"guitar","material":"through-composed"} for s,_ in SECTIONS]}
+ return {"format":"code-composer-song/v1","meta":{"title":"Cedar Rain, Afterlight","global_seed":1919060,"revision":"SOLO-ACOUSTIC-PROD-R0"},"transport":{"bpm":BPM,"meter":{"beats_per_bar":4,"beat_unit":4}},"tonal":{"root":"E","scale":"natural_minor"},"sections":[{"id":s,"bars":n,"name":s.replace('_',' ').title()} for s,n in SECTIONS],"instruments":[{"id":"guitar","family":"acoustic_guitar","variant":"steel-string","render_lock":{"preset":PRESET,"preset_version":"1.0.0"}}],"tracks":[{"id":"guitar","function":"solo-acoustic-guitar","instrument":"guitar"}],"materials":[{"id":"through-composed","kind":"motif","intervals":[0],"rhythm":[1]}],"parts":[{"id":f"{s}-part","section":s,"track":"guitar","material":"through-composed"} for s,_ in SECTIONS]}
 
 def build_score(song,sr):
  return {"format":"code-composer-performance-score/v1","source_song":{"format":"code-composer-song/v1","fingerprint":song_fingerprint(song)},"meta":{"title":"Cedar Rain, Afterlight — production solo acoustic"},"tracks":[{"id":"guitar","events":deepcopy(build_events())}],"render":{"sample_rate":sr,"tail_seconds":3.2,"mix":{"tracks":[{"track":"guitar","gain":.43,"pan":0.,"reverb_send":0.}],"music_bus_gain":1.,"room_return_gain":0.,"master_gain":.80}}}
