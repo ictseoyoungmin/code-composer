@@ -1,0 +1,59 @@
+name: Production Solo Acoustic R3
+
+on:
+  push:
+    branches: ["composition/cedar-rain-afterlight"]
+    paths:
+      - "tools/compose_cedar_rain_afterlight_r3.py"
+      - "tools/render_cedar_rain_afterlight_r3_sections.py"
+      - ".github/workflows/production-solo-acoustic-r3.yml"
+  workflow_dispatch:
+
+jobs:
+  render-r3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Code Composer
+        run: python -m pip install -e skills/code-composer/kit
+      - name: Static syntax and R3 texture contract
+        run: |
+          python -m py_compile tools/compose_cedar_rain_afterlight_r3.py tools/render_cedar_rain_afterlight_r3_sections.py
+          PYTHONPATH=tools python - <<'PY'
+          import compose_cedar_rain_afterlight_r3 as r3
+          print(r3.validate_guitar_native_texture())
+          PY
+      - name: 24 kHz R3 deterministic check
+        run: PYTHONPATH=tools python tools/render_cedar_rain_afterlight_r3_sections.py --output out/r3-preview24 --sample-rate 24000 --determinism-check
+      - name: 48 kHz R3 production master
+        run: PYTHONPATH=tools python tools/render_cedar_rain_afterlight_r3_sections.py --output out/r3-master48 --sample-rate 48000
+      - name: Verify R3 metrics
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for p in [Path('out/r3-preview24/metrics.json'), Path('out/r3-master48/metrics.json')]:
+              d=json.loads(p.read_text())
+              r=d['r3_guitar_native_texture']
+              assert d['revision']=='SOLO-ACOUSTIC-PROD-R3'
+              assert r['isolated_melody_peak_count']==0
+              assert r['minimum_contacts_per_gesture']>=3
+              assert r['guitar_native_texture'] is True
+              assert d['clipped_sample_ratio']==0.0
+              assert d['unique_bar_signatures']>=50
+              assert d['identical_four_bar_windows']==0
+              print(p, d['duration_seconds'], d['peak'], r)
+          PY
+      - name: Upload R3 listening evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cedar-rain-afterlight-r3-production
+          path: |
+            out/r3-master48/**
+            out/r3-preview24/metrics.json
+          if-no-files-found: error
+          retention-days: 30
