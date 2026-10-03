@@ -440,3 +440,15 @@ AG09 Dogfood 3 uses Stephen Collins Foster's **"Oh! Susanna" (1848)** as a recog
 - Project usage: public-domain melody and basic harmonic identity only.
 - Arrangement: independently authored by Code Composer for two modeled steel-string acoustic-guitar parts (rhythmic strumming + picked melody).
 - No modern recording, modern copyrighted arrangement, performance audio, tablature, sample, impulse response, or third-party source code is copied or redistributed.
+
+### Cedar Rain, Afterlight — CC0 score inspiration
+
+The production solo-acoustic composition **Cedar Rain, Afterlight** consulted Mauro Giuliani’s *12 Divertimenti per chitarra, Op.40* only as a high-level guitar-idiom and formal reference.
+
+- Composer/reference work: Mauro Giuliani — *12 Divertimenti per chitarra, Op.40* (first published ca. 1813)
+- Source: IMSLP
+- Consulted edition: 2026 typeset by Marieh
+- Source license: Creative Commons Zero 1.0 (CC0), as listed by IMSLP
+- Project usage: structural/idiomatic inspiration only — alternating-bass motion, voice-leading between guitar shapes, phrase-scale cadence variation, and contrast between plucked/strummed textures.
+- Originality boundary: no melody, bar, chord sequence, voicing sequence, tablature passage, recording, sample, impulse response, or source code was copied or redistributed.
+- Source URL: https://imslp.org/wiki/12_Divertimenti_per_chitarra%2C_Op.40_%28Giuliani%2C_Mauro%29
