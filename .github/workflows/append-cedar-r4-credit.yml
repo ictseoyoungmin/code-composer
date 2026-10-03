@@ -1,0 +1,43 @@
+name: Append Cedar Rain R4 Credit
+
+on:
+  push:
+    branches: ["composition/cedar-rain-afterlight"]
+    paths: [".github/workflows/append-cedar-r4-credit.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  append-credit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: composition/cedar-rain-afterlight
+      - name: Append R4 provenance once
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -Fq 'Cedar Rain, Afterlight R4 — score-informed rewrite' CREDITS.md; then
+            echo 'R4 credit already present'
+            exit 0
+          fi
+          printf '%s\n' \
+            '' \
+            '### Cedar Rain, Afterlight R4 — score-informed rewrite' \
+            '' \
+            'The R4 rewrite was informed by direct study of public-domain Mauro Giuliani guitar notation and published guitar-performance analysis, specifically to replace mechanically generated treble rolls with meter-led guitar phrasing.' \
+            '' \
+            '- Mauro Giuliani — *Studio per la Chitarra, Op.1* (1812). Public-domain historical score; Wikimedia/Internet Archive public-domain copy consulted.' \
+            '- Mauro Giuliani — *12 Divertimenti per chitarra, Op.40* (ca.1813). IMSLP Marieh 2026 typeset marked Creative Commons Zero 1.0.' \
+            '- Caleb Lavery-Brook, University of Adelaide MPhil exegesis (2021): discussion of Giuliani Op.1 Nos.36/44, including p-i-p-i bass patterns supporting melody played by m, and melodic/gestural arpeggiation.' \
+            '- Tecla Editions, notes on Giuliani complete studies: right-hand fingering progression and idiomatic use of p/i/m/a.' \
+            '- Project usage: metrical bass+melody coordination, alternating bass, selective p-i-m-a-m-i texture, phrase breathing, cadential density reduction, and right-hand distribution only.' \
+            '- Originality boundary: no external melody, bar, chord sequence, voicing sequence, tablature passage, performance audio, sample, or source code is copied or redistributed.' \
+            >> CREDITS.md
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CREDITS.md
+          git commit -m 'docs: credit R4 score-informed guitar references'
+          git push origin HEAD:composition/cedar-rain-afterlight
