@@ -5,6 +5,7 @@ on:
     branches: ["composition/cedar-rain-afterlight"]
     paths:
       - "tools/compose_cedar_rain_afterlight.py"
+      - "tools/render_cedar_rain_afterlight_sections.py"
       - ".github/workflows/production-solo-acoustic-composition.yml"
   workflow_dispatch:
 
@@ -20,11 +21,11 @@ jobs:
       - name: Install Code Composer
         run: python -m pip install -e skills/code-composer/kit
       - name: Static syntax check
-        run: python -m py_compile tools/compose_cedar_rain_afterlight.py
+        run: python -m py_compile tools/compose_cedar_rain_afterlight.py tools/render_cedar_rain_afterlight_sections.py
       - name: 24 kHz deterministic production check
-        run: python tools/compose_cedar_rain_afterlight.py --output out/preview24 --sample-rate 24000 --repeat
+        run: python tools/render_cedar_rain_afterlight_sections.py --output out/preview24 --sample-rate 24000 --determinism-check
       - name: 48 kHz production master
-        run: python tools/compose_cedar_rain_afterlight.py --output out/master48 --sample-rate 48000
+        run: python tools/render_cedar_rain_afterlight_sections.py --output out/master48 --sample-rate 48000
       - name: Summarize metrics
         run: |
           python - <<'PY'
@@ -33,7 +34,7 @@ jobs:
           for p in [Path('out/preview24/metrics.json'), Path('out/master48/metrics.json')]:
               d=json.loads(p.read_text())
               print(p)
-              for k in ['duration_seconds','peak','rms','clipped_sample_ratio','unique_bar_signatures','authored_event_count','render_ir_event_count','pitched_note_count','instrument_action_count','strum_note_count','right_hand_method_counts','action_counts','section_rms']:
+              for k in ['duration_seconds','peak','rms','clipped_sample_ratio','unique_bar_signatures','identical_four_bar_windows','authored_event_count','pitched_note_count','instrument_action_count','strum_note_count','right_hand_method_counts','left_hand_technique_counts','action_counts','deterministic_exact']:
                   print(f"  {k}: {d[k]}")
           PY
       - name: Upload production package
@@ -43,6 +44,6 @@ jobs:
           path: |
             out/master48/**
             out/preview24/metrics.json
-            out/preview24/01_cedar_rain_afterlight_24k.wav
+            out/preview24/01_cedar_rain_afterlight_master_24k_float32.wav
           if-no-files-found: error
           retention-days: 30
