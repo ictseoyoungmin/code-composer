@@ -452,3 +452,14 @@ The production solo-acoustic composition **Cedar Rain, Afterlight** consulted Ma
 - Project usage: structural/idiomatic inspiration only — alternating-bass motion, voice-leading between guitar shapes, phrase-scale cadence variation, and contrast between plucked/strummed textures.
 - Originality boundary: no melody, bar, chord sequence, voicing sequence, tablature passage, recording, sample, impulse response, or source code was copied or redistributed.
 - Source URL: https://imslp.org/wiki/12_Divertimenti_per_chitarra%2C_Op.40_%28Giuliani%2C_Mauro%29
+
+### Cedar Rain, Afterlight R4 — score-informed rewrite
+
+The R4 rewrite was informed by direct study of public-domain Mauro Giuliani guitar notation and published guitar-performance analysis, specifically to replace mechanically generated treble rolls with meter-led guitar phrasing.
+
+- Mauro Giuliani — *Studio per la Chitarra, Op.1* (1812). Public-domain historical score; Wikimedia/Internet Archive public-domain copy consulted.
+- Mauro Giuliani — *12 Divertimenti per chitarra, Op.40* (ca.1813). IMSLP Marieh 2026 typeset marked Creative Commons Zero 1.0.
+- Caleb Lavery-Brook, University of Adelaide MPhil exegesis (2021): discussion of Giuliani Op.1 Nos.36/44, including p-i-p-i bass patterns supporting melody played by m, and melodic/gestural arpeggiation.
+- Tecla Editions, notes on Giuliani complete studies: right-hand fingering progression and idiomatic use of p/i/m/a.
+- Project usage: metrical bass+melody coordination, alternating bass, selective p-i-m-a-m-i texture, phrase breathing, cadential density reduction, and right-hand distribution only.
+- Originality boundary: no external melody, bar, chord sequence, voicing sequence, tablature passage, performance audio, sample, or source code is copied or redistributed.
