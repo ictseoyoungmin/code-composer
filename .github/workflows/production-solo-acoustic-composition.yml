@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install Code Composer
-        run: python -m pip install -e .
+        run: python -m pip install -e skills/code-composer/kit
       - name: Static syntax check
         run: python -m py_compile tools/compose_cedar_rain_afterlight.py
       - name: 24 kHz deterministic production check
