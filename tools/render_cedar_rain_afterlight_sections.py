@@ -28,7 +28,7 @@ def _song(section_id: str, bars: int, seed: int):
         "meta": {
             "title": f"Cedar Rain, Afterlight — {section_id}",
             "global_seed": int(seed),
-            "revision": "SOLO-ACOUSTIC-PROD-R1",
+            "revision": "SOLO-ACOUSTIC-PROD-R2",
         },
         "transport": {"bpm": comp.BPM, "meter": {"beats_per_bar": 4, "beat_unit": 4}},
         "tonal": {"root": "E", "scale": "natural_minor"},
@@ -56,6 +56,13 @@ def _local_events(all_events, start_bar: int, bars: int):
     return out
 
 
+def _master_gain_for_rate(sr: int) -> float:
+    # Fixed production headroom, not measured normalization or limiting.
+    # The physical renderer has a higher peak response at 48 kHz than 24 kHz;
+    # retain the exact performance and lower only the final linear bus gain.
+    return 0.56 if int(sr) >= 44100 else 0.80
+
+
 def _score(song, events, sr: int):
     return {
         "format": "code-composer-performance-score/v1",
@@ -69,7 +76,7 @@ def _score(song, events, sr: int):
                 "tracks": [{"track": "guitar", "gain": 0.43, "pan": 0.0, "reverb_send": 0.0}],
                 "music_bus_gain": 1.0,
                 "room_return_gain": 0.0,
-                "master_gain": 0.80,
+                "master_gain": _master_gain_for_rate(sr),
             },
         },
     }
@@ -115,11 +122,11 @@ def _render_one(out: Path, section_id: str, bars: int, start_bar: int, sr: int, 
         "id": section_id,
         "bars": bars,
         "start_bar": start_bar,
-        "audio": audio,
         "event_count": len(events),
         "peak": peak,
         "rms": _rms(audio),
         "wav": wav,
+        "audio": audio,
         "wav_sha256": _sha(wav),
         "song_fingerprint": song_fingerprint(song),
         "performance_score_fingerprint": performance_score_fingerprint(score),
@@ -166,8 +173,6 @@ def main():
     deterministic = None
     det_section = None
     if args.determinism_check:
-        # Representative high-density section: development. Exact repeat keeps
-        # the determinism gate meaningful without duplicating the entire 3-min render.
         start_bar = comp.START["development"]
         bars = dict(comp.SECTIONS)["development"]
         a = next(x for x in section_results if x["id"] == "development")
@@ -193,7 +198,6 @@ def main():
     if peak >= 0.98 or clipped != 0.0:
         raise SystemExit(f"assembled master unsafe peak/clipping {peak}/{clipped}")
 
-    # Preserve the ~3-minute musical body plus natural final tail.
     duration = len(master) / sr
     if not 176.0 <= duration <= 181.0:
         raise SystemExit(f"duration {duration} outside production target")
@@ -201,7 +205,6 @@ def main():
     master_path = out / f"01_cedar_rain_afterlight_master_{sr//1000}k_float32.wav"
     _write_float_wav(master_path, sr, master)
 
-    # Listening cuts are direct slices of the assembled master; no processing.
     cut_files = []
     cursor = 0
     for i, (section_id, bars) in enumerate(comp.SECTIONS, 1):
@@ -237,7 +240,7 @@ def main():
     report = {
         "schema": "code-composer-production-solo-acoustic-section-tail/v1",
         "title": "Cedar Rain, Afterlight",
-        "revision": "SOLO-ACOUSTIC-PROD-R1",
+        "revision": "SOLO-ACOUSTIC-PROD-R2",
         "sample_rate": sr,
         "bpm": comp.BPM,
         "bars": comp.TOTAL_BARS,
@@ -250,6 +253,7 @@ def main():
         "post_eq": False,
         "post_compression": False,
         "synthetic_reverb": False,
+        "fixed_master_gain": _master_gain_for_rate(sr),
         "peak": peak,
         "rms": _rms(master),
         "clipped_sample_ratio": clipped,
@@ -284,6 +288,7 @@ def main():
         "## Production render\n"
         "- Every audible source is the same Code Composer v1.19 stateful steel-string acoustic-guitar engine.\n"
         "- Sections are captured separately for tractable long-form rendering and joined only by overlap-adding their engine-generated natural tails at exact section boundaries.\n"
+        "- 48 kHz uses a fixed 0.56 linear master gain for deterministic headroom; this is not measured normalization or limiting.\n"
         "- No samples, other instruments, resampling, normalization, EQ, compression, or synthetic reverb are added.\n",
         encoding="utf-8",
     )
