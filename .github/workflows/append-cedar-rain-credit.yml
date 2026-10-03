@@ -24,20 +24,20 @@ jobs:
             echo 'credit already present'
             exit 0
           fi
-          cat >> CREDITS.md <<'EOF'
-
-### Cedar Rain, Afterlight — CC0 score inspiration
-
-The production solo-acoustic composition **Cedar Rain, Afterlight** consulted Mauro Giuliani's *12 Divertimenti per chitarra, Op.40* only as a high-level guitar-idiom and formal reference.
-
-- Composer/reference work: Mauro Giuliani — *12 Divertimenti per chitarra, Op.40* (first published ca. 1813)
-- Source: IMSLP
-- Consulted edition: 2026 typeset by Marieh
-- Source license: Creative Commons Zero 1.0 (CC0), as listed by IMSLP
-- Project usage: structural/idiomatic inspiration only — alternating-bass motion, voice-leading between guitar shapes, phrase-scale cadence variation, and contrast between plucked/strummed textures.
-- Originality boundary: no melody, bar, chord sequence, voicing sequence, tablature passage, recording, sample, impulse response, or source code was copied or redistributed.
-- Source URL: https://imslp.org/wiki/12_Divertimenti_per_chitarra%2C_Op.40_%28Giuliani%2C_Mauro%29
-EOF
+          printf '%s\n' \
+            '' \
+            '### Cedar Rain, Afterlight — CC0 score inspiration' \
+            '' \
+            'The production solo-acoustic composition **Cedar Rain, Afterlight** consulted Mauro Giuliani’s *12 Divertimenti per chitarra, Op.40* only as a high-level guitar-idiom and formal reference.' \
+            '' \
+            '- Composer/reference work: Mauro Giuliani — *12 Divertimenti per chitarra, Op.40* (first published ca. 1813)' \
+            '- Source: IMSLP' \
+            '- Consulted edition: 2026 typeset by Marieh' \
+            '- Source license: Creative Commons Zero 1.0 (CC0), as listed by IMSLP' \
+            '- Project usage: structural/idiomatic inspiration only — alternating-bass motion, voice-leading between guitar shapes, phrase-scale cadence variation, and contrast between plucked/strummed textures.' \
+            '- Originality boundary: no melody, bar, chord sequence, voicing sequence, tablature passage, recording, sample, impulse response, or source code was copied or redistributed.' \
+            '- Source URL: https://imslp.org/wiki/12_Divertimenti_per_chitarra%2C_Op.40_%28Giuliani%2C_Mauro%29' \
+            >> CREDITS.md
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add CREDITS.md
