@@ -1,0 +1,62 @@
+name: Production Solo Acoustic R4
+
+on:
+  push:
+    branches: ["composition/cedar-rain-afterlight"]
+    paths:
+      - "tools/compose_cedar_rain_afterlight_r4.py"
+      - "tools/render_cedar_rain_afterlight_r4.py"
+      - ".github/workflows/production-solo-acoustic-r4.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  render-r4:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Code Composer
+        run: python -m pip install -e skills/code-composer/kit
+      - name: Static syntax and music-first grammar
+        run: |
+          python -m py_compile tools/compose_cedar_rain_afterlight_r4.py tools/render_cedar_rain_afterlight_r4.py
+          PYTHONPATH=tools python tools/compose_cedar_rain_afterlight_r4.py
+      - name: 24 kHz R4 deterministic check
+        run: PYTHONPATH=tools python tools/render_cedar_rain_afterlight_r4.py --output out/r4-preview24 --sample-rate 24000 --determinism-check
+      - name: 48 kHz R4 production master
+        run: PYTHONPATH=tools python tools/render_cedar_rain_afterlight_r4.py --output out/r4-master48 --sample-rate 48000
+      - name: Verify R4 metrics
+        run: |
+          python - <<'PY'
+          import json
+          p='out/r4-master48/metrics.json'
+          m=json.load(open(p,encoding='utf-8'))
+          assert m['revision']=='SOLO-ACOUSTIC-PROD-R4'
+          assert m['meter']=='3/4'
+          assert m['bars']==72
+          assert 178.0 <= m['duration_seconds'] <= 183.5
+          assert m['clipped_sample_ratio']==0.0
+          assert m['peak']<0.98
+          g=m['musical_grammar']
+          assert g['music_first_grammar'] is True
+          assert g['bass_melody_downbeat_anchor_ratio'] >= .78
+          assert g['max_exposed_treble_run'] <= 2
+          assert g['unique_bar_signatures'] >= 60
+          assert g['identical_four_bar_windows']==0
+          print(json.dumps(m,indent=2,ensure_ascii=False))
+          PY
+      - name: Upload R4 listening evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: cedar-rain-afterlight-r4-production
+          path: |
+            out/r4-master48
+            out/r4-preview24/metrics.json
+          if-no-files-found: error
+          retention-days: 30
