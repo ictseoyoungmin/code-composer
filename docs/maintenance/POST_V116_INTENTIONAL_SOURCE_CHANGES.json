@@ -60,8 +60,8 @@
       "reason": "Standalone Performance IR schema mirrors S31 destination-bound harmonic anticipation arrival_binding and exactly-one target semantics."
     },
     "src/code_composer/audio/piano.py": {
-      "sha256": "68f2d7a5baf558a2ec291f497bf114c50d739252743d6babca4829352d918b8e",
-      "reason": "S14/S28 piano realism work retained. CR03 reopens only the canonical explicit sustain-pedal release path after perceptual listening found note endings audibly hard-cut: release_s is treated as an exponential time constant and rendered to an authored quiet floor; the old second ~105 ms unison damping envelope is removed from explicit pedal-up; the special 0.035x explicit-pedal soundboard modal shrink is removed; final declick is permitted only after the release has already settled below the configured floor. Legacy note-local pedal projects keep their historical buffer-length path in this slice."
+      "sha256": "3b8ef53dd148b2f6ac6739757c9f69e12f06a9cda655c3e6bca967ab6b4f702d",
+      "reason": "S14/S28 piano realism work retained. CR03 reopens only the canonical explicit sustain-pedal release path after perceptual listening found note endings audibly hard-cut: release_s is treated as an exponential time constant and rendered to an authored quiet floor; the old second ~105 ms unison damping envelope is removed from explicit pedal-up; the special 0.035x explicit-pedal soundboard modal shrink is removed; final declick is permitted only after the release has already settled below the configured floor. Legacy note-local pedal projects keep their historical buffer-length path in this slice. PR #81 fixes the legacy release branch discarding the authored per-string natural decay envelope: retain component_env when multiplying secondary-string damping, without in-place mutation of the shared envelope. Disabled decay spread and the explicit-pedal path retain their existing samples; no presets, notes, or pedal events are retuned."
     },
     "src/code_composer/audio/piano_design.py": {
       "sha256": "71ebf3b58ddf89cf2135fea993472dccf3d94963f31e601d1db9e107c4251fc5",
