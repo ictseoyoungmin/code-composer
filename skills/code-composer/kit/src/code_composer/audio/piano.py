@@ -596,15 +596,16 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
                     string_noteoff=_damper_envelope(t,off,sr,tau,contact_delay)
                     component_env=natural_env*string_noteoff
                 else:
-                    # Legacy/no-pedal S14 behavior remains byte-stable: collapse
-                    # secondary detuned strings quickly after an ordinary key damper
-                    # falls so a long exposed unison beating tail cannot emerge.
+                    # Retain S14 release damping without discarding each string's
+                    # natural decay. With decoherence disabled this remains the
+                    # byte-stable legacy path; explicit pedal control is unchanged.
                     anchor=(string_count-1)//2
                     if si!=anchor:
                         tau=max(.015,float(strings.get('release_detune_damping_s',0.070)))
                         extra=np.ones(n,dtype=np.float64)
                         extra[off:]=np.exp(-(t[off:]-t[off])/tau)
-                        component_env=env*extra
+                        # Do not use *=: component_env may alias the shared env.
+                        component_env=component_env*extra
             sig=np.sin(2*np.pi*freq*t+phase)*component_env*amp*string_level/string_count
             pan=note_pan + spread*stereo_width*0.16
             l,r=_equal_power(sig,pan)
