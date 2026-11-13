@@ -31,5 +31,34 @@ jobs:
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
           python - <<'PY'
           import base64, hashlib, os, pathlib, subprocess, zlib
-          payload='eNrtfdty28a24Lu+Alt5AEmBIAHe6XBXHFtOXCexfSwnu2a0VQgINEVEIMANgJLlHE3NP8wfzpfMunTjQoKkFCfZp6bspEQSaKxevXrde3XDDxYLrd2+DjLN7fixl3ZWbhBlInIjT3TevX7+5q3z6u2Lny7OXzrPf3r5+sPrt2+cd+/HlrnytflTnziJxJ22CEKhrWJfaFa3O+z3T4LIFx+1Lv8zzcXQmvd8+6TdbmsdX9x2ok0Ynpydnf2O/r75Rmt3ja52ZhlWt699883J2Vca3tSyZZD4mrvxgyyIo6m2iBNxncSbyNfWgRvFhhbFQBP4sxSJliViDlh7m+zk7OTsInOzTTrVWq0wSAGTILrWXM8T6wxx0t6+O3/TaiEADVHVViK5FlqcaIkIhZsKU/uwFNomBbhL4SIW0clZsFon8a1YiSjT4BnGxNbmm0xLsyAMAUG8Atho6X0EH2nwScBvNwg1H7BIXC8DPEzE76uvtAsvXgsADKNJBPR0K3Cw2TJOguwe2yAKcOs2iDep7K3xy3zi9oTl/dJE7OABbe2maXALA48361D4begHB4uzF5ra6yzVfLFwNyGQZRF8hEdwZhLVTHz0AiAV0FdbL2HgqdboGlrXHPQMzTK7Qy1xfaB1qs0Fkh96Wa2gbbxYpCJLmydnbpjGWioArg98KhIgTuCGbWIeEQFZ7zU3I5oEUQrEz+BZ+rl0V0B1DfG4kfQG1js5+2UTBWkcOXzfIawcNwyuIyT8LzCLQI4s8ACVKEviEKbM33iAOLBLCp0E2L+Wrl0PxmecnGGzINrAQ+G9BtOXaD++fvlaG3b/7//+P+O+od0tkdlvhFgjPQKg10q4Ec0Lcv1awJ8og2d5boR/craW9LsRTDTt1yADmiK1NT8GVJAvvaUbAU+tg8xbGjAH2QaZ0NAk4cNgIbJgJVJAEZoLDX7Q/VsRxjAn94a2Fj6MRNxC96mBzIlkk9OspXEIY9FTOf/wgMk8g0RIgS+YLH55hoknWGpgjOkGmkAzIBDgtPGoCUwOPgr9Mv1NZkNFa4AsPq7DAEAaoCWA2MzBc+RO5PVYu+wa1pWpPZ+ngHfnk0hikIAbmh/giI8gAydnxMxtG3DPltA0yqftOoznOOaPQOKABI3JiAIIV0GIkHYX9vg75MS1myCrPAPRzLQ7F4RE/Cq8TPhSM3jErb4LV7T5vXYnAA/SBNkSeVKkGXQehgXgBWAXJyB8JJEZSg5hBhTSXOD+RIAwR8InUv9CSsgE0ngiyZzrBAjhLGIP5fIXnoNUAIou0kgqMU0C3qSkkBRXaxZwQde0B20Pfylm0Ro4DCRh09BQEaDEp2sYYuKGoHc9914DcpFGw1kA2HAHEQQSiyACifV0000'
+          payload='eNrtfdty28a24Lu+Alt5AEmBIAHe6XBXHFtOXCexfSwnu2a0VQgINEVEIMANgJLlHE3NP8wfzpfMunTjQoKkFCfZp6bspEQSaKxevXrde3XDDxYLrd2+DjLN7fixl3ZWbhBlInIjT3TevX7+5q3z6u2Lny7OXzrPf3r5+sPrt2+cd+/HlrnytflTnziJxJ22CEKhrWJfaFa3O+z3T4LIFx+1Lv8zzcXQmvd8+6TdbmsdX9x2ok0Ynpydnf2O/r75Rmt3ja52ZhlWt699883J2Vca3tSyZZD4mrvxgyyIo6m2iBNxncSbyNfWgRvFhhbFQBP4sxSJliViDlh7m+zk7OTsInOzTTrVWq0wSAGTILrWXM8T6wxx0t6+O3/TaiEADVHVViK5FlqcaIkIhZsKU/uwFNomBbhL4SIW0clZsFon8a1YiSjT4BnGxNbmm0xLsyAMAUG8Atho6X0EH2nwScBvNwg1H7BIXC8DPEzE76uvtAsvXgsADKNJBPR0K3Cw2TJOguwe2yAKcOs2iDep7K3xy3zi9oTl/dJE7OABbe2maXALA48361D4begHB4uzF5ra6yzVfLFwNyGQZRF8hEdwZhLVTHz0AiAV0FdbL2HgqdboGlrXHPQMzTK7Qy1xfaB1qs0Fkh96Wa2gbbxYpCJLmydnbpjGWioArg98KhIgTuCGbWIeEQFZ7zU3I5oEUQrEz+BZ+rl0V0B1DfG4kfQG1js5+2UTBWkcOXzfIawcNwyuIyT8LzCLQI4s8ACVKEviEKbM33iAOLBLCp0E2L+Wrl0PxmecnGGzINrAQ+G9BtOXaD++fvlaG3b/7//+P+O+od0tkdlvhFgjPQKg10q4Ec0Lcv1awJ8og2d5boR/craW9LsRTDTt1yADmiK1NT8GVJAvvaUbAU+tg8xbGjAH2QaZ0NAk4cNgIbJgJVJAEZoLDX7Q/VsRxjAn94a2Fj6MRNxC96mBzIlkk9OspXEIY9FTOf/wgMk8g0RIgS+YLH55hoknWGpgjOkGmkAzIBDgtPGoCUwOPgr9Mv1NZkNFa4AsPq7DAEAaoCWA2MzBc+RO5PVYu+wa1pWpPZ+ngHfnk0hikIAbmh/giI8gAydnxMxtG3DPltA0yqftOoznOOaPQOKABI3JiAIIV0GIkHYX9vg75MS1myCrPAPRzLQ7F4RE/Cq8TPhSM3jErb4LV7T5vXYnAA/SBNkSeVKkGXQehgXgBWAXJyB8JJEZSg5hBhTSXOD+RIAwR8InUv9CSsgE0ngiyZzrBAjhLGIP5fIXnoNUAIou0kgqMU0C3qSkkBRXaxZwQde0B20Pfylm0Ro4DCRh09BQEaDEp2sYYuKGoHc9914DcpFGw1kA2HAHEQQSiyACifVIXbEeiDfZGnTVNSo8qXGAfYAoqOP8JI5XJKPwHdkANOE94hBHzPDEpEiDfZGnTVNSo8qXGAfYAoqOP8JI5XJKPwHdkANOE94hBHzPDEp'
+          patch=zlib.decompress(base64.b64decode(payload, validate=True))
+          assert hashlib.sha256(patch).hexdigest() == 'dc619c45a290c9139cab7d3c37296583ab87c0e295b45832e105eb2e459fe9a9'
+          p=pathlib.Path(os.environ['RUNNER_TEMP'])/'piano-focus.patch'
+          p.write_bytes(patch)
+          subprocess.run(['git','apply','--check',str(p)],check=True)
+          subprocess.run(['git','apply','--index',str(p)],check=True)
           PY
+      - name: Install repository test dependencies
+        run: python -m pip install 'numpy==2.2.6' 'scipy==1.15.3' 'pytest>=8' 'jsonschema>=4.20'
+      - name: Full native verification before commit
+        run: |
+          python skills/code-composer/kit/scripts/self_check.py
+          python tools/validate_skill.py
+          python tools/verify_plugin_distribution.py
+          python tools/verify_release_version.py
+          python -m pytest -q
+          python tools/build_skill.py
+          python tools/build_plugins.py
+      - name: Commit only verified patch to existing PR branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git ls-remote origin refs/heads/fix/piano-unison-decay-envelope | cut -f1)" = "$EXPECTED_HEAD"
+          git diff --cached --check
+          test -n "$(git diff --cached --name-only)"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'feat(piano): add explicit focused voicing and canonical listening probes'
+          git push origin HEAD:refs/heads/fix/piano-unison-decay-envelope
+          git rev-parse HEAD
