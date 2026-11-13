@@ -1,12 +1,13 @@
-"""Old preview stems must not mask the piano natural-decay correction."""
+"""Old preview stems must not mask either piano decay correction."""
 import numpy as np
+import pytest
 
 from code_composer.execution import preview
 
 
-def test_piano_decay_fix_invalidates_pre_fix_stems(tmp_path, monkeypatch):
+@pytest.mark.parametrize("old_epoch", ["cr05-renderer-epoch-1", "cr05-renderer-epoch-2"])
+def test_piano_decay_fix_invalidates_pre_fix_stems(tmp_path, monkeypatch, old_epoch):
     current_epoch = preview.STEM_CACHE_RENDERER_EPOCH
-    old_epoch = "cr05-renderer-epoch-1"
     assert current_epoch != old_epoch
     ir = {
         "transport": {"bpm": 120, "beats_per_bar": 4},
