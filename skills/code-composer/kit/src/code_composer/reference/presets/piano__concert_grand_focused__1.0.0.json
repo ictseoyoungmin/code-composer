@@ -1,0 +1,67 @@
+{
+  "format": "code-composer-factory-preset/v1",
+  "preset_id": "piano.concert_grand_focused",
+  "version": "1.0.0",
+  "name": "Concert Grand Focused",
+  "engine": "piano",
+  "family": "acoustic",
+  "character": [
+    "acoustic",
+    "foreground",
+    "per-strike",
+    "compact-unison"
+  ],
+  "strengths": [
+    "foreground melodic piano",
+    "repeated-note definition",
+    "controlled late treble energy"
+  ],
+  "limitations": [
+    "deterministic modeled piano, not a sampled concert instrument",
+    "audition candidate; subjective listening acceptance is required",
+    "lower output gain reserves per-note peak headroom; compare at matched playback loudness"
+  ],
+  "recommended_roles": [
+    "lead",
+    "topline",
+    "pad"
+  ],
+  "expression_capabilities": {
+    "pedal": true,
+    "per_strike_identity": true
+  },
+  "musical_content": false,
+  "patch": {
+    "kind": "piano",
+    "piano_design": {
+      "categories": {
+        "body": "concert_grand",
+        "hammer": "medium_felt",
+        "stringing": "concert",
+        "soundboard": "open_board",
+        "perspective": "player"
+      },
+      "controls": {
+        "stereo_width": 0.65,
+        "base_decay_s": 3.6,
+        "decay_keytrack": 0.8,
+        "partial_decay_power": 0.42,
+        "spectral_rolloff": 1.1,
+        "velocity_brightness": 0.8,
+        "detune_cents": 0.25,
+        "hammer_noise_gain": 0.052,
+        "resonance_gain": 0.02,
+        "resonance_pedal_gain": 0.06,
+        "soundboard_gain": 0.032,
+        "output_gain": 0.25,
+        "strike_phase_jitter_rad": 0.18,
+        "strike_unison_phase_jitter_rad": 0.12,
+        "strike_partial_phase_jitter_rad": 0.045,
+        "strike_hammer_noise_mix": 0.45,
+        "strike_hammer_gain_variation": 0.035,
+        "strike_hammer_decay_variation": 0.08,
+        "unison_hammer_phase_alignment": 1.0
+      }
+    }
+  }
+}

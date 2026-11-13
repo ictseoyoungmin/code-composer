@@ -62,6 +62,82 @@ def _note_pan(midi,width):
     return max(-width,min(width,(float(midi)-60.0)/36.0*width))
 
 
+def _hammer_unison_phase(midi, string_count, string_index, alignment=0.0):
+    """Optionally share the initial hammer phase of three treble strings.
+
+    Fixed phase spacing seeds a differential mode before detuning evolves.
+    Preserve the mean phase while tapering that spacing over C4..C6. Authored
+    per-strike jitter is applied separately and is not discarded. Zero is the
+    exact existing path; one selects the shared-phase audition model.
+    """
+    alignment=float(alignment)
+    if not math.isfinite(alignment) or not 0.0 <= alignment <= 1.0:
+        raise ValueError("piano hammer phase alignment must be finite in [0, 1]")
+    if alignment==0.0 or string_count!=3 or midi<=60:
+        return 0.53*string_index
+    blend=alignment*float(_smoothstep01((float(midi)-60.0)/24.0))
+    center=(string_count-1)/2.0
+    return 0.53*(string_index+blend*(center-string_index))
+
+
+def _treble_coupling_rate(midi, frequency, string_count):
+    """Reduced bridge-radiation loss, not an EQ or a note-duration gate.
+
+    Fade into the three-string treble model over C4..C6. The coefficient is
+    a conservative sound-model calibration, not a measured grand-piano bridge.
+    """
+    if string_count != 3:
+        return 0.0
+    register=float(_smoothstep01((float(midi)-60.0)/24.0))
+    return 3.0*register*min(3.0,math.sqrt(max(0.0,float(frequency))/1000.0))
+
+
+def _coupled_unison_state(t, frequencies, phases, decays, levels, coupling):
+    """Passive complex string amplitudes in a common rotating frame.
+
+    dz/dt = [diag(-1/tau + j*dw) - g*u*u.T] z, u=ones(N)/sqrt(N).
+    Its Hermitian part is negative definite: coupling cannot create energy.
+    Unlike independent detuned oscillators, the common radiating mode loses
+    energy to the bridge while quieter differential modes may continue ringing.
+    Pitch offsets, excitation phases and per-string intrinsic losses are kept.
+    This is a reduced modal approximation, not a full mechanical piano model.
+    """
+    t=np.asarray(t,dtype=np.float64)
+    f=np.asarray(frequencies,dtype=np.float64)
+    phase=np.asarray(phases,dtype=np.float64)
+    tau=np.asarray(decays,dtype=np.float64)
+    level=np.asarray(levels,dtype=np.float64)
+    count=len(f)
+    if f.ndim!=1 or count<1 or any(a.shape!=f.shape for a in (phase,tau,level)):
+        raise ValueError("coupled piano strings require equally sized vectors")
+    if (t.ndim!=1 or np.any(t<0) or not np.isfinite(t).all()
+            or not all(np.isfinite(a).all() for a in (f,phase,tau,level))
+            or np.any(tau<=0) or not math.isfinite(coupling) or coupling<0):
+        raise ValueError("invalid coupled piano state parameters")
+    center=float(np.mean(f))
+    matrix=np.diag(-1.0/tau+2j*np.pi*(f-center))
+    matrix-=float(coupling)*np.ones((count,count))/count
+    initial=level*np.exp(1j*phase)
+    values,vectors=np.linalg.eig(matrix)
+    # Near a repeated/defective mode, avoid an ill-conditioned modal inverse.
+    # The rare fallback evaluates the same stable matrix exponential, rather
+    # than silently disabling the physics or emitting an unstable approximation.
+    if np.linalg.cond(vectors)>1e5:
+        from scipy.linalg import expm
+        if len(t)<=1:
+            return np.column_stack([expm(matrix*float(x))@initial for x in t]) if len(t) else np.empty((count,0),complex)
+        if not np.allclose(np.diff(t),t[1]-t[0],rtol=1e-9,atol=1e-12):
+            return np.column_stack([expm(matrix*float(x))@initial for x in t])
+        from scipy.sparse.linalg import expm_multiply
+        return expm_multiply(matrix,initial,start=float(t[0]),stop=float(t[-1]),
+                             num=len(t),endpoint=True,traceA=np.trace(matrix)).T
+    weights=np.linalg.solve(vectors,initial)
+    state=np.zeros((count,len(t)),dtype=np.complex128)
+    for i,value in enumerate(values):
+        state+=(vectors[:,i]*weights[i])[:,None]*np.exp(value*t)[None,:]
+    return state
+
+
 def _hammer_layer(base_hz,n,sr,midi,velocity,cfg,strike_seed=None,strike_cfg=None):
     gain=float(cfg.get('gain',0.11))
     noise_gain=float(cfg.get('noise_gain',0.055))
@@ -115,7 +191,7 @@ def _hammer_layer(base_hz,n,sr,midi,velocity,cfg,strike_seed=None,strike_cfg=Non
     return noise*amp*noise_gain + tonal*env*tonal_gain*(0.35+0.8*v)
 
 
-def _resonance_layer(base_hz,n,sr,midi,velocity,pedal,cfg,noteoff_env=None):
+def _resonance_layer(base_hz,n,sr,midi,velocity,pedal,cfg,noteoff_env=None,string_model=None):
     """Low-level string/body reinforcement without inventing a release melody.
 
     In the no-pedal state the dampers must dominate after key release.  Historical
@@ -154,14 +230,32 @@ def _resonance_layer(base_hz,n,sr,midi,velocity,pedal,cfg,noteoff_env=None):
         else:
             ratios=[1.0,2.0,3.0]; weights=[1.0,0.28,0.12]
 
+    corrected=bool(string_model is not None and string_model['count']==3 and midi>60)
     out=np.zeros(n,dtype=np.float64)
     for i,(ratio,w) in enumerate(zip(ratios,weights)):
-        freq=base_hz*float(ratio)
+        r=float(ratio)
+        freq=base_hz*r
+        partial_env=1.0
+        if corrected:
+            register=float(_smoothstep01((float(midi)-60.0)/24.0))
+            if register>0 and string_model['count']==3:
+                # Use the struck strings' stretched partials, not an independent
+                # exactly-harmonic bank beating against them. Upper reinforcement
+                # must also lose energy at least as fast as its source at C6+.
+                freq*=math.sqrt(max(1e-9,1.0+string_model['inharmonicity']*r*r*register))
+                source_tau=string_model['decay_s']/max(1.0,abs(r))**string_model['partial_decay_power']
+                tau=(1.0-register)*decay+register*min(decay,source_tau)
+                loss=_treble_coupling_rate(midi,freq,string_model['count'])
+                partial_env=np.exp(-t/max(.02,tau)-loss*t)
+                if noteoff_env is not None:
+                    partial_env*=np.asarray(noteoff_env,dtype=np.float64)[:n]
         if freq>=sr*0.45: continue
         phase=0.31*(midi+i*13)
-        out += np.sin(2*np.pi*freq*t+phase)*float(w)
+        out += np.sin(2*np.pi*freq*t+phase)*float(w)*partial_env
     norm=max(1.0,sum(abs(float(w)) for w in weights))
-    return out/norm*env*gain*(0.4+0.6*max(0.0,min(1.0,velocity)))
+    if not corrected:
+        return out/norm*env*gain*(0.4+0.6*max(0.0,min(1.0,velocity)))
+    return out/norm*gain*(0.4+0.6*max(0.0,min(1.0,velocity)))
 
 
 
@@ -553,6 +647,8 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
         # Low partials survive longer; upper partials die quickly like real strings.
         decay=base_decay*key_factor/(k**partial_decay_power)
         env=attack_env*np.exp(-t/max(0.02,decay))*noteoff
+        coupling=_treble_coupling_rate(midi,fundamental,string_count)
+        coupled=[]
         for si,spread in enumerate(spreads):
             # S28-G: retain the physical 3-string unison and its mean detune, but
             # avoid making every partial of every string a perfectly coherent
@@ -567,10 +663,11 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
             string_stretch=math.sqrt(max(1e-9,1.0+string_inharm*(k*k)))
             string_fundamental=base_hz*k*string_stretch
             freq=string_fundamental*(2.0**(cents/1200.0))
-            phase=0.19*midi + 0.37*k + 0.53*si + strike_global_phase + float(partial_phase_offsets[k]) + float(unison_phase_offsets[si])
+            phase=0.19*midi + 0.37*k + _hammer_unison_phase(midi,string_count,si,strings.get('hammer_phase_alignment',0.0)) + strike_global_phase + float(partial_phase_offsets[k]) + float(unison_phase_offsets[si])
             string_decay=decay*(1.0 + spread*float(decoh.get('decay_spread',0.0))*decoh_register*(0.70+0.30*pattern))
             string_level=1.0 + spread*float(decoh.get('level_spread',0.0))*decoh_register*(0.65-0.35*pattern)
             component_env=attack_env*np.exp(-t/max(0.02,string_decay))*noteoff if decoh_active else env
+            component_noteoff=noteoff
             if off<n and string_count>1:
                 if pedal_controlled:
                     # CR03: the explicit pedal-up damper is the *single* release
@@ -595,26 +692,44 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
                     natural_env=attack_env*np.exp(-t/max(0.02,string_decay))
                     string_noteoff=_damper_envelope(t,off,sr,tau,contact_delay)
                     component_env=natural_env*string_noteoff
+                    component_noteoff=string_noteoff
                 else:
-                    # Legacy/no-pedal S14 behavior remains byte-stable: collapse
-                    # secondary detuned strings quickly after an ordinary key damper
-                    # falls so a long exposed unison beating tail cannot emerge.
+                    # Retain S14 release damping without discarding each string's
+                    # natural decay. With decoherence disabled this remains the
+                    # byte-stable legacy path; explicit pedal control is unchanged.
                     anchor=(string_count-1)//2
                     if si!=anchor:
                         tau=max(.015,float(strings.get('release_detune_damping_s',0.070)))
                         extra=np.ones(n,dtype=np.float64)
                         extra[off:]=np.exp(-(t[off:]-t[off])/tau)
-                        component_env=env*extra
+                        # Do not use *=: component_env may alias the shared env.
+                        component_env=component_env*extra
+                        component_noteoff=noteoff*extra
+            if coupling>0:
+                coupled.append((freq,phase,max(.02,string_decay),string_level,component_noteoff,spread))
+                continue
             sig=np.sin(2*np.pi*freq*t+phase)*component_env*amp*string_level/string_count
             pan=note_pan + spread*stereo_width*0.16
             l,r=_equal_power(sig,pan)
             left+=l; right+=r
+        if coupled:
+            frequencies,phases,decays,levels,releases,positions=zip(*coupled)
+            state=_coupled_unison_state(t,frequencies,phases,decays,levels,coupling)
+            carrier=np.exp(2j*np.pi*float(np.mean(frequencies))*t)
+            for si,spread in enumerate(positions):
+                sig=(state[si]*carrier).imag*attack_env*releases[si]*amp/string_count
+                l,r=_equal_power(sig,note_pan+spread*stereo_width*.16)
+                left+=l; right+=r
 
     hammer=_hammer_layer(base_hz,n,sr,midi,v,graph.get('hammer',{}),strike_seed=strike_seed,strike_cfg=strike_cfg)
     hl,hr=_equal_power(hammer,note_pan*0.55)
     left+=hl; right+=hr
 
-    resonance=_resonance_layer(base_hz,n,sr,midi,v,pedal,graph.get('resonance',{}),noteoff_env=noteoff)
+    resonance=_resonance_layer(
+        base_hz,n,sr,midi,v,pedal,graph.get('resonance',{}),noteoff_env=noteoff,
+        string_model={'count':string_count,'inharmonicity':inharm,
+                      'decay_s':base_decay*key_factor,'partial_decay_power':partial_decay_power},
+    )
     if np.any(resonance):
         # Resonance is broader than the struck string image.
         rl,rr=_equal_power(resonance,note_pan*0.35)
