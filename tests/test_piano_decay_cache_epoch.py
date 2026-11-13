@@ -5,7 +5,7 @@ import pytest
 from code_composer.execution import preview
 
 
-@pytest.mark.parametrize("old_epoch", ["cr05-renderer-epoch-1", "cr05-renderer-epoch-2"])
+@pytest.mark.parametrize("old_epoch", ["cr05-renderer-epoch-1", "cr05-renderer-epoch-2", "cr05-renderer-epoch-3"])
 def test_piano_decay_fix_invalidates_pre_fix_stems(tmp_path, monkeypatch, old_epoch):
     current_epoch = preview.STEM_CACHE_RENDERER_EPOCH
     assert current_epoch != old_epoch

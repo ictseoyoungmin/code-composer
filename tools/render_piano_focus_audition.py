@@ -115,7 +115,7 @@ def main():
             wavfile.write(raw,args.sample_rate,audio.astype(np.float32))
             (args.out/f'{label}_resolved_patch.json').write_text(json.dumps(patch,indent=2)+'\n')
             row={'label':label,'preset':preset,'render_seconds':elapsed,'raw_file':raw.name,
-                'raw_peak':float(np.max(np.abs(audio))),'raw_rms':float(np.sqrt(np.mean(audio*audio)))}}
+                'raw_peak':float(np.max(np.abs(audio))),'raw_rms':float(np.sqrt(np.mean(audio*audio)))}
             if not args.no_match:row['raw_lufs'],row['raw_true_peak_dbfs']=measure_loudness(raw)
             item['variants'].append(row)
         if not args.no_match:

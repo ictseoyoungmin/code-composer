@@ -86,6 +86,7 @@ ACOUSTIC_CONTROL_SPECS = {
     'strike_hammer_noise_mix': ('strike_identity.hammer_noise_mix', 0.0, 1.0, float),
     'strike_hammer_gain_variation': ('strike_identity.hammer_gain_variation', 0.0, 0.20, float),
     'strike_hammer_decay_variation': ('strike_identity.hammer_decay_variation', 0.0, 0.30, float),
+    'unison_hammer_phase_alignment': ('strings.hammer_phase_alignment', 0.0, 1.0, float),
     'unison_partial_mistune_cents': ('strings.unison_decoherence.partial_mistune_cents', 0.0, 0.25, float),
     'unison_inharmonicity_spread': ('strings.unison_decoherence.inharmonicity_spread', 0.0, 0.12, float),
     'unison_decay_spread': ('strings.unison_decoherence.decay_spread', 0.0, 0.20, float),

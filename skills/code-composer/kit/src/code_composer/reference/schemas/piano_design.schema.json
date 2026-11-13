@@ -250,6 +250,81 @@
               "type": "number",
               "minimum": 0,
               "maximum": 2
+            },
+            "unison_hammer_phase_alignment": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "release_floor_db": {
+              "type": "number",
+              "minimum": -120.0,
+              "maximum": -36.0
+            },
+            "damper_contact_spread_s": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 0.02
+            },
+            "damper_string_release_spread": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 0.25
+            },
+            "strike_phase_jitter_rad": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 0.8
+            },
+            "strike_unison_phase_jitter_rad": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 0.5
+            },
+            "strike_partial_phase_jitter_rad": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 0.25
+            },
+            "strike_hammer_noise_mix": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            },
+            "strike_hammer_gain_variation": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 0.2
+            },
+            "strike_hammer_decay_variation": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 0.3
+            },
+            "unison_partial_mistune_cents": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 0.25
+            },
+            "unison_inharmonicity_spread": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 0.12
+            },
+            "unison_decay_spread": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 0.2
+            },
+            "unison_level_spread": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 0.12
+            },
+            "unison_decoherence_start_midi": {
+              "type": "integer",
+              "minimum": 21,
+              "maximum": 108
             }
           }
         }

@@ -36,7 +36,7 @@ STEM_CACHE_FORMAT = "code-composer-preview-stem-cache/v1"
 
 # Explicit renderer epoch. Any source change that can alter dry-track samples must bump
 # this value so persistent caches cannot silently survive an engine implementation change.
-STEM_CACHE_RENDERER_EPOCH = "cr05-renderer-epoch-3"
+STEM_CACHE_RENDERER_EPOCH = "cr05-renderer-epoch-4"
 
 
 class PreviewValidationError(ValueError):

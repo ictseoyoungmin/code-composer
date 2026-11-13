@@ -62,6 +62,24 @@ def _note_pan(midi,width):
     return max(-width,min(width,(float(midi)-60.0)/36.0*width))
 
 
+def _hammer_unison_phase(midi, string_count, string_index, alignment=0.0):
+    """Optionally share the initial hammer phase of three treble strings.
+
+    Fixed phase spacing seeds a differential mode before detuning evolves.
+    Preserve the mean phase while tapering that spacing over C4..C6. Authored
+    per-strike jitter is applied separately and is not discarded. Zero is the
+    exact existing path; one selects the shared-phase audition model.
+    """
+    alignment=float(alignment)
+    if not math.isfinite(alignment) or not 0.0 <= alignment <= 1.0:
+        raise ValueError("piano hammer phase alignment must be finite in [0, 1]")
+    if alignment==0.0 or string_count!=3 or midi<=60:
+        return 0.53*string_index
+    blend=alignment*float(_smoothstep01((float(midi)-60.0)/24.0))
+    center=(string_count-1)/2.0
+    return 0.53*(string_index+blend*(center-string_index))
+
+
 def _treble_coupling_rate(midi, frequency, string_count):
     """Reduced bridge-radiation loss, not an EQ or a note-duration gate.
 
@@ -645,7 +663,7 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
             string_stretch=math.sqrt(max(1e-9,1.0+string_inharm*(k*k)))
             string_fundamental=base_hz*k*string_stretch
             freq=string_fundamental*(2.0**(cents/1200.0))
-            phase=0.19*midi + 0.37*k + 0.53*si + strike_global_phase + float(partial_phase_offsets[k]) + float(unison_phase_offsets[si])
+            phase=0.19*midi + 0.37*k + _hammer_unison_phase(midi,string_count,si,strings.get('hammer_phase_alignment',0.0)) + strike_global_phase + float(partial_phase_offsets[k]) + float(unison_phase_offsets[si])
             string_decay=decay*(1.0 + spread*float(decoh.get('decay_spread',0.0))*decoh_register*(0.70+0.30*pattern))
             string_level=1.0 + spread*float(decoh.get('level_spread',0.0))*decoh_register*(0.65-0.35*pattern)
             component_env=attack_env*np.exp(-t/max(0.02,string_decay))*noteoff if decoh_active else env

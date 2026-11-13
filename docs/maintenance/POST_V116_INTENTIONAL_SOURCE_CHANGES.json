@@ -60,12 +60,12 @@
       "reason": "Standalone Performance IR schema mirrors S31 destination-bound harmonic anticipation arrival_binding and exactly-one target semantics."
     },
     "src/code_composer/audio/piano.py": {
-      "sha256": "0fba0fd374bde0d9e5657d3bc394401217b6fb8d7da4b32c5f6ba27190f0c914",
-      "reason": "S14/S28 piano realism work retained. CR03 reopens only the canonical explicit sustain-pedal release path after perceptual listening found note endings audibly hard-cut: release_s is treated as an exponential time constant and rendered to an authored quiet floor; the old second ~105 ms unison damping envelope is removed from explicit pedal-up; the special 0.035x explicit-pedal soundboard modal shrink is removed; final declick is permitted only after the release has already settled below the configured floor. Legacy note-local pedal projects keep their historical buffer-length path in this slice. PR #81 fixes the legacy release branch discarding the authored per-string natural decay envelope: retain component_env when multiplying secondary-string damping, without in-place mutation of the shared envelope. Disabled decay spread and the explicit-pedal path retain their existing samples; no presets, notes, or pedal events are retuned. PR #81 follow-up adds passive three-string treble coupling with smooth C4-C6 register weighting, preserves intrinsic losses and authored release envelopes, aligns treble reinforcement frequencies/losses with the struck strings, and retains the legacy sample path for MIDI <=60 and single/two-string configurations. This intentionally changes acoustic treble voicing; no notes, event durations, pedal timelines, presets, or electric-piano path are rewritten."
+      "sha256": "f775a0860637f16d98df468e53e423c9937b5666a63b01719113949a46be60ad",
+      "reason": "S14/S28 piano realism work retained. CR03 reopens only the canonical explicit sustain-pedal release path after perceptual listening found note endings audibly hard-cut: release_s is treated as an exponential time constant and rendered to an authored quiet floor; the old second ~105 ms unison damping envelope is removed from explicit pedal-up; the special 0.035x explicit-pedal soundboard modal shrink is removed; final declick is permitted only after the release has already settled below the configured floor. Legacy note-local pedal projects keep their historical buffer-length path in this slice. PR #81 fixes the legacy release branch discarding the authored per-string natural decay envelope: retain component_env when multiplying secondary-string damping, without in-place mutation of the shared envelope. Disabled decay spread and the explicit-pedal path retain their existing samples; no presets, notes, or pedal events are retuned. PR #81 follow-up adds passive three-string treble coupling with smooth C4-C6 register weighting, preserves intrinsic losses and authored release envelopes, aligns treble reinforcement frequencies/losses with the struck strings, and retains the legacy sample path for MIDI <=60 and single/two-string configurations. This intentionally changes acoustic treble voicing; no notes, event durations, pedal timelines, presets, or electric-piano path are rewritten. PR81 third audition adds an explicit bounded hammer phase alignment control with exact zero-default compatibility. The focused preset uses shared treble excitation; existing presets are not revoiced. Authored note and pedal events are unchanged."
     },
     "src/code_composer/audio/piano_design.py": {
-      "sha256": "71ebf3b58ddf89cf2135fea993472dccf3d94963f31e601d1db9e107c4251fc5",
-      "reason": "CR03 adds explicit-pedal damper controls for floor-based release settling, bounded felt-contact spread, and bounded per-string release spread; removes the obsolete explicit-pedal 0.035x soundboard modal shortcut and no longer relies on pedal_damper_unison_decay_s as a second release authority."
+      "sha256": "58e72a93bdfc5488008a52c08b55fc4b87aca56471831637a8af2d3b96eb32d9",
+      "reason": "CR03 adds explicit-pedal damper controls for floor-based release settling, bounded felt-contact spread, and bounded per-string release spread; removes the obsolete explicit-pedal 0.035x soundboard modal shortcut and no longer relies on pedal_damper_unison_decay_s as a second release authority. PR81 third audition exposes unison_hammer_phase_alignment as an absolute numeric acoustic control in [0,1], absent/zero preserving the prior engine path."
     },
     "src/code_composer/agent/performance_ir.py": {
       "sha256": "e1f27f8f7ad2bbcb64353ce78c2ea4fdeb3cf0de099b5db9b14471689b65c280",
@@ -118,6 +118,14 @@
     "src/code_composer/composition/musical_transitions.py": {
       "sha256": "9cd3a7b2a4eeb5884a4eb4618f59244df40ae8e7ac8f5329c61367c583f06c58",
       "reason": "S31 resolves an explicitly authored destination_progression/index pointer against the destination section S30 progression variant, validates existence/range, and records lineage while preserving legacy target_degree semantics."
+    },
+    "schemas/piano_design.schema.json": {
+      "sha256": "e0ec9b3e8f948503cedadd10713874dcd71a9129d93b1f159553e856e5831fce",
+      "reason": "PR81 third audition exposes bounded unison_hammer_phase_alignment and repairs schema drift for 14 existing runtime strike/unison/release controls. Bounds match ACOUSTIC_CONTROL_SPECS exactly; unknown properties remain rejected. No new musical inference or event fields."
+    },
+    "src/code_composer/reference/schemas/piano_design.schema.json": {
+      "sha256": "e0ec9b3e8f948503cedadd10713874dcd71a9129d93b1f159553e856e5831fce",
+      "reason": "PR81 third audition exposes bounded unison_hammer_phase_alignment and repairs schema drift for 14 existing runtime strike/unison/release controls. Bounds match ACOUSTIC_CONTROL_SPECS exactly; unknown properties remain rejected. No new musical inference or event fields."
     }
   }
 }
