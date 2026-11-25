@@ -59,13 +59,21 @@
       "sha256": "2c35e7e75ebd192841cb103e03c116a2af5f40d1c4fce2fc9f10634d54e505f2",
       "reason": "Standalone Performance IR schema mirrors S31 destination-bound harmonic anticipation arrival_binding and exactly-one target semantics."
     },
+    "schemas/piano_design.schema.json": {
+      "sha256": "9401648d5717591ce90e7bea99238f34e7f5bcfe1cb6edf0afea5ed7949e1ed6",
+      "reason": "Add the portable bounded treble radiation control for the opt-in Balanced piano."
+    },
+    "src/code_composer/reference/schemas/piano_design.schema.json": {
+      "sha256": "9401648d5717591ce90e7bea99238f34e7f5bcfe1cb6edf0afea5ed7949e1ed6",
+      "reason": "Mirror the portable bounded treble radiation control for the opt-in Balanced piano."
+    },
     "src/code_composer/audio/piano.py": {
-      "sha256": "68f2d7a5baf558a2ec291f497bf114c50d739252743d6babca4829352d918b8e",
-      "reason": "S14/S28 piano realism work retained. CR03 reopens only the canonical explicit sustain-pedal release path after perceptual listening found note endings audibly hard-cut: release_s is treated as an exponential time constant and rendered to an authored quiet floor; the old second ~105 ms unison damping envelope is removed from explicit pedal-up; the special 0.035x explicit-pedal soundboard modal shrink is removed; final declick is permitted only after the release has already settled below the configured floor. Legacy note-local pedal projects keep their historical buffer-length path in this slice."
+      "sha256": "72915e38e47f4e4877c0970e564a63b8e06075286d1c9fa3c34d46bb28ad6849",
+      "reason": "S14/S28 piano realism work retained. CR03 reopens only the canonical explicit sustain-pedal release path after perceptual listening found note endings audibly hard-cut: release_s is treated as an exponential time constant and rendered to an authored quiet floor; the old second ~105 ms unison damping envelope is removed from explicit pedal-up; the special 0.035x explicit-pedal soundboard modal shrink is removed; final declick is permitted only after the release has already settled below the configured floor. Legacy note-local pedal projects keep their historical buffer-length path in this slice. Restore per-string decay in the legacy damper branch; add optional register- and partial-dependent radiation loss and source-bounded upper reinforcement."
     },
     "src/code_composer/audio/piano_design.py": {
-      "sha256": "71ebf3b58ddf89cf2135fea993472dccf3d94963f31e601d1db9e107c4251fc5",
-      "reason": "CR03 adds explicit-pedal damper controls for floor-based release settling, bounded felt-contact spread, and bounded per-string release spread; removes the obsolete explicit-pedal 0.035x soundboard modal shortcut and no longer relies on pedal_damper_unison_decay_s as a second release authority."
+      "sha256": "4619f8163744fd0568eca65d89de13a2119db2dd6bf522319b8f65a13a44aeda",
+      "reason": "CR03 adds explicit-pedal damper controls for floor-based release settling, bounded felt-contact spread, and bounded per-string release spread; removes the obsolete explicit-pedal 0.035x soundboard modal shortcut and no longer relies on pedal_damper_unison_decay_s as a second release authority. Expose the bounded rate for the opt-in treble radiation path; absent or zero is inert."
     },
     "src/code_composer/agent/performance_ir.py": {
       "sha256": "e1f27f8f7ad2bbcb64353ce78c2ea4fdeb3cf0de099b5db9b14471689b65c280",

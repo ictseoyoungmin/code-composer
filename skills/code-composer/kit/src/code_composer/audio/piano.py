@@ -115,7 +115,13 @@ def _hammer_layer(base_hz,n,sr,midi,velocity,cfg,strike_seed=None,strike_cfg=Non
     return noise*amp*noise_gain + tonal*env*tonal_gain*(0.35+0.8*v)
 
 
-def _resonance_layer(base_hz,n,sr,midi,velocity,pedal,cfg,noteoff_env=None):
+def _upper_partial_loss(rate, frequency):
+    """Extra string-to-bridge loss for an upper partial, in inverse seconds."""
+    x=max(0.0,min(1.0,(frequency-1150.0)/2200.0))
+    return rate*x*x*(3.0-2.0*x)
+
+
+def _resonance_layer(base_hz,n,sr,midi,velocity,pedal,cfg,noteoff_env=None,treble_source=None):
     """Low-level string/body reinforcement without inventing a release melody.
 
     In the no-pedal state the dampers must dominate after key release.  Historical
@@ -156,10 +162,21 @@ def _resonance_layer(base_hz,n,sr,midi,velocity,pedal,cfg,noteoff_env=None):
 
     out=np.zeros(n,dtype=np.float64)
     for i,(ratio,w) in enumerate(zip(ratios,weights)):
-        freq=base_hz*float(ratio)
+        r=float(ratio)
+        freq=base_hz*r
+        mode_env=1.0
+        if treble_source is not None and r>=3.0 and r.is_integer():
+            # Reinforcement should not create an unstretched duplicate pitch
+            # that outlives the struck upper partial under the pedal.
+            stiffness, source_decay, power, rate, clock=treble_source
+            freq*=math.sqrt(1.0+stiffness*r*r)
+            source_tau=max(.02,source_decay/r**power)
+            extra_loss=max(0.0,1.0/source_tau-1.0/decay)
+            mode_env=np.exp(-extra_loss*t-_upper_partial_loss(rate,freq)*clock)
         if freq>=sr*0.45: continue
         phase=0.31*(midi+i*13)
-        out += np.sin(2*np.pi*freq*t+phase)*float(w)
+        mode=np.sin(2*np.pi*freq*t+phase)*float(w)
+        out += mode if treble_source is None else mode*mode_env
     norm=max(1.0,sum(abs(float(w)) for w in weights))
     return out/norm*env*gain*(0.4+0.6*max(0.0,min(1.0,velocity)))
 
@@ -544,6 +561,17 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
     # octaves above the authored start point.
     decoh_register=(min(1.0,max(0.0,(midi-decoh_start)/24.0)) if decoh_active else 0.0)
 
+    # Opt-in loss builds after contact, preserving the initial felt attack.
+    # The clock is shared by all modes, not reallocated per string or partial.
+    rate=float(strings.get('treble_radiation_rate',0.0))
+    treble_source=None
+    if rate>0.0 and string_count==3 and midi>60:
+        register=min(1.0,(midi-60)/24.0)
+        rate*=register*register*(3.0-2.0*register)
+        settle=.055
+        clock=t+settle*np.expm1(-t/settle)
+        treble_source=(inharm,base_decay*key_factor,partial_decay_power,rate,clock)
+
     for k in range(1,partials+1):
         stretch=math.sqrt(max(1e-9,1.0+inharm*(k*k)))
         fundamental=base_hz*k*stretch
@@ -553,6 +581,11 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
         # Low partials survive longer; upper partials die quickly like real strings.
         decay=base_decay*key_factor/(k**partial_decay_power)
         env=attack_env*np.exp(-t/max(0.02,decay))*noteoff
+        mode_loss=None
+        if treble_source is not None and k>2:
+            loss=_upper_partial_loss(rate,fundamental)
+            if loss>0.0:
+                mode_loss=np.exp(-loss*clock)
         for si,spread in enumerate(spreads):
             # S28-G: retain the physical 3-string unison and its mean detune, but
             # avoid making every partial of every string a perfectly coherent
@@ -604,7 +637,11 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
                         tau=max(.015,float(strings.get('release_detune_damping_s',0.070)))
                         extra=np.ones(n,dtype=np.float64)
                         extra[off:]=np.exp(-(t[off:]-t[off])/tau)
-                        component_env=env*extra
+                        # Preserve the per-string natural decay; avoid in-place
+                        # multiplication because component_env may alias env.
+                        component_env=component_env*extra
+            if mode_loss is not None:
+                component_env=component_env*mode_loss
             sig=np.sin(2*np.pi*freq*t+phase)*component_env*amp*string_level/string_count
             pan=note_pan + spread*stereo_width*0.16
             l,r=_equal_power(sig,pan)
@@ -614,7 +651,7 @@ def render_piano_note(midi:int,duration_s:float,sr:int,patch:dict,velocity:float
     hl,hr=_equal_power(hammer,note_pan*0.55)
     left+=hl; right+=hr
 
-    resonance=_resonance_layer(base_hz,n,sr,midi,v,pedal,graph.get('resonance',{}),noteoff_env=noteoff)
+    resonance=_resonance_layer(base_hz,n,sr,midi,v,pedal,graph.get('resonance',{}),noteoff_env=noteoff,treble_source=treble_source)
     if np.any(resonance):
         # Resonance is broader than the struck string image.
         rl,rr=_equal_power(resonance,note_pan*0.35)

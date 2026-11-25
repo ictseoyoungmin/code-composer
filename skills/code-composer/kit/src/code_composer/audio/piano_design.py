@@ -48,6 +48,7 @@ ACOUSTIC_CONTROL_SPECS = {
     'spectral_rolloff': ('strings.spectral_rolloff', 0.5, 3.0, float),
     'velocity_brightness': ('strings.velocity_brightness', 0.0, 2.0, float),
     'inharmonicity': ('strings.inharmonicity', 0.0, 0.005, float),
+    'treble_radiation_rate': ('strings.treble_radiation_rate', 0.0, 24.0, float),
     'detune_cents': ('strings.detune_cents', 0.0, 5.0, float),
     'stereo_width': ('strings.stereo_width', 0.0, 1.0, float),
     'low_strings': ('strings.low_strings', 1, 3, int),
