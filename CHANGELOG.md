@@ -1,3 +1,8 @@
+## v1.19.2 — Piano Decay and Balanced Grand — 2026-11-25
+
+- Preserve each piano string’s natural decay when applying the damper envelope. Invalidate cached piano previews rendered with the previous envelope.
+- Add the optional `piano.concert_grand_balanced@1.0.0` preset for a less persistent high-register ring. The existing Natural preset remains the default.
+
 ## v1.19.1 — Acoustic Guitar Legato Fixes — 2026-11-25
 
 - Resolve legato source notes on the same physical string even when intervening notes are played on other strings.
