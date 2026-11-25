@@ -2,7 +2,7 @@
   <img src="skills/code-composer/assets/icon.svg" width="180" alt="Code Composer icon">
   <h1>Code Composer</h1>
   <p>
-    <img src="https://img.shields.io/badge/version-v1.19.0-59636e" alt="Version v1.19.0">
+    <img src="https://img.shields.io/badge/version-v1.19.1-59636e" alt="Version v1.19.1">
     <a href="https://github.com/ictseoyoungmin/code-composer/actions/workflows/ci.yml"><img src="https://github.com/ictseoyoungmin/code-composer/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
     <img src="https://img.shields.io/badge/Python-3.10%2B-blue" alt="Python 3.10+">
     <img src="https://img.shields.io/badge/Agent%20Skill-Deterministic%20Music-8b6f47" alt="Agent Skill: Deterministic Music">
@@ -15,6 +15,8 @@
 Code Composer turns explicit musical intent into editable structured music, deterministic audio, MIDI, exchange packages, and production handoff files. The **agent or user decides the music**; the engine validates and realizes those decisions reproducibly.
 
 It is designed for workflows where the composition should remain inspectable, revisable, and portable instead of disappearing inside a black-box generation step.
+
+> **[v1.19.1](docs/releases/v1.19.1.md):** fixes same-string legato resolution and improves hammer-on sustain without increasing the guitar or master level.
 
 > **v1.19.0 acoustic-guitar release (2026-10-03):** adds a deterministic steel-string acoustic-guitar performance system spanning string/fret authority, right- and left-hand technique, fingerstyle/arpeggio, continuous down/up strumming and mute mechanics, same-guitar percussive actions, and persistent six-string/body coupling. AG09 production closure passed five human-listened dogfoods, including a recognizable public-domain song reference and a single-track integration performance with technique transitions.
 

@@ -1,3 +1,8 @@
+## v1.19.1 — Acoustic Guitar Legato Fixes — 2026-11-25
+
+- Resolve legato source notes on the same physical string even when intervening notes are played on other strings.
+- Shorten the outgoing pitch on hammer-ons and pull-offs. Support weak hammer-on sustain without boosting the initial fret contact or master output.
+
 ## v1.19.0 development — AG07 Percussive Guitar Performance — CLOSED — 2026-09-29
 
 - Adds engine-owned acoustic-guitar `instrument_action` rendering for body tap, top slap, bridge hit, string slap, muted strum, dead strum and nail click.
