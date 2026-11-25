@@ -146,7 +146,7 @@ def resolve_left_hand(
     # Transition techniques require a preceding pitched note on the same resolved string.
     if previous_event is None or "midi" not in previous_event:
         raise GuitarLeftHandError(
-            f"{technique} requires a preceding pitched guitar note"
+            f"{technique} requires a preceding pitched guitar note for a same-string transition"
         )
     prev_perf = previous_event.get("performance") or {}
     prev_pos = prev_perf.get("guitar_realization")
@@ -238,18 +238,24 @@ def realize_guitar_left_hand(ir: dict, track_id: str, plan_instrument: dict) -> 
 
     events = track.get("events", [])
     left_events = []
-    previous_pitched = None
+    previous_by_string: dict[int, dict] = {}
     for event_index, ev in enumerate(events):
         if "midi" not in ev:
             continue
         perf = deepcopy(ev.get("performance") or {})
         instrument = perf.get("instrument") if isinstance(perf.get("instrument"), dict) else {}
         authored = instrument.get("left_hand")
+        position = perf.get("guitar_realization")
+        string = int(position["string"]) if isinstance(position, dict) else None
+        previous = previous_by_string.get(string) if string is not None else None
+        # Interleaved bass or inner voices do not replace this string's source.
+        if previous is not None and previous["start_beat"] >= ev["start_beat"]:
+            previous = None
         if authored is not None:
             realization = resolve_left_hand(
                 authored,
                 current_event=ev,
-                previous_event=previous_pitched,
+                previous_event=previous,
             )
             perf["left_hand_realization"] = deepcopy(realization)
             ev["performance"] = perf
@@ -261,7 +267,8 @@ def realize_guitar_left_hand(ir: dict, track_id: str, plan_instrument: dict) -> 
                 "authored": deepcopy(authored),
                 "resolved": deepcopy(realization),
             })
-        previous_pitched = ev
+        if string is not None:
+            previous_by_string[string] = ev
 
     report = deepcopy(out.get("guitar_performance_report") or {
         "version": "1.0",
