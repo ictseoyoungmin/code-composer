@@ -277,7 +277,9 @@ strings; they continue to interact through the S3 shared-body state.
 When a new authored event reuses the same physical string, S5 modifies only the
 decay time of the already-existing residual waveform:
 
-- slide / hammer-on / pull-off: longer residual carry;
+- slide: longer residual carry;
+- hammer-on / pull-off: shorter carry on the previous same-string waveform, with a
+  continuous contact boundary and unchanged excitation of the destination note;
 - palm mute / fretting mute / dead note: shorter residual carry;
 - ordinary re-attack: unchanged S4/S2 behavior.
 
@@ -308,7 +310,8 @@ player-contact and coupled-string references remain the provenance basis.
 3. isolated no-transition note is sample-exact with S4.
 4. muted/dead traversal contact order is deterministic and physical-string ordered.
 5. dead contact removes more existing residual state than muted contact.
-6. legato left-hand transitions lengthen residual carry while mute/dead contact shortens it.
+6. slides lengthen residual carry; hammer-on and pull-off damp the previous pitch
+   after contact without changing the target pitch or interrupting another string.
 7. mixed arpeggio→strum→mute→slap→fingerstyle output is exact with S4 before the
    mute boundary and differs only after state-changing contact begins.
 8. mixed performance remains deterministic and Render-IR event exact.

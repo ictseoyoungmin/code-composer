@@ -3,6 +3,7 @@ from copy import deepcopy
 import numpy as np
 import pytest
 
+from code_composer.audio.acoustic_guitar import stateful
 from code_composer.audio.acoustic_guitar.stateful import (
     _action_string_contact_schedule,
     _string_contact_loading_curve,
@@ -223,13 +224,55 @@ def test_s5_dead_contact_removes_more_residual_energy_than_muted_contact():
     assert 0.0 < dead[-1] < muted[-1] < 1.0
 
 
-def test_s5_legato_and_mute_scale_existing_residual_in_opposite_directions():
-    base = {"performance": {"left_hand_realization": {"technique": ""}}}
-    hammer = {"performance": {"left_hand_realization": {"technique": "hammer_on"}}}
-    dead = {"performance": {"left_hand_realization": {"technique": "dead_note"}}}
-    assert _technique_carry_tau_scale(base, 0.82) == 1.0
-    assert _technique_carry_tau_scale(hammer, 0.82) > 1.0
-    assert 0.0 < _technique_carry_tau_scale(dead, 0.82) < 1.0
+def test_s5_technique_carry_respects_the_contact_type():
+    def scale(technique):
+        event = {"performance": {"left_hand_realization": {"technique": technique}}}
+        assert _technique_carry_tau_scale(event, 0.0) == 1.0
+        return _technique_carry_tau_scale(event, 0.82)
+
+    assert scale("") == 1.0
+    assert scale("slide") > 1.0
+    for technique in ("hammer_on", "pull_off", "dead_note"):
+        assert 0.0 < scale(technique) < 1.0
+
+
+@pytest.mark.parametrize(("technique", "frets"), [
+    ("hammer_on", (3, 4)), ("pull_off", (4, 3)),
+])
+def test_s5_legato_releases_previous_pitch_after_contact(tmp_path, monkeypatch, technique, frets):
+    start = 0.34
+    events = [
+        _note("source", 0.0, start, 64 + frets[0], 1, frets[0]),
+        _note("independent-bass", 0.10, 0.65, 40, 6, 0, method="thumb"),
+        _note("legato", start, 0.65, 64 + frets[1], 1, frets[1],
+              method=None, left_hand={"technique": technique}),
+    ]
+    after, ir = _render(tmp_path, S5, "contact", events)
+    # Recreate the earlier prolonged carry without altering the performer score.
+    def prolonged_carry(event, memory):
+        left = (event.get("performance") or {}).get("left_hand_realization") or {}
+        if left.get("technique") == technique:
+            return 1.0 + 1.60 * memory
+        return _technique_carry_tau_scale(event, memory)
+
+    monkeypatch.setattr(stateful, "_technique_carry_tau_scale", prolonged_carry)
+    before, baseline_ir = _render(tmp_path, S5, "prolonged", events)
+    contact = int(start * BEAT_S * SR)
+    assert _events(ir) == _events(baseline_ir)
+    assert np.array_equal(after[:contact + 1], before[:contact + 1])
+
+    lo, hi = contact + int(0.055 * SR), contact + int(0.185 * SR)
+
+    def component(audio, midi):
+        x = audio[lo:hi].mean(axis=1)
+        time = np.arange(len(x)) / SR
+        hz = 440.0 * 2.0 ** ((midi - 69) / 12.0)
+        return abs(np.sum(x * np.hanning(len(x)) * np.exp(-2j * np.pi * hz * time)))
+
+    old, new = (64 + fret for fret in frets)
+    assert component(after, old) < 0.60 * component(before, old)
+    assert component(after, new) == pytest.approx(component(before, new), rel=0.15)
+    assert component(after, 40) == pytest.approx(component(before, 40), rel=0.02)
 
 
 def test_s5_isolated_note_without_technique_transition_is_sample_exact_with_s4(tmp_path):

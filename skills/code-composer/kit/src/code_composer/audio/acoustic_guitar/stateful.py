@@ -578,7 +578,10 @@ def _technique_carry_tau_scale(event: dict, memory: float) -> float:
     if technique == "slide":
         return 1.0 + 2.00 * memory
     if technique in {"hammer_on", "pull_off"}:
-        return 1.0 + 1.60 * memory
+        # The fretting contact changes the vibrating length. Keep the old
+        # waveform continuous at contact, but do not sustain a second pitch.
+        # Only the previous component on this string is damped.
+        return 1.0 - 0.92 * memory
     if technique == "natural_harmonic":
         return 1.0 + 0.30 * memory
     if technique == "palm_mute":
