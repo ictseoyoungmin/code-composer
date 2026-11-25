@@ -1421,6 +1421,37 @@
     },
     {
       "format": "code-composer-factory-preset/v1",
+      "preset_id": "piano.concert_grand_balanced",
+      "version": "1.0.0",
+      "name": "Concert Grand Balanced",
+      "engine": "piano",
+      "family": "acoustic",
+      "character": [
+        "acoustic",
+        "foreground",
+        "settled-treble"
+      ],
+      "strengths": [
+        "preserves note body and early struck harmonics while reducing late treble beating",
+        "pedal resonance tied to the struck upper modes"
+      ],
+      "limitations": [
+        "opt-in voicing; not a measured or sampled grand",
+        "audition candidate; existing Natural preset is not replaced"
+      ],
+      "recommended_roles": [
+        "lead",
+        "topline",
+        "pad"
+      ],
+      "expression_capabilities": {
+        "pedal": true,
+        "per_strike_identity": true
+      },
+      "musical_content": false
+    },
+    {
+      "format": "code-composer-factory-preset/v1",
       "preset_id": "piano.concert_grand_natural",
       "version": "1.0.0",
       "name": "Concert Grand Natural",
