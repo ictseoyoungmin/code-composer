@@ -593,6 +593,40 @@ def _technique_carry_tau_scale(event: dict, memory: float) -> float:
     return 1.0
 
 
+def _restore_hammer_sustain(
+    event: dict, incoming: np.ndarray, previous: np.ndarray,
+    start: int, last_start: int, sr: int, memory: float,
+) -> np.ndarray:
+    """Support a weak destination tone without boosting the contact or old pitch."""
+    if memory <= 1e-15 or last_start < 0:
+        return incoming
+    left = (event.get("performance") or {}).get("left_hand_realization") or {}
+    if left.get("technique") != "hammer_on":
+        return incoming
+
+    lo = max(last_start + int(0.010 * sr), start - int(0.070 * sr))
+    hi = start - int(0.025 * sr)
+    post = incoming[int(0.035 * sr):int(0.080 * sr)]
+    if min(hi - lo, len(post)) < max(1, int(0.012 * sr)):
+        return incoming
+    pre = previous[lo:hi]
+    prior_rms = float(np.sqrt(np.mean(pre.mean(axis=1) ** 2)))
+    new_rms = float(np.sqrt(np.mean(post.mean(axis=1) ** 2)))
+    if new_rms <= 1e-12:
+        return incoming
+
+    # Aim for a modest level drop, but keep touch and velocity differences.
+    # Bound the correction to about 3.5 dB at the stock S5 memory setting.
+    gain = min(1.0 + 0.60 * memory, 0.79 * prior_rms / new_rms)
+    if gain <= 1.0:
+        return incoming
+
+    # Leave the fret attack untouched; ramp in support for the ringing tone.
+    time = np.arange(len(incoming), dtype=np.float64) / float(sr)
+    x = np.clip((time - 0.012) / 0.020, 0.0, 1.0)
+    return incoming * (1.0 + (gain - 1.0) * x * x * (3.0 - 2.0 * x))[:, None]
+
+
 def _action_string_contact_schedule(action: str, parameters: dict, sr: int):
     """Physical-string contact order for AG07 actions that touch the strings."""
     action = str(action)
@@ -856,6 +890,11 @@ def _render_shared_body_memory(
                     patch,
                     velocity=float(ev.get("velocity", 0.8)),
                     performance=ev.get("performance"),
+                )
+
+                stereo = _restore_hammer_sustain(
+                    ev, stereo, target, start, int(last_start[idx]), int(sr),
+                    technique_transition_memory,
                 )
 
                 if (

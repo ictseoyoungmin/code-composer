@@ -275,6 +275,51 @@ def test_s5_legato_releases_previous_pitch_after_contact(tmp_path, monkeypatch, 
     assert component(after, 40) == pytest.approx(component(before, 40), rel=0.02)
 
 
+def test_s5_hammer_sustain_is_bounded_and_leaves_other_contacts_untouched():
+    start = int(0.2 * SR)
+    event = {"performance": {"left_hand_realization": {"technique": "hammer_on"}}}
+    prior = np.full((SR, 2), 0.1)
+    weak = np.full((SR // 5, 2), 0.01)
+    strong = np.full_like(weak, 0.08)
+    corrected = stateful._restore_hammer_sustain(event, weak, prior, start, 0, SR, 0.82)
+    attack = int(0.012 * SR)
+    assert np.array_equal(weak[:attack], corrected[:attack])
+    assert corrected[-1, 0] == pytest.approx(0.01 * (1.0 + 0.60 * 0.82))
+    assert stateful._restore_hammer_sustain(event, strong, prior, start, 0, SR, 0.82) is strong
+    assert stateful._restore_hammer_sustain(event, weak, prior, 100, 0, SR, 0.82) is weak
+    assert stateful._restore_hammer_sustain(event, weak, prior, start, 0, SR, 0.0) is weak
+    assert stateful._restore_hammer_sustain({}, weak, prior, start, 0, SR, 0.82) is weak
+
+
+def test_s5_restores_weak_hammer_destination_without_a_louder_attack(tmp_path, monkeypatch):
+    start = 0.3424
+    events = [
+        _note("source", 0, start, 67, 1, 3, velocity=0.7),
+        _note("contact", start, 0.64, 68, 1, 4, method=None,
+              left_hand={"technique": "hammer_on"}, velocity=0.7),
+    ]
+    after, ir = _render(tmp_path, S5, "hammer-supported", events)
+    monkeypatch.setattr(stateful, "_restore_hammer_sustain", lambda ev, incoming, *_: incoming)
+    before, before_ir = _render(tmp_path, S5, "hammer-unsupported", events)
+
+    assert _events(ir) == _events(before_ir)
+    contact = int(start * BEAT_S * SR)
+    hold = slice(contact + int(0.035 * SR), contact + int(0.080 * SR))
+    assert np.array_equal(after[:contact + int(0.011 * SR)], before[:contact + int(0.011 * SR)])
+    assert 1.15 < _rms(after[hold]) / _rms(before[hold]) < 1.50
+
+    lo = contact + int(0.066 * SR)
+    hi = contact + int(0.206 * SR)
+    t = np.arange(hi - lo) / SR
+    window = np.hanning(len(t))
+    def tone(audio, pitch):
+        hz = 440 * 2 ** ((pitch - 69) / 12)
+        return abs(np.sum(audio[lo:hi].mean(axis=1) * window * np.exp(-2j * np.pi * hz * t)))
+
+    assert tone(after, 68) > 1.15 * tone(before, 68)
+    assert tone(after, 67) < 1.10 * tone(before, 67)
+
+
 def test_s5_isolated_note_without_technique_transition_is_sample_exact_with_s4(tmp_path):
     events = [_note("e4", 0.0, 0.70, 64, 1, 0, method="finger")]
     a, ir_a = _render(tmp_path, S4, "single_s4", events)

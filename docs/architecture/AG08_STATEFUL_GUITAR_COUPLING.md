@@ -274,18 +274,21 @@ strings; they continue to interact through the S3 shared-body state.
 
 ### Same-string left-hand transitions preserve technique semantics
 
-When a new authored event reuses the same physical string, S5 modifies only the
+When a new authored event reuses the same physical string, S5 controls the
 decay time of the already-existing residual waveform:
 
 - slide: longer residual carry;
 - hammer-on / pull-off: shorter carry on the previous same-string waveform, with a
-  continuous contact boundary and unchanged excitation of the destination note;
+  continuous contact boundary;
 - palm mute / fretting mute / dead note: shorter residual carry;
 - ordinary re-attack: unchanged S4/S2 behavior.
 
-The authored destination note, fret, AG04 realization, and injected excitation
-remain unchanged. The transition layer therefore changes state continuity, not
-musical authority.
+For hammer-ons only, the renderer compares the same string before contact
+with the isolated destination tone. When the ringing tone is weak, it applies
+bounded support after the first 12 ms, leaving the original fret attack and the
+old-pitch decay unchanged. The gain only affects audio, not authored velocities,
+pitches, frets, or AG04 realization. This correction is inert when technique
+transition memory is off.
 
 ### S5 preservation contract
 
@@ -312,6 +315,7 @@ player-contact and coupled-string references remain the provenance basis.
 5. dead contact removes more existing residual state than muted contact.
 6. slides lengthen residual carry; hammer-on and pull-off damp the previous pitch
    after contact without changing the target pitch or interrupting another string.
+   A weak hammer-on may receive bounded sustain support without changing its attack.
 7. mixed arpeggio→strum→mute→slap→fingerstyle output is exact with S4 before the
    mute boundary and differs only after state-changing contact begins.
 8. mixed performance remains deterministic and Render-IR event exact.
