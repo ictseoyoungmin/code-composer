@@ -10,6 +10,7 @@ from code_composer.execution import (
     compile_performance_score_to_render_ir,
     lower_song_to_execution_plan,
     realize_instrument_mechanics,
+    render_song_score_to_files,
 )
 from code_composer.presets import materialize_preset
 
@@ -185,6 +186,60 @@ def test_transition_realization_uses_same_string_and_reduced_excitation(
     assert "right_hand_realization" not in ev["performance"]
 
 
+@pytest.mark.parametrize(
+    "technique,src_midi,src_fret,dst_midi,dst_fret",
+    [
+        ("slide", 64, 0, 69, 5),
+        ("hammer_on", 64, 0, 67, 3),
+        ("pull_off", 67, 3, 64, 0),
+    ],
+)
+def test_legato_source_survives_interleaved_notes_on_other_strings(
+    technique, src_midi, src_fret, dst_midi, dst_fret
+):
+    events = [
+        _note("older", 0.0, 65, 1, 1),
+        _note("source", 0.25, src_midi, 1, src_fret, right_hand={"method": "finger"}),
+        _note("bass", 0.5, 40, 6, 0, right_hand={"method": "thumb"}),
+        _note("inner", 0.625, 55, 3, 0, right_hand={"method": "finger"}),
+        _note("destination", 0.75, dst_midi, 1, dst_fret, left_hand={"technique": technique}),
+    ]
+    realized = _realized(events)["tracks"][0]["events"]
+    lh = realized[-1]["performance"]["left_hand_realization"]
+    assert (lh["string"], lh["from_fret"], lh["to_fret"]) == (1, src_fret, dst_fret)
+    assert (lh["from_midi"], lh["to_midi"]) == (src_midi, dst_midi)
+    assert "right_hand_realization" not in realized[-1]["performance"]
+    for field in ("start_beat", "duration_beats", "midi", "velocity"):
+        assert [e[field] for e in realized] == [e[field] for e in events]
+    assert realized[2]["performance"]["right_hand_realization"]["method"] == "thumb"
+
+
+def test_stateful_fingerstyle_renders_interleaved_legato_chain(tmp_path):
+    events = [
+        _note("treble", 0.0, 64, 1, 0, right_hand={"method": "finger"}),
+        _note("bass_one", 0.25, 40, 6, 0, right_hand={"method": "thumb"}),
+        _note("hammer", 0.5, 67, 1, 3, left_hand={"technique": "hammer_on"}),
+        _note("bass_two", 0.75, 45, 5, 0, right_hand={"method": "thumb"}),
+        _note("pull", 1.0, 64, 1, 0, left_hand={"technique": "pull_off"}),
+    ]
+    song, score = _score(events)
+    song["instruments"][0]["render_lock"]["preset"] = "acoustic_guitar.steel_stateful_performance"
+    score["source_song"]["fingerprint"] = song_fingerprint(song)
+
+    path = tmp_path / "interleaved-legato.wav"
+    result = render_song_score_to_files(song, score, path)
+    report = result["guitar_performance_report"]["tracks"]["g"]
+    legs = [item["resolved"] for item in report["left_hand_events"]]
+    assert [(leg["from_fret"], leg["to_fret"]) for leg in legs] == [(0, 3), (3, 0)]
+    audio = np.asarray(result["audio"])
+    assert path.is_file() and audio.ndim == 2 and audio.shape[1] == 2
+    assert np.isfinite(audio).all() and 0.001 < np.max(np.abs(audio)) < 0.98
+    sr = result["sr"]
+    for beat in (0.25, 0.5, 0.75, 1.0):
+        start = round(beat * 60 / 96 * sr)
+        assert _rms(audio[start:start + sr // 16]) > 0.001
+
+
 def test_transition_render_is_not_a_fresh_pick_attack():
     out = _realized([
         _note("a", 0.0, 64, 1, 0, right_hand={"method": "pick"}),
@@ -240,6 +295,14 @@ def test_transition_requires_previous_same_string_and_direction():
         _realized([
             _note("a", 0.0, 64, 1, 0),
             _note("b", 0.5, 67, 1, 3, left_hand={"technique": "pull_off"}),
+        ])
+
+
+def test_simultaneous_note_on_same_string_cannot_source_legato():
+    with pytest.raises(PerformanceBridgeError, match="preceding pitched"):
+        _realized([
+            _note("a-source", 0.0, 64, 1, 0),
+            _note("b-hammer", 0.0, 67, 1, 3, left_hand={"technique": "hammer_on"}),
         ])
 
 

@@ -62,8 +62,8 @@ Natural harmonic:
 - does not retune body modes or global EQ.
 
 Slide / hammer-on / pull-off:
-- require a preceding pitched guitar note;
-- require the same resolved AG02 string;
+- use the most recent earlier pitched note on the same resolved AG02 string;
+- ignore notes on other strings when finding that predecessor (for example, an interleaved thumb bass);
 - preserve authored destination MIDI/fret;
 - attach explicit source/destination fret provenance;
 - use a continuous time-varying pitch phase over the transition window;
